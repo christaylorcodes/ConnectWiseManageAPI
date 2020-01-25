@@ -1,247 +1,247 @@
 ---
 Module Name: ConnectWiseManageAPI
-Module Guid: 00000000-0000-0000-0000-000000000000
-Download Help Link: {{ Update Download Link }}
-Help Version: {{ Please enter version of help manually (X.X.X.X) format }}
+Module Guid: 3374fb93-c06d-47b0-b4cc-9d49987e376f
+Download Help Link: https://github.com/christaylorcodes/ConnectWiseManageAPI
+Help Version: 0.0.0.1
 Locale: en-US
 ---
 
 # ConnectWiseManageAPI Module
 ## Description
-These commands should mirror what is avalible via the [REST API](https://developer.connectwise.com/Products/Manage/REST).
+These commands should mirror what is available via the [REST API](https://developer.connectwise.com/Products/Manage/REST).
 
 ## ConnectWiseManageAPI Cmdlets
-### [Connect-CWM](Docs\Connect-CWM.md)
+### [Connect-CWM](./Docs/Connect-CWM.md)
 This command is used to authenticate with the Manage server.
 
-### [ConvertFrom-CWMColumnRow](ConvertFrom-CWMColumnRow.md)
+### [ConvertFrom-CWMColumnRow](./Docs/ConvertFrom-CWMColumnRow.md)
 {{ Fill in the Description }}
 
-### [ConvertFrom-CWMTime](ConvertFrom-CWMTime.md)
+### [ConvertFrom-CWMTime](./Docs/ConvertFrom-CWMTime.md)
 {{ Fill in the Description }}
 
-### [ConvertTo-CWMTime](ConvertTo-CWMTime.md)
+### [ConvertTo-CWMTime](./Docs/ConvertTo-CWMTime.md)
 {{ Fill in the Description }}
 
-### [Disconnect-CWM](Disconnect-CWM.md)
+### [Disconnect-CWM](./Docs/Disconnect-CWM.md)
 {{ Fill in the Description }}
 
-### [Get-CWMAgreement](Get-CWMAgreement.md)
+### [Get-CWMAgreement](./Docs/Get-CWMAgreement.md)
 {{ Fill in the Description }}
 
-### [Get-CWMAgreementAddition](Get-CWMAgreementAddition.md)
+### [Get-CWMAgreementAddition](./Docs/Get-CWMAgreementAddition.md)
 {{ Fill in the Description }}
 
-### [Get-CWMAgreementSite](Get-CWMAgreementSite.md)
+### [Get-CWMAgreementSite](./Docs/Get-CWMAgreementSite.md)
 {{ Fill in the Description }}
 
-### [Get-CWMAuditTrail](Get-CWMAuditTrail.md)
+### [Get-CWMAuditTrail](./Docs/Get-CWMAuditTrail.md)
 {{ Fill in the Description }}
 
-### [Get-CWMBoardStatus](Get-CWMBoardStatus.md)
+### [Get-CWMBoardStatus](./Docs/Get-CWMBoardStatus.md)
 {{ Fill in the Description }}
 
-### [Get-CWMBoardStatusNotification](Get-CWMBoardStatusNotification.md)
+### [Get-CWMBoardStatusNotification](./Docs/Get-CWMBoardStatusNotification.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCallbackEntry](Get-CWMCallbackEntry.md)
+### [Get-CWMCallbackEntry](./Docs/Get-CWMCallbackEntry.md)
 {{ Fill in the Description }}
 
-### [Get-CWMChargeCode](Get-CWMChargeCode.md)
+### [Get-CWMChargeCode](./Docs/Get-CWMChargeCode.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompany](Get-CWMCompany.md)
+### [Get-CWMCompany](./Docs/Get-CWMCompany.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyConfiguration](Get-CWMCompanyConfiguration.md)
+### [Get-CWMCompanyConfiguration](./Docs/Get-CWMCompanyConfiguration.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyNote](Get-CWMCompanyNote.md)
+### [Get-CWMCompanyNote](./Docs/Get-CWMCompanyNote.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyNoteType](Get-CWMCompanyNoteType.md)
+### [Get-CWMCompanyNoteType](./Docs/Get-CWMCompanyNoteType.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyStatus](Get-CWMCompanyStatus.md)
+### [Get-CWMCompanyStatus](./Docs/Get-CWMCompanyStatus.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyTeam](Get-CWMCompanyTeam.md)
+### [Get-CWMCompanyTeam](./Docs/Get-CWMCompanyTeam.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyTeamRole](Get-CWMCompanyTeamRole.md)
+### [Get-CWMCompanyTeamRole](./Docs/Get-CWMCompanyTeamRole.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyType](Get-CWMCompanyType.md)
+### [Get-CWMCompanyType](./Docs/Get-CWMCompanyType.md)
 {{ Fill in the Description }}
 
-### [Get-CWMCompanyTypeAssociation](Get-CWMCompanyTypeAssociation.md)
+### [Get-CWMCompanyTypeAssociation](./Docs/Get-CWMCompanyTypeAssociation.md)
 {{ Fill in the Description }}
 
-### [Get-CWMContact](Get-CWMContact.md)
+### [Get-CWMContact](./Docs/Get-CWMContact.md)
 {{ Fill in the Description }}
 
-### [Get-CWMDocument](Get-CWMDocument.md)
+### [Get-CWMDocument](./Docs/Get-CWMDocument.md)
 {{ Fill in the Description }}
 
-### [Get-CWMManufacturer](Get-CWMManufacturer.md)
+### [Get-CWMManufacturer](./Docs/Get-CWMManufacturer.md)
 {{ Fill in the Description }}
 
-### [Get-CWMMarketingGroup](Get-CWMMarketingGroup.md)
+### [Get-CWMMarketingGroup](./Docs/Get-CWMMarketingGroup.md)
 {{ Fill in the Description }}
 
-### [Get-CWMMarketingGroupCompany](Get-CWMMarketingGroupCompany.md)
+### [Get-CWMMarketingGroupCompany](./Docs/Get-CWMMarketingGroupCompany.md)
 {{ Fill in the Description }}
 
-### [Get-CWMMember](Get-CWMMember.md)
+### [Get-CWMMember](./Docs/Get-CWMMember.md)
 {{ Fill in the Description }}
 
-### [Get-CWMMyMember](Get-CWMMyMember.md)
+### [Get-CWMMyMember](./Docs/Get-CWMMyMember.md)
 {{ Fill in the Description }}
 
-### [Get-CWMMySecurity](Get-CWMMySecurity.md)
+### [Get-CWMMySecurity](./Docs/Get-CWMMySecurity.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProduct](Get-CWMProduct.md)
+### [Get-CWMProduct](./Docs/Get-CWMProduct.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProductCatalog](Get-CWMProductCatalog.md)
+### [Get-CWMProductCatalog](./Docs/Get-CWMProductCatalog.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProductComponent](Get-CWMProductComponent.md)
+### [Get-CWMProductComponent](./Docs/Get-CWMProductComponent.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProductSubCategory](Get-CWMProductSubCategory.md)
+### [Get-CWMProductSubCategory](./Docs/Get-CWMProductSubCategory.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProductType](Get-CWMProductType.md)
+### [Get-CWMProductType](./Docs/Get-CWMProductType.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProjectPhase](Get-CWMProjectPhase.md)
+### [Get-CWMProjectPhase](./Docs/Get-CWMProjectPhase.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProjectSecurityRole](Get-CWMProjectSecurityRole.md)
+### [Get-CWMProjectSecurityRole](./Docs/Get-CWMProjectSecurityRole.md)
 {{ Fill in the Description }}
 
-### [Get-CWMProjectTeamMember](Get-CWMProjectTeamMember.md)
+### [Get-CWMProjectTeamMember](./Docs/Get-CWMProjectTeamMember.md)
 {{ Fill in the Description }}
 
-### [Get-CWMReport](Get-CWMReport.md)
+### [Get-CWMReport](./Docs/Get-CWMReport.md)
 {{ Fill in the Description }}
 
-### [Get-CWMReportColumn](Get-CWMReportColumn.md)
+### [Get-CWMReportColumn](./Docs/Get-CWMReportColumn.md)
 {{ Fill in the Description }}
 
-### [Get-CWMSalesActivity](Get-CWMSalesActivity.md)
+### [Get-CWMSalesActivity](./Docs/Get-CWMSalesActivity.md)
 {{ Fill in the Description }}
 
-### [Get-CWMScheduleEntry](Get-CWMScheduleEntry.md)
+### [Get-CWMScheduleEntry](./Docs/Get-CWMScheduleEntry.md)
 {{ Fill in the Description }}
 
-### [Get-CWMServiceBoard](Get-CWMServiceBoard.md)
+### [Get-CWMServiceBoard](./Docs/Get-CWMServiceBoard.md)
 {{ Fill in the Description }}
 
-### [Get-CWMSystemInfo](Get-CWMSystemInfo.md)
+### [Get-CWMSystemInfo](./Docs/Get-CWMSystemInfo.md)
 {{ Fill in the Description }}
 
-### [Get-CWMTicket](Get-CWMTicket.md)
+### [Get-CWMTicket](./Docs/Get-CWMTicket.md)
 {{ Fill in the Description }}
 
-### [Get-CWMTicketConfiguration](Get-CWMTicketConfiguration.md)
+### [Get-CWMTicketConfiguration](./Docs/Get-CWMTicketConfiguration.md)
 {{ Fill in the Description }}
 
-### [Get-CWMTicketNote](Get-CWMTicketNote.md)
+### [Get-CWMTicketNote](./Docs/Get-CWMTicketNote.md)
 {{ Fill in the Description }}
 
-### [Get-CWMTimeEntry](Get-CWMTimeEntry.md)
+### [Get-CWMTimeEntry](./Docs/Get-CWMTimeEntry.md)
 {{ Fill in the Description }}
 
-### [Get-CWMTimeSheet](Get-CWMTimeSheet.md)
+### [Get-CWMTimeSheet](./Docs/Get-CWMTimeSheet.md)
 {{ Fill in the Description }}
 
-### [New-CWMAgreementAddition](New-CWMAgreementAddition.md)
+### [New-CWMAgreementAddition](./Docs/New-CWMAgreementAddition.md)
 {{ Fill in the Description }}
 
-### [New-CWMCallbackEntry](New-CWMCallbackEntry.md)
+### [New-CWMCallbackEntry](./Docs/New-CWMCallbackEntry.md)
 {{ Fill in the Description }}
 
-### [New-CWMCompanyConfigurationTypeQuestionValue](New-CWMCompanyConfigurationTypeQuestionValue.md)
+### [New-CWMCompanyConfigurationTypeQuestionValue](./Docs/New-CWMCompanyConfigurationTypeQuestionValue.md)
 {{ Fill in the Description }}
 
-### [New-CWMCompanyTeam](New-CWMCompanyTeam.md)
+### [New-CWMCompanyTeam](./Docs/New-CWMCompanyTeam.md)
 {{ Fill in the Description }}
 
-### [New-CWMCompanyTypeAssociation](New-CWMCompanyTypeAssociation.md)
+### [New-CWMCompanyTypeAssociation](./Docs/New-CWMCompanyTypeAssociation.md)
 {{ Fill in the Description }}
 
-### [New-CWMContact](New-CWMContact.md)
+### [New-CWMContact](./Docs/New-CWMContact.md)
 {{ Fill in the Description }}
 
-### [New-CWMContactCommunication](New-CWMContactCommunication.md)
+### [New-CWMContactCommunication](./Docs/New-CWMContactCommunication.md)
 {{ Fill in the Description }}
 
-### [New-CWMDebugReport](New-CWMDebugReport.md)
+### [New-CWMDebugReport](./Docs/New-CWMDebugReport.md)
 {{ Fill in the Description }}
 
-### [New-CWMProductCatalog](New-CWMProductCatalog.md)
+### [New-CWMProductCatalog](./Docs/New-CWMProductCatalog.md)
 {{ Fill in the Description }}
 
-### [New-CWMProjectTeamMember](New-CWMProjectTeamMember.md)
+### [New-CWMProjectTeamMember](./Docs/New-CWMProjectTeamMember.md)
 {{ Fill in the Description }}
 
-### [New-CWMScheduleEntry](New-CWMScheduleEntry.md)
+### [New-CWMScheduleEntry](./Docs/New-CWMScheduleEntry.md)
 {{ Fill in the Description }}
 
-### [New-CWMTimeEntry](New-CWMTimeEntry.md)
+### [New-CWMTimeEntry](./Docs/New-CWMTimeEntry.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMAgreementSite](Remove-CWMAgreementSite.md)
+### [Remove-CWMAgreementSite](./Docs/Remove-CWMAgreementSite.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMCallbackEntry](Remove-CWMCallbackEntry.md)
+### [Remove-CWMCallbackEntry](./Docs/Remove-CWMCallbackEntry.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMCompanyConfiguration](Remove-CWMCompanyConfiguration.md)
+### [Remove-CWMCompanyConfiguration](./Docs/Remove-CWMCompanyConfiguration.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMCompanyTypeAssociation](Remove-CWMCompanyTypeAssociation.md)
+### [Remove-CWMCompanyTypeAssociation](./Docs/Remove-CWMCompanyTypeAssociation.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMMarketingGroupCompany](Remove-CWMMarketingGroupCompany.md)
+### [Remove-CWMMarketingGroupCompany](./Docs/Remove-CWMMarketingGroupCompany.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMScheduleEntry](Remove-CWMScheduleEntry.md)
+### [Remove-CWMScheduleEntry](./Docs/Remove-CWMScheduleEntry.md)
 {{ Fill in the Description }}
 
-### [Remove-CWMTicket](Remove-CWMTicket.md)
+### [Remove-CWMTicket](./Docs/Remove-CWMTicket.md)
 {{ Fill in the Description }}
 
-### [Submit-CWMTimeSheet](Submit-CWMTimeSheet.md)
+### [Submit-CWMTimeSheet](./Docs/Submit-CWMTimeSheet.md)
 {{ Fill in the Description }}
 
-### [Update-CWMAgreementAddition](Update-CWMAgreementAddition.md)
+### [Update-CWMAgreementAddition](./Docs/Update-CWMAgreementAddition.md)
 {{ Fill in the Description }}
 
-### [Update-CWMCallbackEntry](Update-CWMCallbackEntry.md)
+### [Update-CWMCallbackEntry](./Docs/Update-CWMCallbackEntry.md)
 {{ Fill in the Description }}
 
-### [Update-CWMCompany](Update-CWMCompany.md)
+### [Update-CWMCompany](./Docs/Update-CWMCompany.md)
 {{ Fill in the Description }}
 
-### [Update-CWMCompanyConfiguration](Update-CWMCompanyConfiguration.md)
+### [Update-CWMCompanyConfiguration](./Docs/Update-CWMCompanyConfiguration.md)
 {{ Fill in the Description }}
 
-### [Update-CWMCompanyConfigurationTypeQuestionValue](Update-CWMCompanyConfigurationTypeQuestionValue.md)
+### [Update-CWMCompanyConfigurationTypeQuestionValue](./Docs/Update-CWMCompanyConfigurationTypeQuestionValue.md)
 {{ Fill in the Description }}
 
-### [Update-CWMCompanyTypeAssociation](Update-CWMCompanyTypeAssociation.md)
+### [Update-CWMCompanyTypeAssociation](./Docs/Update-CWMCompanyTypeAssociation.md)
 {{ Fill in the Description }}
 
-### [Update-CWMProductCatalog](Update-CWMProductCatalog.md)
+### [Update-CWMProductCatalog](./Docs/Update-CWMProductCatalog.md)
 {{ Fill in the Description }}
 
-### [Update-CWMProjectPhase](Update-CWMProjectPhase.md)
+### [Update-CWMProjectPhase](./Docs/Update-CWMProjectPhase.md)
 {{ Fill in the Description }}
 
-### [Update-CWMTicket](Update-CWMTicket.md)
+### [Update-CWMTicket](./Docs/Update-CWMTicket.md)
 {{ Fill in the Description }}
 

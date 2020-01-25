@@ -103,7 +103,7 @@ Connect-CWM @Connection
 
 In this example we are connecting with a cookie, using user credentials. 
 
-This method will not work on accounts with MFA enabled.
+This method will not work on accounts with MFA enabled. All your accounts are MFA enabled, right?
 
 This method is going to be removed in future versions.
 Please move to a different authentication method.
@@ -158,7 +158,7 @@ Accept wildcard characters: False
 ```
 
 ### -Credentials
-Manage username and password as a PSCredential object \[pscredential\]. This method will not work on accounts with MFA enabled.
+Manage username and password as a PSCredential object \[pscredential\]. This method will not work on accounts with MFA enabled. All your accounts are MFA enabled, right?
 
 ```yaml
 Type: PSCredential
