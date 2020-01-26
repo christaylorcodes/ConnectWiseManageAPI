@@ -206,6 +206,9 @@ This function will remove a company configuration from Manage.
 ### [Remove-CWMCompanyTypeAssociation](Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.
 
+### [Remove-CWMContact](Remove-CWMContact.md)
+This will remove a contact by its ID.
+
 ### [Remove-CWMMarketingGroupCompany](Remove-CWMMarketingGroupCompany.md)
 This function will remove a company from a marketing group.
 
@@ -235,6 +238,9 @@ This will update a company configuration question value.
 
 ### [Update-CWMCompanyTypeAssociation](Update-CWMCompanyTypeAssociation.md)
 This will update a company type association.
+
+### [Update-CWMContact](Update-CWMContact.md)
+This will modify a contact by its ID.
 
 ### [Update-CWMProductCatalog](Update-CWMProductCatalog.md)
 This will update a catalog item.
