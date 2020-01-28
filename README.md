@@ -30,4 +30,3 @@ It takes time to maintain this project. Does the time spent on this module help 
 | ------------- | ------------- |
 |![bc1qtfghmwqa6tshkpf03nsjlf40a6vahwg2n4vvqv](./Donate/BTC.png "bc1qtfghmwqa6tshkpf03nsjlf40a6vahwg2n4vvqv") | ![0x4aDC4F156D0A285ac9FB8C9Bd1513fe64FE35F1B](./Donate/ETH.png "0x4aDC4F156D0A285ac9FB8C9Bd1513fe64FE35F1B")|
 | `bc1qtfghmwqa6tshkpf03nsjlf40a6vahwg2n4vvqv` | `0x4aDC4F156D0A285ac9FB8C9Bd1513fe64FE35F1B` 
-|
