@@ -1,4 +1,7 @@
-﻿![LogIn](https://www.connectwise.com/-/media/logos/company/product/manage/manage-horiz-black.ashx?h=393&w=1494&la=en&hash=41DF6B6D3CB705E82EE2189EC9C101E5C77B900A "Logo Title Text 1")
+﻿[![Build status](https://ci.appveyor.com/api/projects/status/gkmh0h0234s1x7rt?svg=true)](https://ci.appveyor.com/project/christaylorcodes/connectwisemanageapi)
+
+
+![LogIn](https://www.connectwise.com/-/media/logos/company/product/manage/manage-horiz-black.ashx?h=393&w=1494&la=en&hash=41DF6B6D3CB705E82EE2189EC9C101E5C77B900A "Logo Title Text 1")
 
 
 # ConnectWise Manage REST API PowerShell Wrapper
