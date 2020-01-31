@@ -1,8 +1,9 @@
 ﻿function Get-CWMTicket {
     [CmdletBinding()]
     param(
-        [int]$TicketID,
-        [string]$Condition,
+        [Alias("TicketID")]
+        [int]$id,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -11,8 +12,8 @@
         [int]$pageSize,
         [switch]$all
     )
-    if ($TicketID) {
-        $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$($TicketID)"
+    if ($id) {
+        $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$($id)"
         return Invoke-CWMGetMaster -URI $URI
     }
     else {

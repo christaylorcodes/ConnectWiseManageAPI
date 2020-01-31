@@ -15,46 +15,46 @@ These commands should mirror what is available via the [REST API](https://develo
 This command is used to authenticate with the Manage server.
 
 ### [ConvertFrom-CWMColumnRow](./Docs/ConvertFrom-CWMColumnRow.md)
-{{ Fill in the Description }}
+Used to convert report data to PowerShell objects.
 
 ### [ConvertFrom-CWMTime](./Docs/ConvertFrom-CWMTime.md)
-{{ Fill in the Description }}
+Used to convert a CWM `string` to a date time PowerShell object.
 
 ### [ConvertTo-CWMTime](./Docs/ConvertTo-CWMTime.md)
-{{ Fill in the Description }}
+Used to convert at date time object to a format used in `condition`s.
 
 ### [Disconnect-CWM](./Docs/Disconnect-CWM.md)
-{{ Fill in the Description }}
+Used to clear connection information from memory.
 
 ### [Get-CWMAgreement](./Docs/Get-CWMAgreement.md)
-{{ Fill in the Description }}
+Used to get agreements
 
 ### [Get-CWMAgreementAddition](./Docs/Get-CWMAgreementAddition.md)
-{{ Fill in the Description }}
+Used to get agreement additions
 
 ### [Get-CWMAgreementSite](./Docs/Get-CWMAgreementSite.md)
-{{ Fill in the Description }}
+Used to get agreement sites
 
 ### [Get-CWMAuditTrail](./Docs/Get-CWMAuditTrail.md)
-{{ Fill in the Description }}
+Used to list the audit trail
 
 ### [Get-CWMBoardStatus](./Docs/Get-CWMBoardStatus.md)
-{{ Fill in the Description }}
+Used to get service board statuses.
 
 ### [Get-CWMBoardStatusNotification](./Docs/Get-CWMBoardStatusNotification.md)
-{{ Fill in the Description }}
+Used to get service board status notifications.
 
 ### [Get-CWMCallbackEntry](./Docs/Get-CWMCallbackEntry.md)
-{{ Fill in the Description }}
+Used to get callback entries.
 
 ### [Get-CWMChargeCode](./Docs/Get-CWMChargeCode.md)
-{{ Fill in the Description }}
+Used to get charge codes.
 
 ### [Get-CWMCompany](./Docs/Get-CWMCompany.md)
-{{ Fill in the Description }}
+Used to get companies.
 
 ### [Get-CWMCompanyConfiguration](./Docs/Get-CWMCompanyConfiguration.md)
-{{ Fill in the Description }}
+Used to get configurations.
 
 ### [Get-CWMCompanyNote](./Docs/Get-CWMCompanyNote.md)
 {{ Fill in the Description }}

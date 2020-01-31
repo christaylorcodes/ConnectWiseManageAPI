@@ -1,32 +1,47 @@
 ---
-external help file: ConnectWiseManageAPI-help.xml
-Module Name: ConnectWiseManageAPI
+external help file:
+Module Name:
 online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Disconnect-CWM
+# ConvertFrom-CWMColumnRow
 
 ## SYNOPSIS
-This will remove the ConnectWise Manage authorization variable.
+Take Column Row output from Manage and converts it to an object
 
 ## SYNTAX
 
 ```
-Disconnect-CWM [<CommonParameters>]
+ConvertFrom-CWMColumnRow [[-Data] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will remove the ConnectWise Manage authorization variable.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Disconnect-CWM
+ConvertFrom-CWMColumnRow -Data $Data
 ```
 
 ## PARAMETERS
+
+### -Data
+Column row object to be converted
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

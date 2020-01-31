@@ -5,34 +5,31 @@ online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Invoke-CWMWebRequest
+# Invoke-CWMGetMaster
 
 ## SYNOPSIS
-This function is used to handle all web requests to the ConnectWise Manage API.
+This will be basis of all get calls to the ConnectWise Manage API.
 
 ## SYNTAX
 
 ```
-Invoke-CWMWebRequest [[-Arguments] <Object>] [[-MaxRetry] <Int32>] [<CommonParameters>]
+Invoke-CWMGetMaster [[-Arguments] <Object>] [[-URI] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This function is used to manage error handling with web requests.
-It will also handle retries of failed attempts.
+This will insure that all GET requests are handled correctly.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Invoke-CWMGetMaster -Arguments $Arguments -URI $URI
+```
 
 ## PARAMETERS
 
 ### -Arguments
-A splat object of web request parameters
+A hash table of parameters
 
 ```yaml
 Type: Object
@@ -40,23 +37,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MaxRetry
-The maximum number of retry attempts
+### -URI
+The URI of the GET endpoint
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: 5
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -72,7 +69,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor
 Date: 10/10/2018
 
+Author: Chris Taylor
+Update Date: 9/26/2019
+Purpose/Change: changed orderBy support, improved url query string creation
+
 ## RELATED LINKS
 
-[https://christaylor.codes](https://christaylor.codes)
+[https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
 

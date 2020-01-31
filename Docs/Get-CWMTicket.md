@@ -13,7 +13,7 @@ This function list tickets that match your condition.
 ## SYNTAX
 
 ```
-Get-CWMTicket [[-TicketID] <Int32>] [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+Get-CWMTicket [-id <Int32>] [[-condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
  [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-all] [<CommonParameters>]
 ```
 
@@ -27,14 +27,14 @@ Get-CWMTicket [[-TicketID] <Int32>] [[-Condition] <String>] [[-orderBy] <String>
 Get-CWMTicket -TicketID 1
 ```
 
-Returns ticket 1
+We are using `TicketID` an alias for `id` to get ticket #1.
 
 ### EXAMPLE 2
 ```
 Get-CWMTicket -all
 ```
 
-Returns all tickets
+By default only 25 results are returned, this returns all tickets.
 
 ### EXAMPLE 3
 ```
@@ -44,37 +44,6 @@ Get-CWMTicket -condition 'summary="test"'
 Returns the first 25 tickets with the summary of test
 
 ## PARAMETERS
-
-### -Condition
-This is your search condition to return the results you desire.
-Example: (contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TicketID
-{{ Fill TicketID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -all
 Return all results
@@ -166,6 +135,37 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -condition
+This is your search condition to return the results you desire.
+Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: TicketID
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -177,8 +177,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/products/manage/rest?a=Schedule&e=ScheduleEntries&o=GET](https://developer.connectwise.com/products/manage/rest?a=Schedule&e=ScheduleEntries&o=GET)
 
 [https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=GETBYID](https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=GETBYID)
 

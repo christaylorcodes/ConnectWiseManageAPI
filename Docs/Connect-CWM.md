@@ -31,7 +31,7 @@ Connect-CWM -Server <String> -Company <String> -ClientID <String> -IntegratorUse
 ```
 
 ## DESCRIPTION
-This will create a global variable that contains all needed connection and authorization information.
+This will create a script variable that contains all needed connection and authorization information.
 All other commands from the module will call this variable to get connection information.
 
 ## EXAMPLES
@@ -70,7 +70,7 @@ In this example we are connecting with an Integrator account.
 Please move to a different authentication method.
 [https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication)
 
-### Impersonat
+### Impersonate
 
 ```
 $Connection = @{

@@ -154,7 +154,12 @@
         Disconnect-CWM
         return
     }
-
+    
+    if (!$Version) { 
+        [version]$Version = $Info.version.trim('v')
+        $script:CWMServerConnection.Version = "$($Version.major).$($Version.minor)"
+    }
+    
     Write-Verbose 'Connection successful.'
     Write-Verbose '$CWMServerConnection, variable initialized.'
 }

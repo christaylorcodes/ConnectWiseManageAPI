@@ -6,7 +6,7 @@
         [string[]]$Skip
     )
     # Skip common parameters
-    $Skip += 'Debug','ErrorAction','ErrorVariable','InformationAction','InformationVariable','OutVariable','OutBuffer','PipelineVariable','Verbose','WarningAction','WarningVariable','WhatIf','Confirm'
+    $Skip += 'Debug','ErrorAction','ErrorVariable','InformationAction','InformationVariable','OutVariable','OutBuffer','PipelineVariable','Verbose','WarningAction','WarningVariable','WhatIf','Confirm','Version','VersionAutomatic'
 
     $Body = @{}
     foreach($i in $Arguments.GetEnumerator()){
@@ -22,8 +22,8 @@
         Method = 'Post'
         ContentType = 'application/json'
         Body = $Body
+        Version = $Arguments.Version
     }
-
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if($Result.content){

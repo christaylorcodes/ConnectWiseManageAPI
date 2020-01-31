@@ -5,25 +5,25 @@ online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Invoke-CWMAllResult
+# Invoke-CWMSearchMaster
 
 ## SYNOPSIS
-This will handel web requests for all results to the ConnectWise Manage API.
+This will be basis of all search calls to the ConnectWise Manage API.
 
 ## SYNTAX
 
 ```
-Invoke-CWMAllResult [[-Arguments] <Object>] [<CommonParameters>]
+Invoke-CWMSearchMaster [[-Arguments] <Object>] [[-URI] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will enable forward only pagination and loop all results.
+This will insure that all search requests are handled correctly.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CWMAllResult -Arguments $Arguments
+Invoke-CWMSearchMaster -Arguments $Arguments -URI $URI
 ```
 
 ## PARAMETERS
@@ -33,6 +33,21 @@ A hash table of parameters
 
 ```yaml
 Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -URI
+The URI of the search endpoint
+
+```yaml
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -56,5 +71,5 @@ Date: 10/10/2018
 
 ## RELATED LINKS
 
-[https://christaylor.codes](https://christaylor.codes)
+[https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
 

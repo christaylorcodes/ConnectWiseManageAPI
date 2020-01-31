@@ -9,20 +9,26 @@
     if(!$script:CWMServerConnection){
         $ErrorMessage = @()
         $ErrorMessage += "Not connected to a Manage server."
-        $ErrorMessage +=  $_.ScriptStackTrace
-        $ErrorMessage += ''
         $ErrorMessage += '--> $CWMServerConnection variable not found.'
         $ErrorMessage += "----> Run 'Connect-CWM' to initialize the connection before issuing other CWM cmdlets."
         Write-Error ($ErrorMessage | Out-String)
-        return
+        EXIT 1
     }
 
     # Add default set of arguments
     foreach($Key in $script:CWMServerConnection.Headers.Keys){
         if($Arguments.Headers.Keys -notcontains $Key){
-            $Arguments.Headers += @{$Key = $script:CWMServerConnection.Headers.$Key}
+            # Set version
+            if ($Key -eq 'Accept' -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
+                $Arguments.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Arguments.Version)"
+                Write-Verbose "Version Passed: $($Arguments.Version)"
+            } else {
+                $Arguments.Headers += @{$Key = $script:CWMServerConnection.Headers.$Key}
+            }            
         }
     }
+    $Arguments.Remove('Version')
+
     if(!$Arguments.SessionVariable){ $Arguments.WebSession = $script:CWMServerConnection.Session }
 
     # Check URI format
@@ -35,49 +41,47 @@
         $Result = Invoke-WebRequest @Arguments -UseBasicParsing
     }
     catch {
+        # Start error message
+        $ErrorMessage = @()
+
         if($_.Exception.Response){
             # Read exception response
             $ErrorStream = $_.Exception.Response.GetResponseStream()
             $Reader = New-Object System.IO.StreamReader($ErrorStream)
             $script:ErrBody = $Reader.ReadToEnd() | ConvertFrom-Json
 
-            # Start error message
-            $ErrorMessage = @()
-
-            if($errBody.code){
+            if($ErrBody.code){
                 $ErrorMessage += "An exception has been thrown."
-                $ErrorMessage +=  $_.ScriptStackTrace
-                $ErrorMessage += ''
                 $ErrorMessage += "--> $($ErrBody.code)"
-                if($errBody.code -eq 'Unauthorized'){
+                if($ErrBody.code -eq 'Unauthorized'){
                     $ErrorMessage += "-----> $($ErrBody.message)"
                     $ErrorMessage += "-----> Use 'Disconnect-CWM' or 'Connect-CWM -Force' to set new authentication."
                 }
                 else {
-                    $ErrorMessage += "-----> $($ErrBody.message)"
+                    $ErrorMessage += "-----> $($ErrBody.code): $($ErrBody.message)"
                     $ErrorMessage += "-----> ^ Error has not been documented please report. ^"
                 }
             } elseif ($_.Exception.message) {
                 $ErrorMessage += "An exception has been thrown."
-                $ErrorMessage +=  $_.ScriptStackTrace
-                $ErrorMessage += ''
                 $ErrorMessage += "--> $($_.Exception.message)"
             }
         }
 
         if ($_.ErrorDetails) {
             $ErrorMessage += "An error has been thrown."
-            $ErrorMessage +=  $_.ScriptStackTrace
-            $ErrorMessage += ''
-            $script:errDetails = $_.ErrorDetails | ConvertFrom-Json
-            $ErrorMessage += "--> $($errDetails.code)"
-            $ErrorMessage += "--> $($errDetails.message)"
-            if($errDetails.errors.message){
-                $ErrorMessage += "-----> $($errDetails.errors.message)"
+            $script:ErrDetails = $_.ErrorDetails | ConvertFrom-Json
+            $ErrorMessage += "--> $($ErrDetails.code)"
+            $ErrorMessage += "--> $($ErrDetails.message)"
+            if($ErrDetails.errors.message){
+                $ErrorMessage += "-----> $($ErrDetails.errors.message)"
             }
         }
+        
+        if ($ErrorMessage.Length -lt 1){ $ErrorMessage = $_ } 
+        else { $ErrorMessage += $_.ScriptStackTrace }
+
         Write-Error ($ErrorMessage | out-string)
-        return
+        EXIT 2
     }
 
     # Not sure this will be hit with current iwr error handling
@@ -96,7 +100,7 @@
     }
     if ($Retry -ge $MaxRetry) {
         Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
-        return
+        EXIT 3
     }
 
     # Save current version

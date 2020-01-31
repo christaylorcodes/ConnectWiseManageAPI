@@ -5,20 +5,19 @@ online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Invoke-CWMNewMaster
+# Invoke-CWMPatchMaster
 
 ## SYNOPSIS
-This will be basis of all create calls to the ConnectWise Manage API.
+This will be basis of all Patch calls to the ConnectWise Manage API.
 
 ## SYNTAX
 
 ```
-Invoke-CWMNewMaster [[-Arguments] <Object>] [[-URI] <String>] [[-Skip] <String[]>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Invoke-CWMPatchMaster [[-Arguments] <Object>] [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all create requests are handled correctly.
+This will insure that all update requests are handled correctly.
 
 ## EXAMPLES
 
@@ -38,14 +37,29 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -URI
-The URI of the create endpoint
+The URI of the update endpoint
 
 ```yaml
 Type: String
@@ -53,23 +67,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-Ignores the specified number of objects and then gets the remaining objects.
-Enter the number of objects to skip.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -83,21 +81,6 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
 
 Required: False
 Position: Named

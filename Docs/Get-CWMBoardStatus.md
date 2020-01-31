@@ -19,7 +19,7 @@ Get-CWMBoardStatus [-ServiceBoardID] <Int32> [[-Condition] <String>] [[-orderBy]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This function will list the statuses of a service board based on conditions.
 
 ## EXAMPLES
 
@@ -34,7 +34,7 @@ Will return all \<SOMETHING\> that match the condition
 
 ### -Condition
 This is your search condition to return the results you desire.
-Example: (contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"
+Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
 
 ```yaml
 Type: String

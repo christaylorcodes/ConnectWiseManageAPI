@@ -1,19 +1,24 @@
-﻿function Get-CWMTicketNote {
-    [CmdletBinding()]
+﻿function New-CWMTicketNote {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSShouldProcess", "")]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
-        [Parameter(Mandatory=$true)]
-        [int]$TicketID,
-        [string]$Condition,
-        [ValidatePattern('\S* (desc|asc)')]
-        [string]$orderBy,
-        [string]$childConditions,
-        [string]$customFieldConditions,
-        [int]$page,
-        [int]$pageSize,
-        [switch]$all
+        [int]$id,
+        [int]$ticketId,
+        [string]$text,
+        [boolean]$detailDescriptionFlag,
+        [boolean]$internalAnalysisFlag,
+        [boolean]$resolutionFlag,
+        $member,
+        $contact,
+        [boolean]$customerUpdatedFlag,
+        [boolean]$processNotifications,
+        [string]$dateCreated,
+        [string]$createdBy,
+        [boolean]$internalFlag,
+        [boolean]$externalFlag,
+        $_info
     )
-
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$($TicketID)/notes"
-
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    
+    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$ticketId/notes"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
 }

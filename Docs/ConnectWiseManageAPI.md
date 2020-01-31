@@ -14,9 +14,6 @@ Locale: {{ Update Locale }}
 ### [Connect-CWM](Connect-CWM.md)
 This command is used to authenticate with the Manage server.
 
-### [ConvertFrom-CWMColumnRow](ConvertFrom-CWMColumnRow.md)
-Take Column Row output from Manage and converts it to an object
-
 ### [ConvertFrom-CWMTime](ConvertFrom-CWMTime.md)
 {{ Fill in the Synopsis }}
 
@@ -116,6 +113,9 @@ This function will list the product sub categories.
 ### [Get-CWMProductType](Get-CWMProductType.md)
 This function will list product types.
 
+### [Get-CWMProject](Get-CWMProject.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMProjectPhase](Get-CWMProjectPhase.md)
 This function will list all phases for a project.
 
@@ -124,6 +124,9 @@ This function will list project security roles.
 
 ### [Get-CWMProjectTeamMember](Get-CWMProjectTeamMember.md)
 This function will list team members of a project.
+
+### [Get-CWMProjectTicket](Get-CWMProjectTicket.md)
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMReport](Get-CWMReport.md)
 This function will allow you to search for Manage configurations.
@@ -190,6 +193,12 @@ This function will create a new ticket.
 
 ### [New-CWMScheduleEntry](New-CWMScheduleEntry.md)
 This function will create a new ticket.
+
+### [New-CWMTicket](New-CWMTicket.md)
+This function will create a new ticket.
+
+### [New-CWMTicketNote](New-CWMTicketNote.md)
+Add a note to a CW Manage ticket.
 
 ### [New-CWMTimeEntry](New-CWMTimeEntry.md)
 This function will create a new time entry.

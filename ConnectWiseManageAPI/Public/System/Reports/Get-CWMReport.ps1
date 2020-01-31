@@ -17,9 +17,7 @@
         $URI += "/$Report"
     }
     $Result = Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
-    if(!$Result){return}
-    if($Report){
-        return ConvertFrom-CWMColumnRow -Data $Result
-    }
+    if(!$Result){ return }
+    if($Report){ return ConvertFrom-CWMColumnRow -Data $Result }
     return $Result
 }

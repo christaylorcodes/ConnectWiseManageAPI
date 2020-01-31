@@ -5,25 +5,25 @@ online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Invoke-CWMPatchMaster
+# Invoke-CWMDeleteMaster
 
 ## SYNOPSIS
-This will be basis of all Patch calls to the ConnectWise Manage API.
+This will be basis of all delete calls to the ConnectWise Manage API.
 
 ## SYNTAX
 
 ```
-Invoke-CWMPatchMaster [[-Arguments] <Object>] [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMDeleteMaster [[-Arguments] <Object>] [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all update requests are handled correctly.
+This will insure that all delete requests are handled correctly.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-CWMPatchMaster -Arguments $Arguments -URI $URI
+Invoke-CWMDeleteMaster -Arguments $Arguments -URI $URI
 ```
 
 ## PARAMETERS
@@ -37,14 +37,29 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -URI
-The URI of the update endpoint
+The URI of the delete endpoint
 
 ```yaml
 Type: String
@@ -52,7 +67,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,21 +81,6 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
 
 Required: False
 Position: Named

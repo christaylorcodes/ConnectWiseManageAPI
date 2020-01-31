@@ -7,7 +7,11 @@
 # ConnectWise Manage REST API PowerShell Wrapper
 >**As of 8/14/2019 ConnectWise now requires the use of a [Client ID](https://developer.connectwise.com/ClientID) to interact with the API.**
 
-This is a PowerShell wrapper for the [ConnectWise Manage REST API](https://developer.connectwise.com/Products/Manage/REST). This module makes it easy to leverage PowerShell to automate tasks in Manage.
+## This is a PowerShell wrapper for the [ConnectWise Manage REST API](https://developer.connectwise.com/Products/Manage/REST). 
+
+This module makes it easy to leverage PowerShell to automate tasks in Manage and can be esily installed from the [PowerShellGallery](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
+
+>`Install-Module 'ConnectWiseManageAPI'`
 
 The Wiki has some great information on [how to get started](https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki/Getting-Started---Authentication) with the module.
 

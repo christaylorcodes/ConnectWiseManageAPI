@@ -1,35 +1,38 @@
 ---
 external help file:
 Module Name:
-online version: https://developer.connectwise.com/Manage/Developer_Guide#Authentication
+online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Invoke-CWMGetMaster
+# Invoke-CWMWebRequest
 
 ## SYNOPSIS
-This will be basis of all get calls to the ConnectWise Manage API.
+This function is used to handle all web requests to the ConnectWise Manage API.
 
 ## SYNTAX
 
 ```
-Invoke-CWMGetMaster [[-Arguments] <Object>] [[-URI] <String>] [<CommonParameters>]
+Invoke-CWMWebRequest [[-Arguments] <Object>] [[-MaxRetry] <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all GET requests are handled correctly.
+This function is used to manage error handling with web requests.
+It will also handle retries of failed attempts.
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
-Invoke-CWMGetMaster -Arguments $Arguments -URI $URI
-```
+
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Arguments
-A hash table of parameters
+A splat object of web request parameters
 
 ```yaml
 Type: Object
@@ -37,23 +40,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URI
-The URI of the GET endpoint
+### -MaxRetry
+The maximum number of retry attempts
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: None
+Position: 1
+Default value: 5
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -69,11 +72,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor
 Date: 10/10/2018
 
-Author: Chris Taylor
-Update Date: 9/26/2019
-Purpose/Change: changed orderBy support, improved url query string creation
-
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
+[https://christaylor.codes](https://christaylor.codes)
 

@@ -15,5 +15,9 @@
             $Result = $Result.content | ConvertFrom-Json
         }
     }
+    if ($Result.StatusCode -eq 204) {
+        Write-Verbose 'Success'
+        return
+    }
     return $Result
 }

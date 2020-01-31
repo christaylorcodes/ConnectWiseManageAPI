@@ -18,7 +18,7 @@ Get-CWMAuditTrail [-Type] <Object> [-ID] <String> [[-deviceIdentifier] <Object>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This function will get the audit trail of an item in ConnectWise.
 
 ## EXAMPLES
 
