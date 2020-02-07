@@ -257,6 +257,9 @@ This will update a catalog item.
 ### [Update-CWMProjectPhase](Update-CWMProjectPhase.md)
 This will update an project phase.
 
+### [Update-CWMProjectTicket](Update-CWMProjectTicket.md)
+This will update a Manage project ticket.
+
 ### [Update-CWMTicket](Update-CWMTicket.md)
 This will update a ticket.
 

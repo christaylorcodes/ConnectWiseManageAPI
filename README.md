@@ -1,15 +1,13 @@
 ﻿[![Build status](https://ci.appveyor.com/api/projects/status/gkmh0h0234s1x7rt?svg=true)](https://ci.appveyor.com/project/christaylorcodes/connectwisemanageapi)
+[![Gallery](https://img.shields.io/powershellgallery/v/ConnectWiseManageAPI?label=PS%20Gallery&logo=powershell&logoColor=white)](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
 
+![ConnectWiseManageLogo](https://www.connectwise.com/-/media/logos/company/product/manage/manage-horiz-black.ashx?h=393&w=1494&la=en&hash=41DF6B6D3CB705E82EE2189EC9C101E5C77B900A)
 
-![LogIn](https://www.connectwise.com/-/media/logos/company/product/manage/manage-horiz-black.ashx?h=393&w=1494&la=en&hash=41DF6B6D3CB705E82EE2189EC9C101E5C77B900A "Logo Title Text 1")
-
-
-# ConnectWise Manage REST API PowerShell Wrapper
->**As of 8/14/2019 ConnectWise now requires the use of a [Client ID](https://developer.connectwise.com/ClientID) to interact with the API.**
+>**As of 8/14/2019 ConnectWise requires the use of a [Client ID](https://developer.connectwise.com/ClientID) to interact with the API.**
 
 ## This is a PowerShell wrapper for the [ConnectWise Manage REST API](https://developer.connectwise.com/Products/Manage/REST). 
 
-This module makes it easy to leverage PowerShell to automate tasks in Manage and can be esily installed from the [PowerShellGallery](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
+This module makes it easy to leverage PowerShell to automate tasks in Manage and can be easily installed from the [PowerShellGallery](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
 
 >`Install-Module 'ConnectWiseManageAPI'`
 
