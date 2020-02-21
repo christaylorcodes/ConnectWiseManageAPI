@@ -17,7 +17,7 @@
         [string]$IntegratorUser,
         [Parameter(ParameterSetName = 'Integrator', Mandatory = $True)]
         [string]$IntegratorPass,
-        [Parameter(ParameterSetName = 'Integrator')]
+        [Parameter(ParameterSetName = 'Integrator', Mandatory = $True)]
         [string]$MemberID,
         [switch]$Force,
         [Parameter(ParameterSetName = 'Integrator')]
@@ -69,8 +69,8 @@
         $null = Invoke-CWMWebRequest -Arguments $WebRequestArguments
     }
 
-    # Integrator account w/ w/o member id
-    elseif($IntegratorUser -and $IntegratorPass){
+    # Integrator account w/ member
+    elseif($IntegratorUser -and $IntegratorPass -and $MemberID){
         Write-Verbose "Using Integrator authentication"
         $ConnectionMethod = 'Integrator'
         if(!$DontWarn){
@@ -82,44 +82,47 @@
         $AuthString  = $Company + '+' + $IntegratorUser + ':' + $IntegratorPass
         $encodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
         $Headers = @{
-            Authorization = "Basic $encodedAuth"
+            Authentication = "Basic $encodedAuth"
             ClientID = $ClientID
-            'x-CW-usertype' = "integrator"
+            'x-cw-usertype' = "integrator"
             'Cache-Control'= 'no-cache'
         }
 
-        if ($MemberID) {
-            Write-Verbose "Impersonating user, $MemberID"
-            $ConnectionMethod = 'Impersonation'
-            $URL = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
-            $Body = @{
-                memberIdentifier = $MemberID
-            }
-            $URI = "https://$($Server)/v4_6_release//login/login.aspx?response=json"
-            $WebRequestArguments = @{
-                Method = 'Post'
-                Uri = $URL
-                Body = $Body
-                ContentType = 'application/json'
-            }
-            $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-            if($Result.content){
-                $Result = $Result.content | ConvertFrom-Json
-            }
-            else {
-                Write-Error "Issue getting Auth Token for impersonated user, $MemberID"
-                return
-            }
-
-            # Create auth header for Impersonated user
-            $expiration = [datetime]$Result.expiration
-            $AuthString  = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
-            $encodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)));
-            $Headers = @{
-                Authorization = "Basic $encodedAuth"
-                ClientID = $ClientID
-                'Cache-Control'= 'no-cache'
-            }
+        $ConnectionMethod = 'Impersonation'
+        Write-Verbose "Impersonating user, $MemberID"        
+        $URL = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
+        $Body = @{
+            memberIdentifier = $MemberID
+        }
+        
+        $script:CWMServerConnection = @{
+            Server = $Server
+            Headers = $Headers
+            Session = $CWMSession
+        }            
+        $WebRequestArguments = @{
+            Method = 'Post'
+            Uri = $URL
+            Body = $Body
+            ContentType = 'application/json'
+        }
+        $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        if($Result.content){
+            $Result = $Result.content | ConvertFrom-Json
+        }
+        else {
+            Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
+            return
+        }
+        Write-Verbose "Integrator results $Result"
+        # Create auth header for Impersonated user
+        $expiration = [datetime]$Result.expiration
+        $AuthString  = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
+        $encodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)));
+        $Headers = @{
+            Authorization = "Basic $encodedAuth"
+            ClientID = $ClientID
+            'Cache-Control'= 'no-cache'
         }
     }
 

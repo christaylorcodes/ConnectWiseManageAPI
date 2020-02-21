@@ -2,11 +2,12 @@
     [CmdletBinding()]
     param(
         $Arguments,
-        [int]$MaxRetry = 5
+        [int]$MaxRetry = 5,
+        [switch]$Unauthenticated
     )
 
     # Check that we have cached connection info
-    if(!$script:CWMServerConnection){
+    if(!$script:CWMServerConnection -and !$Unauthenticated){
         $ErrorMessage = @()
         $ErrorMessage += "Not connected to a Manage server."
         $ErrorMessage += '--> $CWMServerConnection variable not found.'
