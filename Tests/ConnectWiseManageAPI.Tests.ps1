@@ -25,7 +25,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     clientid = $env:CWMClientID
                 }
 
-                Connect-CWM @CWMConnectionInfo -ErrorAction Stop
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Connected = $true                   
             }
             catch {
@@ -43,7 +43,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     clientid = $env:CWMClientID
                 }
 
-                Connect-CWM @CWMConnectionInfo -ErrorAction Stop
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Connected = $true                   
             }
             catch {
@@ -62,13 +62,34 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     clientid = '123'
                 }
 
-                Connect-CWM @CWMConnectionInfo -ErrorAction Stop
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Connected = $true                   
             }
             catch {
                 $Connected = $false 
             }
             $Connected | Should -Be $false
+        }
+        # Cookie
+        It 'should connect with username and password' {
+            try {
+                $Password = ConvertTo-SecureString -AsPlainText -Force $env:CWMUserPassword
+                $Credentials = New-Object PSCredential $env:CWMUserName, $Password
+
+                $CWMConnectionInfo = @{
+                    Server = $CWMServer
+                    Company = $env:CWMCompany
+                    Credentials = $Credentials
+                    clientid = $env:CWMClientID
+                }
+
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+                $Connected = $true                   
+            }
+            catch {
+                $Connected = $false 
+            }
+            $Connected | Should -Be $true
         }
     }
 }
