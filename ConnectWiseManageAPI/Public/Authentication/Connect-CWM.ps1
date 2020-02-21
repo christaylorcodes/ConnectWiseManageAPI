@@ -71,8 +71,9 @@
 
     # Integrator account w/ member
     elseif($IntegratorUser -and $IntegratorPass -and $MemberID){
-        Write-Verbose "Using Integrator authentication"
-        $ConnectionMethod = 'Integrator'
+        Write-Verbose "Using Integrator authentication and impersonating, $MemberID"
+        $ConnectionMethod = 'Impersonation'
+
         if(!$DontWarn){
             Write-Warning "Please move to a different authentication method."
             Write-Warning "Use the -Don'tWarn switch to suppress this message."
@@ -88,8 +89,6 @@
             'Cache-Control'= 'no-cache'
         }
 
-        $ConnectionMethod = 'Impersonation'
-        Write-Verbose "Impersonating user, $MemberID"        
         $URL = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
         $Body = @{
             memberIdentifier = $MemberID
@@ -107,11 +106,13 @@
             ContentType = 'application/json'
         }
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        Write-Verbose "Result: $Result"
         if($Result.content){
             $Result = $Result.content | ConvertFrom-Json
         }
         else {
             Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
+            Write-Error $Result
             return
         }
         Write-Verbose "Integrator results $Result"

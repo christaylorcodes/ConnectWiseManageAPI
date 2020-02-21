@@ -70,7 +70,7 @@
 
         if ($_.ErrorDetails) {
             $ErrorMessage += "An error has been thrown."
-            $script:ErrDetails = $_.ErrorDetails | ConvertFrom-Json
+            $script:ErrDetails = $_.ErrorDetails
             $ErrorMessage += "--> $($ErrDetails.code)"
             $ErrorMessage += "--> $($ErrDetails.message)"
             if($ErrDetails.errors.message){
