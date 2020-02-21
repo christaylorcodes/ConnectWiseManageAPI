@@ -73,7 +73,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     Server = $CWMServer
                     Company = $env:CWMCompany
                     Credentials = $Credentials
-                    clientid = $ClientID
+                    clientid = $env:CWMClientID
                 }
                 $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop                                   
             }
