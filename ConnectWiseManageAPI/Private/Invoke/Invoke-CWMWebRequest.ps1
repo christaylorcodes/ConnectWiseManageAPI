@@ -19,7 +19,7 @@
     foreach($Key in $script:CWMServerConnection.Headers.Keys){
         if($Arguments.Headers.Keys -notcontains $Key){
             # Set version
-            if ($Key -eq 'Accept' -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
+            if ($Key -eq 'Accept' -and $Arguments.Version -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
                 $Arguments.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Arguments.Version)"
                 Write-Verbose "Version Passed: $($Arguments.Version)"
             } else {

@@ -5,7 +5,7 @@
         $Hash = $true
     )
 
-    if (!$CWMServerConnection) {
+    if (!$script:CWMServerConnection) {
         $ErrorMessage = @()
         $ErrorMessage += "Not connected to a Manage server."
         $ErrorMessage += '--> $CWMServerConnection variable not found.'
@@ -14,10 +14,17 @@
         return
     }
 
+    try {
+        $SysInfo = Get-CWMSystemInfo -ErrorAction Stop
+    } 
+    catch {
+        $SysInfo = 'error'
+    }
+
     $DebugOutput = @{}
     $DebugOutput.CWMServerConnection = $script:CWMServerConnection.Clone()
-    $DebugOutput.CWMServerConnection.Headers = $script:CWMServerConnection.Headers.Clone()
-    $DebugOutput.CWMSystemInfo = Get-CWMSystemInfo -ErrorAction SilentlyContinue
+    $DebugOutput.CWMServerConnection.Headers = $script:CWMServerConnection.Headers.Clone()    
+    $DebugOutput.CWMSystemInfo = $SysInfo
     $DebugOutput.OS = [System.Environment]::OSVersion.Version
     $DebugOutput.PowerShell = $PSVersionTable.PSVersion
     $DebugOutput.Errors = $Error[0..4]
@@ -37,5 +44,6 @@
         $DebugOutput.CWMServerConnection.Headers.Authorization = Get-StringHash $DebugOutput.CWMServerConnection.Headers.Authorization
         $DebugOutput.CWMServerConnection.Headers.ClientID = Get-StringHash $DebugOutput.CWMServerConnection.Headers.ClientID
     }
-    return ($DebugOutput | ConvertTo-Json | Out-String)
+    Write-Verbose '1'
+    return ($DebugOutput | ConvertTo-Json -Depth 99 | Out-String)
 }
