@@ -36,10 +36,10 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                 $CWMConnectionInfo = @{
                     Server = $CWMServer
                     IntegratorUser = $env:CWMIntegratorUser
-                    IntegratorPass = $env:IntegratorPass
+                    IntegratorPass = $env:CWMIntegratorPass
                     Company = $env:CWMCompany
                     MemberID = $env:CWMUserName
-                    clientid = $env:CWMIntegratorPass
+                    clientid = $env:CWMClientID
                 }
                 
                 $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop                  
