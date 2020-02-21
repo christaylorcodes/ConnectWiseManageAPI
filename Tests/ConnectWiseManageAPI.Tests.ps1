@@ -84,3 +84,30 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
         }
     }
 }
+
+Describe "Get-CWMContact  PS$PSVersion Integrations tests" {
+
+    Context 'Strict mode' { 
+
+        Set-StrictMode -Version latest
+        It 'returns results' {
+            try {
+                $CWMConnectionInfo = @{
+                    Server = $CWMServer
+                    Company = $env:CWMCompany
+                    pubkey = $env:CWMAPIMemberPub
+                    privatekey = $env:CWMAPIMemberPriv
+                    clientid = $env:CWMClientID
+                }
+
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+                $Contacts = Get-CWMContact
+                $Result = ($Contacts | Measure-Object).Count -gt 0
+            }
+            catch {
+                $Result = $_
+            }
+            $Result | Should -Be $true
+        }
+    }
+}

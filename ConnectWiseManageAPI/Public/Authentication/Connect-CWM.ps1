@@ -33,6 +33,14 @@
 
     # Validate server
     $Server = ($Server -replace("http.*:\/\/",'') -split '/')[0]
+    
+    $Headers = @{ ClientID = $ClientID }
+    $script:CWMServerConnection = @{
+        Server = $Server
+        ConnectionMethod = $ConnectionMethod
+        Version = $Version
+        Headers = $Headers
+    }
 
     # API key
     if($PubKey -and $PrivateKey){
@@ -51,22 +59,20 @@
     elseif($Credentials){
         Write-Verbose "Using Cookie authentication"
         $ConnectionMethod = 'Cookie'
-        $script:CWMServerConnection = @{}
-        $Headers = @{ ClientID = $ClientID }
         $Body = @{
             CompanyName = $Company
             UserName = $Credentials.UserName
             Password = $Credentials.GetNetworkCredential().Password
         }
-        $URI = "https://$($Server)/v4_6_release//login/login.aspx?response=json"
         $WebRequestArguments = @{
-            Uri = $Uri
+            Uri = "https://$($Server)/v4_6_release//login/login.aspx?response=json"
             Method = 'Post'
             Body = $Body
             SessionVariable = 'script:CWMSession'
         }
         # Create session variable. Cookies are stored in that object
-        $null = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        $CookieResult = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        Write-Verbose $CookieResult
     }
 
     # Integrator account w/ member
@@ -84,27 +90,16 @@
         $encodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
         $Headers = @{
             Authentication = "Basic $encodedAuth"
-            ClientID = $ClientID
-            'x-cw-usertype' = "integrator"
-            'Cache-Control'= 'no-cache'
+            'x-cw-usertype' = 'integrator'
         }
-
-        $URL = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
-        $Body = @{
-            memberIdentifier = $MemberID
-        }
-        
-        $script:CWMServerConnection = @{
-            Server = $Server
-            Headers = $Headers
-            Session = $CWMSession
-        }            
         $WebRequestArguments = @{
             Method = 'Post'
-            Uri = $URL
-            Body = $Body
+            Uri = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
+            Body = @{ memberIdentifier = $MemberID }
             ContentType = 'application/json'
+            Headers = $Headers
         }
+        Write-Verbose "WebRequestArguments: $($WebRequestArguments | ConvertTo-Json)"
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         Write-Verbose "Result: $Result"
         if($Result.content){
@@ -137,7 +132,7 @@
     $script:CWMServerConnection = @{
         Server = $Server
         Headers = $Headers
-        Session = $CWMSession
+        Session = $script:CWMSession
         Expiration = $expiration
         ConnectionMethod = $ConnectionMethod
         Version = $Version
@@ -152,6 +147,7 @@
 
     # Validate connection info
     Write-Verbose 'Validating authentication'
+    Write-Verbose "Session: $($script:CWMServerConnection.Session)"
     $Info = Get-CWMSystemInfo
     if(!$Info) {
         Write-Warning 'Authentication failed. Clearing connection settings.'

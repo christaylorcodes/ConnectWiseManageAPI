@@ -2,12 +2,11 @@
     [CmdletBinding()]
     param(
         $Arguments,
-        [int]$MaxRetry = 5,
-        [switch]$Unauthenticated
+        [int]$MaxRetry = 5
     )
 
     # Check that we have cached connection info
-    if(!$script:CWMServerConnection -and !$Unauthenticated){
+    if(!$script:CWMServerConnection){
         $ErrorMessage = @()
         $ErrorMessage += "Not connected to a Manage server."
         $ErrorMessage += '--> $CWMServerConnection variable not found.'
@@ -19,6 +18,7 @@
     # Add default set of arguments
     foreach($Key in $script:CWMServerConnection.Headers.Keys){
         if($Arguments.Headers.Keys -notcontains $Key){
+            if (!$Arguments.Headers) { $Arguments.Headers = @{} }
             # Set version
             if ($Key -eq 'Accept' -and $Arguments.Version -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
                 $Arguments.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Arguments.Version)"
