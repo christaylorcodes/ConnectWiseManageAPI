@@ -24,13 +24,12 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     clientid = $env:CWMClientID
                 }
 
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-                $Connected = $true                   
+                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
             }
             catch {
-                $Connected = $false 
+                $Result = $_
             }
-            $Connected | Should -Be $true
+            $Result | Should -Be $null
         }
         It 'Authentication: Member Impersonation' {
             try {
@@ -43,13 +42,12 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     clientid = $env:CWMClientID
                 }
                 
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-                $Connected = $true                   
+                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop                  
             }
             catch {
-                $Connected = $false 
+                $Result = $_
             }
-            $Connected | Should -Be $true
+            $Result | Should -Be $null
         }
         It 'Authentication: My Account' {
             try {
@@ -60,13 +58,12 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     privatekey = $env:CWMPriv
                     clientid = $env:CWMClientID
                 }
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-                $Connected = $true                   
+                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
             }
             catch {
-                $Connected = $false 
+                $Result = $_
             }
-            $Connected | Should -Be $true
+            $Result | Should -Be $null
         }
         It 'Authentication: Cookies!' {
             try {
@@ -78,13 +75,12 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     Credentials = $Credentials
                     clientid = $ClientID
                 }
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-                $Connected = $true                   
+                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop                                   
             }
             catch {
-                $Connected = $false 
+                $Result = $_
             }
-            $Connected | Should -Be $true
+            $Result | Should -Be $null
         }
     }
 }
