@@ -35,9 +35,9 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
             try {
                 $CWMConnectionInfo = @{
                     Server = $CWMServer
-                    IntegratorUser = $env:CWMIntegratorUser
-                    IntegratorPass = $env:CWMIntegratorPass
                     Company = $env:CWMCompany
+                    pubkey = $env:CWMAPIMemberPub
+                    privatekey = $env:CWMAPIMemberPriv
                     MemberID = $env:CWMUserName
                     clientid = $env:CWMClientID
                 }
