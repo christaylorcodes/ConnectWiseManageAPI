@@ -34,7 +34,10 @@
     # Validate server
     $Server = ($Server -replace("http.*:\/\/",'') -split '/')[0]
     
-    $Headers = @{ ClientID = $ClientID }
+    $Headers = @{ 
+        ClientID = $ClientID 
+        'Cache-Control' = 'no-cache'
+    }
     $script:CWMServerConnection = @{
         Server = $Server
         ConnectionMethod = $ConnectionMethod
@@ -51,7 +54,7 @@
         $Headers = @{
             Authorization = "Basic $EncodedAuth"
             ClientID = $ClientID
-            'Cache-Control'= 'no-cache'
+            'Cache-Control' = 'no-cache'
         }
     }
 
@@ -65,14 +68,44 @@
             Password = $Credentials.GetNetworkCredential().Password
         }
         $WebRequestArguments = @{
-            Uri = "https://$($Server)/v4_6_release//login/login.aspx?response=json"
+            Uri = "https://$($Server)/v4_6_release/login/login.aspx?response=json"
             Method = 'Post'
             Body = $Body
             SessionVariable = 'script:CWMSession'
         }
+
         # Create session variable. Cookies are stored in that object
-        $CookieResult = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        Write-Verbose $CookieResult
+        $CookieResult = Invoke-CWMWebRequest -Arguments $WebRequestArguments | ConvertFrom-Json
+        if (!$CookieResult.Success) {
+            Write-Error 'There was an error obtain the MemberHash'
+            Write-Error $CookieResult
+            break
+        }
+
+        # Seems cookies don't get put in session any more, add them
+        $Cookie = New-Object System.Net.Cookie
+        $Cookie.Name = "companyName" 
+        $Cookie.Value = $Company
+        $Cookie.Domain = $Server
+        $script:CWMSession.Cookies.Add($Cookie)
+
+        $Cookie = New-Object System.Net.Cookie
+        $Cookie.Name = "memberHash"
+        $Cookie.Value = $CookieResult.Hash
+        $Cookie.Domain = $Server
+        $script:CWMSession.Cookies.Add($Cookie)
+
+        $Cookie = New-Object System.Net.Cookie
+        $Cookie.Name = "MemberID"
+        $Cookie.Value = $Credentials.UserName
+        $Cookie.Domain = $Server
+        $script:CWMSession.Cookies.Add($Cookie)
+
+        $Cookie = New-Object System.Net.Cookie
+        $Cookie.Name = "MemberContext"
+        $Cookie.Value = 'web'
+        $Cookie.Domain = $Server
+        $script:CWMSession.Cookies.Add($Cookie)
     }
 
     # Integrator account w/ member

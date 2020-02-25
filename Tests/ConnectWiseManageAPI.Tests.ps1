@@ -1,4 +1,4 @@
-$CWMServer = 'https://staging.connectwisedev.com/'
+$CWMServer = 'https://api-staging.connectwisedev.com/'
 $Verbose = @{}
 if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master")
 {
@@ -101,13 +101,13 @@ Describe "Get-CWMContact  PS$PSVersion Integrations tests" {
                 }
 
                 Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-                $Contacts = Get-CWMContact
-                $Result = ($Contacts | Measure-Object).Count -gt 0
+                $Contacts = Get-CWMContact -ErrorAction Stop
+                $Result = ($Contacts | Measure-Object).Count
             }
             catch {
                 $Result = $_
             }
-            $Result | Should -Be $true
+            $Result | Should -Be 25
         }
     }
 }

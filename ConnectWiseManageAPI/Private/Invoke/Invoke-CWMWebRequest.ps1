@@ -18,7 +18,6 @@
     # Add default set of arguments
     foreach($Key in $script:CWMServerConnection.Headers.Keys){
         if($Arguments.Headers.Keys -notcontains $Key){
-            if (!$Arguments.Headers) { $Arguments.Headers = @{} }
             # Set version
             if ($Key -eq 'Accept' -and $Arguments.Version -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
                 $Arguments.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Arguments.Version)"
@@ -39,6 +38,7 @@
 
     # Issue request
     try {
+        Write-Verbose "Arguments: $($Arguments | ConvertTo-Json)"
         $Result = Invoke-WebRequest @Arguments -UseBasicParsing
     }
     catch {
