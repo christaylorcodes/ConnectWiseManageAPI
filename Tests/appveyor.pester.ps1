@@ -17,14 +17,12 @@ $Address = "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID
 Set-Location $ProjectRoot
 
 $Verbose = @{}
-if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master")
-{
+if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master"){
     $Verbose.add("Verbose",$True)
 }
 
 #Run a test with the current version of PowerShell, upload results
-if($Test)
-{
+if($Test){
     "`n`tSTATUS: Testing with PowerShell $PSVersion`n"
 
     Import-Module Pester -force
@@ -32,15 +30,13 @@ if($Test)
     Invoke-Pester @Verbose -Path "$ProjectRoot\Tests" -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -PassThru |
         Export-Clixml -Path "$ProjectRoot\PesterResults_PS$PSVersion`_$Timestamp.xml"
     
-    If($env:APPVEYOR_JOB_ID)
-    {
+    If($env:APPVEYOR_JOB_ID){
         (New-Object 'System.Net.WebClient').UploadFile( $Address, "$ProjectRoot\$TestFile" )
     }
 }
 
 #If finalize is specified, display errors and fail build if we ran into any
-If($Finalize)
-{
+If($Finalize){
     #Show status...
         $AllFiles = Get-ChildItem -Path $ProjectRoot\PesterResults*.xml | Select-Object -ExpandProperty FullName
         "`n`tSTATUS: Finalizing results`n"

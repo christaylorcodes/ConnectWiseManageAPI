@@ -1,8 +1,7 @@
 $ModuleName = 'ConnectWiseManageAPI'
 $CWMServer = 'https://api-staging.connectwisedev.com/'
 $Verbose = @{}
-if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master")
-{
+if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master") {
     $Verbose.add("Verbose",$True)
 }
 
@@ -91,6 +90,7 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
     Context 'Strict mode' { 
 
         Set-StrictMode -Version latest
+
         It 'returns results' {
             try {
                 $CWMConnectionInfo = @{
@@ -104,6 +104,7 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
                 Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Tickets = Get-CWMTicket -ErrorAction Stop
                 $Tickets.count | Should -Be 25
+                $Tickets[0].id | Should -BeGreaterThan 0
             }
             catch {
                 $_ | Should -Be $null
@@ -161,6 +162,28 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
                 It 'calls Invoke-CWMGetMaster when given an id' {
                     Assert-MockCalled Invoke-CWMGetMaster 1
                 }
+            }
+        }
+    }
+}
+
+Describe "Disconnect-CWM  PS$PSVersion Integrations tests" {
+
+    Context 'Strict mode' { 
+
+        Set-StrictMode -Version latest
+
+        It 'clears variable' {
+            try { Disconnect-CWM -ErrorAction Stop }
+            catch { $_ | Should -Be $null }
+        }
+        It 'causes other calls to fail after its run' {
+            try {
+                $Result = Get-CWMSystemInfo -ErrorAction Stop
+                $Result | Should -Be $null
+            }
+            catch {
+                $true | Should -Be $true
             }
         }
     }
