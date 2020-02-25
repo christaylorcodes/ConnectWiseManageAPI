@@ -6,22 +6,18 @@
         [Parameter(Mandatory=$true)]
         [string]$Company,
         [Parameter(ParameterSetName = 'API Key', Mandatory = $True)]
+        [Parameter(ParameterSetName = 'Impersonation', Mandatory = $True)]
         [string]$PubKey,
         [Parameter(ParameterSetName = 'API Key', Mandatory = $True)]
+        [Parameter(ParameterSetName = 'Impersonation', Mandatory = $True)]
         [string]$PrivateKey,
         [Parameter(Mandatory=$true)]
         [string]$ClientID,
         [Parameter(ParameterSetName = 'Cookie', Mandatory = $True)]
         [pscredential]$Credentials,
-        [Parameter(ParameterSetName = 'Integrator', Mandatory = $True)]
-        [string]$IntegratorUser,
-        [Parameter(ParameterSetName = 'Integrator', Mandatory = $True)]
-        [string]$IntegratorPass,
-        [Parameter(ParameterSetName = 'Integrator', Mandatory = $True)]
+        [Parameter(ParameterSetName = 'Impersonation', Mandatory = $True)]
         [string]$MemberID,
         [switch]$Force,
-        [Parameter(ParameterSetName = 'Integrator')]
-        [switch]$DontWarn,
         [string]$Version
     )
 
@@ -40,7 +36,6 @@
     }
     $script:CWMServerConnection = @{
         Server = $Server
-        ConnectionMethod = $ConnectionMethod
         Version = $Version
         Headers = $Headers
     }
@@ -50,12 +45,8 @@
         Write-Verbose "Using API Key authentication"
         $ConnectionMethod = 'Key'
         $AuthString  = "$($Company)+$($PubKey):$($PrivateKey)"
-        $EncodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString));
-        $Headers = @{
-            Authorization = "Basic $EncodedAuth"
-            ClientID = $ClientID
-            'Cache-Control' = 'no-cache'
-        }
+        $EncodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
+        $Headers.add('Authorization', "Basic $EncodedAuth")
     }
 
     # Cookies, yummy
@@ -108,23 +99,12 @@
         $script:CWMSession.Cookies.Add($Cookie)
     }
 
-    # Integrator account w/ member
-    elseif($IntegratorUser -and $IntegratorPass -and $MemberID){
-        Write-Verbose "Using Integrator authentication and impersonating, $MemberID"
+    # Impersonation
+    elseif($PubKey -and $PrivateKey -and $MemberID){
+        Write-Verbose "Impersonating, $MemberID"
         $ConnectionMethod = 'Impersonation'
 
-        if(!$DontWarn){
-            Write-Warning "Please move to a different authentication method."
-            Write-Warning "Use the -Don'tWarn switch to suppress this message."
-            Write-Warning "https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication"
-        }
-
-        $AuthString  = $Company + '+' + $IntegratorUser + ':' + $IntegratorPass
-        $encodedAuth  = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
-        $Headers = @{
-            Authentication = "Basic $encodedAuth"
-            'x-cw-usertype' = 'integrator'
-        }
+        $Headers.Add('x-cw-usertype', 'member')
         $WebRequestArguments = @{
             Method = 'Post'
             Uri = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
@@ -132,9 +112,7 @@
             ContentType = 'application/json'
             Headers = $Headers
         }
-        Write-Verbose "WebRequestArguments: $($WebRequestArguments | ConvertTo-Json)"
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        Write-Verbose "Result: $Result"
         if($Result.content){
             $Result = $Result.content | ConvertFrom-Json
         }
@@ -143,7 +121,7 @@
             Write-Error $Result
             return
         }
-        Write-Verbose "Integrator results $Result"
+
         # Create auth header for Impersonated user
         $expiration = [datetime]$Result.expiration
         $AuthString  = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
@@ -172,15 +150,11 @@
     }
 
     # Set version header info
-    if ($Version) {
-        $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Version)"
-    } else {
-        $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json"
-    }
+    if ($Version) { $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Version)" }
+    else { $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json" }
 
     # Validate connection info
     Write-Verbose 'Validating authentication'
-    Write-Verbose "Session: $($script:CWMServerConnection.Session)"
     $Info = Get-CWMSystemInfo
     if(!$Info) {
         Write-Warning 'Authentication failed. Clearing connection settings.'

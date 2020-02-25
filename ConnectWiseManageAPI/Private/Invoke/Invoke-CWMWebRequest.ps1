@@ -38,7 +38,7 @@
 
     # Issue request
     try {
-        Write-Verbose "Arguments: $($Arguments | ConvertTo-Json)"
+        Write-Debug "Arguments: $($Arguments | ConvertTo-Json)"
         $Result = Invoke-WebRequest @Arguments -UseBasicParsing
     }
     catch {
