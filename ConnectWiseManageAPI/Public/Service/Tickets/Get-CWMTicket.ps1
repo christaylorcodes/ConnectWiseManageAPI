@@ -1,7 +1,7 @@
 ﻿function Get-CWMTicket {
     [CmdletBinding()]
     param(
-        [Alias("TicketID")]
+        [Alias('TicketID')]
         [int]$id,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]

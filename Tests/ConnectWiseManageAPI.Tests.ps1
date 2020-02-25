@@ -1,3 +1,4 @@
+$ModuleName = 'ConnectWiseManageAPI'
 $CWMServer = 'https://api-staging.connectwisedev.com/'
 $Verbose = @{}
 if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master")
@@ -6,7 +7,7 @@ if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master")
 }
 
 $PSVersion = $PSVersionTable.PSVersion.Major
-Import-Module $PSScriptRoot\..\ConnectWiseManageAPI\ConnectWiseManageAPI.psm1 -Force
+Import-Module $PSScriptRoot\..\ConnectWiseManageAPI\$($ModuleName).psm1 -Force
 
 #Integration test example
 Describe "Connect-CWM  PS$PSVersion Integrations tests" {
@@ -85,7 +86,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
     }
 }
 
-Describe "Get-CWMContact  PS$PSVersion Integrations tests" {
+Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
     Context 'Strict mode' { 
 
@@ -101,13 +102,66 @@ Describe "Get-CWMContact  PS$PSVersion Integrations tests" {
                 }
 
                 Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-                $Contacts = Get-CWMContact -ErrorAction Stop
-                $Result = ($Contacts | Measure-Object).Count
+                $Tickets = Get-CWMTicket -ErrorAction Stop
+                $Tickets.count | Should -Be 25
             }
             catch {
-                $Result = $_
+                $_ | Should -Be $null
             }
-            $Result | Should -Be 25
+        }
+        It 'accepts the -all switch' {
+            try {
+                $CWMConnectionInfo = @{
+                    Server = $CWMServer
+                    Company = $env:CWMCompany
+                    pubkey = $env:CWMAPIMemberPub
+                    privatekey = $env:CWMAPIMemberPriv
+                    clientid = $env:CWMClientID
+                }
+
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+                $Tickets = Get-CWMTicket -all -ErrorAction Stop
+                $Tickets.count | Should -BeGreaterThan 25
+            }
+            catch {
+                $_ | Should -Be $null
+            }
+        }
+
+        It 'accepts a conditions' {
+            try {
+                $CWMConnectionInfo = @{
+                    Server = $CWMServer
+                    Company = $env:CWMCompany
+                    pubkey = $env:CWMAPIMemberPub
+                    privatekey = $env:CWMAPIMemberPriv
+                    clientid = $env:CWMClientID
+                }
+
+                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+                $Conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
+                foreach($Condition in $Conditions){
+                    $Tickets = Get-CWMTicket -Condition $Condition -ErrorAction Stop
+                    $Tickets.count | Should -Be 25    
+                }
+            }
+            catch {
+                $_ | Should -Be $null
+            }
+        }
+        Context "Test calls to internal functions:" {
+            InModuleScope $ModuleName {
+                Mock Invoke-CWMSearchMaster { return }
+                Get-CWMTicket -ErrorAction Stop    
+                It 'calls Invoke-CWMSearchMaster' {
+                    Assert-MockCalled Invoke-CWMSearchMaster 1
+                }
+                Mock Invoke-CWMGetMaster { return }
+                Get-CWMTicket -TicketID 44 -ErrorAction Stop    
+                It 'calls Invoke-CWMGetMaster when given an id' {
+                    Assert-MockCalled Invoke-CWMGetMaster 1
+                }
+            }
         }
     }
 }
