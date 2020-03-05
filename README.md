@@ -6,7 +6,7 @@
 
 > **As of 8/14/2019 ConnectWise requires the use of a [Client ID](https://developer.connectwise.com/ClientID) to interact with the API.**
 
-## This is a PowerShell wrapper for the [ConnectWise Manage REST API](https://developer.connectwise.com/Products/Manage/REST).
+## This is a PowerShell wrapper for the [ConnectWise Manage REST API](https://developer.connectwise.com/Products/Manage/REST)
 
 This module makes it easy to leverage PowerShell to automate tasks in Manage and can be easily installed from the [PowerShellGallery](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
 
@@ -18,15 +18,15 @@ See [ConnectWiseManageAPI_Functions](ConnectWiseManageAPI_Functions.md) for a li
 
 Checkout the [Examples](https://github.com/christaylorcodes/ConnectWiseManageAPI/tree/master/Examples) folder to see other ways to use the module.
 
-# [Contributing](CONTRIBUTING.md)
+## [Contributing](CONTRIBUTING.md)
 
 If you use this project please give it a star and follow so you can get updated when new features are released. This also lets me know what projects are getting used and what ones I should dedicate more time to. If you want to get more involved please see the [contributing page](CONTRIBUTING.md). Projects need all kinds of help even if you don't know how to code.
 
 Want to share something you created using the module? Submit it to be featured as a Community Package.
 
-# [Donating](https://paypal.me/ChrisTaylorCodes)
+## [Donating](https://paypal.me/ChrisTaylorCodes)
 
-If you cant take time to contribute maybe you would like to help in other ways. 
+If you cant take time to contribute maybe you would like to help in other ways.
 
 It takes time to maintain this project. Does the time spent on this module help you do cool things? Is that time worth a beer or two?
 

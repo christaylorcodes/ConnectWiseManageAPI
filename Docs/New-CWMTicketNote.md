@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE
+online version:
 schema: 2.0.0
 ---
 
@@ -303,4 +303,3 @@ Date: 1/21/2019
 ## RELATED LINKS
 
 [https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE](https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE)
-
