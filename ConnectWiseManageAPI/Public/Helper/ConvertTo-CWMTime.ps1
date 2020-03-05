@@ -1,5 +1,6 @@
 ﻿function ConvertTo-CWMTime {
     [CmdletBinding()]
+    [OutputType([String])]
     param(
         [Parameter(ValueFromPipeline = $true)]
         [datetime]$Date,
