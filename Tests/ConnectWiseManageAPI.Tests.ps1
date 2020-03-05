@@ -11,7 +11,7 @@ Import-Module $PSScriptRoot\..\ConnectWiseManageAPI\$($ModuleName).psm1 -Force
 #Integration test example
 Describe "Connect-CWM  PS$PSVersion Integrations tests" {
 
-    Context 'Strict mode' { 
+    Context 'Strict mode' {
 
         Set-StrictMode -Version latest
         It 'Authentication: API Member Only' {
@@ -41,8 +41,8 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     MemberID = $env:CWMUserName
                     clientid = $env:CWMClientID
                 }
-                
-                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop                  
+
+                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
             }
             catch {
                 $Result = $_
@@ -75,7 +75,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     Credentials = $Credentials
                     clientid = $env:CWMClientID
                 }
-                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop                                   
+                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
             }
             catch {
                 $Result = $_
@@ -87,7 +87,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
 
 Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
-    Context 'Strict mode' { 
+    Context 'Strict mode' {
 
         Set-StrictMode -Version latest
 
@@ -143,7 +143,7 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
                 $Conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
                 foreach($Condition in $Conditions){
                     $Tickets = Get-CWMTicket -Condition $Condition -ErrorAction Stop
-                    $Tickets.count | Should -Be 25    
+                    $Tickets.count | Should -Be 25
                 }
             }
             catch {
@@ -153,12 +153,12 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
         Context "Test calls to internal functions:" {
             InModuleScope $ModuleName {
                 Mock Invoke-CWMSearchMaster { return }
-                Get-CWMTicket -ErrorAction Stop    
+                Get-CWMTicket -ErrorAction Stop
                 It 'calls Invoke-CWMSearchMaster' {
                     Assert-MockCalled Invoke-CWMSearchMaster 1
                 }
                 Mock Invoke-CWMGetMaster { return }
-                Get-CWMTicket -TicketID 44 -ErrorAction Stop    
+                Get-CWMTicket -TicketID 44 -ErrorAction Stop
                 It 'calls Invoke-CWMGetMaster when given an id' {
                     Assert-MockCalled Invoke-CWMGetMaster 1
                 }
@@ -169,7 +169,7 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
 Describe "Disconnect-CWM  PS$PSVersion Integrations tests" {
 
-    Context 'Strict mode' { 
+    Context 'Strict mode' {
 
         Set-StrictMode -Version latest
 

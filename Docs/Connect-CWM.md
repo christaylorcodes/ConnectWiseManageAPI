@@ -101,7 +101,7 @@ $Connection = @{
 Connect-CWM @Connection
 ```
 
-In this example we are connecting with a cookie, using user credentials. 
+In this example we are connecting with a cookie, using user credentials.
 
 This method will not work on accounts with MFA enabled. All your accounts are MFA enabled, right?
 
@@ -329,4 +329,3 @@ Author: Chris Taylor Update Date: 9/24/2019 Purpose/Change: Added API version su
 ## RELATED LINKS
 
 [https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
-

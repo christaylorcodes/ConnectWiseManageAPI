@@ -2,7 +2,7 @@ $CWMConnectionInfo = @{
     # This is the URL to your manage server.
     Server      = 'server.example.com'
     # This is the company entered at login
-    Company     = 'My Company ID' 
+    Company     = 'My Company ID'
     # Public key created for this integration
     pubKey      = '1234'
     # Private key created for this integration
@@ -13,7 +13,7 @@ $CWMConnectionInfo = @{
 # ^This information is sensitive, take precautions to secure it.^
 
 # Install/Update/Load the module
-if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue) { Update-Module 'ConnectWiseManageAPI' -Verbose } 
+if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue) { Update-Module 'ConnectWiseManageAPI' -Verbose }
 else { Install-Module 'ConnectWiseManageAPI' -Verbose }
 Import-Module 'ConnectWiseManageAPI'
 
@@ -28,9 +28,9 @@ $Chrises = Get-CWMContact $Condition
 # Lets check those chris's out.
 $Chrises | Select-Object firstName, lastName, addressLine1, city, title | Out-GridView
 
-# You might notice that you only received 25 Chris's. That is because the default pageSize is 25. 
+# You might notice that you only received 25 Chris's. That is because the default pageSize is 25.
 # You can change the pageSize or return all results.
-$LessChris = Get-CWMContact $Condition -pageSize 11 
+$LessChris = Get-CWMContact $Condition -pageSize 11
 $MoreChrises = Get-CWMContact $Condition -all
 
 # Lets make a new contact
@@ -38,7 +38,7 @@ $AnotherChris = @{
     firstName       = 'Chris'
     lastName        = 'Taylor'
     addressLine1    = '1234 AnyStreet'
-    city            = 'TownsVille'    
+    city            = 'TownsVille'
 }
 $New = New-CWMContact @AnotherChris
 

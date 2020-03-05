@@ -29,9 +29,9 @@
 
     # Validate server
     $Server = ($Server -replace("http.*:\/\/",'') -split '/')[0]
-    
-    $Headers = @{ 
-        ClientID = $ClientID 
+
+    $Headers = @{
+        ClientID = $ClientID
         'Cache-Control' = 'no-cache'
     }
     $script:CWMServerConnection = @{
@@ -75,7 +75,7 @@
 
         # Seems cookies don't get put in session any more, add them
         $Cookie = New-Object System.Net.Cookie
-        $Cookie.Name = "companyName" 
+        $Cookie.Name = "companyName"
         $Cookie.Value = $Company
         $Cookie.Domain = $Server
         $script:CWMSession.Cookies.Add($Cookie)
@@ -161,12 +161,12 @@
         Disconnect-CWM
         return
     }
-    
-    if (!$Version) { 
+
+    if (!$Version) {
         [version]$Version = $Info.version.trim('v')
         $script:CWMServerConnection.Version = "$($Version.major).$($Version.minor)"
     }
-    
+
     Write-Verbose 'Connection successful.'
     Write-Verbose '$CWMServerConnection, variable initialized.'
 }
