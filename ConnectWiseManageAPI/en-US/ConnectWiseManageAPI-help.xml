@@ -114,17 +114,6 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>DontWarn</maml:name>
-          <maml:Description>
-            <maml:para>Suppress the warning about using a deprecated authentication method.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
             <maml:para>Ignore cached information and recreate</maml:para>
@@ -136,9 +125,9 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>IntegratorPass</maml:name>
+          <maml:name>MemberID</maml:name>
           <maml:Description>
-            <maml:para>The integrator password docs: Member Impersonation</maml:para>
+            <maml:para>The member that you are impersonating</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -148,9 +137,9 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>IntegratorUser</maml:name>
+          <maml:name>PrivateKey</maml:name>
           <maml:Description>
-            <maml:para>The integrator username docs: Member Impersonation</maml:para>
+            <maml:para>Private API key created by a user docs: My Account</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -159,10 +148,10 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MemberID</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PubKey</maml:name>
           <maml:Description>
-            <maml:para>The member that you are impersonating</maml:para>
+            <maml:para>Public API key created by a user docs: My Account</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -321,18 +310,6 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>DontWarn</maml:name>
-        <maml:Description>
-          <maml:para>Suppress the warning about using a deprecated authentication method.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
           <maml:para>Ignore cached information and recreate</maml:para>
@@ -345,30 +322,6 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>IntegratorPass</maml:name>
-        <maml:Description>
-          <maml:para>The integrator password docs: Member Impersonation</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>IntegratorUser</maml:name>
-        <maml:Description>
-          <maml:para>The integrator username docs: Member Impersonation</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MemberID</maml:name>
         <maml:Description>
           <maml:para>The member that you are impersonating</maml:para>
@@ -504,7 +457,7 @@ Connect-CWM @Connection</dev:code>
 }
 Connect-CWM @Connection</dev:code>
         <dev:remarks>
-          <maml:para>In this example we are connecting with a cookie, using user credentials. </maml:para>
+          <maml:para>In this example we are connecting with a cookie, using user credentials.</maml:para>
           <maml:para>This method will not work on accounts with MFA enabled. All your accounts are MFA enabled, right?</maml:para>
           <maml:para>This method is going to be removed in future versions. Please move to a different authentication method. https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication (https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication)</maml:para>
         </dev:remarks>
@@ -525,10 +478,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/Manage/Developer_Guide#Authentication</maml:linkText>
         <maml:uri>https://developer.connectwise.com/Manage/Developer_Guide#Authentication</maml:uri>
@@ -605,19 +554,14 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -701,12 +645,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -742,12 +681,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -952,10 +886,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=Agreements&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=Agreements&amp;o=GET</maml:uri>
@@ -1190,10 +1120,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=AgreementAdditions&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=AgreementAdditions&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -1427,10 +1353,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/finance.html#tag/AgreementSites</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/finance.html#tag/AgreementSites</maml:uri>
       </maml:navigationLink>
@@ -1624,10 +1546,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=AuditTrail&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=AuditTrail&amp;o=GET</maml:uri>
@@ -1861,10 +1779,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=BoardStatuses&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=BoardStatuses&amp;o=GET</maml:uri>
@@ -2123,10 +2037,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=BoardStatusNotifications&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=BoardStatusNotifications&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -2336,10 +2246,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/get</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/get</maml:uri>
       </maml:navigationLink>
@@ -2379,12 +2285,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -2589,10 +2490,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Companies&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Companies&amp;o=GET</maml:uri>
@@ -2802,10 +2699,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Configurations&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Configurations&amp;o=GET</maml:uri>
@@ -3040,10 +2933,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyNotes&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyNotes&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -3253,10 +3142,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyNoteTypes&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyNoteTypes&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -3465,10 +3350,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Company&amp;e=CompanyStatuses&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Company&amp;e=CompanyStatuses&amp;o=GET</maml:uri>
@@ -3703,10 +3584,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyTeams&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyTeams&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -3916,10 +3793,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=TeamRoles&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=TeamRoles&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -4128,10 +4001,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyTypes&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyTypes&amp;o=GET</maml:uri>
@@ -4366,10 +4235,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -4579,10 +4444,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Contacts&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Contacts&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -4769,10 +4630,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=System&amp;e=Documents&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=System&amp;e=Documents&amp;o=GET</maml:uri>
@@ -4983,10 +4840,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=Manufacturers&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=Manufacturers&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -5195,10 +5048,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Marketing&amp;e=Groups&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Marketing&amp;e=Groups&amp;o=GET</maml:uri>
@@ -5433,10 +5282,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Marketing&amp;e=GroupCompanies&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Marketing&amp;e=GroupCompanies&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -5646,10 +5491,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Members&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Members&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -5691,10 +5532,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Info&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Info&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -5735,10 +5572,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Info&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Info&amp;o=GET</maml:uri>
@@ -5949,10 +5782,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=ProductsItem&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=ProductsItem&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -6161,10 +5990,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=CatalogsItem&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=CatalogsItem&amp;o=GET</maml:uri>
@@ -6399,10 +6224,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=ProductComponents&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=ProductComponents&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -6612,10 +6433,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=SubCategories&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=SubCategories&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -6824,10 +6641,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=ProductTypes&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=ProductTypes&amp;o=GET</maml:uri>
@@ -7284,10 +7097,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Project&amp;e=ProjectPhases&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Project&amp;e=ProjectPhases&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -7496,10 +7305,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectSecurityRoles&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectSecurityRoles&amp;o=GET</maml:uri>
@@ -7733,10 +7538,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectBoardTeamMembers&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectBoardTeamMembers&amp;o=GET</maml:uri>
@@ -8193,10 +7994,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=System&amp;e=Reports&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=System&amp;e=Reports&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -8262,10 +8059,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Reports&amp;o=COLUMNS</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Reports&amp;o=COLUMNS</maml:uri>
@@ -8476,10 +8269,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Sales&amp;e=Activities&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Sales&amp;e=Activities&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -8688,10 +8477,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=GET</maml:uri>
@@ -8902,10 +8687,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=BoardInfos&amp;o=BOARDS</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=BoardInfos&amp;o=BOARDS</maml:uri>
       </maml:navigationLink>
@@ -8946,10 +8727,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Info&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=System&amp;e=Info&amp;o=GET</maml:uri>
@@ -9198,10 +8975,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=GETBYID</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=GETBYID</maml:uri>
       </maml:navigationLink>
@@ -9338,10 +9111,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=CONFIGURATIONS</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=CONFIGURATIONS</maml:uri>
@@ -9576,10 +9345,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=TicketNotes&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=TicketNotes&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -9789,10 +9554,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeEntries&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeEntries&amp;o=GET</maml:uri>
       </maml:navigationLink>
@@ -10001,10 +9762,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeSheets&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeSheets&amp;o=GET</maml:uri>
@@ -10771,10 +10528,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=AgreementAdditions&amp;o=CREATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=AgreementAdditions&amp;o=CREATE</maml:uri>
       </maml:navigationLink>
@@ -11079,10 +10832,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post</maml:uri>
       </maml:navigationLink>
@@ -11386,10 +11135,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post</maml:uri>
@@ -11743,10 +11488,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post</maml:uri>
       </maml:navigationLink>
@@ -11930,10 +11671,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post</maml:uri>
@@ -13042,10 +12779,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/Contacts/paths/~1company~1contacts/post</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/Contacts/paths/~1company~1contacts/post</maml:uri>
       </maml:navigationLink>
@@ -13333,10 +13066,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post</maml:uri>
       </maml:navigationLink>
@@ -13440,19 +13169,14 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -14168,10 +13892,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=CatalogsItem&amp;o=CREATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=CatalogsItem&amp;o=CREATE</maml:uri>
       </maml:navigationLink>
@@ -14475,10 +14195,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectsTeamMembers&amp;o=CREATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectsTeamMembers&amp;o=CREATE</maml:uri>
@@ -15095,10 +14811,6 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=CREATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=CREATE</maml:uri>
@@ -20598,10 +20310,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeEntries&amp;o=CREATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeEntries&amp;o=CREATE</maml:uri>
       </maml:navigationLink>
@@ -20738,10 +20446,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/finance.html#tag/AgreementSites/paths/~1finance~1agreements~1{id}~1sites~1{siteId}/delete</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/finance.html#tag/AgreementSites/paths/~1finance~1agreements~1{id}~1sites~1{siteId}/delete</maml:uri>
       </maml:navigationLink>
@@ -20854,10 +20558,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/delete</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/delete</maml:uri>
       </maml:navigationLink>
@@ -20969,10 +20669,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Configurations&amp;o=DELETE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Company&amp;e=Configurations&amp;o=DELETE</maml:uri>
@@ -21109,10 +20805,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=DELETE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=DELETE</maml:uri>
@@ -21380,10 +21072,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Marketing&amp;e=GroupCompanies&amp;o=DELETE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Marketing&amp;e=GroupCompanies&amp;o=DELETE</maml:uri>
       </maml:navigationLink>
@@ -21495,10 +21183,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=DELETE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=DELETE</maml:uri>
@@ -21612,10 +21296,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=DELETE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=DELETE</maml:uri>
       </maml:navigationLink>
@@ -21681,10 +21361,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeSheets&amp;o=SUBMIT</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Time&amp;e=TimeSheets&amp;o=SUBMIT</maml:uri>
@@ -21899,10 +21575,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=AgreementAdditions&amp;o=UPDATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Finance&amp;e=AgreementAdditions&amp;o=UPDATE</maml:uri>
       </maml:navigationLink>
@@ -22092,10 +21764,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/patch</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/patch</maml:uri>
       </maml:navigationLink>
@@ -22284,10 +21952,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=Companies&amp;o=UPDATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=Companies&amp;o=UPDATE</maml:uri>
@@ -22487,19 +22151,14 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -22733,10 +22392,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values~1{Id}/patch</maml:linkText>
         <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values~1{Id}/patch</maml:uri>
       </maml:navigationLink>
@@ -22949,10 +22604,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=UPDATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=UPDATE</maml:uri>
@@ -23350,10 +23001,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=CatalogsItem&amp;o=UPDATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/manage/rest?a=Procurement&amp;e=CatalogsItem&amp;o=UPDATE</maml:uri>
       </maml:navigationLink>
@@ -23566,10 +23213,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectPhases&amp;o=UPDATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Project&amp;e=ProjectPhases&amp;o=UPDATE</maml:uri>
@@ -23966,10 +23609,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://christaylor.codes</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=UPDATE</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Service&amp;e=Tickets&amp;o=UPDATE</maml:uri>

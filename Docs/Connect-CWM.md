@@ -12,6 +12,12 @@ This command is used to authenticate with the Manage server.
 
 ## SYNTAX
 
+### Impersonation
+```
+Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
+ -MemberID <String> [-Force] [-Version <String>] [<CommonParameters>]
+```
+
 ### API Key
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
@@ -22,12 +28,6 @@ Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <Str
 ```
 Connect-CWM -Server <String> -Company <String> -ClientID <String> -Credentials <PSCredential> [-Force]
  [-Version <String>] [<CommonParameters>]
-```
-
-### Integrator
-```
-Connect-CWM -Server <String> -Company <String> -ClientID <String> -IntegratorUser <String>
- -IntegratorPass <String> [-MemberID <String>] [-Force] [-DontWarn] [-Version <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,42 +52,21 @@ In this example we are connecting with an API Key.
 
 Using an API Key is the preferred authentication method.
 
-### Integrator
-
-```
-$Connection = @{
-    Server = $Server
-    Company = $Company
-    IntegratorUser = $IntegratorUser
-    IntegratorPass = $IntegratorPass
-    ClientID = $ClientID
-}
-Connect-CWM @Connection
-```
-
-In this example we are connecting with an Integrator account.
-
-Please move to a different authentication method.
-[https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication)
-
 ### Impersonate
 
 ```
 $Connection = @{
     Server = $Server
     Company = $Company
-    IntegratorUser = $IntegratorUser
-    IntegratorPass = $IntegratorPass
+    PubKey = $PubKey
+    PrivateKey = $PrivateKey
     MemberID = $MemberID
     ClientID = $ClientID
 }
 Connect-CWM @Connection
 ```
 
-In this example we are connecting with an Integrator account and impersonating another user. $MemberID
-
-Please move to a different authentication method.
-[https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication)
+In this example we are connecting with an API key and impersonating another user. $MemberID
 
 ### Credentials
 
@@ -105,8 +84,8 @@ In this example we are connecting with a cookie, using user credentials.
 
 This method will not work on accounts with MFA enabled. All your accounts are MFA enabled, right?
 
-This method is going to be removed in future versions.
-Please move to a different authentication method.
+This method is going to be removed in future versions. Please move to a different authentication method.
+
 [https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Products/Manage/Developer_Guide#Authentication)
 
 ### Force Version
@@ -172,21 +151,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DontWarn
-Suppress the warning about using a deprecated authentication method.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Integrator
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Force
 Ignore cached information and recreate
 
@@ -202,45 +166,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -IntegratorPass
-The integrator password docs: Member Impersonation
-
-```yaml
-Type: String
-Parameter Sets: Integrator
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IntegratorUser
-The integrator username docs: Member Impersonation
-
-```yaml
-Type: String
-Parameter Sets: Integrator
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MemberID
 The member that you are impersonating
 
 ```yaml
 Type: String
-Parameter Sets: Integrator
+Parameter Sets: Impersonation
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -252,7 +186,7 @@ Private API key created by a user docs: My Account
 
 ```yaml
 Type: String
-Parameter Sets: API Key
+Parameter Sets: Impersonation, API Key
 Aliases:
 
 Required: True
@@ -267,7 +201,7 @@ Public API key created by a user docs: My Account
 
 ```yaml
 Type: String
-Parameter Sets: API Key
+Parameter Sets: Impersonation, API Key
 Aliases:
 
 Required: True
