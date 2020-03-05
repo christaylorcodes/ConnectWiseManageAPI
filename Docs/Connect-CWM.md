@@ -37,7 +37,7 @@ All other commands from the module will call this variable to get connection inf
 ## EXAMPLES
 
 ### API Key
-```
+```powershell
 $Connection = @{
     Server = $Server
     Company = $Company
@@ -54,7 +54,7 @@ Using an API Key is the preferred authentication method.
 
 ### Impersonate
 
-```
+```powershell
 $Connection = @{
     Server = $Server
     Company = $Company
@@ -70,7 +70,7 @@ In this example we are connecting with an API key and impersonating another user
 
 ### Credentials
 
-```
+```powershell
 $Connection = @{
     Server = $Server
     Company = $Company
@@ -90,7 +90,7 @@ This method is going to be removed in future versions. Please move to a differen
 
 ### Force Version
 
-```
+```powershell
 $Connection = @{
     Server = $Server
     Company = $Company
