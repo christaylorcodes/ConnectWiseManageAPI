@@ -2,7 +2,7 @@ $CWMConnectionInfo = @{
     # This is the URL to your manage server.
     Server      = 'server.example.com'
     # This is the company entered at login
-    Company     = 'My Company ID' 
+    Company     = 'My Company ID'
     # Public key created for this integration
     pubkey      = '1234'
     # Private key created for this integration
@@ -13,12 +13,12 @@ $CWMConnectionInfo = @{
 # ^This information is sensitive, take precautions to secure it.^
 
 # Install/Update/Load the module
-if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue) { Update-Module 'ConnectWiseManageAPI' -Verbose } 
+if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue) { Update-Module 'ConnectWiseManageAPI' -Verbose }
 else { Install-Module 'ConnectWiseManageAPI' -Verbose }
 Import-Module 'ConnectWiseManageAPI'
 
 # Connect to your Manage server
-Connect-CWM @CWMConnectionInfo -Force -Verbose  
+Connect-CWM @CWMConnectionInfo -Force -Verbose
 
 # We are going to create a new ticket
 

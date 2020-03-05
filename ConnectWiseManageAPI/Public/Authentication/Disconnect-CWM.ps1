@@ -11,5 +11,5 @@
     }
     catch {
         Write-Error "There was an error clearing connection information.`n$($_)"
-    }    
+    }
 }

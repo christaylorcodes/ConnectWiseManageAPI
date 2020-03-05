@@ -16,14 +16,14 @@
 
     try {
         $SysInfo = Get-CWMSystemInfo -ErrorAction Stop
-    } 
+    }
     catch {
         $SysInfo = 'error'
     }
 
     $DebugOutput = @{}
     $DebugOutput.CWMServerConnection = $script:CWMServerConnection.Clone()
-    $DebugOutput.CWMServerConnection.Headers = $script:CWMServerConnection.Headers.Clone()    
+    $DebugOutput.CWMServerConnection.Headers = $script:CWMServerConnection.Headers.Clone()
     $DebugOutput.CWMSystemInfo = $SysInfo
     $DebugOutput.OS = [System.Environment]::OSVersion.Version
     $DebugOutput.PowerShell = $PSVersionTable.PSVersion

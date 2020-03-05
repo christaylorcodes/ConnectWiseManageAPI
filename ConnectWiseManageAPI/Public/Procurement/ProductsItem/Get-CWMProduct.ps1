@@ -2,7 +2,7 @@ function Get-CWMProduct {
     [CmdletBinding()]
     param(
         [string]$Condition,
-        [ValidatePattern('\S* (desc|asc)')] 
+        [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childconditions,
         [string]$customfieldconditions,

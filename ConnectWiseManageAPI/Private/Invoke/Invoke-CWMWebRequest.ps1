@@ -24,7 +24,7 @@
                 Write-Verbose "Version Passed: $($Arguments.Version)"
             } else {
                 $Arguments.Headers += @{$Key = $script:CWMServerConnection.Headers.$Key}
-            }            
+            }
         }
     }
     $Arguments.Remove('Version')
@@ -77,8 +77,8 @@
                 $ErrorMessage += "-----> $($ErrDetails.errors.message)"
             }
         }
-        
-        if ($ErrorMessage.Length -lt 1){ $ErrorMessage = $_ } 
+
+        if ($ErrorMessage.Length -lt 1){ $ErrorMessage = $_ }
         else { $ErrorMessage += $_.ScriptStackTrace }
 
         Write-Error ($ErrorMessage | out-string)

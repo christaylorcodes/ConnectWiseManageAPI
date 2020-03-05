@@ -29,7 +29,7 @@ if($Test){
 
     Invoke-Pester @Verbose -Path "$ProjectRoot\Tests" -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -PassThru |
         Export-Clixml -Path "$ProjectRoot\PesterResults_PS$PSVersion`_$Timestamp.xml"
-    
+
     If($env:APPVEYOR_JOB_ID){
         (New-Object 'System.Net.WebClient').UploadFile( $Address, "$ProjectRoot\$TestFile" )
     }
@@ -44,7 +44,7 @@ If($Finalize){
 
     #What failed?
         $Results = @( Get-ChildItem -Path "$ProjectRoot\PesterResults_PS*.xml" | Import-Clixml )
-        
+
         $FailedCount = $Results |
             Select-Object -ExpandProperty FailedCount |
             Measure-Object -Sum |

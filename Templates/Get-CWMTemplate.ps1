@@ -2,7 +2,7 @@ function Get-CWMTemplate {
     [CmdletBinding()]
     param(
         [string]$Condition,
-        [ValidatePattern('\S* (desc|asc)')] 
+        [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
         [string]$customFieldConditions,
@@ -11,5 +11,5 @@ function Get-CWMTemplate {
         [switch]$all
     )
     $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/<URI>"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI            
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
 }
