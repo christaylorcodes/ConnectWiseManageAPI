@@ -23,7 +23,7 @@ Update-CWMCompany [-CompanyID] <Int32> [-Operation] <String> [-Path] <String> [-
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

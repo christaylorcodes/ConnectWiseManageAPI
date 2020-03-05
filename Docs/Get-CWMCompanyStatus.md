@@ -23,7 +23,7 @@ Get-CWMCompanyStatus [[-Condition] <String>] [[-orderBy] <String>] [[-childCondi
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompanyStatus -all
 ```
 

@@ -23,7 +23,7 @@ New-CWMCompanyTypeAssociation [-id] <Int32> [-type] <Hashtable> [[-company] <Has
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMCompanyTypeAssociation -company @{id = 4385} -Type @{type = @{id = 68}}
 ```
 

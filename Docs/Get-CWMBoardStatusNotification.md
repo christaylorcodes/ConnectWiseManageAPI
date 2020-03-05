@@ -24,7 +24,7 @@ Get-CWMBoardStatusNotification [-ServiceBoardID] <Int32> [[-StatusID] <Int32>] [
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMBoardStatusNotification -ServiceBoardID 1 -StatusID 1 -Condition "status/id IN (1,42,43,57)" -all
 ```
 

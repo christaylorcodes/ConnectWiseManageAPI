@@ -23,7 +23,7 @@ Get-CWMDocument [[-RecordType] <Object>] [[-RecordID] <Int32>] [[-page] <Int32>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMDocuments -RecordType Ticket -RecordID 1836414
 ```
 

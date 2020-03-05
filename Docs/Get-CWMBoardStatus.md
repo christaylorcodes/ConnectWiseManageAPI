@@ -24,7 +24,7 @@ This function will list the statuses of a service board based on conditions.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMBoardStatus -ServiceBoardID -Condition "status/id IN (1,42,43,57)" -all
 ```
 

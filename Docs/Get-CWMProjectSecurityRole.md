@@ -23,7 +23,7 @@ Get-CWMProjectSecurityRole [[-Condition] <String>] [[-orderBy] <String>] [[-chil
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMProjectSecurityRole -all
 ```
 

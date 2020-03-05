@@ -23,7 +23,7 @@ This function will get the audit trail of an item in ConnectWise.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMAuditTrail
 ```
 

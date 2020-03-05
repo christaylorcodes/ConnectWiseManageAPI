@@ -23,7 +23,7 @@ Get-CWMReport [[-Report] <String>] [[-Condition] <String>] [[-orderBy] <String>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMReport -Condition "name=`"$Report`""
 ```
 

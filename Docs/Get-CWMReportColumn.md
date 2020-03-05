@@ -22,7 +22,7 @@ Get-CWMReportColumn [-Report] <String> [<CommonParameters>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMReportColumn -Report ServiceNote
 ```
 

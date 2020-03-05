@@ -22,7 +22,7 @@ This will enable forward only pagination and loop all results.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Invoke-CWMAllResult -Arguments $Arguments
 ```
 

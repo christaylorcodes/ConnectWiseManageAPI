@@ -22,7 +22,7 @@ Remove-CWMCompanyConfiguration [[-CompanyConfigurationID] <Int32>] [-WhatIf] [-C
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Remove-CWMCompanyConfiguration -CompanyConfigurationID 123
 ```
 

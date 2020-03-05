@@ -23,7 +23,7 @@ Get-CWMTimeEntry [[-Condition] <String>] [[-orderBy] <String>] [[-childCondition
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWCTimeSheet -Condition 'member/identifier="ctaylor" and status = "Open"'
 ```
 

@@ -24,7 +24,7 @@ Get-CWMCompanyTeam [[-CompanyID] <Int32>] [[-Condition] <String>] [[-orderBy] <S
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompanyTeam -CompanyID 1 -all
 ```
 

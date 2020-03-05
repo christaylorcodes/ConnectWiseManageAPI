@@ -23,7 +23,7 @@ Update-CWMAgreementAddition [-AgreementID] <Int32> [-AdditionID] <Int32> [-Opera
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

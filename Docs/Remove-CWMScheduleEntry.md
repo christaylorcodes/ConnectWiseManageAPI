@@ -22,7 +22,7 @@ Remove-CWMScheduleEntry [[-ID] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Remove-CWMScheduleEntry -ID 123
 ```
 

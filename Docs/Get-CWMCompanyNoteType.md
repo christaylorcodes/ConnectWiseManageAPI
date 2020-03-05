@@ -23,7 +23,7 @@ Get-CWMCompanyNoteType [[-Condition] <String>] [[-orderBy] <String>] [[-childCon
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompanyNoteTypes -Condition "status/id IN (1,42,43,57)" -all
 ```
 

@@ -22,7 +22,7 @@ Submit-CWMTimeSheet [[-ID] <Int32>] [<CommonParameters>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Submit-CWMTimeSheet -ID 1
 ```
 

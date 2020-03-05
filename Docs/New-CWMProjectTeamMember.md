@@ -24,7 +24,7 @@ New-CWMProjectTeamMember [-ProjectID] <Int32> [[-id] <Int32>] [[-hours] <Decimal
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $Ticket = @{
 ```
 

@@ -23,7 +23,7 @@ Get-CWMScheduleEntry [[-Condition] <String>] [[-orderBy] <String>] [[-childCondi
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMScheduleEntry
 ```
 

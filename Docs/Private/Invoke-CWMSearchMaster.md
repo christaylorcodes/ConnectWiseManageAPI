@@ -22,7 +22,7 @@ This will insure that all search requests are handled correctly.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Invoke-CWMSearchMaster -Arguments $Arguments -URI $URI
 ```
 

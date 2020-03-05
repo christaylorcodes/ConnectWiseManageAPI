@@ -26,7 +26,7 @@ New-CWMTicketNote [[-id] <Int32>] [[-ticketId] <Int32>] [[-text] <String>] [[-de
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMTicketNote -ticketId $Ticket.id -text 'New note'
 ```
 

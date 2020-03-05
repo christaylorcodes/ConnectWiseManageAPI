@@ -22,7 +22,7 @@ Remove-CWMAgreementSite [-AgreementID] <Int32> [-SiteID] <Int32> [-WhatIf] [-Con
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Remove-CWMAgreementSite -AgreementID 123 -SiteID 123
 ```
 

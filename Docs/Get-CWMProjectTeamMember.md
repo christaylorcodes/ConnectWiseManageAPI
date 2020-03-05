@@ -24,7 +24,7 @@ Get-CWMProjectTeamMember [-ProjectID] <Int32> [[-Condition] <String>] [[-orderBy
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMProjectTeamMember -ProjectID 1 -all
 ```
 

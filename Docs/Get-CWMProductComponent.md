@@ -24,7 +24,7 @@ Get-CWMProductComponent [-ProductID] <Int32> [[-Condition] <String>] [[-orderBy]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMProductComponent -ID 555 -all
 ```
 

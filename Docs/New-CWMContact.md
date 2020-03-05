@@ -33,7 +33,7 @@ New-CWMContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [[-t
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMContact -firstName 'Chris' -lastName 'Taylor' -company @{id = $Company.id}
 ```
 

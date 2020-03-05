@@ -23,7 +23,7 @@ Get-CWMCompany [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompany -Condition "status/id IN (1,42,43,57)" -all
 ```
 

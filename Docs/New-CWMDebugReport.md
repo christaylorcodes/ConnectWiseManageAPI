@@ -22,8 +22,8 @@ Please include this data with any incident report.
 
 ## EXAMPLES
 
-### Example 1
-```
+### EXAMPLE 1
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 

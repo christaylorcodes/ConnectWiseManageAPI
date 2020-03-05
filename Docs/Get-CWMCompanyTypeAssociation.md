@@ -24,7 +24,7 @@ Get-CWMCompanyTypeAssociation [-CompanyID] <Int32> [[-Condition] <String>] [[-or
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompanyTypeAssociation -CompanyID 1 -all
 ```
 

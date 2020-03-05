@@ -22,7 +22,7 @@ Get-CWMMyMember [<CommonParameters>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMMyMembers
 ```
 

@@ -24,7 +24,7 @@ Used to retrieve additions associated with a Manage agreement.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMAgreementAddition -AgreementID $Agreement.id -all
 ```
 

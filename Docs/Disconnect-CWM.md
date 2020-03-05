@@ -22,7 +22,7 @@ This will remove the ConnectWise Manage authorization variable.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Disconnect-CWM
 ```
 

@@ -22,7 +22,7 @@ Remove-CWMTicket [-TicketID] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Remove-CWMTicket -TicketID 1
 ```
 

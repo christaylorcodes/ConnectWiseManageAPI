@@ -23,7 +23,7 @@ Get-CWMCompanyType [[-Condition] <String>] [[-orderBy] <String>] [[-childConditi
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWCompanyType -all
 ```
 

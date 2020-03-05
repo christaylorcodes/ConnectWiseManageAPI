@@ -23,7 +23,7 @@ Update-CWMCallbackEntry [-ID] <Int32> [-Operation] <String> [-Path] <String> [-V
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

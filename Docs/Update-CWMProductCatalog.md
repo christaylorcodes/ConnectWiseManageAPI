@@ -23,7 +23,7 @@ Update-CWMProductCatalog [-CatalogID] <Object> [-Operation] <String> [-Path] <Ob
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $Update = @{
 ```
 

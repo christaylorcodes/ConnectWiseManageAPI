@@ -23,7 +23,7 @@ Get-CWMSalesActivity [[-Condition] <String>] [[-orderBy] <String>] [[-childCondi
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMSalesActivity -Condition "status/id IN (1,42,43,57)" -all
 ```
 

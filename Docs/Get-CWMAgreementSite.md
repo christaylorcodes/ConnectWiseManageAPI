@@ -24,7 +24,7 @@ This function will list Agreement Sites based on conditions.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMAgreementSite -AgreementID 123
 ```
 

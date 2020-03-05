@@ -23,7 +23,7 @@ Update-CWMProjectPhase [-ProjectID] <Object> [-PhaseID] <Object> [-Operation] <S
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

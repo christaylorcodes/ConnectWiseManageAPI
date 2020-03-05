@@ -22,7 +22,7 @@ This will insure that all delete requests are handled correctly.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Invoke-CWMDeleteMaster -Arguments $Arguments -URI $URI
 ```
 

@@ -23,7 +23,7 @@ Get-CWMProduct [[-Condition] <String>] [[-orderBy] <String>] [[-childconditions]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMProduct -all
 ```
 

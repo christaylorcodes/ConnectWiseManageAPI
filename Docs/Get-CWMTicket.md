@@ -23,7 +23,7 @@ Get-CWMTicket [-id <Int32>] [[-condition] <String>] [[-orderBy] <String>] [[-chi
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMTicket -TicketID 1
 ```
 

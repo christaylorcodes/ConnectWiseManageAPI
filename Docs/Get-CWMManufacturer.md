@@ -23,7 +23,7 @@ Get-CWMManufacturer [[-Condition] <String>] [[-orderBy] <String>] [[-childCondit
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMManufacturer -Condition "name=`"$Name`""
 ```
 

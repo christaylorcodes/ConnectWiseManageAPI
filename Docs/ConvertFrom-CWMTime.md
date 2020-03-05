@@ -21,8 +21,8 @@ ConvertFrom-CWMTime [[-Date] <String>] [<CommonParameters>]
 
 ## EXAMPLES
 
-### Example 1
-```
+### EXAMPLE 1
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 

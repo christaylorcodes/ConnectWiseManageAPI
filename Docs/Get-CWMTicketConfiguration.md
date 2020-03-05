@@ -23,7 +23,7 @@ Get-CWMTicketConfiguration [-TicketID] <Int32> [[-page] <Int32>] [[-pageSize] <I
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMTicketConfiguration -TicketID 1
 ```
 

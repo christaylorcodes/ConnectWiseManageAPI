@@ -45,7 +45,7 @@ New-CWMTimeEntry [-id <Int32>] -chargeToId <Int32> -chargeToType <String> [-memb
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMTimeEntry
 ```
 

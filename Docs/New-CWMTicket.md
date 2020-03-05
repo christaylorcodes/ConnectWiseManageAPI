@@ -85,7 +85,7 @@ New-CWMTicket [-Version <String>] [-VersionAutomatic] [[-id] <Int32>] [-summary]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $NewTicketParameters = @{
     summary = 'Testing out the API'
     # We want to pass Manage objects as hash tables

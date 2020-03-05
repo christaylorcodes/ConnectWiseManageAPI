@@ -22,7 +22,7 @@ This will insure that all GET requests are handled correctly.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Invoke-CWMGetMaster -Arguments $Arguments -URI $URI
 ```
 

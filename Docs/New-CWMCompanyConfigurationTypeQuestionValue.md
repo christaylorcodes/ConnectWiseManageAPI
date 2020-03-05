@@ -24,7 +24,7 @@ New-CWMCompanyConfigurationTypeQuestionValue [-configurationTypeId] <Int32> [-qu
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMTemplate
 ```
 

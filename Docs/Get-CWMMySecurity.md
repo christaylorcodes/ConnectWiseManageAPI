@@ -22,7 +22,7 @@ Get-CWMMySecurity [<CommonParameters>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMSystemInfo
 ```
 

@@ -23,7 +23,7 @@ Update-CWMCompanyTypeAssociation [-CompanyID] <Int32> [-TypeAssociationID] <Int3
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

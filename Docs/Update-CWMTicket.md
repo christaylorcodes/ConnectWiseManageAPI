@@ -23,7 +23,7 @@ Update-CWMTicket [-TicketID] <Int32> [-Operation] <String> [-Path] <String> [-Va
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

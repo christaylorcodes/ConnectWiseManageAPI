@@ -23,7 +23,7 @@ Get-CWMMember [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMMember -Condition "name = 'chris'" -all
 ```
 

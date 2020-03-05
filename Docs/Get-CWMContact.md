@@ -23,7 +23,7 @@ Get-CWMContact [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMContact -Condition 'firstName = "Chris"' -all
 ```
 

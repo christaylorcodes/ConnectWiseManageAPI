@@ -22,7 +22,7 @@ ConvertFrom-CWMColumnRow [[-Data] <Object>] [<CommonParameters>]
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 ConvertFrom-CWMColumnRow -Data $Data
 ```
 

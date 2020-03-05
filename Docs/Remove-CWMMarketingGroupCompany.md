@@ -22,7 +22,7 @@ Remove-CWMMarketingGroupCompany [-ID] <Int32> [-CompanyId] <Int32> [-WhatIf] [-C
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Remove-CWMMarketingGroupCompany -id 1 -CompanyId 1
 ```
 

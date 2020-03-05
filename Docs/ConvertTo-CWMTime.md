@@ -22,7 +22,7 @@ This will convert an input to a universal date time object then output in a form
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 ConvertTo-CWMTime $(Get-Date).AddDays(1)
 ```
 

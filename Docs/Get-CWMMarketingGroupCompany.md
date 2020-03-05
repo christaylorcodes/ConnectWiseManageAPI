@@ -24,7 +24,7 @@ Get-CWMMarketingGroupCompany [-id] <Int32> [[-Condition] <String>] [[-orderBy] <
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMMarketingGroupCompany -id 1 -all
 ```
 

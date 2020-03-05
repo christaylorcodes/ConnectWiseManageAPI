@@ -24,7 +24,7 @@ Get-CWMTicketNote [-TicketID] <Int32> [[-Condition] <String>] [[-orderBy] <Strin
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMTicketNote -TicketID 1 -Condition "status/id IN (1,42,43,57)" -all
 ```
 

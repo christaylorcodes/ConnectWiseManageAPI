@@ -24,7 +24,7 @@ Get-CWMCompanyNote [-CompanyID] <Int32> [[-Condition] <String>] [[-orderBy] <Str
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompanyNotes -CompanyID 1 -all
 ```
 

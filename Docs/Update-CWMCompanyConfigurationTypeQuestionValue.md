@@ -24,7 +24,7 @@ Update-CWMCompanyConfigurationTypeQuestionValue [-ConfigurationTypeId] <Int32> [
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $UpdateParam = @{
 ```
 

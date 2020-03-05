@@ -27,7 +27,7 @@ New-CWMScheduleEntry [[-id] <Int32>] [[-objectId] <Int32>] [[-name] <String>] [-
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $Ticket = @{
 ```
 

@@ -23,7 +23,7 @@ Get-CWMCompanyTeamRole [[-Condition] <String>] [[-orderBy] <String>] [[-childCon
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCompanyTeamRole -all
 ```
 

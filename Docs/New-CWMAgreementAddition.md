@@ -29,7 +29,7 @@ New-CWMAgreementAddition [-AgreementID] <Int32> [[-id] <Int32>] [-product] <Obje
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $CreateParam = @{
 ```
 

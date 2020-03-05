@@ -24,7 +24,7 @@ Get-CWMProjectPhase [-ProjectID] <Int32> [[-Condition] <String>] [[-orderBy] <St
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMProjectPhase -ProjectID 1 -all
 ```
 

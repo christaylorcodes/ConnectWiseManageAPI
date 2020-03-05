@@ -23,7 +23,7 @@ Get-CWMMarketingGroup [[-Condition] <String>] [[-orderBy] <String>] [[-childCond
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMMarketingGroup -Condition 'name = "group"' -all
 ```
 

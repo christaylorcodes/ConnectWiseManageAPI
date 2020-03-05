@@ -23,7 +23,7 @@ This will insure that all create requests are handled correctly.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Invoke-CWMPatchMaster -Arguments $Arguments -URI $URI
 ```
 

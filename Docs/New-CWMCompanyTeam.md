@@ -25,7 +25,7 @@ New-CWMCompanyTeam [-id] <Int32> [[-company] <Hashtable>] [-teamRole] <Hashtable
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMCompanyTeam -id $CompanyID -TeamRole @{id = $Role.id}
 ```
 

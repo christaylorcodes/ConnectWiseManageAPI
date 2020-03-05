@@ -29,7 +29,7 @@ New-CWMProductCatalog [-identifier] <String> [-description] <String> [[-inactive
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 $Catalog = @{
 ```
 

@@ -24,7 +24,7 @@ New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMCallbackEntry -level 'board' -objectid 63 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
 ```
 

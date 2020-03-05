@@ -23,7 +23,7 @@ Get-CWMCallbackEntry [[-Condition] <String>] [[-orderBy] <Object>] [[-childCondi
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMCallbackEntry -Condition "url = 'http://christaylor.codes'" -all
 ```
 

@@ -23,7 +23,7 @@ Get-CWMServiceBoard [[-Condition] <String>] [[-orderBy] <String>] [[-childCondit
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMServiceBoard -Condition "status/id IN (1,42,43,57)" -all
 ```
 

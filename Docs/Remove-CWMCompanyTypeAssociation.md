@@ -23,7 +23,7 @@ Remove-CWMCompanyTypeAssociation [-CompanyID] <Int32> [-TypeAssociationID] <Int3
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Remove-CWMCompanyConfiguration -CompanyConfigurationID 123
 ```
 

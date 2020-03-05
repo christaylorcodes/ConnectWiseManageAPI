@@ -24,7 +24,7 @@ New-CWMContactCommunication [-id] <Int32> [[-contactId] <Int32>] [-type] <Hashta
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 New-CWMContactCommunication -id 7125 -type @{'name' = 'Private Email'} -value 'don't@email.me'
 ```
 

@@ -23,7 +23,7 @@ Get-CWMProductSubCategory [[-Condition] <String>] [[-orderBy] <String>] [[-child
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+```powershell
 Get-CWMProductSubCategory -all
 ```
 
