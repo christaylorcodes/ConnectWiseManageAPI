@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version:
 schema: 2.0.0
 ---
 

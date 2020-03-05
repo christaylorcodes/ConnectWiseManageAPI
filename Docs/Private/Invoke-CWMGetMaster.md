@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name:
-online version: https://christaylor.codes
+online version:
 schema: 2.0.0
 ---
 
