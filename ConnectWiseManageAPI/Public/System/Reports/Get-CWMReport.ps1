@@ -9,6 +9,7 @@
         [string]$customFieldConditions,
         [int]$page,
         [int]$pageSize,
+        [string[]]$fields,
         [switch]$all
     )
 

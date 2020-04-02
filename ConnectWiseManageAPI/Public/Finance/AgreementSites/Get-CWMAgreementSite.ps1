@@ -8,6 +8,7 @@
         [string]$customFieldConditions,
         [int]$page,
         [int]$pageSize,
+        [string[]]$fields,
         [switch]$all,
         [Parameter(Mandatory=$true)]
         [int]$AgreementID

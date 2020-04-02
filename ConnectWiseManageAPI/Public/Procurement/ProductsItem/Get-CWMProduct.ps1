@@ -8,6 +8,7 @@ function Get-CWMProduct {
         [string]$customfieldconditions,
         [int]$page,
         [int]$pageSize,
+        [string[]]$fields,
         [switch]$all
     )
 

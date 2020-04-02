@@ -20,6 +20,11 @@
         $URI += "&customFieldConditions=$customFieldConditions"
     }
 
+    if($Arguments.Fields) {
+        $fields = [System.Web.HttpUtility]::UrlEncode($($Arguments.Fields -join ','))
+        $URI += "&fields=$fields"
+    }
+
     if($Arguments.orderBy) {
         $orderBy = [System.Web.HttpUtility]::UrlEncode($Arguments.orderBy)
         $URI += "&orderBy=$orderBy"
