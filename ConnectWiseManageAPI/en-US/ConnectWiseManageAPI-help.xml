@@ -768,7 +768,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -867,7 +867,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -1013,7 +1013,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -1124,7 +1124,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -1270,7 +1270,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -1381,7 +1381,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -1721,7 +1721,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -1832,7 +1832,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -1990,7 +1990,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -2113,7 +2113,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -2247,7 +2247,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -2346,7 +2346,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -2516,7 +2516,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -2615,7 +2615,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -2749,7 +2749,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -2848,7 +2848,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -2994,7 +2994,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -3105,7 +3105,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -3239,7 +3239,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -3338,7 +3338,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -3472,7 +3472,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -3571,7 +3571,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -3717,7 +3717,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -3828,7 +3828,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -3962,7 +3962,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4061,7 +4061,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4195,7 +4195,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4294,7 +4294,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4440,7 +4440,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4551,7 +4551,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4685,7 +4685,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4784,7 +4784,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -5105,7 +5105,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -5204,7 +5204,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -5338,7 +5338,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -5437,7 +5437,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -5583,7 +5583,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -5694,7 +5694,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -5828,7 +5828,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -5927,7 +5927,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -6143,7 +6143,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -6242,7 +6242,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -6376,7 +6376,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -6475,7 +6475,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -6621,7 +6621,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -6732,7 +6732,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -6866,7 +6866,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -6965,7 +6965,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -7099,7 +7099,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -7198,7 +7198,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -7332,7 +7332,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -7431,7 +7431,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -7590,7 +7590,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -7701,7 +7701,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -7835,7 +7835,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -7934,7 +7934,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8080,7 +8080,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8191,7 +8191,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8325,7 +8325,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8424,7 +8424,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8583,7 +8583,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8694,7 +8694,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8894,7 +8894,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8993,7 +8993,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9127,7 +9127,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9226,7 +9226,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9360,7 +9360,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9459,7 +9459,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9646,7 +9646,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9757,7 +9757,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10054,7 +10054,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10165,7 +10165,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10299,7 +10299,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10398,7 +10398,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10532,7 +10532,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill fields Description }}</maml:para>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10631,7 +10631,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill fields Description }}</maml:para>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>

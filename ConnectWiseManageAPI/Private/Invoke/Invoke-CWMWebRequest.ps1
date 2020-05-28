@@ -11,8 +11,7 @@
         $ErrorMessage += "Not connected to a Manage server."
         $ErrorMessage += '--> $CWMServerConnection variable not found.'
         $ErrorMessage += "----> Run 'Connect-CWM' to initialize the connection before issuing other CWM cmdlets."
-        Write-Error ($ErrorMessage | Out-String)
-        EXIT 1
+        return Write-Error ($ErrorMessage | Out-String)
     }
 
     # Add default set of arguments
@@ -81,8 +80,7 @@
         if ($ErrorMessage.Length -lt 1){ $ErrorMessage = $_ }
         else { $ErrorMessage += $_.ScriptStackTrace }
 
-        Write-Error ($ErrorMessage | out-string)
-        EXIT 2
+        return Write-Error ($ErrorMessage | out-string)
     }
 
     # Not sure this will be hit with current iwr error handling
@@ -100,8 +98,7 @@
         $Result = Invoke-WebRequest @Arguments -UseBasicParsing
     }
     if ($Retry -ge $MaxRetry) {
-        Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
-        EXIT 3
+        return Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
     }
 
     # Save current version
