@@ -24,6 +24,7 @@
     $DebugOutput = @{}
     $DebugOutput.CWMServerConnection = $script:CWMServerConnection.Clone()
     $DebugOutput.CWMServerConnection.Headers = $script:CWMServerConnection.Headers.Clone()
+    $DebugOutput.ModuleVersion = (Get-Module 'ConnectWiseManageAPI').Version
     $DebugOutput.CWMSystemInfo = $SysInfo
     $DebugOutput.OS = [System.Environment]::OSVersion.Version
     $DebugOutput.PowerShell = $PSVersionTable.PSVersion

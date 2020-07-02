@@ -25,9 +25,14 @@ Update-CWMAgreementAddition [-AgreementID] <Int32> [-AdditionID] <Int32> [-Opera
 ### EXAMPLE 1
 ```powershell
 $UpdateParam = @{
+    AgreementID = $Agreement.id     
+    AdditionID = $Addition.id     
+    Operation = 'replace'     
+    Path = 'quantity'     
+    Value = $Count 
+} 
+Update-CWMAgreementAddition @UpdateParam
 ```
-
-AgreementID = $Agreement.id     AdditionID = $Addition.id     Operation = 'replace'     Path = 'quantity'     Value = $UmbrellaCount } Update-CWMAgreementAddition @UpdateParam
 
 ## PARAMETERS
 

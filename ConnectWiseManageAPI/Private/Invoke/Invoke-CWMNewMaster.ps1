@@ -8,19 +8,28 @@
     # Skip common parameters
     $Skip += 'Debug','ErrorAction','ErrorVariable','InformationAction','InformationVariable','OutVariable','OutBuffer','PipelineVariable','Verbose','WarningAction','WarningVariable','WhatIf','Confirm','Version','VersionAutomatic'
 
-    $Body = @{}
-    foreach($i in $Arguments.GetEnumerator()){
-        if($Skip -notcontains $i.Key){
-            $Body.Add($i.Key, $i.value)
+    if ($Arguments.Body) {
+        $Body = $Arguments.Body
+    } else {
+        $Body = @{}
+        foreach($i in $Arguments.GetEnumerator()){
+            if($Skip -notcontains $i.Key){
+                $Body.Add($i.Key, $i.value)
+            }
         }
+        $Body = ConvertTo-Json $Body -Depth 100
     }
-    $Body = ConvertTo-Json $Body -Depth 100
     Write-Verbose $Body
+
+    $ContentType = 'application/json'
+    if ($Arguments.ContentType) {
+        $ContentType = $Arguments.ContentType
+    }
 
     $WebRequestArguments = @{
         Uri = $URI
         Method = 'Post'
-        ContentType = 'application/json'
+        ContentType = $ContentType
         Body = $Body
         Version = $Arguments.Version
     }

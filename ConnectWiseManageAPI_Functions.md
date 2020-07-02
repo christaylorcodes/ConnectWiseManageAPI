@@ -185,6 +185,9 @@ This function will create a new contact communication.
 ### [New-CWMDebugReport](New-CWMDebugReport.md)
 This function is used to gather troubleshooting information.
 
+### [New-CWMDocument](New-CWMDocument.md)
+Will allow you to upload a document and attach it to an item.
+
 ### [New-CWMProductCatalog](New-CWMProductCatalog.md)
 This function will create a new catalog.
 

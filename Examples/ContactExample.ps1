@@ -51,7 +51,7 @@ Update-CWMContact -id $New.id -Operation add -Path 'title' -Value 'Janitor'
 
 # Now lets clean him up
 Remove-CWMContact -id $New.id -Verbose
-# A successfully removal will have no output, so wo look at the verbose.
+# A successful removal will have no output, so wo look at the verbose.
 
 # To clear your connection information from memory you can terminate the session or issue the disconnect command.
 Disconnect-CWM
