@@ -3,12 +3,17 @@
     [OutputType([String])]
     param(
         [Parameter(ValueFromPipeline = $true)]
-        [datetime]$Date,
+        [datetime[]]$Date,
         [switch]$Raw
     )
-    $Converted = "[$(Get-Date $Date.ToUniversalTime() -format yyyy-MM-ddTHH:mm:ssZ)]"
-    if($Raw){
-        $Converted = $Converted.Trim('[]')
+    begin { $Collection = @() }
+    process {
+        foreach ($D in $Date) {
+            $Collection += "[$(Get-Date $D.ToUniversalTime() -format yyyy-MM-ddTHH:mm:ssZ)]"
+            if($Raw){
+                $Collection += $Converted.Trim('[]')
+            }
+        }
     }
-    return $Converted
+    end { return $Collection }
 }

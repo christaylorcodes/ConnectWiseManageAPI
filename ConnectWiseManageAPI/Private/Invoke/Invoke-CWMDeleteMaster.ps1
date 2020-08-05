@@ -1,7 +1,6 @@
 ﻿function Invoke-CWMDeleteMaster {
     [CmdletBinding(SupportsShouldProcess)]
     param (
-        $Arguments,
         [string]$URI
     )
 

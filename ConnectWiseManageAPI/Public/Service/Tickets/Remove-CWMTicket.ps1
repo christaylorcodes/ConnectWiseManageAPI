@@ -7,5 +7,5 @@
     )
 
     $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$TicketID"
-    return Invoke-CWMDeleteMaster -Arguments $PsBoundParameters -URI $URI
+    return Invoke-CWMDeleteMaster -URI $URI
 }

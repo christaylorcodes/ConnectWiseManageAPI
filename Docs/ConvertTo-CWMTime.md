@@ -13,11 +13,11 @@ Converts \[datetime\] to the time format used in condition queries.
 ## SYNTAX
 
 ```
-ConvertTo-CWMTime [[-Date] <DateTime>] [-Raw] [<CommonParameters>]
+ConvertTo-CWMTime [[-Date] <DateTime[]>] [-Raw] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will convert an input to a universal date time object then output in a format used by the ConnectWise Manage API.
+This will convert an input to a universal date time object then output in a format used by the ConnectWise Manage API conditions parameters.
 
 ## EXAMPLES
 
@@ -34,7 +34,7 @@ Will output tomorrows date.
 Date used in conversion.
 
 ```yaml
-Type: DateTime
+Type: DateTime[]
 Parameter Sets: (All)
 Aliases:
 

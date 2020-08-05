@@ -13,7 +13,7 @@ This will be basis of all delete calls to the ConnectWise Manage API.
 ## SYNTAX
 
 ```
-Invoke-CWMDeleteMaster [[-Arguments] <Object>] [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMDeleteMaster [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,21 +27,6 @@ Invoke-CWMDeleteMaster -Arguments $Arguments -URI $URI
 ```
 
 ## PARAMETERS
-
-### -Arguments
-A hash table of parameters
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -67,7 +52,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
