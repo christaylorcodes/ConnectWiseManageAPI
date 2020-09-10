@@ -18,22 +18,30 @@ Update-CWMCompanyTypeAssociation [-CompanyID] <Int32> [-TypeAssociationID] <Int3
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This will update a company type association.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```powershell
 $UpdateParam = @{
+    CompanyID = $Company.id
+    TypeAssociationID = $TypeAssoc.id
+    Operation = 'replace'
+    Path = 'type/id'
+    Value = $Type.id
+}
+Update-CWMCompanyTypeAssociation @UpdateParam
 ```
 
-CompanyID = $Company.id     TypeAssociationID = $TypeAssoc.id     Operation = 'replace'     Path = 'name'     Value = $NewName } Update-CWMCompanyTypeAssociation @UpdateParam
+Will replace the `$TypeAssoc.id` with the new type associated with the id in `$Type.id`
 
 ## PARAMETERS
 
 ### -CompanyID
 The ID of the company that you are updating.
-Get-CWMCompanies
+
+`Get-CWMCompanies`
 
 ```yaml
 Type: Int32
@@ -64,7 +72,8 @@ Accept wildcard characters: False
 
 ### -Operation
 What you are doing with the value.
-replace
+
+`replace`
 
 ```yaml
 Type: String
@@ -82,6 +91,8 @@ Accept wildcard characters: False
 ### -Path
 The value that you want to perform the operation on.
 
+`type/id`
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -96,7 +107,8 @@ Accept wildcard characters: False
 
 ### -TypeAssociationID
 The TypeAssociationID of the company that you are updating.
-Get-CWMCompanyTypeAssociation
+
+`Get-CWMCompanyTypeAssociation -Company $Company.id`
 
 ```yaml
 Type: Int32
@@ -111,7 +123,9 @@ Accept wildcard characters: False
 ```
 
 ### -Value
-The value of that operation.
+The ID of the new type.
+
+`Get-CWMCompanyType`
 
 ```yaml
 Type: Object
