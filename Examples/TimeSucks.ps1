@@ -173,9 +173,9 @@ if($LastTimeEntry -lt (Get-Date -Hour 0 -Minute 0 -Second 0)){
     [datetime]$LastTimeEntry = Get-Date $($Config.ScheduledStart)
 }
 
-#If last time entry was more than $Timeframe minutes old prompt for time input.
-if($LastTimeEntry -gt (Get-Date).AddMinutes((($TimeFrame * -1) -2))){
-    #Last time entry was within $TimeFrame
+#If last time entry was more than $Config.TimeFrame minutes old prompt for time input.
+if($LastTimeEntry -gt (Get-Date).AddMinutes((($Config.TimeFrame * -1) -2))){
+    #Last time entry was within $Config.TimeFrame
     Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Last time entry was $LastTimeEntry."
     exit
 }
@@ -411,8 +411,8 @@ $WPFSubmit.add_click({
 Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Launching form."
 $null = $Form.ShowDialog()
 
-#if $TimeFrame set make sure there is a scheduled task.
-if($TimeFrame){
+#if $Config.TimeFrame set make sure there is a scheduled task.
+if($Config.TimeFrame){
     #Setup scheduled task
     $TaskQuery = Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue
     if(!$TaskQuery){
