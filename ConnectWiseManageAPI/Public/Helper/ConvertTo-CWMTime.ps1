@@ -9,10 +9,9 @@
     begin { $Collection = @() }
     process {
         foreach ($D in $Date) {
-            $Collection += "[$(Get-Date $D.ToUniversalTime() -format yyyy-MM-ddTHH:mm:ssZ)]"
-            if($Raw){
-                $Collection += $Converted.Trim('[]')
-            }
+            $Converted = "[$(Get-Date $D.ToUniversalTime() -format yyyy-MM-ddTHH:mm:ssZ)]"
+            if($Raw){ $Collection += $Converted.Trim('[]') }
+            else { $Collection += $Converted }
         }
     }
     end { return $Collection }

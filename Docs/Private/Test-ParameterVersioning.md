@@ -8,7 +8,7 @@ schema: 2.0.0
 # Test-ParameterVersioning
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+This is used to determine the latest version based on parameters passed.
 
 ## SYNTAX
 
@@ -18,16 +18,22 @@ Test-ParameterVersioning [-VersionAutomatic] [-ParameterSetName] <String> [-Defa
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+As the API changes and new versions are released the module will need to accept new parameter sets based on what is available for that version. This is used to see what version should be passed to the API based on the parameters used.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+$TestVersion = @{
+    VersionAutomatic = $VersionAutomatic
+    ParameterSetName = $PSCmdlet.ParameterSetName
+    DefaultParameterSetName = $PSCmdlet.MyInvocation.MyCommand.DefaultParameterSet
+    Version = $Version
+}
+$PsBoundParameters.Version = Test-ParameterVersioning @TestVersion
 ```
 
-{{ Add example description here }}
+Updates the version to the latest version possible based on parameters passed.
 
 ## PARAMETERS
 

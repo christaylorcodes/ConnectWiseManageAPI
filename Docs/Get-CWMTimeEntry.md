@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMTimeEntry
 
 ## SYNOPSIS
-This function will allow you to search for Manage configurations.
+This function will allow you to search for Manage time entries.
 
 ## SYNTAX
 
@@ -25,10 +25,10 @@ Get-CWMTimeEntry [[-Condition] <String>] [[-orderBy] <String>] [[-childCondition
 
 ### EXAMPLE 1
 ```powershell
-Get-CWCTimeSheet -Condition 'member/identifier="ctaylor" and status = "Open"'
+Get-CWMTimeEntry -Condition 'enteredBy="ctaylor"'
 ```
 
-This will return all the open time sheets for ctaylor
+This will return time entries entered by ctaylor
 
 ## PARAMETERS
 

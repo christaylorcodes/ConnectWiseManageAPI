@@ -165,5 +165,5 @@ Author: Chris Taylor Date: 10/25/2018
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=Service&e=BoardInfos&o=BOARDS](https://developer.connectwise.com/products/manage/rest?a=Service&e=BoardInfos&o=BOARDS)
+[[https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Boards/postServiceBoards](https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Boards/postServiceBoards)]([https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Boards/postServiceBoards](https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Boards/postServiceBoards))
 

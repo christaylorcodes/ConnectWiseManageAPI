@@ -5,24 +5,25 @@ online version:
 schema: 2.0.0
 ---
 
-# Update-CWMCompanyConfiguration
+# Get-CWMServiceBoardInfo
 
 ## SYNOPSIS
-This function will update a company configuration.
+This will return information about service boards.
 
 ## SYNTAX
 
 ```
-Update-CWMCompanyConfiguration [-ID] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Get-CWMServiceBoardInfo [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This function will update a company configuration.
+This will return information about service boards.
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -31,92 +32,121 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -Condition
+{{ Fill Condition Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-{{ Fill ID Description }}
-
-```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Operation
-{{ Fill Operation Description }}
+### -all
+{{ Fill all Description }}
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
-Accepted values: add, replace, remove
 
-Required: True
-Position: 1
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-{{ Fill Path Description }}
+### -childConditions
+{{ Fill childConditions Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Value
-{{ Fill Value Description }}
+### -customFieldConditions
+{{ Fill customFieldConditions Description }}
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+### -fields
+{{ Fill fields Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
-Aliases: wi
+Aliases:
 
 Required: False
-Position: Named
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+{{ Fill orderBy Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+{{ Fill page Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+{{ Fill pageSize Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -134,3 +164,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/Products/Manage/REST#/Boards/getServiceBoards](https://developer.connectwise.com/Products/Manage/REST#/Boards/getServiceBoards)

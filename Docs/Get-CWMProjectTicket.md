@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMProjectTicket
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+This will return a list of project tickets.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-CWMProjectTicket [[-Condition] <String>] [[-orderBy] <String>] [[-childCondi
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This will return a list of project tickets.
 
 ## EXAMPLES
 

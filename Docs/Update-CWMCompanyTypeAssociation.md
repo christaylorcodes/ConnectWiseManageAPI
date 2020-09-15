@@ -106,7 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### -TypeAssociationID
-The TypeAssociationID of the company that you are updating.
+The TypeAssociationID you are updating.
 
 `Get-CWMCompanyTypeAssociation -Company $Company.id`
 
@@ -163,7 +163,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
+Author: Chris Taylor
+
+Date: 10/10/2018
 
 ## RELATED LINKS
 

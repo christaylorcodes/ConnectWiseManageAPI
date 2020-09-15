@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMProject
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+This will return a list of projects.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-CWMProject [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This will return a list of projects.
 
 ## EXAMPLES
 

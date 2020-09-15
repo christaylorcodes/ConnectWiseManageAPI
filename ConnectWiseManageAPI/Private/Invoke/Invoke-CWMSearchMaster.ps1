@@ -8,12 +8,29 @@
     $Body = @{}
     switch ($Arguments.Keys) {
         'condition'                { $Body.conditions               = $Arguments.condition                }
-        'orderBy'                  { $Body.orderBy                  = $Arguments.orderBy                  }
-        'childconditions'          { $Body.childconditions          = $Arguments.childconditions          }
-        'customfieldconditions'    { $Body.customfieldconditions    = $Arguments.customfieldconditions    }
     }
     $Body = ConvertTo-Json $Body -Depth 100
     Write-Verbose $Body
+
+    if($Arguments.childConditions) {
+        $childConditions = [System.Web.HttpUtility]::UrlEncode($Arguments.childConditions)
+        $URI += "&childConditions=$childConditions"
+    }
+
+    if($Arguments.customFieldConditions) {
+        $customFieldConditions = [System.Web.HttpUtility]::UrlEncode($Arguments.customFieldConditions)
+        $URI += "&customFieldConditions=$customFieldConditions"
+    }
+
+    if($Arguments.Fields) {
+        $fields = [System.Web.HttpUtility]::UrlEncode($($Arguments.Fields -join ','))
+        $URI += "&fields=$fields"
+    }
+
+    if($Arguments.orderBy) {
+        $orderBy = [System.Web.HttpUtility]::UrlEncode($Arguments.orderBy)
+        $URI += "&orderBy=$orderBy"
+    }
 
     $WebRequestArguments = @{
         Uri = $URI

@@ -8,7 +8,7 @@ schema: 2.0.0
 # ConvertFrom-CWMTime
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Converts date time returned by manage to a \[datetime\] object.
 
 ## SYNTAX
 

@@ -15,7 +15,7 @@
     )
     if ($id) {
         $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$($id)"
-        return Invoke-CWMGetMaster -URI $URI
+        return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
     }
     else {
         $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/search"
