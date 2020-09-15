@@ -360,7 +360,7 @@ $WPFSubmit.add_click({
 
         #Time Wrap
         if($WPFTimeWrap.IsChecked){
-            $chargeToId = ($ChargeCodes | Where-Object{ $_.Description -eq $TimeWrapChargeCode }).'TE_Charge_Code_RecID'
+            $chargeToId = ($ChargeCodes | Where-Object{ $_.Description -eq $Config.TimeWrapChargeCode }).'TE_Charge_Code_RecID'
 
             $TimeEntryParams = @{
                 chargeToId = $chargeToId
@@ -387,10 +387,7 @@ $WPFSubmit.add_click({
         }
         try {
             $null = New-CWMTimeEntry @TimeEntryParams -ErrorAction Stop
-            if($AutoClose){
-                $Form.Close()
-                Exit 0
-            }
+            if($Config.AutoClose){ $Form.Close() }
             $WPFStatus.Text = 'Time entry successfully created.'
             $WPFStartTime.Text = Get-Date -f t
             $WPFEndTime.Text = ''
@@ -414,7 +411,7 @@ $null = $Form.ShowDialog()
 #if $Config.TimeFrame set make sure there is a scheduled task.
 if($Config.TimeFrame){
     #Setup scheduled task
-    $TaskQuery = Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue
+    $TaskQuery = Get-ScheduledTask -TaskName $Config.TaskName -ErrorAction SilentlyContinue
     if(!$TaskQuery){
         if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
             Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading SilentLaunchPoSh.vbs"
@@ -434,7 +431,7 @@ if($Config.TimeFrame){
                 Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
             }
         }
-        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Creating scheduled task, $TaskName."
+        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Creating scheduled task, $Config.TaskName."
         $Duration = "$((New-TimeSpan $Config.ScheduledStart $Config.ScheduledEnd).Hours):00"
         $ScheduledTask = schtasks /Create /RU $env:USERNAME /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST $Config.ScheduledStart /DU $Duration /TN $Config.TaskName /RL HIGHEST /RI 5 /F /TR "hostname" 2>&1
         $Action = New-ScheduledTaskAction -Execute 'WSCRIPT' -Argument "`"$ScriptDir\SilentLaunchPoSh.vbs`" `"$ScriptPath`""
@@ -443,7 +440,7 @@ if($Config.TimeFrame){
     }
 }
 else{
-    $null = SCHTASKS /Delete /TN $TaskName /F 2>&1
+    $null = SCHTASKS /Delete /TN $Config.TaskName /F 2>&1
 }
 
 if($Config.AutoUpdate) {
