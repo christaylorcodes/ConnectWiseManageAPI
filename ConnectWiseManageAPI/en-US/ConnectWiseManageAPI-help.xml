@@ -10740,7 +10740,12 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://developer.connectwise.com/Products/Manage/REST#/Boards/getServiceBoards</maml:linkText>
+        <maml:uri>https://developer.connectwise.com/Products/Manage/REST#/Boards/getServiceBoards</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -11920,7 +11925,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>CWMTimeEntry</command:noun>
       <maml:description>
-        <maml:para>This function will allow you to search for Manage configurations.</maml:para>
+        <maml:para>This function will allow you to search for Manage time entries.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -12134,9 +12139,9 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CWCTimeSheet -Condition 'member/identifier="ctaylor" and status = "Open"'</dev:code>
+        <dev:code>Get-CWMTimeEntry -Condition 'enteredBy="ctaylor"'</dev:code>
         <dev:remarks>
-          <maml:para>This will return all the open time sheets for ctaylor</maml:para>
+          <maml:para>This will return time entries entered by ctaylor</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -16627,9 +16632,9 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
           <maml:Description>
             <maml:para>{{ Fill password Description }}</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>SecureString</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -17427,7 +17432,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
           <maml:name>licenseClass</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill licenseClass Description }}</maml:para>
+            <maml:para>F = Full Member, A = API Member, C = StreamlineIT Member, X = Subcontractor Member</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">F</command:parameterValue>
@@ -18430,7 +18435,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
         <maml:name>licenseClass</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill licenseClass Description }}</maml:para>
+          <maml:para>F = Full Member, A = API Member, C = StreamlineIT Member, X = Subcontractor Member</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -18600,9 +18605,9 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <maml:Description>
           <maml:para>{{ Fill password Description }}</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>SecureString</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -19308,16 +19313,44 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>$NewMember = @{
+    identifier = 'ctaylor'
+    firstName = 'Chris'
+    lastName = 'Taylor'
+    password = 'ChangeMe1!'
+    licenseClass = 'F'
+    agreementInvoicingDisplayOptions = 'RemainOnInvoicingScreen'
+    companyActivityTabFormat = 'SummaryList'
+    defaultEmail = 'Office'
+    defaultPhone = 'Office'
+    invoiceScreenDefaultTabFormat = 'ShowInvoicingTab'
+    invoiceTimeTabFormat = 'SummaryList'
+    invoicingDisplayOptions = 'RemainOnInvoicingScreen'
+    hireDate = $(ConvertTo-CWMTime (Get-Date).AddDays(-1) -Raw)
+    # additional required fields
+    timeZone = @{id=1}
+    securityRole = @{id=63}
+    structureLevel = @{id=1}
+    securityLocation = @{id=38}
+    defaultLocation = @{id=2}
+    defaultDepartment = @{id=10}
+    workRole = @{id=21}
+    timeApprover = @{id=186}
+    expenseApprover = @{id=186}
+    salesDefaultLocation = @{id=38}
+    officeEmail = 'dont@bug.me'
+    officePhone = '19001234567'
+}
+New-CWMMember @NewMember -Verbose</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will create a new fully license user 'ctaylor'</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post</maml:uri>
+        <maml:linkText>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=UPDATE#/Members/postSystemMembers</maml:linkText>
+        <maml:uri>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=UPDATE#/Members/postSystemMembers</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20966,11 +20999,11 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:verb>New</command:verb>
       <command:noun>CWMServiceBoard</command:noun>
       <maml:description>
-        <maml:para>This function will create a new ticket.</maml:para>
+        <maml:para>This function will create a new service board.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function will create a new service board.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -22533,17 +22566,13 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$Ticket = @{</dev:code>
+        <dev:code>New-CWMServiceBoard -name 'test' -location @{id=2} -department @{id=14}</dev:code>
         <dev:remarks>
-          <maml:para>'identifier' = $Product.offerName     'description' = $Product.offerName     'subcategory' = @{id = 152}     'type' = @{id = 47}     'customerDescription' = $Product.offerName     'cost' = $Product.unitPrice     'price' = $Price     'manufacturerPartNumber' = $Product.offerName     'manufacturer' = $Manufacturer     'productClass' = 'Agreement'     'taxableFlag' = $true } New-CWMScheduleEntry @Ticket</maml:para>
+          <maml:para>this will create a new 'test' service board.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Schedule&amp;e=ScheduleEntries&amp;o=CREATE</maml:uri>
-      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=UPDATE#/Boards/postServiceBoards</maml:linkText>
         <maml:uri>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyCompanyTypeAssociations&amp;o=UPDATE#/Boards/postServiceBoards</maml:uri>

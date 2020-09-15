@@ -1,5 +1,5 @@
 ﻿function New-CWMTicket {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSShouldProcess", "")]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium', DefaultParameterSetName = "2020.1")]
     param(
         [string]$Version,

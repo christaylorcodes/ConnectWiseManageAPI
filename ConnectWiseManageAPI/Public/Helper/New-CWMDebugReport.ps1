@@ -1,5 +1,5 @@
 ﻿function New-CWMDebugReport {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSShouldProcess", "")]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         $Hash = $true

@@ -13,7 +13,7 @@ This will create a new Manage user.
 ## SYNTAX
 
 ```
-New-CWMMember [[-id] <Int32>] [-identifier] <String> [[-password] <SecureString>] [-firstName] <String>
+New-CWMMember [[-id] <Int32>] [-identifier] <String> [[-password] <String>] [-firstName] <String>
  [[-middleInitial] <String>] [-lastName] <String> [[-title] <String>] [[-reportCard] <Hashtable>]
  [-licenseClass] <String> [[-disableOnlineFlag] <Boolean>] [[-enableMobileFlag] <Boolean>]
  [[-type] <Hashtable>] [[-employeeIdentifer] <String>] [[-vendorNumber] <String>] [[-notes] <String>]
@@ -1213,7 +1213,7 @@ Accept wildcard characters: False
 {{ Fill password Description }}
 
 ```yaml
-Type: SecureString
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -2078,4 +2078,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
 [https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers](https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers)
