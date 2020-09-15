@@ -63,7 +63,7 @@
 $Version = 0.2
 
 $ScriptName = 'TimeSucks'
-$ScriptURL = 'https://github.com/christaylorcodes/ConnectWiseManageAPI/blob/master/Examples/TimeSucks.ps1'
+$ScriptURL = 'https://raw.githubusercontent.com/christaylorcodes/ConnectWiseManageAPI/master/Examples/TimeSucks.ps1'
 $Quotes = 'All your time are belong to us!','Time keeps on slipping slipping, into the future.','Time is money.','Time waits for no one.','Lost time is never found again.'
 
 #Exit if already open
