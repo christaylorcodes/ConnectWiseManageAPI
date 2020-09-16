@@ -156,10 +156,46 @@ try {
     }
     Connect-CWM @CWMConnectionInfo -ErrorAction Stop
 } catch {
+    Disconnect-CWM
     $Config.PSObject.Properties.Remove('CWMConnectionInfo')
     $Config | Export-Clixml -Path $ConfigPath -Force
     Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "Manage Connection information is incorrect."
     Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "Clearing connection info, run again to re-enter." -ExitGracefully
+}
+
+#if $Config.TimeFrame set make sure there is a scheduled task.
+if($Config.TimeFrame){
+    #Setup scheduled task
+    $TaskQuery = Get-ScheduledTask -TaskName $Config.TaskName -ErrorAction SilentlyContinue
+    if(!$TaskQuery){
+        if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
+            Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading SilentLaunchPoSh.vbs"
+            $url = "https://gitlab.com/ChrisTaylorRocks/ConnectWise-TimeEntryReminder/raw/master/SilentLaunchPoSh.vbs"
+            $output = "$ScriptDir\SilentLaunchPoSh.vbs"
+            Invoke-RestMethod $url -OutFile $output
+            if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
+                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "$ScriptDir\SilentLaunchPoSh.vbs, is missing."
+                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
+            }
+        }
+        if(-not $(Test-Path $ScriptPath)){
+            Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading $(Split-Path $ScriptPath -Leaf)"
+            Invoke-RestMethod $ScriptURL -OutFile $ScriptPath
+            if(-not $(Test-Path $ScriptPath)){
+                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "$ScriptPath, is missing."
+                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
+            }
+        }
+        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Creating scheduled task, $Config.TaskName."
+        $Duration = "$((New-TimeSpan $Config.ScheduledStart $Config.ScheduledEnd).Hours):00"
+        $ScheduledTask = schtasks /Create /RU $env:USERNAME /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST $Config.ScheduledStart /DU $Duration /TN $Config.TaskName /RL HIGHEST /RI 5 /F /TR "hostname" 2>&1
+        $Action = New-ScheduledTaskAction -Execute 'WSCRIPT' -Argument "`"$ScriptDir\SilentLaunchPoSh.vbs`" `"$ScriptPath`""
+        $null = Set-ScheduledTask -TaskName $Config.TaskName -Action $Action -User $env:USERNAME
+        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message $ScheduledTask
+    }
+}
+else{
+    $null = SCHTASKS /Delete /TN $Config.TaskName /F 2>&1
 }
 
 Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Starting time frame check."
@@ -177,7 +213,7 @@ if($LastTimeEntry -lt (Get-Date -Hour 0 -Minute 0 -Second 0)){
 if($LastTimeEntry -gt (Get-Date).AddMinutes((($Config.TimeFrame * -1) -2))){
     #Last time entry was within $Config.TimeFrame
     Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Last time entry was $LastTimeEntry."
-    exit
+    Stop-Log -ToScreen -Status 'Success'
 }
 
 #Get CW icon if on machine
@@ -220,7 +256,7 @@ $inputXAML = @"
 </Window>
 "@
 
-#region -[Dont mess with this region]-
+#region -[Don't mess with this region]-
 
 $inputXAML = $inputXAML -replace 'mc:Ignorable="d"','' -replace "x:N",'N' -replace '^<Win.*', '<Window'
 [void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
@@ -261,8 +297,8 @@ $ChargeCodes.Description | ForEach-Object { $null = $WPFcomboBox.Items.add($_) }
 #Populate service tickets
 #TODO limit to open tickets with time entry in last two days
 Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Loading Recent tickets"
-$TimeEntrCondition = "enteredBy = '$($Config.ManageUser)' and chargeToType = 'ServiceTicket' and dateEntered > $((Get-Date).AddDays(-2) | ConvertTo-CWMTime)"
-$LatestTimeEntries = Get-CWMTimeEntry -Condition $TimeEntrCondition -orderBy 'timeEnd desc' -fields @('chargeToId','timeStart') -all
+$TimeEntryCondition = "enteredBy = '$($Config.ManageUser)' and chargeToType = 'ServiceTicket' and dateEntered > $((Get-Date).AddDays(-2) | ConvertTo-CWMTime)"
+$LatestTimeEntries = Get-CWMTimeEntry -Condition $TimeEntryCondition -orderBy 'timeEnd desc' -fields @('chargeToId','timeStart') -all
 $RecentTimeEntryTicketIDs = $LatestTimeEntries.chargeToId | Sort-Object -Unique
 if (($RecentTimeEntryTicketIDs | Measure-Object).Count -gt 0) {
     $RecentTicketCondition = "id in ($($RecentTimeEntryTicketIDs -join ',')) and closedFlag = false"
@@ -275,8 +311,8 @@ if (($RecentTimeEntryTicketIDs | Measure-Object).Count -gt 0) {
 }
 
 #Todays total hours
-$TimeEntrCondition = "enteredBy = '$($Config.ManageUser)' and  dateEntered > $(Get-Date 00:00 | ConvertTo-CWMTime)"
-$TodaysTimeEntries = Get-CWMTimeEntry -Condition $TimeEntrCondition -orderBy 'timeEnd desc' -fields @('actualHours') -all
+$TimeEntryCondition = "enteredBy = '$($Config.ManageUser)' and  dateEntered > $(Get-Date 00:00 | ConvertTo-CWMTime)"
+$TodaysTimeEntries = Get-CWMTimeEntry -Condition $TimeEntryCondition -orderBy 'timeEnd desc' -fields @('actualHours') -all
 $TodaysTotal = (($TodaysTimeEntries.actualHours) | Measure-Object -Sum).Sum
 $WPFtodaysHours.text = "$TodaysTotal hours today"
 
@@ -407,41 +443,6 @@ $WPFSubmit.add_click({
 #Shows the form
 Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Launching form."
 $null = $Form.ShowDialog()
-
-#if $Config.TimeFrame set make sure there is a scheduled task.
-if($Config.TimeFrame){
-    #Setup scheduled task
-    $TaskQuery = Get-ScheduledTask -TaskName $Config.TaskName -ErrorAction SilentlyContinue
-    if(!$TaskQuery){
-        if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
-            Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading SilentLaunchPoSh.vbs"
-            $url = "https://gitlab.com/ChrisTaylorRocks/ConnectWise-TimeEntryReminder/raw/master/SilentLaunchPoSh.vbs"
-            $output = "$ScriptDir\SilentLaunchPoSh.vbs"
-            Invoke-RestMethod $url -OutFile $output
-            if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "$ScriptDir\SilentLaunchPoSh.vbs, is missing."
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
-            }
-        }
-        if(-not $(Test-Path $ScriptPath)){
-            Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading $(Split-Path $ScriptPath -Leaf)"
-            Invoke-RestMethod $ScriptURL -OutFile $ScriptPath
-            if(-not $(Test-Path $ScriptPath)){
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "$ScriptPath, is missing."
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
-            }
-        }
-        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Creating scheduled task, $Config.TaskName."
-        $Duration = "$((New-TimeSpan $Config.ScheduledStart $Config.ScheduledEnd).Hours):00"
-        $ScheduledTask = schtasks /Create /RU $env:USERNAME /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST $Config.ScheduledStart /DU $Duration /TN $Config.TaskName /RL HIGHEST /RI 5 /F /TR "hostname" 2>&1
-        $Action = New-ScheduledTaskAction -Execute 'WSCRIPT' -Argument "`"$ScriptDir\SilentLaunchPoSh.vbs`" `"$ScriptPath`""
-        $null = Set-ScheduledTask -TaskName $Config.TaskName -Action $Action -User $env:USERNAME
-        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message $ScheduledTask
-    }
-}
-else{
-    $null = SCHTASKS /Delete /TN $Config.TaskName /F 2>&1
-}
 
 if($Config.AutoUpdate) {
     Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Updating module."
