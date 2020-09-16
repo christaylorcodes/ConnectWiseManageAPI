@@ -237,7 +237,7 @@ $inputXAML = @"
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="343*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textBox" Margin="10,72,9.333,43" TextWrapping="Wrap" Grid.ColumnSpan="3" AcceptsReturn="True"/>
+        <TextBox x:Name="textBox" Margin="10,72,9.333,43" TextWrapping="Wrap" Grid.ColumnSpan="3" AcceptsReturn="True" SpellCheck.IsEnabled="True"/>
         <Label x:Name="StartLabel" Content="Start Time" Height="30" Margin="0,10,156.333,0" VerticalAlignment="Top" RenderTransformOrigin="0.497,-0.795" FontSize="11" Grid.Column="2" HorizontalAlignment="Right" Width="60"/>
         <TextBox x:Name="EndTime" HorizontalAlignment="Right" Height="22" Margin="0,10,73.333,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Grid.Column="2"/>
         <TextBox x:Name="StartTime" Height="22" Margin="0,10,220.333,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="2" HorizontalAlignment="Right" Width="79"/>
