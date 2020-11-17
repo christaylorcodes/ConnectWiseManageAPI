@@ -19,9 +19,17 @@
         Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
         return
     }
+
     $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
     $Collection = @()
     $Collection += $PageResult.Content | ConvertFrom-Json
+    $Link = $PageResult.Headers.Link;
+    if ($Link) {
+        $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
+    }
+    else {
+        $NextPage = $null
+    }
 
     # Loop through all results
     while ($NextPage) {
@@ -29,7 +37,13 @@
         $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
         if (!$PageResult){return}
         $Collection += $PageResult.Content | ConvertFrom-Json
-        $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
+        $Link = $PageResult.Headers.Link;
+        if ($Link) {
+            $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
+        }
+        else {
+            $NextPage = $null
+        }
     }
     return $Collection
 }

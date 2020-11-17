@@ -13,7 +13,7 @@
     The time your shift ends in 24hr format.
 
     .PARAMETER ManageUser
-    You Manage Username.
+    Your Manage Username.
 
     .PARAMETER TimeFrame
     How long you can go without entering a time entry in minutes.
@@ -31,7 +31,7 @@
     If true the script and required modules will update on close.
 
     .PARAMETER Server
-    The URL for you CW Manage server.
+    The URL for your CW Manage server.
 
     .PARAMETER Company
     The company used when logging in to Manage.
@@ -101,7 +101,7 @@ function Save-Config {
     Start-Process notepad -ArgumentList $env:TEMP\TempConfig.json -Wait
     $Config = Get-Content $env:TEMP\TempConfig.json | ConvertFrom-Json
     Remove-Item $env:TEMP\TempConfig.json -Force -Confirm:$false
-    $APIKeys = Get-Credential -Message 'Enter you Manage public and private API keys'
+    $APIKeys = Get-Credential -Message 'Enter your Manage public and private API keys'
     $Config.CWMConnectionInfo | Add-Member  -NotePropertyName credential -NotePropertyValue $APIKeys
     $Config | Export-Clixml -Path $Path
 }
