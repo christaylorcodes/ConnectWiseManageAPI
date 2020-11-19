@@ -20,7 +20,6 @@
         return
     }
 
-    $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
     $Collection = @()
     $Collection += $PageResult.Content | ConvertFrom-Json
     $Link = $PageResult.Headers.Link;
