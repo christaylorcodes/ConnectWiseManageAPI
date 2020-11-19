@@ -5,15 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Update-CWMTicket
+# Update-CWMTicketNote
 
 ## SYNOPSIS
-This will update a ticket.
+This will update a ticket note.
 
 ## SYNTAX
 
 ```
-Update-CWMTicket [-TicketID] <Int32> [-TicketNoteID] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
+Update-CWMTicketNote [-TicketID] <Int32> [-TicketNoteID] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -27,7 +27,7 @@ Update-CWMTicket [-TicketID] <Int32> [-TicketNoteID] <Int32> [-Operation] <Strin
 $UpdateParam = @{
 ```
 
-ID = 1     Operation = 'replace'     Path = 'name'     Value = $NewName } Update-CWMTicket @UpdateParam
+TicketID = 1     TicketNoteID = 1     Operation = 'replace'     Path = 'name'     Value = $NewName } Update-CWMTicketNote @UpdateParam
 
 ## PARAMETERS
 
