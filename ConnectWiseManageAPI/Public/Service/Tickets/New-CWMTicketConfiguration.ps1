@@ -1,13 +1,14 @@
-function New-CWMTemplate {
+function New-CWMTicketConfiguration {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
+    	[int]$TicketID,
+        [int]$id,
+        [string]$deviceIdentifier
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/<URI>"
+    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$TicketID/configurations"
 
-    # If there are parameters that should not be included in the body
-    $Skip = @()
-
+    $Skip = @('TicketID')
     return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI -Skip $Skip
 }

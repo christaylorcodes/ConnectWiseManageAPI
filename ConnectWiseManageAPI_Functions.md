@@ -152,6 +152,12 @@ This function will list sales activities based on conditions.
 ### [Get-CWMScheduleEntry](Docs/Get-CWMScheduleEntry.md)
 This function will list members schedules.
 
+### [Get-CWMScheduleHoliday](Docs/Get-CWMScheduleHoliday.md)
+{{ Fill in the Synopsis }}
+
+### [Get-CWMScheduleHolidayList](Docs/Get-CWMScheduleHolidayList.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMServiceBoard](Docs/Get-CWMServiceBoard.md)
 This function will list of service boards based on conditions.
 
@@ -174,7 +180,7 @@ This function will list configs attached to a ticket.
 This function will list notes of a ticket based on conditions.
 
 ### [Get-CWMTimeEntry](Docs/Get-CWMTimeEntry.md)
-This function will allow you to search for Manage configurations.
+This function will allow you to search for Manage time entries.
 
 ### [Get-CWMTimeSheet](Docs/Get-CWMTimeSheet.md)
 This function will allow you to search for Manage configurations.
@@ -219,10 +225,13 @@ This function will create a new ticket.
 This function will create a new ticket.
 
 ### [New-CWMServiceBoard](Docs/New-CWMServiceBoard.md)
-This function will create a new ticket.
+This function will create a new service board.
 
 ### [New-CWMTicket](Docs/New-CWMTicket.md)
 This function will create a new ticket.
+
+### [New-CWMTicketConfiguration](Docs/New-CWMTicketConfiguration.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMTicketNote](Docs/New-CWMTicketNote.md)
 Add a note to a CW Manage ticket.

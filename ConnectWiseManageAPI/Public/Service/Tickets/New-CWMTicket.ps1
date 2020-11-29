@@ -117,10 +117,12 @@
         [hashtable]$agreement,
         [Parameter(ParameterSetName = "2020.1")]
         [Parameter(ParameterSetName = "2019.1")]
-        [int]$severity,
+        [ValidateSet('Low', 'Medium', 'High')]
+        [string]$severity,
         [Parameter(ParameterSetName = "2020.1")]
         [Parameter(ParameterSetName = "2019.1")]
-        [int]$impact,
+        [ValidateSet('Low', 'Medium', 'High')]
+        [string]$impact,
         [Parameter(ParameterSetName = "2020.1")]
         [Parameter(ParameterSetName = "2019.1")]
         [ValidateLength(1,100)]
