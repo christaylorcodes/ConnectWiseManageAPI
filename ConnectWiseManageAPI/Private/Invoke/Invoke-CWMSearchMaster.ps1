@@ -35,7 +35,7 @@
     $WebRequestArguments = @{
         Uri = $URI
         Method = 'Post'
-        ContentType = 'application/json'
+        ContentType = 'application/json; charset=utf-8' #needed for accented chars
         Body = $Body
         Headers = $script:CWMServerConnection.Headers
     }

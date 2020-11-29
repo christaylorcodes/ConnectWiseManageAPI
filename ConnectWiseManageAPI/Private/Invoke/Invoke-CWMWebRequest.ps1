@@ -45,11 +45,17 @@
         $ErrorMessage = @()
 
         if($_.Exception.Response){
-            # Read exception response
-            $ErrorStream = $_.Exception.Response.GetResponseStream()
-            $Reader = New-Object System.IO.StreamReader($ErrorStream)
-            $script:ErrBody = $Reader.ReadToEnd() | ConvertFrom-Json
-
+            try {
+                # Read exception response
+                #this can fail with some type of exceptions
+                $ErrorStream = $_.Exception.Response.GetResponseStream()
+                $Reader = New-Object System.IO.StreamReader($ErrorStream)
+                $script:ErrBody = $Reader.ReadToEnd() | ConvertFrom-Json
+            }
+            catch {
+                $script:ErrBody = $_.Exception.Response.Content
+            }
+            $ErrBody = $script:ErrBody
             if($ErrBody.code){
                 $ErrorMessage += "An exception has been thrown."
                 $ErrorMessage += "--> $($ErrBody.code)"
@@ -88,7 +94,7 @@
     # TODO Find test for retry
     # Retry the request
     $Retry = 0
-    while ($Retry -lt $MaxRetry -and $Result.StatusCode -eq 500) {
+    while ($Retry -lt $MaxRetry -and $Result.StatusCode -ge 500) {
         $Retry++
         # ConnectWise Manage recommended wait time
         $Wait = $([math]::pow( 2, $Retry))
