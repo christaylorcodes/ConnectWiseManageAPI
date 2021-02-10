@@ -28,7 +28,14 @@ New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [
 New-CWMCallbackEntry -level 'board' -objectid 63 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
 ```
 
-Create a new callback.
+Create a new callback for all tickets on service board 63.
+
+### EXAMPLE 1
+```powershell
+New-CWMCallbackEntry -level 'Status' -objectid 72 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
+```
+
+Create a new callback for all tickets in status 63.
 
 ## PARAMETERS
 
@@ -79,7 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -description
-Description of what the callback is for.
+This is used to label the callback's usage.
 
 ```yaml
 Type: String
@@ -94,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -id
-Don't use?
+Don't use. The database record id of the callback, this is automatically assigned.
 
 ```yaml
 Type: Int32
@@ -109,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -inactiveFlag
-Used to deactivate a call back.
+Used to determine if the callback is active and sending requests.
 
 ```yaml
 Type: Boolean
@@ -124,7 +131,7 @@ Accept wildcard characters: False
 ```
 
 ### -level
-The type of object you want to trigger on ticket, contact, opportunity, etc.
+The type of object you want to trigger on ticket, contact, opportunity, etc. [See associated table for all values.](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
 
 ```yaml
 Type: String
@@ -139,7 +146,7 @@ Accept wildcard characters: False
 ```
 
 ### -memberId
-The id of the member you want to trigger on.
+This is a read only value that shows who initially created the Callback.
 
 ```yaml
 Type: Int32
@@ -154,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -objectId
-The id of the object you want to trigger on.
+The ObjectId should be the Id of whatever record (level) you are subscribing to. This should be set to 1 when using a level of Owner. 
 
 ```yaml
 Type: Int32
@@ -169,7 +176,7 @@ Accept wildcard characters: False
 ```
 
 ### -type
-The type of object you want to trigger on ticket, contact, opportunity, etc.
+This is the specific type of record such as Company, Ticket, Contact, etc... [See the associated table for all values.](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
 
 ```yaml
 Type: String
@@ -184,7 +191,7 @@ Accept wildcard characters: False
 ```
 
 ### -url
-The URL to send the callback to.
+This is the URL ConnectWise Manage will send the GET payload to.
 
 ```yaml
 Type: String
@@ -211,4 +218,4 @@ Author: Chris Taylor Date: 6/27/2019
 ## RELATED LINKS
 
 [https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post](https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post)
-
+[https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks)](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
