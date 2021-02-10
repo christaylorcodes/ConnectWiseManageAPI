@@ -19,7 +19,7 @@ New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+ConnectWise Manage callbacks are payloads of information that are similar to webhooks.  When a record is saved within ConnectWise Manage, a summarized payload is sent to a specified location. 
 
 ## EXAMPLES
 
