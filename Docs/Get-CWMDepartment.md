@@ -5,30 +5,30 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CWMScheduleHolidayList
+# Get-CWMDepartment
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns available departments.
 
 ## SYNTAX
 
 ```
-Get-CWMScheduleHolidayList [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+Get-CWMDepartment [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
  [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Lists departments based on given conditions.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CWMDepartment -all
 ```
 
-{{ Add example description here }}
+Lists all available departments.
 
 ## PARAMETERS
 

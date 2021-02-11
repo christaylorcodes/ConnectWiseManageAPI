@@ -86,6 +86,12 @@ This function will list all types associated with a company.
 ### [Get-CWMContact](Docs/Get-CWMContact.md)
 This function will list contacts.
 
+### [Get-CWMDepartment](Get-CWMDepartment.md)
+Return departments.
+
+### [Get-CWMDepartmentLocation](Get-CWMDepartmentLocation.md)
+Return locations for a given department.
+
 ### [Get-CWMDocument](Docs/Get-CWMDocument.md)
 This function will list documents associated with a record.
 

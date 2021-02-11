@@ -19,7 +19,7 @@ New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [
 ```
 
 ## DESCRIPTION
-ConnectWise Manage callbacks are payloads of information that are similar to webhooks.  When a record is saved within ConnectWise Manage, a summarized payload is sent to a specified location. 
+ConnectWise Manage callbacks are payloads of information that are similar to webhooks.  When a record is saved within ConnectWise Manage, a summarized payload is sent to a specified location.
 
 ## EXAMPLES
 
@@ -30,7 +30,7 @@ New-CWMCallbackEntry -level 'board' -objectid 63 -type 'ticket' -url 'http://chr
 
 Create a new callback for all tickets on service board 63.
 
-### EXAMPLE 1
+### EXAMPLE 2
 ```powershell
 New-CWMCallbackEntry -level 'Status' -objectid 72 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
 ```
@@ -161,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -objectId
-The ObjectId should be the Id of whatever record (level) you are subscribing to. This should be set to 1 when using a level of Owner. 
+The ObjectId should be the Id of whatever record (level) you are subscribing to. This should be set to 1 when using a level of Owner.
 
 ```yaml
 Type: Int32

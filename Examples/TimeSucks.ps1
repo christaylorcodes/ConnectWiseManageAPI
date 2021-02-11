@@ -67,7 +67,7 @@ $ScriptURL = 'https://raw.githubusercontent.com/christaylorcodes/ConnectWiseMana
 $Quotes = 'All your time are belong to us!','Time keeps on slipping slipping, into the future.','Time is money.','Time waits for no one.','Lost time is never found again.'
 
 #Exit if already open
-$AlreadyRunning = Get-WmiObject -Class Win32_Process -Filter "name='powershell.exe'" | Where-Object {$_.CommandLine -eq $((Get-WmiObject -Class Win32_Process -Filter "ProcessId='$PID'").CommandLine) -and $_.ProcessId -ne $pid}
+$AlreadyRunning = Get-CimInstance -Class Win32_Process -Filter "name='powershell.exe'" | Where-Object {$_.CommandLine -eq $((Get-CimInstance -Class Win32_Process -Filter "ProcessId='$PID'").CommandLine) -and $_.ProcessId -ne $pid}
 if($null -ne $AlreadyRunning){
     Get-Date | Out-File "$(Split-Path -Parent $MyInvocation.MyCommand.Path)\AlreadyRunning.log"
     exit
@@ -79,7 +79,8 @@ $sLogPath = $ScriptPath -replace '.ps1','.log'
 $ConfigPath = $ScriptPath -replace '.ps1','.xml'
 
 #Dot Source required Function Libraries
-(new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1") | Invoke-Expression
+$Logging = [Scriptblock]::Create((new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1"))
+$Logging.Invoke()
 
 $MinimumVersion = '0.3.5.0'
 if (Get-Module ConnectWiseManageAPI -ListAvailable | Where-Object { $_.version -ge $MinimumVersion}) {}
@@ -269,7 +270,7 @@ try{
 }
 catch [System.Management.Automation.MethodInvocationException] {
     Write-Warning 'Issue with XAML.  Check the syntax for this control...'
-    Write-Host $error[0].Exception.Message -ForegroundColor Red
+    Write-Error $error[0].Exception.Message
     if ($error[0].Exception.Message -like "*button*"){
         Write-Warning 'Ensure your button in the $inputXAML does NOT have a `Click=ButtonClick` property.'
     }

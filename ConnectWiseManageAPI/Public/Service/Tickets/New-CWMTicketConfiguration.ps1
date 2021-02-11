@@ -3,7 +3,6 @@ function New-CWMTicketConfiguration {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
     	[int]$TicketID,
-        [int]$id,
         [string]$deviceIdentifier
     )
 

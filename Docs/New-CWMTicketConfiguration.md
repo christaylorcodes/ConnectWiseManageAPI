@@ -1,33 +1,33 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?a=Service&e=Tickets&o=CREATE#/Tickets/postServiceTickets
+online version:
 schema: 2.0.0
 ---
 
 # New-CWMTicketConfiguration
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Assigns a configuration to a ticket.
 
 ## SYNTAX
 
 ```
-New-CWMTicketConfiguration [[-TicketID] <Int32>] [[-id] <Int32>] [[-deviceIdentifier] <String>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+New-CWMTicketConfiguration [[-TicketID] <Int32>] [[-deviceIdentifier] <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Attaches the given configuration to the given ticket.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-CWMTicketConfiguration -TicketID 123 -deviceIdentifier 333
 ```
 
-{{ Add example description here }}
+Attaches configuration 333 to ticket 123.
 
 ## PARAMETERS
 
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -TicketID
-{{ Fill TicketID Description }}
+Ticket ID of the ticket you want to attach the configuration to.
 
 ```yaml
 Type: Int32
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -deviceIdentifier
-{{ Fill deviceIdentifier Description }}
+The ID of the configuration you want to attach to the ticket.
 
 ```yaml
 Type: String
@@ -92,28 +92,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object
