@@ -2,7 +2,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8aa3633cda3d41d5baa5e9f595b8124f)](https://www.codacy.com/manual/christaylorcodes/ConnectWiseManageAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=christaylorcodes/ConnectWiseManageAPI&amp;utm_campaign=Badge_Grade)
 [![Gallery](https://img.shields.io/powershellgallery/v/ConnectWiseManageAPI?label=PS%20Gallery&logo=powershell&logoColor=white)](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
 
-![ConnectWiseManageLogo](.\Media\Manage-RGB-Horiz-Master.png)
+![ConnectWiseManageLogo](https://raw.githubusercontent.com/christaylorcodes/ConnectWiseManageAPI/master/Media/Manage-RGB-Horiz-Master.png)
 
 > **As of 8/14/2019 ConnectWise requires the use of a [Client ID](https://developer.connectwise.com/ClientID) to interact with the API.**
 
