@@ -79,7 +79,7 @@ $sLogPath = $ScriptPath -replace '.ps1','.log'
 $ConfigPath = $ScriptPath -replace '.ps1','.xml'
 
 # logging module
-Invoke-Expression Invoke-RestMethod "https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1"
+Invoke-RestMethod "https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1" | Invoke-Expression
 
 $MinimumVersion = '0.3.5.0'
 if (Get-Module ConnectWiseManageAPI -ListAvailable | Where-Object { $_.version -ge $MinimumVersion}) {}
