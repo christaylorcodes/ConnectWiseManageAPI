@@ -78,9 +78,8 @@ $ScriptPath = Join-Path $ScriptDir "$($ScriptName).ps1"
 $sLogPath = $ScriptPath -replace '.ps1','.log'
 $ConfigPath = $ScriptPath -replace '.ps1','.xml'
 
-#Dot Source required Function Libraries
-$Logging = [Scriptblock]::Create((new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1"))
-$Logging.Invoke()
+# logging module
+Invoke-Expression Invoke-Expression "https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1"
 
 $MinimumVersion = '0.3.5.0'
 if (Get-Module ConnectWiseManageAPI -ListAvailable | Where-Object { $_.version -ge $MinimumVersion}) {}
