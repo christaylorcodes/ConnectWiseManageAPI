@@ -1,20 +1,20 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/Products/Manage/REST#/Contacts/patchCompanyContactsById
 schema: 2.0.0
 ---
 
-# Update-CWMTicket
+# Update-CWMMember
 
 ## SYNOPSIS
-This will update a ticket.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Update-CWMTicket [-TicketID] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Update-CWMMember [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,27 +22,12 @@ Update-CWMTicket [-TicketID] <Int32> [-Operation] <String> [-Path] <String> [-Va
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-$UpdateParam = @{
-    ID = 1
-    Operation = 'replace'
-    Path = 'name'
-    Value = $NewName 
-} 
-Update-CWMTicket @UpdateParam
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```powershell
-$UpdateParam = @{
-    ID = 1
-    Operation = 'replace'
-    Path = 'subType'
-    Value = ${id = 123} 
-}
-Update-CWMTicket @UpdateParam
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -56,14 +41,13 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Operation
-What you are doing with the value.
-replace, add, remove
+{{ Fill Operation Description }}
 
 ```yaml
 Type: String
@@ -79,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-The value that you want to perform the operation on.
+{{ Fill Path Description }}
 
 ```yaml
 Type: String
@@ -93,23 +77,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TicketID
-The ID of the ticket that you are updating.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Value
-The value of path.
+{{ Fill Value Description }}
 
 ```yaml
 Type: Object
@@ -134,7 +103,22 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -144,12 +128,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor Date: 10/22/2018
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE](https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE)
-

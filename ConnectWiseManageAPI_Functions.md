@@ -224,6 +224,9 @@ This will create a new Manage user.
 ### [New-CWMProductCatalog](Docs/New-CWMProductCatalog.md)
 This function will create a new catalog.
 
+### [New-CWMProjectPhase](Docs/New-CWMProjectPhase.md)
+This function will create a new phase for a project.
+
 ### [New-CWMProjectTeamMember](Docs/New-CWMProjectTeamMember.md)
 This function will create a new ticket.
 
@@ -293,7 +296,10 @@ This will update a company type association.
 ### [Update-CWMContact](Docs/Update-CWMContact.md)
 This will modify a contact by its ID.
 
-### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
+### [Update-CWMMember](Docs/Update-CWMMember.md)
+Used to update a members properties.
+
+### [Update-CWMProductCatalog](Update-CWMProductCatalog.md)
 This will update a catalog item.
 
 ### [Update-CWMProjectPhase](Docs/Update-CWMProjectPhase.md)
