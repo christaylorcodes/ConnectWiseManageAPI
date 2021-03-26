@@ -1,3 +1,4 @@
+$ErrorActionPreference = 'Stop'
 $ModuleName = 'ConnectWiseManageAPI'
 $CWMServer = 'https://api-staging.connectwisedev.com/'
 $Verbose = @{}
@@ -5,10 +6,17 @@ if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master") {
     $Verbose.add("Verbose",$True)
 }
 
-$PSVersion = $PSVersionTable.PSVersion.Major
-Import-Module $PSScriptRoot\..\ConnectWiseManageAPI\$($ModuleName).psm1 -Force
+$CWMConnectionInfo = @{
+    Server = $CWMServer
+    Company = $env:CWMCompany
+    pubkey = $env:CWMAPIMemberPub
+    privatekey = $env:CWMAPIMemberPriv
+    clientid = $env:CWMClientID
+}
 
-#Integration test example
+$PSVersion = $PSVersionTable.PSVersion.Major
+Import-Module $PSScriptRoot\..\$($ModuleName)\$($ModuleName).psm1 -Force
+
 Describe "Connect-CWM  PS$PSVersion Integrations tests" {
 
     Context 'Strict mode' {
@@ -16,14 +24,6 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
         Set-StrictMode -Version latest
         It 'Authentication: API Member Only' {
             try {
-                $CWMConnectionInfo = @{
-                    Server = $CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMAPIMemberPub
-                    privatekey = $env:CWMAPIMemberPriv
-                    clientid = $env:CWMClientID
-                }
-
                 $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
             }
             catch {
@@ -85,6 +85,8 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
     }
 }
 
+Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+
 Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
     Context 'Strict mode' {
@@ -93,15 +95,6 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
         It 'returns results' {
             try {
-                $CWMConnectionInfo = @{
-                    Server = $CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMAPIMemberPub
-                    privatekey = $env:CWMAPIMemberPriv
-                    clientid = $env:CWMClientID
-                }
-
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Tickets = Get-CWMTicket -ErrorAction Stop
                 $Tickets.count | Should -Be 25
                 $Tickets[0].id | Should -BeGreaterThan 0
@@ -112,15 +105,6 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
         }
         It 'accepts the -all switch' {
             try {
-                $CWMConnectionInfo = @{
-                    Server = $CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMAPIMemberPub
-                    privatekey = $env:CWMAPIMemberPriv
-                    clientid = $env:CWMClientID
-                }
-
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Tickets = Get-CWMTicket -all -ErrorAction Stop
                 $Tickets.count | Should -BeGreaterThan 25
             }
@@ -131,15 +115,6 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
         It 'accepts a conditions' {
             try {
-                $CWMConnectionInfo = @{
-                    Server = $CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMAPIMemberPub
-                    privatekey = $env:CWMAPIMemberPriv
-                    clientid = $env:CWMClientID
-                }
-
-                Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
                 $Conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
                 foreach($Condition in $Conditions){
                     $Tickets = Get-CWMTicket -Condition $Condition -ErrorAction Stop
@@ -158,7 +133,7 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
                     Assert-MockCalled Invoke-CWMSearchMaster 1
                 }
                 Mock Invoke-CWMGetMaster { return }
-                Get-CWMTicket -TicketID 44 -ErrorAction Stop
+                Get-CWMTicket -TicketID 42 -ErrorAction Stop
                 It 'calls Invoke-CWMGetMaster when given an id' {
                     Assert-MockCalled Invoke-CWMGetMaster 1
                 }
