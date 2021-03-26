@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $ModuleName = 'ConnectWiseManageAPI'
-$CWMServer = 'https://api-staging.connectwisedev.com/'
+
 $Verbose = @{}
 if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master") {
     $Verbose.add("Verbose",$True)
@@ -17,7 +17,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
         It 'Authentication: API Member Only' {
             try {
                 $CWMConnectionInfo = @{
-                    Server = $CWMServer
+                    Server = $env:CWMServer
                     Company = $env:CWMCompany
                     pubkey = $env:CWMAPIMemberPub
                     privatekey = $env:CWMAPIMemberPriv
@@ -33,7 +33,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
         It 'Authentication: Member Impersonation' {
             try {
                 $CWMConnectionInfo = @{
-                    Server = $CWMServer
+                    Server = $env:CWMServer
                     Company = $env:CWMCompany
                     pubkey = $env:CWMAPIMemberPub
                     privatekey = $env:CWMAPIMemberPriv
@@ -51,7 +51,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
         It 'Authentication: My Account' {
             try {
                 $CWMConnectionInfo = @{
-                    Server = $CWMServer
+                    Server = $env:CWMServer
                     Company = $env:CWMCompany
                     pubkey = $env:CWMPub
                     privatekey = $env:CWMPriv
@@ -69,7 +69,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                 $Password = ConvertTo-SecureString -AsPlainText -Force $env:CWMUserPassword
                 $Credentials = New-Object PSCredential $env:CWMUserName, $Password
                 $CWMConnectionInfo = @{
-                    Server = $CWMServer
+                    Server = $env:CWMServer
                     Company = $env:CWMCompany
                     Credentials = $Credentials
                     clientid = $env:CWMClientID
@@ -85,7 +85,7 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
 }
 
 $CWMConnectionInfo = @{
-    Server = $CWMServer
+    Server = $env:CWMServer
     Company = $env:CWMCompany
     pubkey = $env:CWMAPIMemberPub
     privatekey = $env:CWMAPIMemberPriv
