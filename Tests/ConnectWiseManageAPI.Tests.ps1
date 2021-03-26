@@ -119,7 +119,7 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
             }
         }
 
-        It 'accepts a conditions' {
+        It 'accepts a condition' {
             try {
                 $Conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
                 foreach($Condition in $Conditions){
@@ -131,15 +131,24 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
                 $_ | Should -Be $null
             }
         }
-        Context "Test calls to internal functions:" {
-            InModuleScope $ModuleName {
-                Mock Invoke-CWMSearchMaster { return }
-                $Tickets = Get-CWMTicket -ErrorAction Stop
+        InModuleScope $ModuleName {
+            Context "Calls to internal search function:" {
+                BeforeEach{
+                    Mock Invoke-CWMSearchMaster { return $true }
+                    $null = Get-CWMTicket -ErrorAction SilentlyContinue
+                }
                 It 'calls Invoke-CWMSearchMaster' {
                     Assert-MockCalled Invoke-CWMSearchMaster 1
                 }
-                Mock Invoke-CWMGetMaster { return }
-                Get-CWMTicket -TicketID $Tickets[0].id -ErrorAction Stop
+            }
+        }
+        InModuleScope $ModuleName {
+            Context "Calls to internal get function:" {
+                BeforeEach{
+                    Mock Invoke-CWMGetMaster { return }
+                    $null = Get-CWMTicket -TicketID 1 -ErrorAction SilentlyContinue
+                }
+
                 It 'calls Invoke-CWMGetMaster when given an id' {
                     Assert-MockCalled Invoke-CWMGetMaster 1
                 }
