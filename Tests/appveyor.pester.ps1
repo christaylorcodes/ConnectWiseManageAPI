@@ -29,10 +29,11 @@ if($Test){
 
     # Invoke-Pester @Verbose -Path "$ProjectRoot\Tests" -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -PassThru |
     #     Export-Clixml -Path "$ProjectRoot\PesterResults_PS$PSVersion`_$Timestamp.xml"
-    Get-ChildItem "$ProjectRoot\Tests" -Filter '*.Tests.ps1' | ForEach{
-        Invoke-Pester -Script $_.FullName -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -PassThru |
+    $config = [PesterConfiguration]::Default
+    $config.TestResult.OutputPath.Value = $TestFile
+    $config.run.PassThru.Value = $true
+    Invoke-Pester -Configuration $Config |
         Export-Clixml -Path "$ProjectRoot\PesterResults_PS$PSVersion`_$Timestamp.xml"
-    }
 
     If($env:APPVEYOR_JOB_ID){
         (New-Object 'System.Net.WebClient').UploadFile( $Address, "$ProjectRoot\$TestFile" )
