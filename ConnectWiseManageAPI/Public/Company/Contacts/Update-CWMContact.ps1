@@ -3,6 +3,7 @@ function Update-CWMContact {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
+        [Alias('contactId')]
         [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
@@ -13,6 +14,6 @@ function Update-CWMContact {
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/contacts/$ID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/company/contacts/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

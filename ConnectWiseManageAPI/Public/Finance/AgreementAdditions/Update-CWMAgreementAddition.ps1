@@ -3,9 +3,11 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$AgreementID,
+        [Alias('agreementId')]
+        [int]$parentId,
         [Parameter(Mandatory=$true)]
-        [int]$AdditionID,
+        [Alias('additionId')]
+        [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
         [string]$Operation,
@@ -15,6 +17,6 @@
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/finance/agreements/$AgreementID/additions/$AdditionID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/finance/agreements/$($parentId)/additions/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

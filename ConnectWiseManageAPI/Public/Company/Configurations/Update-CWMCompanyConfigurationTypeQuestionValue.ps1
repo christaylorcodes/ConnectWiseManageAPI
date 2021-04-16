@@ -3,11 +3,14 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ConfigurationTypeId,
+        [Alias('typeId')]
+        [int]$grandparentId,
         [Parameter(Mandatory=$true)]
-        [int]$ID,
+        [Alias('questionId')]
+        [int]$parentId,
         [Parameter(Mandatory=$true)]
-        [int]$QuestionId,
+        [Alias('valueId')]
+        [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
         [string]$Operation,
@@ -17,6 +20,6 @@
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/configurations/types/$configurationTypeId/questions/$QuestionId/values/$ID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/company/configurations/types/$($grandparentId)/questions/$($parentId)/values/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -3,7 +3,8 @@ function Update-CWMCompanyConfiguration {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ID,
+        [Alias('configurationId')]
+        [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
         [string]$Operation,
@@ -13,6 +14,6 @@ function Update-CWMCompanyConfiguration {
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/configurations/$ID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/company/configurations/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

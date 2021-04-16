@@ -13,6 +13,6 @@ function Update-CWMTemplate {
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/<URI>/$ID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '<Endpoint>'
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -2,7 +2,7 @@
     [CmdletBinding(SupportsShouldProcess)]
     param (
         $Arguments,
-        [string]$URI
+        [string]$Endpoint
     )
 
     Write-Verbose $($Arguments.Value | Out-String)
@@ -16,6 +16,7 @@
     $Body = ConvertTo-Json $Body -Depth 100
     Write-Verbose $Body
 
+    $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
         Uri = $URI
         Method = 'Patch'

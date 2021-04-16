@@ -3,6 +3,7 @@ function Update-CWMMember {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
+        [Alias('memberId')]
         [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
@@ -13,6 +14,6 @@ function Update-CWMMember {
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0//system/members/$id"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/system/members/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

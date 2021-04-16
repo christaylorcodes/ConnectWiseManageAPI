@@ -3,7 +3,8 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ID,
+        [Alias('callbackId')]
+        [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
         [string]$Operation,
@@ -13,6 +14,6 @@
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/callbacks/$ID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/system/callbacks/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

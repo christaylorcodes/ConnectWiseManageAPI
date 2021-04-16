@@ -3,7 +3,8 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$CompanyID,
+        [Alias('companyId')]
+        [int]$id,
         [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
         [string]$Operation,
@@ -13,6 +14,6 @@
         $Value
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/companies/$CompanyID"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/company/companies/$($id)"
+    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
