@@ -2,7 +2,9 @@ function Get-CWMBoardType {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ServiceBoardID,
+        [Alias('boardId')]
+        [int]$parentId,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         $orderBy,
@@ -13,6 +15,9 @@ function Get-CWMBoardType {
         [string[]]$fields,
         [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/boards/$ServiceBoardID/types"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = "/service/boards/$parentId/types"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

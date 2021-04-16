@@ -13,8 +13,8 @@ $CWMConnectionInfo = @{
 # ^This information is sensitive, take precautions to secure it.^
 
 # Install/Update/Load the module
-if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue) { Update-Module 'ConnectWiseManageAPI' -Verbose }
-else { Install-Module 'ConnectWiseManageAPI' -Verbose }
+if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue){ Update-Module 'ConnectWiseManageAPI' -Verbose }
+else{ Install-Module 'ConnectWiseManageAPI' -Verbose }
 Import-Module 'ConnectWiseManageAPI'
 
 # Connect to your Manage server

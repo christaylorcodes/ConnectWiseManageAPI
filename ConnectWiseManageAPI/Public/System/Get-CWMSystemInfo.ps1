@@ -2,8 +2,7 @@
     [CmdletBinding()]
     param()
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/info"
-    #$PsBoundParameters.Unauthenticated = $true
+    $Endpoint = '/system/info'
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

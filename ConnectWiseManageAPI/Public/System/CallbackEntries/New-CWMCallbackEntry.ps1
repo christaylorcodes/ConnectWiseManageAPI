@@ -14,7 +14,10 @@
         [Parameter(Mandatory=$true)]
         [string]$level,
         [int]$memberId,
+        [string]$payloadVersion,
         [boolean]$inactiveFlag,
+        [boolean]$isSoapCallbackFlag,
+        [boolean]$isSelfSuppressedFlag,        
         [hashtable]$_info
     )
 

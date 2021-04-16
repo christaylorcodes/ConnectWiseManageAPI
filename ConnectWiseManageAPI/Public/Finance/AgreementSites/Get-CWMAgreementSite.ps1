@@ -1,6 +1,10 @@
 ﻿function Get-CWMAgreementSite {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory=$true)]
+        [Alias('AgreementID')]
+        [int]$parentId,
+        [id]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -9,10 +13,11 @@
         [int]$page,
         [int]$pageSize,
         [string[]]$fields,
-        [switch]$all,
-        [Parameter(Mandatory=$true)]
-        [int]$AgreementID
+        [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/finance/agreements/$($AgreementID)/sites"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = "/finance/agreements/$($parentId)/sites"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

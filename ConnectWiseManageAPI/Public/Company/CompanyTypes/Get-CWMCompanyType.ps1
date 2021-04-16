@@ -1,6 +1,7 @@
 ﻿function Get-CWMCompanyType {
     [CmdletBinding()]
     param(
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -10,8 +11,10 @@
         [int]$pageSize,
         [string[]]$fields,
         [switch]$all
-        )
+    )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/companies/types"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '/company/companies/types'
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

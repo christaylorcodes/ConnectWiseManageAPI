@@ -2,7 +2,9 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ServiceBoardID,
+        [Alias('serviceBoardId')]
+        [int]$parentId,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -14,7 +16,8 @@
         [switch]$all
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/boards/$ServiceBoardID/statuses"
+    $Endpoint = "/service/boards/$parentId/statuses"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

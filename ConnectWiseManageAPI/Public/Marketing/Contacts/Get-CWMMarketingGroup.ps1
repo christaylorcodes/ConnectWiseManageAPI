@@ -1,6 +1,10 @@
-﻿function Get-CWMCompanyConfiguration {
+﻿function Get-CWMMarketingGroupContact {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory=$true)]
+        [Alias('groupId')]
+        [int]$parentId,
+        [Alias('contactId')]
         [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -13,7 +17,7 @@
         [switch]$all
     )
 
-    $Endpoint = '/company/configurations'
+    $Endpoint = "/marketing/groups/$($parentId)/contacts"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

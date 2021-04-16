@@ -1,6 +1,7 @@
 ﻿function Get-CWMCompanyNote {
     [CmdletBinding()]
     param(
+        [int]$id,
         [Parameter(Mandatory=$true)]
         [int]$CompanyID,
         [string]$Condition,
@@ -13,6 +14,9 @@
         [string[]]$fields,
         [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/companies/$($CompanyID)/notes"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = "/company/companies/$($CompanyID)/notes"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

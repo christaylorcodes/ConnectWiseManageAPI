@@ -1,8 +1,19 @@
 ﻿function Get-CWMMySecurity {
     [CmdletBinding()]
-    param()
+    param(
+        [string]$condition,
+        [ValidatePattern('\S* (desc|asc)')]
+        [string]$orderBy,
+        [string]$childConditions,
+        [string]$customFieldConditions,
+        [int]$page,
+        [int]$pageSize,
+        [string[]]$fields,
+        [switch]$all
+    )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/mysecurity"
+    $Endpoint = '/system/mysecurity'
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

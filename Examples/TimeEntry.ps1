@@ -13,8 +13,8 @@ $CWMConnectionInfo = @{
 # ^This information is sensitive, take precautions to secure it.^
 
 # Install/Update/Load the module
-if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue) { Update-Module 'ConnectWiseManageAPI' -Verbose }
-else { Install-Module 'ConnectWiseManageAPI' -Verbose }
+if(Get-InstalledModule 'ConnectWiseManageAPI' -ErrorAction SilentlyContinue){ Update-Module 'ConnectWiseManageAPI' -Verbose }
+else{ Install-Module 'ConnectWiseManageAPI' -Verbose }
 Import-Module 'ConnectWiseManageAPI'
 
 # Connect to your Manage server
@@ -30,11 +30,10 @@ $TimeEntryDetail = @{
     chargeToType = 'ServiceTicket'
     member = @{id=<IDNumber>}
     notes = 'TimeEntry Test'
-    timeStart = '2020-08-30T18:03:10Z'
-    timeEnd = '2020-08-30T19:03:34Z'
+    timeStart = (Get-Date).AddMinutes(-15) | ConvertTo-CWMTime -Raw
+    timeEnd = Get-Date | ConvertTo-CWMTime -Raw
     hoursDeduct = 0.00
 }
-
 New-CWMTimeEntry @TimeEntryDetail
 
 # To clear your connection information from memory you can terminate the session or issue the disconnect command.

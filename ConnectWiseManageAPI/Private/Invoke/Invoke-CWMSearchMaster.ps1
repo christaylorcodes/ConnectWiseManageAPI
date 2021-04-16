@@ -2,7 +2,7 @@
     [CmdletBinding()]
     param (
         $Arguments,
-        [string]$URI
+        [string]$Endpoint
     )
 
     $Body = @{}
@@ -14,23 +14,25 @@
 
     if($Arguments.childConditions) {
         $childConditions = [System.Web.HttpUtility]::UrlEncode($Arguments.childConditions)
-        $URI += "&childConditions=$childConditions"
+        $URLParamaters += "&childConditions=$childConditions"
     }
 
     if($Arguments.customFieldConditions) {
         $customFieldConditions = [System.Web.HttpUtility]::UrlEncode($Arguments.customFieldConditions)
-        $URI += "&customFieldConditions=$customFieldConditions"
+        $URLParamaters += "&customFieldConditions=$customFieldConditions"
     }
 
     if($Arguments.Fields) {
         $fields = [System.Web.HttpUtility]::UrlEncode($($Arguments.Fields -join ','))
-        $URI += "&fields=$fields"
+        $URLParamaters += "&fields=$fields"
     }
 
     if($Arguments.orderBy) {
         $orderBy = [System.Web.HttpUtility]::UrlEncode($Arguments.orderBy)
-        $URI += "&orderBy=$orderBy"
+        $URLParamaters += "&orderBy=$orderBy"
     }
+
+    $URI = New-CWMUrl -Endpoint $Endpoint -URLParamaters $URLParamaters
 
     $WebRequestArguments = @{
         Uri = $URI

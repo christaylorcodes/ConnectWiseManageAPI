@@ -1,7 +1,9 @@
 function Get-CWMScheduleHoliday {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory=$true)]
         [Alias('holidayListId')]
+        [int]$parentId,
         [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -14,6 +16,8 @@ function Get-CWMScheduleHoliday {
         [switch]$all
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/schedule/holidaylists/$id/holidays"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/schedule/holidaylists/$(parentId)/holidays"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

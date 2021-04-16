@@ -6,21 +6,23 @@
         $Type,
         [Parameter(Mandatory=$true)]
         [string]$ID,
-        $deviceIdentifier,
+        [string]$deviceIdentifier,
+        [string]$condition,
+        [ValidatePattern('\S* (desc|asc)')]
+        [string]$orderBy,
         [string]$childConditions,
+        [string]$customFieldConditions,
         [int]$page,
-        [int]$pageSize
+        [int]$pageSize,
+        [string[]]$fields,
+        [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/audittrail"
-    if($Type) {
-        $URI += "?type=$type"
-    }
-    if($ID) {
-        $URI += "&id=$ID"
-    }
-    if($deviceIdentifier) {
-        $URI += "&deviceIdentifier=$deviceIdentifier"
-    }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '/company/companies'
+
+    if($Type){ $Endpoint += "&type=$type" }
+    if($ID){ $Endpoint += "&id=$ID" }
+    if($deviceIdentifier){ $Endpoint += "&deviceIdentifier=$deviceIdentifier" }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -2,7 +2,9 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ProjectID,
+        [Alias('ProjectID')]
+        [int]$parentId,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -14,6 +16,8 @@
         [switch]$all
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/project/projects/$ProjectID/teamMembers"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/project/projects/$ProjectID/teamMembers"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

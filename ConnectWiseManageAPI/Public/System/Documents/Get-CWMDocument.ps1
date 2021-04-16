@@ -1,41 +1,20 @@
 ﻿function Get-CWMDocument {
     [CmdletBinding()]
     param(
-        [ValidateSet(
-            'Agreement',
-            'Company',
-            'Configuration',
-            'Contact',
-            'Expense',
-            'HTMLTemplate',
-            'Opportunity',
-            'Project',
-            'PurchaseOrder',
-            'Rma',
-            'SalesOrder',
-            'Ticket',
-            'ServiceTemplate',
-            'ToolbarIcon',
-            'Meeting',
-            'MeetingNote',
-            'ProductSetup',
-            'ProjectTemplateTicket',
-            'WordTemplate',
-            'Member',
-            'PhaseStatus',
-            'ProjectStatus',
-            'TicketStatus'
-        )]
-        $RecordType,
-        [int]$RecordID,
+        [int]$id,
+        [string]$condition,
+        [ValidatePattern('\S* (desc|asc)')]
+        [string]$orderBy,
+        [string]$childConditions,
+        [string]$customFieldConditions,
         [int]$page,
         [int]$pageSize,
-        [int]$pageID
+        [string[]]$fields,
+        [switch]$all
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/documents"
-    if ($RecordType) {$URI += "&recordType=$RecordType"}
-    if ($RecordID) {$URI += "&recordId=$RecordID"}
+    $Endpoint = '/system/documents'
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

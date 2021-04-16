@@ -1,6 +1,7 @@
 function Get-CWMSource {
     [CmdletBinding()]
     param(
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         $orderBy,
@@ -11,6 +12,9 @@ function Get-CWMSource {
         [string[]]$fields,
         [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/sources"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = '/service/sources'
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

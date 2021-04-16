@@ -1,8 +1,10 @@
 ﻿function Get-CWMCallbackEntry {
     [CmdletBinding()]
     param(
-        [string]$Condition,
-        $orderBy,
+        [int]$id,
+        [string]$condition,
+        [ValidatePattern('\S* (desc|asc)')]
+        [string]$orderBy,
         [string]$childConditions,
         [string]$customFieldConditions,
         [int]$page,
@@ -10,6 +12,9 @@
         [string[]]$fields,
         [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/callbacks"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = '/system/callbacks'
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

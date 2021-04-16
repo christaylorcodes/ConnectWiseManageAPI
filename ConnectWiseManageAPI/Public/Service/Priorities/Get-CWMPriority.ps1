@@ -1,6 +1,7 @@
 function Get-CWMPriority {
     [CmdletBinding()]
     param(
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         $orderBy,
@@ -11,6 +12,9 @@ function Get-CWMPriority {
         [string[]]$fields,
         [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/priorities"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = '/service/priorities'
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

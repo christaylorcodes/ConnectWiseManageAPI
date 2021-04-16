@@ -1,6 +1,8 @@
 function Get-CWMDepartmentLocation {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory=$true)]
+        [int]$parentId,
         [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -12,6 +14,9 @@ function Get-CWMDepartmentLocation {
         [string[]]$fields,
         [switch]$all
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/departments/$id/locations"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = "/system/departments/$($parentId)/locations"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

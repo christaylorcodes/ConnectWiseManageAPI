@@ -1,7 +1,7 @@
 ﻿function Get-CWMTicket {
     [CmdletBinding()]
     param(
-        [Alias('TicketID')]
+        [Alias('ticketId')]
         [int]$id,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -14,11 +14,13 @@
         [switch]$all
     )
     if ($id) {
-        $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$($id)"
-        return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+        $Endpoint = '/service/tickets'
+        if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+        return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
     else {
-        $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/search"
-        return Invoke-CWMSearchMaster -Arguments $PsBoundParameters -URI $URI
+        $Endpoint = '/service/tickets/search'
+        return Invoke-CWMSearchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
 }

@@ -2,6 +2,9 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
+        [Alias('groupId')]
+        [int]$parentId,
+        [Alias('companyId')]
         [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -14,7 +17,8 @@
         [switch]$all
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/marketing/groups/$($id)/companies"
+    $Endpoint = "/marketing/groups/$($parentId)/companies"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

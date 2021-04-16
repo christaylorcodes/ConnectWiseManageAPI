@@ -2,7 +2,9 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ProductID,
+        [Alias('ProductID')]
+        [int]$parentId,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -12,12 +14,10 @@
         [int]$pageSize,
         [string[]]$fields,
         [switch]$all
-        )
-    if(!$script:CWMServerConnection){
-        Write-Error "Not connected to a Manage server. Run Connect-CWM first."
-        break
-    }
+    )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/procurement/products/$($ProductID)/components"
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/procurement/products/$($parentId)/components"
+    if($id){ $Endpoint = Join-Url $Endpoint $id }
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -18,7 +18,8 @@
         [Parameter(ParameterSetName = 'Impersonation', Mandatory = $True)]
         [string]$MemberID,
         [switch]$Force,
-        [string]$Version
+        [string]$Version,
+        [string]$BasePath = 'apis/3.0'
     )
 
     if ((($script:CWMServerConnection -and !$script:CWMServerConnection.expiration) `
@@ -29,6 +30,8 @@
 
     # Validate server
     $Server = ($Server -replace("http.*:\/\/",'') -split '/')[0]
+    try{ $CompanyInfo = Invoke-RestMethod "https://$($Server)/login/companyinfo/$($Company)" -ErrorAction Stop }
+    catch{ Write-Error $_ -ErrorAction Stop }
 
     $Headers = @{
         ClientID = $ClientID
@@ -147,6 +150,8 @@
         Expiration = $expiration
         ConnectionMethod = $ConnectionMethod
         Version = $Version
+        Codebase = $CompanyInfo.Codebase
+        BasePath = $BasePath
     }
 
     # Set version header info
