@@ -15,19 +15,19 @@ This command is used to authenticate with the Manage server.
 ### Impersonation
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
- -MemberID <String> [-Force] [-Version <String>] [<CommonParameters>]
+ -MemberID <String> [-Force] [-Version <String>] [-BasePath <String>] [<CommonParameters>]
 ```
 
 ### API Key
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
- [-Force] [-Version <String>] [<CommonParameters>]
+ [-Force] [-Version <String>] [-BasePath <String>] [<CommonParameters>]
 ```
 
 ### Cookie
 ```
 Connect-CWM -Server <String> -Company <String> -ClientID <String> -Credentials <PSCredential> [-Force]
- [-Version <String>] [<CommonParameters>]
+ [-Version <String>] [-BasePath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -230,6 +230,21 @@ Accept wildcard characters: False
 ### -Version
 Used to specify a version.
 If not used it will use the servers current version.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BasePath
+{{ Fill BasePath Description }}
 
 ```yaml
 Type: String

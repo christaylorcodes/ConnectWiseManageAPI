@@ -13,7 +13,7 @@ This function will list Callback entries based on conditions.
 ## SYNTAX
 
 ```
-Get-CWMCallbackEntry [[-Condition] <String>] [[-orderBy] <Object>] [[-childConditions] <String>]
+Get-CWMCallbackEntry [-id <Int32>] [[-condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
  [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-fields <String[]>] [-all]
  [<CommonParameters>]
 ```
@@ -31,22 +31,6 @@ Get-CWMCallbackEntry -Condition "url = 'http://christaylor.codes'" -all
 Will return all callbacks that match the condition
 
 ## PARAMETERS
-
-### -Condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -all
 Return all results
@@ -97,7 +81,7 @@ Accept wildcard characters: False
 Choose which field to sort the results by
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -143,6 +127,37 @@ Allows you to return a partial response with just the fields listed.
 
 ```yaml
 Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+This is your search condition to return the results you desire.
+Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 

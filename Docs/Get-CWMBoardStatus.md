@@ -13,7 +13,7 @@ This function will list the statuses of a service board based on conditions.
 ## SYNTAX
 
 ```
-Get-CWMBoardStatus [-ServiceBoardID] <Int32> [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMBoardStatus -parentId <Int32> [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [-fields <String[]>] [-all] [<CommonParameters>]
 ```
@@ -44,21 +44,6 @@ Aliases:
 Required: False
 Position: 1
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ServiceBoardID
-The ID of the service board you want to retrieve statuses for.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -162,6 +147,36 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: serviceBoardId
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

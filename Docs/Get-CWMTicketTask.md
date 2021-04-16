@@ -1,21 +1,21 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?#/Priorities/getServicePriorities
+online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=GET
 schema: 2.0.0
 ---
 
-# Get-CWMPriority
+# Get-CWMTicketTask
 
 ## SYNOPSIS
-This function will list service priorities on conditions.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Get-CWMPriority [-id <Int32>] [[-Condition] <String>] [[-orderBy] <Object>] [[-childconditions] <String>]
- [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
- [<CommonParameters>]
+Get-CWMTicketTask [-parentId] <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,37 +23,20 @@ Get-CWMPriority [-id <Int32>] [[-Condition] <String>] [[-orderBy] <Object>] [[-c
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CWMPriority -Condition 'name like "*Emergency*"'
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-Will return all priorities that include the word "Emergency", such as "Priority 1 - Emergency"
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Condition
-This is your search condition to return the results you desire.
-Example:
-(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"
+{{ Fill Condition Description }}
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by
-
-```yaml
-Type: Object
 Parameter Sets: (All)
 Aliases:
 
@@ -64,23 +47,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childconditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -all
+{{ Fill all Description }}
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customfieldconditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+### -childConditions
+{{ Fill childConditions Description }}
 
 ```yaml
 Type: String
@@ -94,32 +77,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-Used in pagination to cycle through results
+### -customFieldConditions
+{{ Fill customFieldConditions Description }}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 5
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-Number of results returned per page (Defaults to 25)
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -133,23 +101,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 8
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -all
-Return all results
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -163,7 +116,67 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+{{ Fill orderBy Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+{{ Fill page Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+{{ Fill pageSize Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -174,13 +187,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Michael Clark (@ClarkMichaelA)
-Date: 03/09/2020
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Products/Manage/REST?#/Priorities/getServicePriorities](https://developer.connectwise.com/Products/Manage/REST?#/Priorities/getServicePriorities)
-

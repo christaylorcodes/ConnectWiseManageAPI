@@ -79,8 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -PhaseID
-The ID of the phase that you are updating.
-Get-CWProjectPhases
+The ID of the phase that you are updating. Get-CWProjectPhases
 
 ```yaml
 Type: Object
@@ -95,8 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectID
-The ID of the project that you are updating.
-List-CWProjects
+The ID of the project that you are updating. List-CWProjects
 
 ```yaml
 Type: Object

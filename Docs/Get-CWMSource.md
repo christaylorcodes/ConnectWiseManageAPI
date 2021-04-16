@@ -13,7 +13,7 @@ This function will list service sources on conditions.
 ## SYNTAX
 
 ```
-Get-CWMSource [[-Condition] <String>] [[-orderBy] <Object>] [[-childconditions] <String>]
+Get-CWMSource [-id <Int32>] [[-Condition] <String>] [[-orderBy] <Object>] [[-childconditions] <String>]
  [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
  [<CommonParameters>]
 ```
@@ -150,6 +150,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

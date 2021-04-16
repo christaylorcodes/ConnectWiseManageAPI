@@ -13,8 +13,9 @@ This function will list documents associated with a record.
 ## SYNTAX
 
 ```
-Get-CWMDocument [[-RecordType] <Object>] [[-RecordID] <Int32>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-pageID] <Int32>] [<CommonParameters>]
+Get-CWMDocument [-id <Int32>] [-condition <String>] [-orderBy <String>] [-childConditions <String>]
+ [-customFieldConditions <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-fields <String[]>] [-all]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,38 +32,6 @@ Will return documents associated with a the ticket 1936414
 
 ## PARAMETERS
 
-### -RecordID
-The ID of a RecordType specified
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -RecordType
-The type of document you are looking for.
-Agreement, Company, Configuration, Contact, Expense, HTMLTemplate, Opportunity, Project, PurchaseOrder, Rma, SalesOrder, Ticket, ServiceTemplate, ToolbarIcon, Meeting, MeetingNote, ProductSetup, ProjectTemplateTicket, WordTemplate, Member, PhaseStatus, ProjectStatus, TicketStatus
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-Accepted values: Agreement, Company, Configuration, Contact, Expense, HTMLTemplate, Opportunity, Project, PurchaseOrder, Rma, SalesOrder, Ticket, ServiceTemplate, ToolbarIcon, Meeting, MeetingNote, ProductSetup, ProjectTemplateTicket, WordTemplate, Member, PhaseStatus, ProjectStatus, TicketStatus
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -page
 Used in pagination to cycle through results
 
@@ -73,21 +42,6 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageID
-Used in pagination to request a page by id
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -104,6 +58,111 @@ Aliases:
 Required: False
 Position: 3
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+{{ Fill all Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+{{ Fill childConditions Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+{{ Fill condition Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+{{ Fill customFieldConditions Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+{{ Fill fields Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+{{ Fill orderBy Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

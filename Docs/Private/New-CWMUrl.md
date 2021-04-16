@@ -5,34 +5,36 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CWMSearchMaster
+# New-CWMUrl
 
 ## SYNOPSIS
-This will be basis of all search calls to the ConnectWise Manage API.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Invoke-CWMSearchMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [<CommonParameters>]
+New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all search requests are handled correctly.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Invoke-CWMSearchMaster -Arguments $Arguments -URI $URI
+PS C:\> {{ Add example code here }}
 ```
+
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -Arguments
-A hash table of parameters
+### -Endpoint
+{{ Fill Endpoint Description }}
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -43,8 +45,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Endpoint
-{{ Fill Endpoint Description }}
+### -URLParameters
+{{ Fill URLParameters Description }}
 
 ```yaml
 Type: String
@@ -63,13 +65,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor
-Date: 10/10/2018
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
-

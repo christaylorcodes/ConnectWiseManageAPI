@@ -13,7 +13,7 @@ Returns available departments.
 ## SYNTAX
 
 ```
-Get-CWMDepartment [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+Get-CWMDepartment [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
  [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
  [<CommonParameters>]
 ```
@@ -147,6 +147,21 @@ Aliases:
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -13,7 +13,7 @@ This function will list the teams of a service board based on conditions.
 ## SYNTAX
 
 ```
-Get-CWMBoardTeam [-ServiceBoardID] <Int32> [[-Condition] <String>] [[-orderBy] <Object>]
+Get-CWMBoardTeam -parentId <Int32> [-id <Int32>] [[-Condition] <String>] [[-orderBy] <Object>]
  [[-childconditions] <String>] [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
@@ -31,21 +31,6 @@ Get-CWMBoardTeam -ServiceBoardID 123 -Condition 'name like "Windows*"'
 Will return all teams on the service board that have a name that begins with the word "Windows", such as "Windows Server Team"
 
 ## PARAMETERS
-
-### -ServiceBoardID
-The ID of the service board you want to retrieve teams for.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Condition
 This is your search condition to return the results you desire.
@@ -165,6 +150,36 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: boardId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

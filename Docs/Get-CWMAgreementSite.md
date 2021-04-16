@@ -13,9 +13,9 @@ This function will list Agreement Sites based on conditions.
 ## SYNTAX
 
 ```
-Get-CWMAgreementSite [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
- [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-fields <String[]>] [-all]
- [-AgreementID] <Int32> [<CommonParameters>]
+Get-CWMAgreementSite -parentId <Int32> [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +31,6 @@ Get-CWMAgreementSite -AgreementID 123
 Will return all sites for the agreement.
 
 ## PARAMETERS
-
-### -AgreementID
-The ID of the agreement you want to get the sites of.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 6
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Condition
 This is your search condition to return the results you desire.
@@ -162,6 +147,36 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: AgreementID
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

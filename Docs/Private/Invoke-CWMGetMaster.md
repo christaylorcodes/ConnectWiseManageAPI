@@ -13,7 +13,7 @@ This will be basis of all get calls to the ConnectWise Manage API.
 ## SYNTAX
 
 ```
-Invoke-CWMGetMaster [[-Arguments] <Object>] [[-URI] <String>] [<CommonParameters>]
+Invoke-CWMGetMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,8 +43,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URI
-The URI of the GET endpoint
+### -Endpoint
+{{ Fill Endpoint Description }}
 
 ```yaml
 Type: String

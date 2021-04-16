@@ -1,4 +1,5 @@
 function New-CWMUrl {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Justification = 'No creation impact.')]
     param(
         [string]$Endpoint,
         [string]$URLParameters

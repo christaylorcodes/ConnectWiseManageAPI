@@ -1,59 +1,45 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE
 schema: 2.0.0
 ---
 
-# Get-CWMDepartmentLocation
+# New-CWMTicketTask
 
 ## SYNOPSIS
-Return locations for a given department.
+Add a note to a CW Manage ticket.
 
 ## SYNTAX
 
 ```
-Get-CWMDepartmentLocation -parentId <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
- [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-fields] <String[]>] [-all] [<CommonParameters>]
+New-CWMTicketTask [-parentId] <Int32> [[-id] <Int32>] [[-notes] <String>] [[-closedFlag] <Boolean>]
+ [[-priority] <Int32>] [[-schedule] <Hashtable>] [[-code] <Hashtable>] [[-resolution] <String>]
+ [[-childScheduleAction] <Object>] [[-childTicketId] <Int32>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns location information for the given department.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> Get-CWMDepartmentLocation -id 1 -all
+### EXAMPLE 1
+```
+New-CWMTicketNote -ticketId $Ticket.id -text 'New note'
 ```
 
-Returns all locations for a given department.
+Create a new note.
 
 ## PARAMETERS
 
-### -Condition
-{{ Fill Condition Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -all
-{{ Fill all Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
 Position: Named
@@ -62,11 +48,72 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-{{ Fill childConditions Description }}
+### -WhatIf
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: String
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+{{ Fill _info Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childScheduleAction
+{{ Fill childScheduleAction Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+Accepted values: Transfer, Delete, Done
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childTicketId
+{{ Fill childTicketId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -closedFlag
+{{ Fill closedFlag Description }}
+
+```yaml
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -77,31 +124,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customFieldConditions
-{{ Fill customFieldConditions Description }}
+### -code
+{{ Fill code Description }}
 
 ```yaml
-Type: String
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-{{ Fill fields Description }}
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -116,14 +148,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -orderBy
-{{ Fill orderBy Description }}
+### -notes
+{{ Fill notes Description }}
 
 ```yaml
 Type: String
@@ -137,46 +169,61 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-{{ Fill page Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-{{ Fill pageSize Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -parentId
 {{ Fill parentId Description }}
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: ticketId
 
 Required: True
-Position: Named
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -priority
+{{ Fill priority Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -resolution
+{{ Fill resolution Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -schedule
+{{ Fill schedule Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -192,5 +239,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
+Author: Chris Taylor Date: 1/21/2019
 
 ## RELATED LINKS

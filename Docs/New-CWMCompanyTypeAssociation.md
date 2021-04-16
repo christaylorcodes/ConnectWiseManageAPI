@@ -13,7 +13,7 @@ Creates a new type association for a company
 ## SYNTAX
 
 ```
-New-CWMCompanyTypeAssociation [[-id] <Int32>] [-type] <Hashtable> [-company] <Hashtable> [[-_info] <Hashtable>]
+New-CWMCompanyTypeAssociation [-id] <Int32> [-type] <Hashtable> [[-company] <Hashtable>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -85,7 +85,7 @@ Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 2
 Default value: None
 Accept pipeline input: False
@@ -100,7 +100,7 @@ Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: 0
 Accept pipeline input: False

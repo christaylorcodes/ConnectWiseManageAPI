@@ -4,7 +4,7 @@
         [Parameter(Mandatory=$true)]
         [Alias('AgreementID')]
         [int]$parentId,
-        [id]$id,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,

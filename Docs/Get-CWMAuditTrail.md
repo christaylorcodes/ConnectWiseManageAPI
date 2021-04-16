@@ -13,8 +13,9 @@ This function will get the audit trail of an item in ConnectWise.
 ## SYNTAX
 
 ```
-Get-CWMAuditTrail [-Type] <Object> [-ID] <String> [[-deviceIdentifier] <Object>] [[-childConditions] <String>]
- [[-page] <Int32>] [[-pageSize] <Int32>] [<CommonParameters>]
+Get-CWMAuditTrail [-Type] <Object> [-ID] <String> [[-deviceIdentifier] <String>] [-condition <String>]
+ [-orderBy <String>] [[-childConditions] <String>] [-customFieldConditions <String>] [[-page] <Int32>]
+ [[-pageSize] <Int32>] [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,7 +82,7 @@ Accept wildcard characters: False
 ?
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -118,6 +119,81 @@ Aliases:
 Required: False
 Position: 5
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+{{ Fill all Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+{{ Fill condition Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+{{ Fill customFieldConditions Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+{{ Fill fields Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+{{ Fill orderBy Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

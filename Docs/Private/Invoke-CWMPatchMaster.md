@@ -13,7 +13,7 @@ This will be basis of all Patch calls to the ConnectWise Manage API.
 ## SYNTAX
 
 ```
-Invoke-CWMPatchMaster [[-Arguments] <Object>] [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMPatchMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,8 +58,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URI
-The URI of the update endpoint
+### -Endpoint
+{{ Fill Endpoint Description }}
 
 ```yaml
 Type: String

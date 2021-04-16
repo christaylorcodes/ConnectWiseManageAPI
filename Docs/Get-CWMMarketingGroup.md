@@ -14,8 +14,7 @@ This function will list marketing groups based on conditions.
 
 ```
 Get-CWMMarketingGroup [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
- [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-fields <String[]>] [-all]
- [<CommonParameters>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -134,21 +133,6 @@ Aliases:
 Required: False
 Position: 5
 Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

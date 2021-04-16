@@ -39,9 +39,7 @@ Will replace the `$TypeAssoc.id` with the new type associated with the id in `$T
 ## PARAMETERS
 
 ### -CompanyID
-The ID of the company that you are updating.
-
-`Get-CWMCompanies`
+The ID of the company that you are updating. Get-CWMCompanies
 
 ```yaml
 Type: Int32
@@ -106,9 +104,7 @@ Accept wildcard characters: False
 ```
 
 ### -TypeAssociationID
-The TypeAssociationID you are updating.
-
-`Get-CWMCompanyTypeAssociation -Company $Company.id`
+The TypeAssociationID of the company that you are updating. Get-CWMCompanyTypeAssociation
 
 ```yaml
 Type: Int32

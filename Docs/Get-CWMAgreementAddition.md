@@ -13,7 +13,7 @@ This function will list additions to a Manage agreements.
 ## SYNTAX
 
 ```
-Get-CWMAgreementAddition [-AgreementID] <Object> [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMAgreementAddition -parentId <Object> [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [-fields <String[]>] [-all] [<CommonParameters>]
 ```
@@ -31,21 +31,6 @@ Get-CWMAgreementAddition -AgreementID $Agreement.id -all
 Will list all agreement additions for the given agreement.
 
 ## PARAMETERS
-
-### -AgreementID
-The agreement ID of the agreement the addition belongs to.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Condition
 This is your search condition to return the results you desire.
@@ -162,6 +147,36 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases: AgreementID
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

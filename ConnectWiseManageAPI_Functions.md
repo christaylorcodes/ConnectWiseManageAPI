@@ -86,10 +86,10 @@ This function will list all types associated with a company.
 ### [Get-CWMContact](Docs/Get-CWMContact.md)
 This function will list contacts.
 
-### [Get-CWMDepartment](Get-CWMDepartment.md)
-Return departments.
+### [Get-CWMDepartment](Docs/Get-CWMDepartment.md)
+Returns available departments.
 
-### [Get-CWMDepartmentLocation](Get-CWMDepartmentLocation.md)
+### [Get-CWMDepartmentLocation](Docs/Get-CWMDepartmentLocation.md)
 Return locations for a given department.
 
 ### [Get-CWMDocument](Docs/Get-CWMDocument.md)
@@ -185,6 +185,9 @@ This function will list configs attached to a ticket.
 ### [Get-CWMTicketNote](Docs/Get-CWMTicketNote.md)
 This function will list notes of a ticket based on conditions.
 
+### [Get-CWMTicketTask](Docs/Get-CWMTicketTask.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMTimeEntry](Docs/Get-CWMTimeEntry.md)
 This function will allow you to search for Manage time entries.
 
@@ -224,8 +227,8 @@ This will create a new Manage user.
 ### [New-CWMProductCatalog](Docs/New-CWMProductCatalog.md)
 This function will create a new catalog.
 
-### [New-CWMProjectPhase](Docs/New-CWMProjectPhase.md)
-This function will create a new phase for a project.
+### [New-CWMTicket](Docs/New-CWMTicket.md)
+This function will create a new project phase
 
 ### [New-CWMProjectTeamMember](Docs/New-CWMProjectTeamMember.md)
 This function will create a new ticket.
@@ -240,9 +243,12 @@ This function will create a new service board.
 This function will create a new ticket.
 
 ### [New-CWMTicketConfiguration](Docs/New-CWMTicketConfiguration.md)
-{{ Fill in the Synopsis }}
+Assigns a configuration to a ticket.
 
 ### [New-CWMTicketNote](Docs/New-CWMTicketNote.md)
+Add a note to a CW Manage ticket.
+
+### [New-CWMTicketTask](Docs/New-CWMTicketTask.md)
 Add a note to a CW Manage ticket.
 
 ### [New-CWMTimeEntry](Docs/New-CWMTimeEntry.md)
@@ -297,9 +303,9 @@ This will update a company type association.
 This will modify a contact by its ID.
 
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
-Used to update a members properties.
+{{ Fill in the Synopsis }}
 
-### [Update-CWMProductCatalog](Update-CWMProductCatalog.md)
+### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
 This will update a catalog item.
 
 ### [Update-CWMProjectPhase](Docs/Update-CWMProjectPhase.md)

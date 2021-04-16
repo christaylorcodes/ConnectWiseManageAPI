@@ -13,7 +13,7 @@ This will be basis of all delete calls to the ConnectWise Manage API.
 ## SYNTAX
 
 ```
-Invoke-CWMDeleteMaster [[-URI] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMDeleteMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,8 +43,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URI
-The URI of the delete endpoint
+### -Endpoint
+{{ Fill Endpoint Description }}
 
 ```yaml
 Type: String

@@ -13,7 +13,7 @@ This will be basis of all create calls to the ConnectWise Manage API.
 ## SYNTAX
 
 ```
-Invoke-CWMNewMaster [[-Arguments] <Object>] [[-URI] <String>] [[-Skip] <String[]>] [-WhatIf] [-Confirm]
+Invoke-CWMNewMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [[-Skip] <String[]>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -59,6 +59,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Endpoint
+{{ Fill Endpoint Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Skip
 Ignores the specified number of objects and then gets the remaining objects.
 Enter the number of objects to skip.
@@ -70,21 +85,6 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -URI
-The URI of the create endpoint
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

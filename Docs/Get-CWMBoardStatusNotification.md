@@ -13,7 +13,7 @@ This function will list \<SOMETHING\> based on conditions.
 ## SYNTAX
 
 ```
-Get-CWMBoardStatusNotification [-ServiceBoardID] <Int32> [[-StatusID] <Int32>] [[-Condition] <String>]
+Get-CWMBoardStatusNotification -grandparentId <Int32> -parentId <Int32> [-id <Int32>] [[-Condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
  [[-pageSize] <Int32>] [-fields <String[]>] [-all] [<CommonParameters>]
 ```
@@ -44,36 +44,6 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ServiceBoardID
-The ID of the board you are getting notifications for.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -StatusID
-The ID of the status you are getting notifications for.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -177,6 +147,51 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -grandparentId
+{{ Fill grandparentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: boardId
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: statusId
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

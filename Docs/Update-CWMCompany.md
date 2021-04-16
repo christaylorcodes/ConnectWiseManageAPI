@@ -32,8 +32,7 @@ CompanyID = $Company.id     Operation = 'replace'     Path = 'name'     Value = 
 ## PARAMETERS
 
 ### -CompanyID
-The ID of the company that you are updating.
-Get-CWMCompanies
+The ID of the company that you are updating. Get-CWMCompanies
 
 ```yaml
 Type: Int32

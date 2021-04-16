@@ -37,8 +37,7 @@ Update-CWMAgreementAddition @UpdateParam
 ## PARAMETERS
 
 ### -AdditionID
-The ID of the addition that you are updating.
-Get-CWMAddition
+The ID of the addition that you are updating. Get-CWMAddition
 
 ```yaml
 Type: Int32
@@ -53,8 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -AgreementID
-The ID of the agreement that you are updating.
-Get-CWMAgreement
+The ID of the agreement that you are updating. Get-CWMAgreement
 
 ```yaml
 Type: Int32

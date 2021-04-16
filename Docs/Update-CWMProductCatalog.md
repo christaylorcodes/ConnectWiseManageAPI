@@ -32,8 +32,7 @@ CatalogID = $testProduct.id     Operation = 'replace'     Path      = 'price'   
 ## PARAMETERS
 
 ### -CatalogID
-The ID of the catalog that you are updating.
-Get-CWMCatalogs
+The ID of the catalog that you are updating. Get-CWMCatalogs
 
 ```yaml
 Type: Object

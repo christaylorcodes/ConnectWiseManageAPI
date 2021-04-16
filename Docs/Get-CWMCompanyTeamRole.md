@@ -13,9 +13,9 @@ This function will list company team roles.
 ## SYNTAX
 
 ```
-Get-CWMCompanyTeamRole [[-Condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
- [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-fields <String[]>] [-all]
- [<CommonParameters>]
+Get-CWMCompanyTeamRole [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -143,6 +143,21 @@ Allows you to return a partial response with just the fields listed.
 
 ```yaml
 Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 

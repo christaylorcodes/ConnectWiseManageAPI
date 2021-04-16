@@ -13,7 +13,7 @@ This function will list all types associated with a company.
 ## SYNTAX
 
 ```
-Get-CWMCompanyTypeAssociation [-CompanyID] <Int32> [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMCompanyTypeAssociation [-id <Int32>] [-CompanyID] <Int32> [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [-fields <String[]>] [-all] [<CommonParameters>]
 ```
@@ -158,6 +158,21 @@ Allows you to return a partial response with just the fields listed.
 
 ```yaml
 Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 

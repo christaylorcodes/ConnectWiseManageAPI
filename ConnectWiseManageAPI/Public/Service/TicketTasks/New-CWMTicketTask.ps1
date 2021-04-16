@@ -10,7 +10,7 @@ function New-CWMTicketTask {
         [string]$notes,
         [boolean]$closedFlag,
         [int]$priority,
-        [hastable]$schedule,
+        [hashtable]$schedule,
         [hashtable]$code,
         [string]$resolution,
         [ValidateSet('Transfer', 'Delete', 'Done')]
