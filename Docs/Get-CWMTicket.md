@@ -44,6 +44,13 @@ Get-CWMTicket -condition 'summary="test"'
 
 Returns the first 25 tickets with the summary of test
 
+### EXAMPLE 4
+```
+Get-CWMTicket -condition 'subType/id = 2014'
+```
+
+Returns the first 25 tickets with subType 2014
+
 ## PARAMETERS
 
 ### -all
