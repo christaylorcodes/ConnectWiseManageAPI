@@ -3,9 +3,10 @@ function New-CWMTicketTask {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
-        [int]$id,
+        [Parameter(Mandatory=$true)]
         [Alias('parentId')]
         [int]$ticketId,
+        [int]$id,
         [string]$notes,
         [boolean]$closedFlag,
         [int]$priority,
