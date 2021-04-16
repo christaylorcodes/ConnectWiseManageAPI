@@ -16,7 +16,7 @@ function Get-CWMBoardTeam {
         [switch]$all
     )
 
-    $Endpoint = "/service/boards/$parentId/teams"
+    $Endpoint = "/service/boards/$($parentId)/teams"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

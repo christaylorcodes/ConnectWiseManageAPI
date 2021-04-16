@@ -1,10 +1,10 @@
 ﻿function Get-CWMAgreementAddition {
     [CmdletBinding()]
     param(
-        [int]$id,
         [Parameter(Mandatory=$true)]
         [Alias('AgreementID')]
         $parentId,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -16,7 +16,7 @@
         [switch]$all
     )
 
-    $Endpoint = "/finance/agreements/$parentId/additions"
+    $Endpoint = "/finance/agreements/$($parentId)/additions"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

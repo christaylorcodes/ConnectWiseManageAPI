@@ -16,7 +16,7 @@
         [switch]$all
     )
 
-    $Endpoint = "/service/boards/$parentId/statuses"
+    $Endpoint = "/service/boards/$($parentId)/statuses"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

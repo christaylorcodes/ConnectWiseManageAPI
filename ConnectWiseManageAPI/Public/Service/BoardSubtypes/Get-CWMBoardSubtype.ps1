@@ -16,7 +16,7 @@ function Get-CWMBoardSubtype {
         [switch]$all
     )
 
-    $Endpoint = "/service/boards/$parentId/subtypes"
+    $Endpoint = "/service/boards/$($parentId)/subtypes"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

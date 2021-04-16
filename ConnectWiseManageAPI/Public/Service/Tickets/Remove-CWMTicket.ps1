@@ -3,9 +3,10 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$TicketID
+        [Alias('ticketId')]
+        [int]$id
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$TicketID"
-    return Invoke-CWMDeleteMaster -URI $URI
+    $Endpoint = "/service/tickets/$($id)"
+    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

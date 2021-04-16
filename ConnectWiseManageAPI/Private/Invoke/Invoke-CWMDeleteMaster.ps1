@@ -1,9 +1,10 @@
 ﻿function Invoke-CWMDeleteMaster {
     [CmdletBinding(SupportsShouldProcess)]
     param (
-        [string]$URI
+        [string]$Endpoint
     )
 
+    $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
         Uri = $URI
         Method = 'Delete'

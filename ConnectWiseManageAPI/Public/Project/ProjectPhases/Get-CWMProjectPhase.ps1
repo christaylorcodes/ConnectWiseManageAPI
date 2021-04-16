@@ -2,7 +2,7 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [Alias('ProjectID')]
+        [Alias('projectId')]
         [int]$parentId,
         [int]$id,
         [string]$Condition,
@@ -16,7 +16,7 @@
         [switch]$all
     )
 
-    $Endpoint = "/project/projects/$parentId/phases"
+    $Endpoint = "/project/projects/$($parentId)/phases"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

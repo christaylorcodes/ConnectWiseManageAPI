@@ -16,7 +16,7 @@
         [switch]$all
     )
 
-    $Endpoint = "/project/projects/$ProjectID/teamMembers"
+    $Endpoint = "/project/projects/$($parentId)/teamMembers"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

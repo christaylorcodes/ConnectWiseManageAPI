@@ -3,11 +3,13 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$CompanyID,
+        [Alias('companyId')]
+        [int]$parentId,
         [Parameter(Mandatory=$true)]
-        [int]$TypeAssociationID
+        [Alias('typeAssociationId')]
+        [int]$id
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/companies/$CompanyID/typeAssociations/$TypeAssociationID"
-    return Invoke-CWMDeleteMaster -URI $URI
+    $Endpoint = "/company/companies/$($parentId)/typeAssociations/$($id)"
+    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

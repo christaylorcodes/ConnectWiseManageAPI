@@ -3,8 +3,10 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ID
+        [Alias('callbackId')]
+        [int]$id
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/callbacks/$ID"
-    return Invoke-CWMDeleteMaster -URI $URI
+
+    $Endpoint = "/system/callbacks/$($id)"
+    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

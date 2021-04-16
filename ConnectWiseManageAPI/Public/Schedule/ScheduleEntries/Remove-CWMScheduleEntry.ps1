@@ -2,9 +2,11 @@
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
-        [int]$ID
+        [Parameter(Mandatory=$true)]
+        [Alias('entryId')]
+        [int]$id
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/schedule/entries/$ID"
-    return Invoke-CWMDeleteMaster -URI $URI
+    $Endpoint = "/schedule/entries/$($id)"
+    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }
