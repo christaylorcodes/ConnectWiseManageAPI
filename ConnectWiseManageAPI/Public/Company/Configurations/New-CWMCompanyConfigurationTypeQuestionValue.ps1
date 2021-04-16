@@ -3,12 +3,14 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int] $configurationTypeId,
+        [Alias('typeId')]
+        [int]$grandparentId,
         [Parameter(Mandatory=$true)]
-        [int]$questionId,
+        [Alias('questionId')]
+        [int]$parentId,
+        [int]$id,
         [hashtable]$configurationType,
         [boolean]$defaultFlag,
-        [int]$id,
         [boolean]$inactiveFlag,
         [hashtable]$question,
         [Parameter(Mandatory=$true)]
@@ -17,6 +19,6 @@
         [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/configurations/types/$configurationTypeId/questions/$questionId/values"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/company/configurations/types/$($grandparentId)/questions/$($parentId)/values"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

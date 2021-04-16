@@ -3,6 +3,8 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
+        [Alias('companyId')]
+        [int]$parentId,
         [int]$id,
         [hashtable]$company,
         [Parameter(Mandatory=$true)]
@@ -17,6 +19,6 @@
         [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/company/companies/$id/teams"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/company/companies/$($parentId)/teams"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
