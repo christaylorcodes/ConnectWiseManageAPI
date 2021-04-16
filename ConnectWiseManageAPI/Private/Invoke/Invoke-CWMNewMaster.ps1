@@ -2,11 +2,11 @@
     [CmdletBinding(SupportsShouldProcess)]
     param (
         $Arguments,
-        [string]$URI,
+        [string]$Endpoint,
         [string[]]$Skip
     )
     # Skip common parameters
-    $Skip += 'Debug','ErrorAction','ErrorVariable','InformationAction','InformationVariable','OutVariable','OutBuffer','PipelineVariable','Verbose','WarningAction','WarningVariable','WhatIf','Confirm','Version','VersionAutomatic'
+    $Skip += 'Debug','ErrorAction','ErrorVariable','InformationAction','InformationVariable','OutVariable','OutBuffer','PipelineVariable','Verbose','WarningAction','WarningVariable','WhatIf','Confirm','Version','VersionAutomatic','grandparentId','parentId'
 
     if ($Arguments.Body) {
         $Body = $Arguments.Body
@@ -26,6 +26,7 @@
         $ContentType = $Arguments.ContentType
     }
 
+    $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
         Uri = $URI
         Method = 'Post'

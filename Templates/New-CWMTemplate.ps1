@@ -6,10 +6,9 @@ function New-CWMTemplate {
     param(
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/<URI>"
-
-    # If there are parameters that should not be included in the body
+    # If there are parameters that should not be included in the body. grandparentId & parentId already skipped.
     $Skip = @()
 
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI -Skip $Skip
+    $Endpoint = '<Endpoint>'
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

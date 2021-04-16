@@ -60,7 +60,7 @@ function New-CWMProjectPhase {
         [hashtable]$_info,
         [hashtable[]]$customFields
     )
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/project/projects/$parentId/phases"
-    $PsBoundParameters.Remove('parentId')
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+
+    $Endpoint = "/project/projects/$($parentId)/phases"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

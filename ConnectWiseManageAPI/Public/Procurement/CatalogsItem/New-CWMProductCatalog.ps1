@@ -10,15 +10,15 @@
         [string]$description,
         [bool]$inactiveFlag,
         [Parameter(Mandatory=$true)]
-        $subcategory,
+        [hashtable]$subcategory,
         [Parameter(Mandatory=$true)]
-        $type,
+        [hashtable]$type,
         [ValidateSet('Agreement', 'Bundle', 'Inventory', 'NonInventory', 'Service')]
         [string]$productClass,
         [bool]$serializedFlag,
         [bool]$serializedCostFlag,
         [bool]$phaseProductFlag,
-        $unitOfMeasure,
+        [hashtable]$unitOfMeasure,
         [int]$minStockLevel,
         [float]$price,
         [float]$cost,
@@ -27,21 +27,21 @@
         [Parameter(Mandatory=$true)]
         [ValidateLength(1,6000)]
         [string]$customerDescription,
-        $manufacturer,
+        [hashtable]$manufacturer,
         [ValidateLength(1,50)]
         [string]$manufacturerPartNumber,
-        $vendor,
+        [hashtable]$vendor,
         [ValidateLength(1,50)]
         [string]$vendorSku,
         [string]$notes,
         [ValidateLength(1,50)]
         [string]$integrationXRef,
         [string]$dateEntered,
-        $category,
-        $_info,
-        $customFields
+        [hashtable]$category,
+        [hashtable]$_info,
+        [hashtable]$customFields
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/procurement/catalog"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '/procurement/catalog'
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

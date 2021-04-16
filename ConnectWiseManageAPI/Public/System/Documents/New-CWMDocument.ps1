@@ -57,6 +57,6 @@
     $PsBoundParameters.Body = $Body
     $PsBoundParameters.ContentType = "multipart/form-data; boundary=`"$boundary`""
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/documents"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '/system/documents'
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

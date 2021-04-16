@@ -17,10 +17,10 @@
         [string]$payloadVersion,
         [boolean]$inactiveFlag,
         [boolean]$isSoapCallbackFlag,
-        [boolean]$isSelfSuppressedFlag,        
+        [boolean]$isSelfSuppressedFlag,
         [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/system/callbacks"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '/system/callbacks'
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -1,9 +1,11 @@
 ﻿function Submit-CWMTimeSheet {
     [CmdletBinding()]
     param(
-        [int]$ID
+        [Parameter(Mandatory=$true)]
+        [Alias('sheetId')]
+        [int]$id
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/time/sheets/$($ID)/submit"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/time/sheets/$($id)/submit"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

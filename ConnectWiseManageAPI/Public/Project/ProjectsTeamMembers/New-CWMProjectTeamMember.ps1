@@ -3,19 +3,20 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$ProjectID,
+        [Alias('projectId')]
+        [int]$parentId,
         [int]$id,
         [decimal]$hours,
         [Parameter(Mandatory=$true)]
-        $member,
+        [hashtable]$member,
         [Parameter(Mandatory=$true)]
-        $projectRole,
-        $workRole,
+        [hashtable]$projectRole,
+        [hashtable]$workRole,
         [string]$startDate,
         [string]$endDate,
-        $_info
+        [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/project/projects/$ProjectID/teamMembers"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/project/projects/$($parentId)/teamMembers"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

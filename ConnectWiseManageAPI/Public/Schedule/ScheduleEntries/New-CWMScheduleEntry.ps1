@@ -7,15 +7,15 @@
         [ValidateLength(1,250)]
         [string]$name,
         [Parameter(Mandatory=$true)]
-        $member,
-        $where,
+        [hashtable]$member,
+        [hashtable]$where,
         [string]$dateStart,
         [string]$dateEnd,
-        $reminder,
-        $status,
+        [hashtable]$reminder,
+        [hashtable]$status,
         [Parameter(Mandatory=$true)]
-        $type,
-        $span,
+        [hashtable]$type,
+        [hashtable]$span,
         [boolean]$doneFlag,
         [boolean]$acknowledgedFlag,
         [boolean]$ownerFlag,
@@ -26,9 +26,9 @@
         [GUID]$mobileGuid,
         [string]$closeDate,
         [decimal]$hours,
-        $_info
+        [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/schedule/entries"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = '/schedule/entries'
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

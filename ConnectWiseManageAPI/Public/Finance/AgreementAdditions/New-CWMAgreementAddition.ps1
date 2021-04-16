@@ -3,7 +3,8 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [int]$AgreementID,
+        [Alias('AgreementId')]
+        [int]$parentId,
         [int]$id,
         [Parameter(Mandatory=$true)]
         $product,
@@ -35,11 +36,9 @@
         [float]$extendedProrateCost,
         [float]$extendedProratePrice,
         [bool]$prorateCurrentPeriodFlag,
-        $_info
+        [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/finance/agreements/$AgreementID/additions"
-    $Skip = @('AgreementID')
-
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI -Skip $Skip
+    $Endpoint = "/finance/agreements/$($parentId)/additions"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

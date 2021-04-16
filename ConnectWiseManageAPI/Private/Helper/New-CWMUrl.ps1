@@ -1,12 +1,12 @@
 function New-CWMUrl {
     param(
         [string]$Endpoint,
-        [string]$URLParamaters
+        [string]$URLParameters
     )
     $URL = "https://$($script:CWMServerConnection.Server)"
     $URL = Join-Url $URL $script:CWMServerConnection.Codebase
     $URL = Join-Url $URL $script:CWMServerConnection.BasePath
     $URL = Join-Url $URL $Endpoint
-    $URL += $URLParamaters
+    $URL += $URLParameters
     return $URL
 }

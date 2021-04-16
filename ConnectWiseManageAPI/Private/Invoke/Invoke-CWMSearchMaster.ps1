@@ -14,25 +14,25 @@
 
     if($Arguments.childConditions) {
         $childConditions = [System.Web.HttpUtility]::UrlEncode($Arguments.childConditions)
-        $URLParamaters += "&childConditions=$childConditions"
+        $URLParameters += "&childConditions=$childConditions"
     }
 
     if($Arguments.customFieldConditions) {
         $customFieldConditions = [System.Web.HttpUtility]::UrlEncode($Arguments.customFieldConditions)
-        $URLParamaters += "&customFieldConditions=$customFieldConditions"
+        $URLParameters += "&customFieldConditions=$customFieldConditions"
     }
 
     if($Arguments.Fields) {
         $fields = [System.Web.HttpUtility]::UrlEncode($($Arguments.Fields -join ','))
-        $URLParamaters += "&fields=$fields"
+        $URLParameters += "&fields=$fields"
     }
 
     if($Arguments.orderBy) {
         $orderBy = [System.Web.HttpUtility]::UrlEncode($Arguments.orderBy)
-        $URLParamaters += "&orderBy=$orderBy"
+        $URLParameters += "&orderBy=$orderBy"
     }
 
-    $URI = New-CWMUrl -Endpoint $Endpoint -URLParamaters $URLParamaters
+    $URI = New-CWMUrl -Endpoint $Endpoint -URLParameters $URLParameters
 
     $WebRequestArguments = @{
         Uri = $URI

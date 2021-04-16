@@ -2,12 +2,12 @@ function New-CWMTicketConfiguration {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
-    	[int]$TicketID,
+        [Parameter(Mandatory=$true)]
+        [Alias('ticketId')]
+    	[int]$parentId,
         [string]$deviceIdentifier
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$TicketID/configurations"
-
-    $Skip = @('TicketID')
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI -Skip $Skip
+    $Endpoint = "/service/tickets/$($parentId)/configurations"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

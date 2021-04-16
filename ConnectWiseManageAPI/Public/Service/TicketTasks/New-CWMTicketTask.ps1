@@ -4,8 +4,8 @@ function New-CWMTicketTask {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [Alias('parentId')]
-        [int]$ticketId,
+        [Alias('ticketId')]
+        [int]$parentId,
         [int]$id,
         [string]$notes,
         [boolean]$closedFlag,
@@ -19,7 +19,6 @@ function New-CWMTicketTask {
         [hashtable]$_info
     )
 
-    $URI = "https://$($script:CWMServerConnection.Server)/v4_6_release/apis/3.0/service/tickets/$($ticketId)/tasks"
-
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -URI $URI
+    $Endpoint = "/service/tickets/$($parentId)/tasks"
+    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
