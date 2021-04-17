@@ -1,7 +1,7 @@
 function ConvertFrom-CWMTime {
     [CmdletBinding()]
     param(
-    [string]$Date
+        [string]$Date
     )
-    return Get-Date $Date.Trim('[',']')
+    return Get-Date $Date.Trim('[]')
 }

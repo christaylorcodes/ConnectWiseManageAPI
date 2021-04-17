@@ -15,11 +15,11 @@ The following is a set of guidelines for contributing. These are mostly guidelin
 -   [Your First Code Contribution](#your-first-code-contribution)
 -   [Pull Requests](#pull-requests)
 
-[Styleguides](#styleguides)
+[Style Guides](#style-guides)
 
 -   [Git Commit Messages](#git-commit-messages)
--   [Powershell Styleguide](#powershell-styleguide)
--   [Documentation Styleguide](#documentation-styleguide)
+-   [Powershell Style Guide](#powershell-style-guide)
+-   [Documentation Style Guide](#documentation-style-guide)
 
 ## I don't want to read this whole thing I just have a question
 
@@ -93,7 +93,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 -   **Specify which version of manage you're using.**
 -   **Specify the name and version of the OS you're using.**
 
-## Styleguides
+## Style Guides
 
 ### Git Commit Messages
 
@@ -124,11 +124,11 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
     -   :arrow_down: `:arrow_down:` when downgrading dependencies
     -   :shirt: `:shirt:` when removing linter warnings
 
-### PowerShell Styleguide
+### PowerShell Style Guide
 
 -   Refer to the [unofficial guide](https://github.com/PoshCode/PowerShellPracticeAndStyle).
 
-### Documentation Styleguide
+### Documentation Style Guide
 
 -   Use [Markdown](https://daringfireball.net/projects/markdown).
 -   Documentation is built with platyPS from the markdown.

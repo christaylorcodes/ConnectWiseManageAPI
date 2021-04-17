@@ -1,5 +1,5 @@
 ﻿function New-CWMDebugReport {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'No impact')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         $Hash = $true
@@ -14,21 +14,20 @@
         return
     }
 
-    try {
-        $SysInfo = Get-CWMSystemInfo -ErrorAction Stop
-    }
-    catch {
-        $SysInfo = 'error'
-    }
+    try { $SysInfo = Get-CWMSystemInfo -ErrorAction Stop }
+    catch { $SysInfo = 'error' }
 
-    $DebugOutput = @{}
-    $DebugOutput.CWMServerConnection = $script:CWMServerConnection.Clone()
-    $DebugOutput.CWMServerConnection.Headers = $script:CWMServerConnection.Headers.Clone()
-    $DebugOutput.ModuleVersion = (Get-Module 'ConnectWiseManageAPI').Version
-    $DebugOutput.CWMSystemInfo = $SysInfo
-    $DebugOutput.OS = [System.Environment]::OSVersion.Version
-    $DebugOutput.PowerShell = $PSVersionTable.PSVersion
-    $DebugOutput.Errors = $Error[0..4]
+    $DebugOutput = @{
+        CWMServerConnection = @{
+            Server  = $script:CWMServerConnection.Clone()
+            Headers = $script:CWMServerConnection.Headers.Clone()
+        }
+        ModuleVersion   = (Get-Module 'ConnectWiseManageAPI').Version
+        CWMSystemInfo   = $SysInfo
+        OS              = [System.Environment]::OSVersion.Version
+        PowerShell      = $PSVersionTable.PSVersion
+        Errors          = $Error[0..4]
+    }
 
     # Hash sensitive information so that it can be shared
     if ($Hash) {
@@ -45,6 +44,5 @@
         $DebugOutput.CWMServerConnection.Headers.Authorization = Get-StringHash $DebugOutput.CWMServerConnection.Headers.Authorization
         $DebugOutput.CWMServerConnection.Headers.ClientID = Get-StringHash $DebugOutput.CWMServerConnection.Headers.ClientID
     }
-    Write-Verbose '1'
     return ($DebugOutput | ConvertTo-Json -Depth 99 | Out-String)
 }

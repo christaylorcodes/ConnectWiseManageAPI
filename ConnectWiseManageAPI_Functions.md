@@ -186,8 +186,7 @@ This function will list configs attached to a ticket.
 This function will list notes of a ticket based on conditions.
 
 ### [Get-CWMTicketTask](Docs/Get-CWMTicketTask.md)
-{{ Fill in the Synopsis }}
-
+Get the tasks of a service ticket.
 ### [Get-CWMTimeEntry](Docs/Get-CWMTimeEntry.md)
 This function will allow you to search for Manage time entries.
 
@@ -303,8 +302,7 @@ This will update a company type association.
 This will modify a contact by its ID.
 
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
-{{ Fill in the Synopsis }}
-
+Update properties of a Manage member.
 ### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
 This will update a catalog item.
 

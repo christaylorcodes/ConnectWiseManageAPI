@@ -6,13 +6,13 @@
         [datetime[]]$Date,
         [switch]$Raw
     )
-    begin { $Collection = @() }
+    begin {}
     process {
         foreach ($D in $Date) {
             $Converted = "[$(Get-Date $D.ToUniversalTime() -format yyyy-MM-ddTHH:mm:ssZ)]"
-            if($Raw){ $Collection += $Converted.Trim('[]') }
-            else { $Collection += $Converted }
+            if($Raw){ $Converted.Trim('[]') }
+            else { $Converted }
         }
     }
-    end { return $Collection }
+    end {}
 }
