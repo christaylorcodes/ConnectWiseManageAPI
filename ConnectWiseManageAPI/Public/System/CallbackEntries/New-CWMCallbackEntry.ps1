@@ -22,5 +22,5 @@
     )
 
     $Endpoint = '/system/callbacks'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

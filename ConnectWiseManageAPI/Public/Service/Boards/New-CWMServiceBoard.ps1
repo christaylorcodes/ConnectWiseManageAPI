@@ -77,5 +77,5 @@ function New-CWMServiceBoard {
     )
 
     $Endpoint = '/service/boards'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

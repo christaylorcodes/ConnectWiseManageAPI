@@ -40,5 +40,6 @@
             $Result = $Result.content | ConvertFrom-Json
         }
     }
-    return $Result
+
+    $Result
 }

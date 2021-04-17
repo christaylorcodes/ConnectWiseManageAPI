@@ -21,5 +21,5 @@
     )
 
     $Endpoint = "/company/configurations/types/$($grandparentId)/questions/$($parentId)/values/$($id)"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

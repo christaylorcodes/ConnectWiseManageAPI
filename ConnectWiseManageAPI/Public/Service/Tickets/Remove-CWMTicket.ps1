@@ -8,5 +8,5 @@
     )
 
     $Endpoint = "/service/tickets/$($id)"
-    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

@@ -18,6 +18,6 @@
     if($id){ $Endpoint = Join-Url $Endpoint $id }
     $Result = Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     if(!$Result){ return }
-    if($id){ return ConvertFrom-CWMColumnRow -Data $Result }
-    return $Result
+    if($id){ ConvertFrom-CWMColumnRow -Data $Result }
+    else{ $Result }
 }

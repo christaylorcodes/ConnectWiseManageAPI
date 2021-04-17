@@ -14,10 +14,9 @@
 
     # First request
     $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
-    if(!$PageResult){return}
+    if(!$PageResult){ return }
     if(!$PageResult.Headers.ContainsKey('Link')){
-        Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
-        return
+        Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise." -ErrorAction Stop
     }
 
     $Collection = @()
@@ -34,7 +33,7 @@
     while ($NextPage) {
         $Arguments.Uri = $NextPage
         $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
-        if (!$PageResult){return}
+        if (!$PageResult){ return }
         $Collection += $PageResult.Content | ConvertFrom-Json
         $Link = $PageResult.Headers.Link;
         if ($Link) {
@@ -44,5 +43,5 @@
             $NextPage = $null
         }
     }
-    return $Collection
+    $Collection
 }

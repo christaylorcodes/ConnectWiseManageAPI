@@ -15,5 +15,5 @@ function Update-CWMMember {
     )
 
     $Endpoint = "/system/members/$($id)"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

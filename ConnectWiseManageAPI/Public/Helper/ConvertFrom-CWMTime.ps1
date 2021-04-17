@@ -3,5 +3,5 @@ function ConvertFrom-CWMTime {
     param(
         [string]$Date
     )
-    return Get-Date $Date.Trim('[]')
+    Get-Date $Date.Trim('[]')
 }

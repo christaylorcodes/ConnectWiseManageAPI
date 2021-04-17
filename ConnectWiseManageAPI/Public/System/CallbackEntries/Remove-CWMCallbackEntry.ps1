@@ -8,5 +8,5 @@
     )
 
     $Endpoint = "/system/callbacks/$($id)"
-    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

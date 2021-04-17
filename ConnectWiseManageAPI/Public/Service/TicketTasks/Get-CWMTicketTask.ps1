@@ -18,5 +18,5 @@ function Get-CWMTicketTask {
     $Endpoint = "/service/tickets/$($parentId)/tasks"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

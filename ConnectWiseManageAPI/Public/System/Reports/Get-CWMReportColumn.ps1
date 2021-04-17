@@ -11,5 +11,6 @@
     $Result | Foreach-Object { $_ } |  ForEach-Object {
         $HashTable.Add($_.PSObject.Properties.Name, $_.PSObject.Properties.Value)
     }
-    return $HashTable
+
+    $HashTable
 }

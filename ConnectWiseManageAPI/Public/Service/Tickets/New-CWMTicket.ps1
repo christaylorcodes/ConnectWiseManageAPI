@@ -325,5 +325,5 @@
     $PsBoundParameters.Version = Test-ParameterVersioning @TestVersion
 
     $Endpoint = '/service/tickets'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

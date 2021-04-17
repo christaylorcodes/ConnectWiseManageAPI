@@ -5,5 +5,5 @@ function Join-Url {
         [parameter(Mandatory=$True)]
         [string] $ChildPath
     )
-    return "$($Path.TrimEnd('/'))/$($ChildPath.TrimStart('/'))"
+    "$($Path.TrimEnd('/'))/$($ChildPath.TrimStart('/'))"
 }

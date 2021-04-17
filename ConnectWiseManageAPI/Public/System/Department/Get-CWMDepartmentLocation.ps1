@@ -18,5 +18,5 @@ function Get-CWMDepartmentLocation {
     $Endpoint = "/system/departments/$($parentId)/locations"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

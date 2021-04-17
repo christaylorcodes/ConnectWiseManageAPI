@@ -24,5 +24,5 @@
     if($ID){ $Endpoint += "&id=$ID" }
     if($deviceIdentifier){ $Endpoint += "&deviceIdentifier=$deviceIdentifier" }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

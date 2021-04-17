@@ -8,5 +8,5 @@
     )
 
     $Endpoint = "/company/configurations/$($id)"
-    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

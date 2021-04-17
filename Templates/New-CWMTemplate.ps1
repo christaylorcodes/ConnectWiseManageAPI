@@ -10,5 +10,5 @@ function New-CWMTemplate {
     $Skip = @()
 
     $Endpoint = '<Endpoint>'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

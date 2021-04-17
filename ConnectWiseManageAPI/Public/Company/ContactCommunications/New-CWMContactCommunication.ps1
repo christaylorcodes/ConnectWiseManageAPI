@@ -19,5 +19,5 @@
     )
 
     $Endpoint = "/company/contacts/$($parentId)/communications"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

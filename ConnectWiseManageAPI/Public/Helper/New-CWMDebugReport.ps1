@@ -44,5 +44,6 @@
         $DebugOutput.CWMServerConnection.Headers.Authorization = Get-StringHash $DebugOutput.CWMServerConnection.Headers.Authorization
         $DebugOutput.CWMServerConnection.Headers.ClientID = Get-StringHash $DebugOutput.CWMServerConnection.Headers.ClientID
     }
-    return ($DebugOutput | ConvertTo-Json -Depth 99 | Out-String)
+
+    $DebugOutput | ConvertTo-Json -Depth 99 | Out-String
 }

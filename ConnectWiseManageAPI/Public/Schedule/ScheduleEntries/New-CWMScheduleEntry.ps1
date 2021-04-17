@@ -30,5 +30,5 @@
     )
 
     $Endpoint = '/schedule/entries'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

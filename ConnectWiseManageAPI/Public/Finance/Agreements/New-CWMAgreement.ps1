@@ -100,5 +100,5 @@ function New-CWMAgreement {
     )
 
     $Endpoint = '/finance/agreements'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

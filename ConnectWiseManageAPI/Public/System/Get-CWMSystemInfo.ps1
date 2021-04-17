@@ -4,5 +4,5 @@
 
     $Endpoint = '/system/info'
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

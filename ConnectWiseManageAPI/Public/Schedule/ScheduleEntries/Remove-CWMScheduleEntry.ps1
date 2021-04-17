@@ -8,5 +8,5 @@
     )
 
     $Endpoint = "/schedule/entries/$($id)"
-    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

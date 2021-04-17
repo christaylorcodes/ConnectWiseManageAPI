@@ -15,5 +15,5 @@ function Update-CWMCompanyConfiguration {
     )
 
     $Endpoint = "/company/configurations/$($id)"
-    return Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

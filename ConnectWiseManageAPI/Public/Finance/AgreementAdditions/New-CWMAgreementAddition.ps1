@@ -40,5 +40,5 @@
     )
 
     $Endpoint = "/finance/agreements/$($parentId)/additions"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

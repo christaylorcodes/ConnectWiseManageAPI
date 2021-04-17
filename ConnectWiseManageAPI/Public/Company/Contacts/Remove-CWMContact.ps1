@@ -8,5 +8,5 @@ function Remove-CWMContact {
     )
 
     $Endpoint = "/company/contacts/$($id)"
-    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

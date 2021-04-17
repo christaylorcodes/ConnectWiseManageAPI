@@ -9,5 +9,5 @@ function New-CWMTicketConfiguration {
     )
 
     $Endpoint = "/service/tickets/$($parentId)/configurations"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

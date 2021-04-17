@@ -20,5 +20,5 @@ function New-CWMTicketTask {
     )
 
     $Endpoint = "/service/tickets/$($parentId)/tasks"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

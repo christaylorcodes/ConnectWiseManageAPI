@@ -62,5 +62,5 @@ function New-CWMProjectPhase {
     )
 
     $Endpoint = "/project/projects/$($parentId)/phases"
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

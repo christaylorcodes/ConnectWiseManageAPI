@@ -3,7 +3,20 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
-        [ValidateSet('Ticket','Agreement','Company','Configuration','Contact','Expense','Opportunity','PurchaseOrder','Project','SalesOrder','ServiceTemplate','Rma')]
+        [ValidateSet(
+            'Ticket',
+            'Agreement',
+            'Company',
+            'Configuration',
+            'Contact',
+            'Expense',
+            'Opportunity',
+            'PurchaseOrder',
+            'Project',
+            'SalesOrder',
+            'ServiceTemplate',
+            'Rma'
+        )]
         [string]$recordType,
         [Parameter(Mandatory=$true)]
         [int]$recordId,
@@ -11,13 +24,11 @@
         [string]$title,
         [Parameter(Mandatory=$true)]
         [ValidateScript({
-            if(-Not ($_ | Test-Path) ){
-                throw "File or folder does not exist"
-            }
-            if(-Not ($_ | Test-Path -PathType Leaf) ){
+            if(-Not ($_ | Test-Path)){ throw "File or folder does not exist" }
+            if(-Not ($_ | Test-Path -PathType Leaf)){
                 throw "The Path argument must be a file. Folder paths are not allowed."
             }
-            return $true
+            $true
         })]
         [System.IO.FileInfo]$FilePath,
         [string]$FileName = (Split-Path $FilePath -Leaf),
@@ -58,5 +69,5 @@
     $PsBoundParameters.ContentType = "multipart/form-data; boundary=`"$boundary`""
 
     $Endpoint = '/system/documents'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

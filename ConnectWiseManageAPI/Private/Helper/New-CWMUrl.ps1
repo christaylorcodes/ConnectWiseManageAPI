@@ -9,5 +9,5 @@ function New-CWMUrl {
     $URL = Join-Url $URL $script:CWMServerConnection.BasePath
     $URL = Join-Url $URL $Endpoint
     $URL += $URLParameters
-    return $URL
+    $URL
 }

@@ -7,5 +7,5 @@ function Remove-CWMTemplate {
         [int]$id
     )
     $Endpoint = "<Endpoint>"
-    return Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMDeleteMaster -Endpoint $Endpoint
 }

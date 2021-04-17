@@ -1,9 +1,10 @@
 ﻿function Get-CWMCompanyTypeAssociation {
     [CmdletBinding()]
     param(
-        [int]$id,
         [Parameter(Mandatory=$true)]
-        [int]$CompanyID,
+        [Alias('companyId')]
+        [int]$parentId,
+        [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -15,8 +16,8 @@
         [switch]$all
     )
 
-    $Endpoint = "/company/companies/$CompanyID/typeAssociations"
+    $Endpoint = "/company/companies/$(parentId)/typeAssociations"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

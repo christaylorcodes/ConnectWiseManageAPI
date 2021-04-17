@@ -43,5 +43,5 @@
     )
 
     $Endpoint = '/procurement/catalog'
-    return Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

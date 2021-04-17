@@ -17,10 +17,10 @@
         $Endpoint = '/service/tickets'
         if($id){ $Endpoint = Join-Url $Endpoint $id }
 
-        return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+        Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
     else {
         $Endpoint = '/service/tickets/search'
-        return Invoke-CWMSearchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+        Invoke-CWMSearchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
 }
