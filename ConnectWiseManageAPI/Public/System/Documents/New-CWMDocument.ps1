@@ -17,17 +17,13 @@
             'ServiceTemplate',
             'Rma'
         )]
-        [string]$recordType,
-        
+        [string]$recordType,        
         [Parameter(Mandatory=$true)]
         [int]$recordId,
-        
         [Parameter(Mandatory=$true)]
         [string]$title,
-
         [Parameter(Mandatory=$true, ParameterSetName = 'URL')]
         [string]$URL,
-        
         [Parameter(
             Mandatory=$true, 
             ParameterSetName = 'File'
@@ -60,7 +56,6 @@
                 Write-Debug "Making default filename from `$Filepath"
                 $Filename = Split-Path $FilePath -Leaf
             }
-
             # https://www.techcolumnist.com/2019/01/09/powershell-connectwise-documents-api-uploading-a-document-or-attachment-to-a-ticket/
             $fileBytes = [System.IO.File]::ReadAllBytes($FilePath);
             $fileEnc = [System.Text.Encoding]::GetEncoding(28591).GetString($fileBytes);
@@ -113,7 +108,6 @@
                 "$true",
                 "--$boundary--$LF"
             ) -join $LF
-
         }
     }
 
