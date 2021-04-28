@@ -1,4 +1,4 @@
-﻿function New-CWMDocument {
+﻿function New-CWMDocumentURL {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
@@ -18,11 +18,20 @@
             'Rma'
         )]
         [string]$recordType,
+        
         [Parameter(Mandatory=$true)]
         [int]$recordId,
+        
         [Parameter(Mandatory=$true)]
         [string]$title,
-        [Parameter(Mandatory=$true)]
+
+        [Parameter(Mandatory=$true, ParameterSetName = 'URL')]
+        [string]$URL,
+        
+        [Parameter(
+            Mandatory=$true, 
+            ParameterSetName = 'File'
+        )]
         [ValidateScript({
             if(-Not ($_ | Test-Path)){ throw "File or folder does not exist" }
             if(-Not ($_ | Test-Path -PathType Leaf)){
@@ -31,39 +40,82 @@
             $true
         })]
         [System.IO.FileInfo]$FilePath,
-        [string]$FileName = (Split-Path $FilePath -Leaf),
+        
+        [Parameter(ParameterSetName = 'File')]
+        [string]$FileName,
+        
         [boolean]$Private = $true,
+        
         [boolean]$ReadOnly = $false
+        
     )
-
-    # https://www.techcolumnist.com/2019/01/09/powershell-connectwise-documents-api-uploading-a-document-or-attachment-to-a-ticket/
-    $fileBytes = [System.IO.File]::ReadAllBytes($FilePath);
-    $fileEnc = [System.Text.Encoding]::GetEncoding(28591).GetString($fileBytes);
+  
     $boundary = [System.Guid]::NewGuid().ToString();
     $LF = "`r`n";
+   
+    switch ($PSCmdlet.ParameterSetName){
+        "File" {
+            Write-Debug "This is the File ParameterSet"
+            If(!$FileName){ 
+                Write-Debug "Making default filename from `$Filepath"
+                $Filename = Split-Path $FilePath -Leaf
+            }
 
-    $Body = (
-        "--$boundary",
-        "Content-Disposition: form-data; name=`"recordType`"$LF",
-        "$recordType",
-        "--$boundary",
-        "Content-Disposition: form-data; name=`"recordId`"$LF",
-        "$recordId",
-        "--$boundary",
-        "Content-Disposition: form-data; name=`"Title`"$LF",
-        "$title",
-        "--$boundary",
-        "Content-Disposition: form-data; name=`"PrivateFlag`"$LF",
-        "$Private",
-        "--$boundary",
-        "Content-Disposition: form-data; name=`"ReadOnlyFlag`"$LF",
-        "$ReadOnly",
-        "--$boundary",
-        "Content-Disposition: form-data; name=`"file`"; filename=`"$FileName`"",
-        "Content-Type: application/octet-stream$LF",
-        $fileEnc,
-        "--$boundary--$LF"
-    ) -join $LF
+            # https://www.techcolumnist.com/2019/01/09/powershell-connectwise-documents-api-uploading-a-document-or-attachment-to-a-ticket/
+            $fileBytes = [System.IO.File]::ReadAllBytes($FilePath);
+            $fileEnc = [System.Text.Encoding]::GetEncoding(28591).GetString($fileBytes);
+            $Body = (
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"recordType`"$LF",
+                "$recordType",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"recordId`"$LF",
+                "$recordId",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"Title`"$LF",
+                "$title",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"PrivateFlag`"$LF",
+                "$Private",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"ReadOnlyFlag`"$LF",
+                "$ReadOnly",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"file`"; filename=`"$FileName`"",
+                "Content-Type: application/octet-stream$LF",
+                $fileEnc,
+                "--$boundary--$LF"
+            ) -join $LF
+        }
+        "URL" {
+            Write-Debug "This is the URL ParameterSet"
+            $Body = (
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"recordType`"$LF",
+                "$recordType",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"recordId`"$LF",
+                "$recordId",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"Title`"$LF",
+                "$title",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"PrivateFlag`"$LF",
+                "$Private",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"ReadOnlyFlag`"$LF",
+                "$ReadOnly",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"url`"$LF",
+                "$URL",
+                "--$boundary",
+                "Content-Disposition: form-data; name=`"urlFlag`"$LF",
+                "$true",
+                "--$boundary--$LF"
+            ) -join $LF
+
+        }
+    }
 
     $PsBoundParameters.Body = $Body
     $PsBoundParameters.ContentType = "multipart/form-data; boundary=`"$boundary`""
