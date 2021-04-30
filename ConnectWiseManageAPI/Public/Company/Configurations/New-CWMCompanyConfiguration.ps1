@@ -1,6 +1,5 @@
 ﻿function New-CWMCompanyConfiguration {
     # 2020.4
-    # ^ add a comment for what version of the api you used to create function
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
@@ -16,9 +15,6 @@
         [hashtable]$manufacturer,
         [array]$questions
     )
-
-    # If there are parameters that should not be included in the body. grandparentId & parentId already skipped.
-    $Skip = @()
 
     $Endpoint = 'company/configurations'
     Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
