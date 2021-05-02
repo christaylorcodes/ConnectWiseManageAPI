@@ -36,19 +36,13 @@
             $true
         })]
         [System.IO.FileInfo]$FilePath,
-        
         [Parameter(ParameterSetName = 'File')]
         [string]$FileName,
-        
         [boolean]$Private = $true,
-        
         [boolean]$ReadOnly = $false
-        
     )
-  
     $boundary = [System.Guid]::NewGuid().ToString();
     $LF = "`r`n";
-   
     switch ($PSCmdlet.ParameterSetName){
         "File" {
             Write-Debug "This is the File ParameterSet"
@@ -110,10 +104,8 @@
             ) -join $LF
         }
     }
-
     $PsBoundParameters.Body = $Body
     $PsBoundParameters.ContentType = "multipart/form-data; boundary=`"$boundary`""
-
     $Endpoint = '/system/documents'
     Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
