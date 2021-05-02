@@ -17,7 +17,7 @@
             'ServiceTemplate',
             'Rma'
         )]
-        [string]$recordType,        
+        [string]$recordType,
         [Parameter(Mandatory=$true)]
         [int]$recordId,
         [Parameter(Mandatory=$true)]
@@ -25,7 +25,7 @@
         [Parameter(Mandatory=$true, ParameterSetName = 'URL')]
         [string]$URL,
         [Parameter(
-            Mandatory=$true, 
+            Mandatory=$true,
             ParameterSetName = 'File'
         )]
         [ValidateScript({
@@ -46,7 +46,7 @@
     switch ($PSCmdlet.ParameterSetName){
         "File" {
             Write-Debug "This is the File ParameterSet"
-            If(!$FileName){ 
+            If(!$FileName){
                 Write-Debug "Making default filename from `$Filepath"
                 $Filename = Split-Path $FilePath -Leaf
             }

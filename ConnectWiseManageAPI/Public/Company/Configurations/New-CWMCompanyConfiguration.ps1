@@ -42,7 +42,7 @@
         [ValidateLength(0,50)]
         [string]$backupServerName,
         [long]$backupBillableSpaceGb,
-        [string]$backupProtectedDeviceList, 
+        [string]$backupProtectedDeviceList,
         [int]$backupYear,
         [int]$backupMonth,
         [ValidateLength(0,50)]
@@ -61,13 +61,13 @@
         [int]$parentConfigurationId,
         [hashtable]$vendor,
         [hashtable]$manufacturer,
-        [array]$questions,       
+        [array]$questions,
         [boolean]$activeFlag,
         [validatelength(0,1000)]
         [string]$managementLink,
         [validatelength(0,1000)]
         [string]$remoteLink,
-        [hashtable]$sla,    
+        [hashtable]$sla,
         [string]$mobilezGuid,
         [hashtable]$_info,
         [boolean]$displayVendorFlag,
