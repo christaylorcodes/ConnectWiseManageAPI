@@ -152,4 +152,3 @@ Author: Chris Taylor Date: 10/22/2018
 ## RELATED LINKS
 
 [https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE](https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE)
-

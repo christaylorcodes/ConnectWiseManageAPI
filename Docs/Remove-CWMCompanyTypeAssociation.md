@@ -102,4 +102,3 @@ Author: Chris Taylor Date: 7/3/2017
 ## RELATED LINKS
 
 [https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=DELETE](https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=DELETE)
-

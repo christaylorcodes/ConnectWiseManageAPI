@@ -76,4 +76,3 @@ Purpose/Change: changed orderBy support, improved url query string creation
 ## RELATED LINKS
 
 [https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
-

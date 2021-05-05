@@ -87,4 +87,3 @@ Author: Chris Taylor Date: 11/14/2018
 ## RELATED LINKS
 
 [https://developer.connectwise.com/products/manage/rest?a=Schedule&e=ScheduleEntries&o=DELETE](https://developer.connectwise.com/products/manage/rest?a=Schedule&e=ScheduleEntries&o=DELETE)
-

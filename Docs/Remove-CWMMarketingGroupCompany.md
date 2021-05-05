@@ -104,4 +104,3 @@ Author: Chris Taylor Date: 1/9/2019
 ## RELATED LINKS
 
 [https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE](https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE)
-

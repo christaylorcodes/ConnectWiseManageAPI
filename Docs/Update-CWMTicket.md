@@ -28,8 +28,8 @@ $UpdateParam = @{
     ID = 1
     Operation = 'replace'
     Path = 'name'
-    Value = $NewName 
-} 
+    Value = $NewName
+}
 Update-CWMTicket @UpdateParam
 ```
 
@@ -39,7 +39,7 @@ $UpdateParam = @{
     ID = 1
     Operation = 'replace'
     Path = 'subType'
-    Value = ${id = 123} 
+    Value = ${id = 123}
 }
 Update-CWMTicket @UpdateParam
 ```
@@ -152,4 +152,3 @@ Author: Chris Taylor Date: 10/22/2018
 ## RELATED LINKS
 
 [https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE](https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE)
-

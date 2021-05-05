@@ -87,4 +87,3 @@ Author: Chris Taylor Date: 7/3/2017
 ## RELATED LINKS
 
 [https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE](https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE)
-
