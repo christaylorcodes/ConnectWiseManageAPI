@@ -16,7 +16,7 @@
     $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
     if(!$PageResult){ return }
     if(!$PageResult.Headers.ContainsKey('Link')){
-        Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise." -ErrorAction Stop
+        return Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
     }
 
     $Collection = @()
