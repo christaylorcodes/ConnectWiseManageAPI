@@ -14,8 +14,9 @@ This function will create a new callback entry.
 
 ```
 New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [-objectId] <Int32>
- [-type] <String> [-level] <String> [[-memberId] <Int32>] [[-inactiveFlag] <Boolean>] [[-_info] <Hashtable>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-type] <String> [-level] <String> [[-memberId] <Int32>] [-payloadVersion <String>]
+ [[-inactiveFlag] <Boolean>] [-isSoapCallbackFlag <Boolean>] [-isSelfSuppressedFlag <Boolean>]
+ [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -200,6 +201,51 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -isSelfSuppressedFlag
+{{ Fill isSelfSuppressedFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -isSoapCallbackFlag
+{{ Fill isSoapCallbackFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -payloadVersion
+{{ Fill payloadVersion Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -13,7 +13,7 @@ This will update an addition to an agreement.
 ## SYNTAX
 
 ```
-Update-CWMAgreementAddition [-AgreementID] <Int32> [-AdditionID] <Int32> [-Operation] <String> [-Path] <String>
+Update-CWMAgreementAddition -parentId <Int32> -id <Int32> [-Operation] <String> [-Path] <String>
  [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -35,36 +35,6 @@ Update-CWMAgreementAddition @UpdateParam
 ```
 
 ## PARAMETERS
-
-### -AdditionID
-The ID of the addition that you are updating. Get-CWMAddition
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AgreementID
-The ID of the agreement that you are updating. Get-CWMAgreement
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -140,6 +110,36 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: additionId
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: agreementId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -22,8 +22,8 @@ New-CWMTicket [-Version <String>] [-VersionAutomatic] [[-id] <Int32>] [-summary]
  [[-contactPhoneExtension] <String>] [[-contactEmailAddress] <String>] [[-type] <Hashtable>]
  [[-subType] <Hashtable>] [[-item] <Hashtable>] [[-team] <Hashtable>] [[-owner] <Hashtable>]
  [[-priority] <Hashtable>] [[-serviceLocation] <Hashtable>] [[-source] <Hashtable>] [[-requiredDate] <String>]
- [[-budgetHours] <Decimal>] [[-opportunity] <Hashtable>] [[-agreement] <Hashtable>] [[-severity] <Int32>]
- [[-impact] <Int32>] [[-externalXRef] <String>] [[-poNumber] <String>] [[-knowledgeBaseCategoryId] <Int32>]
+ [[-budgetHours] <Decimal>] [[-opportunity] <Hashtable>] [[-agreement] <Hashtable>] [[-severity] <String>]
+ [[-impact] <String>] [[-externalXRef] <String>] [[-poNumber] <String>] [[-knowledgeBaseCategoryId] <Int32>]
  [[-knowledgeBaseSubCategoryId] <Int32>] [[-allowAllClientsPortalView] <Boolean>]
  [[-customerUpdatedFlag] <Boolean>] [[-automaticEmailContactFlag] <Boolean>]
  [[-automaticEmailResourceFlag] <Boolean>] [[-automaticEmailCcFlag] <Boolean>] [[-automaticEmailCc] <String>]
@@ -58,7 +58,7 @@ New-CWMTicket [-Version <String>] [-VersionAutomatic] [[-id] <Int32>] [-summary]
  [[-contactEmailAddress] <String>] [[-type] <Hashtable>] [[-subType] <Hashtable>] [[-item] <Hashtable>]
  [[-team] <Hashtable>] [[-owner] <Hashtable>] [[-priority] <Hashtable>] [[-serviceLocation] <Hashtable>]
  [[-source] <Hashtable>] [[-requiredDate] <String>] [[-budgetHours] <Decimal>] [[-opportunity] <Hashtable>]
- [[-agreement] <Hashtable>] [[-severity] <Int32>] [[-impact] <Int32>] [[-externalXRef] <String>]
+ [[-agreement] <Hashtable>] [[-severity] <String>] [[-impact] <String>] [[-externalXRef] <String>]
  [[-poNumber] <String>] [[-knowledgeBaseCategoryId] <Int32>] [[-knowledgeBaseSubCategoryId] <Int32>]
  [[-allowAllClientsPortalView] <Boolean>] [[-customerUpdatedFlag] <Boolean>]
  [[-automaticEmailContactFlag] <Boolean>] [[-automaticEmailResourceFlag] <Boolean>]
@@ -766,7 +766,7 @@ Accept wildcard characters: False
 {{ Fill impact Description }}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -1246,7 +1246,7 @@ Accept wildcard characters: False
 {{ Fill severity Description }}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 

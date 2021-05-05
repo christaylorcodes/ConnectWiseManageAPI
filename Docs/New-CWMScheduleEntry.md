@@ -13,12 +13,13 @@ This function will create a new ticket.
 ## SYNTAX
 
 ```
-New-CWMScheduleEntry [[-id] <Int32>] [[-objectId] <Int32>] [[-name] <String>] [-member] <Object>
- [[-where] <Object>] [[-dateStart] <String>] [[-dateEnd] <String>] [[-reminder] <Object>] [[-status] <Object>]
- [-type] <Object> [[-span] <Object>] [[-doneFlag] <Boolean>] [[-acknowledgedFlag] <Boolean>]
- [[-ownerFlag] <Boolean>] [[-meetingFlag] <Boolean>] [[-allowScheduleConflictsFlag] <Boolean>]
- [[-addMemberToProjectFlag] <Boolean>] [[-projectRoleId] <Int32>] [[-mobileGuid] <Guid>]
- [[-closeDate] <String>] [[-hours] <Decimal>] [[-_info] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMScheduleEntry [[-id] <Int32>] [[-objectId] <Int32>] [[-name] <String>] [-member] <Hashtable>
+ [[-where] <Hashtable>] [[-dateStart] <String>] [[-dateEnd] <String>] [[-reminder] <Hashtable>]
+ [[-status] <Hashtable>] [-type] <Hashtable> [[-span] <Hashtable>] [[-doneFlag] <Boolean>]
+ [[-acknowledgedFlag] <Boolean>] [[-ownerFlag] <Boolean>] [[-meetingFlag] <Boolean>]
+ [[-allowScheduleConflictsFlag] <Boolean>] [[-addMemberToProjectFlag] <Boolean>] [[-projectRoleId] <Int32>]
+ [[-mobileGuid] <Guid>] [[-closeDate] <String>] [[-hours] <Decimal>] [[-_info] <Hashtable>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,7 +71,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -235,7 +236,7 @@ Accept wildcard characters: False
 {{ Fill member Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -325,7 +326,7 @@ Accept wildcard characters: False
 {{ Fill reminder Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -340,7 +341,7 @@ Accept wildcard characters: False
 {{ Fill span Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -355,7 +356,7 @@ Accept wildcard characters: False
 {{ Fill status Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -370,7 +371,7 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -385,7 +386,7 @@ Accept wildcard characters: False
 {{ Fill where Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 

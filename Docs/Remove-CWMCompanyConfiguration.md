@@ -13,7 +13,7 @@ This function will remove a company configuration from Manage.
 ## SYNTAX
 
 ```
-Remove-CWMCompanyConfiguration [[-CompanyConfigurationID] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMCompanyConfiguration -id <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,21 +27,6 @@ Remove-CWMCompanyConfiguration -CompanyConfigurationID 123
 ```
 
 ## PARAMETERS
-
-### -CompanyConfigurationID
-{{ Fill CompanyConfigurationID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -70,6 +55,21 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: companyConfigurationId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,7 +13,7 @@ This function will list all types associated with a company.
 ## SYNTAX
 
 ```
-Get-CWMCompanyTypeAssociation [-id <Int32>] [-CompanyID] <Int32> [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMCompanyTypeAssociation -parentId <Int32> [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [-fields <String[]>] [-all] [<CommonParameters>]
 ```
@@ -31,21 +31,6 @@ Get-CWMCompanyTypeAssociation -CompanyID 1 -all
 Will list all types associated with company 1.
 
 ## PARAMETERS
-
-### -CompanyID
-The id of the company to retrieve types.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Condition
 This is your search condition to return the results you desire.
@@ -177,6 +162,21 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+The id of the company to retrieve types.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: companyId
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

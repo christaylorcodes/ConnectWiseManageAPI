@@ -114,7 +114,7 @@ The ID of the contact you are updating. `Get-CWMContact`
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: contactId
 
 Required: True
 Position: 0

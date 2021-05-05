@@ -13,8 +13,7 @@ This function will remove a type from a company.
 ## SYNTAX
 
 ```
-Remove-CWMCompanyTypeAssociation [-CompanyID] <Int32> [-TypeAssociationID] <Int32> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Remove-CWMCompanyTypeAssociation -parentId <Int32> -id <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,21 +27,6 @@ Remove-CWMCompanyConfiguration -CompanyConfigurationID 123
 ```
 
 ## PARAMETERS
-
-### -CompanyID
-The ID of the company configuration that you want to delete.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -59,21 +43,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TypeAssociationID
-The ID of the company configuration that you want to delete.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -86,6 +55,36 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: typeAssociationId
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: companyId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

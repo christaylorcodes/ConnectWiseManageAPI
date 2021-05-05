@@ -13,7 +13,7 @@ This function will remove a Callback entry from Manage.
 ## SYNTAX
 
 ```
-Remove-CWMCallbackEntry [-ID] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMCallbackEntry [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,21 +43,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ID
-The ID of the Callback you want to delete.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -70,6 +55,21 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The ID of the Callback you want to delete.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: callbackId
+
+Required: True
+Position: 0
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

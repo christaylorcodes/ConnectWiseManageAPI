@@ -13,14 +13,14 @@ This function will create a new agreement addition.
 ## SYNTAX
 
 ```
-New-CWMAgreementAddition [-AgreementID] <Int32> [[-id] <Int32>] [-product] <Object> [[-quantity] <Single>]
+New-CWMAgreementAddition -parentId <Int32> [[-id] <Int32>] [-product] <Object> [[-quantity] <Single>]
  [[-lessIncluded] <Single>] [[-unitPrice] <Single>] [[-unitCost] <Single>] [-billCustomer] <String>
  [[-effectiveDate] <String>] [[-cancelledDate] <String>] [[-taxableFlag] <Boolean>] [[-serialNumber] <String>]
  [[-invoiceDescription] <String>] [[-purchaseItemFlag] <Boolean>] [[-specialOrderFlag] <Boolean>]
  [[-description] <String>] [[-billedQuantity] <Single>] [[-uom] <String>] [[-extPrice] <Single>]
  [[-extCost] <Single>] [[-sequenceNumber] <Single>] [[-margin] <Single>] [[-prorateCost] <Single>]
  [[-proratePrice] <Single>] [[-extendedProrateCost] <Single>] [[-extendedProratePrice] <Single>]
- [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,21 +36,6 @@ $CreateParam = @{
 AgreementID = $Agreement.id     product = @{id = $Product.id}     billCustomer = 'DoNotBill'     quantity = $Quantity     taxableFlag = $true     effectiveDate = $(Get-Date (Get-Date -Day 1).AddMonths(1) -format yyyy-MM-ddTHH:mm:ssZ) } New-CWMAgreementAddition @CreateParam
 
 ## PARAMETERS
-
-### -AgreementID
-{{ Fill AgreementID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -87,7 +72,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -484,6 +469,21 @@ Aliases:
 
 Required: False
 Position: 17
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: AgreementId
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

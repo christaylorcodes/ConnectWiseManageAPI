@@ -13,11 +13,11 @@ Add a note to a CW Manage ticket.
 ## SYNTAX
 
 ```
-New-CWMTicketNote [[-id] <Int32>] [[-ticketId] <Int32>] [[-text] <String>] [[-detailDescriptionFlag] <Boolean>]
- [[-internalAnalysisFlag] <Boolean>] [[-resolutionFlag] <Boolean>] [[-member] <Object>] [[-contact] <Object>]
- [[-customerUpdatedFlag] <Boolean>] [[-processNotifications] <Boolean>] [[-dateCreated] <String>]
- [[-createdBy] <String>] [[-internalFlag] <Boolean>] [[-externalFlag] <Boolean>] [[-_info] <Object>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-detailDescriptionFlag] <Boolean>]
+ [[-internalAnalysisFlag] <Boolean>] [[-resolutionFlag] <Boolean>] [[-member] <Hashtable>]
+ [[-contact] <Hashtable>] [[-customerUpdatedFlag] <Boolean>] [[-processNotifications] <Boolean>]
+ [[-dateCreated] <String>] [[-createdBy] <String>] [[-internalFlag] <Boolean>] [[-externalFlag] <Boolean>]
+ [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,7 +38,7 @@ Create a new note.
 {{ Fill _info Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 {{ Fill contact Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -188,7 +188,7 @@ Accept wildcard characters: False
 {{ Fill member Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -244,21 +244,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ticketId
-{{ Fill ticketId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -283,6 +268,21 @@ Parameter Sets: (All)
 Aliases: wi
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

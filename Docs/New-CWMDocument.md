@@ -12,10 +12,17 @@ Will allow you to upload a document and attach it to an item.
 
 ## SYNTAX
 
+### URL
+```
+New-CWMDocument [-recordType] <String> [-recordId] <Int32> [-title] <String> -URL <String>
+ [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### File
 ```
 New-CWMDocument [-recordType] <String> [-recordId] <Int32> [-title] <String> [-FilePath] <FileInfo>
- [[-FileName] <String>] [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [[-FileName] <String>] [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,7 +59,7 @@ Name of the file when uploaded. Will default to the original file name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: File
 Aliases:
 
 Required: False
@@ -67,7 +74,7 @@ Full path to the file to be uploaded.
 
 ```yaml
 Type: FileInfo
-Parameter Sets: (All)
+Parameter Sets: File
 Aliases:
 
 Required: True
@@ -164,6 +171,36 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -isAvatar
+{{ Fill isAvatar Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -URL
+{{ Fill URL Description }}
+
+```yaml
+Type: String
+Parameter Sets: URL
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

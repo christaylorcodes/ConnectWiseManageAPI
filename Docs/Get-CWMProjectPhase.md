@@ -13,9 +13,9 @@ This function will list all phases for a project.
 ## SYNTAX
 
 ```
-Get-CWMProjectPhase [-ProjectID] <Int32> [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMProjectPhase -parentId <Int32> [-id <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-all] [<CommonParameters>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,21 +44,6 @@ Aliases:
 Required: False
 Position: 1
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProjectID
-The ID of the project you want to retrieve phases for.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -149,6 +134,51 @@ Aliases:
 Required: False
 Position: 6
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Allows you to return a partial response with just the fields listed.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: projectId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

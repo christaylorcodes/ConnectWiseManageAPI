@@ -125,7 +125,7 @@ Accept wildcard characters: False
 ```
 
 ### -fields
-{{ Fill fields Description }}
+Allows you to return a partial response with just the fields listed.
 
 ```yaml
 Type: String[]

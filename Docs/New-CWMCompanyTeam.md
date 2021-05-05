@@ -13,10 +13,10 @@ This function will create a new company team.
 ## SYNTAX
 
 ```
-New-CWMCompanyTeam [-id] <Int32> [[-company] <Hashtable>] [-teamRole] <Hashtable> [[-locationId] <Int32>]
- [[-businessUnitId] <Int32>] [[-contact] <Hashtable>] [[-member] <Hashtable>] [[-accountManagerFlag] <Boolean>]
- [[-techFlag] <Boolean>] [[-salesFlag] <Boolean>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-CWMCompanyTeam -parentId <Int32> [[-id] <Int32>] [[-company] <Hashtable>] [-teamRole] <Hashtable>
+ [[-locationId] <Int32>] [[-businessUnitId] <Int32>] [[-contact] <Hashtable>] [[-member] <Hashtable>]
+ [[-accountManagerFlag] <Boolean>] [[-techFlag] <Boolean>] [[-salesFlag] <Boolean>] [[-_info] <Hashtable>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -145,7 +145,7 @@ Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: 0
 Accept pipeline input: False
@@ -224,6 +224,21 @@ Aliases:
 Required: False
 Position: 8
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: companyId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

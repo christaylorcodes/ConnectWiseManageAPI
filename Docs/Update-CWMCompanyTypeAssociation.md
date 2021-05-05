@@ -13,8 +13,8 @@ This will update a company type association.
 ## SYNTAX
 
 ```
-Update-CWMCompanyTypeAssociation [-CompanyID] <Int32> [-TypeAssociationID] <Int32> [-Operation] <String>
- [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMCompanyTypeAssociation -parentId <Int32> -id <Int32> [-Operation] <String> [-Path] <String>
+ [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +37,6 @@ Update-CWMCompanyTypeAssociation @UpdateParam
 Will replace the `$TypeAssoc.id` with the new type associated with the id in `$Type.id`
 
 ## PARAMETERS
-
-### -CompanyID
-The ID of the company that you are updating. Get-CWMCompanies
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -103,21 +88,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TypeAssociationID
-The TypeAssociationID of the company that you are updating. Get-CWMCompanyTypeAssociation
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Value
 The ID of the new type.
 
@@ -147,6 +117,36 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: typeAssociationId
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: companyId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

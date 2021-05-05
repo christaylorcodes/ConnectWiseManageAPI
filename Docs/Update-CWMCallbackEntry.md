@@ -13,7 +13,7 @@ This will update a Callback entry.
 ## SYNTAX
 
 ```
-Update-CWMCallbackEntry [-ID] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
+Update-CWMCallbackEntry [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -42,21 +42,6 @@ Aliases: cf
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-The ID of the Callback that you are updating.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -120,6 +105,21 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The ID of the Callback that you are updating.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: callbackId
+
+Required: True
+Position: 0
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

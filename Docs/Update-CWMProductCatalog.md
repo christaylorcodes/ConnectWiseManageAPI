@@ -13,8 +13,8 @@ This will update a catalog item.
 ## SYNTAX
 
 ```
-Update-CWMProductCatalog [-CatalogID] <Object> [-Operation] <String> [-Path] <Object> [-Value] <Object>
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMProductCatalog -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +30,6 @@ $Update = @{
 CatalogID = $testProduct.id     Operation = 'replace'     Path      = 'price'     Value     = $Price } Update-CWMCatalog @Update
 
 ## PARAMETERS
-
-### -CatalogID
-The ID of the catalog that you are updating. Get-CWMCatalogs
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -82,7 +67,7 @@ Accept wildcard characters: False
 The value that you want to perform the operation on.
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -120,6 +105,21 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: catalogId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

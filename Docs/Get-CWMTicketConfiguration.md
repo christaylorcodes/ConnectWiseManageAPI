@@ -13,8 +13,9 @@ This function will list configs attached to a ticket.
 ## SYNTAX
 
 ```
-Get-CWMTicketConfiguration [-TicketID] <Int32> [[-page] <Int32>] [[-pageSize] <Int32>] [-all]
- [<CommonParameters>]
+Get-CWMTicketConfiguration -parentId <Int32> [-id <Int32>] [-condition <String>] [-orderBy <String>]
+ [-childConditions <String>] [-customFieldConditions <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +31,6 @@ Get-CWMTicketConfiguration -TicketID 1
 Will return all configurations for ticket 1
 
 ## PARAMETERS
-
-### -TicketID
-The id of the ticket you want to retrieve configurations for.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -all
 Return all results
@@ -87,6 +73,112 @@ Aliases:
 Required: False
 Position: 2
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Allows searching arrays on endpoints that list childConditions under parameters
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Condition
+This is your search condition to return the results you desire.
+Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Allows searching custom fields when customFieldConditions is listed in the parameters
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Allows you to return a partial response with just the fields listed.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -64,7 +64,7 @@ Accept wildcard characters: False
 ```
 
 ### -childConditions
-{{ Fill childConditions Description }}
+Allows searching arrays on endpoints that list childConditions under parameters
 
 ```yaml
 Type: String
@@ -124,7 +124,7 @@ Accept wildcard characters: False
 ```
 
 ### -all
-{{ Fill all Description }}
+Return all results
 
 ```yaml
 Type: SwitchParameter
@@ -138,8 +138,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -condition
-{{ Fill condition Description }}
+### -Condition
+This is your search condition to return the results you desire.
+Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
 
 ```yaml
 Type: String
@@ -154,7 +155,7 @@ Accept wildcard characters: False
 ```
 
 ### -customFieldConditions
-{{ Fill customFieldConditions Description }}
+Allows searching custom fields when customFieldConditions is listed in the parameters
 
 ```yaml
 Type: String
@@ -169,7 +170,7 @@ Accept wildcard characters: False
 ```
 
 ### -fields
-{{ Fill fields Description }}
+Allows you to return a partial response with just the fields listed.
 
 ```yaml
 Type: String[]
@@ -183,8 +184,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -orderBy
-{{ Fill orderBy Description }}
+### -fields
+Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
 
 ```yaml
 Type: String

@@ -33,10 +33,10 @@ function New-CWMAgreement {
         [string]$workOrder,
         [ValidateLength(1,5000)]
         [string]$internalNotes,
-        [ValidationSet('Amount', 'Hours', 'Incidents')]
+        [ValidateSet('Amount', 'Hours', 'Incidents')]
         [string]$applicationUnits,
         [double]$applicationLimit,
-        [ValidationSet('Contract2Weeks', 'Contract4Weeks', 'ContractYear', 'CalendarMonth', 'CalendarQuarter', 'CalendarWeek', 'ContractQuarter', 'CalendarYear')]
+        [ValidateSet('Contract2Weeks', 'Contract4Weeks', 'ContractYear', 'CalendarMonth', 'CalendarQuarter', 'CalendarWeek', 'ContractQuarter', 'CalendarYear')]
         [string]$applicationCycle,
         [boolean]$applicationUnlimitedFlag,
         [boolean]$oneTimeFlag,
@@ -50,16 +50,16 @@ function New-CWMAgreement {
         [int]$limit,
         [boolean]$expireWhenZero,
         [boolean]$chargeToFirm,
-        [ValidationSet('Actual', 'Hourly')]
+        [ValidateSet('Actual', 'Hourly')]
         [string]$employeeCompRate,
-        [ValidationSet('Billing', 'Amount', 'Percent')]
+        [ValidateSet('Billing', 'Amount', 'Percent')]
         [string]$employeeCompNotExceed,
         [double]$compHourlyRate,
         [double]$compLimitAmount,
         [hashtable]$billingCycle,
         [boolean]$billOneTimeFlag,
         [hashtable]$billingTerms,
-        [ValidationSet('ContractYear', 'CalendarYear')]
+        [ValidateSet('ContractYear', 'CalendarYear')]
         [string]$invoicingCycle,
         [hashtable]$billToCompany,
         [hashtable]$billToContact,
@@ -78,22 +78,22 @@ function New-CWMAgreement {
         [hashtable]$workType,
         [hashtable]$projectType,
         [hashtable]$invoiceTemplate,
-        [ValidationSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
+        [ValidateSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
         [string]$billTime,
-        [ValidationSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
+        [ValidateSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
         [string]$billExpenses,
-        [ValidationSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
+        [ValidateSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
         [string]$billProducts,
         [boolean]$billableTimeInvoice,
         [boolean]$billableExpenseInvoice,
         [boolean]$billableProductInvoice,
         [hashtable]$currency,
-        [ValidationSet('Current', 'Future', 'Both', 'Undefined')]
+        [ValidateSet('Current', 'Future', 'Both', 'Undefined')]
         [string]$periodType,
         [boolean]$autoInvoiceFlag,
         [string]$nextInvoiceDate,
         [hashtable]$companyLocation,
-        [ValidationSet('Active', 'Cancelled', 'Expired', 'Inactive')]
+        [ValidateSet('Active', 'Cancelled', 'Expired', 'Inactive')]
         [string]$agreementStatus,
         [hashtable]$_info,
         [array]$customFields

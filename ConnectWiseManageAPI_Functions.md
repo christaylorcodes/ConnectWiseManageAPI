@@ -62,6 +62,9 @@ This function will list companies based on conditions.
 ### [Get-CWMCompanyConfiguration](Docs/Get-CWMCompanyConfiguration.md)
 This function will list all CW company configurations.
 
+### [Get-CWMCompanyConfigurationType](Docs/Get-CWMCompanyConfigurationType.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMCompanyNote](Docs/Get-CWMCompanyNote.md)
 This function will list company notes based on conditions.
 
@@ -186,11 +189,15 @@ This function will list configs attached to a ticket.
 This function will list notes of a ticket based on conditions.
 
 ### [Get-CWMTicketTask](Docs/Get-CWMTicketTask.md)
-Get the tasks of a service ticket.
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMTimeEntry](Docs/Get-CWMTimeEntry.md)
 This function will allow you to search for Manage time entries.
 
 ### [Get-CWMTimeSheet](Docs/Get-CWMTimeSheet.md)
+This function will allow you to search for Manage configurations.
+
+### [New-CWMAgreement](Docs/New-CWMAgreement.md)
 This function will allow you to search for Manage configurations.
 
 ### [New-CWMAgreementAddition](Docs/New-CWMAgreementAddition.md)
@@ -198,6 +205,9 @@ This function will create a new agreement addition.
 
 ### [New-CWMCallbackEntry](Docs/New-CWMCallbackEntry.md)
 This function will create a new callback entry.
+
+### [New-CWMCompanyConfiguration](Docs/New-CWMCompanyConfiguration.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMCompanyConfigurationTypeQuestionValue](Docs/New-CWMCompanyConfigurationTypeQuestionValue.md)
 This function will create a new \<SOMETHING\>.
@@ -302,7 +312,8 @@ This will update a company type association.
 This will modify a contact by its ID.
 
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
-Update properties of a Manage member.
+{{ Fill in the Synopsis }}
+
 ### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
 This will update a catalog item.
 

@@ -14,13 +14,13 @@ This function will create a new catalog.
 
 ```
 New-CWMProductCatalog [-identifier] <String> [-description] <String> [[-inactiveFlag] <Boolean>]
- [-subcategory] <Object> [-type] <Object> [[-productClass] <String>] [[-serializedFlag] <Boolean>]
- [[-serializedCostFlag] <Boolean>] [[-phaseProductFlag] <Boolean>] [[-unitOfMeasure] <Object>]
+ [-subcategory] <Hashtable> [-type] <Hashtable> [[-productClass] <String>] [[-serializedFlag] <Boolean>]
+ [[-serializedCostFlag] <Boolean>] [[-phaseProductFlag] <Boolean>] [[-unitOfMeasure] <Hashtable>]
  [[-minStockLevel] <Int32>] [[-price] <Single>] [[-cost] <Single>] [[-priceAttribute] <Int32>]
- [[-taxableFlag] <Boolean>] [-customerDescription] <String> [[-manufacturer] <Object>]
- [[-manufacturerPartNumber] <String>] [[-vendor] <Object>] [[-vendorSku] <String>] [[-notes] <String>]
- [[-integrationXRef] <String>] [[-dateEntered] <String>] [[-category] <Object>] [[-_info] <Object>]
- [[-customFields] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-taxableFlag] <Boolean>] [-customerDescription] <String> [[-manufacturer] <Hashtable>]
+ [[-manufacturerPartNumber] <String>] [[-vendor] <Hashtable>] [[-vendorSku] <String>] [[-notes] <String>]
+ [[-integrationXRef] <String>] [[-dateEntered] <String>] [[-category] <Hashtable>] [[-_info] <Hashtable>]
+ [[-customFields] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,7 +72,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -87,7 +87,7 @@ Accept wildcard characters: False
 {{ Fill category Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -117,7 +117,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -222,7 +222,7 @@ Accept wildcard characters: False
 {{ Fill manufacturer Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -373,7 +373,7 @@ Accept wildcard characters: False
 {{ Fill subcategory Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -403,7 +403,7 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -418,7 +418,7 @@ Accept wildcard characters: False
 {{ Fill unitOfMeasure Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -433,7 +433,7 @@ Accept wildcard characters: False
 {{ Fill vendor Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 

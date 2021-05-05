@@ -13,8 +13,8 @@ This will update an project phase.
 ## SYNTAX
 
 ```
-Update-CWMProjectPhase [-ProjectID] <Object> [-PhaseID] <Object> [-Operation] <String> [-Path] <String>
- [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMProjectPhase -parentId <Int32> -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,36 +78,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PhaseID
-The ID of the phase that you are updating. Get-CWProjectPhases
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProjectID
-The ID of the project that you are updating. List-CWProjects
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Value
 The value of that operation.
 
@@ -135,6 +105,36 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: phaseId
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: projectId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

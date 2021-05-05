@@ -13,9 +13,9 @@ This function will list all companies that are a member of a marketing group bas
 ## SYNTAX
 
 ```
-Get-CWMMarketingGroupCompany [-id] <Int32> [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMMarketingGroupCompany -parentId <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-all] [<CommonParameters>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -99,9 +99,9 @@ This is the id of the marketing group.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
-Required: True
+Required: False
 Position: 0
 Default value: 0
 Accept pipeline input: False
@@ -149,6 +149,36 @@ Aliases:
 Required: False
 Position: 6
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Allows you to return a partial response with just the fields listed.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: groupId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

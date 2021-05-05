@@ -13,7 +13,7 @@ This will update a Manage project ticket.
 ## SYNTAX
 
 ```
-Update-CWMProjectTicket [-TicketID] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
+Update-CWMProjectTicket -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -78,21 +78,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TicketID
-ID of the project ticket you want to modify.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Value
 The value to be used for the operation.
 
@@ -118,6 +103,21 @@ Parameter Sets: (All)
 Aliases: wi
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: ticketID
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

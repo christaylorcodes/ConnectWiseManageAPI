@@ -13,7 +13,7 @@ This function will remove the supplied ticket.
 ## SYNTAX
 
 ```
-Remove-CWMTicket [-TicketID] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMTicket -id <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,21 +45,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TicketID
-The ticket ID of the ticket you want to remove
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -72,6 +57,21 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

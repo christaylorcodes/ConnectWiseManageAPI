@@ -14,7 +14,8 @@ This function list tickets that match your condition.
 
 ```
 Get-CWMTicket [-id <Int32>] [[-condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
- [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-all] [<CommonParameters>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [-fields <String[]>] [-all]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -164,7 +165,22 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: TicketID
+Aliases: ticketId
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Allows you to return a partial response with just the fields listed.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named

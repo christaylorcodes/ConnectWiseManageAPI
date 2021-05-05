@@ -13,7 +13,7 @@ This function will create a new contact communication.
 ## SYNTAX
 
 ```
-New-CWMContactCommunication [-id] <Int32> [[-contactId] <Int32>] [-type] <Hashtable> [-value] <String>
+New-CWMContactCommunication -parentId <Int32> [[-id] <Int32>] [-type] <Hashtable> [-value] <String>
  [[-extension] <String>] [[-defaultFlag] <Boolean>] [[-mobileGuid] <Guid>] [[-_info] <Hashtable>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
@@ -85,21 +85,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -contactId
-don't use?
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -defaultFlag
 Set to $true if you want to set as the default contact method.
 
@@ -138,7 +123,7 @@ Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: 0
 Accept pipeline input: False
@@ -187,6 +172,21 @@ Aliases:
 
 Required: True
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: contactId
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

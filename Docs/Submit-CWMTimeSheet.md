@@ -13,7 +13,7 @@ This function will submit a time sheet for approval.
 ## SYNTAX
 
 ```
-Submit-CWMTimeSheet [[-ID] <Int32>] [<CommonParameters>]
+Submit-CWMTimeSheet [-id] <Int32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,15 +30,15 @@ Will submit time sheet 1
 
 ## PARAMETERS
 
-### -ID
+### -id
 The ID of the time sheet you want to submit.
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: sheetId
 
-Required: False
+Required: True
 Position: 0
 Default value: 0
 Accept pipeline input: False

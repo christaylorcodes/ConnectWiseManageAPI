@@ -13,7 +13,7 @@ This will remove a contact by its ID.
 ## SYNTAX
 
 ```
-Remove-CWMContact [[-id] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMContact [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,9 +67,9 @@ The ID of the contact you want to delete.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: contactId
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False

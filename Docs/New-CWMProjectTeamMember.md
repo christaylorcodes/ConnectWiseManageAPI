@@ -13,9 +13,9 @@ This function will create a new ticket.
 ## SYNTAX
 
 ```
-New-CWMProjectTeamMember [-ProjectID] <Int32> [[-id] <Int32>] [[-hours] <Decimal>] [-member] <Object>
- [-projectRole] <Object> [[-workRole] <Object>] [[-startDate] <String>] [[-endDate] <String>]
- [[-_info] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMProjectTeamMember -parentId <Int32> [[-id] <Int32>] [[-hours] <Decimal>] [-member] <Hashtable>
+ [-projectRole] <Hashtable> [[-workRole] <Hashtable>] [[-startDate] <String>] [[-endDate] <String>]
+ [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -47,21 +47,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProjectID
-{{ Fill ProjectID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -82,7 +67,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -142,7 +127,7 @@ Accept wildcard characters: False
 {{ Fill member Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -157,7 +142,7 @@ Accept wildcard characters: False
 {{ Fill projectRole Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -187,12 +172,27 @@ Accept wildcard characters: False
 {{ Fill workRole Description }}
 
 ```yaml
-Type: Object
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: projectId
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

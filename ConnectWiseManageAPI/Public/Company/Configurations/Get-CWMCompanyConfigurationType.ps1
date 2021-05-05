@@ -1,4 +1,4 @@
-﻿function Get-CWMCompanyConfigurationTypes {
+﻿function Get-CWMCompanyConfigurationType {
     [CmdletBinding()]
     param(
         [int]$id,
@@ -17,5 +17,4 @@
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
-
 }
