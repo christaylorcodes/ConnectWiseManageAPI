@@ -36,7 +36,7 @@ Create a new callback for all tickets on service board 63.
 New-CWMCallbackEntry -level 'Status' -objectid 72 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
 ```
 
-Create a new callback for all tickets in status 63.
+Create a new callback for all tickets in status 72.
 
 ## PARAMETERS
 
