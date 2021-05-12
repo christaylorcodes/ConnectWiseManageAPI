@@ -1,21 +1,21 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyNoteTypes&o=GET#/CompanySites/getCompanyCompaniesByParentIdSites
 schema: 2.0.0
 ---
 
-# Get-CWMMarketingGroupCompany
+# Get-CWMCompanySite
 
 ## SYNOPSIS
-This function will list all companies that are a member of a marketing group based on conditions.
+Get a companies sites.
 
 ## SYNTAX
 
 ```
-Get-CWMMarketingGroupCompany -parentId <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMCompanySite [-parentId] <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [<CommonParameters>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,12 +23,12 @@ Get-CWMMarketingGroupCompany -parentId <Int32> [[-id] <Int32>] [[-Condition] <St
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Get-CWMMarketingGroupCompany -id 1 -all
+PS C:\> Get-CWMCompanySite -parentId 123
 ```
 
-Will return all companies that are a member or group 1
+Return the first 25 sites assigned to company id 123.
 
 ## PARAMETERS
 
@@ -42,7 +42,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -58,7 +58,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -72,14 +72,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+Allows searching custom fields.
 
 ```yaml
 Type: String
@@ -87,23 +87,38 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Allows you to return a partial response with just the fields listed.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -id
-This is the id of the marketing group.
+{{ Fill id Description }}
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: companyId
+Aliases: siteId
 
 Required: False
-Position: 0
-Default value: 0
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -117,14 +132,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+Used in pagination to cycle through results.
 
 ```yaml
 Type: Int32
@@ -132,8 +147,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
-Default value: 0
+Position: 6
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -147,37 +162,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-{{ Fill fields Description }}
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -parentId
-{{ Fill parentId Description }}
+The ID of the company you want to list site data for.
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: groupId
+Aliases: companyId
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -188,11 +188,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor Date: 1/9/2019
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=GET](https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=GET)

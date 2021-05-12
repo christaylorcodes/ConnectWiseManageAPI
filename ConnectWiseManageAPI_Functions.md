@@ -71,6 +71,9 @@ This function will list company notes based on conditions.
 ### [Get-CWMCompanyNoteType](Docs/Get-CWMCompanyNoteType.md)
 This function will list company note types based on conditions.
 
+### [Get-CWMCompanySite](Docs/Get-CWMCompanySite.md)
+Get a companies sites.
+
 ### [Get-CWMCompanyStatus](Docs/Get-CWMCompanyStatus.md)
 This function will list all CW company statuses.
 
@@ -310,6 +313,9 @@ This will update a company type association.
 
 ### [Update-CWMContact](Docs/Update-CWMContact.md)
 This will modify a contact by its ID.
+
+### [Update-CWMContactCommunication](Docs/Update-CWMContactCommunication.md)
+Update a contacts communication data.
 
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
 {{ Fill in the Synopsis }}

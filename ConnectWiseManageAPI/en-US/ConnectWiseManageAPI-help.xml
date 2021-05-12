@@ -1678,7 +1678,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1813,7 +1813,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4125,7 +4125,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4283,7 +4283,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4893,6 +4893,305 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyNoteTypes&amp;o=GET</maml:linkText>
         <maml:uri>https://developer.connectwise.com/products/manage/rest?a=Company&amp;e=CompanyNoteTypes&amp;o=GET</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-CWMCompanySite</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>CWMCompanySite</command:noun>
+      <maml:description>
+        <maml:para>Get a companies sites.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CWMCompanySite</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="companyId">
+          <maml:name>parentId</maml:name>
+          <maml:description>
+            <maml:para>The ID of the company you want to list site data for.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="siteId">
+          <maml:name>id</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill id Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Condition</maml:name>
+          <maml:description>
+            <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>orderBy</maml:name>
+          <maml:description>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>childConditions</maml:name>
+          <maml:description>
+            <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>customFieldConditions</maml:name>
+          <maml:description>
+            <maml:para>Allows searching custom fields.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>page</maml:name>
+          <maml:description>
+            <maml:para>Used in pagination to cycle through results.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+          <maml:name>pageSize</maml:name>
+          <maml:description>
+            <maml:para>Number of results returned per page (Defaults to 25)</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+          <maml:name>fields</maml:name>
+          <maml:description>
+            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>all</maml:name>
+          <maml:description>
+            <maml:para>Return all results</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Condition</maml:name>
+        <maml:description>
+          <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>all</maml:name>
+        <maml:description>
+          <maml:para>Return all results</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>childConditions</maml:name>
+        <maml:description>
+          <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>customFieldConditions</maml:name>
+        <maml:description>
+          <maml:para>Allows searching custom fields.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+        <maml:name>fields</maml:name>
+        <maml:description>
+          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="siteId">
+        <maml:name>id</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill id Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>orderBy</maml:name>
+        <maml:description>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>page</maml:name>
+        <maml:description>
+          <maml:para>Used in pagination to cycle through results.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <maml:name>pageSize</maml:name>
+        <maml:description>
+          <maml:para>Number of results returned per page (Defaults to 25)</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="companyId">
+        <maml:name>parentId</maml:name>
+        <maml:description>
+          <maml:para>The ID of the company you want to list site data for.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-CWMCompanySite -parentId 123</dev:code>
+        <dev:remarks>
+          <maml:para>Return the first 25 sites assigned to company id 123.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://developer.connectwise.com/Products/Manage/REST?a=Company&amp;e=CompanyNoteTypes&amp;o=GET#/CompanySites/getCompanyCompaniesByParentIdSites</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -6516,7 +6815,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6674,7 +6973,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6798,7 +7097,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6968,7 +7267,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7163,7 +7462,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7274,7 +7573,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7886,7 +8185,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8009,7 +8308,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8155,7 +8454,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8266,7 +8565,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8329,7 +8628,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>all</maml:name>
           <maml:description>
-            <maml:para>Return all results</maml:para>
+            <maml:para>{{ Fill all Description }}</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -8340,7 +8639,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>childConditions</maml:name>
           <maml:description>
-            <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+            <maml:para>{{ Fill childConditions Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8352,7 +8651,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
-            <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+            <maml:para>{{ Fill condition Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8364,7 +8663,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>customFieldConditions</maml:name>
           <maml:description>
-            <maml:para>Allows searching custom fields when customFieldConditions is listed in the parameters</maml:para>
+            <maml:para>{{ Fill customFieldConditions Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8376,7 +8675,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8400,7 +8699,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>page</maml:name>
           <maml:description>
-            <maml:para>Used in pagination to cycle through results</maml:para>
+            <maml:para>{{ Fill page Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -8412,7 +8711,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>pageSize</maml:name>
           <maml:description>
-            <maml:para>Number of results returned per page (Defaults to 25)</maml:para>
+            <maml:para>{{ Fill pageSize Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -8427,7 +8726,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>all</maml:name>
         <maml:description>
-          <maml:para>Return all results</maml:para>
+          <maml:para>{{ Fill all Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -8439,7 +8738,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>childConditions</maml:name>
         <maml:description>
-          <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+          <maml:para>{{ Fill childConditions Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8451,7 +8750,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
-          <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+          <maml:para>{{ Fill condition Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8463,7 +8762,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>customFieldConditions</maml:name>
         <maml:description>
-          <maml:para>Allows searching custom fields when customFieldConditions is listed in the parameters</maml:para>
+          <maml:para>{{ Fill customFieldConditions Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8475,7 +8774,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8499,7 +8798,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>page</maml:name>
         <maml:description>
-          <maml:para>Used in pagination to cycle through results</maml:para>
+          <maml:para>{{ Fill page Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -8511,7 +8810,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>pageSize</maml:name>
         <maml:description>
-          <maml:para>Number of results returned per page (Defaults to 25)</maml:para>
+          <maml:para>{{ Fill pageSize Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -8562,7 +8861,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>all</maml:name>
           <maml:description>
-            <maml:para>Return all results</maml:para>
+            <maml:para>{{ Fill all Description }}</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -8573,7 +8872,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>childConditions</maml:name>
           <maml:description>
-            <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+            <maml:para>{{ Fill childConditions Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8585,7 +8884,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
-            <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+            <maml:para>{{ Fill condition Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8597,7 +8896,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>customFieldConditions</maml:name>
           <maml:description>
-            <maml:para>Allows searching custom fields when customFieldConditions is listed in the parameters</maml:para>
+            <maml:para>{{ Fill customFieldConditions Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8609,7 +8908,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -8633,7 +8932,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>page</maml:name>
           <maml:description>
-            <maml:para>Used in pagination to cycle through results</maml:para>
+            <maml:para>{{ Fill page Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -8645,7 +8944,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>pageSize</maml:name>
           <maml:description>
-            <maml:para>Number of results returned per page (Defaults to 25)</maml:para>
+            <maml:para>{{ Fill pageSize Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -8660,7 +8959,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>all</maml:name>
         <maml:description>
-          <maml:para>Return all results</maml:para>
+          <maml:para>{{ Fill all Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -8672,7 +8971,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>childConditions</maml:name>
         <maml:description>
-          <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+          <maml:para>{{ Fill childConditions Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8684,7 +8983,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
-          <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+          <maml:para>{{ Fill condition Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8696,7 +8995,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>customFieldConditions</maml:name>
         <maml:description>
-          <maml:para>Allows searching custom fields when customFieldConditions is listed in the parameters</maml:para>
+          <maml:para>{{ Fill customFieldConditions Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8708,7 +9007,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -8732,7 +9031,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>page</maml:name>
         <maml:description>
-          <maml:para>Used in pagination to cycle through results</maml:para>
+          <maml:para>{{ Fill page Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -8744,7 +9043,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>pageSize</maml:name>
         <maml:description>
-          <maml:para>Number of results returned per page (Defaults to 25)</maml:para>
+          <maml:para>{{ Fill pageSize Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -9135,7 +9434,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9246,7 +9545,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9392,7 +9691,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9503,7 +9802,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9649,7 +9948,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9772,7 +10071,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9930,7 +10229,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10041,7 +10340,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10187,7 +10486,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10298,7 +10597,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10373,7 +10672,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -10444,7 +10743,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10519,7 +10818,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -10555,7 +10854,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10714,7 +11013,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -10837,7 +11136,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -10995,7 +11294,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -11106,7 +11405,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -11252,7 +11551,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -11375,7 +11674,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -11462,7 +11761,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -11533,7 +11832,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -11608,7 +11907,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -11644,7 +11943,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -11803,7 +12102,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -11914,7 +12213,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -12126,7 +12425,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -12237,7 +12536,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -12383,7 +12682,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -12494,7 +12793,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -12581,7 +12880,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -12751,7 +13050,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -12863,7 +13162,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -13021,7 +13320,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -13204,7 +13503,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -13315,7 +13614,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -13390,7 +13689,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -13548,7 +13847,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -14046,7 +14345,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -14157,7 +14456,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -14264,7 +14563,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>childConditions</maml:name>
           <maml:description>
-            <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+            <maml:para>{{ Fill childConditions Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -14276,7 +14575,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
-            <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+            <maml:para>{{ Fill condition Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -14288,7 +14587,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>customFieldConditions</maml:name>
           <maml:description>
-            <maml:para>Allows searching custom fields when customFieldConditions is listed in the parameters</maml:para>
+            <maml:para>{{ Fill customFieldConditions Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -14300,7 +14599,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -14387,7 +14686,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>childConditions</maml:name>
         <maml:description>
-          <maml:para>Allows searching arrays on endpoints that list childConditions under parameters</maml:para>
+          <maml:para>{{ Fill childConditions Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -14399,7 +14698,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
-          <maml:para>This is your search condition to return the results you desire. Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered &gt; [2015-12-23T05:53:27Z] or summary contains "test" AND  summary != "Some Summary"`</maml:para>
+          <maml:para>{{ Fill condition Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -14411,7 +14710,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>customFieldConditions</maml:name>
         <maml:description>
-          <maml:para>Allows searching custom fields when customFieldConditions is listed in the parameters</maml:para>
+          <maml:para>{{ Fill customFieldConditions Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -14423,7 +14722,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -14593,7 +14892,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -14716,7 +15015,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -14827,7 +15126,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill orderBy Description }}</maml:para>
+            <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -14985,7 +15284,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill orderBy Description }}</maml:para>
+          <maml:para>Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -15173,7 +15472,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -15284,7 +15583,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -15430,7 +15729,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
-            <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+            <maml:para>{{ Fill fields Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -15541,7 +15840,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
-          <maml:para>Allows you to return a partial response with just the fields listed.</maml:para>
+          <maml:para>{{ Fill fields Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -18759,7 +19058,7 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>New-CWMCallbackEntry -level 'Status' -objectid 72 -type 'ticket' -url 'http://christaylor.codes/webhook?id='</dev:code>
         <dev:remarks>
-          <maml:para>Create a new callback for all tickets in status 63.</maml:para>
+          <maml:para>Create a new callback for all tickets in status 72.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -41813,6 +42112,213 @@ Update-CWMCompanyTypeAssociation @UpdateParam</dev:code>
       <maml:navigationLink>
         <maml:linkText>https://developer.connectwise.com/Products/Manage/REST#/Contacts/patchCompanyContactsById</maml:linkText>
         <maml:uri>https://developer.connectwise.com/Products/Manage/REST#/Contacts/patchCompanyContactsById</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-CWMContactCommunication</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>CWMContactCommunication</command:noun>
+      <maml:description>
+        <maml:para>Update a contacts communication data.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Used to update the `communicationItems` property of a contact.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-CWMContactCommunication</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="contactId">
+          <maml:name>parentId</maml:name>
+          <maml:description>
+            <maml:para>The ID of the contact you want to modify.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Operation</maml:name>
+          <maml:description>
+            <maml:para>What you are doing with the value. replace, add, remove</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">add</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">replace</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">remove</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the property that you want to perform the operation on.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>Value</maml:name>
+          <maml:description>
+            <maml:para>The value you want to set the property to.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Operation</maml:name>
+        <maml:description>
+          <maml:para>What you are doing with the value. replace, add, remove</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>The path to the property that you want to perform the operation on.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>Value</maml:name>
+        <maml:description>
+          <maml:para>The value you want to set the property to.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="contactId">
+        <maml:name>parentId</maml:name>
+        <maml:description>
+          <maml:para>The ID of the contact you want to modify.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Update-CWMContactCommunication -parentId 123 -Operation replace -Path 'value' -Value 'new@email.com'</dev:code>
+        <dev:remarks>
+          <maml:para>Update the value of communication item 123 to the new value.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://developer.connectwise.com/Products/Manage/REST#/ContactCommunications/patchCompanyContactsByParentIdCommunicationsById</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

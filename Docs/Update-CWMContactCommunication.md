@@ -1,33 +1,33 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/Products/Manage/REST#/ContactCommunications/patchCompanyContactsByParentIdCommunicationsById
 schema: 2.0.0
 ---
 
-# Update-CWMCompanyConfiguration
+# Update-CWMContactCommunication
 
 ## SYNOPSIS
-This function will update a company configuration.
+Update a contacts communication data.
 
 ## SYNTAX
 
 ```
-Update-CWMCompanyConfiguration [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Update-CWMContactCommunication [-parentId] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This function will update a company configuration.
+Used to update the `communicationItems` property of a contact.
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Update-CWMContactCommunication -parentId 123 -Operation replace -Path 'value' -Value 'new@email.com'
 ```
 
-{{ Add example description here }}
+Update the value of communication item 123 to the new value.
 
 ## PARAMETERS
 
@@ -94,7 +94,8 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
 Type: SwitchParameter
@@ -108,13 +109,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill ID Description }}
+### -parentId
+The ID of the contact you want to modify.
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: configurationId
+Aliases: contactId
 
 Required: True
 Position: 0
