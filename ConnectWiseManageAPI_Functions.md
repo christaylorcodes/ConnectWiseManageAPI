@@ -63,7 +63,13 @@ This function will list companies based on conditions.
 This function will list all CW company configurations.
 
 ### [Get-CWMCompanyConfigurationType](Docs/Get-CWMCompanyConfigurationType.md)
-{{ Fill in the Synopsis }}
+List the company configuration types.
+
+### [Get-CWMCompanyContact](Docs/Get-CWMCompanyContact.md)
+This function will list contacts.
+
+### [Get-CWMCompanyContactNote](Docs/Get-CWMCompanyContactNote.md)
+This function will list a contacts notes.
 
 ### [Get-CWMCompanyNote](Docs/Get-CWMCompanyNote.md)
 This function will list company notes based on conditions.
@@ -89,9 +95,6 @@ This function will list company types.
 ### [Get-CWMCompanyTypeAssociation](Docs/Get-CWMCompanyTypeAssociation.md)
 This function will list all types associated with a company.
 
-### [Get-CWMContact](Docs/Get-CWMContact.md)
-This function will list contacts.
-
 ### [Get-CWMDepartment](Docs/Get-CWMDepartment.md)
 Returns available departments.
 
@@ -104,11 +107,11 @@ This function will list documents associated with a record.
 ### [Get-CWMManufacturer](Docs/Get-CWMManufacturer.md)
 This function will allow you to search for Manage manufacturers.
 
-### [Get-CWMMarketingGroup](Docs/Get-CWMMarketingGroup.md)
-This function will list marketing groups based on conditions.
-
 ### [Get-CWMMarketingGroupCompany](Docs/Get-CWMMarketingGroupCompany.md)
 This function will list all companies that are a member of a marketing group based on conditions.
+
+### [Get-CWMMarketingGroupContact](Docs/Get-CWMMarketingGroupContact.md)
+Will list a marketing groups contacts.
 
 ### [Get-CWMMember](Docs/Get-CWMMember.md)
 This function will list ConnectWise Manage members based on conditions.
@@ -192,7 +195,7 @@ This function will list configs attached to a ticket.
 This function will list notes of a ticket based on conditions.
 
 ### [Get-CWMTicketTask](Docs/Get-CWMTicketTask.md)
-{{ Fill in the Synopsis }}
+Will list the tasks associated with a ticket.
 
 ### [Get-CWMTimeEntry](Docs/Get-CWMTimeEntry.md)
 This function will allow you to search for Manage time entries.
@@ -210,19 +213,22 @@ This function will create a new agreement addition.
 This function will create a new callback entry.
 
 ### [New-CWMCompanyConfiguration](Docs/New-CWMCompanyConfiguration.md)
-{{ Fill in the Synopsis }}
+Will create a new configuration for the given company.
 
 ### [New-CWMCompanyConfigurationTypeQuestionValue](Docs/New-CWMCompanyConfigurationTypeQuestionValue.md)
 This function will create a new \<SOMETHING\>.
+
+### [New-CWMCompanyContact](Docs/New-CWMCompanyContact.md)
+This function will create a new contact.
+
+### [New-CWMCompanyContactNote](Docs/New-CWMCompanyContactNote.md)
+This function will create a note on the given contact.
 
 ### [New-CWMCompanyTeam](Docs/New-CWMCompanyTeam.md)
 This function will create a new company team.
 
 ### [New-CWMCompanyTypeAssociation](Docs/New-CWMCompanyTypeAssociation.md)
 Creates a new type association for a company
-
-### [New-CWMContact](Docs/New-CWMContact.md)
-This function will create a new contact.
 
 ### [New-CWMContactCommunication](Docs/New-CWMContactCommunication.md)
 This function will create a new contact communication.
@@ -275,11 +281,14 @@ This function will remove a Callback entry from Manage.
 ### [Remove-CWMCompanyConfiguration](Docs/Remove-CWMCompanyConfiguration.md)
 This function will remove a company configuration from Manage.
 
+### [Remove-CWMCompanyContact](Docs/Remove-CWMCompanyContact.md)
+Removes a contact.
+
+### [Remove-CWMCompanyContactNote](Docs/Remove-CWMCompanyContactNote.md)
+Removes a note from a contact.
+
 ### [Remove-CWMCompanyTypeAssociation](Docs/Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.
-
-### [Remove-CWMContact](Docs/Remove-CWMContact.md)
-This will remove a contact by its ID.
 
 ### [Remove-CWMMarketingGroupCompany](Docs/Remove-CWMMarketingGroupCompany.md)
 This function will remove a company from a marketing group.
@@ -308,17 +317,17 @@ This function will update a company configuration.
 ### [Update-CWMCompanyConfigurationTypeQuestionValue](Docs/Update-CWMCompanyConfigurationTypeQuestionValue.md)
 This will update a company configuration question value.
 
+### [Update-CWMCompanyContact](Docs/Update-CWMCompanyContact.md)
+This will modify a contact by its ID.
+
 ### [Update-CWMCompanyTypeAssociation](Docs/Update-CWMCompanyTypeAssociation.md)
 This will update a company type association.
-
-### [Update-CWMContact](Docs/Update-CWMContact.md)
-This will modify a contact by its ID.
 
 ### [Update-CWMContactCommunication](Docs/Update-CWMContactCommunication.md)
 Update a contacts communication data.
 
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
-{{ Fill in the Synopsis }}
+Update the properties of a ConnectWise Manage member.
 
 ### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
 This will update a catalog item.

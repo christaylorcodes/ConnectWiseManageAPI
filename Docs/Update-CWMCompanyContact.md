@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values~1{Id}/patch
 schema: 2.0.0
 ---
 
-# Update-CWMContact
+# Update-CWMCompanyContact
 
 ## SYNOPSIS
 This will modify a contact by its ID.
@@ -13,8 +13,8 @@ This will modify a contact by its ID.
 ## SYNTAX
 
 ```
-Update-CWMContact [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Update-CWMCompanyContact [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,10 +24,10 @@ You can perform one of the PATCH operations on a contact.
 
 ### Example 1
 ```powershell
-PS C:\> Update-CWMContact -id 1 -Operation add -Path 'title' -Value 'Janitor'
+PS C:\> Update-CWMCompanyContact -id $Contact.id -Operation add -Path 'title' -Value 'Janitor'
 ```
 
-We are adding a title to the contact 1.
+Will add a title to the given contact.
 
 ## PARAMETERS
 
@@ -47,7 +47,8 @@ Accept wildcard characters: False
 ```
 
 ### -Operation
-What you are doing with the value. (add, replace, remove)
+What you are doing with the value.
+replace, add, remove
 
 ```yaml
 Type: String
@@ -63,7 +64,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-The value that you want to perform the operation on.
+The path to the property that you want to perform the operation on.
 
 ```yaml
 Type: String
@@ -78,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -Value
-The value of that operation.
+The value you want to set the property to.
 
 ```yaml
 Type: Object
@@ -109,7 +110,7 @@ Accept wildcard characters: False
 ```
 
 ### -id
-The ID of the contact you are updating. `Get-CWMContact`
+The ID of the contact you want to update.
 
 ```yaml
 Type: Int32
@@ -133,8 +134,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
-Author: Chris Taylor Date: 1/25/2020
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Products/Manage/REST#/Contacts/patchCompanyContactsById](https://developer.connectwise.com/Products/Manage/REST#/Contacts/patchCompanyContactsById)

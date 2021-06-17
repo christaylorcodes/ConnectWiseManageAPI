@@ -1,32 +1,32 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE
 schema: 2.0.0
 ---
 
-# Remove-CWMContact
+# Remove-CWMCompanyContact
 
 ## SYNOPSIS
-This will remove a contact by its ID.
+Removes a contact.
 
 ## SYNTAX
 
 ```
-Remove-CWMContact [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMCompanyContact [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The contact given will be removed from Manage.
+Removes a company contact via ID.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Remove-CWMContact -id 1
+PS C:\> Remove-CWMCompanyContact -id $Contact.id
 ```
 
-This will remove contact 1.
+Will remove the contact given.
 
 ## PARAMETERS
 
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -id
-The ID of the contact you want to delete.
+The ID of the contact you want removed.
 
 ```yaml
 Type: Int32
@@ -86,8 +86,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
-Author: Chris Taylor Date: 1/25/2020
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Products/Manage/REST#/Contacts/deleteCompanyContactsById](https://developer.connectwise.com/Products/Manage/REST#/Contacts/deleteCompanyContactsById)

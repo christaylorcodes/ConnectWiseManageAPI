@@ -1,34 +1,34 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=GET
+online version: https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=GET
 schema: 2.0.0
 ---
 
-# Get-CWMTicketTask
+# Get-CWMCompanyContactNote
 
 ## SYNOPSIS
-Will list the tasks associated with a ticket.
+This function will list a contacts notes.
 
 ## SYNTAX
 
 ```
-Get-CWMTicketTask [-parentId] <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
+Get-CWMCompanyContactNote [-parentId] <Int32> [[-id] <Int32>] [[-Condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Will list the tasks associated with a ticket via ID or conditions.
+Used to return a company contacts notes via ID or conditions.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Get-CWMTicketTask -parentId $Ticket.id -all
+PS C:\> Get-CWMCompanyContactNote -parentId $Contact.id
 ```
 
-Will list all the tasks associated with the given ticket.
+Will return all notes for the given contact.
 
 ## PARAMETERS
 
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+Allows searching custom fields.
 
 ```yaml
 Type: String
@@ -109,12 +109,12 @@ Accept wildcard characters: False
 ```
 
 ### -id
-The ID of the task you want returned.
+The ID of the note you want returned.
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: taskId
+Aliases: noteId
 
 Required: False
 Position: 1
@@ -139,7 +139,7 @@ Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+Used in pagination to cycle through results.
 
 ```yaml
 Type: Int32
@@ -169,12 +169,12 @@ Accept wildcard characters: False
 ```
 
 ### -parentId
-The ID of the ticket you want the tasks from.
+The ID of the contact you want to return the notes of.
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: ticketId
+Aliases: contactId
 
 Required: True
 Position: 0

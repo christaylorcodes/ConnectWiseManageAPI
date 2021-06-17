@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-CWMUrl
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Used to generate the full URL to be invoked.
 
 ## SYNTAX
 

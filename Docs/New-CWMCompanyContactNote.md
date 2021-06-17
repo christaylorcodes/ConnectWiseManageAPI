@@ -1,33 +1,34 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST#/ContactCommunications/patchCompanyContactsByParentIdCommunicationsById
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post
 schema: 2.0.0
 ---
 
-# Update-CWMContactCommunication
+# New-CWMCompanyContactNote
 
 ## SYNOPSIS
-Update a contacts communication data.
+This function will create a note on the given contact.
 
 ## SYNTAX
 
 ```
-Update-CWMContactCommunication [-parentId] <Int32> -id <Int32> [-Operation] <String> [-Path] <String>
- [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMCompanyContactNote [-parentId] <Int32> [[-id] <Int32>] [-text] <String> [[-type] <Hashtable>]
+ [[-flagged] <Boolean>] [[-enteredBy] <String>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Used to update the `communicationItems` property of a contact.
+This function will create a note on the given contact.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Update-CWMContactCommunication -parentId 123 -Operation replace -Path 'value' -Value 'new@email.com'
+PS C:\> New-CWMCompanyContactNote -parentId $Contact.id -text 'This guy rocks!'
 ```
 
-Update the value of communication item 123 to the new value.
+Will add a note to the given contact.
 
 ## PARAMETERS
 
@@ -41,53 +42,6 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Operation
-What you are doing with the value.
-replace, add, remove
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: add, replace, remove
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-The path to the property that you want to perform the operation on.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Value
-The value you want to set the property to.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -109,8 +63,68 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -_info
+Used to give a non-default value for the _info field.
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -enteredBy
+Used to give a non-default value for the enteredBy field.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -flagged
+Used to flag the note.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+Dont use.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -parentId
-The ID of the contact you want to modify.
+The ID of the contact you want the note associated with.
 
 ```yaml
 Type: Int32
@@ -124,16 +138,31 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The ID of the communication item you want to update.
+### -text
+The text you want in the note.
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
-Aliases: communicationId
+Aliases:
 
 Required: True
-Position: Named
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -type
+Set a type for the note.
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

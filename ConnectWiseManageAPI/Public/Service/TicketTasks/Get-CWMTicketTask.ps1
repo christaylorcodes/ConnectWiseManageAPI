@@ -2,7 +2,9 @@ function Get-CWMTicketTask {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
+        [Alias('ticketId')]
         [int]$parentId,
+        [Alias('taskId')]
         [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]

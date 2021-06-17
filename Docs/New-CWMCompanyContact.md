@@ -1,47 +1,44 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post
 schema: 2.0.0
 ---
 
-# New-CWMCompanyConfiguration
+# New-CWMCompanyContact
 
 ## SYNOPSIS
-Will create a new configuration for the given company.
+This function will create a new contact.
 
 ## SYNTAX
 
 ```
-New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Hashtable>] [-company] <Hashtable>
- [[-contact] <Hashtable>] [[-site] <Hashtable>] [[-locationID] <Int32>] [[-businessUnitID] <Int32>]
- [[-deviceIdentifier] <String>] [[-serialNumber] <String>] [[-modelNumber] <String>] [[-tagNumber] <String>]
- [[-purchaseDate] <String>] [[-installationDate] <String>] [[-installedby] <Hashtable>]
- [[-warrantyExpirationDate] <String>] [[-vendorNotes] <String>] [[-notes] <String>] [[-macAddress] <String>]
- [[-lastLoginName] <String>] [[-billFlag] <Boolean>] [[-backupSuccesses] <Int32>] [[-backupIncomplete] <Int32>]
- [[-backupFailed] <Int32>] [[-backupRestores] <Int32>] [[-lastBackupDate] <String>]
- [[-backupServerName] <String>] [[-backupBillableSpaceGb] <Int64>] [[-backupProtectedDeviceList] <String>]
- [[-backupYear] <Int32>] [[-backupMonth] <Int32>] [[-ipAddress] <String>] [[-defaultGateway] <String>]
- [[-osType] <String>] [[-osInfo] <String>] [[-cpuSpeed] <String>] [[-ram] <String>]
- [[-localHardDrives] <String>] [[-parentConfigurationId] <Int32>] [[-vendor] <Hashtable>]
- [[-manufacturer] <Hashtable>] [[-questions] <Array>] [[-activeFlag] <Boolean>] [[-managementLink] <String>]
- [[-remoteLink] <String>] [[-sla] <Hashtable>] [[-mobilezGuid] <String>] [[-_info] <Hashtable>]
- [[-displayVendorFlag] <Boolean>] [[-companyLocationId] <Int32>] [[-showRemoteFlag] <Boolean>]
- [[-showAutomateFlag] <Boolean>] [[-needsRenewalFlag] <Boolean>] [[-manufacturerPartNumber] <String>]
- [[-customFields] <Array>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [[-type] <Hashtable>]
+ [[-company] <Hashtable>] [[-site] <Hashtable>] [[-addressLine1] <String>] [[-addressLine2] <String>]
+ [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <String>] [[-relationship] <Hashtable>]
+ [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>] [[-defaultMergeContactId] <Int32>]
+ [[-securityIdentifier] <String>] [[-managerContactId] <Int32>] [[-assistantContactId] <Int32>]
+ [[-title] <String>] [[-school] <String>] [[-nickName] <String>] [[-marriedFlag] <Boolean>]
+ [[-childrenFlag] <Boolean>] [[-significantOther] <String>] [[-portalPassword] <SecureString>]
+ [[-portalSecurityLevel] <Int32>] [[-disablePortalLoginFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>]
+ [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>] [[-presence] <String>]
+ [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>] [[-linkedInUrl] <String>]
+ [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>] [[-communicationItems] <Hashtable[]>]
+ [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This function will create a new contact with the given values.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-CWMCompanyContact -firstName 'Chris' -lastName 'Taylor' -company @{id = $Company.id}
 ```
 
-{{ Add example description here }}
+Will create a new contact, Chris Taylor, under the given company
+.
 
 ## PARAMETERS
 
@@ -85,89 +82,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 47
+Position: 40
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -activeFlag
-{{ Fill activeFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 42
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupBillableSpaceGb
-{{ Fill backupBillableSpaceGb Description }}
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 27
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupFailed
-{{ Fill backupFailed Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupIncomplete
-{{ Fill backupIncomplete Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupMonth
-{{ Fill backupMonth Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupProtectedDeviceList
-{{ Fill backupProtectedDeviceList Description }}
+### -addressLine1
+{{ Fill addressLine1 Description }}
 
 ```yaml
 Type: String
@@ -175,92 +97,17 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 28
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -backupRestores
-{{ Fill backupRestores Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 24
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupServerName
-{{ Fill backupServerName Description }}
+### -addressLine2
+{{ Fill addressLine2 Description }}
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 26
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupSuccesses
-{{ Fill backupSuccesses Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -backupYear
-{{ Fill backupYear Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 29
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billFlag
-{{ Fill billFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -businessUnitID
-{{ Fill businessUnitID Description }}
-
-```yaml
-Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -271,158 +118,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -company
-{{ Fill company Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -companyLocationId
-{{ Fill companyLocationId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 49
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -contact
-{{ Fill contact Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -cpuSpeed
-{{ Fill cpuSpeed Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 35
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFields
-{{ Fill customFields Description }}
-
-```yaml
-Type: Array
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 54
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultGateway
-{{ Fill defaultGateway Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 32
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -deviceIdentifier
-{{ Fill deviceIdentifier Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -displayVendorFlag
-{{ Fill displayVendorFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 48
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -installationDate
-{{ Fill installationDate Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -installedby
-{{ Fill installedby Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ipAddress
-{{ Fill ipAddress Description }}
+### -anniversary
+{{ Fill anniversary Description }}
 
 ```yaml
 Type: String
@@ -436,71 +133,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -lastBackupDate
-{{ Fill lastBackupDate Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 25
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -lastLoginName
-{{ Fill lastLoginName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -localHardDrives
-{{ Fill localHardDrives Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 37
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -locationID
-{{ Fill locationID Description }}
+### -assistantContactId
+{{ Fill assistantContactId Description }}
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -macAddress
-{{ Fill macAddress Description }}
-
-```yaml
-Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -511,8 +148,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -managementLink
-{{ Fill managementLink Description }}
+### -birthDay
+{{ Fill birthDay Description }}
 
 ```yaml
 Type: String
@@ -520,89 +157,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 43
+Position: 30
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -manufacturer
-{{ Fill manufacturer Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 40
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -manufacturerPartNumber
-{{ Fill manufacturerPartNumber Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 53
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -mobilezGuid
-{{ Fill mobilezGuid Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 46
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -modelNumber
-{{ Fill modelNumber Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -name
-{{ Fill name Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -needsRenewalFlag
-{{ Fill needsRenewalFlag Description }}
+### -childrenFlag
+{{ Fill childrenFlag Description }}
 
 ```yaml
 Type: Boolean
@@ -610,14 +172,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 52
+Position: 23
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -notes
-{{ Fill notes Description }}
+### -city
+{{ Fill city Description }}
 
 ```yaml
 Type: String
@@ -625,14 +187,149 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 17
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -osInfo
-{{ Fill osInfo Description }}
+### -communicationItems
+{{ Fill communicationItems Description }}
+
+```yaml
+Type: Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 39
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -company
+{{ Fill company Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -country
+{{ Fill country Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFields
+{{ Fill customFields Description }}
+
+```yaml
+Type: Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 41
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultBillingFlag
+{{ Fill defaultBillingFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 37
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultFlag
+{{ Fill defaultFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 38
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultMergeContactId
+{{ Fill defaultMergeContactId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -department
+{{ Fill department Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -disablePortalLoginFlag
+{{ Fill disablePortalLoginFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 27
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -facebookUrl
+{{ Fill facebookUrl Description }}
 
 ```yaml
 Type: String
@@ -646,23 +343,39 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -osType
-{{ Fill osType Description }}
+### -firstName
+{{ Fill firstName Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 33
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentConfigurationId
-{{ Fill parentConfigurationId Description }}
+### -gender
+{{ Fill gender Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Male, Female
+
+Required: False
+Position: 29
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
 
 ```yaml
 Type: Int32
@@ -670,14 +383,29 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 38
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -purchaseDate
-{{ Fill purchaseDate Description }}
+### -inactiveFlag
+{{ Fill inactiveFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -lastName
+{{ Fill lastName Description }}
 
 ```yaml
 Type: String
@@ -685,29 +413,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 12
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -questions
-{{ Fill questions Description }}
-
-```yaml
-Type: Array
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 41
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ram
-{{ Fill ram Description }}
+### -linkedInUrl
+{{ Fill linkedInUrl Description }}
 
 ```yaml
 Type: String
@@ -721,38 +434,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -remoteLink
-{{ Fill remoteLink Description }}
+### -managerContactId
+{{ Fill managerContactId Description }}
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 44
+Position: 17
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -serialNumber
-{{ Fill serialNumber Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -showAutomateFlag
-{{ Fill showAutomateFlag Description }}
+### -marriedFlag
+{{ Fill marriedFlag Description }}
 
 ```yaml
 Type: Boolean
@@ -760,22 +458,143 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 51
+Position: 22
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -showRemoteFlag
-{{ Fill showRemoteFlag Description }}
+### -mobileGuid
+{{ Fill mobileGuid Description }}
 
 ```yaml
-Type: Boolean
+Type: Guid
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 50
+Position: 33
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -nickName
+{{ Fill nickName Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -portalPassword
+{{ Fill portalPassword Description }}
+
+```yaml
+Type: SecureString
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -portalSecurityLevel
+{{ Fill portalSecurityLevel Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 26
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -presence
+{{ Fill presence Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Online, DoNotDisturb, Away, Offline, NoAgent
+
+Required: False
+Position: 32
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -relationship
+{{ Fill relationship Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -school
+{{ Fill school Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -securityIdentifier
+{{ Fill securityIdentifier Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -significantOther
+{{ Fill significantOther Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -796,38 +615,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -sla
-{{ Fill sla Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 45
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -status
-{{ Fill status Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -tagNumber
-{{ Fill tagNumber Description }}
+### -state
+{{ Fill state Description }}
 
 ```yaml
 Type: String
@@ -835,7 +624,37 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 11
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -title
+{{ Fill title Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -twitterUrl
+{{ Fill twitterUrl Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 35
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -849,45 +668,30 @@ Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -vendor
-{{ Fill vendor Description }}
+### -unsubscribeFlag
+{{ Fill unsubscribeFlag Description }}
 
 ```yaml
-Type: Hashtable
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 39
+Position: 28
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -vendorNotes
-{{ Fill vendorNotes Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -warrantyExpirationDate
-{{ Fill warrantyExpirationDate Description }}
+### -zip
+{{ Fill zip Description }}
 
 ```yaml
 Type: String
@@ -895,7 +699,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 15
+Position: 10
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
