@@ -1,6 +1,7 @@
-function Update-CWMContact {
+function Update-CWMCompanyContact {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [Alias('Update-CWMContact')]
     param(
         [Parameter(Mandatory=$true)]
         [Alias('contactId')]

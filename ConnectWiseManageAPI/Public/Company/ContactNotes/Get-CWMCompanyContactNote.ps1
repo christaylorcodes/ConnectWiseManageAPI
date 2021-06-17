@@ -1,6 +1,11 @@
-﻿function Get-CWMContact {
+function Get-CWMCompanyContactNote {
     [CmdletBinding()]
+    [Alias('Get-CWMContactNote')]
     param(
+        [Parameter(Mandatory=$true)]
+        [Alias('contactId')]
+        [int]$parentId,
+        [Alias('noteId')]
         [int]$id,
         [string]$Condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -13,7 +18,7 @@
         [switch]$all
     )
 
-    $Endpoint = '/company/contacts'
+    $Endpoint = "/company/contacts/$($parentId)/notes"
     if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

@@ -6,6 +6,9 @@ function Update-CWMContactCommunication {
         [Alias('contactId')]
         [int]$parentId,
         [Parameter(Mandatory=$true)]
+        [Alias('communicationId')]
+        [int]$id,
+        [Parameter(Mandatory=$true)]
         [validateset('add','replace','remove')]
         [string]$Operation,
         [Parameter(Mandatory=$true)]
@@ -14,6 +17,6 @@ function Update-CWMContactCommunication {
         $Value
     )
 
-    $Endpoint = "/company/contacts/$($parentId)/communications"
+    $Endpoint = "/company/contacts/$($parentId)/communications/$($id)"
     Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

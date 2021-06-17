@@ -1,6 +1,7 @@
-function Remove-CWMContact {
+function Remove-CWMCompanyContact {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [Alias('Remove-CWMContact')]
     param(
         [Parameter(Mandatory=$true)]
         [Alias('contactId')]

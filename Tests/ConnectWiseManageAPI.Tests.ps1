@@ -9,6 +9,36 @@ if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master") {
 $PSVersion = $PSVersionTable.PSVersion.Major
 Import-Module $PSScriptRoot\..\$($ModuleName)\$($ModuleName).psm1 -Force
 
+Describe "Parameters PS$PSVersion Integrations tests" {
+
+    Context 'Strict mode' {
+
+        Set-StrictMode -Version latest
+        It 'Get function fields' {
+            $MandatoryParams = @('condition', 'orderBy', 'childConditions', 'customFieldConditions', 'page', 'pageSize', 'fields', 'all')
+            $ExcludeFunction = @('Get-CWMChargeCode','Get-CWMReportColumn', 'Get-CWMSystemInfo')
+            try {
+                $GetFunctions = (Get-Module ConnectWiseManageAPI).ExportedCommands.Keys | Where-Object {$_ -like 'Get-CWM*'}
+                foreach($Function in $GetFunctions){
+                    if($ExcludeFunction -contains $Function){ continue }
+                    $FunctionParams = (Get-Command $Function).Parameters.Keys
+                    foreach($TestParam in $MandatoryParams){
+                        if($FunctionParams -notcontains $TestParam){
+                            Write-Output "$Function is missing, $TestParam"
+                        }
+                    }
+
+                }
+            }
+            catch {
+                $Result = $_
+            }
+            $Result | Should -Be $null
+        }
+    }
+}
+
+
 Describe "Connect-CWM  PS$PSVersion Integrations tests" {
 
     Context 'Strict mode' {
@@ -75,6 +105,25 @@ Describe "Connect-CWM  PS$PSVersion Integrations tests" {
                     clientid = $env:CWMClientID
                 }
                 $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+            }
+            catch {
+                $Result = $_
+            }
+            $Result | Should -Be $null
+        }
+        It 'Get function fields' {
+            $MandatoryParams = @('condition', 'orderBy', 'childConditions', 'customFieldConditions', 'page', 'pageSize', 'fields', 'all')
+            try {
+                $GetFunctions = (Get-Module ConnectWiseManageAPI).ExportedCommands.Keys | Where-Object {$_ -like 'Get-CWM*'}
+                foreach($Function in $GetFunctions){
+                    $FunctionParams = (Get-Command $Function).Parameters.Keys
+                    foreach($TestParam in $MandatoryParams){
+                        if($FunctionParams -notcontains $TestParam){
+                            Write-Output "$Function is missing, $TestParam"
+                        }
+                    }
+
+                }
             }
             catch {
                 $Result = $_
