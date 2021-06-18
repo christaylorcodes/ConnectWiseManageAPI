@@ -16,4 +16,4 @@ foreach($import in @($Public + $Private)) {
 # Set variables visible to the module and its functions only
 Add-Type -AssemblyName System.Web
 
-Export-ModuleMember -Function $Public.Basename
+Export-ModuleMember -Function $Public.Basename -Alias *
