@@ -2,10 +2,10 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [validateset('Ticket', 'ProductCatalog', 'Configuration', 'PurchaseOrder', 'Expense')]
-        $Type,
+        [ValidateSet('Ticket', 'ProductCatalog', 'Configuration', 'PurchaseOrder', 'Expense')]
+        $type,
         [Parameter(Mandatory=$true)]
-        [string]$ID,
+        [string]$id,
         [string]$deviceIdentifier,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -18,10 +18,10 @@
         [switch]$all
     )
 
-    $Endpoint = '/company/companies'
+    $Endpoint = '/system/audittrail'
 
     if($Type){ $Endpoint += "&type=$type" }
-    if($ID){ $Endpoint += "&id=$ID" }
+    if($ID){ $Endpoint += "&id=$id" }
     if($deviceIdentifier){ $Endpoint += "&deviceIdentifier=$deviceIdentifier" }
 
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

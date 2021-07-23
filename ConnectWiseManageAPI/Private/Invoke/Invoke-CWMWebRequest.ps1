@@ -57,14 +57,26 @@
             }
             $ErrBody = $script:ErrBody
             if($ErrBody.code){
-                $ErrorMessage += "An exception has been thrown."
+                $ErrorMessage += "An exception code has been thrown."
                 $ErrorMessage += "--> $($ErrBody.code)"
                 if($ErrBody.code -eq 'Unauthorized'){
                     $ErrorMessage += "-----> $($ErrBody.message)"
                     $ErrorMessage += "-----> Use 'Disconnect-CWM' or 'Connect-CWM -Force' to set new authentication."
                 }
+                elseif($ErrBody.code -eq 'ConnectWiseApi'){
+                    switch($ErrBody.message){
+                        'UserNotAuthenticated' {
+                            $ErrorMessage += "-----> $($ErrBody.message)"
+                            $ErrorMessage += "-----> Check your connection parameters and/or user permissions."
+                        }
+                        Default {
+                            $ErrorMessage += "-----> $($ErrBody.message)"
+                            $ErrorMessage += "-----> ^ Error has not been documented please report. ^"
+                        }
+                    }
+                }
                 else {
-                    $ErrorMessage += "-----> $($ErrBody.code): $($ErrBody.message)"
+                    $ErrorMessage += "-----> $($ErrBody.message)"
                     $ErrorMessage += "-----> ^ Error has not been documented please report. ^"
                 }
             } elseif ($_.Exception.message) {
@@ -112,5 +124,5 @@
         $script:CWMServerConnection.'api-current-version' = $Result.Headers.'api-current-version'
     }
 
-    return $Result
+    $Result
 }

@@ -50,6 +50,9 @@ This function will list the teams of a service board based on conditions.
 ### [Get-CWMBoardType](Docs/Get-CWMBoardType.md)
 This function will list the types of a service board based on conditions.
 
+### [Get-CWMBoardTypeSubTypeItemAssociation](Docs/Get-CWMBoardTypeSubTypeItemAssociation.md)
+Get List of BoardTypeSubTypeItemAssociations
+
 ### [Get-CWMCallbackEntry](Docs/Get-CWMCallbackEntry.md)
 This function will list Callback entries based on conditions.
 
