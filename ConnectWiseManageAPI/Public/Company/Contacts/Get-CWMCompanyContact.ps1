@@ -3,7 +3,8 @@
     [Alias('Get-CWMContact')]
     param(
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -15,7 +16,5 @@
     )
 
     $Endpoint = '/company/contacts'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

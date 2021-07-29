@@ -5,6 +5,7 @@
         [Alias('ticketId')]
         [int]$parentId,
         [int]$id,
+        [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -17,7 +18,5 @@
       )
 
      $Endpoint = "/service/tickets/$($parentId)/configurations"
-     if($id){ $Endpoint = Join-Url $Endpoint $id }
-
      Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
   }

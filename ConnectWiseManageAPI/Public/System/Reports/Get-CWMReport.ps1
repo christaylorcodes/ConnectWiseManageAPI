@@ -3,7 +3,7 @@
     param(
         [Alias('reportName')]
         [string]$id,
-        [string]$Condition,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -15,7 +15,6 @@
     )
 
     $Endpoint = '/system/reports'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
     $Result = Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     if(!$Result){ return }
     if($id){ ConvertFrom-CWMColumnRow -Data $Result }

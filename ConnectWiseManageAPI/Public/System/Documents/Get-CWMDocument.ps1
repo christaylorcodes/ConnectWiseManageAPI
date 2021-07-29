@@ -15,6 +15,7 @@
         'ServiceBoard', 'WordTemplate', 'Member', 'PortalImagePortalLogo', 'PortalImageReportLogo',
         'TopNavigationLogo', 'PhaseStatus', 'ProjectStatus', 'TicketStatus', 'Schedule', 'Priority', 'Unassigned')]
         [string]$recordType,
+        [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -27,7 +28,6 @@
     )
 
     $Endpoint = '/system/documents'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
     if($recordId -and $recordType){ $Endpoint = "$($Endpoint)?recordId=$($recordId)&recordType=$($recordType)" }
 
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

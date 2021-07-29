@@ -7,7 +7,8 @@ function Get-CWMCompanyContactNote {
         [int]$parentId,
         [Alias('noteId')]
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -19,7 +20,5 @@ function Get-CWMCompanyContactNote {
     )
 
     $Endpoint = "/company/contacts/$($parentId)/notes"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

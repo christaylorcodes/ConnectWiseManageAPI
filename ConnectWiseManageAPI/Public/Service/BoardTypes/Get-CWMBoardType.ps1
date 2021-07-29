@@ -5,7 +5,8 @@ function Get-CWMBoardType {
         [Alias('boardId')]
         [int]$parentId,
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         $orderBy,
         [string]$childconditions,
@@ -17,7 +18,5 @@ function Get-CWMBoardType {
     )
 
     $Endpoint = "/service/boards/$($parentId)/types"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

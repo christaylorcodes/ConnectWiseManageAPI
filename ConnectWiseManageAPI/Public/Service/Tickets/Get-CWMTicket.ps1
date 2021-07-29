@@ -3,6 +3,7 @@
     param(
         [Alias('ticketId')]
         [int]$id,
+        [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -13,10 +14,8 @@
         [string[]]$fields,
         [switch]$all
     )
-    if ($id) {
+    if ($id -or $count.IsPresent) {
         $Endpoint = '/service/tickets'
-        if($id){ $Endpoint = Join-Url $Endpoint $id }
-
         Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
     else {

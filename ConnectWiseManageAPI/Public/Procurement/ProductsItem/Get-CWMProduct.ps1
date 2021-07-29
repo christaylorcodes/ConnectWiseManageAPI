@@ -2,7 +2,8 @@ function Get-CWMProduct {
     [CmdletBinding()]
     param(
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childconditions,
@@ -14,7 +15,5 @@ function Get-CWMProduct {
     )
 
     $Endpoint = '/procurement/products'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

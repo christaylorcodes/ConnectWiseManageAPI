@@ -6,7 +6,8 @@ function Get-CWMTicketTask {
         [int]$parentId,
         [Alias('taskId')]
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -18,7 +19,5 @@ function Get-CWMTicketTask {
     )
 
     $Endpoint = "/service/tickets/$($parentId)/tasks"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

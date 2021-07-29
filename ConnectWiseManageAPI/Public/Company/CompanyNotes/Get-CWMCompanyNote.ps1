@@ -2,9 +2,10 @@
     [CmdletBinding()]
     param(
         [int]$id,
+        [switch]$count,
         [Parameter(Mandatory=$true)]
         [int]$CompanyID,
-        [string]$Condition,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -16,7 +17,5 @@
     )
 
     $Endpoint = "/company/companies/$($CompanyID)/notes"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -5,7 +5,8 @@ function Get-CWMScheduleHoliday {
         [Alias('holidayListId')]
         [int]$parentId,
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -16,8 +17,6 @@ function Get-CWMScheduleHoliday {
         [switch]$all
     )
 
-    $Endpoint = "/schedule/holidaylists/$(parentId)/holidays"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
+    $Endpoint = "/schedule/holidaylists/$($parentId)/holidays"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -1,8 +1,9 @@
 ﻿function Get-CWMCompany {
     [CmdletBinding()]
     param(
-        [Alias('CompanyID')]
+        [Alias('companyId')]
         [int]$id,
+        [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -15,7 +16,5 @@
     )
 
     $Endpoint = '/company/companies'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

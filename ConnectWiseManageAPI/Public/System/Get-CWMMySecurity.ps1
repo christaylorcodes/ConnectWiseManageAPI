@@ -13,7 +13,5 @@
     )
 
     $Endpoint = '/system/mysecurity'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

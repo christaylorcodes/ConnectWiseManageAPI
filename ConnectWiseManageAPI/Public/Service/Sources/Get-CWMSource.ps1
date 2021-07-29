@@ -2,7 +2,8 @@ function Get-CWMSource {
     [CmdletBinding()]
     param(
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         $orderBy,
         [string]$childconditions,
@@ -14,7 +15,5 @@ function Get-CWMSource {
     )
 
     $Endpoint = '/service/sources'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

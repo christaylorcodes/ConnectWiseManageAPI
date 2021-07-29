@@ -293,6 +293,9 @@ Removes a note from a contact.
 ### [Remove-CWMCompanyTypeAssociation](Docs/Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.
 
+### [Remove-CWMDocument](Docs/Remove-CWMDocument.md)
+Remove a Manage document.
+
 ### [Remove-CWMMarketingGroupCompany](Docs/Remove-CWMMarketingGroupCompany.md)
 This function will remove a company from a marketing group.
 

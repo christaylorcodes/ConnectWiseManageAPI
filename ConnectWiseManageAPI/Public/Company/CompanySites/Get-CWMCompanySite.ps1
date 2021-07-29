@@ -6,7 +6,8 @@ function Get-CWMCompanySite {
         [int]$parentId,
         [Alias('siteId')]
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -18,7 +19,5 @@ function Get-CWMCompanySite {
     )
 
     $Endpoint = "/company/companies/$($parentId)/sites"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

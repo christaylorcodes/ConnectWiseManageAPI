@@ -5,7 +5,8 @@
         [Alias('AgreementID')]
         [int]$parentId,
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -17,7 +18,5 @@
     )
 
     $Endpoint = "/finance/agreements/$($parentId)/sites"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

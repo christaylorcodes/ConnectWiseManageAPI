@@ -170,9 +170,9 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
 
         It 'accepts a condition' {
             try {
-                $Conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
-                foreach($Condition in $Conditions){
-                    $Tickets = Get-CWMTicket -Condition $Condition -ErrorAction Stop
+                $conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
+                foreach($condition in $conditions){
+                    $Tickets = Get-CWMTicket -Condition $condition -ErrorAction Stop
                     $Tickets.count | Should -Be 25
                 }
             }

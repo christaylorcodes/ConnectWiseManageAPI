@@ -2,7 +2,8 @@ function Get-CWMServiceBoard {
     [CmdletBinding()]
     param(
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -14,7 +15,5 @@ function Get-CWMServiceBoard {
     )
 
     $Endpoint = '/service/boards'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

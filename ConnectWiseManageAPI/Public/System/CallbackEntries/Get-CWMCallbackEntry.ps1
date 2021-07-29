@@ -2,6 +2,7 @@
     [CmdletBinding()]
     param(
         [int]$id,
+        [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -14,7 +15,5 @@
     )
 
     $Endpoint = '/system/callbacks'
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

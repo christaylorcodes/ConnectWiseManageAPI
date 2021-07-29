@@ -8,7 +8,8 @@
         [Parameter(Mandatory=$true)]
         [int]$parentId,
         [int]$id,
-        [string]$Condition,
+        [switch]$count,
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
@@ -20,7 +21,5 @@
     )
 
     $Endpoint = "/service/boards/$($grandparentId )/statuses/$($parentId)/notifications"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
-
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
