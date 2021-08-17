@@ -11,5 +11,5 @@
     )
 
     $Endpoint = "/finance/agreements/$($parentId)/sites/$($id)"
-    Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

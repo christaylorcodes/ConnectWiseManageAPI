@@ -11,5 +11,5 @@
     )
 
     $Endpoint = "/marketing/groups/$($parentId)/companies/$($id)"
-    Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

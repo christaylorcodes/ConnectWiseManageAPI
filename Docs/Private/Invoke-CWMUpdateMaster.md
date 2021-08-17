@@ -5,28 +5,45 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CWMRemoveMaster
+# Invoke-CWMUpdateMaster
 
 ## SYNOPSIS
-This will be basis of all delete calls to the ConnectWise Manage API.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMUpdateMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all delete requests are handled correctly.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Invoke-CWMRemoveMaster -Arguments $Arguments -URI $URI
+PS C:\> {{ Add example code here }}
 ```
 
+{{ Add example description here }}
+
 ## PARAMETERS
+
+### -Arguments
+{{ Fill Arguments Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -52,7 +69,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -79,12 +96,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor
-Date: 10/10/2018
 
 ## RELATED LINKS
-
-[https://christaylor.codes](https://christaylor.codes)

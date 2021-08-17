@@ -11,5 +11,5 @@
     )
 
     $Endpoint = "/company/companies/$($parentId)/typeAssociations/$($id)"
-    Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

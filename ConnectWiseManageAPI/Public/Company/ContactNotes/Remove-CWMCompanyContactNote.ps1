@@ -11,5 +11,5 @@ function Remove-CWMCompanyContactNote {
         [int]$id
     )
     $Endpoint = "/company/contacts/$($parentId)/notes/$($id)"
-    Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

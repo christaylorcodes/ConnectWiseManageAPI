@@ -59,6 +59,9 @@ This function will list Callback entries based on conditions.
 ### [Get-CWMChargeCode](Docs/Get-CWMChargeCode.md)
 Gets a list of charge codes
 
+### [Get-CWMCommunicationType](Docs/Get-CWMCommunicationType.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMCompany](Docs/Get-CWMCompany.md)
 This function will list companies based on conditions.
 
@@ -109,6 +112,9 @@ This function will list documents associated with a record.
 
 ### [Get-CWMManufacturer](Docs/Get-CWMManufacturer.md)
 This function will allow you to search for Manage manufacturers.
+
+### [Get-CWMMarketingGroup](Docs/Get-CWMMarketingGroup.md)
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMMarketingGroupCompany](Docs/Get-CWMMarketingGroupCompany.md)
 This function will list all companies that are a member of a marketing group based on conditions.
@@ -241,6 +247,9 @@ This function is used to gather troubleshooting information.
 
 ### [New-CWMDocument](Docs/New-CWMDocument.md)
 Will allow you to upload a document and attach it to an item.
+
+### [New-CWMMarketingGroupCompany](Docs/New-CWMMarketingGroupCompany.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMMember](Docs/New-CWMMember.md)
 This will create a new Manage user.

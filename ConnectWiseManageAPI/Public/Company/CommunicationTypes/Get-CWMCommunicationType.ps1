@@ -1,10 +1,6 @@
-﻿function Get-CWMMarketingGroupCompany {
+function Get-CWMCommunicationType {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
-        [Alias('groupId')]
-        [int]$parentId,
-        [Alias('companyId')]
         [int]$id,
         [switch]$count,
         [string]$condition,
@@ -18,6 +14,6 @@
         [switch]$all
     )
 
-    $Endpoint = "/marketing/groups/$($parentId)/companies"
+    $Endpoint = '/company/communicationTypes'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

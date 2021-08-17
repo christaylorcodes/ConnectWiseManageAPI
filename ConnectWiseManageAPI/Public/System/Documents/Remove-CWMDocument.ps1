@@ -7,5 +7,5 @@ function Remove-CWMDocument {
         [int]$id
     )
     $Endpoint = "/system/documents/$($id)"
-    Invoke-CWMDeleteMaster -Endpoint $Endpoint
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

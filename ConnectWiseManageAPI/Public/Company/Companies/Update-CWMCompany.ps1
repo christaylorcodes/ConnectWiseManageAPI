@@ -15,5 +15,5 @@
     )
 
     $Endpoint = "/company/companies/$($id)"
-    Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMUpdateMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

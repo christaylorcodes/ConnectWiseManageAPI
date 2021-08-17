@@ -18,5 +18,5 @@
     )
 
     $Endpoint = "/project/projects/$($parentId)/phases/$($id)"
-    Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMUpdateMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

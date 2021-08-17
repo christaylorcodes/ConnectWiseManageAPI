@@ -1,4 +1,4 @@
-﻿function Invoke-CWMDeleteMaster {
+﻿function Invoke-CWMRemoveMaster {
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [string]$Endpoint
@@ -9,7 +9,7 @@
         Uri = $URI
         Method = 'Delete'
     }
-    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMDeleteMaster")) {
+    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMRemoveMaster")) {
         $Result =  Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if($Result.content){ $Result = $Result.content | ConvertFrom-Json }
     }

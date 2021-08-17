@@ -14,5 +14,5 @@ function Update-CWMTemplate {
     )
 
     $Endpoint = '<Endpoint>'
-    Invoke-CWMPatchMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMUpdateMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

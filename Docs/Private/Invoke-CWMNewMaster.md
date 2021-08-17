@@ -24,7 +24,7 @@ This will insure that all create requests are handled correctly.
 
 ### EXAMPLE 1
 ```powershell
-Invoke-CWMPatchMaster -Arguments $Arguments -URI $URI
+Invoke-CWMUpdateMaster -Arguments $Arguments -URI $URI
 ```
 
 ## PARAMETERS

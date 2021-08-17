@@ -56,7 +56,7 @@
         }
     }
 
-    if($Arguments.count.IsPresent -and $Result.Count){ $Result = $Result.Count }
+    if($Arguments.count.IsPresent -and $Result.PSObject.Properties.count){ $Result = $Result.count }
 
     $Result
 }

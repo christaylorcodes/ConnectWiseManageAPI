@@ -1,4 +1,4 @@
-﻿function Invoke-CWMPatchMaster {
+﻿function Invoke-CWMUpdateMaster {
     [CmdletBinding(SupportsShouldProcess)]
     param (
         $Arguments,
@@ -23,7 +23,7 @@
         ContentType = 'application/json'
         Body = $Body
     }
-    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$Body`r`n")) {
+    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMUpdateMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if($Result.content){
             $Result = $Result.content | ConvertFrom-Json

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-CWMPatchMaster
+# Invoke-CWMUpdateMaster
 
 ## SYNOPSIS
 This will be basis of all Patch calls to the ConnectWise Manage API.
@@ -13,7 +13,7 @@ This will be basis of all Patch calls to the ConnectWise Manage API.
 ## SYNTAX
 
 ```
-Invoke-CWMPatchMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMUpdateMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ This will insure that all update requests are handled correctly.
 
 ### EXAMPLE 1
 ```powershell
-Invoke-CWMPatchMaster -Arguments $Arguments -URI $URI
+Invoke-CWMUpdateMaster -Arguments $Arguments -URI $URI
 ```
 
 ## PARAMETERS
