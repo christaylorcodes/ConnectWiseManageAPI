@@ -25,14 +25,14 @@ New-CWMContactCommunication -parentId <Int32> [[-id] <Int32>] [-type] <Hashtable
 
 ### EXAMPLE 1
 ```powershell
-New-CWMContactCommunication -id 7125 -type @{'name' = 'Private Email'} -value 'don't@email.me'
+New-CWMContactCommunication -parentId 7125 -type @{'name' = 'Private Email'} -value 'don't@email.me'
 ```
 
 Will add a Private Email address to the contact with the id of 7125.
 
 ### EXAMPLE 2
 ```
-New-CWMContactCommunication -id 7125 -type @{'id' = '2'} -value '6054756968' -extension 555 -defaultFlag $true
+New-CWMContactCommunication -parentId 7125 -type @{'id' = '2'} -value '6054756968' -extension 555 -defaultFlag $true
 ```
 
 Will add a direct phone number with an extension to the contact with the id of 7125 and set it as the default communication method.
@@ -116,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -id
-The id of the contact you want to update.
+don't use?
 
 ```yaml
 Type: Int32
@@ -178,7 +178,7 @@ Accept wildcard characters: False
 ```
 
 ### -parentId
-{{ Fill parentId Description }}
+The id of the contact you want to update.
 
 ```yaml
 Type: Int32
