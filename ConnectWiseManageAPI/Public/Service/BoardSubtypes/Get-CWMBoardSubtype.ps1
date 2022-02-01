@@ -1,7 +1,7 @@
 function Get-CWMBoardSubtype {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('boardId')]
         [int]$parentId,
         [int]$id,

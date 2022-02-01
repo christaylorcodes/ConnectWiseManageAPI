@@ -10,38 +10,20 @@
     }
 
     # Up the pagesize to max
-    $Arguments.URI += "&pageSize=999"
+    $Arguments.URI += '&pageSize=999'
 
-    # First request
-    $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
-    if(!$PageResult){ return }
-    if(!$PageResult.Headers.ContainsKey('Link')){
-        return Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
-    }
-
-    $Collection = @()
-    $Collection += $PageResult.Content | ConvertFrom-Json
-    $Link = $PageResult.Headers.Link;
-    if ($Link) {
-        $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
-    }
-    else {
-        $NextPage = $null
-    }
-
-    # Loop through all results
-    while ($NextPage) {
-        $Arguments.Uri = $NextPage
+    do {
         $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
-        if (!$PageResult){ return }
-        $Collection += $PageResult.Content | ConvertFrom-Json
-        $Link = $PageResult.Headers.Link;
-        if ($Link) {
-            $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>')
+        if (!$PageResult) { return }
+        if (!$PageResult.Headers.ContainsKey('Link')) {
+            return Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
         }
-        else {
-            $NextPage = $null
-        }
+
+        if ($PageResult.Headers.Link) { $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>') }
+        else { $NextPage = $null }
+        $Arguments.Uri = $NextPage
+
+        $PageResult.Content | ConvertFrom-Json
     }
-    $Collection
+    while ($NextPage)
 }

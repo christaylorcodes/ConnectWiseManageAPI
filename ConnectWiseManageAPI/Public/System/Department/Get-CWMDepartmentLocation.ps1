@@ -1,7 +1,7 @@
 function Get-CWMDepartmentLocation {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [int]$parentId,
         [int]$id,
         [switch]$count,

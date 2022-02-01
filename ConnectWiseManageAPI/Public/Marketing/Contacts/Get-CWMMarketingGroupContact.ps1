@@ -1,7 +1,7 @@
 ﻿function Get-CWMMarketingGroupContact {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('groupId')]
         [int]$parentId,
         [Alias('contactId')]

@@ -16,4 +16,4 @@
 
     $Endpoint = '/sales/activities'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
- }
+}

@@ -1,7 +1,7 @@
 ﻿function Get-CWMBoardStatus {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('serviceBoardId')]
         [int]$parentId,
         [int]$id,

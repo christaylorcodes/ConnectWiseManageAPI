@@ -6,10 +6,10 @@
     )
 
     Write-Verbose $($Arguments.Value | Out-String)
-    $Body =@(
+    $Body = @(
         @{
-            op = $Arguments.Operation
-            path = $Arguments.Path
+            op    = $Arguments.Operation
+            path  = $Arguments.Path
             value = $Arguments.Value
         }
     )
@@ -18,14 +18,14 @@
 
     $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
-        Uri = $URI
-        Method = 'Patch'
+        Uri         = $URI
+        Method      = 'Patch'
         ContentType = 'application/json'
-        Body = $Body
+        Body        = $Body
     }
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMUpdateMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if($Result.content){
+        if ($Result.content) {
             $Result = $Result.content | ConvertFrom-Json
         }
     }

@@ -1,10 +1,10 @@
 ﻿function Get-CWMAuditTrail {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateSet('Ticket', 'ProductCatalog', 'Configuration', 'PurchaseOrder', 'Expense')]
         $type,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$id,
         [switch]$count,
         [string]$deviceIdentifier,
@@ -21,12 +21,12 @@
 
     $Endpoint = '/system/audittrail'
 
-    if($Type){ $Endpoint += "&type=$type" }
-    if($ID){
+    if ($Type) { $Endpoint += "&type=$type" }
+    if ($ID) {
         $Endpoint += "&id=$id"
         $null = $PsBoundParameters.Remove('id')
     }
-    if($deviceIdentifier){ $Endpoint += "&deviceIdentifier=$deviceIdentifier" }
+    if ($deviceIdentifier) { $Endpoint += "&deviceIdentifier=$deviceIdentifier" }
 
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

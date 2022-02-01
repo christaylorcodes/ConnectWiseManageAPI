@@ -1,7 +1,7 @@
 function Get-CWMCompanySite {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('companyId')]
         [int]$parentId,
         [Alias('siteId')]

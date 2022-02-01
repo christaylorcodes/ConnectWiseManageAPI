@@ -1,17 +1,17 @@
 function Update-CWMCompanyContact {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     [Alias('Update-CWMContact')]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('contactId')]
         [int]$id,
-        [Parameter(Mandatory=$true)]
-        [validateset('add','replace','remove')]
+        [Parameter(Mandatory = $true)]
+        [validateset('add', 'replace', 'remove')]
         [string]$Operation,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$Path,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         $Value
     )
 

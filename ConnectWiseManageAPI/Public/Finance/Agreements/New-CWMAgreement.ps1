@@ -1,11 +1,11 @@
 function New-CWMAgreement {
     # 2020.4
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [int]$id,
-        [Parameter(Mandatory=$true)]
-        [ValidateLength(1,100)]
+        [Parameter(Mandatory = $true)]
+        [ValidateLength(1, 100)]
         [string]$name,
         [hashtable]$type,
         [hashtable]$company,
@@ -14,7 +14,7 @@ function New-CWMAgreement {
         [hashtable]$subContractCompany,
         [hashtable]$subContractContact,
         [hashtable]$parentAgreement,
-        [ValidateLength(1,50)]
+        [ValidateLength(1, 50)]
         [string]$customerPO,
         [hashtable]$location,
         [hashtable]$department,
@@ -26,12 +26,12 @@ function New-CWMAgreement {
         [hashtable]$opportunity,
         [boolean]$cancelledFlag,
         [string]$dateCancelled,
-        [ValidateLength(1,100)]
+        [ValidateLength(1, 100)]
         [string]$reasonCancelled,
         [hashtable]$sla,
-        [ValidateLength(1,20)]
+        [ValidateLength(1, 20)]
         [string]$workOrder,
-        [ValidateLength(1,5000)]
+        [ValidateLength(1, 5000)]
         [string]$internalNotes,
         [ValidateSet('Amount', 'Hours', 'Incidents')]
         [string]$applicationUnits,

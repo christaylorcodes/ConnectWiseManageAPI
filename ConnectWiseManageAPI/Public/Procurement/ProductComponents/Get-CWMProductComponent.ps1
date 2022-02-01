@@ -1,7 +1,7 @@
 ﻿function Get-CWMProductComponent {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('ProductID')]
         [int]$parentId,
         [int]$id,

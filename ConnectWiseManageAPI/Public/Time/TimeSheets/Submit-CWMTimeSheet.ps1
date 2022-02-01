@@ -1,7 +1,7 @@
 ﻿function Submit-CWMTimeSheet {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('sheetId')]
         [int]$id
     )

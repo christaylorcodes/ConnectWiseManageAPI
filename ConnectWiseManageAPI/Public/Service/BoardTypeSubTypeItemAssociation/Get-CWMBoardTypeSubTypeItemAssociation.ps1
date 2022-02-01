@@ -1,7 +1,7 @@
-function Get-CWMBoardTypeSubTypeItemAssociation{
+function Get-CWMBoardTypeSubTypeItemAssociation {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('boardId')]
         [int]$parentId,
         [Alias('typeSubTypeItemAssociationId')]

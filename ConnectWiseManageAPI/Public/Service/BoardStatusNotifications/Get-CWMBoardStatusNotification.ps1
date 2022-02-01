@@ -1,11 +1,11 @@
 ﻿function Get-CWMBoardStatusNotification {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('boardId')]
         [int]$grandparentId,
         [Alias('statusId')]
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [int]$parentId,
         [int]$id,
         [switch]$count,

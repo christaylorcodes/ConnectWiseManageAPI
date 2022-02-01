@@ -1,13 +1,13 @@
 ﻿function New-CWMTimeEntry {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [int]$id,
-        [Parameter(Mandatory=$true, ParameterSetName='Company')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'Company')]
         [hashtable]$company,
-        [Parameter(Mandatory=$true, ParameterSetName='ChargeTo')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ChargeTo')]
         [int]$chargeToId,
-        [Parameter(Mandatory=$true, ParameterSetName='ChargeTo')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ChargeTo')]
         [ValidateSet('ServiceTicket', 'ProjectTicket', 'ChargeCode', 'Activity')]
         [string]$chargeToType,
         [hashtable]$member,
@@ -16,12 +16,12 @@
         [hashtable]$workType,
         [hashtable]$workRole,
         [hashtable]$agreement,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$timeStart,
         [string]$timeEnd,
         [double]$hoursDeduct,
         [double]$actualHours,
-        [ValidateSet('Billable','DoNotBill','NoCharge','NoDefault')]
+        [ValidateSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
         [string]$billableOption,
         [string]$notes,
         [string]$internalNotes,

@@ -3,7 +3,7 @@
     param(
         [int]$id,
         [switch]$count,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [int]$CompanyID,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
