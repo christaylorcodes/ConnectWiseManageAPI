@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post
 schema: 2.0.0
 ---
 
@@ -18,13 +18,15 @@ New-CWMCompanyTypeAssociation [[-id] <Int32>] [-type] <Hashtable> [-company] <Ha
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Assign a type to a company.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
-New-CWMCompanyTypeAssociation -company @{id = 4385} -Type @{type = @{id = 68}}
+New-CWMCompanyTypeAssociation -company @{id = 4385} -Type @{id = 68}
 ```
 
 Adds the type 68 to company 4385
@@ -32,6 +34,7 @@ Adds the type 68 to company 4385
 ## PARAMETERS
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -47,6 +50,7 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -78,6 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -company
+
 Company object for the company you want to associate the type with
 
 ```yaml
@@ -93,6 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -id
+
 don't use?
 
 ```yaml
@@ -108,6 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -type
+
 Company type reference object that you want to associate with the company
 
 ```yaml
@@ -130,8 +137,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+
 Author: Chris Taylor Date: 8/22/2018
 
 ## RELATED LINKS
 
 [https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post](https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post)
+
+

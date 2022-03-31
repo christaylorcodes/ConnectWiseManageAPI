@@ -221,6 +221,9 @@ This function will create a new agreement addition.
 ### [New-CWMCallbackEntry](Docs/New-CWMCallbackEntry.md)
 This function will create a new callback entry.
 
+### [New-CWMCompany](Docs/New-CWMCompany.md)
+This function will create a new callback entry.
+
 ### [New-CWMCompanyConfiguration](Docs/New-CWMCompanyConfiguration.md)
 Will create a new configuration for the given company.
 
@@ -298,6 +301,9 @@ Removes a contact.
 
 ### [Remove-CWMCompanyContactNote](Docs/Remove-CWMCompanyContactNote.md)
 Removes a note from a contact.
+
+### [Remove-CWMCompanyStatus](Docs/Remove-CWMCompanyStatus.md)
+Remove company status
 
 ### [Remove-CWMCompanyTypeAssociation](Docs/Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.

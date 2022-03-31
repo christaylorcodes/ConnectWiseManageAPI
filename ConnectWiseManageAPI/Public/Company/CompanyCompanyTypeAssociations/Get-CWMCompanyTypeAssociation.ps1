@@ -1,7 +1,7 @@
 ﻿function Get-CWMCompanyTypeAssociation {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias('companyId')]
         [int]$parentId,
         [int]$id,
@@ -17,6 +17,6 @@
         [switch]$all
     )
 
-    $Endpoint = "/company/companies/$(parentId)/typeAssociations"
+    $Endpoint = "/company/companies/$($parentId)/typeAssociations"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

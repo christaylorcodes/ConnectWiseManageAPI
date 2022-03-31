@@ -13,7 +13,7 @@ This function will create a new contact.
 ## SYNTAX
 
 ```
-New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [[-type] <Hashtable>]
+New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [-types <Hashtable[]>]
  [[-company] <Hashtable>] [[-site] <Hashtable>] [[-addressLine1] <String>] [[-addressLine2] <String>]
  [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <String>] [[-relationship] <Hashtable>]
  [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>] [[-defaultMergeContactId] <Int32>]
@@ -660,21 +660,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -type
-{{ Fill type Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -unsubscribeFlag
 {{ Fill unsubscribeFlag Description }}
 
@@ -700,6 +685,21 @@ Aliases:
 
 Required: False
 Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -types
+{{ Fill types Description }}
+
+```yaml
+Type: Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

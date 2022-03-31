@@ -35,7 +35,7 @@ function New-CWMCompany {
         [string]$dateAcquired,
         [hashtable]$sicCode,
         [hashtable]$parentCompany,
-        [number]$annualRevenue,
+        [double]$annualRevenue,
         [int]$numberOfEmployees,
         [int]$yearEstablished,
         [int]$revenueYear,

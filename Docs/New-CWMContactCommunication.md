@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post
 schema: 2.0.0
 ---
 
@@ -25,14 +25,14 @@ New-CWMContactCommunication -parentId <Int32> [[-id] <Int32>] [-type] <Hashtable
 
 ### EXAMPLE 1
 ```powershell
-New-CWMContactCommunication -parentId 7125 -type @{'name' = 'Private Email'} -value 'don't@email.me'
+New-CWMContactCommunication -id 7125 -type @{'name' = 'Private Email'} -value 'don't@email.me'
 ```
 
 Will add a Private Email address to the contact with the id of 7125.
 
 ### EXAMPLE 2
-```
-New-CWMContactCommunication -parentId 7125 -type @{'id' = '2'} -value '6054756968' -extension 555 -defaultFlag $true
+```powershell
+New-CWMContactCommunication -id 7125 -type @{'id' = '2'} -value '6054756968' -extension 555 -defaultFlag $true
 ```
 
 Will add a direct phone number with an extension to the contact with the id of 7125 and set it as the default communication method.
@@ -116,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -id
-don't use?
+The id of the contact you want to update.
 
 ```yaml
 Type: Int32
@@ -178,7 +178,7 @@ Accept wildcard characters: False
 ```
 
 ### -parentId
-The id of the contact you want to update.
+{{ Fill parentId Description }}
 
 ```yaml
 Type: Int32
@@ -203,5 +203,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor Date: 9/26/2019
 
 ## RELATED LINKS
-
-[https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post](https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post)
