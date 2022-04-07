@@ -299,11 +299,11 @@ This function will remove a company configuration from Manage.
 ### [Remove-CWMCompanyContact](Docs/Remove-CWMCompanyContact.md)
 Removes a contact.
 
-### [Remove-CWMCompanyContactNote](Docs/Remove-CWMCompanyContactNote.md)
+### [Remove-CWMCompanyContactNote](Docs/Docs/Remove-CWMCompanyContactNote.md)
 Removes a note from a contact.
 
 ### [Remove-CWMCompanyStatus](Docs/Remove-CWMCompanyStatus.md)
-Remove company status
+Remove a company status
 
 ### [Remove-CWMCompanyTypeAssociation](Docs/Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.

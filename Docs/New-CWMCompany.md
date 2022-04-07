@@ -17,7 +17,7 @@ New-CWMCompany [[-id] <Int32>] [-identifier] <String> [-name] <String> [[-status
  [[-addressLine1] <String>] [[-addressLine2] <String>] [[-city] <String>] [[-state] <String>] [[-zip] <String>]
  [[-country] <Hashtable>] [[-phoneNumber] <String>] [[-faxNumber] <String>] [[-website] <String>]
  [[-territory] <Hashtable>] [[-market] <Hashtable>] [[-accountNumber] <String>] [[-defaultContact] <Hashtable>]
- [[-dateAcquired] <String>] [[-sicCode] <Hashtable>] [[-parentCompany] <Hashtable>] [[-annualRevenue] <Int32>]
+ [[-dateAcquired] <String>] [[-sicCode] <Hashtable>] [[-parentCompany] <Hashtable>] [[-annualRevenue] <Double>]
  [[-numberOfEmployees] <Int32>] [[-yearEstablished] <Int32>] [[-revenueYear] <Int32>]
  [[-ownershipType] <Hashtable>] [[-timeZoneSetup] <Hashtable>] [[-leadSource] <String>] [[-leadFlag] <Boolean>]
  [[-unsubscribeFlag] <Boolean>] [[-calendar] <Hashtable>] [[-userDefinedField1] <String>]
@@ -152,7 +152,7 @@ Accept wildcard characters: False
 {{ Fill annualRevenue Description }}
 
 ```yaml
-Type: Int32
+Type: Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1129,7 +1129,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

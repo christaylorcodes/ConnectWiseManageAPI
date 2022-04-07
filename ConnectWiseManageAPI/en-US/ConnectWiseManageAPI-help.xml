@@ -21973,9 +21973,9 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
           <maml:description>
             <maml:para>{{ Fill annualRevenue Description }}</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Double</command:parameterValue>
           <dev:type>
-            <maml:name>Int32</maml:name>
+            <maml:name>Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -22742,9 +22742,9 @@ Connect-CWM @Connection -Force -Version '3.0.0'</dev:code>
         <maml:description>
           <maml:para>{{ Fill annualRevenue Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Double</command:parameterValue>
         <dev:type>
-          <maml:name>Int32</maml:name>
+          <maml:name>Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -42367,18 +42367,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-CWMTicketConfiguration</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>deviceIdentifier</maml:name>
-          <maml:description>
-            <maml:para>The ID of the configuration you want to attach to the ticket.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -42413,6 +42401,18 @@ New-CWMTicket @NewTicketParameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="deviceIdentifier">
+          <maml:name>id</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill id Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -42440,18 +42440,6 @@ New-CWMTicket @NewTicketParameters</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>deviceIdentifier</maml:name>
-        <maml:description>
-          <maml:para>The ID of the configuration you want to attach to the ticket.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="ticketId">
         <maml:name>parentId</maml:name>
         <maml:description>
@@ -42460,6 +42448,18 @@ New-CWMTicket @NewTicketParameters</dev:code>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
           <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="deviceIdentifier">
+        <maml:name>id</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill id Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -45257,11 +45257,11 @@ New-CWMTicket @NewTicketParameters</dev:code>
       <command:verb>Remove</command:verb>
       <command:noun>CWMCompanyStatus</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Remove a company status</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Removed a company status</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -45368,9 +45368,9 @@ New-CWMTicket @NewTicketParameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Remove-CWMCompanyStatus -id 1</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Removes company status 1</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -45504,9 +45504,9 @@ New-CWMTicket @NewTicketParameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Remove-CWMCompanyConfiguration -CompanyConfigurationID 123</dev:code>
+        <dev:code>Remove-CWMCompanyTypeAssociation -parentId 2222 -id 123</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Removes Type Association 123 from Company ID 2222</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

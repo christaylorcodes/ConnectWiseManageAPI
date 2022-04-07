@@ -13,8 +13,7 @@ Assigns a configuration to a ticket.
 ## SYNTAX
 
 ```
-New-CWMTicketConfiguration -parentId <Int32> [[-deviceIdentifier] <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-CWMTicketConfiguration -parentId <Int32> [-id <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,21 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -deviceIdentifier
-The ID of the configuration you want to attach to the ticket.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -parentId
 {{ Fill parentId Description }}
 
@@ -86,6 +70,21 @@ Parameter Sets: (All)
 Aliases: ticketId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: deviceIdentifier
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
