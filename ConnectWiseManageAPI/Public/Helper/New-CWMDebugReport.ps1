@@ -19,8 +19,9 @@
 
     $DebugOutput = @{
         CWMServerConnection = @{
-            Server  = $script:CWMServerConnection.Clone()
-            Headers = $script:CWMServerConnection.Headers.Clone()
+            Server                = $script:CWMServerConnection.Clone()
+            Headers               = $script:CWMServerConnection.Headers.Clone()
+            'api-current-version' = $script:CWMServerConnection.'api-current-version'
         }
         ModuleVersion       = (Get-Module 'ConnectWiseManageAPI').Version
         CWMSystemInfo       = $SysInfo
@@ -34,9 +35,9 @@
         Function Get-StringHash([String]$String, $HashName = 'MD5') {
             $StringBuilder = New-Object System.Text.StringBuilder
             [System.Security.Cryptography.HashAlgorithm]::Create($HashName).ComputeHash([System.Text.Encoding]::UTF8.GetBytes($String)) | `
-                ForEach-Object {
-                [Void]$StringBuilder.Append($_.ToString('x2'))
-            }
+                    ForEach-Object {
+                    [Void]$StringBuilder.Append($_.ToString('x2'))
+                }
             $StringBuilder.ToString()
         }
 

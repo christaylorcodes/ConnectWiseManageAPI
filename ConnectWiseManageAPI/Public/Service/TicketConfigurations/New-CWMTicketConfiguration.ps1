@@ -5,7 +5,8 @@ function New-CWMTicketConfiguration {
         [Parameter(Mandatory = $true)]
         [Alias('ticketId')]
         [int]$parentId,
-        [string]$deviceIdentifier
+        [Alias('deviceIdentifier')]
+        [string]$id
     )
 
     $Endpoint = "/service/tickets/$($parentId)/configurations"

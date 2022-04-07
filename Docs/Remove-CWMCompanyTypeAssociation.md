@@ -23,8 +23,10 @@ Remove-CWMCompanyTypeAssociation -parentId <Int32> -id <Int32> [-WhatIf] [-Confi
 
 ### EXAMPLE 1
 ```powershell
-Remove-CWMCompanyConfiguration -CompanyConfigurationID 123
+Remove-CWMCompanyTypeAssociation -parentId 2222 -id 123
 ```
+
+Removes Type Association 123 from Company ID 2222
 
 ## PARAMETERS
 
