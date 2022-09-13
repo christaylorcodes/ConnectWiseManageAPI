@@ -42,5 +42,5 @@
         }
     }
 
-    $Result
+    $Result | Write-Output
 }

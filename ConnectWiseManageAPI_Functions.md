@@ -267,7 +267,7 @@ This function will create a new project phase
 This function will create a new ticket.
 
 ### [New-CWMScheduleEntry](Docs/New-CWMScheduleEntry.md)
-This function will create a new ticket.
+This function will create a new schedule entry.
 
 ### [New-CWMServiceBoard](Docs/New-CWMServiceBoard.md)
 This function will create a new service board.
@@ -299,7 +299,7 @@ This function will remove a company configuration from Manage.
 ### [Remove-CWMCompanyContact](Docs/Remove-CWMCompanyContact.md)
 Removes a contact.
 
-### [Remove-CWMCompanyContactNote](Docs/Docs/Remove-CWMCompanyContactNote.md)
+### [Remove-CWMCompanyContactNote](Docs/Remove-CWMCompanyContactNote.md)
 Removes a note from a contact.
 
 ### [Remove-CWMCompanyStatus](Docs/Remove-CWMCompanyStatus.md)
@@ -358,6 +358,9 @@ This will update an project phase.
 
 ### [Update-CWMProjectTicket](Docs/Update-CWMProjectTicket.md)
 This will update a Manage project ticket.
+
+### [Update-CWMScheduleEntry](Docs/Update-CWMScheduleEntry.md)
+Will update a schedule entry.
 
 ### [Update-CWMTicket](Docs/Update-CWMTicket.md)
 This will update a ticket.

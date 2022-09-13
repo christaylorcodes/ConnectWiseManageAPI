@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-CWMScheduleEntry
 
 ## SYNOPSIS
-This function will create a new ticket.
+This function will create a new schedule entry.
 
 ## SYNTAX
 
@@ -29,10 +29,10 @@ New-CWMScheduleEntry [[-id] <Int32>] [[-objectId] <Int32>] [[-name] <String>] [-
 
 ### EXAMPLE 1
 ```powershell
-$Ticket = @{
+New-CWMScheduleEntry -member @{identifier = 'ctaylor'} -objectId $TicketId -type @{id = $TypeId}
 ```
 
-'identifier' = $Product.offerName     'description' = $Product.offerName     'subcategory' = @{id = 152}     'type' = @{id = 47}     'customerDescription' = $Product.offerName     'cost' = $Product.unitPrice     'price' = $Price     'manufacturerPartNumber' = $Product.offerName     'manufacturer' = $Manufacturer     'productClass' = 'Agreement'     'taxableFlag' = $true } New-CWMScheduleEntry @Ticket
+Will create a new schedule entry for ctaylor on ticket
 
 ## PARAMETERS
 
