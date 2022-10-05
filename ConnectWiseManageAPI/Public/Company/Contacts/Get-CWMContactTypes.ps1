@@ -1,15 +1,14 @@
 function Get-CWMContactTypes {
     [CmdletBinding()]
     param(
-        [int]$parentId,
-        [int]$id,
-        [string]$Condition,
+        [string]$conditions,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
         [string]$customFieldConditions,
         [int]$page,
         [int]$pageSize,
+        [int]$pageId,
         [string[]]$fields,
         [switch]$all
     )
