@@ -1,6 +1,7 @@
 function Get-CWMContactTypes {
     [CmdletBinding()]
     param(
+        [int]$id,
         [string]$conditions,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -14,7 +15,6 @@ function Get-CWMContactTypes {
     )
 
     $Endpoint = "/company/contacts/types"
-    if($id){ $Endpoint = Join-Url $Endpoint $id }
 
     return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
