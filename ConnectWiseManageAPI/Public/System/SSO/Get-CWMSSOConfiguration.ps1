@@ -14,10 +14,6 @@ function Get-CWMSSOConfiguration {
         [switch]$all
     )
 
-    $Endpoint = '/system/ssoConfigurations'
-    if ($ID) {
-        $Endpoint += "/$id"
-        $null = $PsBoundParameters.Remove('id')
-    }
+    $Endpoint = '/system/ssoConfigurations'    
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
