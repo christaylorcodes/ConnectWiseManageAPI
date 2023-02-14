@@ -1,4 +1,5 @@
 function Update-CWMSSOConfiguration {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]
@@ -12,8 +13,6 @@ function Update-CWMSSOConfiguration {
         $Value
     )
 
-    if ($PSCmdlet.ShouldProcess($Path, 'Update SSO Configuration')) {
-        $Endpoint = "/system/ssoConfigurations/$($id)"
-        Invoke-CWMUpdateMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
-    }
+    $Endpoint = "/system/ssoConfigurations/$($id)"
+    Invoke-CWMUpdateMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
