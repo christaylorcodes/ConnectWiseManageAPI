@@ -191,6 +191,9 @@ This will return information about service boards.
 ### [Get-CWMSource](Docs/Get-CWMSource.md)
 This function will list service sources on conditions.
 
+### [Get-CWMSSOConfiguration](Docs/Get-CWMSSOConfiguration.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMSystemInfo](Docs/Get-CWMSystemInfo.md)
 This function will return information about the ConnectWise server.
 
@@ -257,6 +260,9 @@ Adds a company to a marketing group.
 ### [New-CWMMember](Docs/New-CWMMember.md)
 This will create a new Manage user.
 
+### [New-CWMMemberToken](Docs/New-CWMMemberToken.md)
+{{ Fill in the Synopsis }}
+
 ### [New-CWMProductCatalog](Docs/New-CWMProductCatalog.md)
 This function will create a new catalog.
 
@@ -305,6 +311,9 @@ Removes a note from a contact.
 ### [Remove-CWMCompanyStatus](Docs/Remove-CWMCompanyStatus.md)
 Remove a company status
 
+### [Remove-CWMCompanyTeam](Docs/Remove-CWMCompanyTeam.md)
+{{ Fill in the Synopsis }}
+
 ### [Remove-CWMCompanyTypeAssociation](Docs/Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.
 
@@ -341,6 +350,9 @@ This will update a company configuration question value.
 ### [Update-CWMCompanyContact](Docs/Update-CWMCompanyContact.md)
 This will modify a contact by its ID.
 
+### [Update-CWMCompanyTeam](Docs/Update-CWMCompanyTeam.md)
+{{ Fill in the Synopsis }}
+
 ### [Update-CWMCompanyTypeAssociation](Docs/Update-CWMCompanyTypeAssociation.md)
 This will update a company type association.
 
@@ -353,6 +365,9 @@ Update the properties of a ConnectWise Manage member.
 ### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
 This will update a catalog item.
 
+### [Update-CWMProject](Docs/Update-CWMProject.md)
+This will update a project.
+
 ### [Update-CWMProjectPhase](Docs/Update-CWMProjectPhase.md)
 This will update an project phase.
 
@@ -362,6 +377,15 @@ This will update a Manage project ticket.
 ### [Update-CWMScheduleEntry](Docs/Update-CWMScheduleEntry.md)
 Will update a schedule entry.
 
+### [Update-CWMSSOConfiguration](Docs/Update-CWMSSOConfiguration.md)
+{{ Fill in the Synopsis }}
+
 ### [Update-CWMTicket](Docs/Update-CWMTicket.md)
 This will update a ticket.
+
+### [Update-CWMTimeEntry](Docs/Update-CWMTimeEntry.md)
+This will update a time entry.
+
+### [Update-CWMTimeSheet](Docs/Update-CWMTimeSheet.md)
+This will update a timesheet.
 

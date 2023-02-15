@@ -14,22 +14,22 @@ This will update a timesheet.
 
 ### Reject
 ```
-Update-CWMTimeSheet -id <Int32> [-Reject] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Reject] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Reverse
 ```
-Update-CWMTimeSheet -id <Int32> [-Reverse] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Reverse] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Submit
 ```
-Update-CWMTimeSheet -id <Int32> [-Submit] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Submit] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Approve
 ```
-Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -140,13 +140,42 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

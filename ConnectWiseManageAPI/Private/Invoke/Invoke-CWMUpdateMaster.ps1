@@ -8,7 +8,7 @@
     Write-Verbose $($Arguments.Value | Out-String)
     $Body = @(
         @{
-            op    = $Arguments.Operation
+            op    = $Arguments.Operation.toLower()
             path  = $Arguments.Path
             value = $Arguments.Value
         }

@@ -1,19 +1,20 @@
-﻿function Get-CWMSSOConfiguration {
+﻿function Get-CWMContactType {
     [CmdletBinding()]
     param(
-        [string]$id,
-        [switch]$count,
-        [string]$condition,
+        [int]$id,
+        [string]$conditions,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
         [string]$customFieldConditions,
         [int]$page,
         [int]$pageSize,
+        [int]$pageId,
         [string[]]$fields,
         [switch]$all
     )
 
-    $Endpoint = '/system/ssoConfigurations'
-    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    $Endpoint = "/company/contacts/types"
+
+    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

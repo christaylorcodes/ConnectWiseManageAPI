@@ -39,9 +39,16 @@
     # Issue request
     try {
         Write-Debug "Arguments: $($Arguments | ConvertTo-Json)"
+        $prevProgressPreference = $global:ProgressPreference
+        $global:ProgressPreference = 'SilentlyContinue'
+
         $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+
+        $global:ProgressPreference = $prevProgressPreference
     }
     catch {
+        $global:ProgressPreference = $prevProgressPreference
+
         # Start error message
         $ErrorMessage = @()
 

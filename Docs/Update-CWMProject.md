@@ -13,7 +13,7 @@ This will update a project.
 ## SYNTAX
 
 ```
-Update-CWMProject [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm]
+Update-CWMProject -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -145,7 +145,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

@@ -2,7 +2,7 @@ function New-CWMTemplate {
     # 2019.1
     # ^ add a comment for what version of the api you used to create function
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
     )
 

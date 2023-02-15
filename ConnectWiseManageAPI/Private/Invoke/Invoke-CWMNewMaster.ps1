@@ -6,14 +6,15 @@
         [string[]]$Skip
     )
     # Skip common parameters
-    $Skip += 'Debug','ErrorAction','ErrorVariable','InformationAction','InformationVariable','OutVariable','OutBuffer','PipelineVariable','Verbose','WarningAction','WarningVariable','WhatIf','Confirm','Version','VersionAutomatic','grandparentId','parentId'
+    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'VersionAutomatic', 'grandparentId', 'parentId'
 
     if ($Arguments.Body) {
         $Body = $Arguments.Body
-    } else {
+    }
+    else {
         $Body = @{}
-        foreach($i in $Arguments.GetEnumerator()){
-            if($Skip -notcontains $i.Key){
+        foreach ($i in $Arguments.GetEnumerator()) {
+            if ($Skip -notcontains $i.Key) {
                 $Body.Add($i.Key, $i.value)
             }
         }
@@ -28,15 +29,16 @@
 
     $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
-        Uri = $URI
-        Method = 'Post'
+        Uri         = $URI
+        Method      = 'Post'
         ContentType = $ContentType
-        Body = $Body
-        Version = $Arguments.Version
+        Body        = $Body
+        Version     = $Arguments.Version
+        Headers     = $Arguments.Headers
     }
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if($Result.content){
+        if ($Result.content) {
             $Result = $Result.content | ConvertFrom-Json
         }
     }
