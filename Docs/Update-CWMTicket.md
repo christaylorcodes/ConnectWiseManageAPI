@@ -18,7 +18,7 @@ Update-CWMTicket -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Ob
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This will update a ticket property with the value given.
 
 ## EXAMPLES
 
@@ -27,8 +27,8 @@ Update-CWMTicket -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Ob
 $UpdateParam = @{
     ID = 1
     Operation = 'replace'
-    Path = 'name'
-    Value = $NewName
+    Path = 'summary'
+    Value = $NewSummary
 }
 Update-CWMTicket @UpdateParam
 ```
@@ -39,7 +39,7 @@ $UpdateParam = @{
     ID = 1
     Operation = 'replace'
     Path = 'subType'
-    Value = ${id = 123}
+    Value = @{id = 123}
 }
 Update-CWMTicket @UpdateParam
 ```
