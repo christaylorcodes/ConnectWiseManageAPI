@@ -101,6 +101,9 @@ This function will list company types.
 ### [Get-CWMCompanyTypeAssociation](Docs/Get-CWMCompanyTypeAssociation.md)
 This function will list all types associated with a company.
 
+### [Get-CWMContactType](Docs/Get-CWMContactType.md)
+Get contact types
+
 ### [Get-CWMDepartment](Docs/Get-CWMDepartment.md)
 Returns available departments.
 
@@ -299,6 +302,9 @@ This function will remove a site from a Manage agreement.
 ### [Remove-CWMCallbackEntry](Docs/Remove-CWMCallbackEntry.md)
 This function will remove a Callback entry from Manage.
 
+### [Remove-CWMCompany](Docs/Remove-CWMCompany.md)
+Remove a company
+
 ### [Remove-CWMCompanyConfiguration](Docs/Remove-CWMCompanyConfiguration.md)
 This function will remove a company configuration from Manage.
 
@@ -328,6 +334,9 @@ This function will remove a schedule entry from Manage.
 
 ### [Remove-CWMTicket](Docs/Remove-CWMTicket.md)
 This function will remove the supplied ticket.
+
+### [Remove-CWMTicketConfiguration](Docs/Remove-CWMTicketConfiguration.md)
+Remove a configuration from a ticket
 
 ### [Submit-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
 This function will submit a time sheet for approval.

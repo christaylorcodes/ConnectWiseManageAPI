@@ -1,34 +1,34 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?#/Sources/getServiceSources
+online version: https://developer.connectwise.com/products/manage/rest?a=Company&e=CompanyCompanyTypeAssociations&o=GET
 schema: 2.0.0
 ---
 
-# Get-CWMSSOConfiguration
+# Get-CWMContactType
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get contact types
 
 ## SYNTAX
 
 ```
-Get-CWMSSOConfiguration [[-id] <String>] [-count] [[-condition] <String>] [[-orderBy] <String>]
- [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+Get-CWMContactType [[-id] <Int32>] [[-conditions] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-pageId] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get information on contact types
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CWMContactType -id 1
 ```
 
-{{ Add example description here }}
+Get information about contact type 1
 
 ## PARAMETERS
 
@@ -62,7 +62,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -condition
+### -conditions
 This is your search condition to return the results you desire.
 Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
 
@@ -73,21 +73,6 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -117,17 +102,17 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -id
-{{ Fill id Description }}
+The contact type id
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -163,6 +148,21 @@ Aliases:
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageId
+The pageId is the record in which you would like to begin with for paging.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

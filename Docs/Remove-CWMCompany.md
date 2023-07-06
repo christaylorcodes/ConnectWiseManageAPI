@@ -1,33 +1,32 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/delete
 schema: 2.0.0
 ---
 
-# Update-CWMSSOConfiguration
+# Remove-CWMCompany
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove a company
 
 ## SYNTAX
 
 ```
-Update-CWMSSOConfiguration [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Remove-CWMCompany [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Remove a company
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Remove-CWMCompany -id 123
 ```
 
-{{ Add example description here }}
+Remove company 123 from Manage
 
 ## PARAMETERS
 
@@ -41,53 +40,6 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Operation
-What you are doing with the value.
-replace, add, remove
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: add, replace, remove
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-The path to the property that you want to perform the operation on.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Value
-The value you want to set the property to.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -110,12 +62,12 @@ Accept wildcard characters: False
 ```
 
 ### -id
-{{ Fill id Description }}
+The company id you want to remove
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
 Required: True
 Position: 0
