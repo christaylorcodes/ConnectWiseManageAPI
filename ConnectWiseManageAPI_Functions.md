@@ -338,8 +338,14 @@ This function will remove the supplied ticket.
 ### [Remove-CWMTicketConfiguration](Docs/Remove-CWMTicketConfiguration.md)
 Remove a configuration from a ticket
 
+### [Remove-CWMTimeEntry](Docs/Remove-CWMTimeEntry.md)
+Removes a time entry
+
 ### [Submit-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
 This function will submit a time sheet for approval.
+
+### [Update-CWMAgreement](Docs/Update-CWMAgreement.md)
+This will update an agreement.
 
 ### [Update-CWMAgreementAddition](Docs/Update-CWMAgreementAddition.md)
 This will update an addition to an agreement.
