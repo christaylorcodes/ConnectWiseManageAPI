@@ -1,4 +1,4 @@
-function Add-CWMTicketChild {
+function Add-CWMTicketChildren {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
