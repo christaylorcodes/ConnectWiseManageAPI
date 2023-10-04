@@ -32,6 +32,9 @@ This function will list additions to a Manage agreements.
 ### [Get-CWMAgreementSite](Docs/Get-CWMAgreementSite.md)
 This function will list Agreement Sites based on conditions.
 
+### [Get-CWMAgreementTypes](Docs/Get-CWMAgreementTypes.md)
+This function will list Agreement Types based on conditions.
+
 ### [Get-CWMAuditTrail](Docs/Get-CWMAuditTrail.md)
 This function will get the audit trail of an item in ConnectWise.
 
@@ -224,6 +227,9 @@ This function will allow you to search for Manage configurations.
 ### [New-CWMAgreementAddition](Docs/New-CWMAgreementAddition.md)
 This function will create a new agreement addition.
 
+### [New-CWMAgreementType](Docs/New-CWMAgreementType.md)
+This function will create a new agreement type.
+
 ### [New-CWMCallbackEntry](Docs/New-CWMCallbackEntry.md)
 This function will create a new callback entry.
 
@@ -349,6 +355,9 @@ This will update an agreement.
 
 ### [Update-CWMAgreementAddition](Docs/Update-CWMAgreementAddition.md)
 This will update an addition to an agreement.
+
+### [Update-CWMAgreementTypes](Docs/Update-CWMAgreementTypes.md)
+This will update an agreement type.
 
 ### [Update-CWMCallbackEntry](Docs/Update-CWMCallbackEntry.md)
 This will update a Callback entry.
