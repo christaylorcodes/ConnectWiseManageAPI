@@ -1,5 +1,5 @@
 function New-CWMAgreementTypes {
-    [CmdletBinding(ConfirmImpact = 'Medium')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [int]$id,
         [Parameter(Mandatory = $true)]
