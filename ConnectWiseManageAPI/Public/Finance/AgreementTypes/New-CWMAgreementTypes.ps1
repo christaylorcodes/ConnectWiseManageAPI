@@ -79,6 +79,9 @@ function New-CWMAgreementTypes {
         [hashtable]$_info
     )
 
-    $Endpoint = '/finance/agreement/types'
-    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    if ($PSCmdlet.ShouldProcess($name, "Creating New Agreement Type")) {
+        $Endpoint = '/finance/agreement/types'
+        Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    }
+
 }
