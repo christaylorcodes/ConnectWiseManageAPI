@@ -290,6 +290,9 @@ This function will create a new service board.
 ### [New-CWMTicket](Docs/New-CWMTicket.md)
 This function will create a new ticket.
 
+### [New-CWMTicket](Docs/New-CWMTicketChild.md)
+This function will bundle or merge child ticket(s) into a parent ticket.
+
 ### [New-CWMTicketConfiguration](Docs/New-CWMTicketConfiguration.md)
 Assigns a configuration to a ticket.
 
