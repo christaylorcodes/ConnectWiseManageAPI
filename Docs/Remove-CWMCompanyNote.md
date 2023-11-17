@@ -39,7 +39,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 14
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -98,21 +98,6 @@ Parameter Sets: (All)
 Aliases: wi
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
