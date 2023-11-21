@@ -10,7 +10,7 @@ function New-CWMCompanyNote {
         [Parameter(Mandatory = $false)]
         [string]$text
     )
-    
+
     $Endpoint = "/company/companies/$id/notes"
     Invoke-CWMNewMaster -Arguments $PSBoundParameters -Endpoint $Endpoint
 }
