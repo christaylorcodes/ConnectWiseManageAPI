@@ -26,7 +26,7 @@ New-CWMTicketChild -ParentTicketID <Int32> -ChildTicketIDs <Int32[]> -OperationT
 
 The `New-CWMTicketChild` function allows users to either bundle or merge tickets in ConnectWise Manage.
 Bundling creates a relationship between tickets without changing their properties, while merging combines tickets 
-and may require specifying additional parameters like status details.
+and requires specifying additional parameters for the merged tickets, such as the status ID - which must be a closed status.
 
 
 ## EXAMPLES 1
@@ -181,4 +181,5 @@ Date: 10/11/2023
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/Manage/REST?a=Service&e=Tickets&o=CREATE#/Tickets/postServiceTickets](https://developer.connectwise.com/Products/Manage/REST?a=Service&e=Tickets&o=CREATE#/Tickets/postServiceTickets)
+[https://developer.connectwise.com/Products/ConnectWise_PSA/REST?a=Service&e=Tickets&o=UPDATE#/Tickets/postServiceTicketsByParentIdMerge](https://developer.connectwise.com/Products/ConnectWise_PSA/REST?a=Service&e=Tickets&o=UPDATE#/Tickets/postServiceTicketsByParentIdMerge)
+[https://developer.connectwise.com/Products/ConnectWise_PSA/REST?a=Service&e=Tickets&o=UPDATE#/Tickets/postServiceTicketsByParentIdAttachChildren](https://developer.connectwise.com/Products/ConnectWise_PSA/REST?a=Service&e=Tickets&o=UPDATE#/Tickets/postServiceTicketsByParentIdAttachChildren)
