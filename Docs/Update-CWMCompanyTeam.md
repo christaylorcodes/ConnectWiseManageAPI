@@ -22,7 +22,7 @@ Update-CWMCompanyTeam [-parentId] <Int32> [-id] <Int32> [-Operation] <String> [-
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

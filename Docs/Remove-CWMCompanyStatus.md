@@ -21,7 +21,7 @@ Removed a company status
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Remove-CWMCompanyStatus -id 1
 ```

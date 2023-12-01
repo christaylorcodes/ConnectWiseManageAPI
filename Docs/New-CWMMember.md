@@ -65,7 +65,7 @@ This will create a new Manage user with the given properties.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 $NewMember = @{
     identifier = 'ctaylor'

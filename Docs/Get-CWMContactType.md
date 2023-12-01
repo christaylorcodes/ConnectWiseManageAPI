@@ -23,7 +23,7 @@ Get information on contact types
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMContactType -id 1
 ```

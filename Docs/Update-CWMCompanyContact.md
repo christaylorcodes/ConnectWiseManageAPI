@@ -22,7 +22,7 @@ You can perform one of the PATCH operations on a contact.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Update-CWMCompanyContact -id $Contact.id -Operation add -Path 'title' -Value 'Janitor'
 ```

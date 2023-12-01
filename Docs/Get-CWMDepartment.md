@@ -23,7 +23,7 @@ Lists departments based on given conditions.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMDepartment -all
 ```

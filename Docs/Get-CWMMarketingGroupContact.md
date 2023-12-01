@@ -23,7 +23,7 @@ Will list a marketing groups contacts via ID or conditions.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMMarketingGroupContact -parentId $Group.id
 ```

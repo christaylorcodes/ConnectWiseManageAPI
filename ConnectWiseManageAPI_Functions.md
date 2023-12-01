@@ -32,9 +32,6 @@ This function will list additions to a Manage agreements.
 ### [Get-CWMAgreementSite](Docs/Get-CWMAgreementSite.md)
 This function will list Agreement Sites based on conditions.
 
-### [Get-CWMAgreementTypes](Docs/Get-CWMAgreementTypes.md)
-This function will list Agreement Types based on conditions.
-
 ### [Get-CWMAuditTrail](Docs/Get-CWMAuditTrail.md)
 This function will get the audit trail of an item in ConnectWise.
 
@@ -227,9 +224,6 @@ This function will allow you to search for Manage configurations.
 ### [New-CWMAgreementAddition](Docs/New-CWMAgreementAddition.md)
 This function will create a new agreement addition.
 
-### [New-CWMAgreementType](Docs/New-CWMAgreementType.md)
-This function will create a new agreement type.
-
 ### [New-CWMCallbackEntry](Docs/New-CWMCallbackEntry.md)
 This function will create a new callback entry.
 
@@ -247,6 +241,9 @@ This function will create a new contact.
 
 ### [New-CWMCompanyContactNote](Docs/New-CWMCompanyContactNote.md)
 This function will create a note on the given contact.
+
+### [New-CWMTicketNote](Docs/New-CWMTicketNote.md)
+Add a note to a CW Manage company.
 
 ### [New-CWMCompanyTeam](Docs/New-CWMCompanyTeam.md)
 This function will create a new company team.
@@ -287,11 +284,11 @@ This function will create a new schedule entry.
 ### [New-CWMServiceBoard](Docs/New-CWMServiceBoard.md)
 This function will create a new service board.
 
-### [New-CWMTicket](Docs/New-CWMTicket.md)
-This function will create a new ticket.
+### [Get-CWMTicket](Docs/Get-CWMTicket.md)
+This function list tickets that match your condition.
 
-### [New-CWMTicket](Docs/New-CWMTicketChild.md)
-This function will bundle or merge child ticket(s) into a parent ticket.
+### [New-CWMTicketChild](Docs/New-CWMTicketChild.md)
+This function will create a new ticket.
 
 ### [New-CWMTicketConfiguration](Docs/New-CWMTicketConfiguration.md)
 Assigns a configuration to a ticket.
@@ -358,9 +355,6 @@ This will update an agreement.
 
 ### [Update-CWMAgreementAddition](Docs/Update-CWMAgreementAddition.md)
 This will update an addition to an agreement.
-
-### [Update-CWMAgreementTypes](Docs/Update-CWMAgreementTypes.md)
-This will update an agreement type.
 
 ### [Update-CWMCallbackEntry](Docs/Update-CWMCallbackEntry.md)
 This will update a Callback entry.

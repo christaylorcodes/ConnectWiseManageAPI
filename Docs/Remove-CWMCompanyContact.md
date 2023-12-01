@@ -21,7 +21,7 @@ Removes a company contact via ID.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Remove-CWMCompanyContact -id $Contact.id
 ```

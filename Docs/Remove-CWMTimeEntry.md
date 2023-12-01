@@ -21,7 +21,7 @@ Remove-CWMTimeEntry [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Remove-CWMTimeEntry -id 123
 ```
@@ -82,7 +82,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

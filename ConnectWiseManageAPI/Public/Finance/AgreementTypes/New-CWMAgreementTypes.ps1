@@ -1,4 +1,4 @@
-function New-CWMAgreementTypes {
+﻿function New-CWMAgreementType {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [int]$id,

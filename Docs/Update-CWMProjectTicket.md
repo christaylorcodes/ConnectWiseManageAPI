@@ -22,7 +22,7 @@ You can execute a patch method against a Manage project ticket.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Update-CWMProjectTicket -TicketID 123 -Operation replace -Path 'board/id' -Value 1
 ```

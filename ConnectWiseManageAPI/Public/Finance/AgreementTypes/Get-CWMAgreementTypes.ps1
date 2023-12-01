@@ -1,4 +1,4 @@
-﻿function Get-CWMAgreementTypes {
+﻿function Get-CWMAgreementType {
     [CmdletBinding()]
     param(
         [int]$id,

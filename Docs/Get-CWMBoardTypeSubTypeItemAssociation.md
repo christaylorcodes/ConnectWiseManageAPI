@@ -23,7 +23,7 @@ Will list out type, subtype and item associations for a service board.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMBoardTypeSubTypeItemAssociation  -parentID 33 -all
 ```

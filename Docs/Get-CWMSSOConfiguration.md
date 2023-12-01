@@ -23,7 +23,7 @@ Get-CWMSSOConfiguration [[-id] <String>] [-count] [[-condition] <String>] [[-ord
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

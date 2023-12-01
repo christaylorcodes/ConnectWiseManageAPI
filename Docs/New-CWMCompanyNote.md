@@ -13,7 +13,11 @@ Add a note to a CW Manage company.
 ## SYNTAX
 
 ```
-New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-flagged] <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-detailDescriptionFlag] <Boolean>]
+ [[-internalAnalysisFlag] <Boolean>] [[-resolutionFlag] <Boolean>] [[-member] <Hashtable>]
+ [[-contact] <Hashtable>] [[-customerUpdatedFlag] <Boolean>] [[-processNotifications] <Boolean>]
+ [[-dateCreated] <String>] [[-createdBy] <String>] [[-internalFlag] <Boolean>] [[-externalFlag] <Boolean>]
+ [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,17 +49,182 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -contact
+{{ Fill contact Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -createdBy
+{{ Fill createdBy Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customerUpdatedFlag
+{{ Fill customerUpdatedFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -dateCreated
+{{ Fill dateCreated Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -detailDescriptionFlag
+{{ Fill detailDescriptionFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -externalFlag
+{{ Fill externalFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -id
 {{ Fill id Description }}
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: companyId
+Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -internalAnalysisFlag
+{{ Fill internalAnalysisFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -internalFlag
+{{ Fill internalFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -member
+{{ Fill member Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -processNotifications
+{{ Fill processNotifications Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -resolutionFlag
+{{ Fill resolutionFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -68,23 +237,9 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-### -flagged
-{{ Fill text Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
 Required: False
 Position: 2
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -21,7 +21,7 @@ Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParam
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

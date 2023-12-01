@@ -22,7 +22,7 @@ As the API changes and new versions are released the module will need to accept 
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 $TestVersion = @{
     VersionAutomatic = $VersionAutomatic

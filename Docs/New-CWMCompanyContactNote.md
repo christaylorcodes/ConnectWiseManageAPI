@@ -23,7 +23,7 @@ This function will create a note on the given contact.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> New-CWMCompanyContactNote -parentId $Contact.id -text 'This guy rocks!'
 ```

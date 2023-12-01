@@ -2,7 +2,7 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [ValidateSet('Ticket', 'ProductCatalog', 'Configuration', 'PurchaseOrder', 'Expense')]
+        [ValidateSet('None', 'Ticket', 'Contact', 'Company', 'Opportunity', 'Time', 'Activity', 'ProductCatalog', 'ProjectTicket', 'Purchasing', 'Configuration', 'Schedule', 'Agreement', 'AgreementAddition', 'Project', 'Invoice', 'PurchaseOrder', 'Expense')]
         $type,
         [Parameter(Mandatory = $true)]
         [string]$id,

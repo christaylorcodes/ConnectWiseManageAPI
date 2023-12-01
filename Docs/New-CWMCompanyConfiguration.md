@@ -36,7 +36,7 @@ New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Has
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

@@ -5,141 +5,167 @@ online version:
 schema: 2.0.0
 ---
 
-# New-CWMTicketChild
+# Get-CWMTicket
 
 ## SYNOPSIS
-This function will create a new ticket.
+This function list tickets that match your condition.
 
 ## SYNTAX
 
-### Bundle (Default)
-```powershell
-New-CWMTicketChild -ParentTicketID <Int32> -ChildTicketIDs <Int32[]> -OperationType Bundle [<CommonParameters>]
 ```
-
-### Merge
-```powershell
-New-CWMTicketChild -ParentTicketID <Int32> -ChildTicketIDs <Int32[]> -OperationType Merge -StatusID <Int32> -StatusName <String> -Sort <Int32> -_info <Hashtable> [<CommonParameters>]
+Get-CWMTicket [-id <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+{{ Fill in the Description }}
 
-The `New-CWMTicketChild` function allows users to either bundle or merge tickets in ConnectWise Manage.
-Bundling creates a relationship between tickets without changing their properties, while merging combines tickets 
-and may require specifying additional parameters like status details.
+## EXAMPLES
 
-
-## EXAMPLES 1
-
+### EXAMPLE 1
 ```powershell
-New-CWMTicketChild -ParentTicketID 1234 -ChildTicketIDs 5678 -OperationType Bundle
+Get-CWMTicket -TicketID 1
 ```
-This example demonstrates how to bundle a single child ticket (ID: 5678) to a parent ticket (ID: 1234).
-## EXAMPLES 2
-```powershell
-New-CWMTicketChild -ParentTicketID 1234 -ChildTicketIDs 5678, 91011 -OperationType Bundle
+
+We are using `TicketID` an alias for `id` to get ticket #1.
+
+### EXAMPLE 2
 ```
-This example demonstrates how to bundle multiple child tickets (IDs: 5678, 91011) to a parent ticket (ID: 1234).
-
-## EXAMPLES 3
-```powershell
-New-CWMTicketChild -ParentTicketID 1234 -ChildTicketIDs 5678 -OperationType Merge -StatusID 1 -StatusName "Closed" -Sort 0 -_info @{ additionalProp1 = "value1"; additionalProp2 = "value2" }
+Get-CWMTicket -all
 ```
-This example demonstrates how to merge a single child ticket (ID: 5678) into a parent ticket (ID: 1234) with specified status details.
 
-## EXAMPLES 4
-```powershell
-New-CWMTicketChild -ParentTicketID 1234 -ChildTicketIDs 5678, 91011 -OperationType Merge -StatusID 1 -StatusName "Closed" -Sort 0 -_info @{ additionalProp1 = "value1"; additionalProp2 = "value2" }
+By default only 25 results are returned, this returns all tickets.
+
+### EXAMPLE 3
 ```
-This example demonstrates how to merge multiple child tickets (IDs: 5678, 91011) into a parent ticket (ID: 1234) with specified status details.
+Get-CWMTicket -condition 'summary="test"'
+```
 
+Returns the first 25 tickets with the summary of test
 
+### EXAMPLE 4
+```
+Get-CWMTicket -condition 'subType/id = 2014'
+```
+
+Returns the first 25 tickets with subType 2014
 
 ## PARAMETERS
 
-### -OperationType
-Specifies the type of operation to perform: "Bundle" or "Merge".
+### -all
+Return all results
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Allows searching arrays on endpoints that list childConditions under parameters
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ParentTicketID
-The ID of the parent ticket.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: True
-Accept wildcard characters: False
-```
-
-### -ChildTicketIDs
-An array of IDs for the child tickets that will be either bundled or merged with the parent ticket.
-
-```yaml
-Type: Int32[]
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: True
-Accept wildcard characters: False
-```
-
-### -_info
-Additional information for the merged ticket. Only used when the OperationType is set to "Merge".
-
-```yaml
-Type: Hashtable
-Parameter Sets: Merge
-Aliases:
-
 Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -StatusID
-The status ID for the merged ticket. Only used when the OperationType is set to "Merge".
-
-```yaml
-Type: Int32
-Parameter Sets: Merge
-Aliases:
-
-Required: True
 Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -customFieldConditions
+Allows searching custom fields when customFieldConditions is listed in the parameters
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+Used in pagination to cycle through results
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+Number of results returned per page (Defaults to 25)
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+This is your search condition to return the results you desire.
+Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: ticketId
 
 Required: False
 Position: Named
@@ -148,18 +174,32 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -fields
+Allows you to return a partial response with just the fields listed.
 
 ```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
-Aliases: wi
+Aliases:
 
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Will return the number of objects.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -169,16 +209,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-This cmdlet accepts the ParentTicketID, ChildTicketIDs, StatusID, StatusName, Sort, and _info as inputs.
-
-
 ## OUTPUTS
 
-This cmdlet outputs the result of the ticket child creation, either bundled or merged.
-
 ## NOTES
-Date: 10/11/2023
+Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/Manage/REST?a=Service&e=Tickets&o=CREATE#/Tickets/postServiceTickets](https://developer.connectwise.com/Products/Manage/REST?a=Service&e=Tickets&o=CREATE#/Tickets/postServiceTickets)
+[https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=GETBYID](https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=GETBYID)
