@@ -19,7 +19,7 @@ Get-CWMSource [-id <Int32>] [-count] [[-condition] <String>] [[-orderBy] <Object
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Used to find a specific SLA or return a list of all of them.
 
 ## EXAMPLES
 
