@@ -23,7 +23,7 @@ Will return marketing manager groups based on conditions.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMarketingGroup -all
 ```

@@ -21,7 +21,7 @@ Attaches the given configuration to the given ticket.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> New-CWMTicketConfiguration -TicketID 123 -deviceIdentifier 333
 ```

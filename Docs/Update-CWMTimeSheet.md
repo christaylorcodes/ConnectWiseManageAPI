@@ -37,12 +37,12 @@ Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [-WhatIf] [-
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 Update-CWMTimeSheet -id 1 -Submit
 ```
 
-### Example 2
+### EXAMPLE 2
 ```powershell
 Update-CWMTimeSheet -id 2 -Approve -ApprovalType 'Tier1Update'
 ```

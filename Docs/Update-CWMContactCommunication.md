@@ -22,7 +22,7 @@ Used to update the `communicationItems` property of a contact.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Update-CWMContactCommunication -parentId 123 -Operation replace -Path 'value' -Value 'new@email.com'
 ```

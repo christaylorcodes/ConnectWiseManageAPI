@@ -30,7 +30,7 @@ Will allow you to upload a document and attach it to an item. You can also set s
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> New-CWMDocument -recordType 'Ticket' -recordId 123 -title 'NewDoc' -FilePath 'C:\temp\test.txt'
 ```

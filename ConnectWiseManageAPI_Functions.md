@@ -242,6 +242,9 @@ This function will create a new contact.
 ### [New-CWMCompanyContactNote](Docs/New-CWMCompanyContactNote.md)
 This function will create a note on the given contact.
 
+### [New-CWMTicketNote](Docs/New-CWMTicketNote.md)
+Add a note to a CW Manage company.
+
 ### [New-CWMCompanyTeam](Docs/New-CWMCompanyTeam.md)
 This function will create a new company team.
 
@@ -281,7 +284,10 @@ This function will create a new schedule entry.
 ### [New-CWMServiceBoard](Docs/New-CWMServiceBoard.md)
 This function will create a new service board.
 
-### [New-CWMTicket](Docs/New-CWMTicket.md)
+### [Get-CWMTicket](Docs/Get-CWMTicket.md)
+This function list tickets that match your condition.
+
+### [New-CWMTicketChild](Docs/New-CWMTicketChild.md)
 This function will create a new ticket.
 
 ### [New-CWMTicketConfiguration](Docs/New-CWMTicketConfiguration.md)
@@ -338,8 +344,14 @@ This function will remove the supplied ticket.
 ### [Remove-CWMTicketConfiguration](Docs/Remove-CWMTicketConfiguration.md)
 Remove a configuration from a ticket
 
+### [Remove-CWMTimeEntry](Docs/Remove-CWMTimeEntry.md)
+Removes a time entry
+
 ### [Submit-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
 This function will submit a time sheet for approval.
+
+### [Update-CWMAgreement](Docs/Update-CWMAgreement.md)
+This will update an agreement.
 
 ### [Update-CWMAgreementAddition](Docs/Update-CWMAgreementAddition.md)
 This will update an addition to an agreement.

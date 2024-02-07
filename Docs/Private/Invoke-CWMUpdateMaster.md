@@ -21,7 +21,7 @@ Invoke-CWMUpdateMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] 
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

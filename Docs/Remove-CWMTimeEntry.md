@@ -1,19 +1,19 @@
 ---
-external help file:
-Module Name:
-online version:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=DELETE
 schema: 2.0.0
 ---
 
-# New-CWMUrl
+# Remove-CWMTimeEntry
 
 ## SYNOPSIS
-Used to generate the full URL to be invoked.
+Removes a time entry
 
 ## SYNTAX
 
 ```
-New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>] [<CommonParameters>]
+Remove-CWMTimeEntry [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,38 +23,54 @@ New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>] [<CommonParameters
 
 ### EXAMPLE 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Remove-CWMTimeEntry -id 123
 ```
 
-{{ Add example description here }}
+Removes time entry 123
 
 ## PARAMETERS
 
-### -Endpoint
-{{ Fill Endpoint Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URLParameters
-{{ Fill URLParameters Description }}
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: wi
 
 Required: False
-Position: 1
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The ID of the time entry you want removed
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: entryId
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,7 +82,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

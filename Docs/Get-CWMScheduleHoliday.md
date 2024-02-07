@@ -23,7 +23,7 @@ Get-CWMScheduleHoliday -parentId <Int32> [[-id] <Int32>] [-count] [[-condition] 
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

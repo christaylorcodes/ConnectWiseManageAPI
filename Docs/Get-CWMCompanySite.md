@@ -23,7 +23,7 @@ Get-CWMCompanySite [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <S
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMCompanySite -parentId 123
 ```

@@ -22,7 +22,7 @@ Update-CWMTimeEntry -id <Int32> [-Operation] <String> [-Path] <String> [-Value] 
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 $UpdateParam = @{
     ID = 1
@@ -33,7 +33,7 @@ $UpdateParam = @{
 Update-CWMTimeEntry @UpdateParam
 ```
 
-### Example 2
+### EXAMPLE 2
 ```powershell
 $UpdateParam = @{
     ID = 1

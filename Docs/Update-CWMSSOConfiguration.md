@@ -22,7 +22,7 @@ Update-CWMSSOConfiguration [-id] <Int32> [-Operation] <String> [-Path] <String> 
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```

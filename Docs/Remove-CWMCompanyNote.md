@@ -1,19 +1,19 @@
 ---
-external help file:
-Module Name:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
 online version:
 schema: 2.0.0
 ---
 
-# New-CWMUrl
+# Remove-CWMCompanyNote
 
 ## SYNOPSIS
-Used to generate the full URL to be invoked.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>] [<CommonParameters>]
+Remove-CWMCompanyNote [-parentId] <Int32> [-NoteId] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,7 +21,7 @@ New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>] [<CommonParameters
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -30,31 +30,62 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Endpoint
-{{ Fill Endpoint Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URLParameters
-{{ Fill URLParameters Description }}
+### -NoteId
+{{ Fill NoteId Description }}
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: CompanyID
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -32,7 +32,7 @@ This function will create a new contact with the given values.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> New-CWMCompanyContact -firstName 'Chris' -lastName 'Taylor' -company @{id = $Company.id}
 ```

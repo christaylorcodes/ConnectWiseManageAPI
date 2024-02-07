@@ -13,8 +13,8 @@ This will update an agreement.
 ## SYNTAX
 
 ```
-Update-CWMAgreement -id <Int32> [-Operation] <String> [-Path] <String>
- [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMAgreement [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,7 +61,7 @@ Aliases:
 Accepted values: add, replace, remove
 
 Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -76,7 +76,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -91,7 +91,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 4
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -119,10 +119,10 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: additionId
+Aliases: agreementId
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -133,8 +133,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 Author: Chris Taylor Date: 10/10/2018
 

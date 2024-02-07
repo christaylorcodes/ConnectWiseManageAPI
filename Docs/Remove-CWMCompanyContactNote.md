@@ -21,7 +21,7 @@ Removes a note via ID from a company contact.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Remove-CWMCompanyContactNote -parentId $Contact.id -id $Note.id
 ```

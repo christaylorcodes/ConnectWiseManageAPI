@@ -22,7 +22,7 @@ Used to add a companied contacts to a marketing group.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> New-CWMMarketingGroupCompany -groupId $Group.id -id $Company.id
 ```

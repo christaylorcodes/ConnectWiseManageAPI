@@ -23,7 +23,7 @@ Returns location information for the given department.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMDepartmentLocation -id 1 -all
 ```

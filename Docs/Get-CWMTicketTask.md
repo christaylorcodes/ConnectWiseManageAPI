@@ -23,7 +23,7 @@ Will list the tasks associated with a ticket via ID or conditions.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> Get-CWMTicketTask -parentId $Ticket.id -all
 ```

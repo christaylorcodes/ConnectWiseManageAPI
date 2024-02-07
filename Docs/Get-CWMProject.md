@@ -23,7 +23,7 @@ This will return a list of projects.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
