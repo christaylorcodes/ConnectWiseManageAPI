@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMSLA
 
 ## SYNOPSIS
-This function will list service sources on conditions.
+This function will list service SLAs on conditions.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-CWMSLA [-id <Int32>] [-count] [[-condition] <String>] [[-orderBy] <Object>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Used to find a specific SLA or return a list of all of them.
 
 ## EXAMPLES
 
