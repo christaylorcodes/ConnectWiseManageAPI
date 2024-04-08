@@ -30,8 +30,8 @@
     )
 
     $Endpoint = '/system/documents'
-    if($id -and $download) { 
-        $Endpoint = "$($Endpoint)/$($id)/download"; 
+    if($id -and $download) {
+        $Endpoint = "$($Endpoint)/$($id)/download";
         $PsBoundParameters.Remove('id') | Out-Null
     }
     if($recordId -and $recordType){ $Endpoint = "$($Endpoint)?recordId=$($recordId)&recordType=$($recordType)" }
