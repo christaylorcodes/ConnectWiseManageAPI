@@ -29,7 +29,7 @@
     $Arguments.Remove('Version')
 
     if (!$Arguments.SessionVariable) {
-        $Arguments.WebSession = $script:CWMServerConnection.Session 
+        $Arguments.WebSession = $script:CWMServerConnection.Session
     }
 
     # Check URI format
@@ -105,9 +105,9 @@
         }
 
         if ($ErrorMessage.Length -lt 1) {
-            $ErrorMessage = $_ 
+            $ErrorMessage = $_
         } else {
-            $ErrorMessage += $_.ScriptStackTrace 
+            $ErrorMessage += $_.ScriptStackTrace
         }
 
         return Write-Error ($ErrorMessage | Out-String)
@@ -132,7 +132,7 @@
         }
 
     }
-    
+
     if ($Retry -ge $MaxRetry) {
         return Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
     }
