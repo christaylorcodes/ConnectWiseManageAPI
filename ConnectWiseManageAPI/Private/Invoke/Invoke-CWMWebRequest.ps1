@@ -42,7 +42,14 @@
         $prevProgressPreference = $global:ProgressPreference
         $global:ProgressPreference = 'SilentlyContinue'
 
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        if ($psversiontable.psversion.major -ge 7){
+
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing -AllowInsecureRedirect
+        }
+
+        else{
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        }
 
         $global:ProgressPreference = $prevProgressPreference
     }
@@ -122,8 +129,17 @@
         Write-Warning "Issue with request, status: $($Result.StatusCode) $($Result.StatusDescription)"
         Write-Warning "$($Retry)/$($MaxRetry) retries, waiting $($Wait)ms."
         Start-Sleep -Milliseconds $Wait
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        if ($psversiontable.psversion.major -ge 7){
+
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing -AllowInsecureRedirect
+        }
+
+        else{
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        }
+
     }
+    
     if ($Retry -ge $MaxRetry) {
         return Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
     }
