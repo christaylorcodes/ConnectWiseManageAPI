@@ -1,4 +1,4 @@
-﻿function Get-CWMProductType {
+function Get-CWMWarehouse {
     [CmdletBinding()]
     param(
         [int]$id,
@@ -6,13 +6,14 @@
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
-        [string]$childConditions,
-        [string]$customFieldConditions,
+        [string]$childconditions,
+        [string]$customfieldconditions,
         [int]$page,
         [int]$pageSize,
         [string[]]$fields,
         [switch]$all
     )
-    $Endpoint = '/procurement/types'
+
+    $Endpoint = '/procurement/warehouses'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -113,6 +113,9 @@ Return locations for a given department.
 ### [Get-CWMDocument](Docs/Get-CWMDocument.md)
 This function will list documents associated with a record.
 
+### [Get-CWMInventory](Docs/Get-CWMInventory.md)
+This function will list documents associated with a record.
+
 ### [Get-CWMManufacturer](Docs/Get-CWMManufacturer.md)
 This function will allow you to search for Manage manufacturers.
 
@@ -217,6 +220,12 @@ This function will allow you to search for Manage time entries.
 
 ### [Get-CWMTimeSheet](Docs/Get-CWMTimeSheet.md)
 This function will allow you to search for Manage configurations.
+
+### [Get-CWMWarehouse](Docs/Get-CWMWarehouse.md)
+This function will list documents associated with a record.
+
+### [Get-CWMWarehouseBin](Docs/Get-CWMWarehouseBin.md)
+This function will list documents associated with a record.
 
 ### [New-CWMAgreement](Docs/New-CWMAgreement.md)
 This function will allow you to search for Manage configurations.
