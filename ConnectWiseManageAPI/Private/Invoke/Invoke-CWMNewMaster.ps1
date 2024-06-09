@@ -13,11 +13,13 @@
     }
     else {
         $Body = @{}
+
         foreach ($i in $Arguments.GetEnumerator()) {
             if ($Skip -notcontains $i.Key) {
                 $Body.Add($i.Key, $i.value)
             }
         }
+
         $Body = ConvertTo-Json $Body -Depth 100
     }
     Write-Verbose $Body
@@ -26,8 +28,9 @@
     if ($Arguments.ContentType) {
         $ContentType = $Arguments.ContentType
     }
-
+    
     $URI = New-CWMUrl -Endpoint $Endpoint
+    
     $WebRequestArguments = @{
         Uri         = $URI
         Method      = 'Post'
@@ -36,8 +39,10 @@
         Version     = $Arguments.Version
         Headers     = $Arguments.Headers
     }
+    
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+    
         if ($Result.content) {
             $Result = $Result.content | ConvertFrom-Json
         }
