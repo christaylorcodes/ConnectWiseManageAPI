@@ -4,6 +4,8 @@
         [Parameter(ParameterSetName = 'ID')]
         [Alias('documentId')]
         [int]$id,
+        [Parameter(ParameterSetName = 'ID')]
+		[switch]$download,
         [Parameter(Mandatory = $true, ParameterSetName = 'Record')]
         [int]$recordId,
         [Parameter(Mandatory = $true, ParameterSetName = 'Record')]
@@ -28,6 +30,10 @@
     )
 
     $Endpoint = '/system/documents'
+    if($id -and $download) {
+        $Endpoint = "$($Endpoint)/$($id)/download";
+        $PsBoundParameters.Remove('id') | Out-Null
+    }
     if($recordId -and $recordType){ $Endpoint = "$($Endpoint)?recordId=$($recordId)&recordType=$($recordType)" }
 
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

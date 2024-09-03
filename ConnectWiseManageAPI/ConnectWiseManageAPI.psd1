@@ -12,7 +12,7 @@
     RootModule        = 'ConnectWiseManageAPI.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.4.14.0'
+    ModuleVersion     = '0.4.14.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -78,7 +78,7 @@
     VariablesToExport = '*'
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport = @('Get-CWMContactNote','New-CWMContactNote','Remove-CWMContactNote','Get-CWMContact','New-CWMContact','Remove-CWMContact','Update-CWMContact')
+    AliasesToExport   = @('Get-CWMContactNote', 'New-CWMContactNote', 'Remove-CWMContactNote', 'Get-CWMContact', 'New-CWMContact', 'Remove-CWMContact', 'Update-CWMContact')
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
