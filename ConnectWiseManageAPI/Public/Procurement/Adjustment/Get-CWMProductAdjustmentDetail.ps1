@@ -1,4 +1,4 @@
-﻿function Get-CWMProductType {
+﻿function Get-CWMProductAdjustmentDetail {
     [CmdletBinding()]
     param(
         [int]$id,
@@ -13,6 +13,7 @@
         [string[]]$fields,
         [switch]$all
     )
-    $Endpoint = '/procurement/types'
+
+    $Endpoint = "/procurement/adjustments/$($parentId)/details"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

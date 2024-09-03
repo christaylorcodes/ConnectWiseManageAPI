@@ -1,18 +1,19 @@
-﻿function Get-CWMProductType {
+function Get-CWMSLA {
     [CmdletBinding()]
     param(
         [int]$id,
         [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
-        [string]$orderBy,
-        [string]$childConditions,
-        [string]$customFieldConditions,
+        $orderBy,
+        [string]$childconditions,
+        [string]$customfieldconditions,
         [int]$page,
         [int]$pageSize,
         [string[]]$fields,
         [switch]$all
     )
-    $Endpoint = '/procurement/types'
+
+    $Endpoint = '/service/SLAs'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
