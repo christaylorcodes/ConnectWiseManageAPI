@@ -13,9 +13,9 @@ This function will list service SLAs on conditions.
 ## SYNTAX
 
 ```
-Get-CWMSLA [-id <Int32>] [-count] [[-condition] <String>] [[-orderBy] <Object>]
- [[-childconditions] <String>] [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-fields] <String[]>] [-all] [<CommonParameters>]
+Get-CWMSLA [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <Object>] [[-childconditions] <String>]
+ [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,17 +32,17 @@ Will return all priorities that include the word "SLA", such as "Default SLA"
 
 ## PARAMETERS
 
-### -orderBy
-Choose which field to sort the results by
+### -all
+Return all results
 
 ```yaml
-Type: Object
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -62,6 +62,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -condition
+This is your search condition to return the results you desire.
+Example:
+(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Will return the number of objects.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -customfieldconditions
 Allows searching custom fields when customFieldConditions is listed in the parameters
 
@@ -72,6 +104,51 @@ Aliases:
 
 Required: False
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Allows you to return a partial response with just the fields listed.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Choose which field to sort the results by
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -107,90 +184,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -all
-Return all results
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-This is your search condition to return the results you desire.
-Example:
-(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 Author: David Mazur
 Date: 02/07/2024

@@ -28,9 +28,9 @@
     if ($Arguments.ContentType) {
         $ContentType = $Arguments.ContentType
     }
-    
+
     $URI = New-CWMUrl -Endpoint $Endpoint
-    
+
     $WebRequestArguments = @{
         Uri         = $URI
         Method      = 'Post'
@@ -39,10 +39,10 @@
         Version     = $Arguments.Version
         Headers     = $Arguments.Headers
     }
-    
+
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-    
+
         if ($Result.content) {
             $Result = $Result.content | ConvertFrom-Json
         }

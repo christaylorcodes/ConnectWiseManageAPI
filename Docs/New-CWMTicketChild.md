@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?a=Service&e=Tickets&o=CREATE#/Tickets/postServiceTickets
+online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
@@ -191,7 +191,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

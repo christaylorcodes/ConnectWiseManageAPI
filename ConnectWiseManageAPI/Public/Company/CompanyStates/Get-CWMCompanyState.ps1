@@ -1,9 +1,7 @@
-function Get-CWMTicketAllNotes {
+﻿function Get-CWMCompanyState {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
-        [Alias('ticketId')]
-        [int]$parentId,
+        [Alias('companyId')]
         [int]$id,
         [switch]$count,
         [string]$condition,
@@ -17,6 +15,6 @@ function Get-CWMTicketAllNotes {
         [switch]$all
     )
 
-    $Endpoint = "/service/tickets/$($parentId)/allnotes"
+    $Endpoint = '/company/states'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

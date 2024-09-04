@@ -1,4 +1,4 @@
-﻿function Get-CWMCompanyStates {
+﻿function Get-CWMCompanyCountry {
     [CmdletBinding()]
     param(
         [Alias('companyId')]
@@ -15,6 +15,6 @@
         [switch]$all
     )
 
-    $Endpoint = '/company/states'
+    $Endpoint = '/company/countries'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

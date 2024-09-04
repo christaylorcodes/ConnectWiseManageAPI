@@ -171,6 +171,8 @@ Accept wildcard characters: False
 
 ### -internalFlag
 A boolean value that determines if the note should appear in the internal tab.
+
+
 ```yaml
 Type: Boolean
 Parameter Sets: (All)

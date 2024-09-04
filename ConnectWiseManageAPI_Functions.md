@@ -35,6 +35,12 @@ This function will list Agreement Sites based on conditions.
 ### [Get-CWMAuditTrail](Docs/Get-CWMAuditTrail.md)
 This function will get the audit trail of an item in ConnectWise.
 
+### [Get-CWMBoardItem](Docs/Get-CWMBoardItem.md)
+{{ Fill in the Synopsis }}
+
+### [Get-CWMBoardItemAssociation](Docs/Get-CWMBoardItemAssociation.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMBoardStatus](Docs/Get-CWMBoardStatus.md)
 This function will list the statuses of a service board based on conditions.
 
@@ -77,6 +83,9 @@ This function will list contacts.
 ### [Get-CWMCompanyContactNote](Docs/Get-CWMCompanyContactNote.md)
 This function will list a contacts notes.
 
+### [Get-CWMCompanyCountry](Docs/Get-CWMCompanyCountry.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMCompanyNote](Docs/Get-CWMCompanyNote.md)
 This function will list company notes based on conditions.
 
@@ -85,6 +94,9 @@ This function will list company note types based on conditions.
 
 ### [Get-CWMCompanySite](Docs/Get-CWMCompanySite.md)
 Get a companies sites.
+
+### [Get-CWMCompanyState](Docs/Get-CWMCompanyState.md)
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMCompanyStatus](Docs/Get-CWMCompanyStatus.md)
 This function will list all CW company statuses.
@@ -114,7 +126,7 @@ Return locations for a given department.
 This function will list documents associated with a record.
 
 ### [Get-CWMInventory](Docs/Get-CWMInventory.md)
-This function will list documents associated with a record.
+This function will list Inventory and Stock on Hand, including serial numbers from a specific Warehouse Bin
 
 ### [Get-CWMManufacturer](Docs/Get-CWMManufacturer.md)
 This function will allow you to search for Manage manufacturers.
@@ -143,6 +155,12 @@ This function will list service priorities on conditions.
 ### [Get-CWMProduct](Docs/Get-CWMProduct.md)
 This function will list all CW products.
 
+### [Get-CWMProductAdjustment](Docs/Get-CWMProductAdjustment.md)
+{{ Fill in the Synopsis }}
+
+### [Get-CWMProductAdjustmentDetail](Docs/Get-CWMProductAdjustmentDetail.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMProductCatalog](Docs/Get-CWMProductCatalog.md)
 This function will list the product catalogs.
 
@@ -170,6 +188,12 @@ This function will list team members of a project.
 ### [Get-CWMProjectTicket](Docs/Get-CWMProjectTicket.md)
 This will return a list of project tickets.
 
+### [Get-CWMPurchaseOrder](Docs/Get-CWMPurchaseOrder.md)
+This function will list purchase orders.
+
+### [Get-CWMPurchaseOrderLineItem](Docs/Get-CWMPurchaseOrderLineItem.md)
+This function will list all line items on a purchase order
+
 ### [Get-CWMReport](Docs/Get-CWMReport.md)
 This function will allow you to search for Manage configurations.
 
@@ -194,6 +218,9 @@ This function will list of service boards based on conditions.
 ### [Get-CWMServiceBoardInfo](Docs/Get-CWMServiceBoardInfo.md)
 This will return information about service boards.
 
+### [Get-CWMSLA](Docs/Get-CWMSLA.md)
+This function will list service SLAs on conditions.
+
 ### [Get-CWMSource](Docs/Get-CWMSource.md)
 This function will list service sources on conditions.
 
@@ -205,6 +232,9 @@ This function will return information about the ConnectWise server.
 
 ### [Get-CWMTicket](Docs/Get-CWMTicket.md)
 This function list tickets that match your condition.
+
+### [Get-CWMTicketAllNote](Docs/Get-CWMTicketAllNote.md)
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMTicketConfiguration](Docs/Get-CWMTicketConfiguration.md)
 This function will list configs attached to a ticket.
@@ -222,16 +252,19 @@ This function will allow you to search for Manage time entries.
 This function will allow you to search for Manage configurations.
 
 ### [Get-CWMWarehouse](Docs/Get-CWMWarehouse.md)
-This function will list documents associated with a record.
+This function will list warehouses.
 
 ### [Get-CWMWarehouseBin](Docs/Get-CWMWarehouseBin.md)
-This function will list documents associated with a record.
+This function will list warehouse bins.
 
 ### [New-CWMAgreement](Docs/New-CWMAgreement.md)
 This function will allow you to search for Manage configurations.
 
 ### [New-CWMAgreementAddition](Docs/New-CWMAgreementAddition.md)
 This function will create a new agreement addition.
+
+### [New-CWMBoardItem](Docs/New-CWMBoardItem.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMCallbackEntry](Docs/New-CWMCallbackEntry.md)
 This function will create a new callback entry.
@@ -253,6 +286,9 @@ This function will create a note on the given contact.
 
 ### [New-CWMTicketNote](Docs/New-CWMTicketNote.md)
 Add a note to a CW Manage company.
+
+### [New-CWMCompanySite](Docs/New-CWMCompanySite.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMCompanyTeam](Docs/New-CWMCompanyTeam.md)
 This function will create a new company team.
@@ -278,11 +314,14 @@ This will create a new Manage user.
 ### [New-CWMMemberToken](Docs/New-CWMMemberToken.md)
 {{ Fill in the Synopsis }}
 
+### [New-CWMProductAdjustment](Docs/New-CWMProductAdjustment.md)
+{{ Fill in the Synopsis }}
+
+### [New-CWMProductAdjustmentDetail](Docs/New-CWMProductAdjustmentDetail.md)
+{{ Fill in the Synopsis }}
+
 ### [New-CWMProductCatalog](Docs/New-CWMProductCatalog.md)
 This function will create a new catalog.
-
-### [New-CWMTicket](Docs/New-CWMTicket.md)
-This function will create a new project phase
 
 ### [New-CWMProjectTeamMember](Docs/New-CWMProjectTeamMember.md)
 This function will create a new ticket.
@@ -293,8 +332,8 @@ This function will create a new schedule entry.
 ### [New-CWMServiceBoard](Docs/New-CWMServiceBoard.md)
 This function will create a new service board.
 
-### [Get-CWMTicket](Docs/Get-CWMTicket.md)
-This function list tickets that match your condition.
+### [New-CWMTicket](Docs/New-CWMTicket.md)
+This function will create a new service ticket
 
 ### [New-CWMTicketChild](Docs/New-CWMTicketChild.md)
 This function will create a new ticket.
@@ -310,6 +349,9 @@ Add a note to a CW Manage ticket.
 
 ### [New-CWMTimeEntry](Docs/New-CWMTimeEntry.md)
 This function will create a new time entry.
+
+### [Remove-CWMAgreementAddition](Docs/Remove-CWMAgreementAddition.md)
+{{ Fill in the Synopsis }}
 
 ### [Remove-CWMAgreementSite](Docs/Remove-CWMAgreementSite.md)
 This function will remove a site from a Manage agreement.
@@ -329,6 +371,12 @@ Removes a contact.
 ### [Remove-CWMCompanyContactNote](Docs/Remove-CWMCompanyContactNote.md)
 Removes a note from a contact.
 
+### [Remove-CWMCompanyNote](Docs/Remove-CWMCompanyNote.md)
+{{ Fill in the Synopsis }}
+
+### [Remove-CWMCompanySite](Docs/Remove-CWMCompanySite.md)
+{{ Fill in the Synopsis }}
+
 ### [Remove-CWMCompanyStatus](Docs/Remove-CWMCompanyStatus.md)
 Remove a company status
 
@@ -337,6 +385,9 @@ Remove a company status
 
 ### [Remove-CWMCompanyTypeAssociation](Docs/Remove-CWMCompanyTypeAssociation.md)
 This function will remove a type from a company.
+
+### [Remove-CWMContactCommunication](Docs/Remove-CWMContactCommunication.md)
+{{ Fill in the Synopsis }}
 
 ### [Remove-CWMDocument](Docs/Remove-CWMDocument.md)
 Remove a Manage document.
@@ -353,6 +404,9 @@ This function will remove the supplied ticket.
 ### [Remove-CWMTicketConfiguration](Docs/Remove-CWMTicketConfiguration.md)
 Remove a configuration from a ticket
 
+### [Remove-CWMTicketNote](Docs/Remove-CWMTicketNote.md)
+{{ Fill in the Synopsis }}
+
 ### [Remove-CWMTimeEntry](Docs/Remove-CWMTimeEntry.md)
 Removes a time entry
 
@@ -364,6 +418,9 @@ This will update an agreement.
 
 ### [Update-CWMAgreementAddition](Docs/Update-CWMAgreementAddition.md)
 This will update an addition to an agreement.
+
+### [Update-CWMBoardItemAssociation](Docs/Update-CWMBoardItemAssociation.md)
+{{ Fill in the Synopsis }}
 
 ### [Update-CWMCallbackEntry](Docs/Update-CWMCallbackEntry.md)
 This will update a Callback entry.
@@ -380,6 +437,9 @@ This will update a company configuration question value.
 ### [Update-CWMCompanyContact](Docs/Update-CWMCompanyContact.md)
 This will modify a contact by its ID.
 
+### [Update-CWMCompanySite](Docs/Update-CWMCompanySite.md)
+{{ Fill in the Synopsis }}
+
 ### [Update-CWMCompanyTeam](Docs/Update-CWMCompanyTeam.md)
 {{ Fill in the Synopsis }}
 
@@ -392,6 +452,9 @@ Update a contacts communication data.
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
 Update the properties of a ConnectWise Manage member.
 
+### [Update-CWMProductAdjustment](Docs/Update-CWMProductAdjustment.md)
+{{ Fill in the Synopsis }}
+
 ### [Update-CWMProductCatalog](Docs/Update-CWMProductCatalog.md)
 This will update a catalog item.
 
@@ -403,6 +466,9 @@ This will update an project phase.
 
 ### [Update-CWMProjectTicket](Docs/Update-CWMProjectTicket.md)
 This will update a Manage project ticket.
+
+### [Update-CWMPurchaseOrder](Docs/Update-CWMPurchaseOrder.md)
+{{ Fill in the Synopsis }}
 
 ### [Update-CWMScheduleEntry](Docs/Update-CWMScheduleEntry.md)
 Will update a schedule entry.

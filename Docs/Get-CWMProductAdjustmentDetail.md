@@ -1,20 +1,20 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest?a=Procurement&e=ProductsItem&o=GET
 schema: 2.0.0
 ---
 
-# Get-CWMWarehouse
+# Get-CWMProductAdjustmentDetail
 
 ## SYNOPSIS
-This function will list warehouses.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Get-CWMWarehouse [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
- [[-childconditions] <String>] [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+Get-CWMProductAdjustmentDetail [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
@@ -23,12 +23,12 @@ Get-CWMWarehouse [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <S
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Get-CWMWarehouse -Condition "name = 'Office'" -all
+PS C:\> {{ Add example code here }}
 ```
 
-Will return all warehouses with the name 'Office'
+{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -42,12 +42,12 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childconditions
+### -childConditions
 Allows searching arrays on endpoints that list childConditions under parameters
 
 ```yaml
@@ -63,8 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+{{ Fill condition Description }}
 
 ```yaml
 Type: String
@@ -93,8 +92,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customfieldconditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+### -customFieldConditions
+Allows searching custom fields.
 
 ```yaml
 Type: String
@@ -154,7 +153,7 @@ Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+Used in pagination to cycle through results.
 
 ```yaml
 Type: Int32
@@ -163,7 +162,7 @@ Aliases:
 
 Required: False
 Position: 5
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -178,7 +177,7 @@ Aliases:
 
 Required: False
 Position: 6
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -193,8 +192,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
-Author: Chris Taylor Date: 11/8/2018
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET](https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET)

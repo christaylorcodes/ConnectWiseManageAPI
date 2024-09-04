@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Remove-CWMCompanyNote
+# New-CWMBoardItem
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-CWMCompanyNote [-parentId] <Int32> [-NoteId] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMBoardItem [-parentId] <Int32> [-name] <String> [[-inactiveFlag] <Boolean>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,21 +46,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -NoteId
-{{ Fill NoteId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -76,13 +62,43 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -inactiveFlag
+{{ Fill inactiveFlag Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -name
+{{ Fill name Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -parentId
 {{ Fill parentId Description }}
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: CompanyID
+Aliases: boardId
 
 Required: True
 Position: 0
