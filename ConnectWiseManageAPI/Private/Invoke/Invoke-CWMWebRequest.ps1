@@ -21,15 +21,16 @@
             if ($Key -eq 'Accept' -and $Arguments.Version -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
                 $Arguments.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Arguments.Version)"
                 Write-Verbose "Version Passed: $($Arguments.Version)"
-            }
-            else {
+            } else {
                 $Arguments.Headers += @{$Key = $script:CWMServerConnection.Headers.$Key }
             }
         }
     }
     $Arguments.Remove('Version')
 
-    if (!$Arguments.SessionVariable) { $Arguments.WebSession = $script:CWMServerConnection.Session }
+    if (!$Arguments.SessionVariable) {
+        $Arguments.WebSession = $script:CWMServerConnection.Session
+    }
 
     # Check URI format
     if ($Arguments.URI -notlike '*`?*' -and $Arguments.URI -like '*`&*') {
@@ -42,11 +43,14 @@
         $prevProgressPreference = $global:ProgressPreference
         $global:ProgressPreference = 'SilentlyContinue'
 
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        if ($psversiontable.psversion.major -ge 7) {
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing -AllowInsecureRedirect
+        } else {
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        }
 
         $global:ProgressPreference = $prevProgressPreference
-    }
-    catch {
+    } catch {
         $global:ProgressPreference = $prevProgressPreference
 
         # Start error message
@@ -59,8 +63,7 @@
                 $ErrorStream = $_.Exception.Response.GetResponseStream()
                 $Reader = New-Object System.IO.StreamReader($ErrorStream)
                 $script:ErrBody = $Reader.ReadToEnd() | ConvertFrom-Json
-            }
-            catch {
+            } catch {
                 $script:ErrBody = $_.Exception.Response.Content
             }
             $ErrBody = $script:ErrBody
@@ -70,8 +73,7 @@
                 if ($ErrBody.code -eq 'Unauthorized') {
                     $ErrorMessage += "-----> $($ErrBody.message)"
                     $ErrorMessage += "-----> Use 'Disconnect-CWM' or 'Connect-CWM -Force' to set new authentication."
-                }
-                elseif ($ErrBody.code -eq 'ConnectWiseApi') {
+                } elseif ($ErrBody.code -eq 'ConnectWiseApi') {
                     switch ($ErrBody.message) {
                         'UserNotAuthenticated' {
                             $ErrorMessage += "-----> $($ErrBody.message)"
@@ -82,13 +84,11 @@
                             $ErrorMessage += '-----> ^ Error has not been documented please report. ^'
                         }
                     }
-                }
-                else {
+                } else {
                     $ErrorMessage += "-----> $($ErrBody.message)"
                     $ErrorMessage += '-----> ^ Error has not been documented please report. ^'
                 }
-            }
-            elseif ($_.Exception.message) {
+            } elseif ($_.Exception.message) {
                 $ErrorMessage += 'An exception has been thrown.'
                 $ErrorMessage += "--> $($_.Exception.message)"
             }
@@ -104,8 +104,11 @@
             }
         }
 
-        if ($ErrorMessage.Length -lt 1) { $ErrorMessage = $_ }
-        else { $ErrorMessage += $_.ScriptStackTrace }
+        if ($ErrorMessage.Length -lt 1) {
+            $ErrorMessage = $_
+        } else {
+            $ErrorMessage += $_.ScriptStackTrace
+        }
 
         return Write-Error ($ErrorMessage | Out-String)
     }
@@ -122,8 +125,14 @@
         Write-Warning "Issue with request, status: $($Result.StatusCode) $($Result.StatusDescription)"
         Write-Warning "$($Retry)/$($MaxRetry) retries, waiting $($Wait)ms."
         Start-Sleep -Milliseconds $Wait
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        if ($psversiontable.psversion.major -ge 7) {
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing -AllowInsecureRedirect
+        } else {
+            $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        }
+
     }
+
     if ($Retry -ge $MaxRetry) {
         return Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
     }
