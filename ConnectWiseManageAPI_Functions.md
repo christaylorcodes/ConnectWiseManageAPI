@@ -410,6 +410,9 @@ Remove a configuration from a ticket
 ### [Remove-CWMTimeEntry](Docs/Remove-CWMTimeEntry.md)
 Removes a time entry
 
+### [Remove-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
+This function will remove a time sheet for approval.
+
 ### [Submit-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
 This function will submit a time sheet for approval.
 
