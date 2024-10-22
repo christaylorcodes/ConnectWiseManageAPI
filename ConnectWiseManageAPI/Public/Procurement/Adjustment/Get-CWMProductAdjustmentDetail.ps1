@@ -1,7 +1,6 @@
-﻿function Get-CWMCompanyCountries {
+﻿function Get-CWMProductAdjustmentDetail {
     [CmdletBinding()]
     param(
-        [Alias('companyId')]
         [int]$id,
         [switch]$count,
         [string]$condition,
@@ -15,6 +14,6 @@
         [switch]$all
     )
 
-    $Endpoint = '/company/countries'
+    $Endpoint = "/procurement/adjustments/$($parentId)/details"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

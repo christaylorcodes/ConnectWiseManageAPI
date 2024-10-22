@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://christaylor.codes
 schema: 2.0.0
 ---
 
-# Remove-CWMCompanyNote
+# Update-CWMBoardItemAssociation
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-CWMCompanyNote [-parentId] <Int32> [-NoteId] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMBoardItemAssociation [-parentId] <Int32> [-itemId] <Int32> [-typeId] <Int32> [-Operation] <String>
+ [-Path] <String> [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,16 +46,48 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -NoteId
-{{ Fill NoteId Description }}
+### -Operation
+What you are doing with the value.
+replace, add, remove
 
 ```yaml
-Type: Int32
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: add, replace, remove
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+The path to the property that you want to perform the operation on.
+
+```yaml
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+The value you want to set the property to.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -76,16 +109,46 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -itemId
+{{ Fill itemId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: id
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -parentId
 {{ Fill parentId Description }}
 
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: CompanyID
+Aliases: boardId
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -typeId
+{{ Fill typeId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

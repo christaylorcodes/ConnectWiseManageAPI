@@ -1,6 +1,9 @@
-﻿function Get-CWMProductType {
+﻿function Get-CWMTicketAllNote {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory=$true)]
+        [Alias('ticketId')]
+        [int]$parentId,
         [int]$id,
         [switch]$count,
         [string]$condition,
@@ -13,6 +16,7 @@
         [string[]]$fields,
         [switch]$all
     )
-    $Endpoint = '/procurement/types'
+
+    $Endpoint = "/service/tickets/$($parentId)/allnotes"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

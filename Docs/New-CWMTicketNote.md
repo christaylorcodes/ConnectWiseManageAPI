@@ -21,13 +21,13 @@ New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-detail
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a note to a ticket.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```powershell
-New-CWMTicketNote -ticketId $Ticket.id -text 'New note'
+New-CWMTicketNote -ticketId $Ticket.id -text 'New note' -detailDescriptionFlag $true -internalFlag $false -resolutionFlag $false
 ```
 
 Create a new note.
@@ -110,7 +110,7 @@ Accept wildcard characters: False
 ```
 
 ### -detailDescriptionFlag
-{{ Fill detailDescriptionFlag Description }}
+A boolean value that determines if the note should appear in the discussion tab.
 
 ```yaml
 Type: Boolean
@@ -170,7 +170,8 @@ Accept wildcard characters: False
 ```
 
 ### -internalFlag
-{{ Fill internalFlag Description }}
+A boolean value that determines if the note should appear in the internal tab.
+
 
 ```yaml
 Type: Boolean
@@ -215,7 +216,7 @@ Accept wildcard characters: False
 ```
 
 ### -resolutionFlag
-{{ Fill resolutionFlag Description }}
+A boolean value that determines if the note should appear in the Resolution tab.
 
 ```yaml
 Type: Boolean
@@ -275,7 +276,7 @@ Accept wildcard characters: False
 ```
 
 ### -parentId
-{{ Fill parentId Description }}
+The ticket id to attach the internal note to.
 
 ```yaml
 Type: Int32

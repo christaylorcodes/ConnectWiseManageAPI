@@ -1,4 +1,4 @@
-﻿function New-CWMCompanySite {
+function New-CWMCompanySite {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(

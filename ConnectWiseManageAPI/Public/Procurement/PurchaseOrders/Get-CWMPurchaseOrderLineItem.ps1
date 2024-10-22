@@ -1,6 +1,9 @@
-﻿function Get-CWMProductType {
+function Get-CWMPurchaseOrderLineItem {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory = $true)]
+        [Alias('ProductID')]
+        [int]$parentId,
         [int]$id,
         [switch]$count,
         [string]$condition,
@@ -13,6 +16,7 @@
         [string[]]$fields,
         [switch]$all
     )
-    $Endpoint = '/procurement/types'
+
+    $Endpoint = "/procurement/purchaseorders/$($parentId)/lineitems"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

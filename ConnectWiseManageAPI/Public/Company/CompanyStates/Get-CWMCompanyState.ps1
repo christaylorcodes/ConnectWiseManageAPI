@@ -1,4 +1,4 @@
-﻿function Get-CWMCompanyStates {
+﻿function Get-CWMCompanyState {
     [CmdletBinding()]
     param(
         [Alias('companyId')]
