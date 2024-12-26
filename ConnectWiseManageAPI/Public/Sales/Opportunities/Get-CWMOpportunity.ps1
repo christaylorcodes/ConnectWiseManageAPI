@@ -1,14 +1,13 @@
 function Get-CWMOpportunity {
     param (
-        [int]$CompanyID,
-        [string]$Condition,
-        [string]$ChildConditions,
-        [string]$CustomFieldConditions,
-        [string]$OrderBy,
-        [string]$Fields,
-        [Int32]$Page,
-        [Int32]$PageSize,
-        [Int32]$PageID,
+        [string]$condition,
+        [string]$childConditions,
+        [string]$customFieldConditions,
+        [string]$orderBy,
+        [string]$fields,
+        [Int32]$page,
+        [Int32]$pageSize,
+        [Int32]$pageID,
         [switch]$all
     )
 
