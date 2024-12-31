@@ -1,4 +1,6 @@
 function New-CWMOpportunity {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [int]$id,
         [Parameter(Mandatory=$true)]

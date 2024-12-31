@@ -12,7 +12,7 @@ function Get-CWMOpportunityForecast {
             [Int32]$pageID,
             [switch]$all
         )
-    
+        
         $endpoint = "/sales/opportunities/$parentId/forecast"
     
         Invoke-CWMGetMaster -Arguments $PSBoundParameters -Endpoint $endpoint
