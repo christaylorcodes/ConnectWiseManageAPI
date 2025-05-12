@@ -42,7 +42,7 @@
         $prevProgressPreference = $global:ProgressPreference
         $global:ProgressPreference = 'SilentlyContinue'
 
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        $Result = Invoke-WebRequest @Arguments -UseBasicParsing -AllowInsecureRedirect
 
         $global:ProgressPreference = $prevProgressPreference
     }
@@ -122,7 +122,7 @@
         Write-Warning "Issue with request, status: $($Result.StatusCode) $($Result.StatusDescription)"
         Write-Warning "$($Retry)/$($MaxRetry) retries, waiting $($Wait)ms."
         Start-Sleep -Milliseconds $Wait
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        $Result = Invoke-WebRequest @Arguments -UseBasicParsing -AllowInsecureRedirect
     }
     if ($Retry -ge $MaxRetry) {
         return Write-Error "Max retries hit. Status: $($Result.StatusCode) $($Result.StatusDescription)"
