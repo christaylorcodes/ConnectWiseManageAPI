@@ -1,4 +1,4 @@
-﻿function Get-CWMProjectTicketAllNote {
+﻿function Get-CWMProjectTicketAllNotes {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]

@@ -1,22 +1,20 @@
-﻿function Get-CWMProjectTicketNote {
+﻿function Get-CWMOpportunityForecasts {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
-        [Alias('ticketId')]
+        [Alias('OpportunityId')]
         [int]$parentId,
-        [int]$id,
         [switch]$count,
-        [string]$condition,
+        [string]$conditions,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,
         [string]$customFieldConditions,
         [int]$page,
         [int]$pageSize,
-        [string[]]$fields,
-        [switch]$all
+        [string[]]$fields
     )
 
-    $Endpoint = "/project/tickets/$($parentId)/notes"
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

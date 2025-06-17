@@ -1,7 +1,7 @@
-function Get-CWMServiceTemplates {
+﻿function Get-CWMOpportunities {
     [CmdletBinding()]
     param(
-        [int]$pageId,
+        [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -12,6 +12,6 @@ function Get-CWMServiceTemplates {
         [string[]]$fields
     )
 
-    $Endpoint = '/service/templates'
+    $Endpoint = '/sales/opportunities'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
