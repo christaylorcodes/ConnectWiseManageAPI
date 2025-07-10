@@ -2,13 +2,13 @@
 Module Name: ConnectWiseManageAPI
 Module Guid: 3374fb93-c06d-47b0-b4cc-9d49987e376f
 Download Help Link: https://github.com/christaylorcodes/ConnectWiseManageAPI
-Help Version: 0.0.0.1
+Help Version: 0.0.0.2
 Locale: en-US
 ---
 
 # ConnectWiseManageAPI Module
 ## Description
-These commands should mirror what is available via the REST API .
+These commands should mirror what is available via the REST API.
 
 ## ConnectWiseManageAPI Cmdlets
 ### [Connect-CWM](Docs/Connect-CWM.md)
@@ -128,6 +128,9 @@ This function will list documents associated with a record.
 ### [Get-CWMInventory](Docs/Get-CWMInventory.md)
 This function will list Inventory and Stock on Hand, including serial numbers from a specific Warehouse Bin
 
+### [Get-CWMInvoices](Docs/Get-CWMInvoices.md)
+This function will list Invoices
+
 ### [Get-CWMManufacturer](Docs/Get-CWMManufacturer.md)
 This function will allow you to search for Manage manufacturers.
 
@@ -148,6 +151,15 @@ This function will return information about the user used for the API connection
 
 ### [Get-CWMMySecurity](Docs/Get-CWMMySecurity.md)
 This function will return information about the users permissions.
+
+### [Get-CWMOpportunities](Docs/Get-CWMOpportunities.md)
+This function will return information about Opportunities.
+
+### [Get-CWMOpportunityForecasts](Docs/Get-CWMOpportunityForecasts.md)
+This function will return information about the Forecast lines on an Opportunit.
+
+### [Get-CWMOpportunityNote](Docs/Get-CWMOpportunityNote.md)
+This function will return the notes on an Opportunity.
 
 ### [Get-CWMPriority](Docs/Get-CWMPriority.md)
 This function will list service priorities on conditions.
@@ -178,6 +190,9 @@ This will return a list of projects.
 
 ### [Get-CWMProjectPhase](Docs/Get-CWMProjectPhase.md)
 This function will list all phases for a project.
+
+### [Get-CWMProjectTicketAllNote](Docs/Get-CWMProjectTicketAllNote.md)
+This function will list all notes for a project ticket.
 
 ### [Get-CWMProjectSecurityRole](Docs/Get-CWMProjectSecurityRole.md)
 This function will list project security roles.
@@ -217,6 +232,9 @@ This function will list of service boards based on conditions.
 
 ### [Get-CWMServiceBoardInfo](Docs/Get-CWMServiceBoardInfo.md)
 This will return information about service boards.
+
+### [Get-CWMServiceTemplates](Docs/Get-CWMServiceTemplates.md)
+This will return information about service/ticket templates.
 
 ### [Get-CWMSLA](Docs/Get-CWMSLA.md)
 This function will list service SLAs on conditions.
