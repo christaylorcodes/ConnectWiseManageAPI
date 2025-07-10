@@ -7,7 +7,7 @@
     </TN>
     <MS>
       <S N="Name">ConnectWiseManageAPI</S>
-      <Version N="Version">0.4.15.0</Version>
+      <Version N="Version">0.4.15.10</Version>
       <S N="Type">Module</S>
       <S N="Description">PowerShell wrapper for the ConnectWise Manage REST API</S>
       <S N="Author">Chris Taylor</S>
@@ -229,7 +229,6 @@
                 <S>Submit-CWMTimeSheet</S>
                 <S>Update-CWMTimeSheet</S>
                 <S>Remove-CWMProjectTicketNote</S>
-                <S>New-CWMProjectTicketNote</S>
                 <S>Get-CWMProjectTicketAllNote</S>
                 <S>Get-CWMProjectTicketNote</S>
                 <S>Import-Module 'ConnectWiseManageAPI'</S>
@@ -405,9 +404,8 @@
                 <S>Update-CWMTimeSheet</S>
                 <S>Get-CWMServiceTemplates</S>
                 <S>Remove-CWMProjectTicketNote</S>
-                <S>New-CWMProjectTicketNote</S>
-                <S>Get-CWMProjectTicketAllNote</S>
-                <S>Get-CWMProjectTicketNote</S>
+                <S>Get-CWMProjectTicketAllNotes</S>
+                <S>Get-CWMProjectTicketNotes</S>
                 <S>Import-Module 'ConnectWiseManageAPI'</S>
               </LST>
             </Obj>

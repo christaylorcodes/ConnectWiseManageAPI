@@ -3,7 +3,7 @@ Module Name: ConnectWiseManageAPI
 online version:
 ---
 
-# Get-CWMOpportunities
+# Get-CWMServiceTemplates
 
 ## SYNOPSIS
 This function will return ervice templates.

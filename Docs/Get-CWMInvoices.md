@@ -1,54 +1,36 @@
 ---
+external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
 online version:
+schema: 2.0.0
 ---
 
-# Get-CWMOpportunityForecasts
+# Get-CWMInvoices
 
 ## SYNOPSIS
-This function will return the forecast lines on an Opportunity.
+This function will list Invoice
 
 ## SYNTAX
 
 ```
-Get-CWMOpportunityForecasts -parentId <Int32> [-count] [[-condition] <String>] [[-orderBy] <String>]
+Get-CWMInvoices [[-id] <Int32>] [[-condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [<CommonParameters>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```powershell
-$CWMOpportunityForecastsParameters = @{
-            ParentId = 3265
-            pageSize = 25
-            page = 1
-            orderBy = "id desc"
-        }
-
-$CWMOpportunityForecasts = Get-CWMOpportunityForecasts @CWMOpportunityForecastsParameters
+Get-CWMInvoices -Id 555
 ```
 
+Will return invoice 555
 
 ## PARAMETERS
-
-### -id
-The ID of the opportunity
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: OpportunityId
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -childConditions
 Allows searching arrays on endpoints that list childConditions under parameters
@@ -59,68 +41,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: 4
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -page
-Used in pagination to cycle through results
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-Number of results returned per page (Defaults to 25)
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -135,7 +57,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Allows searching custom fields when customFieldConditions is listed in the parameters
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -150,23 +87,68 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -count
-Will return the number of objects.
+### -id
+{{ Fill id Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+Used in pagination to cycle through results
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+Number of results returned per page (Defaults to 25)
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -176,11 +158,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Adam Wilson Date: 2025-06-17
+Author: Adam Wilson Date: 2025-06-30
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/OpportunityForecasts](https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/OpportunityForecasts)
+[https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/Invoices/getFinanceInvoices](https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/Invoices/getFinanceInvoices)

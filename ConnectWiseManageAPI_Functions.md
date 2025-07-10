@@ -128,6 +128,9 @@ This function will list documents associated with a record.
 ### [Get-CWMInventory](Docs/Get-CWMInventory.md)
 This function will list Inventory and Stock on Hand, including serial numbers from a specific Warehouse Bin
 
+### [Get-CWMInvoices](Docs/Get-CWMInvoices.md)
+This function will list Invoices
+
 ### [Get-CWMManufacturer](Docs/Get-CWMManufacturer.md)
 This function will allow you to search for Manage manufacturers.
 

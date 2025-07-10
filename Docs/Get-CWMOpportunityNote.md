@@ -3,7 +3,7 @@ Module Name: ConnectWiseManageAPI
 online version:
 ---
 
-# Get-CWMOpportunities
+# Get-CWMOpportunityNote
 
 ## SYNOPSIS
 This function will return the forecast lines on an Opportunity.
