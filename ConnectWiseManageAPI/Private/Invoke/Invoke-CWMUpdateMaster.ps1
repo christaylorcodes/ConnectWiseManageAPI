@@ -6,13 +6,34 @@
     )
 
     Write-Verbose $($Arguments.Value | Out-String)
-    $Body = @(
-        @{
-            op    = $Arguments.Operation.toLower()
-            path  = $Arguments.Path
-            value = $Arguments.Value
+    If ($Arguments.Path.Count -gt 1) {
+        $Body = @()
+        For ($i = 0; $i -lt $Arguments.Path.Count; $i++) {
+            If ($Arguments.Path[$i] -is [Array]) {
+                $Body += @{
+                    op    = $Arguments.Operation.toLower()
+                    path  = $($Arguments.Path[$i])
+                    value = @($($Arguments.Value[$i]))
+                }
+            } Else {
+                $Body += @{
+                    op    = $Arguments.Operation.toLower()
+                    path  = $($Arguments.Path[$i])
+                    value = $Arguments.Value[$i]
+                }
+                    
+            }
         }
-    )
+    } Else {
+        $Body = @(
+            @{
+                op    = $Arguments.Operation.toLower()
+                path  = $Arguments.Path
+                value = $Arguments.Value
+            }
+        )
+    }
+
     $Body = ConvertTo-Json $Body -Depth 100
     Write-Verbose $Body
 
@@ -23,6 +44,7 @@
         ContentType = 'application/json'
         Body        = $Body
     }
+
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMUpdateMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if ($Result.content) {
