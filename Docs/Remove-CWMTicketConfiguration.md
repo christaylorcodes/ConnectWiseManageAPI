@@ -13,7 +13,8 @@ Remove a configuration from a ticket
 ## SYNTAX
 
 ```
-Remove-CWMTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -86,6 +87,21 @@ Aliases: ticketId
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

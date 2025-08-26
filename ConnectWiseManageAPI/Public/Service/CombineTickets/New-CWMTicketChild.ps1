@@ -1,4 +1,4 @@
-﻿function New-CWMTicketChild {
+function New-CWMTicketChild {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium', DefaultParameterSetName = 'Bundle')]
     param(
@@ -39,4 +39,3 @@
         Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
 }
-

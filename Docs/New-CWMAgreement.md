@@ -37,7 +37,7 @@ New-CWMAgreement [[-id] <Int32>] [-name] <String> [[-type] <Hashtable>] [[-compa
  [[-billableExpenseInvoice] <Boolean>] [[-billableProductInvoice] <Boolean>] [[-currency] <Hashtable>]
  [[-periodType] <String>] [[-autoInvoiceFlag] <Boolean>] [[-nextInvoiceDate] <String>]
  [[-companyLocation] <Hashtable>] [[-agreementStatus] <String>] [[-_info] <Hashtable>]
- [[-customFields] <Array>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Array>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -1259,6 +1259,21 @@ Aliases:
 
 Required: False
 Position: 61
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

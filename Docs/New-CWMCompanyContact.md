@@ -24,7 +24,8 @@ New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String
  [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>] [[-presence] <String>]
  [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>] [[-linkedInUrl] <String>]
  [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>] [[-communicationItems] <Hashtable[]>]
- [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -697,6 +698,21 @@ Accept wildcard characters: False
 Type: Hashtable[]
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

@@ -149,11 +149,20 @@ This function will return information about the user used for the API connection
 ### [Get-CWMMySecurity](Docs/Get-CWMMySecurity.md)
 This function will return information about the users permissions.
 
+### [Get-CWMOpportunity](Docs/Get-CWMOpportunity.md)
+{{ Fill in the Synopsis }}
+
+### [Get-CWMOpportunityForecast](Docs/Get-CWMOpportunityForecast.md)
+{{ Fill in the Synopsis }}
+
+### [Get-CWMOpportunityForecastItem](Docs/Get-CWMOpportunityForecastItem.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMPriority](Docs/Get-CWMPriority.md)
 This function will list service priorities on conditions.
 
 ### [Get-CWMProduct](Docs/Get-CWMProduct.md)
-This function will list all CW products.
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMProductAdjustment](Docs/Get-CWMProductAdjustment.md)
 {{ Fill in the Synopsis }}
@@ -187,6 +196,9 @@ This function will list team members of a project.
 
 ### [Get-CWMProjectTicket](Docs/Get-CWMProjectTicket.md)
 This will return a list of project tickets.
+
+### [Get-CWMProjectTicketConfiguration](Docs/Get-CWMProjectTicketConfiguration.md)
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMPurchaseOrder](Docs/Get-CWMPurchaseOrder.md)
 This function will list purchase orders.
@@ -257,6 +269,27 @@ This function will list warehouses.
 ### [Get-CWMWarehouseBin](Docs/Get-CWMWarehouseBin.md)
 This function will list warehouse bins.
 
+### [Invoke-CWMAllResult](Docs/Invoke-CWMAllResult.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-CWMGetMaster](Docs/Invoke-CWMGetMaster.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-CWMNewMaster](Docs/Invoke-CWMNewMaster.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-CWMRemoveMaster](Docs/Invoke-CWMRemoveMaster.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-CWMSearchMaster](Docs/Invoke-CWMSearchMaster.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-CWMUpdateMaster](Docs/Invoke-CWMUpdateMaster.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-CWMWebRequest](Docs/Invoke-CWMWebRequest.md)
+{{ Fill in the Synopsis }}
+
 ### [New-CWMAgreement](Docs/New-CWMAgreement.md)
 This function will allow you to search for Manage configurations.
 
@@ -314,6 +347,18 @@ This will create a new Manage user.
 ### [New-CWMMemberToken](Docs/New-CWMMemberToken.md)
 {{ Fill in the Synopsis }}
 
+### [New-CWMOpportunity](Docs/New-CWMOpportunity.md)
+{{ Fill in the Synopsis }}
+
+### [New-CWMOpportunityForecast](Docs/New-CWMOpportunityForecast.md)
+{{ Fill in the Synopsis }}
+
+### [New-CWMOpportunityForecastItem](Docs/New-CWMOpportunityForecastItem.md)
+{{ Fill in the Synopsis }}
+
+### [New-CWMProduct](Docs/New-CWMProduct.md)
+{{ Fill in the Synopsis }}
+
 ### [New-CWMProductAdjustment](Docs/New-CWMProductAdjustment.md)
 {{ Fill in the Synopsis }}
 
@@ -323,8 +368,14 @@ This will create a new Manage user.
 ### [New-CWMProductCatalog](Docs/New-CWMProductCatalog.md)
 This function will create a new catalog.
 
+### [New-CWMTicket](Docs/New-CWMTicket.md)
+This function will create a new project phase
+
 ### [New-CWMProjectTeamMember](Docs/New-CWMProjectTeamMember.md)
 This function will create a new ticket.
+
+### [New-CWMProjectTicketConfiguration](Docs/New-CWMProjectTicketConfiguration.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMScheduleEntry](Docs/New-CWMScheduleEntry.md)
 This function will create a new schedule entry.
@@ -395,6 +446,21 @@ Remove a Manage document.
 ### [Remove-CWMMarketingGroupCompany](Docs/Remove-CWMMarketingGroupCompany.md)
 This function will remove a company from a marketing group.
 
+### [Remove-CWMOpportunity](Docs/Remove-CWMOpportunity.md)
+{{ Fill in the Synopsis }}
+
+### [Remove-CWMOpportunityForecast](Docs/Remove-CWMOpportunityForecast.md)
+{{ Fill in the Synopsis }}
+
+### [Remove-CWMOpportunityForecastItem](Docs/Remove-CWMOpportunityForecastItem.md)
+{{ Fill in the Synopsis }}
+
+### [Remove-CWMProduct](Docs/Remove-CWMProduct.md)
+{{ Fill in the Synopsis }}
+
+### [Remove-CWMProjectTicketConfiguration](Docs/Remove-CWMProjectTicketConfiguration.md)
+{{ Fill in the Synopsis }}
+
 ### [Remove-CWMScheduleEntry](Docs/Remove-CWMScheduleEntry.md)
 This function will remove a schedule entry from Manage.
 
@@ -410,8 +476,8 @@ Remove a configuration from a ticket
 ### [Remove-CWMTimeEntry](Docs/Remove-CWMTimeEntry.md)
 Removes a time entry
 
-### [Remove-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
-This function will remove a time sheet for approval.
+### [Remove-CWMTimeSheet](Docs/Remove-CWMTimeSheet.md)
+{{ Fill in the Synopsis }}
 
 ### [Submit-CWMTimeSheet](Docs/Submit-CWMTimeSheet.md)
 This function will submit a time sheet for approval.
@@ -454,6 +520,15 @@ Update a contacts communication data.
 
 ### [Update-CWMMember](Docs/Update-CWMMember.md)
 Update the properties of a ConnectWise Manage member.
+
+### [Update-CWMOpportunity](Docs/Update-CWMOpportunity.md)
+{{ Fill in the Synopsis }}
+
+### [Update-CWMOpportunityForecast](Docs/Update-CWMOpportunityForecast.md)
+{{ Fill in the Synopsis }}
+
+### [Update-CWMOpportunityForecastItem](Docs/Update-CWMOpportunityForecastItem.md)
+{{ Fill in the Synopsis }}
 
 ### [Update-CWMProductAdjustment](Docs/Update-CWMProductAdjustment.md)
 {{ Fill in the Synopsis }}

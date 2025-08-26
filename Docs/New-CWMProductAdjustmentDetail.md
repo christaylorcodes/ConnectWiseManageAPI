@@ -16,7 +16,7 @@ schema: 2.0.0
 New-CWMProductAdjustmentDetail [-parentId] <Int32> [-catalogItem] <Hashtable> [[-description] <String>]
  [[-quantityOnHand] <Double>] [[-unitCost] <Double>] [-warehouse] <Hashtable> [-warehouseBin] <Hashtable>
  [-quantityAdjusted] <Int32> [[-serialNumber] <String>] [[-adjustment] <Hashtable>] [[-_info] <Hashtable>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -224,6 +224,21 @@ Aliases:
 
 Required: True
 Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

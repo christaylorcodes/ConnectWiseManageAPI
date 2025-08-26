@@ -15,7 +15,7 @@ This function will create a new ticket.
 ```
 New-CWMProjectTeamMember -parentId <Int32> [[-id] <Int32>] [[-hours] <Decimal>] [-member] <Hashtable>
  [-projectRole] <Hashtable> [[-workRole] <Hashtable>] [[-startDate] <String>] [[-endDate] <String>]
- [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -192,6 +192,21 @@ Parameter Sets: (All)
 Aliases: projectId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

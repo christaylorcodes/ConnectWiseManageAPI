@@ -14,8 +14,8 @@ This function will create a note on the given contact.
 
 ```
 New-CWMCompanyContactNote [-parentId] <Int32> [[-id] <Int32>] [-text] <String> [[-type] <Hashtable>]
- [[-flagged] <Boolean>] [[-enteredBy] <String>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [[-flagged] <Boolean>] [[-enteredBy] <String>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -163,6 +163,21 @@ Aliases:
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

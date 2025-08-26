@@ -15,7 +15,8 @@ This function will create a new \<SOMETHING\>.
 ```
 New-CWMCompanyConfigurationTypeQuestionValue -grandparentId <Int32> -parentId <Int32> [[-id] <Int32>]
  [[-configurationType] <Hashtable>] [[-defaultFlag] <Boolean>] [[-inactiveFlag] <Boolean>]
- [[-question] <Hashtable>] [-value] <String> [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-question] <Hashtable>] [-value] <String> [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -192,6 +193,21 @@ Parameter Sets: (All)
 Aliases: questionId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

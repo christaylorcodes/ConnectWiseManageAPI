@@ -1,4 +1,4 @@
-function New-CWMProduct {
+﻿function New-CWMProduct {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
@@ -91,7 +91,7 @@ function New-CWMProduct {
         [hashtable]$_info,
         [bool]$bypassForecastUpdate,
         [hashtable]$customFields
-        
+
     )
 
     $Endpoint = '/procurement/products'

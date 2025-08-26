@@ -13,7 +13,7 @@ This function will remove the supplied ticket.
 ## SYNTAX
 
 ```
-Remove-CWMTicket -id <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMTicket -id <Int32> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,6 +70,21 @@ Parameter Sets: (All)
 Aliases: ticketId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

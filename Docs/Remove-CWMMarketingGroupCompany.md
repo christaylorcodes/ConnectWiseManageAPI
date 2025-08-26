@@ -13,7 +13,8 @@ This function will remove a company from a marketing group.
 ## SYNTAX
 
 ```
-Remove-CWMMarketingGroupCompany -parentId <Int32> [-id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMMarketingGroupCompany -parentId <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,6 +86,21 @@ Parameter Sets: (All)
 Aliases: groupId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

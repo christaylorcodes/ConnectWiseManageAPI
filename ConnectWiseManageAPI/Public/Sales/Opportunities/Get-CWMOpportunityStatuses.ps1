@@ -1,4 +1,4 @@
-function Get-CWMOpportunityStatuses {
+﻿function Get-CWMOpportunityStatus {
     param (
         [string]$condition,
         [string]$childConditions,

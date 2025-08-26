@@ -16,7 +16,7 @@ This function will create a new callback entry.
 New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [-objectId] <Int32>
  [-type] <String> [-level] <String> [[-memberId] <Int32>] [-payloadVersion <String>]
  [[-inactiveFlag] <Boolean>] [-isSoapCallbackFlag <Boolean>] [-isSelfSuppressedFlag <Boolean>]
- [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -243,6 +243,21 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

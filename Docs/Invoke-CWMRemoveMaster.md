@@ -1,11 +1,11 @@
 ---
-external help file:
-Module Name:
-online version:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET
 schema: 2.0.0
 ---
 
-# Invoke-CWMUpdateMaster
+# Invoke-CWMRemoveMaster
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-CWMUpdateMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,7 +22,7 @@ Invoke-CWMUpdateMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] 
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -29,21 +30,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -Arguments
-{{ Fill Arguments Description }}
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -69,7 +55,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -83,6 +69,21 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

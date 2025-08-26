@@ -14,8 +14,8 @@ This function will create a new contact communication.
 
 ```
 New-CWMContactCommunication -parentId <Int32> [[-id] <Int32>] [-type] <Hashtable> [-value] <String>
- [[-extension] <String>] [[-defaultFlag] <Boolean>] [[-mobileGuid] <Guid>] [[-_info] <Hashtable>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [[-extension] <String>] [[-defaultFlag] <Boolean>] [[-mobileGuid] <Guid>] [[-_info] <Hashtable>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -186,6 +186,21 @@ Parameter Sets: (All)
 Aliases: contactId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

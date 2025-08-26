@@ -15,7 +15,7 @@ schema: 2.0.0
 ```
 Get-CWMBoardItemAssociation [-grandParentId] <Int32> [-parentId] <Int32> [-count] [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -192,6 +192,21 @@ Aliases: itemId
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

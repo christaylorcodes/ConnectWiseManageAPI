@@ -28,7 +28,7 @@ New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Has
  [[-remoteLink] <String>] [[-sla] <Hashtable>] [[-mobilezGuid] <String>] [[-_info] <Hashtable>]
  [[-displayVendorFlag] <Boolean>] [[-companyLocationId] <Int32>] [[-showRemoteFlag] <Boolean>]
  [[-showAutomateFlag] <Boolean>] [[-needsRenewalFlag] <Boolean>] [[-manufacturerPartNumber] <String>]
- [[-customFields] <Array>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Array>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -896,6 +896,21 @@ Aliases:
 
 Required: False
 Position: 15
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

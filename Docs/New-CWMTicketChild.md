@@ -14,14 +14,15 @@ This function will create a new ticket.
 
 ### Bundle (Default)
 ```
-New-CWMTicketChild [-ParentTicketID <Int32>] [-ChildTicketIDs <Int32[]>] -OperationType <String> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+New-CWMTicketChild [-ParentTicketID <Int32>] [-ChildTicketIDs <Int32[]>] -OperationType <String>
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Merge
 ```
 New-CWMTicketChild [-ParentTicketID <Int32>] [-ChildTicketIDs <Int32[]>] -StatusID <Int32> [-Sort <Int32>]
- [-_info <Hashtable>] -OperationType <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-_info <Hashtable>] -OperationType <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -177,6 +178,21 @@ Accept wildcard characters: False
 Type: Hashtable
 Parameter Sets: Merge
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

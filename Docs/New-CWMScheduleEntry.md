@@ -18,8 +18,8 @@ New-CWMScheduleEntry [[-id] <Int32>] [[-objectId] <Int32>] [[-name] <String>] [-
  [[-status] <Hashtable>] [-type] <Hashtable> [[-span] <Hashtable>] [[-doneFlag] <Boolean>]
  [[-acknowledgedFlag] <Boolean>] [[-ownerFlag] <Boolean>] [[-meetingFlag] <Boolean>]
  [[-allowScheduleConflictsFlag] <Boolean>] [[-addMemberToProjectFlag] <Boolean>] [[-projectRoleId] <Int32>]
- [[-mobileGuid] <Guid>] [[-closeDate] <String>] [[-hours] <Decimal>] [[-_info] <Hashtable>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [[-mobileGuid] <Guid>] [[-closeDate] <String>] [[-hours] <Decimal>] [[-_info] <Hashtable>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -392,6 +392,21 @@ Aliases:
 
 Required: False
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

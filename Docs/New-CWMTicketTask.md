@@ -15,8 +15,8 @@ Add a note to a CW Manage ticket.
 ```
 New-CWMTicketTask [-parentId] <Int32> [[-id] <Int32>] [[-notes] <String>] [[-closedFlag] <Boolean>]
  [[-priority] <Int32>] [[-schedule] <Hashtable>] [[-code] <Hashtable>] [[-resolution] <String>]
- [[-childScheduleAction] <Object>] [[-childTicketId] <Int32>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [[-childScheduleAction] <Object>] [[-childTicketId] <Int32>] [[-_info] <Hashtable>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -224,6 +224,21 @@ Aliases:
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

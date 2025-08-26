@@ -1,4 +1,4 @@
-﻿function Get-CWMAgreementType {
+function Get-CWMAgreementType {
     [CmdletBinding()]
     param(
         [int]$id,
@@ -17,4 +17,3 @@
     $Endpoint = '/finance/agreements/types'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
-

@@ -16,14 +16,14 @@ This function will list documents associated with a record.
 ```
 Get-CWMDocument [-id <Int32>] [-download] [-count] [-condition <String>] [-orderBy <String>]
  [-childConditions <String>] [-customFieldConditions <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [<CommonParameters>]
+ [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Record
 ```
 Get-CWMDocument -recordId <Int32> -recordType <String> [-count] [-condition <String>] [-orderBy <String>]
  [-childConditions <String>] [-customFieldConditions <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [<CommonParameters>]
+ [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -228,6 +228,21 @@ Accept wildcard characters: False
 Type: SwitchParameter
 Parameter Sets: ID
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

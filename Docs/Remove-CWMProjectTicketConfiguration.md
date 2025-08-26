@@ -1,11 +1,11 @@
 ---
-external help file:
-Module Name:
-online version:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
 schema: 2.0.0
 ---
 
-# Invoke-CWMRemoveMaster
+# Remove-CWMProjectTicketConfiguration
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMProjectTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,7 +22,7 @@ Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParam
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -45,21 +46,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Endpoint
-{{ Fill Endpoint Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -68,6 +54,51 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: configurationId
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+{{ Fill parentId Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

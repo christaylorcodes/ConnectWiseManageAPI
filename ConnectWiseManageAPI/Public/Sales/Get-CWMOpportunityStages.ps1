@@ -1,4 +1,4 @@
-function Get-CWMOpportunityStages {
+﻿function Get-CWMOpportunityStage {
     param (
         [string]$condition,
         [string]$childConditions,

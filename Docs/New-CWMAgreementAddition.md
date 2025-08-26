@@ -20,7 +20,8 @@ New-CWMAgreementAddition -parentId <Int32> [[-id] <Int32>] [-product] <Object> [
  [[-description] <String>] [[-billedQuantity] <Single>] [[-uom] <String>] [[-extPrice] <Single>]
  [[-extCost] <Single>] [[-sequenceNumber] <Single>] [[-margin] <Single>] [[-prorateCost] <Single>]
  [[-proratePrice] <Single>] [[-extendedProrateCost] <Single>] [[-extendedProratePrice] <Single>]
- [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -483,6 +484,21 @@ Parameter Sets: (All)
 Aliases: AgreementId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

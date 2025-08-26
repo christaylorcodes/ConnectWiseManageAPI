@@ -1,53 +1,41 @@
 ---
-external help file:
-Module Name:
-online version:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET
 schema: 2.0.0
 ---
 
-# Invoke-CWMRemoveMaster
+# Invoke-CWMWebRequest
 
 ## SYNOPSIS
-This will be basis of all delete calls to the ConnectWise Manage API.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CWMWebRequest [[-Arguments] <Object>] [[-MaxRetry] <Int32>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all delete requests are handled correctly.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Invoke-CWMRemoveMaster -Arguments $Arguments -URI $URI
+PS C:\> {{ Add example code here }}
 ```
+
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -Arguments
+{{ Fill Arguments Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Endpoint
-{{ Fill Endpoint Description }}
-
-```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
@@ -58,14 +46,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -MaxRetry
+{{ Fill MaxRetry Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: Int32
 Parameter Sets: (All)
-Aliases: wi
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named
@@ -79,12 +81,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor
-Date: 10/10/2018
 
 ## RELATED LINKS
-
-[https://christaylor.codes](https://christaylor.codes)

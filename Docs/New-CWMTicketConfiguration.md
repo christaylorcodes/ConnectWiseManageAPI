@@ -13,7 +13,8 @@ Assigns a configuration to a ticket.
 ## SYNTAX
 
 ```
-New-CWMTicketConfiguration -parentId <Int32> [-id <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMTicketConfiguration -parentId <Int32> [-id <String>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,6 +84,21 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases: deviceIdentifier
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

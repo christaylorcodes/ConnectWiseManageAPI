@@ -1,47 +1,35 @@
 ---
-external help file:
-Module Name:
-online version:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
 schema: 2.0.0
 ---
 
-# Invoke-CWMUpdateMaster
+# Remove-CWMOpportunity
 
 ## SYNOPSIS
-This will be basis of all Patch calls to the ConnectWise Manage API.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Invoke-CWMUpdateMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMOpportunity [-id] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all update requests are handled correctly.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Invoke-CWMUpdateMaster -Arguments $Arguments -URI $URI
+PS C:\> {{ Add example code here }}
 ```
+
+{{ Add example description here }}
 
 ## PARAMETERS
-
-### -Arguments
-A hash table of parameters
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -53,21 +41,6 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Endpoint
-{{ Fill Endpoint Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -89,17 +62,46 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor
-Date: 10/10/2018
 
 ## RELATED LINKS
-
-[https://christaylor.codes](https://christaylor.codes)

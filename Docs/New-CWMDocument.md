@@ -15,14 +15,15 @@ Will allow you to upload a document and attach it to an item.
 ### URL
 ```
 New-CWMDocument [-recordType] <String> [-recordId] <Int32> [-title] <String> -URL <String>
- [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>] [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### File
 ```
 New-CWMDocument [-recordType] <String> [-recordId] <Int32> [-title] <String> [-FilePath] <FileInfo>
- [[-FileName] <String>] [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [[-FileName] <String>] [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -200,6 +201,21 @@ Parameter Sets: URL
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

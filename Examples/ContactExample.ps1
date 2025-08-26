@@ -1,4 +1,4 @@
-$CWMConnectionInfo = @{
+﻿$CWMConnectionInfo = @{
     # This is the URL to your manage server.
     Server      = 'server.example.com'
     # This is the company entered at login
@@ -23,15 +23,15 @@ Connect-CWM @CWMConnectionInfo
 # Now that you are connected you can issue any of the available commands
 # In the following example we are using a condition to find all of the cool people in your contacts.
 $condition = 'firstName="chris"'
-$Chrises = Get-CWMContact $condition
+$Chrises = Get-CWMCompanyContact $condition
 
 # Lets check those chris's out.
 $Chrises | Select-Object firstName, lastName, addressLine1, city, title | Out-GridView
 
 # You might notice that you only received 25 Chris's. That is because the default pageSize is 25.
 # You can change the pageSize or return all results.
-$LessChris = Get-CWMContact $condition -pageSize 11
-$MoreChrises = Get-CWMContact $condition -all
+$LessChris = Get-CWMCompanyContact $condition -pageSize 11
+$MoreChrises = Get-CWMCompanyContact $condition -all
 
 # Lets make a new contact
 $AnotherChris = @{
@@ -40,17 +40,17 @@ $AnotherChris = @{
     addressLine1    = '1234 AnyStreet'
     city            = 'TownsVille'
 }
-$New = New-CWMContact @AnotherChris
+$New = New-CWMCompanyContact @AnotherChris
 
 # The newly created object should be returned to you in $New
 Write-Output $New
 
 # We forgot his title, lets add that
-Update-CWMContact -id $New.id -Operation add -Path 'title' -Value 'Janitor'
+Update-CWMCompanyContact -id $New.id -Operation add -Path 'title' -Value 'Janitor'
 # You will be returned the updated user object
 
 # Now lets clean him up
-Remove-CWMContact -id $New.id -Verbose
+Remove-CWMCompanyContact -id $New.id -Verbose
 # A successful removal will have no output, so wo look at the verbose.
 
 # To clear your connection information from memory you can terminate the session or issue the disconnect command.

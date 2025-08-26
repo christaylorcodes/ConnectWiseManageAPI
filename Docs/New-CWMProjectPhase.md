@@ -43,8 +43,8 @@ New-CWMTicket [-Version <String>] [-VersionAutomatic] [[-id] <Int32>] [-summary]
  [[-predecessorClosedFlag] <Boolean>] [[-lagDays] <Int32>] [[-lagNonworkingDaysFlag] <Boolean>]
  [[-estimatedStartDate] <String>] [[-duration] <Int32>] [-location <Hashtable>] [-department <Hashtable>]
  [[-mobileGuid] <Guid>] [[-sla] <Hashtable>] [[-currency] <Hashtable>] [-mergedParentTicket <Hashtable>]
- [-integratorTags <String>] [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-integratorTags <String>] [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### 2019.1
@@ -76,7 +76,7 @@ New-CWMTicket [-Version <String>] [-VersionAutomatic] [[-id] <Int32>] [-summary]
  [[-lagNonworkingDaysFlag] <Boolean>] [[-estimatedStartDate] <String>] [[-duration] <Int32>]
  [-location <Hashtable>] [-department <Hashtable>] [[-locationId] <Int32>] [[-businessUnitId] <Int32>]
  [[-mobileGuid] <Guid>] [[-sla] <Hashtable>] [[-currency] <Hashtable>] [[-_info] <Hashtable>]
- [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Hashtable[]>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -1729,6 +1729,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -15,19 +15,20 @@ This command is used to authenticate with the Manage server.
 ### Impersonation
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
- -MemberID <String> [-Force] [-Version <String>] [-BasePath <String>] [<CommonParameters>]
+ -MemberID <String> [-Force] [-Version <String>] [-BasePath <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### API Key
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
- [-Force] [-Version <String>] [-BasePath <String>] [<CommonParameters>]
+ [-Force] [-Version <String>] [-BasePath <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Cookie
 ```
 Connect-CWM -Server <String> -Company <String> -ClientID <String> -Credentials <PSCredential> [-Force]
- [-Version <String>] [-BasePath <String>] [<CommonParameters>]
+ [-Version <String>] [-BasePath <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -250,6 +251,21 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

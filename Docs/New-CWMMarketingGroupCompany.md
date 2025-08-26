@@ -14,7 +14,8 @@ Adds a company to a marketing group.
 
 ```
 New-CWMMarketingGroupCompany [[-groupId] <Int32>] [[-id] <Int32>] [[-defaultContactFlag] <Boolean>]
- [[-allContactsFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-allContactsFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -132,6 +133,21 @@ Aliases:
 
 Required: False
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

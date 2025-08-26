@@ -57,7 +57,7 @@ New-CWMMember [[-id] <Int32>] [-identifier] <String> [[-password] <String>] [-fi
  [[-globalSearchDefaultTicketFilter] <String>] [[-globalSearchDefaultSort] <String>] [[-phoneSource] <String>]
  [[-phoneIntegrationType] <String>] [[-_info] <Hashtable>] [[-copyPodLayouts] <Boolean>]
  [[-copySharedDefaultViews] <Boolean>] [[-copyColumnLayoutsAndFilters] <Boolean>] [[-fromMemberRecId] <Int32>]
- [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Hashtable[]>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -2061,6 +2061,21 @@ Aliases:
 
 Required: False
 Position: 53
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

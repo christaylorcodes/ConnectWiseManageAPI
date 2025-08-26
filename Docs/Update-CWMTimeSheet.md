@@ -14,22 +14,26 @@ This will update a timesheet.
 
 ### Reject
 ```
-Update-CWMTimeSheet -id <Int32> [-Reject] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Reject] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Reverse
 ```
-Update-CWMTimeSheet -id <Int32> [-Reverse] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Reverse] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Submit
 ```
-Update-CWMTimeSheet -id <Int32> [-Submit] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Submit] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Approve
 ```
-Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -162,6 +166,21 @@ Shows what would happen if the cmdlet runs. The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

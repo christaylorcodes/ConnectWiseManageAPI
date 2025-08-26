@@ -14,7 +14,8 @@ schema: 2.0.0
 
 ```
 New-CWMProductAdjustment [-identifier] <String> [-type] <Hashtable> [[-reason] <String>] [[-notes] <String>]
- [[-adjustmentDetails] <Hashtable>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-adjustmentDetails] <Hashtable>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -147,6 +148,21 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

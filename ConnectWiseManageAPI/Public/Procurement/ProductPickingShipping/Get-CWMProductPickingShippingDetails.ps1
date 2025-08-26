@@ -1,4 +1,4 @@
-function Get-CWMProductPickingShippingDetails {
+﻿function Get-CWMProductPickingShippingDetail {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

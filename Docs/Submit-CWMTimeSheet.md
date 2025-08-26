@@ -13,7 +13,7 @@ This function will submit a time sheet for approval.
 ## SYNTAX
 
 ```
-Submit-CWMTimeSheet [-id] <Int32> [<CommonParameters>]
+Submit-CWMTimeSheet [-id] <Int32> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,6 +41,21 @@ Aliases: sheetId
 Required: True
 Position: 0
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

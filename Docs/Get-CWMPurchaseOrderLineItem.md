@@ -15,7 +15,7 @@ This function will list all line items on a purchase order
 ```
 Get-CWMPurchaseOrderLineItem [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -193,6 +193,21 @@ Aliases: ProductID
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

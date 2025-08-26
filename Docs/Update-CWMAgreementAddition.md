@@ -14,7 +14,7 @@ This will update an addition to an agreement.
 
 ```
 Update-CWMAgreementAddition -parentId <Int32> -id <Int32> [-Operation] <String> [-Path] <String>
- [-Value] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Value] <Object> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -138,6 +138,21 @@ Parameter Sets: (All)
 Aliases: agreementId
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

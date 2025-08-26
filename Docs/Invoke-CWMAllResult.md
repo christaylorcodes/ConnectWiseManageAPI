@@ -1,35 +1,37 @@
 ---
-external help file:
-Module Name:
-online version:
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET
 schema: 2.0.0
 ---
 
-# Invoke-CWMGetMaster
+# Invoke-CWMAllResult
 
 ## SYNOPSIS
-This will be basis of all get calls to the ConnectWise Manage API.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Invoke-CWMGetMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [<CommonParameters>]
+Invoke-CWMAllResult [[-Arguments] <Object>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will insure that all GET requests are handled correctly.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-Invoke-CWMGetMaster -Arguments $Arguments -URI $URI
+PS C:\> {{ Add example code here }}
 ```
+
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Arguments
-A hash table of parameters
+{{ Fill Arguments Description }}
 
 ```yaml
 Type: Object
@@ -43,16 +45,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Endpoint
-{{ Fill Endpoint Description }}
+### -ProgressAction
+{{ Fill ProgressAction Description }}
 
 ```yaml
-Type: String
+Type: ActionPreference
 Parameter Sets: (All)
-Aliases:
+Aliases: proga
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -63,16 +65,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Chris Taylor
-Date: 10/10/2018
-
-Author: Chris Taylor
-Update Date: 9/26/2019
-Purpose/Change: changed orderBy support, improved url query string creation
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Manage/Developer_Guide#Authentication](https://developer.connectwise.com/Manage/Developer_Guide#Authentication)
