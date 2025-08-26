@@ -86,6 +86,9 @@ This function will list a contacts notes.
 ### [Get-CWMCompanyCountry](Docs/Get-CWMCompanyCountry.md)
 {{ Fill in the Synopsis }}
 
+### [Get-CWMCompanyCustomNote](Docs/Get-CWMCompanyCustomNote.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-CWMCompanyNote](Docs/Get-CWMCompanyNote.md)
 This function will list company notes based on conditions.
 
@@ -124,6 +127,9 @@ Return locations for a given department.
 
 ### [Get-CWMDocument](Docs/Get-CWMDocument.md)
 This function will list documents associated with a record.
+
+### [Get-CWMExpenseEntry](Docs/Get-CWMExpenseEntry.md)
+{{ Fill in the Synopsis }}
 
 ### [Get-CWMInventory](Docs/Get-CWMInventory.md)
 This function will list Inventory and Stock on Hand, including serial numbers from a specific Warehouse Bin
@@ -317,6 +323,9 @@ This function will create a new contact.
 ### [New-CWMCompanyContactNote](Docs/New-CWMCompanyContactNote.md)
 This function will create a note on the given contact.
 
+### [New-CWMCompanyCustomNote](Docs/New-CWMCompanyCustomNote.md)
+{{ Fill in the Synopsis }}
+
 ### [New-CWMTicketNote](Docs/New-CWMTicketNote.md)
 Add a note to a CW Manage company.
 
@@ -337,6 +346,9 @@ This function is used to gather troubleshooting information.
 
 ### [New-CWMDocument](Docs/New-CWMDocument.md)
 Will allow you to upload a document and attach it to an item.
+
+### [New-CWMExpenseEntry](Docs/New-CWMExpenseEntry.md)
+{{ Fill in the Synopsis }}
 
 ### [New-CWMMarketingGroupCompany](Docs/New-CWMMarketingGroupCompany.md)
 Adds a company to a marketing group.
@@ -422,6 +434,9 @@ Removes a contact.
 ### [Remove-CWMCompanyContactNote](Docs/Remove-CWMCompanyContactNote.md)
 Removes a note from a contact.
 
+### [Remove-CWMCompanyCustomNote](Docs/Remove-CWMCompanyCustomNote.md)
+{{ Fill in the Synopsis }}
+
 ### [Remove-CWMCompanyNote](Docs/Remove-CWMCompanyNote.md)
 {{ Fill in the Synopsis }}
 
@@ -506,6 +521,9 @@ This will update a company configuration question value.
 ### [Update-CWMCompanyContact](Docs/Update-CWMCompanyContact.md)
 This will modify a contact by its ID.
 
+### [Update-CWMCompanyCustomNote](Docs/Update-CWMCompanyCustomNote.md)
+{{ Fill in the Synopsis }}
+
 ### [Update-CWMCompanySite](Docs/Update-CWMCompanySite.md)
 {{ Fill in the Synopsis }}
 
@@ -556,6 +574,9 @@ Will update a schedule entry.
 
 ### [Update-CWMTicket](Docs/Update-CWMTicket.md)
 This will update a ticket.
+
+### [Update-CWMTicketTask](Docs/Update-CWMTicketTask.md)
+{{ Fill in the Synopsis }}
 
 ### [Update-CWMTimeEntry](Docs/Update-CWMTimeEntry.md)
 This will update a time entry.

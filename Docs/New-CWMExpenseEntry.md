@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post
 schema: 2.0.0
 ---
 
-# New-CWMOpportunityForecastItem
+# New-CWMExpenseEntry
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,16 +13,13 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-New-CWMOpportunityForecastItem [-parentID] <Int32> [[-id] <Int32>] [[-forecastDescription] <String>]
- [-opportunity] <Hashtable> [[-quantity] <Int32>] [-status] <Hashtable> [[-catalogItem] <Hashtable>]
- [[-productDescription] <String>] [[-productClass] <String>] [[-revenue] <Decimal>] [[-cost] <Decimal>]
- [[-margin] <Decimal>] [[-percentage] <Decimal>] [[-includeFlag] <Boolean>] [[-quoteWerksDocNo] <String>]
- [[-quoteWerksDocName] <String>] [[-quoteWerksQuantity] <Int32>] [-forecastType] <String>
- [[-linkFlag] <Boolean>] [[-recurringRevenue] <Decimal>] [[-recurringCost] <Decimal>]
- [[-recurringDateStart] <String>] [[-recurringDateEnd] <String>] [[-billCycle] <Hashtable>]
- [[-cycleBasis] <String>] [[-cycles] <Int32>] [[-recurringFlag] <Boolean>] [[-sequenceNumber] <Int32>]
- [[-subNumber] <Int32>] [[-taxableFlag] <Boolean>] [[-info] <Hashtable>] [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMExpenseEntry [[-id] <Int32>] [[-company] <Hashtable>] [[-chargeToId] <Int32>] [[-chargeToType] <String>]
+ [-type] <Hashtable> [-member] <Hashtable> [[-paymentMethod] <Hashtable>] [[-classification] <Hashtable>]
+ [-amount] <Double> [[-billableOption] <String>] [-date] <String> [[-locationId] <Int32>]
+ [[-businessUnitId] <Int32>] [[-notes] <String>] [[-agreement] <Hashtable>] [[-agreementAmount] <Double>]
+ [[-odometerStart] <Double>] [[-odometerEnd] <Double>] [[-ticket] <Hashtable>] [[-project] <Hashtable>]
+ [[-phase] <Hashtable>] [[-customFields] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,8 +67,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -billCycle
-{{ Fill billCycle Description }}
+### -agreement
+{{ Fill agreement Description }}
 
 ```yaml
 Type: Hashtable
@@ -79,59 +76,60 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 23
+Position: 14
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -catalogItem
-{{ Fill catalogItem Description }}
+### -agreementAmount
+{{ Fill agreementAmount Description }}
 
 ```yaml
-Type: Hashtable
+Type: Double
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 15
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -cost
-{{ Fill cost Description }}
+### -amount
+{{ Fill amount Description }}
 
 ```yaml
-Type: Decimal
+Type: Double
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 10
+Required: True
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -cycleBasis
-{{ Fill cycleBasis Description }}
+### -billableOption
+{{ Fill billableOption Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
+Accepted values: Billable, DoNotBill, NoCharge, NoDefault
 
 Required: False
-Position: 24
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -cycles
-{{ Fill cycles Description }}
+### -businessUnitId
+{{ Fill businessUnitId Description }}
 
 ```yaml
 Type: Int32
@@ -139,17 +137,17 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 25
+Position: 12
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -forecastDescription
-{{ Fill forecastDescription Description }}
+### -chargeToId
+{{ Fill chargeToId Description }}
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -160,8 +158,69 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -forecastType
-{{ Fill forecastType Description }}
+### -chargeToType
+{{ Fill chargeToType Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Company, ServiceTicket, ProjectTicket, ChargeCode, Activity
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -classification
+{{ Fill classification Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -company
+{{ Fill company Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFields
+{{ Fill customFields Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -date
+{{ Fill date Description }}
 
 ```yaml
 Type: String
@@ -169,7 +228,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 17
+Position: 10
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -184,62 +243,17 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -includeFlag
-{{ Fill includeFlag Description }}
+### -locationId
+{{ Fill locationId Description }}
 
 ```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -info
-{{ Fill info Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -linkFlag
-{{ Fill linkFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -margin
-{{ Fill margin Description }}
-
-```yaml
-Type: Decimal
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -250,248 +264,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -opportunity
-{{ Fill opportunity Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentID
-{{ Fill parentID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -percentage
-{{ Fill percentage Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -productClass
-{{ Fill productClass Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -productDescription
-{{ Fill productDescription Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -quantity
-{{ Fill quantity Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -quoteWerksDocName
-{{ Fill quoteWerksDocName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -quoteWerksDocNo
-{{ Fill quoteWerksDocNo Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -quoteWerksQuantity
-{{ Fill quoteWerksQuantity Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringCost
-{{ Fill recurringCost Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringDateEnd
-{{ Fill recurringDateEnd Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringDateStart
-{{ Fill recurringDateStart Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringFlag
-{{ Fill recurringFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 26
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringRevenue
-{{ Fill recurringRevenue Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -revenue
-{{ Fill revenue Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -sequenceNumber
-{{ Fill sequenceNumber Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 27
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -status
-{{ Fill status Description }}
+### -member
+{{ Fill member Description }}
 
 ```yaml
 Type: Hashtable
@@ -505,31 +279,121 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -subNumber
-{{ Fill subNumber Description }}
+### -notes
+{{ Fill notes Description }}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 28
+Position: 13
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -taxableFlag
-{{ Fill taxableFlag Description }}
+### -odometerEnd
+{{ Fill odometerEnd Description }}
 
 ```yaml
-Type: Boolean
+Type: Double
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 29
+Position: 17
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -odometerStart
+{{ Fill odometerStart Description }}
+
+```yaml
+Type: Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -paymentMethod
+{{ Fill paymentMethod Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -phase
+{{ Fill phase Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -project
+{{ Fill project Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ticket
+{{ Fill ticket Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 18
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -type
+{{ Fill type Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

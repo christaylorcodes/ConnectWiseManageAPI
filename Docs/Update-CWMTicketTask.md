@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
+online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=UPDATE
 schema: 2.0.0
 ---
 
-# Remove-CWMOpportunityForecastItem
+# Update-CWMTicketTask
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMTicketTask [-parentId] <Int32> [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object>
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,6 +41,52 @@ Aliases: cf
 
 Required: False
 Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Operation
+{{ Fill Operation Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: add, replace, remove
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+{{ Fill Path Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+{{ Fill Value Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

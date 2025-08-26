@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Info&o=GET
+online version: https://developer.connectwise.com/manage/rest?a=System&e=Documents&o=GET
 schema: 2.0.0
 ---
 
-# Get-CWMOpportunity
+# Get-CWMExpenseEntry
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,9 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CWMOpportunity [[-condition] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>]
- [[-orderBy] <String>] [[-fields] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-pageID] <Int32>] [-all]
- [<CommonParameters>]
+Get-CWMExpenseEntry [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,7 +56,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -71,7 +71,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+{{ Fill count Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -86,7 +101,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -96,12 +111,27 @@ Accept wildcard characters: False
 {{ Fill fields Description }}
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+{{ Fill id Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -116,7 +146,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -137,21 +167,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageID
-{{ Fill pageID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -pageSize
 {{ Fill pageSize Description }}
 
@@ -162,6 +177,21 @@ Aliases:
 
 Required: False
 Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

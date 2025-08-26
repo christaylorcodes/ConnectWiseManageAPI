@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values~1{Id}/patch
 schema: 2.0.0
 ---
 
-# Remove-CWMOpportunityForecastItem
+# Update-CWMCompanyCustomNote
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-CWMCompanyCustomNote [-parentId] <Int32> [-id] <Int32> [-Operation] <String> [-Path] <String>
+ [-Value] <Object> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,6 +46,52 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Operation
+{{ Fill Operation Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: add, replace, remove
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+{{ Fill Path Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+{{ Fill Value Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -68,7 +114,7 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: noteId
 
 Required: True
 Position: 1
@@ -83,7 +129,7 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
 Required: True
 Position: 0

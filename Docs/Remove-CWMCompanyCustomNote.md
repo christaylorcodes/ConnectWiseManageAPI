@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
+online version: https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE
 schema: 2.0.0
 ---
 
-# Remove-CWMOpportunityForecastItem
+# Remove-CWMCompanyCustomNote
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CWMCompanyCustomNote [-parentId] <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,7 +83,7 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: CompanyID
 
 Required: True
 Position: 0

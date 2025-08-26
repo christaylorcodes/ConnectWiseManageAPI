@@ -1,11 +1,11 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post
 schema: 2.0.0
 ---
 
-# Remove-CWMOpportunityForecastItem
+# New-CWMCompanyCustomNote
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMCompanyCustomNote [-parentId] <Int32> [[-status] <Hashtable>] [[-customNote] <String>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,16 +62,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -customNote
+{{ Fill customNote Description }}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -83,10 +83,25 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -status
+{{ Fill status Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
