@@ -85,6 +85,11 @@ function New-CWMCompanyServiceTemplate {
         [string]$connectWiseId
     )
 
+    # Without a company in the body, the API returns 201 with id 0 and creates nothing
+    if (!$PsBoundParameters.ContainsKey('company')) {
+        $PsBoundParameters.company = @{ id = $parentId }
+    }
+
     $Endpoint = "/company/companies/$($parentId)/serviceTemplates"
     Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -206,6 +206,59 @@ Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
     }
 }
 
+Describe "Invoke-CWMWebRequest  PS$PSVersion redirect handling tests" {
+    Context 'Redirect responses' {
+        BeforeEach {
+            InModuleScope $ModuleName {
+                $script:CWMServerConnection = @{ Headers = @{ Accept = 'application/json' }; Session = $null; Version = '2025.1' }
+            }
+        }
+        AfterEach {
+            InModuleScope $ModuleName { $script:CWMServerConnection = $null }
+        }
+
+        It 'refuses an HTTPS to HTTP redirect without following it' {
+            Mock -ModuleName $ModuleName Invoke-WebRequest { [pscustomobject]@{ StatusCode = 307; Headers = @{ Location = 'http://example.test/insecure' } } }
+            $Arguments = @{ Uri = 'https://example.test/api'; Method = 'Post'; Body = '{}'; Headers = @{} }
+            $Err = $null
+            $null = Invoke-CWMWebRequest -Arguments $Arguments -ErrorVariable Err -ErrorAction SilentlyContinue
+            "$Err" | Should -Match 'Refused insecure redirect'
+            Assert-MockCalled -ModuleName $ModuleName Invoke-WebRequest -Exactly 1 -Scope It
+        }
+        It 'refuses to turn a POST into a GET on a 302' {
+            Mock -ModuleName $ModuleName Invoke-WebRequest { [pscustomobject]@{ StatusCode = 302; Headers = @{ Location = 'https://example.test/other' } } }
+            $Arguments = @{ Uri = 'https://example.test/api'; Method = 'Post'; Body = '{}'; Headers = @{} }
+            $Err = $null
+            $null = Invoke-CWMWebRequest -Arguments $Arguments -ErrorVariable Err -ErrorAction SilentlyContinue
+            "$Err" | Should -Match 'Refused redirect'
+            Assert-MockCalled -ModuleName $ModuleName Invoke-WebRequest -Exactly 1 -Scope It
+        }
+        It 'follows a same-host HTTPS 307 for a POST' {
+            Mock -ModuleName $ModuleName Invoke-WebRequest { [pscustomobject]@{ StatusCode = 307; Headers = @{ Location = '/moved' } } } -ParameterFilter { $Uri -eq 'https://example.test/api' }
+            Mock -ModuleName $ModuleName Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Headers = @{} } } -ParameterFilter { $Uri -eq 'https://example.test/moved' }
+            $Arguments = @{ Uri = 'https://example.test/api'; Method = 'Post'; Body = '{}'; Headers = @{} }
+            $Result = Invoke-CWMWebRequest -Arguments $Arguments -ErrorAction Stop
+            $Result.StatusCode | Should -Be 200
+            Assert-MockCalled -ModuleName $ModuleName Invoke-WebRequest -Exactly 2 -Scope It
+        }
+    }
+}
+
+Describe "New-CWMCompanyServiceTemplate  PS$PSVersion body tests" {
+    Context 'Company default' {
+        It 'defaults company to the parent company' {
+            Mock -ModuleName $ModuleName Invoke-CWMNewMaster { $Arguments }
+            $Result = New-CWMCompanyServiceTemplate -parentId 20371 -name 'T' -board @{ id = 1 } -status @{ id = 2 } -summary 'S'
+            $Result.company.id | Should -Be 20371
+        }
+        It 'keeps a supplied company' {
+            Mock -ModuleName $ModuleName Invoke-CWMNewMaster { $Arguments }
+            $Result = New-CWMCompanyServiceTemplate -parentId 20371 -name 'T' -board @{ id = 1 } -status @{ id = 2 } -summary 'S' -company @{ id = 5 }
+            $Result.company.id | Should -Be 5
+        }
+    }
+}
+
 Describe "Disconnect-CWM  PS$PSVersion Integrations tests" {
 
     Context 'Strict mode' {

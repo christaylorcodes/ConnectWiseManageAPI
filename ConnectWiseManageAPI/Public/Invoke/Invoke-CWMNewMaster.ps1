@@ -46,6 +46,10 @@
         if ($Result.content) {
             $Result = $Result.content | ConvertFrom-Json
         }
+
+        if ($Result -and $Result.PSObject.Properties['id'] -and $Result.id -eq 0) {
+            Write-Warning "The API returned id 0 for $($WebRequestArguments.URI); nothing was likely created. Check that the request includes all required fields."
+        }
     }
 
     $Result

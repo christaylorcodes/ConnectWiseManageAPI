@@ -36,15 +36,67 @@
         $Arguments.URI = $Arguments.URI -replace '(.*?)&(.*)', '$1?$2'
     }
 
+    # Redirects are followed manually so the module controls them identically on PS 5.1 and 7+.
+    # PS 7 rejects HTTPS->HTTP redirects without exposing the response; PS 5.1 follows them silently.
+    $Arguments.MaximumRedirection = 0
+    if ((Get-Command Invoke-WebRequest).Parameters.ContainsKey('AllowInsecureRedirect')) {
+        # Safe because nothing is followed automatically; insecure targets are refused below
+        $Arguments.AllowInsecureRedirect = $true
+    }
+    $RedirectCodes = 301, 302, 303, 307, 308
+    $MaxRedirect = 5
+    $RedirectCount = 0
+    $RedirectError = $null
+
     # Issue request
     try {
         Write-Debug "Arguments: $($Arguments | ConvertTo-Json)"
         $prevProgressPreference = $global:ProgressPreference
         $global:ProgressPreference = 'SilentlyContinue'
 
-        $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+        while ($true) {
+            $Location = $null
+            try {
+                $Result = Invoke-WebRequest @Arguments -UseBasicParsing
+                $RedirectStatus = [int]$Result.StatusCode
+                if ($RedirectCodes -contains $RedirectStatus) { $Location = "$($Result.Headers.Location)" }
+            }
+            catch {
+                $RedirectResponse = $_.Exception.Response
+                if ($RedirectResponse -and $RedirectCodes -contains [int]$RedirectResponse.StatusCode) {
+                    $RedirectStatus = [int]$RedirectResponse.StatusCode
+                    $Location = "$($RedirectResponse.Headers.Location)"
+                }
+                else { throw }
+            }
+            if (!$Location) { break }
+
+            # Only status, scheme, and host are reported to avoid leaking query strings or ids
+            $CurrentUri = [uri]$Arguments.URI
+            $Target = $null
+            if (![uri]::TryCreate($CurrentUri, $Location, [ref]$Target)) {
+                $RedirectError = "Received redirect ($RedirectStatus) from $($CurrentUri.Host) with an invalid Location header."
+            }
+            elseif ($Target.Scheme -ne 'https') {
+                $RedirectError = "Refused insecure redirect ($RedirectStatus): $($CurrentUri.Scheme)://$($CurrentUri.Host) -> $($Target.Scheme)://$($Target.Host). Check the server and codebase used for the connection."
+            }
+            elseif ($Target.Host -ne $CurrentUri.Host) {
+                $RedirectError = "Refused cross-host redirect ($RedirectStatus): $($CurrentUri.Host) -> $($Target.Host). Reconnect using the target host."
+            }
+            elseif ($Arguments.Method -notin 'Get', 'Head', $null -and $RedirectStatus -notin 307, 308) {
+                $RedirectError = "Refused redirect ($RedirectStatus) for a $($Arguments.Method) request to $($Target.Host); the request would be changed to GET."
+            }
+            elseif (++$RedirectCount -gt $MaxRedirect) {
+                $RedirectError = "Exceeded $MaxRedirect redirects, last from $($CurrentUri.Host)."
+            }
+            if ($RedirectError) { break }
+
+            Write-Verbose "Following redirect ($RedirectStatus) to $($Target.Scheme)://$($Target.Host)"
+            $Arguments.URI = $Target.AbsoluteUri
+        }
 
         $global:ProgressPreference = $prevProgressPreference
+        if ($RedirectError) { return Write-Error $RedirectError }
     }
     catch {
         $global:ProgressPreference = $prevProgressPreference

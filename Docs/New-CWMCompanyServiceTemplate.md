@@ -11,8 +11,7 @@ schema: 2.0.0
 Creates a company service template.
 
 ## DESCRIPTION
-Creates a service template under a company. The request uses the OpenAPI `ServiceTemplate` schema; `name`, `board`, `status`, and `summary` are required. Reference properties are supplied as hashtables.
-
+Creates a service template under a company. The request uses the OpenAPI `ServiceTemplate` schema; `name`, `board`, `status`, and `summary` are required. Reference properties are supplied as hashtables. If `company` is not supplied, it defaults to the parent company (`@{ id = <companyId> }`); the API silently creates nothing without it.
 ## EXAMPLES
 
 ### EXAMPLE 1
