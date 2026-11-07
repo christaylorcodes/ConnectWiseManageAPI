@@ -1,4 +1,4 @@
-# ConnectWiseManageAPI - Codebase Documentation
+﻿# ConnectWiseManageAPI - Codebase Documentation
 
 ## Project Overview
 
@@ -109,7 +109,6 @@ These are the core API interaction functions that all endpoint-specific function
 
 - **[New-CWMUrl.ps1](ConnectWiseManageAPI/Private/Helper/New-CWMUrl.ps1)** - Constructs API URLs with query parameters
 - **[Join-Url.ps1](ConnectWiseManageAPI/Private/Helper/Join-Url.ps1)** - Joins URL path segments
-- **[Test-ParameterVersioning.ps1](ConnectWiseManageAPI/Private/Helper/Test-ParameterVersioning.ps1)** - Validates API version compatibility
 
 ### 4. Endpoint-Specific Functions
 
@@ -193,9 +192,13 @@ Update-CWMTicket -id 456 -PatchOperations @(
 1. User calls `Connect-CWM` with credentials
 2. Module stores credentials in script-scoped variables:
    - `$script:CWMServerConnection` - Connection info object
-   - Contains: Server, AuthString, ClientID, Headers, OverrideVersion
-3. Every API call includes authentication headers
-4. `Disconnect-CWM` clears these variables
+   - Contains: Server, Headers (Authorization, ClientID, Accept), Session, Expiration, ConnectionMethod,
+     Version, Codebase, BasePath, AllowInsecureRedirect
+3. `Connect-CWM` reads the server's current API version from `/system/info`, stores it as `Version`, and
+   sends it in the Accept header (`application/vnd.connectwise.com+json; version=X.Y`). The module always
+   targets the latest API; there is no way to pin an older version, per call or per connection.
+4. Every API call includes these headers
+5. `Disconnect-CWM` clears these variables
 
 ## Error Handling
 

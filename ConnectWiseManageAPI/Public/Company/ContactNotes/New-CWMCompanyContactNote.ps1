@@ -1,5 +1,4 @@
-function New-CWMCompanyContactNote {
-    # 2021.1
+﻿function New-CWMCompanyContactNote {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     [Alias('New-CWMContactNote')]

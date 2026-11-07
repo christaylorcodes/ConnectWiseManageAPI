@@ -1,5 +1,4 @@
-function New-CWMMemberToken {
-    # 2022.1
+﻿function New-CWMMemberToken {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(

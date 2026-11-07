@@ -80,7 +80,6 @@ function Invoke-CWMNewMaster {
         Method      = 'Post'
         ContentType = $ContentType
         Body        = $Body
-        Version     = $Arguments.Version
         Headers     = $Arguments.Headers
     }
 

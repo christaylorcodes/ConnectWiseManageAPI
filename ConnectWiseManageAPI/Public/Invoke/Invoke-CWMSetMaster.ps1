@@ -76,7 +76,6 @@ function Invoke-CWMSetMaster {
         Method      = 'Put'
         ContentType = 'application/json; charset=utf-8'
         Body        = $Body
-        Version     = $Arguments.Version
     }
 
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMSetMaster, with body:`r`n$BodyText`r`n")) {

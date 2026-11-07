@@ -105,7 +105,6 @@
 
 #>
 function New-CWMCompany {
-    # 2021.2
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(

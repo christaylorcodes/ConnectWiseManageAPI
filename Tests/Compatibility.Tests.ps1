@@ -207,9 +207,9 @@ Describe 'Invoke-CWMWebRequest against a local HTTP server' {
         InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url } {
             param($Url)
             $Headers = @{ Custom = '1' }
-            $Arguments = @{ Uri = "$Url/object"; Headers = $Headers; Version = '2020.1' }
+            $Arguments = @{ Uri = "$Url/object"; Headers = $Headers }
             $null = Invoke-CWMWebRequest -Arguments $Arguments
-            $Arguments.ContainsKey('Version') | Should -BeTrue
+            $Arguments.Keys.Count | Should -Be 2
             $Arguments.ContainsKey('WebSession') | Should -BeFalse
             $Headers.Keys | Should -Be @('Custom')
         }

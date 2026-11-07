@@ -58,6 +58,65 @@ Describe 'Connect-CWM authentication branches' {
     }
 }
 
+Describe 'API version (always the server''s current version)' {
+
+    BeforeEach {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = $null
+            Mock Invoke-RestMethod { [pscustomobject]@{ Codebase = 'v4_6_release/' } }
+            Mock Get-CWMSystemInfo { [pscustomobject]@{ version = 'v2025.1.12345' } }
+            Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '{"id":1}'; Headers = @{} } }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force
+        }
+    }
+
+    It 'sends the auto-detected version in the Accept header' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection.Version | Should -BeExactly '2025.1'
+            $script:CWMServerConnection.Headers.Accept | Should -BeExactly 'application/vnd.connectwise.com+json; version=2025.1'
+            Invoke-CWMGetMaster -Arguments @{} -Endpoint '/service/tickets' | Out-Null
+            Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter {
+                $Headers.Accept -eq 'application/vnd.connectwise.com+json; version=2025.1'
+            }
+        }
+    }
+
+    It 'keeps the detected version when a cached connection is reused' {
+        InModuleScope ConnectWiseManageAPI {
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
+            Should -Invoke Invoke-RestMethod -Times 1 -Exactly
+            $script:CWMServerConnection.Headers.Accept | Should -BeExactly 'application/vnd.connectwise.com+json; version=2025.1'
+        }
+    }
+
+    It 'ignores a Version key in -Arguments: not in the body and the Accept header is unchanged' {
+        InModuleScope ConnectWiseManageAPI {
+            Invoke-CWMNewMaster -Arguments @{ summary = 'x'; Version = '2019.1' } -Endpoint '/service/tickets' | Out-Null
+            Invoke-CWMSetMaster -Arguments @{ id = 5; summary = 'x'; Version = '2019.1' } -Endpoint '/service/tickets/5' | Out-Null
+            Should -Invoke Invoke-WebRequest -Times 2 -Exactly -ParameterFilter {
+                $Headers.Accept -eq 'application/vnd.connectwise.com+json; version=2025.1' -and
+                $Body -match '"summary"' -and $Body -notmatch 'Version' -and $Body -notmatch '2019\.1'
+            }
+        }
+    }
+
+    It 'has no -Version parameter on Connect-CWM' {
+        (Get-Command Connect-CWM).Parameters.ContainsKey('Version') | Should -BeFalse
+    }
+
+    It 'has a single parameter set on New-CWMTicket without version parameters' {
+        $Command = Get-Command New-CWMTicket
+        @($Command.ParameterSets).Count | Should -Be 1
+        foreach ($Name in 'Version', 'VersionAutomatic', 'project', 'phase', 'wbsCode', 'locationId', 'businessUnitId') {
+            $Command.Parameters.ContainsKey($Name) | Should -BeFalse -Because "$Name was removed"
+        }
+        $Set = $Command.ParameterSets[0]
+        ($Set.Parameters | Where-Object IsMandatory).Name | Sort-Object | Should -Be @('company', 'summary')
+        @($Set.Parameters | Where-Object Position -GE 0).Count | Should -Be 0
+        $Command.Parameters.ContainsKey('mergedParentTicket') | Should -BeTrue
+    }
+}
+
 Describe 'Invoke-CWMWebRequest insecure redirect workaround' {
 
     BeforeAll {

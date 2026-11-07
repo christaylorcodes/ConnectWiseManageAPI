@@ -11,7 +11,9 @@
     # The unary comma stops a byte[] body from being written to the pipeline one byte at a time
     if ($Arguments.Body) { return , $Arguments.Body }
 
-    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'VersionAutomatic', 'grandparentId', 'parentId'
+    # 'Version' is no longer used (the API version comes from Connect-CWM) but is still kept out of the
+    # body, so older scripts that pass it in -Arguments do not send it to the API.
+    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'grandparentId', 'parentId'
 
     $Body = @{}
     foreach ($i in $Arguments.GetEnumerator()) {

@@ -21,13 +21,6 @@
         [string]$shipmentDate,
         [hashtable]$_info
     )
-    $TestVersion = @{
-        VersionAutomatic = $VersionAutomatic
-        ParameterSetName = $PSCmdlet.ParameterSetName
-        DefaultParameterSetName = $PSCmdlet.MyInvocation.MyCommand.DefaultParameterSet
-        Version = $Version
-    }
-    $PsBoundParameters.Version = Test-ParameterVersioning @TestVersion
 
     $Endpoint = "/procurement/products/$($parentId)/pickingShippingDetails"
     Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

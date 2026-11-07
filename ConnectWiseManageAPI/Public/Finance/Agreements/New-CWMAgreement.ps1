@@ -1,5 +1,4 @@
-function New-CWMAgreement {
-    # 2020.4
+﻿function New-CWMAgreement {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(

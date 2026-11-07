@@ -140,7 +140,6 @@
     - Performance considerations
     - Related functions or alternatives
     - Common pitfalls or gotchas
-    - API version requirements
     - Special permissions required
 
 .LINK

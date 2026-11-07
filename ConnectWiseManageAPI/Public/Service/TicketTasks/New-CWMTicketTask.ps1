@@ -1,5 +1,4 @@
-function New-CWMTicketTask {
-    # 2020.4
+﻿function New-CWMTicketTask {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(

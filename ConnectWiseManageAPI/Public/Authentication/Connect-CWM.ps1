@@ -13,8 +13,10 @@
     and used by all subsequent API calls. The connection persists for the duration of
     the PowerShell session unless explicitly disconnected with Disconnect-CWM.
 
-    The function validates the connection by retrieving system information and stores
-    the API version for proper header configuration.
+    The function validates the connection by retrieving system information. The server's current
+    API version is read from that response and sent in the Accept header of every later request
+    (application/vnd.connectwise.com+json; version=X.Y), so the module always uses the latest API
+    the server offers. The API version cannot be chosen.
 
 .PARAMETER Server
     The ConnectWise Manage server hostname.
@@ -55,11 +57,6 @@
     Forces a new connection even if a valid cached connection exists.
     By default, if a connection is already established, it will be reused.
     Use -Force to refresh the connection or switch accounts.
-
-.PARAMETER Version
-    Specifies the API version to use (e.g., '3.0', '2019.3').
-    If not specified, the function auto-detects and uses the server's current version.
-    Version is used in the Accept header for API versioning.
 
 .PARAMETER BasePath
     The base API path on the server.
@@ -120,10 +117,10 @@
     that need to perform actions as specific users.
 
 .EXAMPLE
-    # Force reconnection with specific API version
-    Connect-CWM -Server 'na.myconnectwise.net' -Company 'MyCompany' -PubKey $PubKey -PrivateKey $PrivateKey -ClientID $ClientID -Version '2019.3' -Force
+    # Force reconnection
+    Connect-CWM -Server 'na.myconnectwise.net' -Company 'MyCompany' -PubKey $PubKey -PrivateKey $PrivateKey -ClientID $ClientID -Force
 
-    Forces a new connection even if one exists and specifies API version 2019.3.
+    Forces a new connection even if one exists, for example to switch accounts.
 
 .EXAMPLE
     # Secure credential handling
@@ -203,7 +200,6 @@ function Connect-CWM {
         [Parameter(ParameterSetName = 'Impersonation', Mandatory = $True)]
         [string]$MemberID,
         [switch]$Force,
-        [string]$Version,
         [string]$BasePath = 'apis/3.0',
         [switch]$AllowInsecureRedirect
     )
@@ -232,7 +228,6 @@ function Connect-CWM {
     }
     $script:CWMServerConnection = @{
         Server  = $Server
-        Version = $Version
         Headers = $Headers
     }
 
@@ -347,16 +342,14 @@ function Connect-CWM {
         Session               = $script:CWMSession
         Expiration            = $expiration
         ConnectionMethod      = $ConnectionMethod
-        Version               = $Version
         Codebase              = $CompanyInfo.Codebase
         BasePath              = $BasePath
         # Set only on the final connection; login/impersonation requests above run without it
         AllowInsecureRedirect = [bool]$AllowInsecureRedirect
     }
 
-    # Set version header info
-    if ($Version) { $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Version)" }
-    else { $script:CWMServerConnection.Headers.Accept = 'application/vnd.connectwise.com+json' }
+    # No version yet: it is read from the system info below
+    $script:CWMServerConnection.Headers.Accept = 'application/vnd.connectwise.com+json'
 
     # Validate connection info
     Write-Verbose 'Validating authentication'
@@ -367,10 +360,10 @@ function Connect-CWM {
         return
     }
 
-    if (!$Version) {
-        [version]$Version = $Info.version.trim('v')
-        $script:CWMServerConnection.Version = "$($Version.major).$($Version.minor)"
-    }
+    # Always use the server's current API version
+    [version]$ServerVersion = $Info.version.trim('v')
+    $script:CWMServerConnection.Version = "$($ServerVersion.Major).$($ServerVersion.Minor)"
+    $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($script:CWMServerConnection.Version)"
 
     Write-Verbose 'Connection successful.'
     Write-Verbose '$CWMServerConnection, variable initialized.'

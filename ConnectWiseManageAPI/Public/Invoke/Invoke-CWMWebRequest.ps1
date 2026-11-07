@@ -17,11 +17,13 @@
     - Handles URI formatting corrections
     - Retries 429 (any method) and 502/503/504 (GET/HEAD only) with Retry-After or exponential backoff
     - Provides detailed error messages with troubleshooting hints
-    - Tracks API version headers
+    - Records the server's api-current-version response header
 
 .PARAMETER Arguments
     Hashtable of arguments to pass to Invoke-WebRequest.
-    Should include: Uri, Method, and optionally Body, Headers, ContentType, Version
+    Should include: Uri, Method, and optionally Body, Headers, ContentType
+    The API version is not set per request: the Accept header from Connect-CWM (the server's current
+    version) is used for every call.
     The hashtable is copied, so the caller's hashtable (and its Headers) is not modified.
 
 .PARAMETER MaxRetry
@@ -93,21 +95,15 @@ function Invoke-CWMWebRequest {
     if ($Arguments -is [hashtable]) { $Arguments = $Arguments.Clone() }
     if ($Arguments.Headers -is [hashtable]) { $Arguments.Headers = $Arguments.Headers.Clone() }
     elseif (!$Arguments.Headers) { $Arguments.Headers = @{} }
+    # Per-request API versions are no longer supported; drop a stale 'Version' key instead of failing.
+    if ($Arguments -is [hashtable]) { $Arguments.Remove('Version') }
 
-    # Add default set of arguments
+    # Add the connection's headers (Authorization, ClientID, Accept with the API version), unless the caller set them
     foreach ($Key in $script:CWMServerConnection.Headers.Keys) {
         if ($Arguments.Headers.Keys -notcontains $Key) {
-            # Set version
-            if ($Key -eq 'Accept' -and $Arguments.Version -and $Arguments.Version -ne $script:CWMServerConnection.Version) {
-                $Arguments.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Arguments.Version)"
-                Write-Verbose "Version Passed: $($Arguments.Version)"
-            }
-            else {
-                $Arguments.Headers += @{$Key = $script:CWMServerConnection.Headers.$Key }
-            }
+            $Arguments.Headers[$Key] = $script:CWMServerConnection.Headers.$Key
         }
     }
-    $Arguments.Remove('Version')
 
     if (!$Arguments.SessionVariable) { $Arguments.WebSession = $script:CWMServerConnection.Session }
 
