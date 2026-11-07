@@ -157,3 +157,17 @@ PowerShell 7.4+ is the primary target. Windows PowerShell 5.1 is still supported
 -   Use [Markdown](https://daringfireball.net/projects/markdown).
 -   Documentation is built with platyPS from the markdown.
 -   Regenerate the docs on PowerShell 7, then run `./Tools/Remove-PlatyPSProgressAction.ps1` to strip the `-ProgressAction` parameter that platyPS adds on PowerShell 7.4+.
+
+### Checking against the ConnectWise API spec
+
+The module targets the latest ConnectWise Manage API only. `./Tools/Test-CWMApiCoverage.ps1` checks every `Invoke-CWM*Master` call (method + path, and POST/PUT body fields) against the OpenAPI spec, without importing the module or calling a ConnectWise server:
+
+```powershell
+# Downloads the maintained copy of manage.json to a temp file and writes a markdown report
+./Tools/Test-CWMApiCoverage.ps1 -OutputPath ./api-coverage.md
+
+# Or check against a manage.json exported from the ConnectWise developer portal
+./Tools/Test-CWMApiCoverage.ps1 -SpecPath C:\Temp\manage.json -PassThru
+```
+
+Run it after adding or changing an endpoint function. Don't commit the spec or the report.
