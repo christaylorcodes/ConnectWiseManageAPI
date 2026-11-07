@@ -1,4 +1,4 @@
-function Get-CWMScheduleHoliday {
+﻿function Get-CWMScheduleHoliday {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
@@ -17,6 +17,6 @@ function Get-CWMScheduleHoliday {
         [switch]$all
     )
 
-    $Endpoint = "/schedule/holidaylists/$($parentId)/holidays"
+    $Endpoint = "/schedule/holidayLists/$($parentId)/holidays"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

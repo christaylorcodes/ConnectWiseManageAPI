@@ -36,7 +36,6 @@
         [string]$notes,
         [ValidateLength(1,50)]
         [string]$integrationXRef,
-        [string]$dateEntered,
         [hashtable]$category,
         [hashtable]$_info,
         [hashtable]$customFields

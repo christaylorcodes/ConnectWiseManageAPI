@@ -1,12 +1,16 @@
 ﻿# Example: list the service tickets attached to a ConnectWise Manage configuration (GitHub issue #38).
 #
-# ConnectWise Manage has no /company/configurations/{id}/tickets endpoint. The link between a
-# ticket and a configuration is stored on the ticket (/service/tickets/{id}/configurations), so
-# the query runs against tickets and filters on that child collection with -childConditions.
+# The ConnectWise Manage API (OpenAPI spec 2026.11) has no endpoint that lists the tickets of a
+# configuration: /company/configurations/{id} has no tickets child path, and the Ticket model has no
+# configurations property to filter on. The only link between the two is stored per ticket, at
+# GET /service/tickets/{id}/configurations (Get-CWMTicketConfiguration).
 #
-# NOTE: the 'configurations/id=N' child condition is not covered by the public API reference we
-# could reach. Try it against your server first. If it is rejected or returns nothing, use the
-# fallback at the end of this file, which uses only documented endpoints.
+# So this example reads the configuration's company, lists that company's tickets, and checks the
+# configurations attached to each ticket. That is one extra request per ticket: narrow the condition
+# (for example by board, status or date) on companies with a lot of tickets.
+#
+# Project tickets have the same per-ticket link (/project/tickets/{id}/configurations); this example
+# only covers service tickets.
 
 $CWMConnectionInfo = @{
     # This is the URL to your manage server.
@@ -28,15 +32,6 @@ Connect-CWM @CWMConnectionInfo
 # The configuration to look up
 $ConfigurationId = 1234
 
-# Option 1: one query, filtering tickets on their configurations child collection.
-# Without -id or -count, Get-CWMTicket uses POST /service/tickets/search and sends
-# childConditions in the request body.
-$Tickets = Get-CWMTicket -childConditions "configurations/id=$ConfigurationId" -orderBy 'id desc' -all
-$Tickets | Select-Object id, summary, @{ n = 'status'; e = { $_.status.name } }, dateEntered
-
-# Option 2 (fallback): read the configuration's company, then check the configurations attached to
-# each of that company's tickets. This uses one extra request per ticket, so narrow the condition
-# (for example by date or board) on companies with a lot of tickets.
 $Configuration = Get-CWMCompanyConfiguration -id $ConfigurationId
 $CompanyTickets = Get-CWMTicket -condition "company/id=$($Configuration.company.id)" -fields 'id', 'summary' -all
 $Tickets = foreach ($Ticket in $CompanyTickets) {

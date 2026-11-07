@@ -80,7 +80,7 @@
     )
 
     if ($PSCmdlet.ShouldProcess($name, "Creating New Agreement Type")) {
-        $Endpoint = '/finance/agreement/types'
+        $Endpoint = '/finance/agreements/types'
         Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     }
 

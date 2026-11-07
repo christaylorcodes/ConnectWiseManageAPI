@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Creates a new project ticket in ConnectWise Manage.
 
@@ -91,8 +91,17 @@
 .PARAMETER billProducts
     How products on the ticket are billed. Passed to the API as-is.
 
-.PARAMETER externalXRef
-    External cross reference. Maximum 100 characters.
+.PARAMETER workRole
+    Default work role for time on the ticket, as a reference. Format: @{ id = 2 }
+
+.PARAMETER workType
+    Default work type for time on the ticket, as a reference. Format: @{ id = 3 }
+
+.PARAMETER location
+    The system location (SystemLocationReference). Format: @{ id = 1 }
+
+.PARAMETER department
+    The department, also called business unit (SystemDepartmentReference). Format: @{ id = 10 }
 
 .PARAMETER initialDescription
     The initial description of the ticket.
@@ -107,9 +116,9 @@
     Array of custom field hashtables. Format: @(@{ id = 1; value = 'x' })
 
 .EXAMPLE
-    New-CWMProjectTicket -summary 'Migrate file shares' -project @{id=386}
+    New-CWMProjectTicket -summary 'Migrate file shares' -project @{id=386} -phase @{id=12}
 
-    Creates a project ticket on project 386.
+    Creates a project ticket on phase 12 of project 386. The API requires summary and phase.
 
 .EXAMPLE
     $Ticket = @{
@@ -124,8 +133,8 @@
     Creates a project ticket on phase 12 of project 386 with a 4 hour budget.
 
 .NOTES
-    Fields mirror the service ticket model (New-CWMTicket); they have not been verified
-    against the project ticket schema in the ConnectWise API documentation.
+    Parameters are properties of the ProjectTicket schema (POST /project/tickets), checked
+    against the ConnectWise OpenAPI spec 2026.11. Only a commonly used subset is exposed.
 
 .LINK
     Get-CWMProjectTicket
@@ -176,8 +185,10 @@ function New-CWMProjectTicket {
         [string]$billTime,
         [string]$billExpenses,
         [string]$billProducts,
-        [ValidateLength(1, 100)]
-        [string]$externalXRef,
+        [hashtable]$workRole,
+        [hashtable]$workType,
+        [hashtable]$location,
+        [hashtable]$department,
         [string]$initialDescription,
         [string]$initialInternalAnalysis,
         [string]$initialResolution,

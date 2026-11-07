@@ -56,6 +56,25 @@ Describe 'Endpoint functions' {
         # Picking/shipping details: parentId (product) is positional 0, id positional 1, since the '{parentId}' URL fix
         @{ Name = 'Update-CWMProductPickingShippingDetail'; HttpMethod = 'Patch'; Path = '/procurement/products/5/pickingShippingDetails/9'; Call = { Update-CWMProductPickingShippingDetail 5 9 replace quantity 2 } }
         @{ Name = 'Remove-CWMProductPickingShippingDetail'; HttpMethod = 'Delete'; Path = '/procurement/products/5/pickingShippingDetails/9'; Call = { Remove-CWMProductPickingShippingDetail 5 9 -Confirm:$false } }
+        # Paths corrected against the OpenAPI spec 2026.11 (exact casing; -ceq below is case-sensitive)
+        @{ Name = 'New-CWMAgreementType'; HttpMethod = 'Post'; Path = '/finance/agreements/types'; Call = { New-CWMAgreementType -name 'Managed' -Confirm:$false } }
+        @{ Name = 'Get-CWMTicketAllNote'; HttpMethod = 'GET'; Path = '/service/tickets/9876/allNotes'; Call = { Get-CWMTicketAllNote -ticketId 9876 } }
+        @{ Name = 'Get-CWMTicketAllNote (count)'; HttpMethod = 'GET'; Path = '/service/tickets/9876/allNotes/count'; Call = { Get-CWMTicketAllNote -parentId 9876 -count } }
+        @{ Name = 'Get-CWMWarehouseBin'; HttpMethod = 'GET'; Path = '/procurement/warehouseBins'; Call = { Get-CWMWarehouseBin } }
+        @{ Name = 'Get-CWMWarehouseBin (id)'; HttpMethod = 'GET'; Path = '/procurement/warehouseBins/7'; Call = { Get-CWMWarehouseBin -id 7 } }
+        @{ Name = 'Get-CWMInventory'; HttpMethod = 'GET'; Path = '/procurement/warehouseBins/7/inventoryOnHand'; Call = { Get-CWMInventory -parentId 7 } }
+        @{ Name = 'Get-CWMScheduleHolidayList'; HttpMethod = 'GET'; Path = '/schedule/holidayLists'; Call = { Get-CWMScheduleHolidayList } }
+        @{ Name = 'Get-CWMScheduleHoliday'; HttpMethod = 'GET'; Path = '/schedule/holidayLists/3/holidays'; Call = { Get-CWMScheduleHoliday -holidayListId 3 } }
+        @{ Name = 'Get-CWMMyMember'; HttpMethod = 'GET'; Path = '/system/myMembers'; Call = { Get-CWMMyMember } }
+        @{ Name = 'Get-CWMMySecurity'; HttpMethod = 'GET'; Path = '/system/mySecurity'; Call = { Get-CWMMySecurity } }
+        # Time sheet actions: the switch picks the endpoint
+        @{ Name = 'Update-CWMTimeSheet -Approve'; HttpMethod = 'Post'; Path = '/time/sheets/55/approve'; Call = { Update-CWMTimeSheet -id 55 -Approve -Confirm:$false } }
+        @{ Name = 'Update-CWMTimeSheet -Reject'; HttpMethod = 'Post'; Path = '/time/sheets/55/reject'; Call = { Update-CWMTimeSheet -id 55 -Reject -Confirm:$false } }
+        @{ Name = 'Update-CWMTimeSheet -Reverse'; HttpMethod = 'Post'; Path = '/time/sheets/55/reverse'; Call = { Update-CWMTimeSheet -id 55 -Reverse -Confirm:$false } }
+        @{ Name = 'Update-CWMTimeSheet -Submit'; HttpMethod = 'Post'; Path = '/time/sheets/55/submit'; Call = { Update-CWMTimeSheet -id 55 -Submit -Confirm:$false } }
+        @{ Name = 'Update-CWMTimeSheet (default)'; HttpMethod = 'Post'; Path = '/time/sheets/55/submit'; Call = { Update-CWMTimeSheet -id 55 -Confirm:$false } }
+        # Unbundle (POST, not DELETE)
+        @{ Name = 'Remove-CWMTicketChild'; HttpMethod = 'Post'; Path = '/service/tickets/100/detachChildren'; Call = { Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201 -Confirm:$false } }
     ) {
         $null = & $Call
         $ExpectedUri = "$CWMTestBaseUri$Path"
@@ -183,6 +202,69 @@ Describe 'Endpoint functions' {
             $Err = $null
             Get-CWMReportColumn -Report 'Service' -ErrorVariable Err | Should -BeNullOrEmpty
             $Err | Should -BeNullOrEmpty
+        }
+    }
+
+    Context 'Request bodies checked against the OpenAPI spec 2026.11' {
+        It 'Update-CWMTimeSheet never sends its switches in the body' {
+            Update-CWMTimeSheet -id 55 -Approve -approvalType Tier1Update -Confirm:$false | Out-Null
+            Update-CWMTimeSheet -id 55 -Reject -Confirm:$false | Out-Null
+            Update-CWMTimeSheet -id 55 -Reverse -Confirm:$false | Out-Null
+            Update-CWMTimeSheet -id 55 -Submit -Confirm:$false | Out-Null
+            $Approve, $Reject, $Reverse, $Submit = $global:CWMTestRequests
+            $A = $Approve.Body | ConvertFrom-Json
+            @($A.PSObject.Properties.Name | Sort-Object) | Should -Be @('approvalType', 'id')
+            $A.approvalType | Should -Be 'Tier1Update'
+            @(($Reject.Body | ConvertFrom-Json).PSObject.Properties.Name) | Should -Be @('id')
+            $Reverse.Body | Should -BeNullOrEmpty
+            $Submit.Body | Should -BeNullOrEmpty
+        }
+
+        It 'New-CWMCompanyTeam sends location and department references, also from the old int parameters' {
+            New-CWMCompanyTeam -parentId 250 -teamRole @{ id = 1 } -locationId 2 -businessUnitId 10 -Confirm:$false | Out-Null
+            New-CWMCompanyTeam -parentId 250 -teamRole @{ id = 1 } -location @{ id = 3 } -department @{ id = 11 } -Confirm:$false | Out-Null
+            $First, $Second = $global:CWMTestRequests | ForEach-Object { $_.Body | ConvertFrom-Json }
+            $First.location.id | Should -Be 2
+            $First.department.id | Should -Be 10
+            $First.PSObject.Properties['locationId'] | Should -BeNullOrEmpty
+            $First.PSObject.Properties['businessUnitId'] | Should -BeNullOrEmpty
+            $Second.location.id | Should -Be 3
+            $Second.department.id | Should -Be 11
+        }
+
+        It 'New-CWMCompanyContact sends managerContact and assistantContact references, also from the old int parameters' {
+            New-CWMCompanyContact -firstName 'A' -managerContactId 5 -assistantContact @{ id = 6 } -Confirm:$false | Out-Null
+            $B = $global:CWMTestRequests[0].Body | ConvertFrom-Json
+            $B.managerContact.id | Should -Be 5
+            $B.assistantContact.id | Should -Be 6
+            $B.PSObject.Properties['managerContactId'] | Should -BeNullOrEmpty
+        }
+
+        It 'renamed fields keep their old names as aliases and send the schema name' {
+            New-CWMCompanySite -parentId 250 -name 'Main' -billSeperateFlag $true -Confirm:$false | Out-Null
+            New-CWMCompanyConfiguration -name 'PC' -type @{ id = 1 } -company @{ id = 250 } -mobilezGuid 'g' -locationID 2 -installedby @{ id = 3 } -Confirm:$false | Out-Null
+            $Site, $Config = $global:CWMTestRequests | ForEach-Object { $_.Body }
+            $Site | Should -Match '"billSeparateFlag"'
+            $Site | Should -Not -Match 'billSeperateFlag'
+            $Config | Should -Match '"mobileGuid"'
+            $Config | Should -Match '"locationId"'
+            $Config | Should -Match '"installedBy"'
+            $Config | Should -Not -Match 'mobilezGuid'
+        }
+
+        It 'parameters with no schema counterpart are gone' {
+            foreach ($Case in @(
+                    @{ Command = 'Get-CWMTicketAllNote'; Parameter = 'id' }
+                    @{ Command = 'Get-CWMProjectTicketAllNote'; Parameter = 'id' }
+                    @{ Command = 'New-CWMTicket'; Parameter = 'dateEntered' }
+                    @{ Command = 'New-CWMTicket'; Parameter = 'enteredBy' }
+                    @{ Command = 'New-CWMProductCatalog'; Parameter = 'dateEntered' }
+                    @{ Command = 'New-CWMProjectTicket'; Parameter = 'externalXRef' }
+                    @{ Command = 'New-CWMMember'; Parameter = 'TimeZoneSetupReference' }
+                    @{ Command = 'New-CWMMember'; Parameter = 'remotePackage' }
+                )) {
+                (Get-Command $Case.Command).Parameters.ContainsKey($Case.Parameter) | Should -BeFalse -Because "$($Case.Command) -$($Case.Parameter)"
+            }
         }
     }
 

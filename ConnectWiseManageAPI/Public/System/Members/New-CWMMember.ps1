@@ -32,7 +32,6 @@
         [string]$vendorNumber,
         [string]$notes,
         [hashtable]$timeZone,
-        [hashtable]$TimeZoneSetupReference,
         [hashtable]$country,
         [int[]]$serviceBoardTeamIds,
         [boolean]$enableMobileGpsFlag,
@@ -149,16 +148,6 @@
         [Parameter(Mandatory=$true)]
         [ValidateSet('RemainOnInvoicingScreen','ShowRecentInvoices')]
         [string]$agreementInvoicingDisplayOptions,
-        [ValidateSet('LogMeIn','NTR')]
-        [string]$remotePackage,
-        [ValidateLength(1,250)]
-        [string]$remotePackagePlatform,
-        [ValidateLength(1,50)]
-        [string]$remotePackageUserName,
-        [ValidateLength(1,50)]
-        [SecureString]$remotePackagePassword,
-        [ValidateLength(1,250)]
-        [string]$remotePackageAccount,
         [ValidateSet('AuthAnvil','GoogleAuthenticator')]
         [string]$authenticationServiceType,
         [boolean]$timebasedOneTimePasswordActivated,

@@ -23,11 +23,8 @@
     The API rejects invalid combinations with a descriptive error, for example when the
     supplied parent is itself a child of another ticket.
 
-    Unbundling: the ConnectWise API has no dedicated "detach children" endpoint (the
-    published ticket endpoints only include attachChildren and merge). A bundled child
-    carries its parent in its parentTicketId field, so the likely way to unbundle is to
-    remove that field from the child with Update-CWMTicket. This is UNVERIFIED against a
-    live server; see the last example.
+    Unbundling: to detach bundled child tickets from the parent again, use
+    Remove-CWMTicketChild (POST /service/tickets/{parentId}/detachChildren).
 
 .PARAMETER ParentTicketID
     The ID of the parent ticket that the child tickets are bundled into or merged into.
@@ -75,14 +72,9 @@
     'Closed' status of service board 1.
 
 .EXAMPLE
-    # UNVERIFIED: unbundle a child ticket from its parent
-    Update-CWMTicket -id 143061 -Operation remove -Path parentTicketId -Value ''
+    Remove-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061
 
-    Detaches ticket 143061 from its parent by removing its parentTicketId. This has not been
-    tested against a live ConnectWise Manage server; there is no documented unbundle
-    endpoint. -Value is mandatory on Update-CWMTicket, so an empty string is passed; a
-    JSON Patch 'remove' operation ignores it. Check the result with
-    Get-CWMTicket -id 143061 -fields id, parentTicketId.
+    Unbundles ticket 143061 from ticket 141378 again (see Remove-CWMTicketChild).
 
 .NOTES
     Author: Chris Taylor
@@ -100,7 +92,7 @@
     Supports -WhatIf and -Confirm (handled by Invoke-CWMNewMaster).
 
 .LINK
-    Update-CWMTicket
+    Remove-CWMTicketChild
 
 .LINK
     Get-CWMTicket

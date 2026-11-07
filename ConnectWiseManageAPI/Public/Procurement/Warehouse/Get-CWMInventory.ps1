@@ -1,4 +1,4 @@
-function Get-CWMInventory {
+﻿function Get-CWMInventory {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
@@ -17,6 +17,6 @@ function Get-CWMInventory {
         [switch]$all
     )
 
-    $Endpoint = "/procurement/warehousebins/$($parentId)/inventoryonhand"
+    $Endpoint = "/procurement/warehouseBins/$($parentId)/inventoryOnHand"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

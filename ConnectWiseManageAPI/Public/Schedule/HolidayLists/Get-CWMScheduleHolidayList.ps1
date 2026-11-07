@@ -14,6 +14,6 @@
         [switch]$all
     )
 
-    $Endpoint = '/schedule/holidaylists'
+    $Endpoint = '/schedule/holidayLists'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

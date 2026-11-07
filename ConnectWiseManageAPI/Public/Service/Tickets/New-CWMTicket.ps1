@@ -185,8 +185,6 @@ function New-CWMTicket {
         [string]$closedDate,
         [string]$closedBy,
         [boolean]$closedFlag,
-        [string]$dateEntered,
-        [string]$enteredBy,
         [decimal]$actualHours,
         [boolean]$approved,
         [decimal]$estimatedExpenseCost,

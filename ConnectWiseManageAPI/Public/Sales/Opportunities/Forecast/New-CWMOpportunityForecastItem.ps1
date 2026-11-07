@@ -1,4 +1,4 @@
-function New-CWMOpportunityForecastItem {
+﻿function New-CWMOpportunityForecastItem {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
@@ -36,7 +36,8 @@ function New-CWMOpportunityForecastItem {
         [int]$sequenceNumber,
         [int]$subNumber,
         [bool]$taxableFlag,
-        [hashtable]$info
+        [Alias('info')]
+        [hashtable]$_info
     )
 
     $endpoint = "/sales/opportunities/$parentId/forecast/$id"

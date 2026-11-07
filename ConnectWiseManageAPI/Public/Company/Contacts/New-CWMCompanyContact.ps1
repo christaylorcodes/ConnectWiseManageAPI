@@ -30,8 +30,11 @@
         [int]$defaultMergeContactId,
         [ValidateLength(1, 184)]
         [string]$securityIdentifier,
-        [int]$managerContactId,
-        [int]$assistantContactId,
+        # ContactReference: @{ id = N }. An int is accepted too.
+        [Alias('managerContactId')]
+        [object]$managerContact,
+        [Alias('assistantContactId')]
+        [object]$assistantContact,
         [ValidateLength(1, 100)]
         [string]$title,
         [ValidateLength(1, 50)]
@@ -63,6 +66,13 @@
         [hashtable]$_info,
         [hashtable[]]$customFields
     )
+
+    # -managerContactId / -assistantContactId (old int parameters) become references: 5 -> @{ id = 5 }
+    foreach ($Name in 'managerContact', 'assistantContact') {
+        if ($PSBoundParameters.ContainsKey($Name) -and ($PSBoundParameters[$Name] -is [ValueType] -or $PSBoundParameters[$Name] -is [string])) {
+            $PSBoundParameters[$Name] = @{ id = [int]$PSBoundParameters[$Name] }
+        }
+    }
 
     $Endpoint = '/company/contacts'
     Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

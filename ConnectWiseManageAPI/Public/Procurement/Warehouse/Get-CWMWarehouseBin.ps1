@@ -1,4 +1,4 @@
-function Get-CWMWarehouseBin {
+﻿function Get-CWMWarehouseBin {
     [CmdletBinding()]
     param(
         [int]$id,
@@ -14,6 +14,6 @@ function Get-CWMWarehouseBin {
         [switch]$all
     )
 
-    $Endpoint = '/procurement/warehousebins'
+    $Endpoint = '/procurement/warehouseBins'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

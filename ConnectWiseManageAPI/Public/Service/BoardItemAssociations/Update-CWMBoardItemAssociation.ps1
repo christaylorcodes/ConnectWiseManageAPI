@@ -23,7 +23,7 @@
     The patch operation to perform: 'add', 'replace' or 'remove'.
 
 .PARAMETER Path
-    The property to change, for example 'addAllFlag'.
+    The property to change, for example 'addAllSubTypesFlag'.
 
 .PARAMETER Value
     The new value for the property. Required for 'add' and 'replace'; not needed for 'remove'.
@@ -34,18 +34,18 @@
     op, path and (except for 'remove') value. 'value' is left out of 'remove' operations.
 
 .EXAMPLE
-    Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -Operation replace -Path 'addAllFlag' -Value $true
+    Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -Operation replace -Path 'addAllSubTypesFlag' -Value $true
 
     Associates all sub types with item 20 and type 30 of board 1.
 
 .EXAMPLE
-    Update-CWMBoardItemAssociation 1 20 30 replace addAllFlag $true
+    Update-CWMBoardItemAssociation 1 20 30 replace addAllSubTypesFlag $true
 
     The same change, using positional parameters.
 
 .EXAMPLE
     Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -PatchOperations @(
-        @{ op = 'replace'; path = 'addAllFlag'; value = $true }
+        @{ op = 'replace'; path = 'addAllSubTypesFlag'; value = $true }
     )
 
     Sends the same change with -PatchOperations. Add more operations to the array to change several properties in one request.

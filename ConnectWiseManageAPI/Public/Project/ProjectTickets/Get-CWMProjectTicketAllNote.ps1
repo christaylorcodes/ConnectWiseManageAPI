@@ -13,9 +13,6 @@
     The ID of the project ticket whose notes to retrieve (required).
     Alias: ticketId
 
-.PARAMETER id
-    The ID of a specific note. Appended to the request path when specified.
-
 .PARAMETER count
     Returns only the count of matching notes.
 
@@ -62,8 +59,8 @@
 .NOTES
     Endpoint: GET /project/tickets/{parentId}/allNotes
 
-    Only the list form of this endpoint (GET /project/tickets/{parentId}/allNotes) is
-    published in the API definition; -id and -count are passed through like Get-CWMTicketAllNote.
+    The API publishes only the list form and GET /project/tickets/{parentId}/allNotes/count
+    (used by -count); there is no /allNotes/{id}, so there is no -id parameter.
 
     Originally proposed by jadamwilson in PR #77
 
@@ -86,7 +83,6 @@ function Get-CWMProjectTicketAllNote {
         [Parameter(Mandatory = $true)]
         [Alias('ticketId')]
         [int]$parentId,
-        [int]$id,
         [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]

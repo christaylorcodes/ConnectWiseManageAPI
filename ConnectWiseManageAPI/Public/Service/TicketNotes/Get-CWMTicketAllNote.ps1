@@ -4,7 +4,6 @@
         [Parameter(Mandatory=$true)]
         [Alias('ticketId')]
         [int]$parentId,
-        [int]$id,
         [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]

@@ -97,7 +97,45 @@ Describe 'New-CWMTicketChild' {
             $Code = $Help.Examples | Out-String -Width 500
             $Code | Should -Match 'OperationType Bundle'
             $Code | Should -Match 'OperationType Merge'
-            $Code | Should -Match 'parentTicketId'
+            $Code | Should -Match 'Remove-CWMTicketChild'
         }
+    }
+}
+
+Describe 'Remove-CWMTicketChild' {
+
+    BeforeEach {
+        Set-CWMTestConnection
+        Set-CWMTestResponse -Content '{"success":true}'
+    }
+
+    It 'POSTs childTicketIds to detachChildren and returns the parsed response' {
+        $Result = Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201, 202 -Confirm:$false
+        $Result.success | Should -BeTrue
+        $global:CWMTestRequests | Should -HaveCount 1
+        $Request = $global:CWMTestRequests[0]
+        $Request.Method | Should -Be 'Post'
+        $Request.Uri | Should -Be "$CWMTestBaseUri/service/tickets/100/detachChildren"
+        $B = $Request.Body | ConvertFrom-Json
+        @($B.PSObject.Properties.Name) | Should -Be @('childTicketIds')
+        @($B.childTicketIds) -join ',' | Should -Be '201,202'
+    }
+
+    It 'sends a single child ID as a JSON array' {
+        Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201 -Confirm:$false | Out-Null
+        $global:CWMTestRequests[0].Body | Should -Match '"childTicketIds"\s*:\s*\[\s*201\s*\]'
+    }
+
+    It 'sends nothing with -WhatIf' {
+        Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201 -WhatIf | Out-Null
+        $global:CWMTestRequests | Should -HaveCount 0
+    }
+
+    It 'requires ParentTicketID and ChildTicketIDs and rejects a parent ID of 0' {
+        foreach ($Name in 'ParentTicketID', 'ChildTicketIDs') {
+            $Attributes = (Get-Command Remove-CWMTicketChild).Parameters[$Name].Attributes.Where({ $_ -is [System.Management.Automation.ParameterAttribute] })
+            $Attributes.Mandatory | Should -Contain $true
+        }
+        { Remove-CWMTicketChild -ParentTicketID 0 -ChildTicketIDs 201 -Confirm:$false } | Should -Throw
     }
 }

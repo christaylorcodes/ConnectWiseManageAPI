@@ -12,6 +12,6 @@
         [switch]$all
     )
 
-    $Endpoint = '/system/mymembers'
+    $Endpoint = '/system/myMembers'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

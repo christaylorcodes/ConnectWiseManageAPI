@@ -12,8 +12,8 @@
         [hashtable]$company,
         [hashtable]$contact,
         [hashtable]$site,
-        [int]$locationID,
-        [int]$businessUnitID,
+        [int]$locationId,
+        [int]$businessUnitId,
         [ValidateLength(0,100)]
         [string]$deviceIdentifier,
         [ValidateLength(0,250)]
@@ -24,7 +24,7 @@
         [string]$tagNumber,
         [string]$purchaseDate,
         [string]$installationDate,
-        [hashtable]$installedby,
+        [hashtable]$installedBy,
         [string]$warrantyExpirationDate,
         [string]$vendorNotes,
         [string]$notes,
@@ -67,7 +67,8 @@
         [validatelength(0,1000)]
         [string]$remoteLink,
         [hashtable]$sla,
-        [string]$mobilezGuid,
+        [Alias('mobilezGuid')]
+        [string]$mobileGuid,
         [hashtable]$_info,
         [boolean]$displayVendorFlag,
         [int]$companyLocationId,
