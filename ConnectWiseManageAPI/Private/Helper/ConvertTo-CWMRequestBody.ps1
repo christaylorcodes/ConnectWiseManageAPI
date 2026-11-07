@@ -13,7 +13,7 @@
 
     # 'Version' is no longer used (the API version comes from Connect-CWM) but is still kept out of the
     # body, so older scripts that pass it in -Arguments do not send it to the API.
-    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'grandparentId', 'parentId'
+    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'ProgressAction', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'grandparentId', 'parentId'
 
     $Body = @{}
     foreach ($i in $Arguments.GetEnumerator()) {

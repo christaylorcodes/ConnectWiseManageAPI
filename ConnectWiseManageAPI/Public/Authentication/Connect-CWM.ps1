@@ -7,11 +7,15 @@
     Supports three authentication methods:
     - API Key authentication (recommended for automation)
     - Cookie-based authentication (username/password credentials)
-    - Member impersonation (for API key with member-specific context)
+    - Member impersonation (API keys plus -MemberID: every request is made as that member)
 
     Connection information is stored in the script-scoped $CWMServerConnection variable
     and used by all subsequent API calls. The connection persists for the duration of
     the PowerShell session unless explicitly disconnected with Disconnect-CWM.
+
+    The connection is only stored once it has been validated. If any step fails (server lookup,
+    impersonation token, cookie login or validation), no connection is left behind: the previous
+    connection is cleared too, and other commands fail until Connect-CWM succeeds.
 
     The function validates the connection by retrieving system information. The server's current
     API version is read from that response and sent in the Accept header of every later request
@@ -21,7 +25,9 @@
 .PARAMETER Server
     The ConnectWise Manage server hostname.
     Examples: 'na.myconnectwise.net', 'api-aus.myconnectwise.net', 'connectwise.company.com'
-    Pass only the hostname. A leading scheme (https://) or trailing path is tolerated and stripped.
+    Pass only the hostname, optionally with a port ('cw.company.com:8443'). A leading scheme (https://)
+    or trailing path is tolerated and stripped. Requests always use https.
+    Values with user info, a query, a fragment or a backslash (characters @ ? # \) are rejected.
 
 .PARAMETER Company
     The ConnectWise Manage company identifier (company name/ID used during login).
@@ -49,14 +55,22 @@
     Create with: Get-Credential or [PSCredential]::new()
 
 .PARAMETER MemberID
-    The member identifier for impersonation authentication.
-    Used with -PubKey and -PrivateKey to authenticate as a specific member.
-    Useful for service accounts that need to act on behalf of specific users.
+    The identifier of the member to impersonate, e.g. 'jsmith'.
+    Used with -PubKey and -PrivateKey. Connect-CWM uses the API keys to request a token for this member
+    (POST /system/members/{MemberID}/tokens) and then sends EVERY request as that member: records are
+    created and changed in the member's name, and the member's security roles decide what is allowed.
+    The connection expires when the token expires; Connect-CWM then connects again.
+    If the token cannot be issued, Connect-CWM fails and no connection is stored.
+
+    Changed in 0.5.0: version 0.4.16 accepted -MemberID but silently connected with the API key
+    instead, so requests ran as the API member. Scripts that pass -MemberID now really act as that member.
 
 .PARAMETER Force
     Forces a new connection even if a valid cached connection exists.
-    By default, if a connection is already established, it will be reused.
-    Use -Force to refresh the connection or switch accounts.
+    By default, a connection to the same server and company, with the same sign-in method (API key,
+    impersonation of the same member, or cookie), is reused without contacting the server. A different
+    server, company, sign-in method or impersonated member always connects again, with or without -Force.
+    Use -Force to refresh the connection or to switch API keys or credentials on the same server and company.
 
 .PARAMETER BasePath
     The base API path on the server.
@@ -148,6 +162,9 @@
     - Connections persist for the PowerShell session duration
     - Only impersonation connections expire (when the impersonation token expires); API key and
       cookie connections are reused until Disconnect-CWM or -Force
+    - A cached connection is reused only for the same server, company, sign-in method and impersonated
+      member; connecting to another tenant replaces it
+    - Cookie-session cookies are marked Secure, so they are only sent over https
     - Use Disconnect-CWM to explicitly clear connection
     - Use -Force to refresh an existing connection
 
@@ -208,162 +225,186 @@ function Connect-CWM {
         Write-Verbose 'AllowInsecureRedirect has no effect on this PowerShell version (requires 7.4+).'
     }
 
-    if ((($script:CWMServerConnection -and !$script:CWMServerConnection.expiration) `
-                -or $script:CWMServerConnection.expiration -gt $(Get-Date)) -and !$Force) {
-        Write-Verbose 'Using cached Authentication information.'
-        if ($PSBoundParameters.ContainsKey('AllowInsecureRedirect')) {
-            $script:CWMServerConnection.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
-        }
-        return
+    # Validate server: a host name with an optional port. A leading http(s):// and a trailing path are stripped.
+    # Anything that could change which host the credentials are sent to (user info, query, fragment, '\') is rejected.
+    $ServerInput = $Server
+    $Server = (($Server.Trim() -replace '^https?://', '') -split '/')[0]
+    $ServerUri = $null
+    if ($ServerInput.Trim() -match '[@#?\\\s]' -or $Server -notmatch '^[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(:\d{1,5})?$' -or
+        ![uri]::TryCreate("https://$Server", [System.UriKind]::Absolute, [ref]$ServerUri) -or
+        $ServerUri.UserInfo -or $ServerUri.PathAndQuery -ne '/' -or $ServerUri.Fragment) {
+        Write-Error "Invalid -Server '$ServerInput'. Pass the host name of the ConnectWise Manage server, e.g. 'na.myconnectwise.net' or 'cw.company.com:8443'." -ErrorAction Stop
     }
 
-    # Validate server
-    $Server = ($Server -replace ('http.*:\/\/', '') -split '/')[0]
-    try { $CompanyInfo = Invoke-RestMethod "https://$($Server)/login/companyinfo/$($Company)" -ErrorAction Stop }
-    catch { Write-Error $_ -ErrorAction Stop }
+    if ($MemberID) { $ConnectionMethod = 'Impersonation' }
+    elseif ($Credentials) { $ConnectionMethod = 'Cookie' }
+    else { $ConnectionMethod = 'Key' }
 
-    $Headers = @{
-        ClientID        = $ClientID
-        'Cache-Control' = 'no-cache'
-    }
-    $script:CWMServerConnection = @{
-        Server  = $Server
-        Headers = $Headers
-    }
-
-    # Impersonation. Checked before plain API key auth, which also matches when PubKey and PrivateKey are passed.
-    if ($PubKey -and $PrivateKey -and $MemberID) {
-        Write-Verbose "Impersonating, $MemberID"
-        $ConnectionMethod = 'Impersonation'
-
-        # The token request is authenticated with the API member's own keys
-        $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
-        $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
-        $Headers.Add('Authorization', "Basic $EncodedAuth")
-        $Headers.Add('x-cw-usertype', 'member')
-        $WebRequestArguments = @{
-            Method      = 'Post'
-            Uri         = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
-            Body        = @{ memberIdentifier = $MemberID } | ConvertTo-Json
-            ContentType = 'application/json; charset=utf-8'
-            Headers     = $Headers
-        }
-        $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if ($Result.content) {
-            $Result = ConvertFrom-CWMJson $Result.Content
-        }
-        else {
-            Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
-            Write-Error $Result
+    # Reuse the cached connection only for the same server, company and sign-in method (and impersonated member).
+    # Anything else connects again, as if -Force was passed.
+    $Cached = $script:CWMServerConnection
+    if ($Cached -and !$Force -and (!$Cached.Expiration -or $Cached.Expiration -gt $(Get-Date))) {
+        if ($Cached.Server -eq $Server -and $Cached.Company -eq $Company -and
+            $Cached.ConnectionMethod -eq $ConnectionMethod -and "$($Cached.MemberID)" -eq "$MemberID") {
+            Write-Verbose 'Using cached Authentication information.'
+            if ($PSBoundParameters.ContainsKey('AllowInsecureRedirect')) {
+                $Cached.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
+            }
             return
         }
+        Write-Verbose 'The cached connection is for a different server, company or sign-in method. Connecting again.'
+    }
 
-        # Create auth header for Impersonated user
-        $expiration = [datetime]$Result.expiration
-        $AuthString = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
-        $encodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)));
+    $EscapedCompany = [uri]::EscapeDataString($Company)
+    $Connected = $false
+    try {
+        # The previous connection is replaced. Until the new one is validated nothing usable is cached:
+        # on any failure the finally block clears both connection variables.
+        $script:CWMServerConnection = $null
+        $script:CWMSession = $null
+
+        try { $CompanyInfo = Invoke-RestMethod "https://$($Server)/login/companyinfo/$($EscapedCompany)" -ErrorAction Stop }
+        catch { Write-Error $_ -ErrorAction Stop }
+
         $Headers = @{
-            Authorization   = "Basic $encodedAuth"
             ClientID        = $ClientID
             'Cache-Control' = 'no-cache'
         }
-    }
+        $Expiration = $null
+        $Session = $null
 
-    # API key
-    elseif ($PubKey -and $PrivateKey) {
-        Write-Verbose 'Using API Key authentication'
-        $ConnectionMethod = 'Key'
-        $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
-        $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
-        $Headers.add('Authorization', "Basic $EncodedAuth")
-    }
-
-    # Cookies, yummy
-    elseif ($Credentials) {
-        Write-Verbose 'Using Cookie authentication'
-        $ConnectionMethod = 'Cookie'
-        $Body = @{
-            CompanyName = $Company
-            UserName    = $Credentials.UserName
-            Password    = $Credentials.GetNetworkCredential().Password
-        }
-        $WebRequestArguments = @{
-            Uri             = "https://$($Server)/v4_6_release/login/login.aspx?response=json"
-            Method          = 'Post'
-            Body            = $Body
-            SessionVariable = 'script:CWMSession'
+        # Built locally; it is only stored for the module once the connection has been validated.
+        $Connection = @{
+            Server           = $Server
+            Company          = $Company
+            Headers          = $Headers
+            Session          = $null
+            Expiration       = $null
+            ConnectionMethod = $ConnectionMethod
+            Codebase         = $CompanyInfo.Codebase
+            BasePath         = $BasePath
         }
 
-        # Create session variable. Cookies are stored in that object
-        $CookieResponse = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        $CookieResult = ConvertFrom-CWMJson $CookieResponse.Content
-        if (!$CookieResult.Success) {
-            Write-Error 'There was an error obtain the MemberHash'
-            if ($CookieResult) { Write-Error ($CookieResult | Out-String) }
+        # Impersonation. Checked before plain API key auth, which also matches when PubKey and PrivateKey are passed.
+        if ($ConnectionMethod -eq 'Impersonation') {
+            Write-Verbose "Impersonating, $MemberID"
+            $Connection.MemberID = $MemberID
+
+            # The token request is authenticated with the API member's own keys
+            $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
+            $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
+            $TokenHeaders = $Headers.Clone()
+            $TokenHeaders.Authorization = "Basic $EncodedAuth"
+            $TokenHeaders.'x-cw-usertype' = 'member'
+            $WebRequestArguments = @{
+                Method      = 'Post'
+                Uri         = "https://$($Server)/v4_6_release/apis/3.0/system/members/$([uri]::EscapeDataString($MemberID))/tokens"
+                Body        = @{ memberIdentifier = $MemberID } | ConvertTo-Json
+                ContentType = 'application/json; charset=utf-8'
+                Headers     = $TokenHeaders
+            }
+            # Invoke-CWMWebRequest needs a connection; this one has no Authorization until the token is issued
+            $script:CWMServerConnection = $Connection
+            $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+            $script:CWMServerConnection = $null
+            if ($Result.content) { $Result = ConvertFrom-CWMJson $Result.Content }
+            if (!$Result.publicKey -or !$Result.privateKey) {
+                Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
+                return
+            }
+
+            # Create auth header for Impersonated user
+            if ($Result.expiration) { $Expiration = [datetime]$Result.expiration }
+            $AuthString = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
+            $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)))
+            $Headers.Authorization = "Basic $EncodedAuth"
+        }
+
+        # API key
+        elseif ($ConnectionMethod -eq 'Key') {
+            Write-Verbose 'Using API Key authentication'
+            $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
+            $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
+            $Headers.Authorization = "Basic $EncodedAuth"
+        }
+
+        # Cookies, yummy
+        else {
+            Write-Verbose 'Using Cookie authentication'
+            $Body = @{
+                CompanyName = $Company
+                UserName    = $Credentials.UserName
+                Password    = $Credentials.GetNetworkCredential().Password
+            }
+            # The login response's cookies are stored in this session
+            $Session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            $WebRequestArguments = @{
+                Uri        = "https://$($Server)/v4_6_release/login/login.aspx?response=json"
+                Method     = 'Post'
+                Body       = $Body
+                WebSession = $Session
+            }
+
+            $script:CWMServerConnection = $Connection
+            $CookieResponse = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+            $script:CWMServerConnection = $null
+            $CookieResult = $null
+            if ($CookieResponse.Content) { $CookieResult = ConvertFrom-CWMJson $CookieResponse.Content }
+            if (!$CookieResult.Success) {
+                Write-Error 'There was an error obtain the MemberHash'
+                if ($CookieResult) { Write-Error ($CookieResult | Out-String) }
+                return
+            }
+
+            # Seems cookies don't get put in session any more, add them. Secure: only ever sent over https.
+            $Cookies = [ordered]@{
+                companyName   = $Company
+                memberHash    = $CookieResult.Hash
+                MemberID      = $Credentials.UserName
+                MemberContext = 'web'
+            }
+            foreach ($Name in $Cookies.Keys) {
+                $Cookie = New-Object System.Net.Cookie
+                $Cookie.Name = $Name
+                $Cookie.Value = $Cookies[$Name]
+                $Cookie.Domain = $ServerUri.Host
+                $Cookie.Secure = $true
+                $Session.Cookies.Add($Cookie)
+            }
+            $Connection.Session = $Session
+        }
+
+        $Connection.Expiration = $Expiration
+        # Set only on the final connection; login/impersonation requests above run without it
+        $Connection.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
+        # No version yet: it is read from the system info below
+        $Connection.Headers.Accept = 'application/vnd.connectwise.com+json'
+
+        # Validate connection info (Get-CWMSystemInfo uses the module's connection)
+        Write-Verbose 'Validating authentication'
+        $script:CWMServerConnection = $Connection
+        $Info = Get-CWMSystemInfo
+        if (!$Info) {
+            Write-Warning 'Authentication failed. Clearing connection settings.'
             return
         }
 
-        # Seems cookies don't get put in session any more, add them
-        $Cookie = New-Object System.Net.Cookie
-        $Cookie.Name = 'companyName'
-        $Cookie.Value = $Company
-        $Cookie.Domain = $Server
-        $script:CWMSession.Cookies.Add($Cookie)
+        # Always use the server's current API version
+        [version]$ServerVersion = $Info.version.trim('v')
+        $Connection.Version = "$($ServerVersion.Major).$($ServerVersion.Minor)"
+        $Connection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Connection.Version)"
 
-        $Cookie = New-Object System.Net.Cookie
-        $Cookie.Name = 'memberHash'
-        $Cookie.Value = $CookieResult.Hash
-        $Cookie.Domain = $Server
-        $script:CWMSession.Cookies.Add($Cookie)
-
-        $Cookie = New-Object System.Net.Cookie
-        $Cookie.Name = 'MemberID'
-        $Cookie.Value = $Credentials.UserName
-        $Cookie.Domain = $Server
-        $script:CWMSession.Cookies.Add($Cookie)
-
-        $Cookie = New-Object System.Net.Cookie
-        $Cookie.Name = 'MemberContext'
-        $Cookie.Value = 'web'
-        $Cookie.Domain = $Server
-        $script:CWMSession.Cookies.Add($Cookie)
+        # Only now is the connection stored. A non-cookie connection clears any earlier cookie session.
+        $script:CWMServerConnection = $Connection
+        $script:CWMSession = $Session
+        $Connected = $true
     }
-
-    # not enough info
-    else {
-        Write-Error 'Valid authentication parameters not passed'
-        return
+    finally {
+        if (!$Connected) {
+            $script:CWMServerConnection = $null
+            $script:CWMSession = $null
+        }
     }
-
-    # Create the Server Connection object
-    $script:CWMServerConnection = @{
-        Server                = $Server
-        Headers               = $Headers
-        Session               = $script:CWMSession
-        Expiration            = $expiration
-        ConnectionMethod      = $ConnectionMethod
-        Codebase              = $CompanyInfo.Codebase
-        BasePath              = $BasePath
-        # Set only on the final connection; login/impersonation requests above run without it
-        AllowInsecureRedirect = [bool]$AllowInsecureRedirect
-    }
-
-    # No version yet: it is read from the system info below
-    $script:CWMServerConnection.Headers.Accept = 'application/vnd.connectwise.com+json'
-
-    # Validate connection info
-    Write-Verbose 'Validating authentication'
-    $Info = Get-CWMSystemInfo
-    if (!$Info) {
-        Write-Warning 'Authentication failed. Clearing connection settings.'
-        Disconnect-CWM
-        return
-    }
-
-    # Always use the server's current API version
-    [version]$ServerVersion = $Info.version.trim('v')
-    $script:CWMServerConnection.Version = "$($ServerVersion.Major).$($ServerVersion.Minor)"
-    $script:CWMServerConnection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($script:CWMServerConnection.Version)"
 
     Write-Verbose 'Connection successful.'
     Write-Verbose '$CWMServerConnection, variable initialized.'

@@ -45,6 +45,7 @@
     - Uses POST method with JSON body
     - Supports UTF-8 encoding for international characters
     - Routes to Invoke-CWMAllResult for -all requests
+    - Retried on 502/503/504 like a GET (ReadOnly = $true), because a search changes nothing
 
 .LINK
     Invoke-CWMWebRequest
@@ -63,6 +64,8 @@ function Invoke-CWMSearchMaster {
         [string]$Endpoint
     )
 
+    $Result = $null
+    $URLParameters = ''
     $Body = @{}
     switch ($Arguments.Keys) {
         'condition' { $Body.conditions = $Arguments.condition }
@@ -85,6 +88,8 @@ function Invoke-CWMSearchMaster {
         Method      = 'Post'
         ContentType = 'application/json; charset=utf-8' #needed for accented chars
         Body        = $Body
+        # A search reads and changes nothing, so it is retried on 502/503/504 like a GET
+        ReadOnly    = $true
     }
 
     if ($Arguments.all) {

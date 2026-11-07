@@ -15,7 +15,7 @@
     - Validates connection state ($CWMServerConnection)
     - Adds authentication headers automatically
     - Handles URI formatting corrections
-    - Retries 429 (any method) and 502/503/504 (GET/HEAD only) with Retry-After or exponential backoff
+    - Retries 429 (any method) and 502/503/504 (GET/HEAD and read-only searches) with Retry-After or exponential backoff
     - Provides detailed error messages with troubleshooting hints
     - Records the server's api-current-version response header
 
@@ -25,10 +25,14 @@
     The API version is not set per request: the Accept header from Connect-CWM (the server's current
     version) is used for every call.
     The hashtable is copied, so the caller's hashtable (and its Headers) is not modified.
+    ReadOnly = $true marks a POST that only reads (a /search endpoint), so it is retried like a GET. The key is
+    not sent to Invoke-WebRequest.
+    A WebSession in the hashtable is used instead of the connection's session.
 
 .PARAMETER MaxRetry
     Maximum number of retry attempts. Default: 5
-    Only 429 Too Many Requests (any method) and 502/503/504 on GET/HEAD are retried. Writes that fail with
+    Only 429 Too Many Requests (any method) and 502/503/504 on GET/HEAD (or a request with ReadOnly = $true)
+    are retried. Writes that fail with
     a 5xx are never retried, because the change may already have been applied and repeating it could create
     a duplicate. The wait is the server's Retry-After when present, otherwise 2, 4, 8, 16, 32 seconds
     (capped at 60 seconds).
@@ -96,7 +100,9 @@ function Invoke-CWMWebRequest {
     if ($Arguments.Headers -is [hashtable]) { $Arguments.Headers = $Arguments.Headers.Clone() }
     elseif (!$Arguments.Headers) { $Arguments.Headers = @{} }
     # Per-request API versions are no longer supported; drop a stale 'Version' key instead of failing.
-    if ($Arguments -is [hashtable]) { $Arguments.Remove('Version') }
+    # ReadOnly (a search POST) is an instruction for the retry check, not an Invoke-WebRequest parameter.
+    $ReadOnly = [bool]$Arguments.ReadOnly
+    if ($Arguments -is [hashtable]) { $Arguments.Remove('Version'); $Arguments.Remove('ReadOnly') }
 
     # Add the connection's headers (Authorization, ClientID, Accept with the API version), unless the caller set them
     foreach ($Key in $script:CWMServerConnection.Headers.Keys) {
@@ -105,7 +111,7 @@ function Invoke-CWMWebRequest {
         }
     }
 
-    if (!$Arguments.SessionVariable) { $Arguments.WebSession = $script:CWMServerConnection.Session }
+    if (!$Arguments.SessionVariable -and !$Arguments.WebSession) { $Arguments.WebSession = $script:CWMServerConnection.Session }
 
     # Check URI format
     if ($Arguments.URI -notlike '*`?*' -and $Arguments.URI -like '*`&*') {
@@ -134,10 +140,11 @@ function Invoke-CWMWebRequest {
     $ProgressPreference = 'SilentlyContinue'
 
     # Only build the debug dump when it will be shown: serializing a large (e.g. byte[] document) body is slow.
-    # Binary bodies are summarized, the WebSession object is reduced to its type, and Authorization is masked.
+    # Binary bodies are summarized, secrets in the body (passwords, tokens, keys) are masked, the WebSession object
+    # is reduced to its type, and Authorization is masked.
     if ($DebugPreference -ne 'SilentlyContinue') {
         $DebugArguments = $Arguments.Clone()
-        if ($DebugArguments.Body -is [byte[]]) { $DebugArguments.Body = "[$($DebugArguments.Body.Length) bytes]" }
+        $DebugArguments.Body = ConvertTo-CWMRedacted $DebugArguments.Body
         if ($DebugArguments.WebSession) { $DebugArguments.WebSession = $DebugArguments.WebSession.GetType().FullName }
         if ($DebugArguments.Headers -is [hashtable] -and $DebugArguments.Headers.Authorization) {
             $DebugArguments.Headers = $DebugArguments.Headers.Clone()
@@ -158,15 +165,28 @@ function Invoke-CWMWebRequest {
             # Capture now: nested try/catch blocks below replace $_
             $WebError = $_
 
+            # Reads (GET/HEAD) change nothing, so the warnings below differ for them
+            $IsRead = !$Arguments.Method -or @('Get', 'Head') -contains $Arguments.Method
+
             # PowerShell 7.4+ insecure redirection check (any http:// Location header on an https request)
             if ($WebError.FullyQualifiedErrorId -like 'InsecureRedirection*') {
-                $ErrorMessage = @(
-                    'The server response pointed to an http:// address, which PowerShell 7.4+ rejects as an insecure redirection.'
-                    '--> On ConnectWise-hosted servers this is usually a Location header on a successful create/update, not a real redirect.'
-                    '--> The record MAY HAVE BEEN CREATED or changed. Check before retrying to avoid duplicates.'
-                    "--> To work around it, reconnect with 'Connect-CWM ... -AllowInsecureRedirect'. See: Get-Help Connect-CWM -Parameter AllowInsecureRedirect"
-                    $WebError.ScriptStackTrace
-                )
+                if ($IsRead) {
+                    $ErrorMessage = @(
+                        'The server redirected this read request to an http:// address, which PowerShell 7.4+ rejects as an insecure redirection. The redirect was not followed.'
+                        '--> Nothing was changed. Check the -Server value passed to Connect-CWM.'
+                        '--> If it keeps happening, please report it at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues'
+                        $WebError.ScriptStackTrace
+                    )
+                }
+                else {
+                    $ErrorMessage = @(
+                        'The server response pointed to an http:// address, which PowerShell 7.4+ rejects as an insecure redirection.'
+                        '--> On ConnectWise-hosted servers this is usually a Location header on a successful create/update, not a real redirect.'
+                        '--> The record MAY HAVE BEEN CREATED or changed. Check before retrying to avoid duplicates.'
+                        "--> To work around it, reconnect with 'Connect-CWM ... -AllowInsecureRedirect'. See: Get-Help Connect-CWM -Parameter AllowInsecureRedirect"
+                        $WebError.ScriptStackTrace
+                    )
+                }
                 return Write-Error ($ErrorMessage | Out-String)
             }
 
@@ -179,18 +199,29 @@ function Invoke-CWMWebRequest {
             # Redirect returned while redirects are disabled (e.g. by -AllowInsecureRedirect)
             if ($StatusCode -ge 300 -and $StatusCode -lt 400) {
                 $Location = $null
-                try { $Location = $Response.Headers.Location } catch { $Location = $null }
+                # 7: HttpResponseHeaders.Location; 5.1: WebHeaderCollection['Location']
+                try { $Location = [string]$Response.Headers.Location } catch { $Location = $null }
+                if (!$Location) { try { $Location = [string]$Response.Headers['Location'] } catch { $Location = $null } }
+                $LocationHost = $null
+                try { if ($Location) { $LocationHost = ([uri]$Location).Host } } catch { $LocationHost = $null }
+                if (!$LocationHost) { $LocationHost = '(none)' }
                 $ErrorMessage = @(
-                    "The server responded with a redirect ($StatusCode) that was not followed."
+                    "The server responded with a redirect ($StatusCode) to host $LocationHost that was not followed."
                     "--> Location: $Location"
-                    '--> Redirects are not followed for this request (MaximumRedirection 0, e.g. via Connect-CWM -AllowInsecureRedirect), so it was not completed.'
-                    '--> Please report this, including the status code and Location, at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues'
-                    $WebError.ScriptStackTrace
                 )
+                if ($IsRead) {
+                    $ErrorMessage += '--> Redirects are not followed for this request (MaximumRedirection 0), so it was not completed. Nothing was changed.'
+                }
+                else {
+                    $ErrorMessage += "--> Redirects are not followed for $($Arguments.Method) requests (MaximumRedirection 0, e.g. via Connect-CWM -AllowInsecureRedirect), so the redirect was not completed."
+                    $ErrorMessage += "--> The server may have processed the request before redirecting: the record MAY HAVE BEEN CREATED or changed. Check before retrying; do not retry blindly or you may create a duplicate."
+                }
+                $ErrorMessage += '--> Please report this, including the status code and Location, at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues'
+                $ErrorMessage += $WebError.ScriptStackTrace
                 return Write-Error ($ErrorMessage | Out-String)
             }
 
-            if ($Attempt -lt $MaxRetry -and (Test-CWMRetryable -StatusCode $StatusCode -Method $Arguments.Method)) {
+            if ($Attempt -lt $MaxRetry -and (Test-CWMRetryable -StatusCode $StatusCode -Method $Arguments.Method -ReadOnly:$ReadOnly)) {
                 $RetryDelay = Get-CWMRetryDelay -Response $Response -Attempt ($Attempt + 1)
                 Write-Warning "Issue with request, status: $StatusCode. Retry $($Attempt + 1)/$($MaxRetry), waiting $($RetryDelay)s."
             }

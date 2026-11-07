@@ -19,7 +19,10 @@
     In both modes:
     - 'value' is left out of 'remove' operations.
     - A value wrapped in a PSObject (for example an array returned from a function) is unwrapped, so
-      Windows PowerShell 5.1 does not serialize it as {"value":[...],"Count":n}.
+      Windows PowerShell 5.1 does not serialize it as {"value":[...],"Count":n}. A PSCustomObject (for
+      example $Ticket.board from Get-CWMTicket), or an array of them, is sent with all its properties.
+    - Verbose and -WhatIf output masks secrets: values of keys such as password or token, and the value
+      of an operation whose path is such a key.
     - The body is always a JSON array, even with a single operation.
 
     This function calls the ConnectWise Manage API endpoint: PATCH {Endpoint}
@@ -89,7 +92,7 @@ function Invoke-CWMUpdateMaster {
         [string]$Endpoint
     )
 
-
+    $Result = $null
     $Operations = New-Object System.Collections.Generic.List[object]
 
     if ($Arguments.Keys -contains 'PatchOperations') {
@@ -119,15 +122,12 @@ function Invoke-CWMUpdateMaster {
             if ($Members.ContainsKey('from')) { $Operation.from = $Members.from }
             if ($Operation.op -ne 'remove') {
                 # Unwrap: 5.1 serializes a PSObject-wrapped array as {"value":[..],"Count":n}
-                $Value = $Members.value
-                if ($null -ne $Value) { $Value = $Value.psobject.BaseObject }
-                $Operation.value = $Value
+                $Operation.value = ConvertTo-CWMPatchValue $Members.value
             }
             $Operations.Add($Operation)
         }
     }
     else {
-        Write-Verbose $($Arguments.Value | Out-String)
         $Operation = [ordered]@{
             op   = $Arguments.Operation.toLower()
             path = $Arguments.Path
@@ -136,16 +136,16 @@ function Invoke-CWMUpdateMaster {
             return Write-Error "-Value is required for '$($Operation.op)' operations. Use -Value `$null to set '$($Operation.path)' to null."
         }
         if ($Operation.op -ne 'remove') {
-            $Value = $Arguments.Value
-            if ($null -ne $Value) { $Value = $Value.psobject.BaseObject }
-            $Operation.value = $Value
+            $Operation.value = ConvertTo-CWMPatchValue $Arguments.Value
         }
         $Operations.Add($Operation)
     }
 
     # -InputObject with an object[] always serializes as a JSON array, also with one element on 5.1
     $Body = ConvertTo-Json -InputObject $Operations.ToArray() -Depth 100
-    Write-Verbose $Body
+    # Secrets (e.g. path 'password') are masked in verbose and -WhatIf output, never in the request
+    $BodyText = [string](ConvertTo-CWMRedacted $Body)
+    Write-Verbose $BodyText
 
     $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
@@ -154,7 +154,7 @@ function Invoke-CWMUpdateMaster {
         ContentType = 'application/json; charset=utf-8'
         Body        = $Body
     }
-    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMUpdateMaster, with body:`r`n$Body`r`n")) {
+    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMUpdateMaster, with body:`r`n$BodyText`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if ($Result.content) {
             $Result = ConvertFrom-CWMJson $Result.Content

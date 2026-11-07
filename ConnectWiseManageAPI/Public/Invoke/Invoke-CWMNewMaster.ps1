@@ -39,6 +39,7 @@
     - Called by all New-CWM* functions
     - Supports -WhatIf and -Confirm
     - Automatically filters PowerShell common parameters
+    - Verbose and -WhatIf output masks secrets (password, token, privateKey, secret, memberHash)
     - Converts parameters to JSON body
     - Writes a warning when the response is a single record with id 0. PR #82 reported that
       POST /company/companies/{id}/serviceTemplates without a company returns a record with id 0
@@ -62,10 +63,11 @@ function Invoke-CWMNewMaster {
         [string[]]$Skip
     )
 
+    $Result = $null
     $Body = ConvertTo-CWMRequestBody -Arguments $Arguments -Skip $Skip
-    # A binary body (e.g. a multipart document upload as byte[]) is summarized instead of printed
-    if ($Body -is [byte[]]) { $BodyText = "[$($Body.Length) bytes]" }
-    else { $BodyText = [string]$Body }
+    # For verbose and -WhatIf output: a binary body (e.g. a multipart document upload as byte[]) is summarized
+    # and secrets (password, token, privateKey, ...) are masked
+    $BodyText = [string](ConvertTo-CWMRedacted $Body)
     Write-Verbose $BodyText
 
     $ContentType = 'application/json; charset=utf-8'

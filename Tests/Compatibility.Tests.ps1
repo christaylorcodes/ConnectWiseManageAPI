@@ -231,6 +231,47 @@ Describe 'Invoke-CWMWebRequest against a local HTTP server' {
         }
     }
 
+    It 'debug output masks passwords and tokens in a hashtable or JSON body' {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url } {
+            param($Url)
+            $DebugPreference = 'Continue'
+            $Text = @(
+                Invoke-CWMWebRequest -Arguments @{ Uri = "$Url/object"; Method = 'Post'; Body = @{ CompanyName = 'co'; UserName = 'u'; Password = 'HUNTER2PW' } } 5>&1
+                Invoke-CWMWebRequest -Arguments @{ Uri = "$Url/object"; Method = 'Post'; Body = '{"identifier":"jdoe","password":"MEMBERPW","nested":{"token":"TOK1"}}' } 5>&1
+            ) | Where-Object { $_ -is [System.Management.Automation.DebugRecord] } | Out-String
+            $Text | Should -Not -Match 'HUNTER2PW|MEMBERPW|TOK1'
+            $Text | Should -Match 'CompanyName'
+            $Text | Should -Match 'jdoe'
+        }
+    }
+
+    It 'retries a read-only (search) POST that fails with 503' {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url } {
+            param($Url)
+            $Result = Invoke-CWMWebRequest -Arguments @{ Uri = "$Url/flakysearch"; Method = 'Post'; Body = '{}'; ReadOnly = $true } -WarningAction SilentlyContinue
+            $Result.StatusCode | Should -Be 200
+            Should -Invoke Start-Sleep -Times 1 -Exactly
+        }
+        $script:TestServer.State.Counts['/flakysearch'] | Should -Be 2
+    }
+
+    It 'warns that a POST answered with a redirect may have created the record' -Skip:($PSVersionTable.PSEdition -ne 'Core') {
+        # Windows PowerShell returns the 3xx response instead of throwing; the module only sends
+        # MaximumRedirection 0 there for -AllowInsecureRedirect, which needs PowerShell 7.4+.
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url } {
+            param($Url)
+            foreach ($Method in 'Post', 'Get') {
+                $Err = $null
+                Invoke-CWMWebRequest -Arguments @{ Uri = "$Url/redirect"; Method = $Method; Body = $(if ($Method -eq 'Post') { '{}' }); MaximumRedirection = 0 } -ErrorVariable Err -ErrorAction SilentlyContinue
+                $Text = ($Err | ForEach-Object { $_.ToString() }) -join ' '
+                $Text | Should -Match 'redirect \(302\) to host elsewhere\.invalid'
+                if ($Method -eq 'Post') { $Text | Should -Match 'MAY HAVE BEEN CREATED' }
+                else { $Text | Should -Not -Match 'MAY HAVE BEEN CREATED'; $Text | Should -Match 'Nothing was changed' }
+            }
+        }
+        $script:TestServer.State.Counts['/redirect'] | Should -Be 2
+    }
+
     It 'does not change the global ProgressPreference' {
         $global:ProgressPreference = 'Continue'
         InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url } {

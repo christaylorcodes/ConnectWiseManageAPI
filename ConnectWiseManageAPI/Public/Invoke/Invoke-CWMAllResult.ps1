@@ -36,7 +36,9 @@
     - Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster
     - Uses forward-only pagination for performance
     - Uses page size 999
-    - Follows Link headers for next page
+    - Follows Link headers for next page, but only to the connected server: the next-page URL must use
+      https (or the scheme of the first request, never a downgrade) and the connection's host. Any other
+      URL stops paging with an error, so credentials are never sent to another host.
     - Returns results from all pages
 
     Performance:
@@ -60,6 +62,13 @@ function Invoke-CWMAllResult {
         $Arguments
     )
 
+    # The next-page URL comes from the server's Link header and is requested with the connection's credentials,
+    # so it may only point at the connected server, over https (never a downgrade from the first request).
+    $AllowedHost = $null
+    try { $AllowedHost = ([uri]"https://$($script:CWMServerConnection.Server)").Host } catch { $AllowedHost = $null }
+    $FirstScheme = $null
+    try { $FirstScheme = ([uri][string]$Arguments.Uri).Scheme } catch { $FirstScheme = $null }
+
     # Update header for new pagination-type
     $Arguments.Headers += @{
         'pagination-type' = 'forward-only'
@@ -81,6 +90,15 @@ function Invoke-CWMAllResult {
         $Arguments.Uri = $NextPage
 
         ConvertFrom-CWMJson $PageResult.Content
+
+        if ($NextPage) {
+            $NextUri = $null
+            if (![uri]::TryCreate($NextPage, [System.UriKind]::Absolute, [ref]$NextUri) -or
+                @('https', $FirstScheme) -notcontains $NextUri.Scheme -or
+                !$AllowedHost -or $NextUri.Host -ne $AllowedHost -or $NextUri.UserInfo) {
+                return Write-Error "Stopped paging: the server's next-page link points to '$NextPage', which is not an https URL on the connected server ($AllowedHost). The results so far were returned. Please report this at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues"
+            }
+        }
     }
     while ($NextPage)
 }

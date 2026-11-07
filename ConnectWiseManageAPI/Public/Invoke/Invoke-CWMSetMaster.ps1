@@ -65,8 +65,10 @@ function Invoke-CWMSetMaster {
     )
 
     # The record id is part of the route, not the body
+    $Result = $null
     $Body = ConvertTo-CWMRequestBody -Arguments $Arguments -Skip ($Skip + 'id')
-    $BodyText = [string]$Body
+    # Secrets are masked in verbose and -WhatIf output, never in the request
+    $BodyText = [string](ConvertTo-CWMRedacted $Body)
     Write-Verbose $BodyText
 
     $URI = New-CWMUrl -Endpoint $Endpoint

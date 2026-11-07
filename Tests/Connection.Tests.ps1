@@ -212,13 +212,29 @@ Describe 'Invoke-CWMWebRequest insecure redirect workaround' {
             ($Err | Out-String) | Should -Match 'AllowInsecureRedirect'
         }
     }
+
+    It 'does not say a record may have been created when a GET hits an insecure redirection' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection.AllowInsecureRedirect = $false
+            Mock Invoke-WebRequest {
+                throw [System.Management.Automation.ErrorRecord]::new(
+                    [System.InvalidOperationException]::new(), 'InsecureRedirection', 'InvalidOperation', $null)
+            }
+            $Err = $null
+            Invoke-CWMWebRequest -Arguments @{ Uri = 'https://example.invalid/x'; Method = 'Get'; Headers = @{} } -ErrorVariable Err -ErrorAction SilentlyContinue
+            $Text = ($Err | ForEach-Object { $_.ToString() }) -join ' '
+            $Text | Should -Match 'insecure redirection'
+            $Text | Should -Match 'Nothing was changed'
+            $Text | Should -Not -Match 'MAY HAVE BEEN CREATED'
+        }
+    }
 }
 
 Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
 
     It 'applies the switch without -Force and without contacting the server' {
         InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Headers = @{} }
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{} }
             Mock Invoke-RestMethod { throw 'should not be called' }
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -AllowInsecureRedirect
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeTrue
@@ -228,7 +244,7 @@ Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
 
     It 'can be turned off again with -AllowInsecureRedirect:$false' {
         InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Headers = @{}; AllowInsecureRedirect = $true }
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{}; AllowInsecureRedirect = $true }
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -AllowInsecureRedirect:$false
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeFalse
         }
@@ -236,7 +252,8 @@ Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
 
     It 'leaves the setting unchanged when the switch is not passed' {
         InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Headers = @{}; AllowInsecureRedirect = $true }
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{}; AllowInsecureRedirect = $true }
+            Mock Invoke-RestMethod { throw 'should not be called' }
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeTrue
         }
@@ -288,5 +305,195 @@ Describe 'Disconnect-CWM' {
         Set-CWMTestConnection
         Disconnect-CWM
         { Get-CWMSystemInfo -ErrorAction Stop } | Should -Throw
+    }
+}
+
+Describe 'Connect-CWM connection state (0.5.0 review)' {
+
+    BeforeEach {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = $null
+            $script:CWMSession = $null
+            Mock Invoke-RestMethod { [pscustomobject]@{ Codebase = 'v4_6_release/' } }
+            Mock Get-CWMSystemInfo { [pscustomobject]@{ version = 'v2025.1' } }
+        }
+    }
+
+    It 'leaves no connection (not even the previous one) when <Case> fails' -ForEach @(
+        @{ Case = 'impersonation' }
+        @{ Case = 'cookie login' }
+        @{ Case = 'validation' }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Case = $Case } {
+            param($Case)
+            $script:CWMServerConnection = @{ Server = 'old.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{ Authorization = 'Basic old' } }
+            $script:CWMSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            $Base = @{ Server = 'example.invalid'; Company = 'c'; ClientID = 'id'; Force = $true; ErrorAction = 'SilentlyContinue'; WarningAction = 'SilentlyContinue' }
+            switch ($Case) {
+                'impersonation' {
+                    Mock Invoke-CWMWebRequest { Write-Error 'token failure' }
+                    Connect-CWM @Base -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe'
+                }
+                'cookie login' {
+                    Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"Success":false}' } }
+                    Connect-CWM @Base -Credentials (New-Object PSCredential 'user', (ConvertTo-SecureString 'pw' -AsPlainText -Force))
+                }
+                'validation' {
+                    Mock Get-CWMSystemInfo { }
+                    Connect-CWM @Base -PubKey 'p' -PrivateKey 'k'
+                }
+            }
+            $script:CWMServerConnection | Should -BeNullOrEmpty
+            $script:CWMSession | Should -BeNullOrEmpty
+        }
+    }
+
+    It 'connects again after a failed impersonation instead of reusing a half-built connection' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { Write-Error 'token failure' }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe' -ErrorAction SilentlyContinue
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
+            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Key'
+            Should -Invoke Invoke-RestMethod -Times 2 -Exactly
+        }
+    }
+
+    It 'connects again without -Force when the <Change> changes' -ForEach @(
+        @{ Change = 'server'; Second = @{ Server = 'other.invalid'; Company = 'c'; PubKey = 'p'; PrivateKey = 'k' } }
+        @{ Change = 'company'; Second = @{ Server = 'example.invalid'; Company = 'other'; PubKey = 'p'; PrivateKey = 'k' } }
+        @{ Change = 'sign-in method'; Second = @{ Server = 'example.invalid'; Company = 'c'; PubKey = 'p'; PrivateKey = 'k'; MemberID = 'jdoe' } }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Second = $Second } {
+            param($Second)
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"publicKey":"ip","privateKey":"ik","expiration":"2099-01-01T00:00:00Z"}' } }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
+            Connect-CWM @Second -ClientID 'id'
+            Should -Invoke Invoke-RestMethod -Times 2 -Exactly
+            $script:CWMServerConnection.Server | Should -Be $Second.Server
+            $script:CWMServerConnection.Company | Should -Be $Second.Company
+        }
+    }
+
+    It 'reuses the cached connection for the same server, company and sign-in method' {
+        InModuleScope ConnectWiseManageAPI {
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
+            Connect-CWM -Server 'https://EXAMPLE.invalid/' -Company 'C' -ClientID 'id' -PubKey 'p2' -PrivateKey 'k2'
+            Should -Invoke Invoke-RestMethod -Times 1 -Exactly
+        }
+    }
+
+    It 'drops a stale cookie session when an API key connection is made' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force
+            $script:CWMSession | Should -BeNullOrEmpty
+            $script:CWMServerConnection.Session | Should -BeNullOrEmpty
+        }
+    }
+
+    It 'marks the cookie-session cookies Secure and stores the session only on success' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"Success":true,"Hash":"HASH1"}' } }
+            Connect-CWM -Server 'example.invalid:8443' -Company 'c' -ClientID 'id' -Credentials (New-Object PSCredential 'user', (ConvertTo-SecureString 'pw' -AsPlainText -Force))
+            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter {
+                $Arguments.WebSession -is [Microsoft.PowerShell.Commands.WebRequestSession] -and -not $Arguments.SessionVariable
+            }
+            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Cookie'
+            [object]::ReferenceEquals($script:CWMSession, $script:CWMServerConnection.Session) | Should -BeTrue
+            $Cookies = @($script:CWMSession.Cookies.GetCookies([uri]'https://example.invalid:8443/'))
+            ($Cookies.Name | Sort-Object) -join ',' | Should -Be 'companyName,MemberContext,memberHash,MemberID'
+            $Cookies | ForEach-Object { $_.Secure | Should -BeTrue -Because "$($_.Name) holds session data" }
+            @($script:CWMSession.Cookies.GetCookies([uri]'http://example.invalid:8443/')).Count | Should -Be 0
+        }
+    }
+
+    It 'rejects the -Server value <Server>' -ForEach @(
+        @{ Server = 'na.example.net@evil.invalid' }
+        @{ Server = 'https://user:pw@evil.invalid' }
+        @{ Server = 'evil.invalid#' }
+        @{ Server = 'evil.invalid?x=1' }
+        @{ Server = 'evil.invalid\x' }
+        @{ Server = 'evil invalid' }
+        @{ Server = 'https://' }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Server = $Server } {
+            param($Server)
+            { Connect-CWM -Server $Server -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force } | Should -Throw '*Invalid -Server*'
+            Should -Invoke Invoke-RestMethod -Times 0
+            $script:CWMServerConnection | Should -BeNullOrEmpty
+        }
+    }
+
+    It 'accepts the -Server value <Server> as <Expected>' -ForEach @(
+        @{ Server = 'na.myconnectwise.net'; Expected = 'na.myconnectwise.net' }
+        @{ Server = 'cw.company.com'; Expected = 'cw.company.com' }
+        @{ Server = 'cw.company.com:8443'; Expected = 'cw.company.com:8443' }
+        @{ Server = 'https://na.myconnectwise.net/'; Expected = 'na.myconnectwise.net' }
+        @{ Server = 'HTTPS://cw.company.com/v4_6_release/apis/3.0'; Expected = 'cw.company.com' }
+        @{ Server = 'http://cw.company.com'; Expected = 'cw.company.com' }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Server = $Server; Expected = $Expected } {
+            param($Server, $Expected)
+            Connect-CWM -Server $Server -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force
+            $script:CWMServerConnection.Server | Should -BeExactly $Expected
+            Should -Invoke Invoke-RestMethod -Times 1 -Exactly -ParameterFilter { ([uri]$Uri).OriginalString -eq "https://$Expected/login/companyinfo/c" }
+        }
+    }
+
+    It 'URL-escapes Company and MemberID' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"publicKey":"ip","privateKey":"ik","expiration":"2099-01-01T00:00:00Z"}' } }
+            Connect-CWM -Server 'example.invalid' -Company 'My Co/1' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'j doe/x?y' -Force
+            Should -Invoke Invoke-RestMethod -Times 1 -Exactly -ParameterFilter { ([uri]$Uri).OriginalString -eq 'https://example.invalid/login/companyinfo/My%20Co%2F1' }
+            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter {
+                $Arguments.Uri -eq 'https://example.invalid/v4_6_release/apis/3.0/system/members/j%20doe%2Fx%3Fy/tokens' -and
+                $Arguments.Body -match '"memberIdentifier":\s*"j doe/x\?y"'
+            }
+            $script:CWMServerConnection.MemberID | Should -Be 'j doe/x?y'
+        }
+    }
+
+    It 'sends requests as the impersonated member, not with the API key' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"publicKey":"imppub","privateKey":"imppriv","expiration":"2099-01-01T00:00:00Z"}' } }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe' -Force
+            $ApiKeyAuth = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes('c+p:k'))
+            $script:CWMServerConnection.Headers.Authorization | Should -Not -Be $ApiKeyAuth
+            $script:CWMServerConnection.Headers.ContainsKey('x-cw-usertype') | Should -BeFalse
+            $script:CWMServerConnection.Expiration | Should -BeOfType [datetime]
+        }
+    }
+}
+
+Describe 'New-CWMDebugReport' {
+
+    BeforeEach {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Get-CWMSystemInfo { [pscustomobject]@{ version = 'v2025.1' } }
+            $Session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            $Session.Cookies.Add((New-Object System.Net.Cookie 'memberHash', 'HASHSECRET', '/', 'example.invalid'))
+            $script:CWMServerConnection = @{
+                Server           = 'example.invalid'
+                Company          = 'c'
+                ConnectionMethod = 'Key'
+                Codebase         = 'v4_6_release/'
+                BasePath         = 'apis/3.0'
+                Headers          = @{ Authorization = 'Basic AUTHSECRET'; ClientID = 'CLIENTSECRET' }
+                Session          = $Session
+            }
+        }
+    }
+
+    It 'never includes headers or the session, even with -Hash:$false' {
+        $Report = New-CWMDebugReport -Hash:$false
+        $Report | Should -Not -Match 'AUTHSECRET|CLIENTSECRET|HASHSECRET|Authorization|Cookies'
+        $Report | Should -Match 'example\.invalid'
+        $Report | Should -Match '"ConnectionMethod":\s*"Key"'
+        ($Report | ConvertFrom-Json).PSObject.Properties.Name | Should -Not -Contain 'Errors'
+    }
+
+    It 'hashes the server name by default' {
+        $Report = New-CWMDebugReport
+        $Report | Should -Not -Match 'example\.invalid|AUTHSECRET'
     }
 }

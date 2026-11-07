@@ -1,4 +1,4 @@
-# Local HTTP server for offline tests. Uses System.Net.HttpListener on http://localhost:<free port>/,
+﻿# Local HTTP server for offline tests. Uses System.Net.HttpListener on http://localhost:<free port>/,
 # so Invoke-WebRequest raises the real edition-specific exceptions (WebException on 5.1,
 # HttpResponseException on 7). No ConnectWise server or network access is needed.
 
@@ -40,7 +40,7 @@ function Start-CWMTestServer {
                     '/html500' { $Status = 500; $Body = '<html>proxy error</html>' }
                     '/always503' { $Status = 503; $Body = '{"code":"ServiceUnavailable","message":"down"}' }
                     '/always500' { $Status = 500; $Body = '{"code":"InternalError","message":"boom"}' }
-                    '/flaky' {
+                    { $_ -eq '/flaky' -or $_ -eq '/flakysearch' } {
                         if ($Count -eq 1) { $Status = 503; $Body = '{"code":"ServiceUnavailable","message":"try again"}' }
                         else { $Body = '[{"id":1}]' }
                     }
@@ -57,6 +57,7 @@ function Start-CWMTestServer {
                         $Body = '[{"id":1},{"id":2}]'
                     }
                     '/page2' { $Response.AddHeader('Link', ''); $Body = '[{"id":3}]' }
+                    '/redirect' { $Status = 302; $Response.AddHeader('Location', 'http://elsewhere.invalid/created/9'); $Body = '{}' }
                     '/version' { $Response.AddHeader('api-current-version', '2025.1'); $Body = '{}' }
                     default { $Status = 404; $Body = '{"code":"NotFound","message":"no route"}' }
                 }

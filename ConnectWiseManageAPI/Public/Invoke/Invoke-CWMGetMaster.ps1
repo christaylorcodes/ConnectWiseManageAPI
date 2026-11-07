@@ -79,6 +79,7 @@ function Invoke-CWMGetMaster {
         [string]$Endpoint
     )
 
+    $Result = $null
     $URLParameters = ''
 
     if ($Arguments.id) { $Endpoint = Join-Url $Endpoint $Arguments.id }

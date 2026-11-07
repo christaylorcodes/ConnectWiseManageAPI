@@ -248,3 +248,205 @@ Describe 'Master functions' {
         }
     }
 }
+
+Describe 'Master function regressions (0.5.0 review)' {
+
+    BeforeEach {
+        Set-CWMTestConnection
+        Set-CWMTestResponse
+    }
+
+    Context 'Invoke-CWMUpdateMaster PSCustomObject values' {
+        It 'sends every property of a PSCustomObject from a Get response, in both modes' {
+            Set-CWMTestResponse -Content '{"id":1,"board":{"id":3,"name":"Help Desk"},"tasks":[{"id":1,"notes":"a"},{"id":2,"notes":"b"}]}'
+            InModuleScope ConnectWiseManageAPI {
+                $Ticket = Invoke-CWMGetMaster -Arguments @{ id = 1 } -Endpoint '/service/tickets'
+                $Ticket.board | Should -BeOfType [pscustomobject]
+                Invoke-CWMUpdateMaster -Arguments @{ Operation = 'replace'; Path = 'board'; Value = $Ticket.board } -Endpoint '/service/tickets/1' | Out-Null
+                Invoke-CWMUpdateMaster -Arguments @{ PatchOperations = @(
+                        @{ op = 'replace'; path = 'board'; value = $Ticket.board }
+                        [pscustomobject]@{ op = 'replace'; path = 'tasks'; value = $Ticket.tasks }
+                    )
+                } -Endpoint '/service/tickets/2' | Out-Null
+                Invoke-CWMUpdateMaster -Arguments @{ Operation = 'replace'; Path = 'tasks'; Value = $Ticket.tasks } -Endpoint '/service/tickets/3' | Out-Null
+
+                $Bodies = @($global:CWMTestRequests | Where-Object Method -EQ 'Patch' | ForEach-Object { , @(ConvertFrom-Json $_.Body | ForEach-Object { $_ }) })
+                $Bodies.Count | Should -Be 3
+                $Bodies[0][0].value.id | Should -Be 3
+                $Bodies[0][0].value.name | Should -Be 'Help Desk'
+                $Bodies[1][0].value.name | Should -Be 'Help Desk'
+                @($Bodies[1][1].value).Count | Should -Be 2
+                ($Bodies[1][1].value.notes -join ',') | Should -Be 'a,b'
+                ($Bodies[2][0].value.notes -join ',') | Should -Be 'a,b'
+                $global:CWMTestRequests | Where-Object Method -EQ 'Patch' | ForEach-Object { $_.Body | Should -Not -Match '"value":\s*\{\s*\}' }
+            }
+        }
+    }
+
+    Context '$Result from the caller''s scope' {
+        It 'returns nothing under -WhatIf even when the caller has a $Result variable' {
+            InModuleScope ConnectWiseManageAPI {
+                $Out = & {
+                    $Result = 'LEAKED'
+                    $null = $Result
+                    Invoke-CWMNewMaster -Arguments @{ summary = 'x' } -Endpoint '/x' -WhatIf
+                    Invoke-CWMSetMaster -Arguments @{ name = 'x' } -Endpoint '/x' -WhatIf
+                    Invoke-CWMUpdateMaster -Arguments @{ Operation = 'replace'; Path = 'a'; Value = 1 } -Endpoint '/x' -WhatIf
+                    Invoke-CWMRemoveMaster -Endpoint '/x' -WhatIf
+                    Invoke-CWMActionMaster -Endpoint '/x' -WhatIf
+                }
+                @($Out | Where-Object { $null -ne $_ }) | Should -BeNullOrEmpty
+                Should -Invoke Invoke-WebRequest -Times 0
+            }
+        }
+    }
+
+    Context 'Invoke-CWMSearchMaster' {
+        It 'ignores a $URLParameters variable in the caller''s scope' {
+            InModuleScope ConnectWiseManageAPI {
+                & {
+                    $URLParameters = '&leak=1'
+                    $null = $URLParameters
+                    Invoke-CWMSearchMaster -Arguments @{ condition = 'id=1' } -Endpoint '/service/tickets/search' | Out-Null
+                }
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter {
+                    $Uri -eq 'https://example.invalid/v4_6_release/apis/3.0/service/tickets/search' -and $Method -eq 'Post'
+                }
+            }
+        }
+        It 'marks the search as read-only so 502/503/504 are retried' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '[]' } }
+                Invoke-CWMSearchMaster -Arguments @{ condition = 'id=1' } -Endpoint '/service/tickets/search' | Out-Null
+                Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter { $Arguments.ReadOnly -eq $true }
+            }
+        }
+        It 'does not pass the ReadOnly key on to Invoke-WebRequest' {
+            InModuleScope ConnectWiseManageAPI {
+                Invoke-CWMSearchMaster -Arguments @{ condition = 'id=1' } -Endpoint '/service/tickets/search' | Out-Null
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { -not $PSBoundParameters.ContainsKey('ReadOnly') }
+            }
+        }
+        It 'Test-CWMRetryable retries a read-only POST on <Code> but never a write' -ForEach @(
+            @{ Code = 502 }, @{ Code = 503 }, @{ Code = 504 }
+        ) {
+            InModuleScope ConnectWiseManageAPI -Parameters @{ Code = $Code } {
+                param($Code)
+                Test-CWMRetryable -StatusCode $Code -Method 'Post' -ReadOnly | Should -BeTrue
+                Test-CWMRetryable -StatusCode $Code -Method 'Post' | Should -BeFalse
+                Test-CWMRetryable -StatusCode 500 -Method 'Post' -ReadOnly | Should -BeFalse
+            }
+        }
+    }
+
+    Context 'Request body' {
+        It 'leaves ProgressAction (PowerShell 7.4 common parameter) out of the body' {
+            InModuleScope ConnectWiseManageAPI {
+                Invoke-CWMNewMaster -Arguments @{ summary = 'x'; ProgressAction = 'SilentlyContinue' } -Endpoint '/x' | Out-Null
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { $Body -match 'summary' -and $Body -notmatch 'ProgressAction' }
+            }
+        }
+        It 'leaves -ProgressAction out of the body of New-CWMTicket' -Skip:($PSVersionTable.PSVersion -lt [version]'7.4') {
+            New-CWMTicket -summary 'x' -company @{ id = 1 } -ProgressAction SilentlyContinue | Out-Null
+            Should -Invoke Invoke-WebRequest -ModuleName ConnectWiseManageAPI -Times 1 -Exactly -ParameterFilter {
+                $Body -match 'summary' -and $Body -notmatch 'ProgressAction'
+            }
+        }
+    }
+
+    Context 'Secrets in verbose output' {
+        It 'masks a password in Invoke-CWMNewMaster verbose output but sends it to the API' {
+            InModuleScope ConnectWiseManageAPI {
+                $Verbose = Invoke-CWMNewMaster -Arguments @{ identifier = 'jdoe'; password = 'MEMBERPW123'; settings = @{ apiToken = 'TOKEN42' } } -Endpoint '/system/members' -Verbose 4>&1 |
+                    Where-Object { $_ -is [System.Management.Automation.VerboseRecord] }
+                $Text = $Verbose | Out-String
+                $Text | Should -Not -Match 'MEMBERPW123|TOKEN42'
+                $Text | Should -Match 'jdoe'
+                $Text | Should -Match '\[redacted\]'
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { $Body -match 'MEMBERPW123' }
+            }
+        }
+        It 'masks secrets in Invoke-CWMSetMaster verbose output' {
+            InModuleScope ConnectWiseManageAPI {
+                $Text = Invoke-CWMSetMaster -Arguments @{ name = 'n'; privateKey = 'PRIVSECRET' } -Endpoint '/x/1' -Verbose 4>&1 |
+                    Where-Object { $_ -is [System.Management.Automation.VerboseRecord] } | Out-String
+                $Text | Should -Not -Match 'PRIVSECRET'
+                $Text | Should -Match '"name"'
+            }
+        }
+        It 'masks the value of a patch operation whose path is a secret' {
+            InModuleScope ConnectWiseManageAPI {
+                $Text = Invoke-CWMUpdateMaster -Arguments @{ Operation = 'replace'; Path = 'password'; Value = 'NEWPW99' } -Endpoint '/system/members/1' -Verbose 4>&1 |
+                    Where-Object { $_ -is [System.Management.Automation.VerboseRecord] } | Out-String
+                $Text | Should -Not -Match 'NEWPW99'
+                $Text | Should -Match 'password'
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { $Body -match 'NEWPW99' }
+            }
+        }
+    }
+
+    Context 'ConvertTo-CWMRedacted' {
+        It 'masks matching keys at any depth and keeps everything else' {
+            InModuleScope ConnectWiseManageAPI {
+                $In = @{
+                    UserName = 'u'; Password = 'P1'
+                    nested   = [pscustomobject]@{ memberHash = 'H1'; name = 'n'; deeper = @{ clientSecret = 'S1'; keep = 'k' } }
+                    list     = @([pscustomobject]@{ accessToken = 'T1'; id = 1 }, @{ PRIVATEKEY = 'K1' })
+                }
+                $Out = ConvertTo-CWMRedacted $In
+                $Json = $Out | ConvertTo-Json -Depth 10
+                $Json | Should -Not -Match 'P1|H1|S1|T1|K1'
+                $Out.UserName | Should -Be 'u'
+                $Out.Password | Should -Be '[redacted]'
+                $Out.nested.name | Should -Be 'n'
+                $Out.nested.deeper.keep | Should -Be 'k'
+                $Out.list[0].id | Should -Be 1
+                $In.Password | Should -Be 'P1' -Because 'the input is not modified'
+                $In.nested.memberHash | Should -Be 'H1'
+            }
+        }
+        It 'handles JSON text, form text, byte[] and plain values' {
+            InModuleScope ConnectWiseManageAPI {
+                ConvertTo-CWMRedacted '{"summary":"x","password":"P2"}' | Should -Not -Match 'P2'
+                ConvertTo-CWMRedacted '[{"op":"replace","path":"password","value":"P3"}]' | Should -Not -Match 'P3'
+                $Plain = "{`n  ""summary"": ""reset""`n}"
+                ConvertTo-CWMRedacted $Plain | Should -BeExactly $Plain
+                ConvertTo-CWMRedacted 'UserName=u&Password=P4' | Should -BeExactly 'UserName=u&Password=[redacted]'
+                ConvertTo-CWMRedacted ([byte[]](1, 2, 3, 4)) | Should -Be '[4 bytes]'
+                ConvertTo-CWMRedacted 5 | Should -Be 5
+                ConvertTo-CWMRedacted $null | Should -BeNullOrEmpty
+            }
+        }
+    }
+
+    Context 'Invoke-CWMAllResult next-page links' {
+        It 'stops paging, with an error, when the next page is <Case>' -ForEach @(
+            @{ Case = 'on another host'; Link = 'https://evil.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
+            @{ Case = 'an http downgrade'; Link = 'http://example.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
+            @{ Case = 'carrying user info'; Link = 'https://user@example.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
+            @{ Case = 'a relative URL'; Link = '/v4_6_release/apis/3.0/service/tickets?page=2' }
+        ) {
+            InModuleScope ConnectWiseManageAPI -Parameters @{ Link = $Link } {
+                param($Link)
+                $script:TestLink = $Link
+                Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = "<$($script:TestLink)>; rel=`"next`"" } } }
+                $Err = $null
+                $Out = Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/service/tickets?'; Method = 'Get' } -ErrorVariable Err -ErrorAction SilentlyContinue
+                @($Out).Count | Should -Be 1
+                ($Err | Out-String) | Should -Match 'Stopped paging'
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly
+            }
+        }
+        It 'follows an https next page on the connected host' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-WebRequest {
+                    if ($Uri -like '*page=2*') { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":2}]'; Headers = @{ Link = '' } } }
+                    else { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = '<https://EXAMPLE.invalid/v4_6_release/apis/3.0/service/tickets?page=2>; rel="next"' } } }
+                }
+                $Out = @(Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/service/tickets?'; Method = 'Get' })
+                $Out.id | Should -Be @(1, 2)
+                Should -Invoke Invoke-WebRequest -Times 2 -Exactly
+            }
+        }
+    }
+}

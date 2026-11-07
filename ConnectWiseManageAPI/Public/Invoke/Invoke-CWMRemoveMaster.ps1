@@ -45,6 +45,7 @@ function Invoke-CWMRemoveMaster {
         [string]$Endpoint
     )
 
+    $Result = $null
     $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
         Uri = $URI

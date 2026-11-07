@@ -17,19 +17,25 @@
     try { $SysInfo = Get-CWMSystemInfo -ErrorAction Stop }
     catch { $SysInfo = 'error' }
 
+    # Only non-secret connection fields. The headers (Authorization, ClientID) and the cookie session are never
+    # included, not even with -Hash:$false.
+    $Connection = $script:CWMServerConnection
     $DebugOutput = @{
         CWMServerConnection = @{
-            Server                = $script:CWMServerConnection.Clone()
-            Headers               = $script:CWMServerConnection.Headers.Clone()
-            'api-current-version' = $script:CWMServerConnection.'api-current-version'
-            AllowInsecureRedirect = $script:CWMServerConnection.AllowInsecureRedirect
+            Server                   = [string]$Connection.Server
+            ConnectionMethod         = $Connection.ConnectionMethod
+            Codebase                 = $Connection.Codebase
+            BasePath                 = $Connection.BasePath
+            Version                  = $Connection.Version
+            'api-current-version'    = $Connection.'api-current-version'
+            Expiration               = $Connection.Expiration
+            AllowInsecureRedirect    = $Connection.AllowInsecureRedirect
             SupportsInsecureRedirect = $script:CWMSupportsInsecureRedirect
         }
         ModuleVersion       = (Get-Module 'ConnectWiseManageAPI').Version
         CWMSystemInfo       = $SysInfo
         OS                  = [System.Environment]::OSVersion.Version
         PowerShell          = $PSVersionTable.PSVersion
-        Errors              = $Error[0..4]
     }
 
     # Hash sensitive information so that it can be shared
@@ -44,8 +50,6 @@
         }
 
         $DebugOutput.CWMServerConnection.Server = Get-StringHash $DebugOutput.CWMServerConnection.Server
-        $DebugOutput.CWMServerConnection.Headers.Authorization = Get-StringHash $DebugOutput.CWMServerConnection.Headers.Authorization
-        $DebugOutput.CWMServerConnection.Headers.ClientID = Get-StringHash $DebugOutput.CWMServerConnection.Headers.ClientID
     }
 
     $DebugOutput | ConvertTo-Json -Depth 99 | Out-String
