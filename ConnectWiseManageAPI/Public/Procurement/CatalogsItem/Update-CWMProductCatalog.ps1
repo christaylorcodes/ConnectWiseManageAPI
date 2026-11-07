@@ -19,7 +19,8 @@
     The catalog item property to change, for example 'description' or 'price'.
 
 .PARAMETER Value
-    The new value for the property.
+    The new value for the property. Required for 'add' and 'replace'; not needed for 'remove'.
+    Use -Value $null to set a property to null.
 
 .PARAMETER PatchOperations
     Several patch operations to apply in one request. Each is a hashtable or PSCustomObject with
@@ -80,7 +81,7 @@ function Update-CWMProductCatalog {
         [string]$Operation,
         [Parameter(Mandatory = $true, Position = 2, ParameterSetName = 'Single')]
         [string]$Path,
-        [Parameter(Mandatory = $true, Position = 3, ParameterSetName = 'Single')]
+        [Parameter(Position = 3, ParameterSetName = 'Single')]
         $Value,
         [Parameter(Mandatory = $true, ParameterSetName = 'Bulk')]
         [ValidateNotNullOrEmpty()]

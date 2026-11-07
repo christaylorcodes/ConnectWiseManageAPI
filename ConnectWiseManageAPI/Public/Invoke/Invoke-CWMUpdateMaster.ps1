@@ -12,7 +12,9 @@
     Two modes:
     - Bulk: when $Arguments contains PatchOperations, those operations are the whole request body and
       Operation/Path/Value are ignored. Several fields can be changed in one request.
-    - Single: otherwise one operation is built from Operation, Path and Value.
+    - Single: otherwise one operation is built from Operation, Path and Value. Value is optional for
+      'remove'. For 'add' and 'replace' a Value key is required (it may be $null), so a forgotten
+      -Value is an error instead of silently sending null.
 
     In both modes:
     - 'value' is left out of 'remove' operations.
@@ -29,7 +31,7 @@
     or:
     - Operation: 'add', 'replace', or 'remove'
     - Path: Field path to modify
-    - Value: New value (not needed for 'remove')
+    - Value: New value (not needed for 'remove'; required, but may be $null, for 'add' and 'replace')
 
 .PARAMETER Endpoint
     The API endpoint path (e.g., '/service/tickets/123', '/company/companies/250')
@@ -130,6 +132,9 @@ function Invoke-CWMUpdateMaster {
         $Operation = [ordered]@{
             op   = $Arguments.Operation.toLower()
             path = $Arguments.Path
+        }
+        if ($Operation.op -in 'add', 'replace' -and $Arguments.Keys -notcontains 'Value') {
+            return Write-Error "-Value is required for '$($Operation.op)' operations. Use -Value `$null to set '$($Operation.path)' to null."
         }
         if ($Operation.op -ne 'remove') {
             $Value = $Arguments.Value

@@ -3,7 +3,8 @@ Template for Update-CWM* (PATCH) functions.
 
 Pattern (issue #53):
 - Two parameter sets:
-    'Single' (default): -Operation, -Path and -Value, all mandatory. One change per request, as before.
+    'Single' (default): -Operation and -Path mandatory, -Value optional (not needed for 'remove';
+                        Invoke-CWMUpdateMaster errors when 'add'/'replace' has no Value). One change per request.
     'Bulk':             -PatchOperations, mandatory. Several changes in one request.
 - Route ids (grandparentId, parentId, id) have no ParameterSetName, so they are in both sets.
 - Positions are explicit, route ids first, so positional calls keep working:
@@ -39,7 +40,8 @@ Fill in <Noun>, <Endpoint> and the comment-based help. Do not invent API constra
     The property to change.
 
 .PARAMETER Value
-    The new value for the property.
+    The new value for the property. Required for 'add' and 'replace'; not needed for 'remove'.
+    Use -Value $null to set a property to null.
 
 .PARAMETER PatchOperations
     Several patch operations to apply in one request. Each is a hashtable or PSCustomObject with
@@ -87,7 +89,7 @@ function Update-CWMTemplate {
         [string]$Operation,
         [Parameter(Mandatory = $true, Position = 2, ParameterSetName = 'Single')]
         [string]$Path,
-        [Parameter(Mandatory = $true, Position = 3, ParameterSetName = 'Single')]
+        [Parameter(Position = 3, ParameterSetName = 'Single')]
         $Value,
         [Parameter(Mandatory = $true, ParameterSetName = 'Bulk')]
         [ValidateNotNullOrEmpty()]

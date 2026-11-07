@@ -24,7 +24,8 @@
     The resource property to change, for example 'hours' or 'member'.
 
 .PARAMETER Value
-    The new value for the property.
+    The new value for the property. Required for 'add' and 'replace'; not needed for 'remove'.
+    Use -Value $null to set a property to null.
 
 .PARAMETER PatchOperations
     Several patch operations to apply in one request. Each is a hashtable or PSCustomObject with
@@ -85,7 +86,7 @@ function Update-CWMServiceTemplateResource {
         [string]$Operation,
         [Parameter(Mandatory = $true, Position = 3, ParameterSetName = 'Single')]
         [string]$Path,
-        [Parameter(Mandatory = $true, Position = 4, ParameterSetName = 'Single')]
+        [Parameter(Position = 4, ParameterSetName = 'Single')]
         $Value,
         [Parameter(Mandatory = $true, ParameterSetName = 'Bulk')]
         [ValidateNotNullOrEmpty()]
