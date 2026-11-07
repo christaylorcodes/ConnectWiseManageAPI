@@ -13,7 +13,7 @@ This will update a company.
 ## SYNTAX
 
 ```
-Update-CWMCompany -id <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object>
+Update-CWMCompany [-id] <Int32> [-Operation] <String> [-Path] <String> [-Value] <Object>
  [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -31,17 +31,17 @@ CompanyID = $Company.id     Operation = 'replace'     Path = 'name'     Value = 
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+{{ Fill id Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -54,10 +54,9 @@ replace, add, remove
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: add, replace, remove
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -72,7 +71,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -87,7 +86,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -109,17 +108,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: companyId
+Aliases: cf
 
-Required: True
+Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

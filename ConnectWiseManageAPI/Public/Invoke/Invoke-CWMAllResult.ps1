@@ -1,4 +1,60 @@
-﻿function Invoke-CWMAllResult {
+﻿<#
+.SYNOPSIS
+    Automatic pagination handler that retrieves all pages of results.
+
+.DESCRIPTION
+    Handles automatic pagination for API requests using forward-only pagination.
+    Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster when -all switch is used.
+
+    Automatically follows pagination links in response headers to retrieve all pages
+    of results. Uses maximum page size (999) for efficiency and forward-only pagination
+    for better performance.
+
+    This function iterates through all pages until no more results are available.
+
+.PARAMETER Arguments
+    Hashtable containing web request parameters:
+    - Uri: Initial request URI
+    - Method: HTTP method (GET or POST)
+    - Body: Request body (for POST requests)
+    - Headers: Request headers
+
+.EXAMPLE
+    $args = @{
+        Uri = 'https://api.myconnectwise.net/.../service/tickets?conditions=status/name="Open"'
+        Method = 'GET'
+    }
+    Invoke-CWMAllResult -Arguments $args
+
+    Retrieves all pages of open tickets.
+
+.NOTES
+    Author: Chris Taylor
+    Date: 2024-01-01
+
+    Internal Function:
+    - Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster
+    - Uses forward-only pagination for performance
+    - Sets page size to maximum (999 records)
+    - Follows Link headers for next page
+    - Returns results from all pages
+
+    Performance:
+    - More efficient than manual pagination
+    - Reduces number of API calls
+    - Recommended for retrieving large datasets
+
+.LINK
+    Invoke-CWMWebRequest
+
+.LINK
+    Invoke-CWMGetMaster
+
+.LINK
+    Invoke-CWMSearchMaster
+
+#>
+function Invoke-CWMAllResult {
     [CmdletBinding()]
     param(
         $Arguments

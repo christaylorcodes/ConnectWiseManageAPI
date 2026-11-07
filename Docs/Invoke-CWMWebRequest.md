@@ -35,22 +35,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill Arguments Description }}
 
 ```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MaxRetry
-{{ Fill MaxRetry Description }}
-
-```yaml
-Type: Int32
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
@@ -61,11 +46,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MaxRetry
+{{ Fill MaxRetry Description }}
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ProgressAction
 {{ Fill ProgressAction Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.ActionPreference
 Parameter Sets: (All)
 Aliases: proga
 
@@ -81,10 +81,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

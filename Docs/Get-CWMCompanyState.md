@@ -128,7 +128,7 @@ Accept wildcard characters: False
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
 Required: False
 Position: 0

@@ -1,4 +1,74 @@
-﻿function Invoke-CWMWebRequest {
+﻿<#
+.SYNOPSIS
+    Low-level HTTP request handler for all ConnectWise Manage API calls.
+
+.DESCRIPTION
+    Core function that handles all HTTP requests to the ConnectWise Manage API.
+    Manages authentication headers, connection state, error handling, and automatic
+    retry logic for server errors (5xx status codes).
+
+    This is the foundation function used by all other Invoke-CWM*Master functions.
+    It should rarely be called directly - use the higher-level master functions instead.
+
+    Key Features:
+    - Validates connection state ($CWMServerConnection)
+    - Adds authentication headers automatically
+    - Handles URI formatting corrections
+    - Implements exponential backoff retry for 5xx errors
+    - Provides detailed error messages with troubleshooting hints
+    - Tracks API version headers
+
+.PARAMETER Arguments
+    Hashtable of arguments to pass to Invoke-WebRequest.
+    Should include: Uri, Method, and optionally Body, Headers, ContentType, Version
+
+.PARAMETER MaxRetry
+    Maximum number of retry attempts for 5xx server errors.
+    Default: 5
+    Uses exponential backoff: 2^retry milliseconds
+
+.EXAMPLE
+    $args = @{
+        Uri = 'https://api.myconnectwise.net/v4_6_release/apis/3.0/service/tickets/12345'
+        Method = 'GET'
+    }
+    Invoke-CWMWebRequest -Arguments $args
+
+    Makes a GET request to retrieve a ticket.
+
+.NOTES
+    Author: Chris Taylor
+    Date: 2024-01-01
+
+    Internal Function:
+    - Called by all Invoke-CWM*Master functions
+    - Handles authentication automatically
+    - Manages retry logic with exponential backoff
+    - Provides detailed error messages
+
+    Insecure redirection (PowerShell 7.4+):
+    - When connected with Connect-CWM -AllowInsecureRedirect, non-GET requests are sent with
+      -AllowInsecureRedirect -MaximumRedirection 0 (redirects are never followed), and GET requests
+      with -MaximumRedirection 50 (the default, re-applied because the setting persists on a shared session).
+    - A caller-supplied non-zero MaximumRedirection disables the workaround for that call.
+
+    Error Handling:
+    - Validates connection state before requests
+    - Parses API error responses
+    - Provides context-specific troubleshooting hints
+    - Retries on 5xx server errors with backoff
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+
+.LINK
+    Connect-CWM
+
+.LINK
+    Invoke-CWMGetMaster
+
+#>
+function Invoke-CWMWebRequest {
     [CmdletBinding()]
     param(
         $Arguments,

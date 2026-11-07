@@ -48,8 +48,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None. This function does not accept parameters or pipeline input.
 ## OUTPUTS
 
+### None. Removes the script-scoped variable $CWMServerConnection.
 ## NOTES
 Author: Chris Taylor Date: 10/10/2018
 

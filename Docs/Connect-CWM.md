@@ -15,20 +15,22 @@ This command is used to authenticate with the Manage server.
 ### Impersonation
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
- -MemberID <String> [-Force] [-Version <String>] [-BasePath <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ -MemberID <String> [-Force] [-Version <String>] [-BasePath <String>] [-AllowInsecureRedirect]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### API Key
 ```
 Connect-CWM -Server <String> -Company <String> -PubKey <String> -PrivateKey <String> -ClientID <String>
- [-Force] [-Version <String>] [-BasePath <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Force] [-Version <String>] [-BasePath <String>] [-AllowInsecureRedirect]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Cookie
 ```
 Connect-CWM -Server <String> -Company <String> -ClientID <String> -Credentials <PSCredential> [-Force]
- [-Version <String>] [-BasePath <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Version <String>] [-BasePath <String>] [-AllowInsecureRedirect] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -106,12 +108,12 @@ In this example we are telling it to ignore any cached connection info and retur
 
 ## PARAMETERS
 
-### -ClientID
-Integration Identifier created by a user.
-See [https://developer.connectwise.com/ClientID](https://developer.connectwise.com/ClientID)
+### -Server
+The URL of your ConnectWise Mange server.
+Example: manage.mydomain.com
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -126,7 +128,53 @@ Accept wildcard characters: False
 The login company.
 
 ```yaml
-Type: String
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PubKey
+Public API key created by a user docs: My Account
+
+```yaml
+Type: System.String
+Parameter Sets: Impersonation, API Key
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PrivateKey
+Private API key created by a user docs: My Account
+
+```yaml
+Type: System.String
+Parameter Sets: Impersonation, API Key
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ClientID
+Integration Identifier created by a user.
+See [https://developer.connectwise.com/ClientID](https://developer.connectwise.com/ClientID)
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -141,8 +189,23 @@ Accept wildcard characters: False
 Manage username and password as a PSCredential object \[pscredential\]. This method will not work on accounts with MFA enabled. All your accounts are MFA enabled, right?
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: Cookie
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberID
+The member that you are impersonating
+
+```yaml
+Type: System.String
+Parameter Sets: Impersonation
 Aliases:
 
 Required: True
@@ -156,7 +219,7 @@ Accept wildcard characters: False
 Ignore cached information and recreate
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -167,73 +230,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MemberID
-The member that you are impersonating
-
-```yaml
-Type: String
-Parameter Sets: Impersonation
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PrivateKey
-Private API key created by a user docs: My Account
-
-```yaml
-Type: String
-Parameter Sets: Impersonation, API Key
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PubKey
-Public API key created by a user docs: My Account
-
-```yaml
-Type: String
-Parameter Sets: Impersonation, API Key
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Server
-The URL of your ConnectWise Mange server.
-Example: manage.mydomain.com
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Version
 Used to specify a version.
 If not used it will use the servers current version.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -248,7 +250,7 @@ Accept wildcard characters: False
 {{ Fill BasePath Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -259,11 +261,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -AllowInsecureRedirect
+Compatibility workaround for ConnectWise-hosted (cloud) instances on PowerShell 7.4 and later.
+
+Some ConnectWise-hosted servers answer create/update requests with an http:// Location header.
+PowerShell 7.4+ treats any such header as an insecure redirection and throws "Cannot follow an
+insecure redirection by default", even though the request already succeeded on the server.
+
+When this switch is set, create/update/delete requests suppress that check AND stop following
+redirects entirely (-MaximumRedirection 0). A real redirect is therefore never followed, so
+requests and session cookies are never sent over plain http; instead a genuine redirect
+response is reported as an error. Read (GET) requests are unaffected.
+
+Has no effect on Windows PowerShell 5.1 or PowerShell 7.0-7.3, which do not perform this check.
+Can be applied to an existing connection without -Force.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ProgressAction
 {{ Fill ProgressAction Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.ActionPreference
 Parameter Sets: (All)
 Aliases: proga
 
@@ -279,11 +308,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None. This function does not accept pipeline input.
 ## OUTPUTS
 
-### Variable
-$script:CWMServerConnection
-
+### None. Connection information is stored in script-scoped variable $CWMServerConnection.
 ## NOTES
 Author: Chris Taylor Date: 10/10/2018
 

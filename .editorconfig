@@ -1,0 +1,128 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false  # Markdown uses trailing spaces for line breaks
+max_line_length = off
+
+# YAML files (GitHub workflows, config files)
+[*.{yml,yaml}]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# Package.json specifically
+[package.json]
+indent_size = 2
+
+# PowerShell files
+[*.{ps1,psm1,psd1}]
+charset = utf-8-bom  # PowerShell prefers BOM for UTF-8
+indent_size = 4
+end_of_line = crlf   # Windows line endings for PowerShell
+
+# Shell scripts
+[*.{sh,bash}]
+end_of_line = lf
+indent_size = 2
+
+# Python files
+[*.py]
+indent_size = 4
+max_line_length = 88  # Black formatter default
+
+# JavaScript/TypeScript
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+quote_type = single
+
+# Vue files
+[*.vue]
+indent_size = 2
+
+# HTML files
+[*.html]
+indent_size = 2
+
+# CSS/SCSS/LESS
+[*.{css,scss,sass,less}]
+indent_size = 2
+
+# Ruby files
+[*.rb]
+indent_size = 2
+
+# Go files
+[*.go]
+indent_style = tab
+indent_size = 4
+
+# Rust files
+[*.rs]
+indent_size = 4
+
+# Java files
+[*.java]
+indent_size = 4
+
+# C/C++ files
+[*.{c,cpp,h,hpp}]
+indent_size = 4
+
+# C# files
+[*.cs]
+indent_size = 4
+
+# XML files
+[*.{xml,csproj,vbproj,vcxproj,props}]
+indent_size = 2
+
+# Visual Studio solution files
+[*.sln]
+indent_style = tab
+
+# Makefiles require tabs
+[Makefile]
+indent_style = tab
+
+# Git config files
+[.git{config,attributes,ignore}]
+indent_size = 2
+
+# Docker files
+[Dockerfile*]
+indent_size = 2
+
+# .env files
+[.env*]
+indent_size = 2
+
+# Configuration files
+[*.{ini,cfg,conf,toml}]
+indent_size = 2
+
+# Batch files (Windows)
+[*.{bat,cmd}]
+end_of_line = crlf
+
+# Documentation files
+[*.{txt,rst}]
+max_line_length = off
+
+# License and changelog files
+[{LICENSE,CHANGELOG,CONTRIBUTING,CODE_OF_CONDUCT,SECURITY}]
+max_line_length = off

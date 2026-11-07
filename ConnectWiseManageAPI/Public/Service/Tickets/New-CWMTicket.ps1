@@ -1,4 +1,117 @@
-﻿function New-CWMTicket {
+﻿<#
+.SYNOPSIS
+    Creates a new service ticket in ConnectWise Manage.
+
+.DESCRIPTION
+    Creates a new service ticket with the specified properties. Only summary and company
+    are required - all other fields are optional and will use system defaults if not specified.
+
+    This function calls the ConnectWise Manage API endpoint: POST /service/tickets
+
+.PARAMETER summary
+    The ticket summary/title (required). Maximum 100 characters.
+
+.PARAMETER company
+    Hashtable with company reference (required). Format: @{ id = 123 }
+
+.PARAMETER board
+    Hashtable with service board reference. Format: @{ id = 1 }
+    If not specified, uses the company's default board.
+
+.PARAMETER status
+    Hashtable with status reference. Format: @{ id = 456 }
+    If not specified, uses the board's default status.
+
+.PARAMETER priority
+    Hashtable with priority reference. Format: @{ id = 3 }
+
+.PARAMETER type
+    Hashtable with type reference. Format: @{ id = 100 }
+
+.PARAMETER subType
+    Hashtable with subtype reference. Format: @{ id = 200 }
+
+.PARAMETER item
+    Hashtable with item reference. Format: @{ id = 50 }
+
+.PARAMETER contact
+    Hashtable with contact reference. Format: @{ id = 789 }
+
+.PARAMETER initialDescription
+    The initial description/details for the ticket. Supports HTML.
+
+.PARAMETER initialInternalAnalysis
+    Internal analysis notes (not visible to contacts).
+
+.PARAMETER initialResolution
+    Initial resolution notes.
+
+.EXAMPLE
+    # Minimal ticket creation
+    $ticket = @{
+        summary = "Password reset request"
+        company = @{ id = 250 }
+    }
+    New-CWMTicket @ticket
+
+    Creates a basic ticket with just summary and company.
+
+.EXAMPLE
+    # Full ticket with board, status, and description
+    $ticket = @{
+        summary = "Server offline - urgent"
+        company = @{ id = 250 }
+        board = @{ id = 1 }
+        status = @{ id = 10 }
+        priority = @{ id = 3 }
+        initialDescription = "Production server is not responding. Multiple users affected."
+    }
+    New-CWMTicket @ticket
+
+    Creates a detailed ticket with multiple properties.
+
+.EXAMPLE
+    # Ticket with contact information
+    $ticketParams = @{
+        summary = "Email not working"
+        company = @{ id = 250 }
+        contact = @{ id = 500 }
+        contactPhoneNumber = "555-1234"
+        contactEmailAddress = "user@company.com"
+        initialDescription = "User reports unable to send/receive email."
+    }
+    New-CWMTicket @ticketParams
+
+    Creates a ticket with contact details.
+
+.NOTES
+    Author: Chris Taylor
+    Date: 2024-01-01
+
+    Required Fields:
+    - summary (string, max 100 chars)
+    - company (hashtable with id)
+
+    Common Optional Fields:
+    - board, status, priority, type, subType, item
+    - contact, contactName, contactPhoneNumber, contactEmailAddress
+    - initialDescription, initialInternalAnalysis, initialResolution
+    - owner, team, serviceLocation, source
+
+.LINK
+    https://developer.connectwise.com/manage/rest#/Tickets
+
+.LINK
+    Get-CWMTicket
+
+.LINK
+    Update-CWMTicket
+
+.LINK
+    Remove-CWMTicket
+
+#>
+function New-CWMTicket {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium', DefaultParameterSetName = "2020.1")]
     param(

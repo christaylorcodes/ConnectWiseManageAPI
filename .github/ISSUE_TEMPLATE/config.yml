@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 MSPGeek Slack Community
+    url: https://join.mspgeek.com/
+    about: Join the #cw-manage channel for community support and discussions
+  - name: 📖 Documentation Wiki
+    url: https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki
+    about: Check out the wiki for guides and documentation
+  - name: 🔍 Browse Existing Issues
+    url: https://github.com/christaylorcodes/ConnectWiseManageAPI/issues
+    about: Search existing issues before creating a new one

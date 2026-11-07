@@ -1,4 +1,62 @@
-﻿function Invoke-CWMGetMaster {
+﻿<#
+.SYNOPSIS
+    Generic GET request handler for retrieving ConnectWise Manage records.
+
+.DESCRIPTION
+    Master function for all GET operations in the module. Handles direct ID lookups,
+    counting, filtering, sorting, field selection, and pagination.
+
+    Used by all Get-CWM* functions (Get-CWMTicket, Get-CWMCompany, etc.) to retrieve data.
+    Automatically routes to Invoke-CWMAllResult when -all switch is used.
+
+    This function calls the ConnectWise Manage API endpoint: GET {Endpoint}
+
+.PARAMETER Arguments
+    Hashtable containing query parameters:
+    - id: Direct ID lookup
+    - condition: Filter string
+    - orderBy: Sort specification
+    - childConditions: Filter on child records
+    - customFieldConditions: Filter on custom fields
+    - page, pageSize: Pagination
+    - fields: Field selection array
+    - all: Switch to retrieve all pages
+    - count: Switch to return count only
+
+.PARAMETER Endpoint
+    The API endpoint path (e.g., '/service/tickets', '/company/companies')
+
+.EXAMPLE
+    $args = @{
+        condition = "status/name='Open'"
+        orderBy = "id desc"
+        all = $true
+    }
+    Invoke-CWMGetMaster -Arguments $args -Endpoint '/service/tickets'
+
+    Retrieves all open tickets sorted by ID descending.
+
+.NOTES
+    Author: Chris Taylor
+    Date: 2024-01-01
+
+    Internal Function:
+    - Called by all Get-CWM* functions
+    - Handles pagination automatically with -all
+    - Routes to Invoke-CWMAllResult for -all requests
+    - Supports both direct lookups and filtered queries
+
+.LINK
+    Invoke-CWMWebRequest
+
+.LINK
+    Invoke-CWMAllResult
+
+.LINK
+    Invoke-CWMSearchMaster
+
+#>
+function Invoke-CWMGetMaster {
     [CmdletBinding()]
     param (
         $Arguments,
@@ -43,8 +101,8 @@
 
     if ($Arguments.all -and !$Arguments.count.IsPresent) { $Result = Invoke-CWMAllResult -Arguments $WebRequestArguments }
     else {
-        if ($Arguments.pageSize) { $WebRequestArguments.URI += "&pageSize=$pageSize" }
-        if ($Arguments.page) { $WebRequestArguments.URI += "&page=$page" }
+        if ($Arguments.pageSize) { $WebRequestArguments.URI += "&pageSize=$($Arguments.pageSize)" }
+        if ($Arguments.page) { $WebRequestArguments.URI += "&page=$($Arguments.page)" }
 
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if ($Result.content) {
