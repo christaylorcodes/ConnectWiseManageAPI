@@ -106,7 +106,7 @@ function Invoke-CWMGetMaster {
 
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if ($Result.content) {
-            try { $Result = $Result.content | ConvertFrom-Json }
+            try { $Result = ConvertFrom-CWMJson $Result.Content }
             catch {
                 Write-Error 'There was an issue converting the results from JSON.'
                 $_

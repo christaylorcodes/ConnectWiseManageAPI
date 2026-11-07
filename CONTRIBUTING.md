@@ -128,7 +128,32 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 
 -   Refer to the [unofficial guide](https://github.com/PoshCode/PowerShellPracticeAndStyle).
 
+### Supported PowerShell versions
+
+PowerShell 7.4+ is the primary target. Windows PowerShell 5.1 is still supported, so every change must work on both.
+
+-   **Syntax and cmdlets must work on 5.1.** No `??`, `?.`, ternary, `&&`/`||`, `ForEach-Object -Parallel`, or 7-only parameters such as `-SkipHttpErrorCheck`, `-NoEnumerate` or `-AllowInsecureRedirect`, including inside splatted hashtables.
+-   **7-only features must be feature-detected** once in `ConnectWiseManageAPI.psm1` (see `$script:CWMSupportsInsecureRedirect`), used only behind that check, and added to the allow-list in `Tests/Compatibility.Lint.Tests.ps1`.
+-   **Use the module's helpers instead of the raw cmdlets** where the editions differ:
+    -   `ConvertFrom-CWMJson` instead of `ConvertFrom-Json` for response bodies (arrays come back the same on both).
+    -   `Get-CWMResponseHeader` instead of `$Response.Headers.<Name>` (string on 5.1, string[] on 7).
+    -   `Invoke-CWMWebRequest` (via the `Invoke-CWM*Master` functions) instead of calling `Invoke-WebRequest` directly.
+    -   JSON request bodies use `ContentType = 'application/json; charset=utf-8'`; without the charset, 5.1 sends Latin-1.
+-   **Check before opening a pull request:**
+
+    ```powershell
+    # Compatibility analysis (5.1 + 7)
+    Invoke-ScriptAnalyzer -Path ./ConnectWiseManageAPI -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
+
+    # Offline tests on both editions (needs Pester 5)
+    pwsh -NoProfile -File ./Tests/appveyor.pester.ps1 -Test
+    powershell -NoProfile -File ./Tests/appveyor.pester.ps1 -Test
+    ```
+
+    CI runs the same checks on Windows PowerShell 5.1, PowerShell 7 on Windows, and PowerShell 7 on Linux.
+
 ### Documentation Style Guide
 
 -   Use [Markdown](https://daringfireball.net/projects/markdown).
 -   Documentation is built with platyPS from the markdown.
+-   Regenerate the docs on PowerShell 7, then run `./Tools/Remove-PlatyPSProgressAction.ps1` to strip the `-ProgressAction` parameter that platyPS adds on PowerShell 7.4+.

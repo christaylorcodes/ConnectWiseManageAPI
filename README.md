@@ -180,7 +180,7 @@ For a complete list of available functions, see [ConnectWiseManageAPI_Functions.
 
 ## 📋 Requirements
 
-- **PowerShell Version:** 3.0 or higher
+- **PowerShell Version:** PowerShell 7.4 or later is recommended (Windows, Linux and macOS). Windows PowerShell 5.1 is still supported. Both are tested on every change.
 - **ConnectWise Manage:** Active instance with API access
 - **API Credentials:** Public/Private API keys and Client ID
 - **Dependencies:** None (self-contained module)

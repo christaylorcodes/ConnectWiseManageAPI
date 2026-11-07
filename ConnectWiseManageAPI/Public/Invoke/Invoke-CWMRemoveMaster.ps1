@@ -53,7 +53,7 @@ function Invoke-CWMRemoveMaster {
     }
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMRemoveMaster")) {
         $Result =  Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if($Result.content){ $Result = $Result.content | ConvertFrom-Json }
+        if($Result.content){ $Result = ConvertFrom-CWMJson $Result.Content }
     }
     if ($Result.StatusCode -eq 204) { Write-Verbose 'Success' }
     $Result

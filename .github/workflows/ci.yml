@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / ${{ matrix.shell }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # PowerShell 7 is the primary target; Windows PowerShell 5.1 stays supported
+          - os: windows-latest
+            shell: pwsh
+          - os: windows-latest
+            shell: powershell
+          - os: ubuntu-latest
+            shell: pwsh
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pester and PSScriptAnalyzer
+        run: |
+          if ($PSVersionTable.PSEdition -ne 'Core') {
+            [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser | Out-Null
+          }
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module Pester -RequiredVersion 5.7.1 -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module PSScriptAnalyzer -RequiredVersion 1.24.0 -Force -Scope CurrentUser
+          $PSVersionTable | Out-String
+
+      - name: Validate manifest and import
+        run: |
+          $Manifest = Test-ModuleManifest ./ConnectWiseManageAPI/ConnectWiseManageAPI.psd1 -ErrorAction Stop
+          "$($Manifest.Name) $($Manifest.Version), PowerShellVersion $($Manifest.PowerShellVersion), editions $($Manifest.CompatiblePSEditions -join ',')"
+          Import-Module ./ConnectWiseManageAPI/ConnectWiseManageAPI.psd1 -Force -ErrorAction Stop
+
+      - name: Compatibility analysis (5.1 + 7)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          $Results = Invoke-ScriptAnalyzer -Path ./ConnectWiseManageAPI -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
+          $Results | Format-Table RuleName, Severity, ScriptName, Line, Message -AutoSize -Wrap | Out-String -Width 250
+          if ($Results) { throw "$(@($Results).Count) compatibility issue(s) found." }
+
+      - name: Tests
+        run: |
+          ./Tests/appveyor.pester.ps1 -Test
+          ./Tests/appveyor.pester.ps1 -Finalize
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.shell }}
+          path: TestResults_*.xml
+          if-no-files-found: ignore

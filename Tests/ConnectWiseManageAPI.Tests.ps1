@@ -1,229 +1,156 @@
-$ErrorActionPreference = 'Stop'
-$ModuleName = 'ConnectWiseManageAPI'
+#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '5.0.0' }
+# Live integration tests against a real ConnectWise Manage server.
+# Tagged 'Integration' and skipped unless these environment variables are set:
+#   CWMServer, CWMCompany, CWMClientID, CWMPub, CWMPriv, CWMAPIMemberPub, CWMAPIMemberPriv, CWMUserName, CWMUserPassword
+# Run only these:     Invoke-Pester ./Tests -TagFilter Integration
+# Run without them:   Invoke-Pester ./Tests -ExcludeTagFilter Integration
 
-$Verbose = @{}
-if($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master") {
-    $Verbose.add("Verbose",$True)
+BeforeDiscovery {
+    $script:NoServer = [string]::IsNullOrEmpty($env:CWMServer)
 }
 
-$PSVersion = $PSVersionTable.PSVersion.Major
-Import-Module $PSScriptRoot\..\$($ModuleName)\$($ModuleName).psm1 -Force
+BeforeAll {
+    $ModuleName = 'ConnectWiseManageAPI'
+    Import-Module "$PSScriptRoot/../$ModuleName/$ModuleName.psd1" -Force
+}
 
-Describe "Parameters PS$PSVersion Integrations tests" {
+AfterAll {
+    Remove-Module ConnectWiseManageAPI -Force -ErrorAction SilentlyContinue
+}
 
-    Context 'Strict mode' {
+Describe 'Exported Get functions' {
 
+    It 'have the standard query parameters' {
+        $MandatoryParams = @('condition', 'orderBy', 'childConditions', 'customFieldConditions', 'page', 'pageSize', 'fields', 'all')
+        $ExcludeFunction = @('Get-CWMChargeCode', 'Get-CWMReportColumn', 'Get-CWMSystemInfo')
+        $GetFunctions = (Get-Module ConnectWiseManageAPI).ExportedCommands.Keys | Where-Object { $_ -like 'Get-CWM*' }
+        $Missing = foreach ($Function in $GetFunctions) {
+            if ($ExcludeFunction -contains $Function) { continue }
+            $FunctionParams = (Get-Command $Function).Parameters.Keys
+            foreach ($TestParam in $MandatoryParams) {
+                if ($FunctionParams -notcontains $TestParam) { "$Function is missing $TestParam" }
+            }
+        }
+        # Informational only, as before: many Get functions intentionally lack some of these
+        $Missing | ForEach-Object { Write-Verbose $_ }
+        $GetFunctions | Should -Not -BeNullOrEmpty
+    }
+}
+
+Describe 'Connect-CWM integration' -Tag 'Integration' -Skip:$NoServer {
+
+    BeforeAll { Set-StrictMode -Version latest }
+
+    It 'Authentication: API Member Only' {
+        $CWMConnectionInfo = @{
+            Server     = $env:CWMServer
+            Company    = $env:CWMCompany
+            pubkey     = $env:CWMAPIMemberPub
+            privatekey = $env:CWMAPIMemberPriv
+            clientid   = $env:CWMClientID
+        }
+        { Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop } | Should -Not -Throw
+    }
+
+    It 'Authentication: Member Impersonation' {
+        $CWMConnectionInfo = @{
+            Server     = $env:CWMServer
+            Company    = $env:CWMCompany
+            pubkey     = $env:CWMAPIMemberPub
+            privatekey = $env:CWMAPIMemberPriv
+            MemberID   = $env:CWMUserName
+            clientid   = $env:CWMClientID
+        }
+        { Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop } | Should -Not -Throw
+        InModuleScope ConnectWiseManageAPI { $script:CWMServerConnection.ConnectionMethod | Should -Be 'Impersonation' }
+    }
+
+    It 'Authentication: My Account' {
+        $CWMConnectionInfo = @{
+            Server     = $env:CWMServer
+            Company    = $env:CWMCompany
+            pubkey     = $env:CWMPub
+            privatekey = $env:CWMPriv
+            clientid   = $env:CWMClientID
+        }
+        { Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop } | Should -Not -Throw
+    }
+
+    It 'Authentication: Cookies!' {
+        $Password = ConvertTo-SecureString -AsPlainText -Force $env:CWMUserPassword
+        $Credentials = New-Object PSCredential $env:CWMUserName, $Password
+        $CWMConnectionInfo = @{
+            Server      = $env:CWMServer
+            Company     = $env:CWMCompany
+            Credentials = $Credentials
+            clientid    = $env:CWMClientID
+        }
+        { Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop } | Should -Not -Throw
+    }
+}
+
+Describe 'Get-CWMTicket integration' -Tag 'Integration' -Skip:$NoServer {
+
+    BeforeAll {
         Set-StrictMode -Version latest
-        It 'Get function fields' {
-            $MandatoryParams = @('condition', 'orderBy', 'childConditions', 'customFieldConditions', 'page', 'pageSize', 'fields', 'all')
-            $ExcludeFunction = @('Get-CWMChargeCode','Get-CWMReportColumn', 'Get-CWMSystemInfo')
-            try {
-                $GetFunctions = (Get-Module ConnectWiseManageAPI).ExportedCommands.Keys | Where-Object {$_ -like 'Get-CWM*'}
-                foreach($Function in $GetFunctions){
-                    if($ExcludeFunction -contains $Function){ continue }
-                    $FunctionParams = (Get-Command $Function).Parameters.Keys
-                    foreach($TestParam in $MandatoryParams){
-                        if($FunctionParams -notcontains $TestParam){
-                            Write-Output "$Function is missing, $TestParam"
-                        }
-                    }
+        $CWMConnectionInfo = @{
+            Server     = $env:CWMServer
+            Company    = $env:CWMCompany
+            pubkey     = $env:CWMAPIMemberPub
+            privatekey = $env:CWMAPIMemberPriv
+            clientid   = $env:CWMClientID
+        }
+        Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+    }
 
-                }
-            }
-            catch {
-                $Result = $_
-            }
-            $Result | Should -Be $null
+    It 'returns results' {
+        $Tickets = Get-CWMTicket -ErrorAction Stop
+        $Tickets.count | Should -Be 25
+        $Tickets[0].id | Should -BeGreaterThan 0
+    }
+
+    It 'accepts the -all switch and returns a flat list of tickets' {
+        $Tickets = @(Get-CWMTicket -all -ErrorAction Stop)
+        $Tickets.count | Should -BeGreaterThan 25
+        $Tickets[0].id | Should -BeGreaterThan 0
+    }
+
+    It 'accepts a condition' {
+        foreach ($condition in @('closedFlag = false', 'closedFlag = true', 'board/id = 1')) {
+            $Tickets = Get-CWMTicket -Condition $condition -ErrorAction Stop
+            $Tickets.count | Should -Be 25
         }
     }
 }
 
+Describe 'Get-CWMTicket routing' {
 
-Describe "Connect-CWM  PS$PSVersion Integrations tests" {
-
-    Context 'Strict mode' {
-
-        Set-StrictMode -Version latest
-        It 'Authentication: API Member Only' {
-            try {
-                $CWMConnectionInfo = @{
-                    Server = $env:CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMAPIMemberPub
-                    privatekey = $env:CWMAPIMemberPriv
-                    clientid = $env:CWMClientID
-                }
-                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-            }
-            catch {
-                $Result = $_
-            }
-            $Result | Should -Be $null
+    It 'calls Invoke-CWMSearchMaster without an id' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMSearchMaster { return $true }
+            $null = Get-CWMTicket -ErrorAction SilentlyContinue
+            Should -Invoke Invoke-CWMSearchMaster -Times 1
         }
-        It 'Authentication: Member Impersonation' {
-            try {
-                $CWMConnectionInfo = @{
-                    Server = $env:CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMAPIMemberPub
-                    privatekey = $env:CWMAPIMemberPriv
-                    MemberID = $env:CWMUserName
-                    clientid = $env:CWMClientID
-                }
+    }
 
-                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-            }
-            catch {
-                $Result = $_
-            }
-            $Result | Should -Be $null
-        }
-        It 'Authentication: My Account' {
-            try {
-                $CWMConnectionInfo = @{
-                    Server = $env:CWMServer
-                    Company = $env:CWMCompany
-                    pubkey = $env:CWMPub
-                    privatekey = $env:CWMPriv
-                    clientid = $env:CWMClientID
-                }
-                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-            }
-            catch {
-                $Result = $_
-            }
-            $Result | Should -Be $null
-        }
-        It 'Authentication: Cookies!' {
-            try {
-                $Password = ConvertTo-SecureString -AsPlainText -Force $env:CWMUserPassword
-                $Credentials = New-Object PSCredential $env:CWMUserName, $Password
-                $CWMConnectionInfo = @{
-                    Server = $env:CWMServer
-                    Company = $env:CWMCompany
-                    Credentials = $Credentials
-                    clientid = $env:CWMClientID
-                }
-                $Result = Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
-            }
-            catch {
-                $Result = $_
-            }
-            $Result | Should -Be $null
-        }
-        It 'Get function fields' {
-            $MandatoryParams = @('condition', 'orderBy', 'childConditions', 'customFieldConditions', 'page', 'pageSize', 'fields', 'all')
-            try {
-                $GetFunctions = (Get-Module ConnectWiseManageAPI).ExportedCommands.Keys | Where-Object {$_ -like 'Get-CWM*'}
-                foreach($Function in $GetFunctions){
-                    $FunctionParams = (Get-Command $Function).Parameters.Keys
-                    foreach($TestParam in $MandatoryParams){
-                        if($FunctionParams -notcontains $TestParam){
-                            Write-Output "$Function is missing, $TestParam"
-                        }
-                    }
-
-                }
-            }
-            catch {
-                $Result = $_
-            }
-            $Result | Should -Be $null
+    It 'calls Invoke-CWMGetMaster when given an id' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMGetMaster { return }
+            $null = Get-CWMTicket -TicketID 1 -ErrorAction SilentlyContinue
+            Should -Invoke Invoke-CWMGetMaster -Times 1
         }
     }
 }
 
-$CWMConnectionInfo = @{
-    Server = $env:CWMServer
-    Company = $env:CWMCompany
-    pubkey = $env:CWMAPIMemberPub
-    privatekey = $env:CWMAPIMemberPriv
-    clientid = $env:CWMClientID
-}
-Connect-CWM @CWMConnectionInfo -Force -ErrorAction Stop
+Describe 'Disconnect-CWM' {
 
-Describe "Get-CWMTicket  PS$PSVersion Integrations tests" {
-
-    Context 'Strict mode' {
-
-        Set-StrictMode -Version latest
-
-        It 'returns results' {
-            try {
-                $Tickets = Get-CWMTicket -ErrorAction Stop
-                $Tickets.count | Should -Be 25
-                $Tickets[0].id | Should -BeGreaterThan 0
-            }
-            catch {
-                $_ | Should -Be $null
-            }
-        }
-        It 'accepts the -all switch' {
-            try {
-                $Tickets = Get-CWMTicket -all -ErrorAction Stop
-                $Tickets.count | Should -BeGreaterThan 25
-            }
-            catch {
-                $_ | Should -Be $null
-            }
-        }
-
-        It 'accepts a condition' {
-            try {
-                $conditions = @('closedFlag = false','closedFlag = true','board/id = 1')
-                foreach($condition in $conditions){
-                    $Tickets = Get-CWMTicket -Condition $condition -ErrorAction Stop
-                    $Tickets.count | Should -Be 25
-                }
-            }
-            catch {
-                $_ | Should -Be $null
-            }
-        }
-        InModuleScope $ModuleName {
-            Context "Calls to internal search function:" {
-                BeforeEach{
-                    Mock Invoke-CWMSearchMaster { return $true }
-                    $null = Get-CWMTicket -ErrorAction SilentlyContinue
-                }
-                It 'calls Invoke-CWMSearchMaster' {
-                    Assert-MockCalled Invoke-CWMSearchMaster 1
-                }
-            }
-        }
-        InModuleScope $ModuleName {
-            Context "Calls to internal get function:" {
-                BeforeEach{
-                    Mock Invoke-CWMGetMaster { return }
-                    $null = Get-CWMTicket -TicketID 1 -ErrorAction SilentlyContinue
-                }
-
-                It 'calls Invoke-CWMGetMaster when given an id' {
-                    Assert-MockCalled Invoke-CWMGetMaster 1
-                }
-            }
-        }
+    It 'clears the connection' {
+        InModuleScope ConnectWiseManageAPI { $script:CWMServerConnection = @{ Server = 'example.invalid'; Headers = @{} } }
+        { Disconnect-CWM -ErrorAction Stop } | Should -Not -Throw
+        InModuleScope ConnectWiseManageAPI { $script:CWMServerConnection | Should -BeNullOrEmpty }
     }
-}
 
-Describe "Disconnect-CWM  PS$PSVersion Integrations tests" {
-
-    Context 'Strict mode' {
-
-        Set-StrictMode -Version latest
-
-        It 'clears variable' {
-            try { Disconnect-CWM -ErrorAction Stop }
-            catch { $_ | Should -Be $null }
-        }
-        It 'causes other calls to fail after its run' {
-            try {
-                $Result = Get-CWMSystemInfo -ErrorAction Stop
-                $Result | Should -Be $null
-            }
-            catch {
-                $true | Should -Be $true
-            }
-        }
+    It 'causes other calls to fail after it runs' {
+        { Get-CWMSystemInfo -ErrorAction Stop } | Should -Throw
     }
 }

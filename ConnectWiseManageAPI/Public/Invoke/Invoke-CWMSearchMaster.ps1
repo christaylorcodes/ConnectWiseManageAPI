@@ -94,7 +94,7 @@ function Invoke-CWMSearchMaster {
         if ($Arguments.page) { $WebRequestArguments.URI += "&page=$($Arguments.page)" }
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if ($Result.content) {
-            $Result = $Result.content | ConvertFrom-Json
+            $Result = ConvertFrom-CWMJson $Result.Content
         }
     }
 

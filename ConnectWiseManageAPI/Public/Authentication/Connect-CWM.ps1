@@ -238,8 +238,46 @@ function Connect-CWM {
         Headers = $Headers
     }
 
+    # Impersonation. Checked before plain API key auth, which also matches when PubKey and PrivateKey are passed.
+    if ($PubKey -and $PrivateKey -and $MemberID) {
+        Write-Verbose "Impersonating, $MemberID"
+        $ConnectionMethod = 'Impersonation'
+
+        # The token request is authenticated with the API member's own keys
+        $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
+        $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
+        $Headers.Add('Authorization', "Basic $EncodedAuth")
+        $Headers.Add('x-cw-usertype', 'member')
+        $WebRequestArguments = @{
+            Method      = 'Post'
+            Uri         = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
+            Body        = @{ memberIdentifier = $MemberID } | ConvertTo-Json
+            ContentType = 'application/json; charset=utf-8'
+            Headers     = $Headers
+        }
+        $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        if ($Result.content) {
+            $Result = ConvertFrom-CWMJson $Result.Content
+        }
+        else {
+            Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
+            Write-Error $Result
+            return
+        }
+
+        # Create auth header for Impersonated user
+        $expiration = [datetime]$Result.expiration
+        $AuthString = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
+        $encodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)));
+        $Headers = @{
+            Authorization   = "Basic $encodedAuth"
+            ClientID        = $ClientID
+            'Cache-Control' = 'no-cache'
+        }
+    }
+
     # API key
-    if ($PubKey -and $PrivateKey) {
+    elseif ($PubKey -and $PrivateKey) {
         Write-Verbose 'Using API Key authentication'
         $ConnectionMethod = 'Key'
         $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
@@ -264,11 +302,12 @@ function Connect-CWM {
         }
 
         # Create session variable. Cookies are stored in that object
-        $CookieResult = Invoke-CWMWebRequest -Arguments $WebRequestArguments | ConvertFrom-Json
+        $CookieResponse = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        $CookieResult = ConvertFrom-CWMJson $CookieResponse.Content
         if (!$CookieResult.Success) {
             Write-Error 'There was an error obtain the MemberHash'
-            Write-Error $CookieResult
-            break
+            if ($CookieResult) { Write-Error ($CookieResult | Out-String) }
+            return
         }
 
         # Seems cookies don't get put in session any more, add them
@@ -295,40 +334,6 @@ function Connect-CWM {
         $Cookie.Value = 'web'
         $Cookie.Domain = $Server
         $script:CWMSession.Cookies.Add($Cookie)
-    }
-
-    # Impersonation
-    elseif ($PubKey -and $PrivateKey -and $MemberID) {
-        Write-Verbose "Impersonating, $MemberID"
-        $ConnectionMethod = 'Impersonation'
-
-        $Headers.Add('x-cw-usertype', 'member')
-        $WebRequestArguments = @{
-            Method      = 'Post'
-            Uri         = "https://$($Server)/v4_6_release/apis/3.0/system/members/$($MemberID)/tokens"
-            Body        = @{ memberIdentifier = $MemberID }
-            ContentType = 'application/json'
-            Headers     = $Headers
-        }
-        $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if ($Result.content) {
-            $Result = $Result.content | ConvertFrom-Json
-        }
-        else {
-            Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
-            Write-Error $Result
-            return
-        }
-
-        # Create auth header for Impersonated user
-        $expiration = [datetime]$Result.expiration
-        $AuthString = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
-        $encodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)));
-        $Headers = @{
-            Authorization   = "Basic $encodedAuth"
-            ClientID        = $ClientID
-            'Cache-Control' = 'no-cache'
-        }
     }
 
     # not enough info

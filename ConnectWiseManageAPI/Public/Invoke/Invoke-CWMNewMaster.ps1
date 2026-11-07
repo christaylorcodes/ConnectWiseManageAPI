@@ -76,9 +76,12 @@ function Invoke-CWMNewMaster {
 
         $Body = ConvertTo-Json $Body -Depth 100
     }
-    Write-Verbose $Body
+    # A binary body (e.g. a multipart document upload as byte[]) is summarized instead of printed
+    if ($Body -is [byte[]]) { $BodyText = "[$($Body.Length) bytes]" }
+    else { $BodyText = [string]$Body }
+    Write-Verbose $BodyText
 
-    $ContentType = 'application/json'
+    $ContentType = 'application/json; charset=utf-8'
     if ($Arguments.ContentType) {
         $ContentType = $Arguments.ContentType
     }
@@ -94,11 +97,11 @@ function Invoke-CWMNewMaster {
         Headers     = $Arguments.Headers
     }
 
-    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$Body`r`n")) {
+    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMNewMaster, with body:`r`n$BodyText`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
 
         if ($Result.content) {
-            $Result = $Result.content | ConvertFrom-Json
+            $Result = ConvertFrom-CWMJson $Result.Content
         }
     }
 

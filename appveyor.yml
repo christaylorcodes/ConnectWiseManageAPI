@@ -1,21 +1,21 @@
 # See http://www.appveyor.com/docs/appveyor-yml for many more options
+# Kept for continuity; .github/workflows/ci.yml is the primary CI (5.1 + 7 on Windows, 7 on Linux).
 
 # Skip on updates to the readme.
-# We can force this by adding [skip ci] or [ci skip] anywhere in commit message 
+# We can force this by adding [skip ci] or [ci skip] anywhere in commit message
 skip_commits:
   message: /updated readme.*/
 
 install:
-  - cinst pester -y
+  - ps: Install-Module Pester -MinimumVersion 5.5.0 -Force -SkipPublisherCheck -Scope CurrentUser
+  - pwsh: Install-Module Pester -MinimumVersion 5.5.0 -Force -SkipPublisherCheck -Scope CurrentUser
 
 build: false
 
 test_script:
-# temporary to get build process working again... install pester and add to psmodulepath
-#  - ps: . .\build.ps1
-# Test with native PS version
+# PowerShell 7 (primary)
+  - pwsh: . .\Tests\appveyor.pester.ps1 -Test
+# Windows PowerShell 5.1
   - ps: . .\Tests\appveyor.pester.ps1 -Test
-# Test with PS version 2
-#  - ps: powershell.exe -version 2.0 -executionpolicy bypass -noprofile -file .\Tests\appveyor.pester.ps1 -Test
-# Finalize pass - collect and upload results
+# Finalize pass - collect results from both and fail the build on any failure
   - ps: . .\Tests\appveyor.pester.ps1 -Finalize

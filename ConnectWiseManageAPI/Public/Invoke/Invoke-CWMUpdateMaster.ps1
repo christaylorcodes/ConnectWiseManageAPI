@@ -72,13 +72,13 @@ function Invoke-CWMUpdateMaster {
     $WebRequestArguments = @{
         Uri         = $URI
         Method      = 'Patch'
-        ContentType = 'application/json'
+        ContentType = 'application/json; charset=utf-8'
         Body        = $Body
     }
     if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMUpdateMaster, with body:`r`n$Body`r`n")) {
         $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
         if ($Result.content) {
-            $Result = $Result.content | ConvertFrom-Json
+            $Result = ConvertFrom-CWMJson $Result.Content
         }
     }
 

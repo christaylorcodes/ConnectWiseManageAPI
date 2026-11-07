@@ -75,11 +75,12 @@ function Invoke-CWMAllResult {
             return Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
         }
 
-        if ($PageResult.Headers.Link) { $NextPage = $PageResult.Headers.Link.Split(';')[0].trimstart('<').trimend('>') }
+        $Link = Get-CWMResponseHeader -Response $PageResult -Name 'Link'
+        if ($Link) { $NextPage = $Link.Split(';')[0].trimstart('<').trimend('>') }
         else { $NextPage = $null }
         $Arguments.Uri = $NextPage
 
-        $PageResult.Content | ConvertFrom-Json
+        ConvertFrom-CWMJson $PageResult.Content
     }
     while ($NextPage)
 }

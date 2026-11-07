@@ -125,6 +125,8 @@ coverage.xml
 # Pester test results
 Pester.Tests.ps1.xml
 *.Tests.ps1.xml
+TestResults_PS*.xml
+PesterResults_PS*.xml
 
 # Debug and profiling
 *.psprofile

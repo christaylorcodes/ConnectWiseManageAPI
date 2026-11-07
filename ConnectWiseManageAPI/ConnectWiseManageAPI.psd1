@@ -15,7 +15,7 @@
     ModuleVersion = '0.4.16'
 
     # Supported PSEditions
-    # CompatiblePSEditions = @()
+    CompatiblePSEditions = @('Desktop', 'Core')
 
     # ID used to uniquely identify this module
     GUID              = '3374fb93-c06d-47b0-b4cc-9d49987e376f'
@@ -33,7 +33,7 @@
     Description       = 'PowerShell wrapper for the ConnectWise Manage REST API'
 
     # Minimum version of the Windows PowerShell engine required by this module
-    PowerShellVersion = '3.0'
+    PowerShellVersion = '5.1'
 
     # Name of the Windows PowerShell host required by this module
     # PowerShellHostName = ''
@@ -95,7 +95,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags         = @('ChrisTaylorCodes', 'ConnectWise', 'Manage', 'REST', 'API')
+            Tags         = @('ChrisTaylorCodes', 'ConnectWise', 'Manage', 'REST', 'API', 'PSEdition_Desktop', 'PSEdition_Core', 'Windows', 'Linux', 'MacOS')
 
             # A URL to the license for this module.
             LicenseUri   = 'https://github.com/christaylorcodes/ConnectWiseManageAPI/blob/master/LICENSE'
