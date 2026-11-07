@@ -573,3 +573,49 @@ Describe 'New-CWMDebugReport' {
         $Report | Should -Not -Match 'example\.invalid|AUTHSECRET'
     }
 }
+
+Describe 'Connect-CWM uses the discovered codebase (0.5.0 review)' {
+
+    BeforeEach {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = $null
+            Mock Invoke-RestMethod { [pscustomobject]@{ Codebase = 'v2025_1/' } }
+            Mock Get-CWMSystemInfo { [pscustomobject]@{ version = 'v2025.1' } }
+        }
+    }
+
+    It 'sends ClientID and the module User-Agent to companyinfo' {
+        InModuleScope ConnectWiseManageAPI {
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force
+            Should -Invoke Invoke-RestMethod -Times 1 -Exactly -ParameterFilter { $Headers.ClientID -eq 'id' -and $UserAgent -like 'ConnectWiseManageAPI/*' }
+        }
+    }
+
+    It 'stops with a clear error when companyinfo returns no codebase' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-RestMethod { [pscustomobject]@{} }
+            { Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force -ErrorAction Stop } | Should -Throw '*did not return a codebase*'
+            $script:CWMServerConnection | Should -BeNullOrEmpty
+        }
+    }
+    It 'requests the impersonation token under the server''s codebase' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"publicKey":"ip","privateKey":"ik","expiration":"2099-01-01T00:00:00Z"}' } }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe' -Force
+            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter {
+                $Arguments.Uri -eq 'https://example.invalid/v2025_1/apis/3.0/system/members/jdoe/tokens'
+            }
+        }
+    }
+
+    It 'logs in with cookies under the server''s codebase' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"Success":false}' } }
+            $Credentials = New-Object PSCredential 'user', (ConvertTo-SecureString 'pw' -AsPlainText -Force)
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -Credentials $Credentials -Force -ErrorAction SilentlyContinue
+            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter {
+                $Arguments.Uri -eq 'https://example.invalid/v2025_1/login/login.aspx?response=json'
+            }
+        }
+    }
+}

@@ -13,6 +13,8 @@
     )
 
     if ($null -eq $Value) { return $null }
+    # Dates are sent as ISO 8601 UTC strings, the same on both editions (see ConvertTo-CWMBodyDate)
+    if (Test-CWMBodyDate $Value) { $Value = ConvertTo-CWMBodyDate $Value }
     $BaseObject = $Value.psobject.BaseObject
     if ($BaseObject -is [System.Management.Automation.PSCustomObject]) { return $Value }
     # The unary comma keeps an array (also with one element) from being unrolled

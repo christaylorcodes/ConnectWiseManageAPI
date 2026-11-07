@@ -445,6 +445,7 @@ Describe 'Endpoint functions' {
             $Text.Substring($Start + 4) | Should -BeExactly "`r`n--$Boundary--`r`n"
             $Text | Should -Match 'filename="a\.bin"'
             $Text | Should -Match "name=`"recordId`"`r`n`r`n123`r`n"
+            $Text | Should -Match "name=`"PrivateFlag`"`r`n`r`nTrue`r`n"
         }
 
         It 'keeps quotes and line breaks out of the multipart headers' {

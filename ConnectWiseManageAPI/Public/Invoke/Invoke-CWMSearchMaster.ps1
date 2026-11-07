@@ -94,7 +94,8 @@ function Invoke-CWMSearchMaster {
     }
 
     if ($Arguments.all) {
-        $Result = Invoke-CWMAllResult -Arguments $WebRequestArguments
+        # Without -pageSize the 0 makes Invoke-CWMAllResult use the API maximum
+        $Result = Invoke-CWMAllResult -Arguments $WebRequestArguments -PageSize $Arguments.pageSize
     }
     else {
         if ($Arguments.pageSize) { $WebRequestArguments.URI += "&pageSize=$($Arguments.pageSize)" }

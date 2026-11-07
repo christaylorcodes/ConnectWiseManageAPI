@@ -280,8 +280,20 @@ function Connect-CWM {
         $script:CWMServerConnection = $null
         $script:CWMSession = $null
 
-        try { $CompanyInfo = Invoke-RestMethod "https://$($Server)/login/companyinfo/$($EscapedCompany)" -ErrorAction Stop }
+        # Codebase discovery runs before there is a connection, so it calls Invoke-RestMethod directly
+        $CompanyInfoArguments = @{
+            Uri             = "https://$($Server)/login/companyinfo/$($EscapedCompany)"
+            Headers         = @{ ClientID = $ClientID }
+            UserAgent       = $script:CWMUserAgent
+            UseBasicParsing = $true
+            ErrorAction     = 'Stop'
+        }
+        try { $CompanyInfo = Invoke-RestMethod @CompanyInfoArguments }
         catch { Write-Error $_ -ErrorAction Stop }
+        # Every URL is built on the codebase; without it the company was not found on this server
+        if (!$CompanyInfo.Codebase) {
+            Write-Error "The server did not return a codebase for company '$Company'. Check -Server and -Company." -ErrorAction Stop
+        }
 
         $Headers = @{
             ClientID        = $ClientID
@@ -313,7 +325,8 @@ function Connect-CWM {
             $TokenHeaders.'x-cw-usertype' = 'member'
             $WebRequestArguments = @{
                 Method      = 'Post'
-                Uri         = "https://$($Server)/v4_6_release/apis/3.0/system/members/$([uri]::EscapeDataString($MemberID))/tokens"
+                # The server's codebase and the connection's base path, like every other request
+                Uri         = New-CWMUrl -Endpoint "/system/members/$([uri]::EscapeDataString($MemberID))/tokens"
                 Body        = @{ memberIdentifier = $MemberID } | ConvertTo-Json
                 ContentType = 'application/json; charset=utf-8'
                 Headers     = $TokenHeaders
@@ -351,7 +364,7 @@ function Connect-CWM {
             # The login response's cookies are stored in this session
             $Session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
             $WebRequestArguments = @{
-                Uri        = "https://$($Server)/v4_6_release/login/login.aspx?response=json"
+                Uri        = (Join-Url (Join-Url "https://$($Server)" $Connection.Codebase) 'login/login.aspx?response=json')
                 Method     = 'Post'
                 Body       = $Body
                 WebSession = $Session

@@ -123,7 +123,10 @@ function Invoke-CWMGetMaster {
         Method = 'GET'
     }
 
-    if ($Arguments.all -and !$Arguments.count.IsPresent) { $Result = Invoke-CWMAllResult -Arguments $WebRequestArguments }
+    if ($Arguments.all -and !$Arguments.count.IsPresent) {
+        # Without -pageSize the 0 makes Invoke-CWMAllResult use the API maximum
+        $Result = Invoke-CWMAllResult -Arguments $WebRequestArguments -PageSize $Arguments.pageSize
+    }
     else {
         if ($Arguments.pageSize) { $WebRequestArguments.URI += "&pageSize=$($Arguments.pageSize)" }
         if ($Arguments.page) { $WebRequestArguments.URI += "&page=$($Arguments.page)" }
@@ -132,8 +135,9 @@ function Invoke-CWMGetMaster {
         if ($Result.content) {
             try { $Result = ConvertFrom-CWMJson $Result.Content }
             catch {
-                Write-Error 'There was an issue converting the results from JSON.'
-                $_
+                # Only the error: the unparsed response is not written to the pipeline as a result
+                Write-Error "There was an issue converting the results from JSON: $($_.Exception.Message)"
+                return
             }
         }
     }

@@ -456,3 +456,141 @@ Describe 'Master function regressions (0.5.0 review)' {
         }
     }
 }
+
+Describe 'API best-practice review (0.5.0)' {
+
+    BeforeEach {
+        Set-CWMTestConnection
+        Set-CWMTestResponse
+    }
+
+    Context 'Paging' {
+        It 'asks for the API maximum of 1000 records per page with -all' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = '' } } }
+                $null = Invoke-CWMGetMaster -Arguments @{ all = $true } -Endpoint '/service/boards'
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { $Uri -like '*pageSize=1000' }
+            }
+        }
+        It 'keeps a smaller -pageSize with -all' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = '' } } }
+                $null = Invoke-CWMGetMaster -Arguments @{ all = $true; pageSize = 50 } -Endpoint '/service/boards'
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { $Uri -like '*pageSize=50' -and $Uri -notlike '*pageSize=1000*' }
+            }
+        }
+        It 'follows rel="next" when Link lists several relations' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-WebRequest {
+                    if ($Uri -like '*pageId=5*') { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":2}]'; Headers = @{ Link = '' } } }
+                    else {
+                        $Link = '<https://example.invalid/v4_6_release/apis/3.0/x?pageId=99>; rel="last", <https://example.invalid/v4_6_release/apis/3.0/x?pageId=5>; rel="next"'
+                        [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = $Link } }
+                    }
+                }
+                $Out = @(Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/x?'; Method = 'Get' })
+                $Out.id | Should -Be @(1, 2)
+                Should -Invoke Invoke-WebRequest -Times 0 -ParameterFilter { $Uri -like '*pageId=99*' }
+            }
+        }
+        It 'stops when Link has no next page' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = '<https://example.invalid/v4_6_release/apis/3.0/x?pageId=0>; rel="first"' } } }
+                $Out = @(Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/x?'; Method = 'Get' })
+                $Out.id | Should -Be @(1)
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly
+            }
+        }
+    }
+
+    Context 'Dates in request bodies' {
+        It 'writes dates as ISO 8601 UTC on every edition, also when nested' {
+            InModuleScope ConnectWiseManageAPI {
+                $When = [datetime]::new(2026, 1, 2, 3, 4, 5, [System.DateTimeKind]::Utc)
+                $Arguments = @{
+                    expectedCloseDate = $When
+                    nested            = @{ at = [DateTimeOffset]::new(2026, 1, 2, 5, 4, 5, [timespan]::FromHours(2)) }
+                    dates             = @($When)
+                    ids               = @(1, 2)
+                }
+                Invoke-CWMNewMaster -Arguments $Arguments -Endpoint '/x' | Out-Null
+                $Raw = $global:CWMTestRequests[0].Body
+                $Raw | Should -Match '"expectedCloseDate":\s*"2026-01-02T03:04:05Z"'
+                $Raw | Should -Match '"at":\s*"2026-01-02T03:04:05Z"'
+                $Raw | Should -Match '"dates":\s*\[\s*"2026-01-02T03:04:05Z"\s*\]'
+                $Raw | Should -Not -Match '"Count"'
+                @(($Raw | ConvertFrom-Json).ids) | Should -Be @(1, 2)
+                $Arguments.expectedCloseDate | Should -BeOfType [datetime]
+            }
+        }
+    }
+
+    Context 'Dates without a kind and dates in patch values' {
+        It 'sends a date without a kind unchanged as UTC, so a calendar date keeps its day' {
+            InModuleScope ConnectWiseManageAPI {
+                Invoke-CWMNewMaster -Arguments @{ expectedCloseDate = [datetime]::new(2026, 1, 2) } -Endpoint '/x' | Out-Null
+                $global:CWMTestRequests[0].Body | Should -Match '"expectedCloseDate":\s*"2026-01-02T00:00:00Z"'
+            }
+        }
+        It 'converts a local date to UTC' {
+            InModuleScope ConnectWiseManageAPI {
+                $Local = [datetime]::new(2026, 1, 2, 9, 0, 0, [System.DateTimeKind]::Local)
+                $Expected = $Local.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", [cultureinfo]::InvariantCulture)
+                Invoke-CWMNewMaster -Arguments @{ d = $Local } -Endpoint '/x' | Out-Null
+                $global:CWMTestRequests[0].Body | Should -Match ('"d":\s*"' + [regex]::Escape($Expected) + '"')
+            }
+        }
+        It 'sends patch values that are dates as ISO 8601 UTC' {
+            InModuleScope ConnectWiseManageAPI {
+                $When = [datetime]::new(2026, 1, 2, 3, 4, 5, [System.DateTimeKind]::Utc)
+                Invoke-CWMUpdateMaster -Arguments @{ Operation = 'replace'; Path = 'expectedCloseDate'; Value = $When } -Endpoint '/x' | Out-Null
+                Invoke-CWMUpdateMaster -Arguments @{ PatchOperations = @(@{ op = 'replace'; path = 'dates'; value = @($When) }) } -Endpoint '/x' | Out-Null
+                $global:CWMTestRequests[0].Body | Should -Match '"value":\s*"2026-01-02T03:04:05Z"'
+                $global:CWMTestRequests[1].Body | Should -Match '"value":\s*\[\s*"2026-01-02T03:04:05Z"\s*\]'
+                $global:CWMTestRequests[1].Body | Should -Not -Match '"Count"'
+            }
+        }
+    }
+    Context 'Invoke-CWMGetMaster' {
+        It 'writes no output object when the response is not JSON' {
+            Set-CWMTestResponse -Content 'not json'
+            InModuleScope ConnectWiseManageAPI {
+                $Out = @(Invoke-CWMGetMaster -Arguments @{} -Endpoint '/x' -ErrorVariable Err -ErrorAction SilentlyContinue)
+                $Out | Should -HaveCount 0
+                "$Err" | Should -Match 'converting the results from JSON'
+            }
+        }
+    }
+
+    Context 'User-Agent' {
+        It 'identifies the module on every request' {
+            InModuleScope ConnectWiseManageAPI {
+                $null = Invoke-CWMGetMaster -Arguments @{} -Endpoint '/x'
+                Should -Invoke Invoke-WebRequest -Times 1 -Exactly -ParameterFilter { $UserAgent -match '^ConnectWiseManageAPI/\S+ PowerShell/\S+$' }
+            }
+        }
+    }
+
+    Context 'Get-CWMDocument -download' {
+        BeforeEach {
+            Mock Invoke-WebRequest -ModuleName ConnectWiseManageAPI {
+                $Stream = New-Object System.IO.MemoryStream (, [byte[]](0x25, 0x50, 0x00, 0xFF))
+                [pscustomobject]@{ StatusCode = 200; Content = [byte[]](0x25, 0x50, 0x00, 0xFF); RawContentStream = $Stream; Headers = @{} }
+            }
+        }
+        It 'returns the exact bytes and does not ask for JSON' {
+            $Bytes = Get-CWMDocument -id 9 -download
+            , $Bytes | Should -BeOfType [byte[]]
+            $Bytes | Should -Be ([byte[]](0x25, 0x50, 0x00, 0xFF))
+            Should -Invoke Invoke-WebRequest -ModuleName ConnectWiseManageAPI -Times 1 -Exactly -ParameterFilter {
+                $Uri -eq 'https://example.invalid/v4_6_release/apis/3.0/system/documents/9/download' -and $Headers.Accept -eq '*/*'
+            }
+        }
+        It 'writes the bytes to -OutFile' {
+            $Path = Join-Path $TestDrive 'doc.bin'
+            $File = Get-CWMDocument -id 9 -download -OutFile $Path
+            $File.FullName | Should -Be (Get-Item $Path).FullName
+            [System.IO.File]::ReadAllBytes($Path) | Should -Be ([byte[]](0x25, 0x50, 0x00, 0xFF))
+        }
+    }
+}

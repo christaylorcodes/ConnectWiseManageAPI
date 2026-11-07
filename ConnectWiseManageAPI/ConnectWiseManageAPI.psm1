@@ -21,6 +21,12 @@ Add-Type -AssemblyName System.Web
 # Used by Connect-CWM -AllowInsecureRedirect / Invoke-CWMWebRequest.
 $script:CWMSupportsInsecureRedirect = (Get-Command Invoke-WebRequest).Parameters.ContainsKey('AllowInsecureRedirect')
 
+# Sent on every request so ConnectWise can identify the module's traffic
+$CWMModuleVersion = $ExecutionContext.SessionState.Module.Version
+if (!$CWMModuleVersion -or "$CWMModuleVersion" -eq '0.0') { $CWMModuleVersion = 'dev' }
+$script:CWMUserAgent = "ConnectWiseManageAPI/$CWMModuleVersion PowerShell/$($PSVersionTable.PSVersion)"
+Remove-Variable CWMModuleVersion
+
 # ConvertFrom-Json gained -NoEnumerate in PowerShell 6.0. Used by ConvertFrom-CWMJson to make array output identical on 5.1 and 7.
 $script:CWMJsonSupportsNoEnumerate = (Get-Command ConvertFrom-Json).Parameters.ContainsKey('NoEnumerate')
 

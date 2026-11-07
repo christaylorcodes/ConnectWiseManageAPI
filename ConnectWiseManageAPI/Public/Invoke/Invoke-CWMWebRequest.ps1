@@ -112,6 +112,7 @@ function Invoke-CWMWebRequest {
     }
 
     if (!$Arguments.SessionVariable -and !$Arguments.WebSession) { $Arguments.WebSession = $script:CWMServerConnection.Session }
+    if (!$Arguments.UserAgent -and $script:CWMUserAgent) { $Arguments.UserAgent = $script:CWMUserAgent }
 
     # Check URI format
     if ($Arguments.URI -notlike '*`?*' -and $Arguments.URI -like '*`&*') {

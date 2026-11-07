@@ -14,9 +14,9 @@ Gets documents, or downloads a document.
 
 ### ID
 ```
-Get-CWMDocument [-id <Int32>] [-download] [-count] [-condition <String>] [-orderBy <String>]
- [-childConditions <String>] [-customFieldConditions <String>] [-page <Int32>] [-pageSize <Int32>]
- [-fields <String[]>] [-all] [<CommonParameters>]
+Get-CWMDocument [-id <Int32>] [-download] [-OutFile <String>] [-count] [-condition <String>]
+ [-orderBy <String>] [-childConditions <String>] [-customFieldConditions <String>] [-page <Int32>]
+ [-pageSize <Int32>] [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ### Record
@@ -78,6 +78,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OutFile
+With -id -download, write the file content to this path and return the file instead of the bytes.
+
+```yaml
+Type: System.String
+Parameter Sets: ID
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

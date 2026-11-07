@@ -7,7 +7,7 @@
     Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster when -all switch is used.
 
     Automatically follows pagination links in response headers to retrieve all pages
-    of results. Uses page size 999 and forward-only pagination
+    of results. Uses page size 1000 (the API maximum, or -PageSize) and forward-only pagination
     for better performance.
 
     This function iterates through all pages until no more results are available.
@@ -35,7 +35,7 @@
     Internal Function:
     - Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster
     - Uses forward-only pagination for performance
-    - Uses page size 999
+    - Uses page size 1000 (the API maximum) unless -PageSize is smaller
     - Follows Link headers for next page, but only to the connected server: the next-page URL must use
       https (or the scheme of the first request, never a downgrade) and the connection's host and port. Any other
       URL stops paging with an error, so credentials are never sent to another host.
@@ -59,8 +59,11 @@
 function Invoke-CWMAllResult {
     [CmdletBinding()]
     param(
-        $Arguments
+        $Arguments,
+        # Records per request. 1000 is the API's maximum; larger values are capped.
+        [int]$PageSize = 1000
     )
+    if ($PageSize -lt 1 -or $PageSize -gt 1000) { $PageSize = 1000 }
 
     # The next-page URL comes from the server's Link header and is requested with the connection's credentials,
     # so it may only point at the connected server, over https (never a downgrade from the first request).
@@ -72,8 +75,7 @@ function Invoke-CWMAllResult {
         'pagination-type' = 'forward-only'
     }
 
-    # Up the pagesize to max
-    $Arguments.URI += '&pageSize=999'
+    $Arguments.URI += "&pageSize=$PageSize"
 
     do {
         $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
@@ -83,8 +85,15 @@ function Invoke-CWMAllResult {
         }
 
         $Link = Get-CWMResponseHeader -Response $PageResult -Name 'Link'
-        if ($Link) { $NextPage = $Link.Split(';')[0].trimstart('<').trimend('>') }
-        else { $NextPage = $null }
+        # Link may list several relations (<url>; rel="next", <url>; rel="last"). Follow rel="next"; a single
+        # link without any rel is taken as the next page.
+        $NextPage = $null
+        if ($Link) {
+            $Links = @($Link -split ',(?=\s*<)')
+            $Next = $Links | Where-Object { $_ -match ';\s*rel\s*=\s*"?next"?' } | Select-Object -First 1
+            if (!$Next -and $Links.Count -eq 1 -and $Links[0] -notmatch ';\s*rel\s*=') { $Next = $Links[0] }
+            if ($Next -match '<([^>]+)>') { $NextPage = $Matches[1] }
+        }
         $Arguments.Uri = $NextPage
 
         ConvertFrom-CWMJson $PageResult.Content

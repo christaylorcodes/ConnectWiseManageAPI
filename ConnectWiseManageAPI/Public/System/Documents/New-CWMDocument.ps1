@@ -110,7 +110,6 @@ function New-CWMDocument {
     $boundary = [System.Guid]::NewGuid().ToString()
     $CRLF = "`r`n"
 
-    # Field names (including the existing 'name="PrivateFlag' header) are kept exactly as before.
     $Head = (
         "--$boundary",
         'Content-Disposition: form-data; name="recordType"',
@@ -125,7 +124,7 @@ function New-CWMDocument {
         '',
         $title,
         "--$boundary",
-        'Content-Disposition: form-data; name="PrivateFlag',
+        'Content-Disposition: form-data; name="PrivateFlag"',
         '',
         $Private,
         "--$boundary",

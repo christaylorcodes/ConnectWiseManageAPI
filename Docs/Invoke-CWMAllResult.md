@@ -13,7 +13,8 @@ Automatic pagination handler that retrieves all pages of results.
 ## SYNTAX
 
 ```
-Invoke-CWMAllResult [[-Arguments] <Object>] [<CommonParameters>]
+Invoke-CWMAllResult [[-Arguments] <Object>] [[-PageSize] <Int32>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,6 +59,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageSize
+Records per request. 1000 is the API's maximum; larger values are capped.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: 1000
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

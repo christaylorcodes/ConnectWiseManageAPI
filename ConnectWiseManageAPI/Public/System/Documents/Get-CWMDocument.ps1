@@ -13,7 +13,10 @@
 
 .PARAMETER download
     With -id, download the file content of the document (GET /system/documents/{id}/download) instead of its
-    metadata.
+    metadata. Returns the file content as a byte array, or writes it to -OutFile.
+
+.PARAMETER OutFile
+    With -id -download, write the file content to this path and return the file instead of the bytes.
 
 .PARAMETER recordId
     The id of the record whose documents are returned. Use with -recordType.
@@ -57,7 +60,12 @@
 .EXAMPLE
     Get-CWMDocument -id 55 -download
 
-    Downloads the content of document 55.
+    Returns the content of document 55 as a byte array.
+
+.EXAMPLE
+    Get-CWMDocument -id 55 -download -OutFile 'C:\Temp\contract.pdf'
+
+    Saves the content of document 55 to C:\Temp\contract.pdf.
 
 .LINK
     https://developer.connectwise.com/manage/rest
@@ -70,6 +78,8 @@ function Get-CWMDocument {
         [int]$id,
         [Parameter(ParameterSetName = 'ID')]
         [switch]$download,
+        [Parameter(ParameterSetName = 'ID')]
+        [string]$OutFile,
         [Parameter(Mandatory = $true, ParameterSetName = 'Record')]
         [int]$recordId,
         [Parameter(Mandatory = $true, ParameterSetName = 'Record')]
@@ -93,21 +103,25 @@ function Get-CWMDocument {
         [switch]$all
     )
 
+    if (($download -and !$id) -or ($OutFile -and !$download)) {
+        return Write-Error '-download needs -id, and -OutFile needs -id -download.'
+    }
+    # The download returns the file itself, not JSON
+    if ($download -and !$count) {
+        return Invoke-CWMDownload -Endpoint "/system/documents/$($id)/download" -OutFile $OutFile
+    }
+
     # Work on a copy so $PSBoundParameters is never modified. recordId/recordType are query parameters and
     # /count goes before the query string (Invoke-CWMGetMaster would add it after), so both are built here.
     $Arguments = @{}
     foreach ($Key in $PSBoundParameters.Keys) { $Arguments[$Key] = $PSBoundParameters[$Key] }
-    foreach ($Key in 'download', 'recordId', 'recordType', 'count') { $null = $Arguments.Remove($Key) }
+    foreach ($Key in 'download', 'OutFile', 'recordId', 'recordType', 'count') { $null = $Arguments.Remove($Key) }
 
     $Endpoint = '/system/documents'
     if ($count) {
         # GET /system/documents/count (there is no per-document count)
         $Endpoint += '/count'
         foreach ($Key in 'id', 'all') { $null = $Arguments.Remove($Key) }
-    }
-    elseif ($id -and $download) {
-        $Endpoint += "/$($id)/download"
-        $null = $Arguments.Remove('id')
     }
     if ($PSCmdlet.ParameterSetName -eq 'Record') {
         $Endpoint += "?recordId=$($recordId)&recordType=$([uri]::EscapeDataString($recordType))"

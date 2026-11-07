@@ -51,6 +51,9 @@ This release has **breaking changes**. Read them before upgrading.
 - **An `add` or `replace` update without a value now errors** instead of silently sending `null`. Pass
   `-Value $null` explicitly to clear a field. `New-CWMTicketChild` also errors when `-OperationType` does not match
   the parameters (a merge without `-StatusID` used to send status 0).
+- **`New-CWMDocument` uploads are private by default.** The `PrivateFlag` part header was malformed (missing
+  closing quote), so the server most likely ignored it and applied its own default. Now `-Private` (default `$true`)
+  reaches the server. *Migration:* pass `-Private $false` for documents that customers should see.
 
 ### Added
 
@@ -74,8 +77,20 @@ This release has **breaking changes**. Read them before upgrading.
 - Examples: `Set-CWMConfigurationLastUser.ps1` (#79), `Get-TicketsForConfiguration.ps1` (#38), and an optional lunch
   window in `TimeSucks.ps1`.
 - Comment-based help for every public function (`Get-Help <function> -Full`), and regenerated `Docs/`.
+- **`Get-CWMDocument -download -OutFile`** saves a document to disk. Without `-OutFile` the content is returned as
+  a `byte[]`.
+- **User-Agent** `ConnectWiseManageAPI/<version> PowerShell/<version>` on every request, so ConnectWise can identify
+  the module's traffic.
 
 ### Changed
+
+- **`-all` asks for 1000 records per page** (the API maximum; was 999) and keeps a smaller `-pageSize` if you
+  pass one. Paging follows the `rel="next"` entry of the `Link` header instead of the first link.
+- **`[datetime]` values in request bodies and patch values are sent as ISO 8601 UTC** (`2026-01-02T03:04:05Z`) on
+  both editions. Windows PowerShell 5.1 sent `\/Date(ms)\/`; PowerShell 7 sent local dates with their offset and dates
+  without a kind with no offset. Local dates (for example `Get-Date`) are converted to UTC. Dates without a kind (for
+  example `[datetime]'2026-01-02'`) are sent unchanged as UTC, as PowerShell 7 sent them, so a calendar date keeps its
+  day. String parameters are sent as given.
 
 - **Retry policy.** Reads (GET/HEAD) and searches retry on 502, 503 and 504; every method retries on 429. Writes
   (POST/PATCH/PUT/DELETE) are never retried on a 5xx, so a retry can't create a duplicate. The wait honours
@@ -102,6 +117,13 @@ This release has **breaking changes**. Read them before upgrading.
   each run) instead of timestamped files in the repo root.
 
 ### Fixed
+
+- **`Get-CWMDocument -download` returns the file.** It used to parse the file as JSON and fail.
+- **`Connect-CWM` uses the server's codebase** for the impersonation token and cookie login requests (they were
+  hard-coded to `v4_6_release`, which broke on-premises servers with another codebase), and sends the `ClientID`
+  header to `/login/companyinfo`.
+- **A response that is not JSON no longer comes back as a result object** from `Get-*` functions; only the error is
+  written.
 
 - **Nine functions that were never exported** (their files had plural names) can now be called:
   `Get-`, `New-` and `Update-CWMAgreementType`, `Get-`, `New-`, `Update-` and `Remove-CWMProductPickingShippingDetail`,
