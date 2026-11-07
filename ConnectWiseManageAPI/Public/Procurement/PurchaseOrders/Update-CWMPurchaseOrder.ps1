@@ -10,7 +10,7 @@
 
 .PARAMETER id
     The ID of the purchase order to update.
-    Alias: catalogId
+    Alias: purchaseOrderId
 
 .PARAMETER Operation
     The patch operation to perform: 'add', 'replace' or 'remove'.
@@ -56,7 +56,7 @@ function Update-CWMPurchaseOrder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium', DefaultParameterSetName = 'Single')]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
-        [Alias('catalogId')]
+        [Alias('purchaseOrderId')]
         [int]$id,
         [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'Single')]
         [validateset('add', 'replace', 'remove')]

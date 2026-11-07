@@ -1,7 +1,6 @@
 ﻿function Get-CWMCompanyState {
     [CmdletBinding()]
     param(
-        [Alias('companyId')]
         [int]$id,
         [switch]$count,
         [string]$condition,

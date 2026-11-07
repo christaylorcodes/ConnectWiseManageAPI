@@ -2,7 +2,8 @@
     [CmdletBinding()]
     param(
         [int]$id,
-        [string]$conditions,
+        [Alias('conditions')]
+        [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
         [string]$childConditions,

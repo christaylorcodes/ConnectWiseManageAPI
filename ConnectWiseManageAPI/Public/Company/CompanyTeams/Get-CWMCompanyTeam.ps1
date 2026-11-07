@@ -3,6 +3,7 @@
     param(
         [int]$id,
         [switch]$count,
+        [Parameter(Mandatory = $true)]
         [Alias('companyId')]
         [int]$parentId,
         [string]$condition,

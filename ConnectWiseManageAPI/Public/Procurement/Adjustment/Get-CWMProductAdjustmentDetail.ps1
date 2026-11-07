@@ -1,6 +1,9 @@
 ﻿function Get-CWMProductAdjustmentDetail {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory = $true)]
+        [Alias('adjustmentId')]
+        [int]$parentId,
         [int]$id,
         [switch]$count,
         [string]$condition,

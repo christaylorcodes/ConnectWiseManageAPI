@@ -19,14 +19,21 @@
         [switch]$all
     )
 
+    # type, id and deviceIdentifier are query parameters here, not path segments, so they are taken out of
+    # a copy of $PSBoundParameters. /count is added before the query string (Invoke-CWMGetMaster would add it after).
+    $Arguments = @{}
+    foreach ($Key in $PSBoundParameters.Keys) { $Arguments[$Key] = $PSBoundParameters[$Key] }
+    foreach ($Key in 'type', 'id', 'deviceIdentifier', 'count') { $null = $Arguments.Remove($Key) }
+
     $Endpoint = '/system/audittrail'
-
-    if ($Type) { $Endpoint += "&type=$type" }
-    if ($ID) {
-        $Endpoint += "&id=$id"
-        $null = $PsBoundParameters.Remove('id')
+    if ($count) {
+        $Endpoint += '/count'
+        $null = $Arguments.Remove('all')
     }
-    if ($deviceIdentifier) { $Endpoint += "&deviceIdentifier=$deviceIdentifier" }
+    $Endpoint += "?type=$([uri]::EscapeDataString([string]$type))&id=$([uri]::EscapeDataString($id))"
+    if ($deviceIdentifier) { $Endpoint += "&deviceIdentifier=$([uri]::EscapeDataString($deviceIdentifier))" }
 
-    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    $Result = Invoke-CWMGetMaster -Arguments $Arguments -Endpoint $Endpoint
+    if ($count -and $null -ne $Result -and $Result.PSObject.Properties['count']) { $Result = $Result.count }
+    $Result
 }

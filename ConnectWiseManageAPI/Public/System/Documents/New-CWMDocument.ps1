@@ -19,7 +19,7 @@
     The ID of the record to attach the document to.
 
 .PARAMETER title
-    The title of the document.
+    The title of the document. Line breaks are replaced with a space.
 
 .PARAMETER URL
     A URL to link instead of uploading a file.
@@ -29,6 +29,7 @@
 
 .PARAMETER FileName
     The file name to send to ConnectWise Manage. Defaults to the name of -FilePath.
+    Double quotes, carriage returns and line feeds are replaced with '_'.
 
 .PARAMETER Private
     Whether the document is private. Default: $true
@@ -102,6 +103,10 @@ function New-CWMDocument {
 
     # https://www.techcolumnist.com/2019/01/09/powershell-connectwise-documents-api-uploading-a-document-or-attachment-to-a-ticket
     # The body is built as byte[] so file bytes are never re-encoded (a string body is re-encoded as UTF-8 on PS 7.4+).
+    # CR/LF would start a new line inside the multipart body and a double quote would end the quoted filename=""
+    # header value, so they are replaced. Quotes stay in the title: it is a part body, not a header.
+    $title = $title -replace '[\r\n]+', ' '
+
     $boundary = [System.Guid]::NewGuid().ToString()
     $CRLF = "`r`n"
 
@@ -138,6 +143,7 @@ function New-CWMDocument {
     switch ($PSCmdlet.ParameterSetName){
         'File' {
             if(!$FileName){ $FileName = Split-Path $FilePath -Leaf }
+            $FileName = $FileName -replace '["\r\n]', '_'
 
             $fileBytes = [System.IO.File]::ReadAllBytes($FilePath.FullName)
 

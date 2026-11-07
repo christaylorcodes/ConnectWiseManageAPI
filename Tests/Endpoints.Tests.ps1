@@ -73,6 +73,20 @@ Describe 'Endpoint functions' {
         @{ Name = 'Update-CWMTimeSheet -Reverse'; HttpMethod = 'Post'; Path = '/time/sheets/55/reverse'; Call = { Update-CWMTimeSheet -id 55 -Reverse -Confirm:$false } }
         @{ Name = 'Update-CWMTimeSheet -Submit'; HttpMethod = 'Post'; Path = '/time/sheets/55/submit'; Call = { Update-CWMTimeSheet -id 55 -Submit -Confirm:$false } }
         @{ Name = 'Update-CWMTimeSheet (default)'; HttpMethod = 'Post'; Path = '/time/sheets/55/submit'; Call = { Update-CWMTimeSheet -id 55 -Confirm:$false } }
+        @{ Name = 'Submit-CWMTimeSheet'; HttpMethod = 'Post'; Path = '/time/sheets/55/submit'; Call = { Submit-CWMTimeSheet -id 55 -Confirm:$false } }
+        # Query-string endpoints: /count goes before the query string
+        @{ Name = 'Get-CWMAuditTrail'; HttpMethod = 'GET'; Path = '/system/audittrail?type=Ticket&id=5&pageSize=10'; Call = { Get-CWMAuditTrail -type Ticket -id 5 -pageSize 10 } }
+        @{ Name = 'Get-CWMAuditTrail (count)'; HttpMethod = 'GET'; Path = '/system/audittrail/count?type=Ticket&id=5&deviceIdentifier=d1'; Call = { Get-CWMAuditTrail -type Ticket -id 5 -deviceIdentifier d1 -count } }
+        @{ Name = 'Get-CWMDocument (id)'; HttpMethod = 'GET'; Path = '/system/documents/9'; Call = { Get-CWMDocument -id 9 } }
+        @{ Name = 'Get-CWMDocument (download)'; HttpMethod = 'GET'; Path = '/system/documents/9/download'; Call = { Get-CWMDocument -id 9 -download } }
+        @{ Name = 'Get-CWMDocument (record)'; HttpMethod = 'GET'; Path = '/system/documents?recordId=123&recordType=Ticket'; Call = { Get-CWMDocument -recordId 123 -recordType Ticket } }
+        @{ Name = 'Get-CWMDocument (record count)'; HttpMethod = 'GET'; Path = '/system/documents/count?recordId=123&recordType=Ticket'; Call = { Get-CWMDocument -recordId 123 -recordType Ticket -count } }
+        @{ Name = 'Get-CWMDocument (count)'; HttpMethod = 'GET'; Path = '/system/documents/count'; Call = { Get-CWMDocument -count } }
+        # Filters that used to be dropped, and route ids that used to be missing
+        @{ Name = 'Get-CWMContactType -condition'; HttpMethod = 'GET'; Path = '/company/contacts/types?conditions=description%3d%27Owner%27'; Call = { Get-CWMContactType -condition "description='Owner'" } }
+        @{ Name = 'Get-CWMContactType -conditions (alias)'; HttpMethod = 'GET'; Path = '/company/contacts/types?conditions=description%3d%27Owner%27'; Call = { Get-CWMContactType -conditions "description='Owner'" } }
+        @{ Name = 'Get-CWMProductAdjustmentDetail'; HttpMethod = 'GET'; Path = '/procurement/adjustments/4/details'; Call = { Get-CWMProductAdjustmentDetail -adjustmentId 4 } }
+        @{ Name = 'New-CWMMarketingGroupCompany'; HttpMethod = 'Post'; Path = '/marketing/groups/3/companies'; Call = { New-CWMMarketingGroupCompany -groupId 3 -id 250 -Confirm:$false } }
         # Unbundle (POST, not DELETE)
         @{ Name = 'Remove-CWMTicketChild'; HttpMethod = 'Post'; Path = '/service/tickets/100/detachChildren'; Call = { Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201 -Confirm:$false } }
     ) {
@@ -157,7 +171,7 @@ Describe 'Endpoint functions' {
     }
 
     Context 'Get-CWMTicket' {
-        It 'sends childConditions in the search body (issue #38 example)' {
+        It 'sends childConditions in the search body' {
             Get-CWMTicket -childConditions 'configurations/id=1234' | Out-Null
             $Request = $global:CWMTestRequests[0]
             $Request.Method | Should -Be 'Post'
@@ -268,6 +282,109 @@ Describe 'Endpoint functions' {
         }
     }
 
+    Context 'Review pass 1 fixes' {
+        It 'Submit-CWMTimeSheet supports -WhatIf and sends no body' {
+            (Get-Command Submit-CWMTimeSheet).Parameters.ContainsKey('WhatIf') | Should -BeTrue
+            Submit-CWMTimeSheet -id 55 -WhatIf | Out-Null
+            $global:CWMTestRequests | Should -HaveCount 0
+            Submit-CWMTimeSheet -sheetId 55 -Confirm:$false | Out-Null
+            $global:CWMTestRequests | Should -HaveCount 1
+            $global:CWMTestRequests[0].Body | Should -BeNullOrEmpty
+        }
+
+        It 'Get-CWMAuditTrail and Get-CWMDocument return the number for -count' {
+            Set-CWMTestResponse -Content '{"count":7}'
+            Get-CWMAuditTrail -type Ticket -id 5 -count | Should -Be 7
+            Get-CWMDocument -recordId 1 -recordType Ticket -count | Should -Be 7
+        }
+
+        It 'Get-CWMAuditTrail does not change the caller''s bound parameters' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-CWMGetMaster { $script:CapturedArguments = $Arguments }
+                Get-CWMAuditTrail -type Ticket -id 5 -condition 'a=1' | Out-Null
+                $script:CapturedArguments | Should -BeOfType [hashtable]
+                $script:CapturedArguments.ContainsKey('id') | Should -BeFalse
+                $script:CapturedArguments.condition | Should -Be 'a=1'
+            }
+        }
+
+        It 'escapes string values that go into the URL' {
+            Get-CWMAuditTrail -type Ticket -id 'a b/c' -deviceIdentifier 'x&y' | Out-Null
+            Get-CWMReportColumn -Report 'My Report/1' | Out-Null
+            New-CWMMemberToken -memberIdentifier 'j doe' -Confirm:$false | Out-Null
+            $Audit, $Report, $Token = $global:CWMTestRequests | ForEach-Object { ([uri]$_.Uri).AbsoluteUri }
+            $Audit | Should -BeExactly "$CWMTestBaseUri/system/audittrail?type=Ticket&id=a%20b%2Fc&deviceIdentifier=x%26y"
+            $Report | Should -BeExactly "$CWMTestBaseUri/system/reports/My%20Report%2F1/columns"
+            $Token | Should -BeExactly "$CWMTestBaseUri/system/members/j%20doe/tokens"
+        }
+
+        It '<Command> -<Parameter> is mandatory' -ForEach @(
+            @{ Command = 'Get-CWMCompanyTeam'; Parameter = 'parentId' }
+            @{ Command = 'New-CWMProductPickingShippingDetail'; Parameter = 'parentId' }
+            @{ Command = 'New-CWMMarketingGroupCompany'; Parameter = 'parentId' }
+            @{ Command = 'Get-CWMProductAdjustmentDetail'; Parameter = 'parentId' }
+            @{ Command = 'New-CWMMemberToken'; Parameter = 'memberIdentifier' }
+        ) {
+            (Get-Command $Command).Parameters[$Parameter].Attributes.Where({ $_ -is [System.Management.Automation.ParameterAttribute] }).Mandatory | Should -Contain $true
+        }
+
+        It '<Command> -<Parameter> has the alias <Alias>' -ForEach @(
+            @{ Command = 'Get-CWMContactType'; Parameter = 'condition'; Alias = 'conditions' }
+            @{ Command = 'Remove-CWMDocument'; Parameter = 'id'; Alias = 'documentId' }
+            @{ Command = 'Update-CWMPurchaseOrder'; Parameter = 'id'; Alias = 'purchaseOrderId' }
+            @{ Command = 'Update-CWMProductAdjustment'; Parameter = 'id'; Alias = 'adjustmentId' }
+            @{ Command = 'Update-CWMAgreementType'; Parameter = 'id'; Alias = 'agreementTypeId' }
+            @{ Command = 'New-CWMMarketingGroupCompany'; Parameter = 'parentId'; Alias = 'groupId' }
+            @{ Command = 'Get-CWMProductAdjustmentDetail'; Parameter = 'parentId'; Alias = 'adjustmentId' }
+        ) {
+            (Get-Command $Command).Parameters[$Parameter].Aliases | Should -Contain $Alias
+        }
+
+        It 'wrong aliases are gone' {
+            (Get-Command Remove-CWMDocument).Parameters['id'].Aliases | Should -Not -Contain 'somethingId'
+            (Get-Command Get-CWMCompanyState).Parameters['id'].Aliases | Should -Not -Contain 'companyId'
+            (Get-Command Get-CWMCompanyCountry).Parameters['id'].Aliases | Should -Not -Contain 'companyId'
+            (Get-Command Update-CWMPurchaseOrder).Parameters['id'].Aliases | Should -Not -Contain 'catalogId'
+            (Get-Command Update-CWMProductAdjustment).Parameters['id'].Aliases | Should -Not -Contain 'catalogId'
+            (Get-Command Update-CWMAgreementType).Parameters['id'].Aliases | Should -Not -Contain 'agreementId'
+        }
+
+        It 'New-CWMMarketingGroupCompany keeps the group id out of the body' {
+            New-CWMMarketingGroupCompany -groupId 3 -id 250 -Confirm:$false | Out-Null
+            $B = $global:CWMTestRequests[0].Body | ConvertFrom-Json
+            $B.id | Should -Be 250
+            $B.PSObject.Properties['groupId'] | Should -BeNullOrEmpty
+            $B.PSObject.Properties['parentId'] | Should -BeNullOrEmpty
+        }
+
+        It 'New-CWMCompanyContact sends -portalPassword as plain text and checks its length' {
+            $Password = ConvertTo-SecureString 'Pa55word!' -AsPlainText -Force
+            New-CWMCompanyContact -firstName 'A' -portalPassword $Password -Confirm:$false | Out-Null
+            ($global:CWMTestRequests[0].Body | ConvertFrom-Json).portalPassword | Should -BeExactly 'Pa55word!'
+            $TooLong = ConvertTo-SecureString ('x' * 16) -AsPlainText -Force
+            { New-CWMCompanyContact -firstName 'A' -portalPassword $TooLong -Confirm:$false } | Should -Throw
+        }
+
+        It '<Command> passes a copy, not $PSBoundParameters, to Invoke-CWMNewMaster' -ForEach @(
+            @{ Command = 'New-CWMCompanyTeam'; Splat = @{ parentId = 250; teamRole = @{ id = 1 }; locationId = 2 }; Key = 'location' }
+            @{ Command = 'New-CWMCompanyContact'; Splat = @{ firstName = 'A'; managerContactId = 5 }; Key = 'managerContact' }
+        ) {
+            InModuleScope ConnectWiseManageAPI -Parameters @{ Command = $Command; Splat = $Splat; Key = $Key } {
+                param($Command, $Splat, $Key)
+                Mock Invoke-CWMNewMaster { $script:CapturedArguments = $Arguments }
+                & $Command @Splat | Out-Null
+                $script:CapturedArguments | Should -BeOfType [hashtable]
+                $script:CapturedArguments[$Key].id | Should -BeGreaterThan 0
+            }
+        }
+
+        It 'Test-CWMApiCoverage.ps1 does not OR Tls12 into a SystemDefault SecurityProtocol' {
+            $Text = Get-Content "$PSScriptRoot/../Tools/Test-CWMApiCoverage.ps1" -Raw
+            $Text | Should -Not -Match '::SecurityProtocol\s*=\s*\[Net\.ServicePointManager\]::SecurityProtocol\s*-bor'
+            $Text | Should -Match '\[int\]\$Protocol -ne 0'
+        }
+    }
+
     Context 'New-CWMProjectTicket (#43)' {
         It 'POSTs to /project/tickets with project.id in the JSON body' {
             Set-CWMTestResponse -StatusCode 201 -Content '{"id":1}'
@@ -325,6 +442,13 @@ Describe 'Endpoint functions' {
             $Text.Substring($Start + 4) | Should -BeExactly "`r`n--$Boundary--`r`n"
             $Text | Should -Match 'filename="a\.bin"'
             $Text | Should -Match "name=`"recordId`"`r`n`r`n123`r`n"
+        }
+
+        It 'keeps quotes and line breaks out of the multipart headers' {
+            New-CWMDocument -recordType Ticket -recordId 123 -title "Line1`r`nLine2" -FilePath $TestFile -FileName "a`"b`r`nc.bin" -Confirm:$false | Out-Null
+            $Text = [System.Text.Encoding]::UTF8.GetString($global:CWMTestRequests[0].Body)
+            $Text | Should -Match 'filename="a_b__c\.bin"'
+            $Text | Should -Match "name=`"Title`"`r`n`r`nLine1 Line2`r`n"
         }
 
         It 'still sends URL documents as a multipart byte body' {

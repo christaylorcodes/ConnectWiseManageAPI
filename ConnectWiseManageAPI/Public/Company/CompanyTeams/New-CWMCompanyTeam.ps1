@@ -22,13 +22,17 @@
         [hashtable]$_info
     )
 
+    # Work on a copy so $PSBoundParameters is never modified
+    $Arguments = @{}
+    foreach ($Key in $PSBoundParameters.Keys) { $Arguments[$Key] = $PSBoundParameters[$Key] }
+
     # -locationId / -businessUnitId (old int parameters) become references: 5 -> @{ id = 5 }
     foreach ($Name in 'location', 'department') {
-        if ($PSBoundParameters.ContainsKey($Name) -and ($PSBoundParameters[$Name] -is [ValueType] -or $PSBoundParameters[$Name] -is [string])) {
-            $PSBoundParameters[$Name] = @{ id = [int]$PSBoundParameters[$Name] }
+        if ($Arguments.ContainsKey($Name) -and ($Arguments[$Name] -is [ValueType] -or $Arguments[$Name] -is [string])) {
+            $Arguments[$Name] = @{ id = [int]$Arguments[$Name] }
         }
     }
 
     $Endpoint = "/company/companies/$($parentId)/teams"
-    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $Arguments -Endpoint $Endpoint
 }

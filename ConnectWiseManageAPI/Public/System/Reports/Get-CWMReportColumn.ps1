@@ -44,7 +44,7 @@ function Get-CWMReportColumn {
         [string]$Report
     )
 
-    $Endpoint = "/system/reports/$($Report)/columns"
+    $Endpoint = "/system/reports/$([uri]::EscapeDataString($Report))/columns"
 
     $Result = Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
     if (!$Result) { return }

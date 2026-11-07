@@ -45,7 +45,8 @@
         [bool]$childrenFlag,
         [ValidateLength(1, 30)]
         [string]$significantOther,
-        [ValidateLength(1, 15)]
+        # ValidateLength only works on strings, so the 1-15 character limit is checked here
+        [ValidateScript({ $_.Length -ge 1 -and $_.Length -le 15 })]
         [SecureString]$portalPassword,
         [int]$portalSecurityLevel,
         [bool]$disablePortalLoginFlag,
@@ -67,13 +68,25 @@
         [hashtable[]]$customFields
     )
 
+    # Work on a copy so $PSBoundParameters is never modified
+    $Arguments = @{}
+    foreach ($Key in $PSBoundParameters.Keys) { $Arguments[$Key] = $PSBoundParameters[$Key] }
+
     # -managerContactId / -assistantContactId (old int parameters) become references: 5 -> @{ id = 5 }
     foreach ($Name in 'managerContact', 'assistantContact') {
-        if ($PSBoundParameters.ContainsKey($Name) -and ($PSBoundParameters[$Name] -is [ValueType] -or $PSBoundParameters[$Name] -is [string])) {
-            $PSBoundParameters[$Name] = @{ id = [int]$PSBoundParameters[$Name] }
+        if ($Arguments.ContainsKey($Name) -and ($Arguments[$Name] -is [ValueType] -or $Arguments[$Name] -is [string])) {
+            $Arguments[$Name] = @{ id = [int]$Arguments[$Name] }
         }
     }
 
+    # A SecureString serializes as {"Length":N}, so the API gets the plain text. It is unwrapped only here,
+    # just before the body is built, and the unmanaged BSTR copy is zeroed and freed straight away.
+    if ($portalPassword) {
+        $Bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($portalPassword)
+        try { $Arguments.portalPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($Bstr) }
+        finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($Bstr) }
+    }
+
     $Endpoint = '/company/contacts'
-    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    Invoke-CWMNewMaster -Arguments $Arguments -Endpoint $Endpoint
 }

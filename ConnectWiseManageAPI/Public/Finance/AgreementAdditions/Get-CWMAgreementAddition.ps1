@@ -3,7 +3,7 @@
     param(
         [Parameter(Mandatory=$true)]
         [Alias('AgreementID')]
-        $parentId,
+        [int]$parentId,
         [int]$id,
         [switch]$count,
         [string]$condition,

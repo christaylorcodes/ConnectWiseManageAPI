@@ -10,7 +10,7 @@
 
 .PARAMETER id
     The ID of the agreement type to update.
-    Alias: agreementId
+    Alias: agreementTypeId
 
 .PARAMETER Operation
     The patch operation to perform: 'add', 'replace' or 'remove'.
@@ -56,7 +56,7 @@ function Update-CWMAgreementType {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium', DefaultParameterSetName = 'Single')]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
-        [Alias('agreementId')]
+        [Alias('agreementTypeId')]
         [int]$id,
         [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'Single')]
         [validateset('add', 'replace', 'remove')]

@@ -57,13 +57,15 @@
 param(
     [string]$SpecPath,
     [string]$SpecUrl = 'https://raw.githubusercontent.com/covenanttechnologysolutions/connectwise-rest/master/generator/manage-json/manage.json',
-    [string]$ModulePath = (Join-Path (Split-Path $PSScriptRoot -Parent) 'ConnectWiseManageAPI'),
+    [string]$ModulePath,
     [string]$OutputPath,
     [switch]$PassThru
 )
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = 'Stop'
+# Set here, not as a parameter default: Windows PowerShell 5.1 leaves $PSScriptRoot empty in script param defaults
+if (-not $ModulePath) { $ModulePath = Join-Path (Split-Path $PSScriptRoot -Parent) 'ConnectWiseManageAPI' }
 
 $MasterMethod = @{
     Get    = 'GET'
@@ -191,6 +193,8 @@ function ConvertFrom-ExpandableText([string]$Text, [string]$SelfName, [string[]]
         $Values = foreach ($p in $Prior) { [regex]::Replace($Text, $Self, $p.Replace('$', '$$'), 'IgnoreCase') }
     }
     foreach ($v in $Values) {
+        # "$([uri]::EscapeDataString($x))" (also with a [string] cast) is the escaped value of $x
+        $v = $v -replace '\$\(\s*\[uri\]::EscapeDataString\(\s*(?:\[string\])?\$(?:\w+:)?(\w+)\s*\)\s*\)', '{$1}'
         $v = $v -replace '\$\(\s*\$(?:\w+:)?(\w+)\s*\)', '{$1}' -replace '\$\{(?:\w+:)?(\w+)\}', '{$1}' -replace '\$(?:\w+:)?(\w+)', '{$1}'
         if ($v -match '\$') { return $null }
         $v
@@ -350,7 +354,14 @@ if (-not $SpecPath) {
     $OldProgress = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
     try {
-        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        # Windows PowerShell only, as in the module's psm1: allow TLS 1.2 without touching SystemDefault (0),
+        # because OR-ing Tls12 into SystemDefault would pin the process to TLS 1.2. pwsh 7 needs nothing here.
+        if ($PSVersionTable.PSEdition -ne 'Core') {
+            $Protocol = [Net.ServicePointManager]::SecurityProtocol
+            if ([int]$Protocol -ne 0 -and -not ($Protocol -band [Net.SecurityProtocolType]::Tls12)) {
+                [Net.ServicePointManager]::SecurityProtocol = $Protocol -bor [Net.SecurityProtocolType]::Tls12
+            }
+        }
         Invoke-WebRequest -Uri $SpecUrl -OutFile $TempSpec -UseBasicParsing
     }
     finally { $ProgressPreference = $OldProgress }

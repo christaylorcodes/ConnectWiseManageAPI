@@ -1,11 +1,13 @@
 ﻿function Submit-CWMTimeSheet {
-    [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]
         [Alias('sheetId')]
         [int]$id
     )
 
-    $Endpoint = "/time/sheets/$($id)/submit"
-    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    # Same request as Update-CWMTimeSheet -Submit: POST /time/sheets/{id}/submit with no body.
+    # -WhatIf and -Confirm flow through to it via the inherited preference variables.
+    Update-CWMTimeSheet -id $id -Submit
 }

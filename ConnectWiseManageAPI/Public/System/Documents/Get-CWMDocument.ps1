@@ -5,7 +5,7 @@
         [Alias('documentId')]
         [int]$id,
         [Parameter(ParameterSetName = 'ID')]
-		[switch]$download,
+        [switch]$download,
         [Parameter(Mandatory = $true, ParameterSetName = 'Record')]
         [int]$recordId,
         [Parameter(Mandatory = $true, ParameterSetName = 'Record')]
@@ -29,12 +29,27 @@
         [switch]$all
     )
 
-    $Endpoint = '/system/documents'
-    if($id -and $download) {
-        $Endpoint = "$($Endpoint)/$($id)/download";
-        $PsBoundParameters.Remove('id') | Out-Null
-    }
-    if($recordId -and $recordType){ $Endpoint = "$($Endpoint)?recordId=$($recordId)&recordType=$($recordType)" }
+    # Work on a copy so $PSBoundParameters is never modified. recordId/recordType are query parameters and
+    # /count goes before the query string (Invoke-CWMGetMaster would add it after), so both are built here.
+    $Arguments = @{}
+    foreach ($Key in $PSBoundParameters.Keys) { $Arguments[$Key] = $PSBoundParameters[$Key] }
+    foreach ($Key in 'download', 'recordId', 'recordType', 'count') { $null = $Arguments.Remove($Key) }
 
-    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    $Endpoint = '/system/documents'
+    if ($count) {
+        # GET /system/documents/count (there is no per-document count)
+        $Endpoint += '/count'
+        foreach ($Key in 'id', 'all') { $null = $Arguments.Remove($Key) }
+    }
+    elseif ($id -and $download) {
+        $Endpoint += "/$($id)/download"
+        $null = $Arguments.Remove('id')
+    }
+    if ($PSCmdlet.ParameterSetName -eq 'Record') {
+        $Endpoint += "?recordId=$($recordId)&recordType=$([uri]::EscapeDataString($recordType))"
+    }
+
+    $Result = Invoke-CWMGetMaster -Arguments $Arguments -Endpoint $Endpoint
+    if ($count -and $null -ne $Result -and $Result.PSObject.Properties['count']) { $Result = $Result.count }
+    $Result
 }
