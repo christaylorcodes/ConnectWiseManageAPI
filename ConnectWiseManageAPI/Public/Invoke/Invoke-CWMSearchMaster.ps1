@@ -6,40 +6,42 @@
     Master function for POST-based search operations. Used when GET endpoints don't support
     complex queries or when the query string would be too long for a GET request.
 
-    The search endpoint uses POST with query parameters in the request body, allowing for
-    more complex filtering than standard GET requests.
+    The filter parameters go in the JSON request body, allowing for more complex filtering
+    than standard GET requests. Field selection and paging go in the query string.
 
-    This function calls the ConnectWise Manage API endpoint: POST {Endpoint}/search
+    This function calls the ConnectWise Manage API endpoint: POST {Endpoint}
+    It does not append /search; the endpoint you pass must already include it
+    (for example '/service/tickets/search'). Passing a collection endpoint such as
+    '/service/tickets' would POST to the create endpoint instead.
 
 .PARAMETER Arguments
-    Hashtable containing search parameters (sent as POST body):
-    - condition: Filter string
-    - orderBy: Sort specification
-    - childConditions: Filter on child records
-    - customFieldConditions: Filter on custom fields
-    - fields: Field selection (sent as URL parameter)
-    - page, pageSize: Pagination
+    Hashtable containing search parameters:
+    - condition: Filter string (POST body, as 'conditions')
+    - orderBy: Sort specification (POST body)
+    - childConditions: Filter on child records (POST body)
+    - customFieldConditions: Filter on custom fields (POST body)
+    - fields: Field selection (query string)
+    - page, pageSize: Pagination (query string)
     - all: Switch to retrieve all pages
 
 .PARAMETER Endpoint
-    The API endpoint path (e.g., '/service/tickets')
+    The full search endpoint path, including /search (e.g., '/service/tickets/search')
 
 .EXAMPLE
-    $args = @{
+    $SearchArguments = @{
         condition = "company/id=250 and status/name='Open'"
         orderBy = "id desc"
         all = $true
     }
-    Invoke-CWMSearchMaster -Arguments $args -Endpoint '/service/tickets'
+    Invoke-CWMSearchMaster -Arguments $SearchArguments -Endpoint '/service/tickets/search'
 
     Searches for all open tickets for company 250.
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Internal Function:
-    - Called by Get-CWM* functions when using search endpoints
+    - Called by Get-CWMTicket for list queries (POST /service/tickets/search)
     - Uses POST method with JSON body
     - Supports UTF-8 encoding for international characters
     - Routes to Invoke-CWMAllResult for -all requests

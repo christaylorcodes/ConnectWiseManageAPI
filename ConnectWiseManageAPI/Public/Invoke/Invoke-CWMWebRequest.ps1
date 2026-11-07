@@ -32,17 +32,16 @@
     (capped at 60 seconds).
 
 .EXAMPLE
-    $args = @{
-        Uri = 'https://api.myconnectwise.net/v4_6_release/apis/3.0/service/tickets/12345'
+    $RequestArguments = @{
+        Uri = 'https://na.myconnectwise.net/v4_6_release/apis/3.0/service/tickets/12345'
         Method = 'GET'
     }
-    Invoke-CWMWebRequest -Arguments $args
+    Invoke-CWMWebRequest -Arguments $RequestArguments
 
     Makes a GET request to retrieve a ticket.
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Internal Function:
     - Called by all Invoke-CWM*Master functions

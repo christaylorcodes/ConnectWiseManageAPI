@@ -19,7 +19,7 @@
 .PARAMETER Server
     The ConnectWise Manage server hostname.
     Examples: 'na.myconnectwise.net', 'api-aus.myconnectwise.net', 'connectwise.company.com'
-    Do not include 'https://' or path segments - only the hostname.
+    Pass only the hostname. A leading scheme (https://) or trailing path is tolerated and stripped.
 
 .PARAMETER Company
     The ConnectWise Manage company identifier (company name/ID used during login).
@@ -37,10 +37,9 @@
     Keep this value secure - treat it like a password.
 
 .PARAMETER ClientID
-    The unique identifier for your application or integration.
-    Required by ConnectWise Manage since August 14, 2019.
-    Used for tracking API usage and rate limiting.
+    The unique identifier for your application or integration, sent in the ClientID header.
     Register your application at: https://developer.connectwise.com/ClientID
+    (requires a ConnectWise Developer login)
 
 .PARAMETER Credentials
     PSCredential object containing username and password.
@@ -147,11 +146,11 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Connection Lifecycle:
     - Connections persist for the PowerShell session duration
-    - Cookie authentication may have time-based expiration
+    - Only impersonation connections expire (when the impersonation token expires); API key and
+      cookie connections are reused until Disconnect-CWM or -Force
     - Use Disconnect-CWM to explicitly clear connection
     - Use -Force to refresh an existing connection
 
@@ -161,10 +160,9 @@
     - Never commit credentials to source control
     - Regularly rotate API keys per security policies
 
-    ClientID Requirement:
-    - Required since August 14, 2019
-    - Used for API usage tracking and rate limiting
-    - Register at: https://developer.connectwise.com/ClientID
+    ClientID:
+    - Mandatory parameter; sent as the ClientID header on every request
+    - Register at: https://developer.connectwise.com/ClientID (requires a ConnectWise Developer login)
 
 .LINK
     https://developer.connectwise.com/manage/rest

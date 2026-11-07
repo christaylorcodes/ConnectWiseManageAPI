@@ -5,9 +5,13 @@
 .DESCRIPTION
     Permanently removes a service ticket by ID. This action cannot be undone.
 
-    Use caution when deleting tickets as this removes all associated data including
-    notes, time entries, and configurations. Consider closing tickets instead of
-    deleting them to preserve history.
+    ConnectWise Manage decides what happens to related records (notes, time entries,
+    configurations) and may refuse the delete, for example when time has been entered.
+    Consider closing tickets instead of deleting them to preserve history.
+
+    ConfirmImpact is Medium, so with the default $ConfirmPreference (High) there is no
+    confirmation prompt: the ticket is deleted immediately. Use -Confirm to be prompted
+    or -WhatIf to preview.
 
     This function calls the ConnectWise Manage API endpoint: DELETE /service/tickets/{id}
 
@@ -21,9 +25,9 @@
     Deletes ticket with ID 12345.
 
 .EXAMPLE
-    Remove-CWMTicket -id 12345 -Confirm:$false
+    Remove-CWMTicket -id 12345 -Confirm
 
-    Deletes the ticket without confirmation prompt.
+    Prompts for confirmation before deleting the ticket.
 
 .EXAMPLE
     Remove-CWMTicket -id 12345 -WhatIf
@@ -33,23 +37,23 @@
 .EXAMPLE
     # Delete multiple tickets
     $oldTicketIds = 100, 101, 102
-    $oldTicketIds | ForEach-Object { Remove-CWMTicket -id $_ -Confirm:$false }
+    $oldTicketIds | ForEach-Object { Remove-CWMTicket -id $_ }
 
-    Deletes multiple tickets without prompting for each one.
+    Deletes multiple tickets. No prompt is shown by default; add -Confirm to be prompted for each one.
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Important:
     - This action is permanent and cannot be undone
-    - All ticket data is removed (notes, time entries, etc.)
+    - ConnectWise Manage may reject the delete (for example when time entries exist)
     - Consider closing tickets instead to preserve history
-    - Supports -WhatIf and -Confirm for safety
+    - Supports -WhatIf and -Confirm (no prompt by default)
 
     Alternative to Deletion:
-    Instead of deleting, consider closing the ticket:
-    Update-CWMTicket -id 123 -Operation 'replace' -Path 'closedFlag' -Value $true
+    Instead of deleting, move the ticket to a closed status on its board:
+    $Closed = Get-CWMBoardStatus -serviceBoardId 1 -condition "closedStatus=true" | Select-Object -First 1
+    Update-CWMTicket -id 123 -Operation 'replace' -Path 'status' -Value @{ id = $Closed.id }
 
 .LINK
     https://developer.connectwise.com/manage/rest#/Tickets

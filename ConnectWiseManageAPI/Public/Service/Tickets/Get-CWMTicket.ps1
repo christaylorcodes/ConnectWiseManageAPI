@@ -55,8 +55,8 @@
 
 .PARAMETER pageSize
     Number of records to return per page.
-    Default: API default (typically 25)
-    Maximum: 1000
+    If not specified, the API's default page size is used. The module does not enforce a maximum;
+    the API applies its own limit.
 
 .PARAMETER fields
     Specify which fields to return in the response.
@@ -117,10 +117,9 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Endpoint Selection:
-    - Direct ID lookup and count use GET /service/tickets
+    - Direct ID lookup uses GET /service/tickets/{id}; count uses GET /service/tickets/count
     - All other queries use POST /service/tickets/search
 
     Performance Tips:

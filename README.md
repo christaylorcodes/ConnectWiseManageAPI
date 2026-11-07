@@ -55,8 +55,8 @@ This module makes it easy to leverage PowerShell to automate tasks in ConnectWis
 - **Automated Pagination** for large result sets
 - **Advanced Filtering** using ConnectWise condition syntax
 - **Retry Logic** for handling transient errors
-- **Pipeline Support** for efficient data processing
-- **Comprehensive Documentation** with examples for every function
+- **Object Output** that works with the PowerShell pipeline (Where-Object, Select-Object, Export-Csv)
+- **Built-in Help** for every function (Get-Help <function> -Full), with examples for the most-used ones
 - **Cross-Platform** compatible with Windows PowerShell and PowerShell Core
 
 ## 📦 Installation
@@ -111,31 +111,30 @@ $ticketParams = @{
 }
 New-CWMTicket @ticketParams
 
-# Update a ticket
-$operations = @(
-    @{
-        op = 'replace'
-        path = 'status'
-        value = @{ id = 789 }
-    }
+# Update one field of a ticket
+Update-CWMTicket -id 12345 -Operation replace -Path status -Value @{ id = 789 }
+
+# Update several fields in one request
+Update-CWMTicket -id 12345 -PatchOperations @(
+    @{ op = 'replace'; path = 'status'; value = @{ id = 789 } }
+    @{ op = 'replace'; path = 'summary'; value = 'Updated from PowerShell' }
 )
-Update-CWMTicket -TicketID 12345 -Operation $operations
 ```
 
 ### Working with Companies
 
 ```powershell
-# Search for companies by type
-Get-CWMCompany -condition "types/name='Partner'" -all
+# Search for companies by type (types is a list, so use -childConditions)
+Get-CWMCompany -childConditions "types/name='Partner'" -all
 
 # Get company with specific ID
-Get-CWMCompany -CompanyID 123
+Get-CWMCompany -id 123
 
-# Create a new company
+# Create a new company (look up the type ID with Get-CWMCompanyType)
 $companyParams = @{
     identifier = 'ACME'
     name = 'ACME Corporation'
-    type = @{ name = 'Client' }
+    types = @(@{ id = 1 })
 }
 New-CWMCompany @companyParams
 ```
@@ -148,10 +147,11 @@ Get-CWMTimeEntry -condition "timeStart > [2024-01-01] and timeStart < [2024-01-3
 
 # Create a new time entry
 $timeParams = @{
+    company = @{ id = 123 }
     chargeToType = 'ServiceTicket'
     chargeToId = 12345
-    timeStart = (Get-Date)
-    timeEnd = (Get-Date).AddHours(2)
+    timeStart = (Get-Date) | ConvertTo-CWMTime -Raw
+    timeEnd = (Get-Date).AddHours(2) | ConvertTo-CWMTime -Raw
     member = @{ identifier = 'JDoe' }
 }
 New-CWMTimeEntry @timeParams

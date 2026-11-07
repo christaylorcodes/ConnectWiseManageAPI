@@ -61,7 +61,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Best Practices:
     - Call Disconnect-CWM at the end of scripts to clean up credentials
@@ -72,7 +71,7 @@
     Security Considerations:
     - Removes credentials and cookie-session data (member hash) from memory
     - Prevents accidental credential reuse
-    - Required when switching between accounts
+    - Recommended when switching between accounts (Connect-CWM -Force also replaces the connection)
 
 .LINK
     https://developer.connectwise.com/manage/rest

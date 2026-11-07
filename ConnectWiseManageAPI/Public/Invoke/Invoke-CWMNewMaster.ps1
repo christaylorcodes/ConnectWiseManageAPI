@@ -23,18 +23,17 @@
     Common parameters are automatically skipped.
 
 .EXAMPLE
-    $args = @{
+    $NewArguments = @{
         summary = "New ticket"
         company = @{ id = 250 }
         board = @{ id = 1 }
     }
-    Invoke-CWMNewMaster -Arguments $args -Endpoint '/service/tickets'
+    Invoke-CWMNewMaster -Arguments $NewArguments -Endpoint '/service/tickets'
 
     Creates a new ticket.
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Internal Function:
     - Called by all New-CWM* functions

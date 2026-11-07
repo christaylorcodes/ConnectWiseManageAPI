@@ -40,7 +40,7 @@
     Page number for pagination (default: 1).
 
 .PARAMETER pageSize
-    Records per page (max: 1000).
+    Records per page. The module does not enforce a maximum; the API applies its own limit.
 
 .PARAMETER fields
     Specify which fields to return. Example: @('id', 'name', 'identifier', 'status')
@@ -75,7 +75,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Common Filters:
     - By type: "types contains 'Customer'"

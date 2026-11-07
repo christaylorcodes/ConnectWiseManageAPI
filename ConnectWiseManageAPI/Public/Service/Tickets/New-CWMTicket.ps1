@@ -3,24 +3,25 @@
     Creates a new service ticket in ConnectWise Manage.
 
 .DESCRIPTION
-    Creates a new service ticket with the specified properties. Only summary and company
-    are required - all other fields are optional and will use system defaults if not specified.
+    Creates a new service ticket with the specified properties. The module only requires
+    summary and company; any field you leave out is not sent, and ConnectWise Manage applies
+    its own defaults or validation.
 
     This function calls the ConnectWise Manage API endpoint: POST /service/tickets
 
 .PARAMETER summary
-    The ticket summary/title (required). Maximum 100 characters.
+    The ticket summary/title (required). 1-100 characters (enforced by the parameter's ValidateLength).
 
 .PARAMETER company
     Hashtable with company reference (required). Format: @{ id = 123 }
 
 .PARAMETER board
     Hashtable with service board reference. Format: @{ id = 1 }
-    If not specified, uses the company's default board.
+    If not specified, no board is sent and ConnectWise Manage decides the board.
 
 .PARAMETER status
     Hashtable with status reference. Format: @{ id = 456 }
-    If not specified, uses the board's default status.
+    If not specified, no status is sent and ConnectWise Manage decides the status.
 
 .PARAMETER priority
     Hashtable with priority reference. Format: @{ id = 3 }
@@ -86,7 +87,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Required Fields:
     - summary (string, max 100 chars)

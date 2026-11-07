@@ -1,13 +1,17 @@
-<#
+﻿<#
 .SYNOPSIS
     Deletes a company from ConnectWise Manage.
 
 .DESCRIPTION
     Permanently removes a company record by ID. This action cannot be undone.
 
-    WARNING: Deleting a company will affect all related records including contacts,
-    tickets, agreements, projects, and more. Consider marking the company as inactive
-    instead of deleting to preserve data integrity.
+    ConnectWise Manage decides what happens to related records (contacts, tickets,
+    agreements, projects) and may refuse the delete. Consider marking the company as
+    inactive instead of deleting it to preserve history.
+
+    ConfirmImpact is Medium, so with the default $ConfirmPreference (High) there is no
+    confirmation prompt: the company is deleted immediately. Use -Confirm to be prompted
+    or -WhatIf to preview.
 
     This function calls the ConnectWise Manage API endpoint: DELETE /company/companies/{id}
 
@@ -21,9 +25,9 @@
     Deletes company with ID 250.
 
 .EXAMPLE
-    Remove-CWMCompany -id 250 -Confirm:$false
+    Remove-CWMCompany -id 250 -Confirm
 
-    Deletes the company without confirmation prompt.
+    Prompts for confirmation before deleting the company.
 
 .EXAMPLE
     Remove-CWMCompany -id 250 -WhatIf
@@ -32,17 +36,17 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Important:
     - This action is permanent and cannot be undone
-    - Affects all related records (contacts, tickets, agreements, etc.)
-    - Consider using inactive status instead of deletion
-    - Supports -WhatIf and -Confirm for safety
+    - ConnectWise Manage may reject the delete when related records exist
+    - Consider using an inactive status instead of deletion
+    - Supports -WhatIf and -Confirm (no prompt by default)
 
     Alternative to Deletion:
-    Mark company as inactive instead:
-    Update-CWMCompany -id 250 -Operation 'replace' -Path 'status' -Value @{ id = 2 }
+    Mark the company inactive instead. Status IDs differ per instance, so look the ID up first:
+    $Inactive = Get-CWMCompanyStatus -condition "inactiveFlag=true" | Select-Object -First 1
+    Update-CWMCompany -id 250 -Operation 'replace' -Path 'status' -Value @{ id = $Inactive.id }
 
 .LINK
     https://developer.connectwise.com/manage/rest#/Companies

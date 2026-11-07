@@ -4,10 +4,10 @@
 
 **ConnectWiseManageAPI** is a PowerShell module that provides a comprehensive wrapper for the ConnectWise Manage REST API. ConnectWise Manage is a professional services automation (PSA) platform used by managed service providers (MSPs) and IT service companies.
 
-- **Version:** 0.4.16
+- **Version:** see `ModuleVersion` in [ConnectWiseManageAPI.psd1](ConnectWiseManageAPI/ConnectWiseManageAPI.psd1)
 - **License:** MIT
 - **Author:** Chris Taylor (@ChrisTaylorCodes)
-- **Language:** PowerShell 3.0+
+- **Language:** PowerShell 7.4+ recommended; Windows PowerShell 5.1 supported
 - **Repository:** https://github.com/christaylorcodes/ConnectWiseManageAPI
 
 ## Purpose
@@ -45,7 +45,7 @@ ConnectWiseManageAPI/
 │   ├── Private/                   # Internal helper functions (not exported)
 │   │   ├── ConvertFrom/          # Conversion utilities
 │   │   └── Helper/               # URL building, parameter testing
-│   └── Public/                    # Exported functions (180+ cmdlets)
+│   └── Public/                    # Exported functions (one per file, 200+)
 │       ├── Authentication/        # Connect/Disconnect
 │       ├── Company/              # Company, contact, site operations
 │       ├── Finance/              # Agreement and billing operations
@@ -59,8 +59,10 @@ ConnectWiseManageAPI/
 │       ├── Service/              # Service tickets and boards
 │       ├── System/               # System info, members, audits
 │       └── Time/                 # Time entries and timesheets
-├── Docs/                         # Function documentation (80+ markdown files)
+├── Docs/                         # Generated function documentation (PlatyPS, one file per function)
 ├── Examples/                     # Usage examples
+├── Templates/                    # Function and help templates
+├── Tools/                        # Maintenance scripts (manifest export, PlatyPS cleanup)
 └── Tests/                        # Pester tests
 ```
 
@@ -81,7 +83,7 @@ These are the core API interaction functions that all endpoint-specific function
 
 - **[Invoke-CWMWebRequest.ps1](ConnectWiseManageAPI/Public/Invoke/Invoke-CWMWebRequest.ps1)** - Low-level HTTP request handler
   - Handles authentication headers
-  - Implements retry logic for 5xx errors
+  - Retries 429 (any method) and 502/503/504 (GET/HEAD only), honoring Retry-After
   - Manages request/response serialization
   - Error handling and logging
 
@@ -90,11 +92,12 @@ These are the core API interaction functions that all endpoint-specific function
   - Handles custom fields and child conditions
 
 - **[Invoke-CWMSearchMaster.ps1](ConnectWiseManageAPI/Public/Invoke/Invoke-CWMSearchMaster.ps1)** - Search endpoint handler
-  - Uses POST for complex queries
+  - Uses POST for complex queries; the caller passes the full `.../search` endpoint
 
 - **[Invoke-CWMNewMaster.ps1](ConnectWiseManageAPI/Public/Invoke/Invoke-CWMNewMaster.ps1)** - Generic POST requests (create)
 
-- **[Invoke-CWMUpdateMaster.ps1](ConnectWiseManageAPI/Public/Invoke/Invoke-CWMUpdateMaster.ps1)** - Generic PATCH/PUT requests (update)
+- **[Invoke-CWMUpdateMaster.ps1](ConnectWiseManageAPI/Public/Invoke/Invoke-CWMUpdateMaster.ps1)** - Generic PATCH requests (update)
+  - One operation from `Operation`/`Path`/`Value`, or several from `PatchOperations`
 
 - **[Invoke-CWMRemoveMaster.ps1](ConnectWiseManageAPI/Public/Invoke/Invoke-CWMRemoveMaster.ps1)** - Generic DELETE requests
 
@@ -114,8 +117,8 @@ Each functional area has dedicated cmdlets that follow PowerShell verb-noun conv
 
 #### Service Management ([Public/Service/](ConnectWiseManageAPI/Public/Service/))
 - Tickets: `Get-CWMTicket`, `New-CWMTicket`, `Update-CWMTicket`, `Remove-CWMTicket`
-- Service Boards: `Get-CWMServiceBoard`, `Get-CWMServiceBoardStatus`, `Get-CWMServiceBoardType`
-- Ticket Notes: `Get-CWMTicketNote`, `New-CWMTicketNote`, `Update-CWMTicketNote`, `Remove-CWMTicketNote`
+- Service Boards: `Get-CWMServiceBoard`, `Get-CWMBoardStatus`, `Get-CWMBoardType`
+- Ticket Notes: `Get-CWMTicketNote`, `New-CWMTicketNote`, `Remove-CWMTicketNote`
 - Ticket Configurations: `Get-CWMTicketConfiguration`, `New-CWMTicketConfiguration`, `Remove-CWMTicketConfiguration`
 
 #### Company Management ([Public/Company/](ConnectWiseManageAPI/Public/Company/))
@@ -136,9 +139,9 @@ Each functional area has dedicated cmdlets that follow PowerShell verb-noun conv
 - Agreements: `Get-CWMAgreement`, `New-CWMAgreement`, `Update-CWMAgreement`
 
 #### System ([Public/System/](ConnectWiseManageAPI/Public/System/))
-- Members: `Get-CWMSystemMember`, `New-CWMSystemMember`, `Update-CWMSystemMember`
+- Members: `Get-CWMMember`, `New-CWMMember`, `Update-CWMMember`
 - Audit Trail: `Get-CWMAuditTrail`
-- Documents: `Get-CWMDocument`, `New-CWMDocument`, `Update-CWMDocument`
+- Documents: `Get-CWMDocument`, `New-CWMDocument`
 - System Info: `Get-CWMSystemInfo`
 
 ## Common Patterns
@@ -171,16 +174,18 @@ ConnectWise Manage uses a specific condition syntax for filtering:
 
 ### Common Update Pattern
 
-Update operations typically use patch objects:
+Every `Update-CWM*` function takes either one change (`-Operation`/`-Path`/`-Value`) or several
+changes in one request (`-PatchOperations`):
 ```powershell
-$Operations = @(
-    @{
-        op = 'replace'
-        path = 'status'
-        value = @{ id = 123 }
-    }
+# One change
+Update-CWMTicket -id 456 -Operation replace -Path status -Value @{ id = 123 }
+
+# Several changes in one request
+Update-CWMTicket -id 456 -PatchOperations @(
+    @{ op = 'replace'; path = 'status'; value = @{ id = 123 } }
+    @{ op = 'replace'; path = 'summary'; value = 'Updated summary' }
+    @{ op = 'remove'; path = 'contact' }
 )
-Update-CWMTicket -TicketID 456 -Operation $Operations
 ```
 
 ## Authentication Flow
@@ -195,7 +200,7 @@ Update-CWMTicket -TicketID 456 -Operation $Operations
 ## Error Handling
 
 - All API calls wrapped in try/catch blocks
-- Retry logic for HTTP 5xx errors (server errors)
+- Retries 429 and, for GET/HEAD only, 502/503/504 (writes are never retried)
 - Detailed error messages with API response content
 - Connection validation before API calls
 - Parameter validation using PowerShell parameter attributes
@@ -203,8 +208,8 @@ Update-CWMTicket -TicketID 456 -Operation $Operations
 ## Testing
 
 - **Framework:** Pester (PowerShell testing framework)
-- **Location:** [Tests/ConnectWiseManageAPI.Tests.ps1](Tests/ConnectWiseManageAPI.Tests.ps1)
-- **CI/CD:** AppVeyor
+- **Location:** [Tests/](Tests/); run everything with `./Tests/appveyor.pester.ps1 -Test` on both `pwsh` and `powershell`
+- **CI/CD:** GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)); AppVeyor is kept for continuity
 - **Coverage:** Authentication, parameter validation, API interactions
 
 ## Key Files Reference
@@ -226,8 +231,8 @@ Update-CWMTicket -TicketID 456 -Operation $Operations
 2. Use appropriate master invoke function (`Invoke-CWMGetMaster`, etc.)
 3. Follow parameter naming conventions
 4. Include comment-based help with `.SYNOPSIS`, `.DESCRIPTION`, `.EXAMPLE`
-5. Add to exported functions in manifest if public
-6. Add documentation in `Docs/` directory
+5. Run `./Tools/Update-CWMManifestExport.ps1` to add it to `FunctionsToExport` in the manifest
+6. Regenerate the `Docs/` markdown (see below)
 7. Update function reference in `ConnectWiseManageAPI_Functions.md`
 
 ### Coding Standards
@@ -270,7 +275,6 @@ All public functions must include comment-based help following this structure:
 
 .NOTES
     Author: Chris Taylor
-    Date: YYYY-MM-DD
 
     Additional notes about:
     - Internal implementation details
@@ -299,17 +303,24 @@ A comprehensive documentation template is available at [Templates/FunctionDocume
 
 #### Regenerating Markdown Documentation
 
-After updating comment-based help in any `.ps1` file, regenerate the markdown documentation using PlatyPS:
+After updating comment-based help in any `.ps1` file, regenerate the markdown documentation using PlatyPS.
+Run from the repository root:
 
 ```powershell
+# 0. After adding, renaming or removing a public function, update the manifest exports first
+./Tools/Update-CWMManifestExport.ps1
+
 # 1. Import the module with latest changes
-Import-Module 'c:\_Code\ConnectWiseManageAPI\ConnectWiseManageAPI\ConnectWiseManageAPI.psd1' -Force
+Import-Module ./ConnectWiseManageAPI/ConnectWiseManageAPI.psd1 -Force
 
 # 2. Import PlatyPS
 Import-Module PlatyPS -Force
 
 # 3. Regenerate all markdown files
-Update-MarkdownHelp -Path 'c:\_Code\ConnectWiseManageAPI\Docs' -UpdateInputOutput -UseFullTypeName -Force
+Update-MarkdownHelp -Path ./Docs -UpdateInputOutput -UseFullTypeName -Force
+
+# 4. Strip the -ProgressAction parameter PlatyPS adds on PowerShell 7.4+
+./Tools/Remove-PlatyPSProgressAction.ps1
 ```
 
 **Important Notes:**
@@ -328,7 +339,7 @@ When adding or updating function documentation:
 3. **Include examples** - Provide practical, real-world usage examples
 4. **Document all parameters** - Explain purpose, valid values, and usage patterns
 5. **Add notes** - Include API endpoint information, performance tips, version requirements
-6. **Regenerate markdown** - Run `Update-MarkdownHelp` to update the `Docs/` directory
+6. **Regenerate markdown** - Run `Update-MarkdownHelp`, then `./Tools/Remove-PlatyPSProgressAction.ps1`
 7. **Test the help** - Verify with `Get-Help Function-Name -Full`
 8. **Commit both files** - Commit the source `.ps1` and generated `.md` files together
 
@@ -358,24 +369,18 @@ New-CWMTicket @Ticket
 
 ### Searching Companies
 ```powershell
-Get-CWMCompany -condition "types contains 'Partner'" -all
+# types is a list on the company, so filter it with -childConditions
+Get-CWMCompany -childConditions "types/name='Partner'" -all
 ```
 
 ### Updating a Contact
 ```powershell
-$Update = @(
-    @{
-        op = 'replace'
-        path = 'email'
-        value = 'newemail@example.com'
-    }
-)
-Update-CWMContact -ContactID 456 -Operation $Update
+Update-CWMContact -id 456 -Operation replace -Path title -Value 'Service Manager'
 ```
 
 ## Dependencies
 
-- **PowerShell Version:** 3.0 or higher
+- **PowerShell Version:** 7.4+ recommended; Windows PowerShell 5.1 supported (see `PowerShellVersion` in the manifest)
 - **Assemblies:** System.Web (for URL encoding)
 - **External Modules:** None (self-contained)
 - **API Requirements:** ConnectWise Manage server and API credentials
@@ -391,6 +396,4 @@ Update-CWMContact -ContactID 456 -Operation $Update
 
 ## Version History
 
-Current version: **0.4.16** (latest commit: e7f0842)
-
-The module is actively maintained with regular updates for new API endpoints and bug fixes.
+See [CHANGELOG.md](CHANGELOG.md) for release history. The current version is `ModuleVersion` in the manifest.

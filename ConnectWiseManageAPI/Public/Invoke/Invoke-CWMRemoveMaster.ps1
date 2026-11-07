@@ -22,7 +22,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Internal Function:
     - Called by all Remove-CWM* functions

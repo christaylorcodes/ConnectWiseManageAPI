@@ -7,7 +7,7 @@
     Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster when -all switch is used.
 
     Automatically follows pagination links in response headers to retrieve all pages
-    of results. Uses maximum page size (999) for efficiency and forward-only pagination
+    of results. Uses page size 999 and forward-only pagination
     for better performance.
 
     This function iterates through all pages until no more results are available.
@@ -20,22 +20,22 @@
     - Headers: Request headers
 
 .EXAMPLE
-    $args = @{
-        Uri = 'https://api.myconnectwise.net/.../service/tickets?conditions=status/name="Open"'
+    $Condition = [System.Web.HttpUtility]::UrlEncode("status/name='Open'")
+    $RequestArguments = @{
+        Uri = "https://na.myconnectwise.net/v4_6_release/apis/3.0/service/tickets?conditions=$Condition"
         Method = 'GET'
     }
-    Invoke-CWMAllResult -Arguments $args
+    Invoke-CWMAllResult -Arguments $RequestArguments
 
     Retrieves all pages of open tickets.
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Internal Function:
     - Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster
     - Uses forward-only pagination for performance
-    - Sets page size to maximum (999 records)
+    - Uses page size 999
     - Follows Link headers for next page
     - Returns results from all pages
 

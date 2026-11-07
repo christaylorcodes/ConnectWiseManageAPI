@@ -67,7 +67,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Common Update Paths:
     - 'summary' - Ticket title

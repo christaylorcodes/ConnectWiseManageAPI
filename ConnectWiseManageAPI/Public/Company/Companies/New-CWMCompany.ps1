@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Creates a new company record in ConnectWise Manage.
 
@@ -80,7 +80,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Required Fields:
     - identifier (string, max 25 chars, must be unique)

@@ -6,7 +6,8 @@
     Master function for all GET operations in the module. Handles direct ID lookups,
     counting, filtering, sorting, field selection, and pagination.
 
-    Used by all Get-CWM* functions (Get-CWMTicket, Get-CWMCompany, etc.) to retrieve data.
+    Used by the Get-CWM* functions (Get-CWMCompany, etc.) to retrieve data. Get-CWMTicket uses it
+    for id and count lookups and sends list queries to Invoke-CWMSearchMaster.
     Automatically routes to Invoke-CWMAllResult when -all switch is used.
 
     This function calls the ConnectWise Manage API endpoint: GET {Endpoint}
@@ -22,7 +23,8 @@
     - pageId: Record id to start forward-only pagination from (sent as &pageId=)
     - fields: Field selection array
     - all: Switch to retrieve all pages
-    - count: Switch to return count only
+    - count: Switch to return count only. Must be a SwitchParameter (as in $PSBoundParameters);
+      count = $true is ignored because the check uses .IsPresent
 
     The id is read from $Arguments.id only; variables in the caller's scope are never used.
 
@@ -51,10 +53,9 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: 2024-01-01
 
     Internal Function:
-    - Called by all Get-CWM* functions
+    - Called by the Get-CWM* functions
     - Handles pagination automatically with -all
     - Routes to Invoke-CWMAllResult for -all requests
     - Supports both direct lookups and filtered queries

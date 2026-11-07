@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Brief one-line description of what the function does.
 
@@ -76,14 +76,23 @@
     Example: @('id', 'name', 'status')
 
 .PARAMETER Operation
-    Array of patch operation hashtables for updating records.
-    Each operation must contain:
-    - op: The operation type ('add', 'replace', or 'remove')
-    - path: The field path to modify
-    - value: The new value (not needed for 'remove' operations)
+    (Update-CWM* functions) The patch operation for a single change: 'add', 'replace', or 'remove'.
+    Used with -Path and -Value. Example: -Operation replace -Path summary -Value 'New summary'
+
+.PARAMETER Path
+    (Update-CWM* functions) The field path to modify, for example 'summary' or 'status'.
+    Use slash notation for nested fields: 'customFields/0/value'
+
+.PARAMETER Value
+    (Update-CWM* functions) The new value. Required (it may be $null) for 'add' and 'replace';
+    not needed for 'remove'.
+
+.PARAMETER PatchOperations
+    (Update-CWM* functions) Several patch operations applied in one request, instead of
+    -Operation/-Path/-Value. Each is a hashtable with op, path and (except for 'remove') value.
 
     Example:
-    @(
+    -PatchOperations @(
         @{ op = 'replace'; path = 'status'; value = @{ id = 123 } }
         @{ op = 'replace'; path = 'summary'; value = 'Updated summary' }
     )
@@ -126,8 +135,6 @@
 
 .NOTES
     Author: Chris Taylor
-    Date: YYYY-MM-DD
-    Version: X.X.X
 
     Additional notes:
     - Performance considerations
@@ -160,7 +167,9 @@
 
 #>
 function Verb-CWMNoun {
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
+    # Get-CWM* stub. New-/Update-/Remove-CWM* functions add SupportsShouldProcess and
+    # call Invoke-CWMNewMaster / Invoke-CWMUpdateMaster / Invoke-CWMRemoveMaster instead.
+    [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]

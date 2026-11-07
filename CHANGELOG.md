@@ -16,8 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Funding configuration
 - Enhanced README.md with modern structure and examples
 - .editorconfig for consistent code formatting across editors
-- .gitattributes for proper handling of PowerShell files
-- Comprehensive .gitignore for PowerShell development
 
 - `Connect-CWM -AllowInsecureRedirect`: opt-in workaround for the PowerShell 7.4+ error
   "Cannot follow an insecure redirection by default" on New-/Update-CWM* commands against
@@ -26,20 +24,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   It has no effect on Windows PowerShell 5.1 or PowerShell 7.0-7.3.
 
 ### Changed
+- Expanded .gitattributes for proper handling of PowerShell files
+- Expanded .gitignore for PowerShell development
 - Updated README badges with additional metrics
 - `Invoke-CWMWebRequest` now gives a readable error for insecure-redirection failures, warning that the record
   may already have been created, and for redirects that are not followed.
 
 ---
 
-## [0.4.16] - 2024-XX-XX
+## [0.4.16] - 2025-08-26
 
 ### Changed
 - Version bump to 0.4.16
 
 ## [0.4.x] - Previous Releases
 
-For changes in versions prior to 0.4.16, please refer to the [GitHub releases](https://github.com/christaylorcodes/ConnectWiseManageAPI/releases) and commit history.
+For changes in versions prior to 0.4.16, please refer to the [commit history](https://github.com/christaylorcodes/ConnectWiseManageAPI/commits/master) and the [PowerShell Gallery version history](https://www.powershellgallery.com/packages/ConnectWiseManageAPI).
 
 ---
 
@@ -61,7 +61,7 @@ For changes in versions prior to 0.4.16, please refer to the [GitHub releases](h
 
 ### Example Entry
 ```markdown
-## [0.5.0] - 2025-02-15
+## [X.Y.Z] - YYYY-MM-DD
 
 ### Added
 - New function `Get-CWMCustomReport` for retrieving custom reports
@@ -92,7 +92,6 @@ For changes in versions prior to 0.4.16, please refer to the [GitHub releases](h
 
 ---
 
-**Note**: Starting with version 0.4.16, we will maintain detailed changelogs for all releases. Previous versions can be reviewed through the [GitHub releases page](https://github.com/christaylorcodes/ConnectWiseManageAPI/releases).
+**Note**: Starting with version 0.4.16, we will maintain detailed changelogs for all releases. Previous versions can be reviewed through the [commit history](https://github.com/christaylorcodes/ConnectWiseManageAPI/commits/master).
 
-[unreleased]: https://github.com/christaylorcodes/ConnectWiseManageAPI/compare/v0.4.16...HEAD
-[0.4.16]: https://github.com/christaylorcodes/ConnectWiseManageAPI/releases/tag/0.4.16
+[0.4.16]: https://www.powershellgallery.com/packages/ConnectWiseManageAPI/0.4.16
