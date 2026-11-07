@@ -98,6 +98,8 @@ This release has **breaking changes**. Read them before upgrading.
   `New-CWMCompanyContact -managerContact/-assistantContact`.
 - `Disconnect-CWM` also clears the cookie session, and does nothing quietly when you are not connected.
 - `Submit-CWMTimeSheet` calls `Update-CWMTimeSheet -Submit` and supports `-WhatIf`.
+- `Tests/Invoke-Tests.ps1` writes its results to `TestResults/` (one file pair per PowerShell version, overwritten
+  each run) instead of timestamped files in the repo root.
 
 ### Fixed
 

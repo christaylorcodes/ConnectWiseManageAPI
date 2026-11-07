@@ -1,6 +1,7 @@
 ﻿# Runs the Pester 5 tests. Works on Windows PowerShell 5.1 and PowerShell 7, locally and in CI.
 #   -Test      run the tests for the current PowerShell version and save the results
 #   -Finalize  read all saved results and fail if any test failed
+# Results go to ./TestResults (gitignored), one pair of files per PowerShell version, overwritten each run.
 
 param(
     [switch]$Finalize,
@@ -8,9 +9,10 @@ param(
     [string]$ProjectRoot = (Split-Path $PSScriptRoot -Parent)
 )
 
-$Timestamp = Get-Date -UFormat '%Y%m%d-%H%M%S'
 $PSVersion = $PSVersionTable.PSVersion.Major
-$TestFile = Join-Path $ProjectRoot "TestResults_PS$PSVersion`_$TimeStamp.xml"
+$ResultsDir = Join-Path $ProjectRoot 'TestResults'
+$TestFile = Join-Path $ResultsDir "TestResults_PS$PSVersion.xml"
+New-Item -ItemType Directory -Path $ResultsDir -Force | Out-Null
 Set-Location $ProjectRoot
 
 if ($Test) {
@@ -30,11 +32,11 @@ if ($Test) {
 
     Invoke-Pester -Configuration $Config |
         Select-Object PassedCount, FailedCount, SkippedCount, @{ n = 'Failed'; e = { $_.Failed | ForEach-Object { $_.ExpandedPath } } } |
-        Export-Clixml -Path (Join-Path $ProjectRoot "PesterResults_PS$PSVersion`_$Timestamp.xml")
+        Export-Clixml -Path (Join-Path $ResultsDir "PesterResults_PS$PSVersion.xml")
 }
 
 if ($Finalize) {
-    $AllFiles = Get-ChildItem -Path (Join-Path $ProjectRoot 'PesterResults_PS*.xml')
+    $AllFiles = Get-ChildItem -Path (Join-Path $ResultsDir 'PesterResults_PS*.xml')
     "`n`tSTATUS: Finalizing results`n"
     "COLLATING FILES:`n$($AllFiles.FullName | Out-String)"
 
