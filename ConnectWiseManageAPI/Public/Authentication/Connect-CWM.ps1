@@ -258,8 +258,8 @@ function Connect-CWM {
     $EscapedCompany = [uri]::EscapeDataString($Company)
     $Connected = $false
     try {
-        # The previous connection is replaced. Until the new one is validated nothing usable is cached:
-        # on any failure the finally block clears both connection variables.
+        # The previous connection is replaced. On any failure the finally block clears both connection
+        # variables, so a partly built connection is never left behind.
         $script:CWMServerConnection = $null
         $script:CWMSession = $null
 
@@ -270,10 +270,6 @@ function Connect-CWM {
             ClientID        = $ClientID
             'Cache-Control' = 'no-cache'
         }
-        $Expiration = $null
-        $Session = $null
-
-        # Built locally; it is only stored for the module once the connection has been validated.
         $Connection = @{
             Server           = $Server
             Company          = $Company
@@ -284,6 +280,8 @@ function Connect-CWM {
             Codebase         = $CompanyInfo.Codebase
             BasePath         = $BasePath
         }
+        # The login and impersonation requests below go through Invoke-CWMWebRequest, which needs a connection
+        $script:CWMServerConnection = $Connection
 
         # Impersonation. Checked before plain API key auth, which also matches when PubKey and PrivateKey are passed.
         if ($ConnectionMethod -eq 'Impersonation') {
@@ -303,10 +301,7 @@ function Connect-CWM {
                 ContentType = 'application/json; charset=utf-8'
                 Headers     = $TokenHeaders
             }
-            # Invoke-CWMWebRequest needs a connection; this one has no Authorization until the token is issued
-            $script:CWMServerConnection = $Connection
             $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-            $script:CWMServerConnection = $null
             if ($Result.content) { $Result = ConvertFrom-CWMJson $Result.Content }
             if (!$Result.publicKey -or !$Result.privateKey) {
                 Write-Error "Issue getting Auth Token for Impersonated user, $MemberID"
@@ -314,7 +309,7 @@ function Connect-CWM {
             }
 
             # Create auth header for Impersonated user
-            if ($Result.expiration) { $Expiration = [datetime]$Result.expiration }
+            if ($Result.expiration) { $Connection.Expiration = [datetime]$Result.expiration }
             $AuthString = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
             $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)))
             $Headers.Authorization = "Basic $EncodedAuth"
@@ -345,9 +340,7 @@ function Connect-CWM {
                 WebSession = $Session
             }
 
-            $script:CWMServerConnection = $Connection
             $CookieResponse = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-            $script:CWMServerConnection = $null
             $CookieResult = $null
             if ($CookieResponse.Content) { $CookieResult = ConvertFrom-CWMJson $CookieResponse.Content }
             if (!$CookieResult.Success) {
@@ -374,15 +367,12 @@ function Connect-CWM {
             $Connection.Session = $Session
         }
 
-        $Connection.Expiration = $Expiration
-        # Set only on the final connection; login/impersonation requests above run without it
+        # Set only now; the login/impersonation requests above run without it
         $Connection.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
         # No version yet: it is read from the system info below
         $Connection.Headers.Accept = 'application/vnd.connectwise.com+json'
 
-        # Validate connection info (Get-CWMSystemInfo uses the module's connection)
         Write-Verbose 'Validating authentication'
-        $script:CWMServerConnection = $Connection
         $Info = Get-CWMSystemInfo
         if (!$Info) {
             Write-Warning 'Authentication failed. Clearing connection settings.'
@@ -394,9 +384,7 @@ function Connect-CWM {
         $Connection.Version = "$($ServerVersion.Major).$($ServerVersion.Minor)"
         $Connection.Headers.Accept = "application/vnd.connectwise.com+json; version=$($Connection.Version)"
 
-        # Only now is the connection stored. A non-cookie connection clears any earlier cookie session.
-        $script:CWMServerConnection = $Connection
-        $script:CWMSession = $Session
+        $script:CWMSession = $Connection.Session
         $Connected = $true
     }
     finally {

@@ -64,9 +64,7 @@ function Invoke-CWMAllResult {
 
     # The next-page URL comes from the server's Link header and is requested with the connection's credentials,
     # so it may only point at the connected server, over https (never a downgrade from the first request).
-    $AllowedHost = $null
     try { $AllowedHost = ([uri]"https://$($script:CWMServerConnection.Server)").Host } catch { $AllowedHost = $null }
-    $FirstScheme = $null
     try { $FirstScheme = ([uri][string]$Arguments.Uri).Scheme } catch { $FirstScheme = $null }
 
     # Update header for new pagination-type
