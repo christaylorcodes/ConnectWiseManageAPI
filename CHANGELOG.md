@@ -81,6 +81,18 @@ This release has **breaking changes**. Read them before upgrading.
   a `byte[]`.
 - **User-Agent** `ConnectWiseManageAPI/<version> PowerShell/<version>` on every request, so ConnectWise can identify
   the module's traffic.
+- **29 new endpoint functions** (checked against the 2026.11 OpenAPI spec):
+  - Custom fields: `Get-`, `New-`, `Update-` and `Remove-CWMUserDefinedField` (`/system/userDefinedFields`).
+  - Agreements: `Get-`, `New-`, `Update-` and `Remove-CWMAgreementAdjustment`, `-CWMAgreementWorkRole` and
+    `-CWMAgreementWorkType` (`/finance/agreements/{id}/adjustments`, `/workroles`, `/worktypes`).
+  - Invoices: `New-CWMInvoice`, `Update-CWMInvoice`, and `Get-CWMInvoice -id <n> -pdf [-OutFile]` for the invoice PDF.
+  - Ticket children: `Get-CWMTicketTimeEntry`, `Get-CWMTicketScheduleEntry`, `Get-CWMTicketDocument` and
+    `Get-CWMTicketProduct`. They return full records from `/time/entries`, `/schedule/entries`, `/system/documents`
+    and `/procurement/products`, not the id-only `/service/tickets/{id}/...` endpoints the API documentation
+    redirects from.
+  - Lookups: `Get-CWMWorkRole`, `Get-CWMWorkType`, `Get-CWMExpenseType`, `Get-CWMConfigurationStatus` and
+    `Get-CWMWorkflow`.
+  - Expenses: `Update-CWMExpenseEntry` and `Remove-CWMExpenseEntry`.
 
 ### Changed
 

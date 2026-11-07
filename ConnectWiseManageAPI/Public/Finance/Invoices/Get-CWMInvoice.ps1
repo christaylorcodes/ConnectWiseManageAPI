@@ -13,6 +13,13 @@
     When specified, returns only that invoice (GET /finance/invoices/{id}).
     Alias: invoiceId
 
+.PARAMETER pdf
+    With -id, download the invoice as a PDF (GET /finance/invoices/{id}/pdf). Returns the PDF as a byte
+    array, or writes it to -OutFile.
+
+.PARAMETER OutFile
+    With -id -pdf, write the PDF to this path and return the file instead of the bytes.
+
 .PARAMETER count
     Returns only the count of matching invoices (GET /finance/invoices/count).
 
@@ -65,11 +72,17 @@
 
     Returns the number of invoices for company 250.
 
+.EXAMPLE
+    Get-CWMInvoice -id 1001 -pdf -OutFile 'C:\Temp\Invoice-1001.pdf'
+
+    Saves invoice 1001 as a PDF.
+
 .NOTES
     Endpoints:
     - GET /finance/invoices
     - GET /finance/invoices/{id}
     - GET /finance/invoices/count
+    - GET /finance/invoices/{id}/pdf
 
     Originally proposed by jadamwilson in PR #77
 
@@ -85,6 +98,8 @@ function Get-CWMInvoice {
     param(
         [Alias('invoiceId')]
         [int]$id,
+        [switch]$pdf,
+        [string]$OutFile,
         [switch]$count,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
@@ -96,6 +111,14 @@ function Get-CWMInvoice {
         [string[]]$fields,
         [switch]$all
     )
+
+    if (($pdf -and !$id) -or ($OutFile -and !$pdf)) {
+        return Write-Error '-pdf needs the -id of the invoice, and -OutFile needs -id -pdf.'
+    }
+    # The PDF is a file, not JSON
+    if ($pdf) {
+        return Invoke-CWMDownload -Endpoint "/finance/invoices/$($id)/pdf" -OutFile $OutFile
+    }
 
     $Endpoint = '/finance/invoices'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint

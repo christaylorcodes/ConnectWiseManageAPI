@@ -14,7 +14,10 @@ BeforeDiscovery {
     $Cases = @(
         @{ Name = 'Update-CWMAgreement'; Ids = @('id') }
         @{ Name = 'Update-CWMAgreementAddition'; Ids = @('parentId', 'id') }
+        @{ Name = 'Update-CWMAgreementAdjustment'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMAgreementType'; Ids = @('id') }
+        @{ Name = 'Update-CWMAgreementWorkRole'; Ids = @('parentId', 'id') }
+        @{ Name = 'Update-CWMAgreementWorkType'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMBoardItemAssociation'; Ids = @('parentId', 'itemId', 'typeId') }
         @{ Name = 'Update-CWMCallbackEntry'; Ids = @('id') }
         @{ Name = 'Update-CWMCompany'; Ids = @('id') }
@@ -27,6 +30,8 @@ BeforeDiscovery {
         @{ Name = 'Update-CWMCompanyTeam'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMCompanyTypeAssociation'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMContactCommunication'; Ids = @('parentId', 'id') }
+        @{ Name = 'Update-CWMExpenseEntry'; Ids = @('id') }
+        @{ Name = 'Update-CWMInvoice'; Ids = @('id') }
         @{ Name = 'Update-CWMKnowledgeBaseArticle'; Ids = @('id') }
         @{ Name = 'Update-CWMMember'; Ids = @('id') }
         @{ Name = 'Update-CWMOpportunity'; Ids = @('id') }
@@ -47,6 +52,7 @@ BeforeDiscovery {
         @{ Name = 'Update-CWMTicket'; Ids = @('id') }
         @{ Name = 'Update-CWMTicketTask'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMTimeEntry'; Ids = @('id') }
+        @{ Name = 'Update-CWMUserDefinedField'; Ids = @('id') }
     )
 }
 

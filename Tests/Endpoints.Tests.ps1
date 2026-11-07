@@ -87,6 +87,35 @@ Describe 'Endpoint functions' {
         @{ Name = 'Get-CWMContactType -conditions (alias)'; HttpMethod = 'GET'; Path = '/company/contacts/types?conditions=description%3d%27Owner%27'; Call = { Get-CWMContactType -conditions "description='Owner'" } }
         @{ Name = 'Get-CWMProductAdjustmentDetail'; HttpMethod = 'GET'; Path = '/procurement/adjustments/4/details'; Call = { Get-CWMProductAdjustmentDetail -adjustmentId 4 } }
         @{ Name = 'New-CWMMarketingGroupCompany'; HttpMethod = 'Post'; Path = '/marketing/groups/3/companies'; Call = { New-CWMMarketingGroupCompany -groupId 3 -id 250 -Confirm:$false } }
+        # API best-practice review: new endpoints (0.5.0)
+        @{ Name = 'Get-CWMUserDefinedField (list)'; HttpMethod = 'GET'; Path = '/system/userDefinedFields'; Call = { Get-CWMUserDefinedField } }
+        @{ Name = 'Get-CWMUserDefinedField (id)'; HttpMethod = 'GET'; Path = '/system/userDefinedFields/4'; Call = { Get-CWMUserDefinedField -id 4 } }
+        @{ Name = 'Get-CWMUserDefinedField (count)'; HttpMethod = 'GET'; Path = '/system/userDefinedFields/count'; Call = { Get-CWMUserDefinedField -count } }
+        @{ Name = 'New-CWMUserDefinedField'; HttpMethod = 'Post'; Path = '/system/userDefinedFields'; Call = { New-CWMUserDefinedField -podId 1 -caption 'C' -sequenceNumber 1 -fieldTypeIdentifier Text } }
+        @{ Name = 'Update-CWMUserDefinedField'; HttpMethod = 'Patch'; Path = '/system/userDefinedFields/4'; Call = { Update-CWMUserDefinedField -id 4 -Operation replace -Path helpText -Value 'x' } }
+        @{ Name = 'Remove-CWMUserDefinedField'; HttpMethod = 'Delete'; Path = '/system/userDefinedFields/4'; Call = { Remove-CWMUserDefinedField -id 4 -Confirm:$false } }
+        @{ Name = 'Get-CWMAgreementAdjustment'; HttpMethod = 'GET'; Path = '/finance/agreements/12/adjustments/5'; Call = { Get-CWMAgreementAdjustment -agreementId 12 -id 5 } }
+        @{ Name = 'New-CWMAgreementAdjustment'; HttpMethod = 'Post'; Path = '/finance/agreements/12/adjustments'; Call = { New-CWMAgreementAdjustment -parentId 12 -amount -50 } }
+        @{ Name = 'Update-CWMAgreementAdjustment'; HttpMethod = 'Patch'; Path = '/finance/agreements/12/adjustments/5'; Call = { Update-CWMAgreementAdjustment -parentId 12 -id 5 -Operation replace -Path amount -Value 1 } }
+        @{ Name = 'Remove-CWMAgreementAdjustment'; HttpMethod = 'Delete'; Path = '/finance/agreements/12/adjustments/5'; Call = { Remove-CWMAgreementAdjustment -parentId 12 -id 5 -Confirm:$false } }
+        @{ Name = 'Get-CWMAgreementWorkRole'; HttpMethod = 'GET'; Path = '/finance/agreements/12/workroles/count'; Call = { Get-CWMAgreementWorkRole -parentId 12 -count } }
+        @{ Name = 'New-CWMAgreementWorkRole'; HttpMethod = 'Post'; Path = '/finance/agreements/12/workroles'; Call = { New-CWMAgreementWorkRole -parentId 12 -workRole @{ id = 3 } -rateType Custom -rate 95 } }
+        @{ Name = 'Update-CWMAgreementWorkRole'; HttpMethod = 'Patch'; Path = '/finance/agreements/12/workroles/5'; Call = { Update-CWMAgreementWorkRole -parentId 12 -id 5 -Operation replace -Path rate -Value 1 } }
+        @{ Name = 'Remove-CWMAgreementWorkRole'; HttpMethod = 'Delete'; Path = '/finance/agreements/12/workroles/5'; Call = { Remove-CWMAgreementWorkRole -parentId 12 -id 5 -Confirm:$false } }
+        @{ Name = 'Get-CWMAgreementWorkType'; HttpMethod = 'GET'; Path = '/finance/agreements/12/worktypes'; Call = { Get-CWMAgreementWorkType -parentId 12 } }
+        @{ Name = 'New-CWMAgreementWorkType'; HttpMethod = 'Post'; Path = '/finance/agreements/12/worktypes'; Call = { New-CWMAgreementWorkType -parentId 12 -rateType Multiplier -billTime Billable } }
+        @{ Name = 'Update-CWMAgreementWorkType'; HttpMethod = 'Patch'; Path = '/finance/agreements/12/worktypes/5'; Call = { Update-CWMAgreementWorkType -parentId 12 -id 5 -Operation replace -Path rate -Value 1 } }
+        @{ Name = 'Remove-CWMAgreementWorkType'; HttpMethod = 'Delete'; Path = '/finance/agreements/12/worktypes/5'; Call = { Remove-CWMAgreementWorkType -parentId 12 -id 5 -Confirm:$false } }
+        @{ Name = 'New-CWMInvoice'; HttpMethod = 'Post'; Path = '/finance/invoices'; Call = { New-CWMInvoice -type Miscellaneous -company @{ id = 250 } } }
+        @{ Name = 'Update-CWMInvoice'; HttpMethod = 'Patch'; Path = '/finance/invoices/1001'; Call = { Update-CWMInvoice -id 1001 -Operation replace -Path customerPO -Value 'PO' } }
+        @{ Name = 'Get-CWMInvoice -pdf'; HttpMethod = 'GET'; Path = '/finance/invoices/1001/pdf'; Call = { Get-CWMInvoice -id 1001 -pdf } }
+        @{ Name = 'Get-CWMWorkRole'; HttpMethod = 'GET'; Path = '/time/workRoles/3'; Call = { Get-CWMWorkRole -id 3 } }
+        @{ Name = 'Get-CWMWorkType'; HttpMethod = 'GET'; Path = '/time/workTypes'; Call = { Get-CWMWorkType } }
+        @{ Name = 'Get-CWMExpenseType'; HttpMethod = 'GET'; Path = '/expense/types/count'; Call = { Get-CWMExpenseType -count } }
+        @{ Name = 'Update-CWMExpenseEntry'; HttpMethod = 'Patch'; Path = '/expense/entries/9'; Call = { Update-CWMExpenseEntry -id 9 -Operation replace -Path notes -Value 'x' } }
+        @{ Name = 'Remove-CWMExpenseEntry'; HttpMethod = 'Delete'; Path = '/expense/entries/9'; Call = { Remove-CWMExpenseEntry -id 9 -Confirm:$false } }
+        @{ Name = 'Get-CWMConfigurationStatus'; HttpMethod = 'GET'; Path = '/company/configurations/statuses'; Call = { Get-CWMConfigurationStatus } }
+        @{ Name = 'Get-CWMWorkflow'; HttpMethod = 'GET'; Path = '/system/workflows/2'; Call = { Get-CWMWorkflow -id 2 } }
         # Unbundle (POST, not DELETE)
         @{ Name = 'Remove-CWMTicketChild'; HttpMethod = 'Post'; Path = '/service/tickets/100/detachChildren'; Call = { Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201 -Confirm:$false } }
     ) {
@@ -406,6 +435,35 @@ Describe 'Endpoint functions' {
             (Get-Command New-CWMProjectTicket).Parameters['project'].Attributes |
                 Where-Object { $_ -is [System.Management.Automation.ParameterAttribute] } |
                 ForEach-Object { $_.Mandatory } | Should -Contain $true
+        }
+    }
+
+    Context 'Ticket children use the endpoints the API documentation recommends' {
+        It '<Name> sends GET <Expected>' -ForEach @(
+            @{ Name = 'Get-CWMTicketTimeEntry'; Call = { Get-CWMTicketTimeEntry -ticketId 1234 -condition "member/identifier='jdoe'" }; Expected = "/time/entries?conditions=(chargeToType='ServiceTicket' or chargeToType='ProjectTicket') and chargeToId=1234 and (member/identifier='jdoe')" }
+            @{ Name = 'Get-CWMTicketScheduleEntry'; Call = { Get-CWMTicketScheduleEntry -parentId 1234 }; Expected = '/schedule/entries?conditions=type/id=4 and objectId=1234' }
+            @{ Name = 'Get-CWMTicketScheduleEntry -count'; Call = { Get-CWMTicketScheduleEntry -parentId 1234 -count }; Expected = '/schedule/entries/count?conditions=type/id=4 and objectId=1234' }
+            @{ Name = 'Get-CWMTicketProduct'; Call = { Get-CWMTicketProduct -parentId 1234 }; Expected = '/procurement/products?conditions=ticket/id=1234' }
+            @{ Name = 'Get-CWMTicketDocument'; Call = { Get-CWMTicketDocument -parentId 1234 }; Expected = '/system/documents?recordId=1234&recordType=Ticket' }
+        ) {
+            $null = & $Call
+            $ExpectedUri = "$CWMTestBaseUri$Expected"
+            Should -Invoke Invoke-WebRequest -ModuleName ConnectWiseManageAPI -Times 1 -Exactly -ParameterFilter {
+                $Method -eq 'GET' -and [System.Web.HttpUtility]::UrlDecode($Uri) -ceq $ExpectedUri
+            }
+        }
+    }
+
+    Context 'Download switches without the id they need' {
+        It '<Name> writes an error and sends nothing' -ForEach @(
+            @{ Name = 'Get-CWMDocument -download'; Call = { Get-CWMDocument -download -ErrorAction SilentlyContinue -ErrorVariable Err; $Err } }
+            @{ Name = 'Get-CWMDocument -OutFile'; Call = { Get-CWMDocument -id 9 -OutFile 'x.bin' -ErrorAction SilentlyContinue -ErrorVariable Err; $Err } }
+            @{ Name = 'Get-CWMInvoice -pdf'; Call = { Get-CWMInvoice -pdf -ErrorAction SilentlyContinue -ErrorVariable Err; $Err } }
+            @{ Name = 'Get-CWMInvoice -OutFile'; Call = { Get-CWMInvoice -id 1 -OutFile 'x.pdf' -ErrorAction SilentlyContinue -ErrorVariable Err; $Err } }
+        ) {
+            $Errors = @(& $Call)
+            $Errors.Count | Should -BeGreaterThan 0
+            Should -Invoke Invoke-WebRequest -ModuleName ConnectWiseManageAPI -Times 0
         }
     }
 
