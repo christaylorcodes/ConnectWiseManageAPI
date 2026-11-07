@@ -19,12 +19,20 @@
         [string]$MemberID,
         [switch]$Force,
         [string]$Version,
-        [string]$BasePath = 'apis/3.0'
+        [string]$BasePath = 'apis/3.0',
+        [switch]$AllowInsecureRedirect
     )
+
+    if ($AllowInsecureRedirect -and !$script:CWMSupportsInsecureRedirect) {
+        Write-Verbose 'AllowInsecureRedirect has no effect on this PowerShell version (requires 7.4+).'
+    }
 
     if ((($script:CWMServerConnection -and !$script:CWMServerConnection.expiration) `
                 -or $script:CWMServerConnection.expiration -gt $(Get-Date)) -and !$Force) {
         Write-Verbose 'Using cached Authentication information.'
+        if ($PSBoundParameters.ContainsKey('AllowInsecureRedirect')) {
+            $script:CWMServerConnection.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
+        }
         return
     }
 
@@ -144,14 +152,16 @@
 
     # Create the Server Connection object
     $script:CWMServerConnection = @{
-        Server           = $Server
-        Headers          = $Headers
-        Session          = $script:CWMSession
-        Expiration       = $expiration
-        ConnectionMethod = $ConnectionMethod
-        Version          = $Version
-        Codebase         = $CompanyInfo.Codebase
-        BasePath         = $BasePath
+        Server                = $Server
+        Headers               = $Headers
+        Session               = $script:CWMSession
+        Expiration            = $expiration
+        ConnectionMethod      = $ConnectionMethod
+        Version               = $Version
+        Codebase              = $CompanyInfo.Codebase
+        BasePath              = $BasePath
+        # Set only on the final connection; login/impersonation requests above run without it
+        AllowInsecureRedirect = [bool]$AllowInsecureRedirect
     }
 
     # Set version header info

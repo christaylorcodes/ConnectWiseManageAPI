@@ -17,4 +17,8 @@ foreach ($import in @($Public + $Private)) {
 # Set variables visible to the module and its functions only
 Add-Type -AssemblyName System.Web
 
+# Invoke-WebRequest gained -AllowInsecureRedirect in PowerShell 7.4. Checked once here so tests can override it.
+# Used by Connect-CWM -AllowInsecureRedirect / Invoke-CWMWebRequest.
+$script:CWMSupportsInsecureRedirect = (Get-Command Invoke-WebRequest).Parameters.ContainsKey('AllowInsecureRedirect')
+
 Export-ModuleMember -Function $Public.Basename -Alias *

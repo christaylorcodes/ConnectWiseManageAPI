@@ -22,6 +22,8 @@
             Server                = $script:CWMServerConnection.Clone()
             Headers               = $script:CWMServerConnection.Headers.Clone()
             'api-current-version' = $script:CWMServerConnection.'api-current-version'
+            AllowInsecureRedirect = $script:CWMServerConnection.AllowInsecureRedirect
+            SupportsInsecureRedirect = $script:CWMSupportsInsecureRedirect
         }
         ModuleVersion       = (Get-Module 'ConnectWiseManageAPI').Version
         CWMSystemInfo       = $SysInfo

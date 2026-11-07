@@ -36,6 +36,24 @@
         $Arguments.URI = $Arguments.URI -replace '(.*?)&(.*)', '$1?$2'
     }
 
+    # Opt-in workaround (Connect-CWM -AllowInsecureRedirect) for ConnectWise-hosted servers that return an
+    # http:// Location header on writes, which PowerShell 7.4+ rejects as an insecure redirection.
+    # -AllowInsecureRedirect is ONLY ever paired with -MaximumRedirection 0, so no redirect is followed and
+    # nothing (including non-Secure session cookies) is sent over http. Any other redirect count combined
+    # with -AllowInsecureRedirect would follow https->http redirects, so a caller-supplied non-zero
+    # MaximumRedirection disables the workaround for that call.
+    if ($script:CWMServerConnection.AllowInsecureRedirect -and $script:CWMSupportsInsecureRedirect) {
+        $CallerSetRedirect = $Arguments.ContainsKey('MaximumRedirection')
+        if (!$Arguments.Method -or $Arguments.Method -eq 'Get') {
+            # MaximumRedirection 0 persists on a shared WebSession, so reads restore the .NET default explicitly
+            if (!$CallerSetRedirect) { $Arguments.MaximumRedirection = 50 }
+        }
+        elseif (!$CallerSetRedirect -or $Arguments.MaximumRedirection -eq 0) {
+            $Arguments.AllowInsecureRedirect = $true
+            $Arguments.MaximumRedirection = 0
+        }
+    }
+
     # Issue request
     try {
         Write-Debug "Arguments: $($Arguments | ConvertTo-Json)"
@@ -48,6 +66,34 @@
     }
     catch {
         $global:ProgressPreference = $prevProgressPreference
+
+        # PowerShell 7.4+ insecure redirection check (any http:// Location header on an https request)
+        if ($_.FullyQualifiedErrorId -like 'InsecureRedirection*') {
+            $ErrorMessage = @(
+                'The server response pointed to an http:// address, which PowerShell 7.4+ rejects as an insecure redirection.'
+                '--> On ConnectWise-hosted servers this is usually a Location header on a successful create/update, not a real redirect.'
+                '--> The record MAY HAVE BEEN CREATED or changed. Check before retrying to avoid duplicates.'
+                "--> To work around it, reconnect with 'Connect-CWM ... -AllowInsecureRedirect'. See: Get-Help Connect-CWM -Parameter AllowInsecureRedirect"
+                $_.ScriptStackTrace
+            )
+            return Write-Error ($ErrorMessage | Out-String)
+        }
+
+        # Redirect returned while redirects are disabled (e.g. by -AllowInsecureRedirect)
+        $StatusCode = 0
+        try { $StatusCode = [int]$_.Exception.Response.StatusCode } catch { $StatusCode = 0 }
+        if ($StatusCode -ge 300 -and $StatusCode -lt 400) {
+            $Location = $null
+            try { $Location = $_.Exception.Response.Headers.Location } catch { $Location = $null }
+            $ErrorMessage = @(
+                "The server responded with a redirect ($StatusCode) that was not followed."
+                "--> Location: $Location"
+                '--> Redirects are not followed for this request (MaximumRedirection 0, e.g. via Connect-CWM -AllowInsecureRedirect), so it was not completed.'
+                '--> Please report this, including the status code and Location, at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues'
+                $_.ScriptStackTrace
+            )
+            return Write-Error ($ErrorMessage | Out-String)
+        }
 
         # Start error message
         $ErrorMessage = @()
