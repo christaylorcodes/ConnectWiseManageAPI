@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMTimeEntry
 
 ## SYNOPSIS
-Removes a time entry
+Deletes a time entry.
 
 ## SYNTAX
 
@@ -18,30 +18,32 @@ Remove-CWMTimeEntry [-id] <Int32> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes a time entry from ConnectWise Manage.
+Calls DELETE /time/entries/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> Remove-CWMTimeEntry -id 123
+Remove-CWMTimeEntry -id 5
 ```
 
-Removes time entry 123
+Deletes time entry 5.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the time entry to delete.
+Alias: entryId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: entryId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -57,21 +59,21 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The ID of the time entry you want removed
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: entryId
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -82,10 +84,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

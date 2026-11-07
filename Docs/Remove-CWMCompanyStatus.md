@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMCompanyStatus
 
 ## SYNOPSIS
-Remove a company status
+Deletes a company status.
 
 ## SYNTAX
 
@@ -18,30 +18,32 @@ Remove-CWMCompanyStatus [-id] <Int32> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-Removed a company status
+Deletes a company status from ConnectWise Manage.
+Calls DELETE /company/companies/statuses/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> Remove-CWMCompanyStatus -id 1
+```
+Remove-CWMCompanyStatus -id 5
 ```
 
-Removes company status 1
+Deletes company status 5.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the company status to delete.
+Alias: statusId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: statusId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -62,16 +64,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: statusId
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -82,10 +84,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

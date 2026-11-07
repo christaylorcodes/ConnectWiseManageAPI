@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMCompanyNote
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Deletes a note of a company.
 
 ## SYNTAX
 
@@ -18,36 +18,39 @@ Remove-CWMCompanyNote [-parentId] <Int32> [-NoteId] <Int32> [-WhatIf]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes a note of a company from ConnectWise Manage.
+Calls DELETE
+/company/companies/{parentId}/notes/{id}.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Remove-CWMCompanyNote -parentId 12 -NoteId 5
 ```
 
-{{ Add example description here }}
+Deletes note 5 of company 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the company.
+Alias: CompanyID
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: CompanyID
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -NoteId
-{{ Fill NoteId Description }}
+The id of the note to delete.
 
 ```yaml
 Type: System.Int32
@@ -55,8 +58,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
-Default value: None
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -77,16 +80,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: CompanyID
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,10 +100,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

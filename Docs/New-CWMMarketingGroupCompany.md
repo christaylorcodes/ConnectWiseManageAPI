@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
@@ -13,35 +13,102 @@ Adds a company to a marketing group.
 ## SYNTAX
 
 ```
-New-CWMMarketingGroupCompany -parentId <Int32> [[-id] <Int32>] [[-defaultContactFlag] <Boolean>]
+New-CWMMarketingGroupCompany [-parentId] <Int32> [[-id] <Int32>] [[-defaultContactFlag] <Boolean>]
  [[-allContactsFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Used to add a companied contacts to a marketing group.
+Adds a company to a marketing group in ConnectWise Manage.
+Calls POST
+/marketing/groups/{parentId}/companies; only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> New-CWMMarketingGroupCompany -groupId $Group.id -id $Company.id
+New-CWMMarketingGroupCompany -parentId 3 -id 250 -defaultContactFlag $true
 ```
 
-Will add the company to the marketing manager group.
+Adds company 250 to marketing group 3.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the marketing group to add the company to.
+Alias: groupId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: groupId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the company to add to the marketing group (sent as id in the request body).
+Alias: companyId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: companyId
 
 Required: False
-Position: Named
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultContactFlag
+Default contact flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -allContactsFlag
+All contacts flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -unsubscribeFlag
+Unsubscribe flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -58,80 +125,20 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -allContactsFlag
-{{ Fill allContactsFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -defaultContactFlag
-{{ Fill defaultContactFlag Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Boolean
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-The id of the company you want to add contacts for.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: companyId
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -unsubscribeFlag
-{{ Fill unsubscribeFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: groupId
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -143,10 +150,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

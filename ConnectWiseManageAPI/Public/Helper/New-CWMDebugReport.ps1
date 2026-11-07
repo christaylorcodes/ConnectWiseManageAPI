@@ -1,4 +1,25 @@
-﻿function New-CWMDebugReport {
+﻿<#
+.SYNOPSIS
+    Creates a debug report to share when reporting a problem.
+
+.DESCRIPTION
+    Returns a JSON report with the non-secret connection settings, the module, PowerShell and OS versions,
+    and the result of Get-CWMSystemInfo. The connection headers and credentials are never included. Requires
+    Connect-CWM first.
+
+.PARAMETER Hash
+    Replace the server name with its MD5 hash so the report can be shared. Defaults to $true; use -Hash
+    $false to show the server name.
+
+.EXAMPLE
+    New-CWMDebugReport | Set-Clipboard
+
+    Creates the report, with the server name hashed, and copies it to the clipboard.
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+#>
+function New-CWMDebugReport {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'No impact')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(

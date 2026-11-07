@@ -1,47 +1,66 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMMarketingGroupCompany
 
 ## SYNOPSIS
-This function will remove a company from a marketing group.
+Removes a company from a marketing group.
 
 ## SYNTAX
 
 ```
-Remove-CWMMarketingGroupCompany -parentId <Int32> [-id] <Int32> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Remove-CWMMarketingGroupCompany [-parentId] <Int32> [-id] <Int32>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Removes a company from a marketing group in ConnectWise Manage.
+Calls DELETE
+/marketing/groups/{parentId}/companies/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Remove-CWMMarketingGroupCompany -id 1 -CompanyId 1
+```
+Remove-CWMMarketingGroupCompany -parentId 12 -id 5
 ```
 
-Will remove company 1 from marketing group 1
+Deletes company 5 of marketing group 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the marketing group.
+Alias: groupId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: groupId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the company to remove from the marketing group.
+Alias: companyId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: companyId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -57,35 +76,20 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The ID of the group you want to delete from.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: companyId
+Aliases: cf
 
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: groupId
-
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -100,8 +104,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 1/9/2019
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE](https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

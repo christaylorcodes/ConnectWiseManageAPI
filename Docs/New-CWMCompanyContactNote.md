@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanyContactNote
 
 ## SYNOPSIS
-This function will create a note on the given contact.
+Creates a contact note for a contact.
 
 ## SYNTAX
 
@@ -19,30 +19,128 @@ New-CWMCompanyContactNote [-parentId] <Int32> [[-id] <Int32>] [-text] <String> [
 ```
 
 ## DESCRIPTION
-This function will create a note on the given contact.
+Creates a contact note for a contact in ConnectWise Manage.
+Calls POST
+/company/contacts/{parentId}/notes; only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> New-CWMCompanyContactNote -parentId $Contact.id -text 'This guy rocks!'
+New-CWMCompanyContactNote -parentId 500 -text 'Prefers to be contacted by email.'
 ```
 
-Will add a note to the given contact.
+Adds a note to contact 500.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the contact to add the contact note to.
+Alias: contactId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: contactId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -text
+Text.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -type
+Type reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -flagged
+Flagged.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -enteredBy
+Entered by.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -58,111 +156,21 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -_info
-Used to give a non-default value for the _info field.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -enteredBy
-Used to give a non-default value for the enteredBy field.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -flagged
-Used to flag the note.
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-Dont use.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-The ID of the contact you want the note associated with.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: contactId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -text
-The text you want in the note.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -type
-Set a type for the note.
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -173,10 +181,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

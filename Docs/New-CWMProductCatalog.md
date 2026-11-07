@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/manage/rest?a=Procurement&e=CatalogsItem&o=CREATE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMProductCatalog
 
 ## SYNOPSIS
-This function will create a new catalog.
+Creates a catalog item.
 
 ## SYNTAX
 
@@ -24,30 +24,425 @@ New-CWMProductCatalog [-identifier] <String> [-description] <String> [[-inactive
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a catalog item in ConnectWise Manage.
+Calls POST /procurement/catalog; only the parameters you
+pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-$Catalog = @{
+$CatalogItem = @{
+    identifier          = 'USB-C-DOCK'
+    description         = 'USB-C docking station'
+    customerDescription = 'USB-C docking station'
+    subcategory         = @{ id = 3 }
+    type                = @{ id = 1 }
+    price               = 199
+    cost                = 120
+}
+New-CWMProductCatalog @CatalogItem
 ```
 
-'identifier' = $Product.offerName     'description' = $Product.offerName     'subcategory' = @{id = 152}     'type' = @{id = 47}     'customerDescription' = $Product.offerName     'cost' = $Product.unitPrice     'price' = $Price     'manufacturerPartNumber' = $Product.offerName     'manufacturer' = $Manufacturer     'productClass' = 'Agreement'     'taxableFlag' = $true } New-CWMCatalog @Catalog
+Creates a catalog item with the properties the API requires, plus price and cost.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -identifier
+Identifier.
+Max length 75.
+Required by the API.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.String
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -description
+Description.
+Max length 60.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -inactiveFlag
+Inactive flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 3
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -subcategory
+Subcategory reference, for example @{ id = 1 }.
+Required by the API.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -type
+Type reference, for example @{ id = 1 }.
+Required by the API.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -productClass
+Product class.
+One of: Agreement, Bundle, Inventory, NonInventory, Service.
+Defaults to Non-Inventory.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -serializedFlag
+Serialized flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -serializedCostFlag
+Serialized cost flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -phaseProductFlag
+Phase product flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -unitOfMeasure
+Unit of measure reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -minStockLevel
+Min stock level.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -price
+Price.
+A number.
+
+```yaml
+Type: System.Single
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -cost
+Cost.
+A number.
+
+```yaml
+Type: System.Single
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -priceAttribute
+Price attribute.
+One of: FixedFee, NotToExceed, OverrideRate, TimeAndMaterials.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -taxableFlag
+Taxable flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customerDescription
+Customer description.
+Max length 6000.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -manufacturer
+Manufacturer reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -manufacturerPartNumber
+Manufacturer part number.
+Max length 50.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 18
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -vendor
+Vendor reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -vendorSku
+Vendor SKU.
+Max length 50.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -notes
+Notes.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -integrationXRef
+Integration XRef.
+Max length 50.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -category
+Category reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFields
+Custom fields.
+An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -63,382 +458,21 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-{{ Fill _info Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 24
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -category
-{{ Fill category Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -cost
-{{ Fill cost Description }}
-
-```yaml
-Type: System.Single
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFields
-{{ Fill customFields Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 25
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customerDescription
-{{ Fill customerDescription Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -description
-{{ Fill description Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -identifier
-{{ Fill identifier Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -inactiveFlag
-{{ Fill inactiveFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -integrationXRef
-{{ Fill integrationXRef Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -manufacturer
-{{ Fill manufacturer Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -manufacturerPartNumber
-{{ Fill manufacturerPartNumber Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -minStockLevel
-{{ Fill minStockLevel Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -notes
-{{ Fill notes Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -phaseProductFlag
-{{ Fill phaseProductFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -price
-{{ Fill price Description }}
-
-```yaml
-Type: System.Single
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -priceAttribute
-{{ Fill priceAttribute Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -productClass
-{{ Fill productClass Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Agreement, Bundle, Inventory, NonInventory, Service
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -serializedCostFlag
-{{ Fill serializedCostFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -serializedFlag
-{{ Fill serializedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -subcategory
-{{ Fill subcategory Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -taxableFlag
-{{ Fill taxableFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -type
-{{ Fill type Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -unitOfMeasure
-{{ Fill unitOfMeasure Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -vendor
-{{ Fill vendor Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -vendorSku
-{{ Fill vendorSku Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -452,6 +486,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

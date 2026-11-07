@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMOpportunityForecast
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Deletes the forecast of an opportunity.
 
 ## SYNTAX
 
@@ -18,30 +18,32 @@ Remove-CWMOpportunityForecast [-parentId] <Int32> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes the forecast of an opportunity from ConnectWise Manage.
+Calls DELETE
+/sales/opportunities/{parentId}/forecast.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Remove-CWMOpportunityForecast -parentId 12
 ```
 
-{{ Add example description here }}
+Deletes the forecast of opportunity 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the opportunity.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -62,16 +64,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -82,10 +84,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

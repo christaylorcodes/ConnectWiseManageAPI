@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/manage/rest?a=Time&e=TimeSheets&o=SUBMIT
+online version:
 schema: 2.0.0
 ---
 
 # Submit-CWMTimeSheet
 
 ## SYNOPSIS
-This function will submit a time sheet for approval.
+Submits a time sheet for approval.
 
 ## SYNTAX
 
@@ -18,21 +18,24 @@ Submit-CWMTimeSheet [-id] <Int32> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Submits a time sheet.
+Calls POST /time/sheets/{id}/submit with no body, the same request as
+Update-CWMTimeSheet -Submit.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Submit-CWMTimeSheet -ID 1
+Submit-CWMTimeSheet -id 88
 ```
 
-Will submit time sheet 1
+Submits time sheet 88.
 
 ## PARAMETERS
 
 ### -id
-The ID of the time sheet you want to submit.
+The id of the time sheet to submit.
+Alias: sheetId
 
 ```yaml
 Type: System.Int32
@@ -40,23 +43,8 @@ Parameter Sets: (All)
 Aliases: sheetId
 
 Required: True
-Position: 0
+Position: 1
 Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -77,6 +65,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -85,6 +88,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 1/7/2019
 
 ## RELATED LINKS
+
+[Update-CWMTimeSheet]()
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

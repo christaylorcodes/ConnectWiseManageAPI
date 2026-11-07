@@ -1,45 +1,49 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMCompanyConfiguration
 
 ## SYNOPSIS
-This function will remove a company configuration from Manage.
+Deletes a configuration.
 
 ## SYNTAX
 
 ```
-Remove-CWMCompanyConfiguration -id <Int32> [-WhatIf] [-Confirm]
+Remove-CWMCompanyConfiguration [-id] <Int32> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes a configuration from ConnectWise Manage.
+Calls DELETE /company/configurations/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Remove-CWMCompanyConfiguration -CompanyConfigurationID 123
 ```
+Remove-CWMCompanyConfiguration -id 5
+```
+
+Deletes configuration 5.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the configuration to delete.
+Alias: companyConfigurationId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyConfigurationId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -55,20 +59,20 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: companyConfigurationId
+Aliases: cf
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -83,8 +87,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 7/3/2017
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE](https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

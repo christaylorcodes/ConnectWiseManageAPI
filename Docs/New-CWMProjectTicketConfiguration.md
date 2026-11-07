@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Project&e=ProjectsTeamMembers&o=CREATE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMProjectTicketConfiguration
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Attaches a configuration to a project ticket.
 
 ## SYNTAX
 
@@ -18,29 +18,64 @@ New-CWMProjectTicketConfiguration [-parentId] <Int32> [[-id] <String>] [[-_info]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Attaches an existing configuration to a project ticket in ConnectWise Manage.
+Calls POST
+/project/tickets/{parentId}/configurations with a ConfigurationReference body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMProjectTicketConfiguration -parentId 1234 -id 77
 ```
 
-{{ Add example description here }}
+Attaches configuration 77 to project ticket 1234.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the project ticket to add the configuration to.
+Alias: ticketId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: ticketId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the configuration to attach.
+Alias: deviceIdentifier
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: deviceIdentifier
 
 Required: False
-Position: Named
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,46 +97,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -_info
-{{ Fill _info Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases: deviceIdentifier
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -112,10 +117,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

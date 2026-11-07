@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMCompanyTeam
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Removes a team member assignment from a company.
 
 ## SYNTAX
 
@@ -18,30 +18,49 @@ Remove-CWMCompanyTeam [-parentId] <Int32> [-id] <Int32> [-WhatIf]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes a team member assignment of a company from ConnectWise Manage.
+Calls DELETE
+/company/companies/{parentId}/teams/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> {{ Add example code here }}
+```
+Remove-CWMCompanyTeam -parentId 12 -id 5
 ```
 
-{{ Add example description here }}
+Deletes team member assignment 5 of company 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the company.
+Alias: companyId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the team member assignment to delete.
+Alias: teamId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: teamId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -62,31 +81,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: teamId
+Aliases: cf
 
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: companyId
-
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,56 +1,229 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCallbackEntry
 
 ## SYNOPSIS
-This function will create a new callback entry.
+Creates a callback entry.
 
 ## SYNTAX
 
 ```
 New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [-objectId] <Int32>
- [-type] <String> [-level] <String> [[-memberId] <Int32>] [-payloadVersion <String>]
- [[-inactiveFlag] <Boolean>] [-isSoapCallbackFlag <Boolean>] [-isSelfSuppressedFlag <Boolean>]
+ [-type] <String> [-level] <String> [[-memberId] <Int32>] [[-payloadVersion] <String>]
+ [[-inactiveFlag] <Boolean>] [[-isSoapCallbackFlag] <Boolean>] [[-isSelfSuppressedFlag] <Boolean>]
  [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-ConnectWise Manage callbacks are payloads of information that are similar to webhooks.  When a record is saved within ConnectWise Manage, a summarized payload is sent to a specified location.
+Creates a callback entry in ConnectWise Manage.
+Calls POST /system/callbacks; only the parameters you
+pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-New-CWMCallbackEntry -level 'board' -objectid 63 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
+```
+New-CWMCallbackEntry -url 'https://example.com/cw/ticket-hook' -objectId 1 -type 'ticket' -level 'owner' -description 'Ticket webhook'
 ```
 
-Create a new callback for all tickets on service board 63.
-
-### EXAMPLE 2
-```powershell
-New-CWMCallbackEntry -level 'Status' -objectid 72 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
-```
-
-Create a new callback for all tickets in status 72.
+Registers a callback URL for ticket events.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
 Required: False
-Position: Named
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -description
+Description.
+Max length 100.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -url
+URL.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -objectId
+Object id.
+An integer.
+Required by the API.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -type
+Type.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -level
+Level.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -memberId
+Member id.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -payloadVersion
+Payload version.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -inactiveFlag
+Inactive flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -isSoapCallbackFlag
+Is SOAP callback flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -isSelfSuppressedFlag
+Is self suppressed flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -66,183 +239,18 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-Metadata
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -description
-This is used to label the callback's usage.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.String
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-Don't use. The database record id of the callback, this is automatically assigned.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -inactiveFlag
-Used to determine if the callback is active and sending requests.
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -level
-The type of object you want to trigger on ticket, contact, opportunity, etc. [See associated table for all values.](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -memberId
-This is a read only value that shows who initially created the Callback.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -objectId
-The ObjectId should be the Id of whatever record (level) you are subscribing to. This should be set to 1 when using a level of Owner.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -type
-This is the specific type of record such as Company, Ticket, Contact, etc... [See the associated table for all values.](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -url
-This is the URL ConnectWise Manage will send the GET payload to.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -isSelfSuppressedFlag
-{{ Fill isSelfSuppressedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -isSoapCallbackFlag
-{{ Fill isSoapCallbackFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -payloadVersion
-{{ Fill payloadVersion Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
 Position: Named
@@ -259,9 +267,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 6/27/2019
 
 ## RELATED LINKS
 
-[https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post](https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post)
-[https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks)](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

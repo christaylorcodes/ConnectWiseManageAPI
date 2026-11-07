@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMServiceBoard
 
 ## SYNOPSIS
-This function will create a new service board.
+Creates a service board.
 
 ## SYNTAX
 
@@ -40,18 +40,1002 @@ New-CWMServiceBoard [[-id] <Int32>] [-name] <String> [[-location] <Hashtable>] [
 ```
 
 ## DESCRIPTION
-This function will create a new service board.
+Creates a service board in ConnectWise Manage.
+Calls POST /service/boards; only the parameters you pass
+are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-New-CWMServiceBoard -name 'test' -location @{id=2} -department @{id=14}
+```
+New-CWMServiceBoard -name 'Help Desk' -location @{ id = 1 } -department @{ id = 2 }
 ```
 
-this will create a new 'test' service board.
+Creates a service board for location 1 and department 2.
 
 ## PARAMETERS
+
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -name
+Name.
+Max length 50.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -location
+Location reference, for example @{ id = 1 }.
+Required by the API.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -department
+Department reference, for example @{ id = 1 }.
+Required by the API.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -inactiveFlag
+Inactive flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -signOffTemplate
+Sign off template reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -sendToContactFlag
+Send to contact flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -contactTemplate
+Contact template reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -sendToResourceFlag
+Send to resource flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -resourceTemplate
+Resource template reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -projectFlag
+Project flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -showDependenciesFlag
+Show dependencies flag.
+$true or $false.
+This field only shows if it is Project Board.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -showEstimatesFlag
+Show estimates flag.
+$true or $false.
+This field only shows if it is Project Board.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -boardIcon
+Board icon reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billTicketsAfterClosedFlag
+Bill tickets after closed flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billTicketSeparatelyFlag
+Bill ticket separately flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billUnapprovedTimeExpenseFlag
+Bill unapproved time expense flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -overrideBillingSetupFlag
+Override billing setup flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 18
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -dispatchMember
+Dispatch member reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -serviceManagerMember
+Service manager member reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -dutyManagerMember
+Duty manager member reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -oncallMember
+Oncall member reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -workRole
+Work role reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -workType
+Work type reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billTime
+Bill time.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billExpense
+Bill expense.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 26
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billProduct
+Bill product.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 27
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -autoCloseStatus
+Auto close status reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 28
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -autoAssignNewTicketsFlag
+Auto assign new tickets flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 29
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -autoAssignNewECTicketsFlag
+Auto assign new EC tickets flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 30
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -autoAssignNewPortalTicketsFlag
+Auto assign new portal tickets flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 31
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -discussionsLockedFlag
+Discussions locked flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 32
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -timeEntryLockedFlag
+Time entry locked flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 33
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -notifyEmailFrom
+Notify email from.
+Max length 50.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 34
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -notifyEmailFromName
+Notify email from name.
+Max length 60.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 35
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -closedLoopDiscussionsFlag
+Closed loop discussions flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 36
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -closedLoopResolutionFlag
+Closed loop resolution flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 37
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -closedLoopInternalAnalysisFlag
+Closed loop internal analysis flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 38
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -timeEntryDiscussionFlag
+Time entry discussion flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 39
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -timeEntryResolutionFlag
+Time entry resolution flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 40
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -timeEntryInternalAnalysisFlag
+Time entry internal analysis flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 41
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -problemSort
+Problem sort.
+One of: Ascending, Descending.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 42
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -resolutionSort
+Resolution sort.
+One of: Ascending, Descending.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 43
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -internalAnalysisSort
+Internal analysis sort.
+One of: Ascending, Descending.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 44
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorAllowReopenClosedFlag
+Email connector allow reopen closed flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 45
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorReopenStatus
+Email connector reopen status reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 46
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorReopenResourcesFlag
+Email connector reopen resources flag.
+$true or $false.
+This field can only be set when
+emailConnectorAllowReopenClosed is true.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 47
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorNewTicketNoMatchFlag
+Email connector new ticket no match flag.
+$true or $false.
+This field can only be set when
+emailConnectorAllowReopenClosed is true.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 48
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorNeverReopenByDaysFlag
+Email connector never reopen by days flag.
+$true or $false.
+This field can only be set when
+emailConnectorAllowReopenClosed is true.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 49
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorReopenDaysLimit
+Email connector reopen days limit.
+An integer.
+This field can only be set when
+emailConnectorNeverReopenByDaysFlag and emailConnectorAllowReopenClosed are both true This field is
+required when emailConnectorNeverReopenByDaysFlag is true.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 50
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorNeverReopenByDaysClosedFlag
+Email connector never reopen by days closed flag.
+$true or $false.
+This field can only be set when
+emailConnectorAllowReopenClosed is true.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 51
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -emailConnectorReopenDaysClosedLimit
+Email connector reopen days closed limit.
+An integer.
+This field can only be set when
+emailConnectorNeverReopenByDaysClosedFlag and emailConnectorAllowReopenClosed are both true This field
+is required when emailConnectorNeverReopenByDaysClosedFlag is true.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 52
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -useMemberDisplayNameFlag
+Use member display name flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 53
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -sendToCCFlag
+Send to CC flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 54
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -autoAssignTicketOwnerFlag
+Auto assign ticket owner flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 55
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -closedLoopAllFlag
+Closed loop all flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 56
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -percentageCalculation
+Percentage calculation.
+One of: ActualHours, Manual, ClosedPhases, ClosedTickets.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 57
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -allSort
+All sort.
+One of: Ascending, Descending.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 58
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -markFirstNoteIssueFlag
+Mark first note issue flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 59
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 60
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -68,941 +1052,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-{{ Fill _info Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 59
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -allSort
-{{ Fill allSort Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Ascending, Descending
-
-Required: False
-Position: 57
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -autoAssignNewECTicketsFlag
-{{ Fill autoAssignNewECTicketsFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 29
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -autoAssignNewPortalTicketsFlag
-{{ Fill autoAssignNewPortalTicketsFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -autoAssignNewTicketsFlag
-{{ Fill autoAssignNewTicketsFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 28
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -autoAssignTicketOwnerFlag
-{{ Fill autoAssignTicketOwnerFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 54
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -autoCloseStatus
-{{ Fill autoCloseStatus Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 27
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billExpense
-{{ Fill billExpense Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Billable, DoNotBill, NoCharge, NoDefault
-
-Required: False
-Position: 25
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billProduct
-{{ Fill billProduct Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Billable, DoNotBill, NoCharge, NoDefault
-
-Required: False
-Position: 26
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billTicketSeparatelyFlag
-{{ Fill billTicketSeparatelyFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billTicketsAfterClosedFlag
-{{ Fill billTicketsAfterClosedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billTime
-{{ Fill billTime Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Billable, DoNotBill, NoCharge, NoDefault
-
-Required: False
-Position: 24
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billUnapprovedTimeExpenseFlag
-{{ Fill billUnapprovedTimeExpenseFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -boardIcon
-{{ Fill boardIcon Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -closedLoopAllFlag
-{{ Fill closedLoopAllFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 55
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -closedLoopDiscussionsFlag
-{{ Fill closedLoopDiscussionsFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 35
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -closedLoopInternalAnalysisFlag
-{{ Fill closedLoopInternalAnalysisFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 37
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -closedLoopResolutionFlag
-{{ Fill closedLoopResolutionFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 36
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -contactTemplate
-{{ Fill contactTemplate Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -department
-{{ Fill department Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -discussionsLockedFlag
-{{ Fill discussionsLockedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 31
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -dispatchMember
-{{ Fill dispatchMember Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -dutyManagerMember
-{{ Fill dutyManagerMember Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorAllowReopenClosedFlag
-{{ Fill emailConnectorAllowReopenClosedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 44
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorNeverReopenByDaysClosedFlag
-{{ Fill emailConnectorNeverReopenByDaysClosedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 50
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorNeverReopenByDaysFlag
-{{ Fill emailConnectorNeverReopenByDaysFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 48
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorNewTicketNoMatchFlag
-{{ Fill emailConnectorNewTicketNoMatchFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 47
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorReopenDaysClosedLimit
-{{ Fill emailConnectorReopenDaysClosedLimit Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 51
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorReopenDaysLimit
-{{ Fill emailConnectorReopenDaysLimit Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 49
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorReopenResourcesFlag
-{{ Fill emailConnectorReopenResourcesFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 46
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -emailConnectorReopenStatus
-{{ Fill emailConnectorReopenStatus Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 45
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -inactiveFlag
-{{ Fill inactiveFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -internalAnalysisSort
-{{ Fill internalAnalysisSort Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Ascending, Descending
-
-Required: False
-Position: 43
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -location
-{{ Fill location Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -markFirstNoteIssueFlag
-{{ Fill markFirstNoteIssueFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 58
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -name
-{{ Fill name Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -notifyEmailFrom
-{{ Fill notifyEmailFrom Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 33
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -notifyEmailFromName
-{{ Fill notifyEmailFromName Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 34
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -oncallMember
-{{ Fill oncallMember Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -overrideBillingSetupFlag
-{{ Fill overrideBillingSetupFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -percentageCalculation
-{{ Fill percentageCalculation Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: ActualHours, Manual, ClosedPhases, ClosedTickets
-
-Required: False
-Position: 56
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -problemSort
-{{ Fill problemSort Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Ascending, Descending
-
-Required: False
-Position: 41
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -projectFlag
-{{ Fill projectFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -resolutionSort
-{{ Fill resolutionSort Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Ascending, Descending
-
-Required: False
-Position: 42
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -resourceTemplate
-{{ Fill resourceTemplate Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -sendToCCFlag
-{{ Fill sendToCCFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 53
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -sendToContactFlag
-{{ Fill sendToContactFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -sendToResourceFlag
-{{ Fill sendToResourceFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -serviceManagerMember
-{{ Fill serviceManagerMember Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -showDependenciesFlag
-{{ Fill showDependenciesFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -showEstimatesFlag
-{{ Fill showEstimatesFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -signOffTemplate
-{{ Fill signOffTemplate Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -timeEntryDiscussionFlag
-{{ Fill timeEntryDiscussionFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 38
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -timeEntryInternalAnalysisFlag
-{{ Fill timeEntryInternalAnalysisFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 40
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -timeEntryLockedFlag
-{{ Fill timeEntryLockedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 32
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -timeEntryResolutionFlag
-{{ Fill timeEntryResolutionFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 39
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -useMemberDisplayNameFlag
-{{ Fill useMemberDisplayNameFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 52
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -workRole
-{{ Fill workRole Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -workType
-{{ Fill workType Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
-Author: Chris Taylor Date: 8/22/2018
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Boards/postServiceBoards](https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Boards/postServiceBoards)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

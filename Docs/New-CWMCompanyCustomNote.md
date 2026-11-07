@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanyCustomNote
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a custom status note for a company.
 
 ## SYNTAX
 
@@ -18,29 +18,66 @@ New-CWMCompanyCustomNote [-parentId] <Int32> [[-status] <Hashtable>] [[-customNo
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a custom status note for a company in ConnectWise Manage.
+Calls POST
+/company/companies/{parentId}/customStatusNotes; only the parameters you pass are sent in the request
+body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMCompanyCustomNote -parentId 250 -status @{ id = 1 } -customNote 'Account is on credit hold.'
 ```
 
-{{ Add example description here }}
+Creates a custom status note for company status 1 on company 250.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the company to add the custom status note to.
+Alias: companyId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -status
+Status reference, for example @{ id = 1 }.
+Required by the API.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customNote
+Custom note.
+Max length 1500.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,46 +99,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customNote
-{{ Fill customNote Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.String
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: companyId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -status
-{{ Fill status Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -112,10 +119,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

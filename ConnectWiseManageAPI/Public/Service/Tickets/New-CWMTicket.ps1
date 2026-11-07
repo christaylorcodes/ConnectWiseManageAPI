@@ -47,6 +47,273 @@
 .PARAMETER initialResolution
     Initial resolution notes.
 
+.PARAMETER id
+    The id property of the request body. Usually left unset; ConnectWise Manage assigns the id of a new
+    record.
+
+.PARAMETER recordType
+    Record type. One of: ProjectIssue, ProjectTicket, ServiceTicket.
+
+.PARAMETER site
+    Site reference, for example @{ id = 5 }.
+
+.PARAMETER siteName
+    Site name. Max length 156.
+
+.PARAMETER addressLine1
+    Address line 1. Max length 50.
+
+.PARAMETER addressLine2
+    Address line 2. Max length 50.
+
+.PARAMETER city
+    City. Max length 50.
+
+.PARAMETER stateIdentifier
+    State identifier. Max length 50.
+
+.PARAMETER zip
+    Zip. Max length 12.
+
+.PARAMETER country
+    Country reference, for example @{ id = 1 }.
+
+.PARAMETER contactName
+    Contact name. Max length 62.
+
+.PARAMETER contactPhoneNumber
+    Contact phone number. Max length 20.
+
+.PARAMETER contactPhoneExtension
+    Contact phone extension. Max length 15.
+
+.PARAMETER contactEmailAddress
+    Contact email address. Max length 250.
+
+.PARAMETER team
+    Team reference, for example @{ id = 1 }.
+
+.PARAMETER owner
+    Owner reference, for example @{ id = 1 }.
+
+.PARAMETER serviceLocation
+    Service location reference, for example @{ id = 1 }.
+
+.PARAMETER source
+    Source reference, for example @{ id = 1 }.
+
+.PARAMETER requiredDate
+    Required date. Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
+
+.PARAMETER budgetHours
+    Budget hours. A number.
+
+.PARAMETER opportunity
+    Opportunity reference, for example @{ id = 75 }.
+
+.PARAMETER agreement
+    Agreement reference, for example @{ id = 30 }.
+
+.PARAMETER severity
+    Severity. One of: Low, Medium, High. Required on updates.
+
+.PARAMETER impact
+    Impact. One of: Low, Medium, High. Required on updates.
+
+.PARAMETER externalXRef
+    External XRef. Max length 100.
+
+.PARAMETER poNumber
+    PO number. Max length 50.
+
+.PARAMETER knowledgeBaseCategoryId
+    Knowledge base category id. An integer.
+
+.PARAMETER knowledgeBaseSubCategoryId
+    Knowledge base sub category id. An integer.
+
+.PARAMETER allowAllClientsPortalView
+    Allow all clients portal view. $true or $false.
+
+.PARAMETER customerUpdatedFlag
+    Customer updated flag. $true or $false.
+
+.PARAMETER automaticEmailContactFlag
+    Automatic email contact flag. $true or $false.
+
+.PARAMETER automaticEmailResourceFlag
+    Automatic email resource flag. $true or $false.
+
+.PARAMETER automaticEmailCcFlag
+    Automatic email CC flag. $true or $false.
+
+.PARAMETER automaticEmailCc
+    Automatic email CC. Max length 1000.
+
+.PARAMETER contactEmailLookup
+    Contact email lookup.
+
+.PARAMETER processNotifications
+    Process notifications. $true or $false. Can be set to false to skip notification processing when adding
+    or updating a ticket (Defaults to True).
+
+.PARAMETER skipCallback
+    Skip callback. $true or $false.
+
+.PARAMETER closedDate
+    Closed date.
+
+.PARAMETER closedBy
+    Closed by.
+
+.PARAMETER closedFlag
+    Closed flag. $true or $false.
+
+.PARAMETER actualHours
+    Actual hours. A number.
+
+.PARAMETER approved
+    Approved. $true or $false.
+
+.PARAMETER estimatedExpenseCost
+    Estimated expense cost. A number.
+
+.PARAMETER estimatedExpenseRevenue
+    Estimated expense revenue. A number.
+
+.PARAMETER estimatedProductCost
+    Estimated product cost. A number.
+
+.PARAMETER estimatedProductRevenue
+    Estimated product revenue. A number.
+
+.PARAMETER estimatedTimeCost
+    Estimated time cost. A number.
+
+.PARAMETER estimatedTimeRevenue
+    Estimated time revenue. A number.
+
+.PARAMETER billingMethod
+    Billing method. One of: ActualRates, FixedFee, NotToExceed, OverrideRate.
+
+.PARAMETER billingAmount
+    Billing amount. A number.
+
+.PARAMETER hourlyRate
+    Hourly rate. A number.
+
+.PARAMETER subBillingMethod
+    Sub billing method. One of: ActualRates, FixedFee, NotToExceed, OverrideRate.
+
+.PARAMETER subBillingAmount
+    Sub billing amount. A number.
+
+.PARAMETER subDateAccepted
+    Sub date accepted.
+
+.PARAMETER dateResolved
+    Date resolved.
+
+.PARAMETER dateResplan
+    Date resplan.
+
+.PARAMETER dateResponded
+    Date responded.
+
+.PARAMETER resolveMinutes
+    Resolve minutes. An integer. To obtain the current SLA times for an active ticket, please use the
+    /service/tickets/calculateSLA endpoint for multiple tickets or /service/tickets/{id} for individual
+    tickets.
+
+.PARAMETER resPlanMinutes
+    Res plan minutes. An integer. To obtain the current SLA times for an active ticket, please use the
+    /service/tickets/calculateSLA endpoint for multiple tickets or /service/tickets/{id} for individual
+    tickets.
+
+.PARAMETER respondMinutes
+    Respond minutes. An integer. To obtain the current SLA times for an active ticket, please use the
+    /service/tickets/calculateSLA endpoint for multiple tickets or /service/tickets/{id} for individual
+    tickets.
+
+.PARAMETER isInSla
+    Is in SLA. $true or $false.
+
+.PARAMETER knowledgeBaseLinkId
+    Knowledge base link id. An integer.
+
+.PARAMETER resources
+    Resources.
+
+.PARAMETER parentTicketId
+    Parent ticket id. An integer.
+
+.PARAMETER hasChildTicket
+    Has child ticket. $true or $false.
+
+.PARAMETER hasMergedChildTicketFlag
+    Has merged child ticket flag. $true or $false.
+
+.PARAMETER knowledgeBaseLinkType
+    Knowledge base link type. One of: Activity, ProjectIssue, KnowledgeBaseArticle, ProjectTicket,
+    ServiceTicket, Time.
+
+.PARAMETER billTime
+    Bill time. One of: Billable, DoNotBill, NoCharge, NoDefault.
+
+.PARAMETER billExpenses
+    Bill expenses. One of: Billable, DoNotBill, NoCharge, NoDefault.
+
+.PARAMETER billProducts
+    Bill products. One of: Billable, DoNotBill, NoCharge, NoDefault.
+
+.PARAMETER predecessorType
+    Predecessor type. One of: Ticket, Phase.
+
+.PARAMETER predecessorId
+    Predecessor id. An integer.
+
+.PARAMETER predecessorClosedFlag
+    Predecessor closed flag. $true or $false.
+
+.PARAMETER lagDays
+    Lag days. An integer.
+
+.PARAMETER lagNonworkingDaysFlag
+    Lag nonworking days flag. $true or $false.
+
+.PARAMETER estimatedStartDate
+    Estimated start date. Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
+
+.PARAMETER duration
+    Duration. An integer.
+
+.PARAMETER location
+    Location reference, for example @{ id = 1 }.
+
+.PARAMETER department
+    Department reference, for example @{ id = 1 }.
+
+.PARAMETER mobileGuid
+    Mobile GUID.
+
+.PARAMETER sla
+    SLA reference, for example @{ id = 1 }.
+
+.PARAMETER currency
+    Currency reference, for example @{ id = 1 }.
+
+.PARAMETER mergedParentTicket
+    Merged parent ticket reference, for example @{ id = 1 }.
+
+.PARAMETER integratorTags
+    Integrator tags. An array of strings.
+
+.PARAMETER _info
+    The _info metadata of the record, as returned by the API. Usually left unset.
+
+.PARAMETER customFields
+    Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
+
 .EXAMPLE
     # Minimal ticket creation
     $ticket = @{

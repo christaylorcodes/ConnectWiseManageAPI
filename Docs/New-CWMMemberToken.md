@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMMemberToken
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates API keys for a member.
 
 ## SYNTAX
 
@@ -18,30 +18,32 @@ New-CWMMemberToken [-memberIdentifier] <String> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a new public and private API key pair for a member.
+Calls POST
+/system/members/{memberIdentifier}/tokens, sent with the x-cw-usertype: member header.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> {{ Add example code here }}
+New-CWMMemberToken -memberIdentifier 'jdoe'
 ```
 
-{{ Add example description here }}
+Creates an API key pair for member jdoe and returns the public key, private key and expiration.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -memberIdentifier
+The identifier (user name) of the member, for example 'jdoe'.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.String
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -57,21 +59,21 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -memberIdentifier
-{{ Fill memberIdentifier Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.String
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -82,10 +84,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

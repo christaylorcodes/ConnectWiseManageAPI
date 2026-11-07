@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Marketing&e=GroupCompanies&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMProjectTicketConfiguration
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Detaches a configuration from a project ticket.
 
 ## SYNTAX
 
@@ -18,30 +18,49 @@ Remove-CWMProjectTicketConfiguration [-id] <Int32> [-parentId] <Int32>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Detaches a configuration from a project ticket in ConnectWise Manage.
+Calls DELETE
+/project/tickets/{parentId}/configurations/{id}.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Remove-CWMProjectTicketConfiguration -parentId 12 -id 5
 ```
 
-{{ Add example description here }}
+Deletes configuration 5 of project ticket 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the configuration to detach.
+Alias: configurationId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: configurationId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+The id of the project ticket.
+Alias: ticketId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -62,31 +81,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: configurationId
+Aliases: cf
 
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: 1
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanyNote
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a note for a company.
 
 ## SYNTAX
 
@@ -18,29 +18,64 @@ New-CWMCompanyNote [-id] <Int32> [[-flagged] <Boolean>] [[-text] <String>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a note for a company in ConnectWise Manage.
+Calls POST /company/companies/{parentId}/notes; only
+the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMCompanyNote -id 250 -text 'Discussed the contract renewal with the owner.' -flagged $true
 ```
 
-{{ Add example description here }}
+Adds a flagged note to company 250.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the company to add the note to.
+Alias: companyId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -flagged
+Flagged.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -text
+Text.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,46 +97,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -flagged
-{{ Fill flagged Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Boolean
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: companyId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -text
-{{ Fill text Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -112,11 +117,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

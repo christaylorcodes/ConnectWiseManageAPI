@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMDebugReport
 
 ## SYNOPSIS
-This function is used to gather troubleshooting information.
+Creates a debug report to share when reporting a problem.
 
 ## SYNTAX
 
@@ -18,37 +18,27 @@ New-CWMDebugReport [[-Hash] <Object>] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-This function is used to gather troubleshooting information.
-Please include this data with any incident report.
+Returns a JSON report with the non-secret connection settings, the module, PowerShell and OS versions,
+and the result of Get-CWMSystemInfo.
+The connection headers and credentials are never included.
+Requires
+Connect-CWM first.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> {{ Add example code here }}
+New-CWMDebugReport | Set-Clipboard
 ```
 
-{{ Add example description here }}
+Creates the report, with the server name hashed, and copies it to the clipboard.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Hash
-Used to hash sensitive information so that it can be shared.
+Replace the server name with its MD5 hash so the report can be shared.
+Defaults to $true; use -Hash
+$false to show the server name.
 
 ```yaml
 Type: System.Object
@@ -56,7 +46,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: True
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -73,7 +63,22 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -86,6 +91,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 9/28/2019
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,4 +1,56 @@
-﻿function Get-CWMAuditTrail {
+﻿<#
+.SYNOPSIS
+    Gets the audit trail of a record.
+
+.DESCRIPTION
+    Retrieves the audit trail entries of one record, identified by its type and id. Calls GET
+    /system/audittrail?type={type}&id={id} (GET /system/audittrail/count with -count).
+
+.PARAMETER type
+    The type of the record, for example Ticket, Company or Agreement.
+
+.PARAMETER id
+    The id of the record whose audit trail is returned.
+
+.PARAMETER count
+    Return only the number of matching audit trails instead of the records.
+
+.PARAMETER deviceIdentifier
+    Device identifier, sent as the deviceIdentifier query parameter.
+
+.PARAMETER condition
+    Filter in ConnectWise Manage condition syntax, for example "text contains 'callback'".
+
+.PARAMETER orderBy
+    Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+.PARAMETER childConditions
+    Filter on child (list) fields, in condition syntax.
+
+.PARAMETER customFieldConditions
+    Filter on custom field values, in condition syntax.
+
+.PARAMETER page
+    The page number to return. Use with -pageSize.
+
+.PARAMETER pageSize
+    The number of records per page. Without it the API's default page size applies.
+
+.PARAMETER fields
+    Only return these fields, for example @('id', 'text').
+
+.PARAMETER all
+    Retrieve every matching record, handling pagination automatically.
+
+.EXAMPLE
+    Get-CWMAuditTrail -type Ticket -id 1234 -all
+
+    Retrieves the full audit trail of service ticket 1234.
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+#>
+function Get-CWMAuditTrail {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

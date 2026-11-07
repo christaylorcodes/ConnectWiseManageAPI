@@ -1,55 +1,164 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMContactCommunication
 
 ## SYNOPSIS
-This function will create a new contact communication.
+Adds a communication item (phone number, email address, ...) to a contact.
 
 ## SYNTAX
 
 ```
-New-CWMContactCommunication -parentId <Int32> [[-id] <Int32>] [-type] <Hashtable> [-value] <String>
+New-CWMContactCommunication [-parentId] <Int32> [[-id] <Int32>] [-type] <Hashtable> [-value] <String>
  [[-extension] <String>] [[-defaultFlag] <Boolean>] [[-mobileGuid] <Guid>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a communication item for a contact in ConnectWise Manage.
+Calls POST
+/company/contacts/{parentId}/communications; only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-New-CWMContactCommunication -id 7125 -type @{'name' = 'Private Email'} -value 'don't@email.me'
+```
+New-CWMContactCommunication -parentId 500 -type @{ id = 1 } -value 'ann.smith@example.com' -defaultFlag $true
 ```
 
-Will add a Private Email address to the contact with the id of 7125.
-
-### EXAMPLE 2
-```powershell
-New-CWMContactCommunication -id 7125 -type @{'id' = '2'} -value '6054756968' -extension 555 -defaultFlag $true
-```
-
-Will add a direct phone number with an extension to the contact with the id of 7125 and set it as the default communication method.
+Adds a communication item of communication type 1 to contact 500 and makes it the default.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the contact to add the communication item to.
+Alias: contactId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: contactId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -type
+Type reference, for example @{ id = 1 }.
+Required by the API.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -value
+Value.
+Max length 250.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -extension
+Extension.
+Max length 15.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultFlag
+Default flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -mobileGuid
+Mobile GUID.
+
+```yaml
+Type: System.Guid
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -65,127 +174,20 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-Metadata
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -defaultFlag
-Set to $true if you want to set as the default contact method.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Boolean
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 5
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -extension
-If your type is a phone number you can add an extension.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-The id of the contact you want to update.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -mobileGuid
-don't use?
-
-```yaml
-Type: System.Guid
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -type
-The type of communication you are adding.
-You can add by name or id.
-@{'id' = 5} or @{'name' = 'Pager'}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -value
-The email or phone number you want to add.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: contactId
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -200,6 +202,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 9/26/2019
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

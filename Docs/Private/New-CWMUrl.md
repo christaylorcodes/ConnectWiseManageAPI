@@ -8,48 +8,37 @@ schema: 2.0.0
 # New-CWMUrl
 
 ## SYNOPSIS
-Used to generate the full URL to be invoked.
+Builds the full URL of an API request.
 
 ## SYNTAX
 
 ```
-New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>] [<CommonParameters>]
+New-CWMUrl [[-Endpoint] <String>] [[-URLParameters] <String>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Joins https://, the server, the codebase and the base path of the current connection
+($script:CWMServerConnection) with the endpoint, then appends the query string.
+Returns nothing when
+there is no connection.
+Internal helper; no API call is made.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> {{ Add example code here }}
+```
+New-CWMUrl -Endpoint '/service/tickets' -URLParameters '&pageSize=10'
 ```
 
-{{ Add example description here }}
+Returns the full URL of the tickets endpoint for the current connection, with &pageSize=10 appended.
 
 ## PARAMETERS
 
 ### -Endpoint
-{{ Fill Endpoint Description }}
+The API endpoint path, for example '/service/tickets'.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -URLParameters
-{{ Fill URLParameters Description }}
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -60,16 +49,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+### -URLParameters
+The query string to append as is, for example '&conditions=id%3D1'.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

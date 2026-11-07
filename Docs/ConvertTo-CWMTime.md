@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # ConvertTo-CWMTime
 
 ## SYNOPSIS
-Converts \[datetime\] to the time format used in condition queries.
+Converts a DateTime to the date format ConnectWise Manage uses.
 
 ## SYNTAX
 
@@ -17,21 +17,33 @@ ConvertTo-CWMTime [[-Date] <DateTime[]>] [-Raw] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will convert an input to a universal date time object then output in a format used by the ConnectWise Manage API conditions parameters.
+Converts one or more \[datetime\] values to UTC and formats them as yyyy-MM-ddTHH:mm:ssZ in square
+brackets, the format used in condition strings.
+With -Raw the brackets are left out, the format used in
+request bodies.
+No API call is made.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-ConvertTo-CWMTime $(Get-Date).AddDays(1)
+```
+$(ConvertTo-CWMTime (Get-Date).AddDays(-7))" -all
 ```
 
-Will output tomorrows date.
+Retrieves the tickets entered in the last seven days.
+
+### EXAMPLE 2
+```
+New-CWMTimeEntry -chargeToType 'ServiceTicket' -chargeToId 1234 -timeStart (ConvertTo-CWMTime (Get-Date).AddHours(-1) -Raw)
+```
+
+Uses -Raw to send a date in a request body.
 
 ## PARAMETERS
 
 ### -Date
-Date used in conversion.
+One or more dates to convert.
+Accepts pipeline input.
 
 ```yaml
 Type: System.DateTime[]
@@ -39,14 +51,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
 ### -Raw
-{{ Fill Raw Description }}
+Return the date without the surrounding square brackets.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -67,7 +79,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.String
 ## NOTES
-Author: Chris Taylor Date: 10/16/2018
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

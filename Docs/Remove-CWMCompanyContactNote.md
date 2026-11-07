@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/manage/rest?a=Company&e=Configurations&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMCompanyContactNote
 
 ## SYNOPSIS
-Removes a note from a contact.
+Deletes a contact note of a contact.
 
 ## SYNTAX
 
@@ -18,30 +18,49 @@ Remove-CWMCompanyContactNote [-parentId] <Int32> [-id] <Int32> [-WhatIf]
 ```
 
 ## DESCRIPTION
-Removes a note via ID from a company contact.
+Deletes a contact note of a contact from ConnectWise Manage.
+Calls DELETE
+/company/contacts/{parentId}/notes/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> Remove-CWMCompanyContactNote -parentId $Contact.id -id $Note.id
+```
+Remove-CWMCompanyContactNote -parentId 12 -id 5
 ```
 
-Removes the given note from the given contact.
+Deletes contact note 5 of contact 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the contact.
+Alias: contactId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: contactId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the contact note to delete.
+Alias: noteId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: noteId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -62,31 +81,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The ID of the note you want removed.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: noteId
+Aliases: cf
 
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-The ID of the contact you want to remove the note from.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: contactId
-
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

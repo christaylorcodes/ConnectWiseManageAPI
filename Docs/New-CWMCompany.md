@@ -92,7 +92,9 @@ Creates a company with specific type and status.
 ## PARAMETERS
 
 ### -id
-{{ Fill id Description }}
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
 Type: System.Int32
@@ -172,7 +174,10 @@ Accept wildcard characters: False
 ```
 
 ### -addressLine2
-{{ Fill addressLine2 Description }}
+Address line 2.
+At least one address field is required -- addressLine1, addressLine2, city, state, zip
+and/or country.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -235,7 +240,7 @@ Accept wildcard characters: False
 ```
 
 ### -country
-{{ Fill country Description }}
+Country reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -266,7 +271,8 @@ Accept wildcard characters: False
 ```
 
 ### -faxNumber
-{{ Fill faxNumber Description }}
+Fax number.
+Max length 30.
 
 ```yaml
 Type: System.String
@@ -297,7 +303,7 @@ Accept wildcard characters: False
 ```
 
 ### -territory
-{{ Fill territory Description }}
+Territory reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -312,7 +318,7 @@ Accept wildcard characters: False
 ```
 
 ### -market
-{{ Fill market Description }}
+Market reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -327,7 +333,7 @@ Accept wildcard characters: False
 ```
 
 ### -accountNumber
-{{ Fill accountNumber Description }}
+Account number.
 
 ```yaml
 Type: System.String
@@ -342,7 +348,7 @@ Accept wildcard characters: False
 ```
 
 ### -defaultContact
-{{ Fill defaultContact Description }}
+Default contact reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -357,7 +363,8 @@ Accept wildcard characters: False
 ```
 
 ### -dateAcquired
-{{ Fill dateAcquired Description }}
+Date acquired.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
 
 ```yaml
 Type: System.String
@@ -372,7 +379,7 @@ Accept wildcard characters: False
 ```
 
 ### -sicCode
-{{ Fill sicCode Description }}
+SIC code reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -387,7 +394,7 @@ Accept wildcard characters: False
 ```
 
 ### -parentCompany
-{{ Fill parentCompany Description }}
+Parent company reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -402,7 +409,8 @@ Accept wildcard characters: False
 ```
 
 ### -annualRevenue
-{{ Fill annualRevenue Description }}
+Annual revenue.
+A number.
 
 ```yaml
 Type: System.Double
@@ -417,7 +425,8 @@ Accept wildcard characters: False
 ```
 
 ### -numberOfEmployees
-{{ Fill numberOfEmployees Description }}
+Number of employees.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -432,7 +441,8 @@ Accept wildcard characters: False
 ```
 
 ### -yearEstablished
-{{ Fill yearEstablished Description }}
+Year established.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -447,7 +457,8 @@ Accept wildcard characters: False
 ```
 
 ### -revenueYear
-{{ Fill revenueYear Description }}
+Revenue year.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -462,7 +473,7 @@ Accept wildcard characters: False
 ```
 
 ### -ownershipType
-{{ Fill ownershipType Description }}
+Ownership type reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -477,7 +488,7 @@ Accept wildcard characters: False
 ```
 
 ### -timeZoneSetup
-{{ Fill timeZoneSetup Description }}
+Time zone setup reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -492,7 +503,8 @@ Accept wildcard characters: False
 ```
 
 ### -leadSource
-{{ Fill leadSource Description }}
+Lead source.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -507,7 +519,8 @@ Accept wildcard characters: False
 ```
 
 ### -leadFlag
-{{ Fill leadFlag Description }}
+Lead flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -522,7 +535,8 @@ Accept wildcard characters: False
 ```
 
 ### -unsubscribeFlag
-{{ Fill unsubscribeFlag Description }}
+Unsubscribe flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -537,7 +551,7 @@ Accept wildcard characters: False
 ```
 
 ### -calendar
-{{ Fill calendar Description }}
+Calendar reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -552,7 +566,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField1
-{{ Fill userDefinedField1 Description }}
+User defined field 1.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -567,7 +582,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField2
-{{ Fill userDefinedField2 Description }}
+User defined field 2.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -582,7 +598,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField3
-{{ Fill userDefinedField3 Description }}
+User defined field 3.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -597,7 +614,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField4
-{{ Fill userDefinedField4 Description }}
+User defined field 4.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -612,7 +630,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField5
-{{ Fill userDefinedField5 Description }}
+User defined field 5.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -627,7 +646,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField6
-{{ Fill userDefinedField6 Description }}
+User defined field 6.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -642,7 +662,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField7
-{{ Fill userDefinedField7 Description }}
+User defined field 7.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -657,7 +678,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField8
-{{ Fill userDefinedField8 Description }}
+User defined field 8.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -672,7 +694,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField9
-{{ Fill userDefinedField9 Description }}
+User defined field 9.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -687,7 +710,8 @@ Accept wildcard characters: False
 ```
 
 ### -userDefinedField10
-{{ Fill userDefinedField10 Description }}
+User defined field 10.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -702,7 +726,7 @@ Accept wildcard characters: False
 ```
 
 ### -vendorIdentifier
-{{ Fill vendorIdentifier Description }}
+Vendor identifier.
 
 ```yaml
 Type: System.String
@@ -717,7 +741,7 @@ Accept wildcard characters: False
 ```
 
 ### -taxIdentifier
-{{ Fill taxIdentifier Description }}
+Tax identifier.
 
 ```yaml
 Type: System.String
@@ -732,7 +756,7 @@ Accept wildcard characters: False
 ```
 
 ### -taxCode
-{{ Fill taxCode Description }}
+Tax code reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -747,7 +771,7 @@ Accept wildcard characters: False
 ```
 
 ### -billingTerms
-{{ Fill billingTerms Description }}
+Billing terms reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -762,7 +786,7 @@ Accept wildcard characters: False
 ```
 
 ### -invoiceTemplate
-{{ Fill invoiceTemplate Description }}
+Invoice template reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -777,7 +801,7 @@ Accept wildcard characters: False
 ```
 
 ### -pricingSchedule
-{{ Fill pricingSchedule Description }}
+Pricing schedule reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -792,7 +816,7 @@ Accept wildcard characters: False
 ```
 
 ### -companyEntityType
-{{ Fill companyEntityType Description }}
+Company entity type reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -807,7 +831,7 @@ Accept wildcard characters: False
 ```
 
 ### -billToCompany
-{{ Fill billToCompany Description }}
+Bill to company reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -822,7 +846,7 @@ Accept wildcard characters: False
 ```
 
 ### -billingSite
-{{ Fill billingSite Description }}
+Billing site reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -837,7 +861,7 @@ Accept wildcard characters: False
 ```
 
 ### -billingContact
-{{ Fill billingContact Description }}
+Billing contact reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -852,7 +876,7 @@ Accept wildcard characters: False
 ```
 
 ### -invoiceDeliveryMethod
-{{ Fill invoiceDeliveryMethod Description }}
+Invoice delivery method reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -867,7 +891,7 @@ Accept wildcard characters: False
 ```
 
 ### -invoiceToEmailAddress
-{{ Fill invoiceToEmailAddress Description }}
+Invoice to email address.
 
 ```yaml
 Type: System.String
@@ -882,7 +906,7 @@ Accept wildcard characters: False
 ```
 
 ### -invoiceCCEmailAddress
-{{ Fill invoiceCCEmailAddress Description }}
+Invoice CC email address.
 
 ```yaml
 Type: System.String
@@ -897,7 +921,8 @@ Accept wildcard characters: False
 ```
 
 ### -deletedFlag
-{{ Fill deletedFlag Description }}
+Deleted flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -912,7 +937,8 @@ Accept wildcard characters: False
 ```
 
 ### -dateDeleted
-{{ Fill dateDeleted Description }}
+Date deleted.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
 
 ```yaml
 Type: System.String
@@ -927,7 +953,7 @@ Accept wildcard characters: False
 ```
 
 ### -deletedBy
-{{ Fill deletedBy Description }}
+Deleted by.
 
 ```yaml
 Type: System.String
@@ -942,7 +968,7 @@ Accept wildcard characters: False
 ```
 
 ### -mobileGuid
-{{ Fill mobileGuid Description }}
+Mobile GUID.
 
 ```yaml
 Type: System.String
@@ -957,7 +983,7 @@ Accept wildcard characters: False
 ```
 
 ### -facebookUrl
-{{ Fill facebookUrl Description }}
+Facebook URL.
 
 ```yaml
 Type: System.String
@@ -972,7 +998,7 @@ Accept wildcard characters: False
 ```
 
 ### -twitterUrl
-{{ Fill twitterUrl Description }}
+Twitter URL.
 
 ```yaml
 Type: System.String
@@ -987,7 +1013,7 @@ Accept wildcard characters: False
 ```
 
 ### -linkedInUrl
-{{ Fill linkedInUrl Description }}
+LinkedIn URL.
 
 ```yaml
 Type: System.String
@@ -1002,7 +1028,7 @@ Accept wildcard characters: False
 ```
 
 ### -currency
-{{ Fill currency Description }}
+Currency reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1017,7 +1043,7 @@ Accept wildcard characters: False
 ```
 
 ### -territoryManager
-{{ Fill territoryManager Description }}
+Territory manager reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1032,7 +1058,7 @@ Accept wildcard characters: False
 ```
 
 ### -resellerIdentifier
-{{ Fill resellerIdentifier Description }}
+Reseller identifier.
 
 ```yaml
 Type: System.String
@@ -1047,7 +1073,8 @@ Accept wildcard characters: False
 ```
 
 ### -isVendorFlag
-{{ Fill isVendorFlag Description }}
+Is vendor flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -1079,7 +1106,7 @@ Accept wildcard characters: False
 ```
 
 ### -site
-{{ Fill site Description }}
+Site reference, for example @{ id = 5 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1094,7 +1121,8 @@ Accept wildcard characters: False
 ```
 
 ### -integratorTags
-{{ Fill integratorTags Description }}
+Integrator tags.
+An array of strings.
 
 ```yaml
 Type: System.Array
@@ -1109,7 +1137,8 @@ Accept wildcard characters: False
 ```
 
 ### -_info
-{{ Fill _info Description }}
+The _info metadata of the record, as returned by the API.
+Usually left unset.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1124,7 +1153,8 @@ Accept wildcard characters: False
 ```
 
 ### -customFields
-{{ Fill customFields Description }}
+Custom fields.
+An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
 Type: System.Collections.Hashtable

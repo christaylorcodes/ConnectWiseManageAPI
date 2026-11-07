@@ -1,45 +1,66 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMAgreementSite
 
 ## SYNOPSIS
-This function will remove a site from a Manage agreement.
+Deletes an agreement site of an agreement.
 
 ## SYNTAX
 
 ```
-Remove-CWMAgreementSite -parentId <Int32> -id <Int32> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Remove-CWMAgreementSite [-parentId] <Int32> [-id] <Int32> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes an agreement site of an agreement from ConnectWise Manage.
+Calls DELETE
+/finance/agreements/{parentId}/sites/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Remove-CWMAgreementSite -AgreementID 123 -SiteID 123
 ```
+Remove-CWMAgreementSite -parentId 12 -id 5
+```
+
+Deletes agreement site 5 of agreement 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the agreement.
+Alias: agreementId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: agreementId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the agreement site to delete.
+Alias: siteId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: siteId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -55,35 +76,20 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: siteId
-
-Required: True
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: agreementId
+Aliases: cf
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -98,8 +104,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 9/19/2019
 
 ## RELATED LINKS
 
-[https://marketplace.connectwise.com/docs/redoc/manage/finance.html#tag/AgreementSites/paths/~1finance~1agreements~1{id}~1sites~1{siteId}/delete](https://marketplace.connectwise.com/docs/redoc/manage/finance.html#tag/AgreementSites/paths/~1finance~1agreements~1{id}~1sites~1{siteId}/delete)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

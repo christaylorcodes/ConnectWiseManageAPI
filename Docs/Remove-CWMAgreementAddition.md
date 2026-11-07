@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMAgreementAddition
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Deletes an agreement addition of an agreement.
 
 ## SYNTAX
 
@@ -18,30 +18,49 @@ Remove-CWMAgreementAddition [-id] <Int32> [-agreementid] <Int32> [-WhatIf]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes an agreement addition of an agreement from ConnectWise Manage.
+Calls DELETE
+/finance/agreements/{parentId}/additions/{id}.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> {{ Add example code here }}
+Remove-CWMAgreementAddition -agreementid 12 -id 5
 ```
 
-{{ Add example description here }}
+Deletes agreement addition 5 of agreement 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the agreement addition to delete.
+Alias: additionId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: additionId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -agreementid
+The id of the agreement.
+Alias: parentId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: parentId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -57,36 +76,21 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -agreementid
-{{ Fill agreementid Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: parentId
-
-Required: True
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: additionId
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMProjectPhase
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a phase for a project.
 
 ## SYNTAX
 
@@ -31,29 +31,792 @@ New-CWMProjectPhase [-parentId] <Int32> [[-id] <Int32>] [[-projectId] <Int32>] [
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a phase for a project in ConnectWise Manage.
+Calls POST /project/projects/{parentId}/phases;
+only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMProjectPhase -parentId 40 -description 'Discovery'
 ```
 
-{{ Add example description here }}
+Adds a phase named Discovery to project 40.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the project to add the phase to.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -projectId
+Project id.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -description
+Description.
+Max length 100.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -board
+Board reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -status
+Status reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -agreement
+Agreement reference, for example @{ id = 30 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -opportunity
+Opportunity reference, for example @{ id = 75 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentPhase
+Parent phase reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -wbsCode
+WBS code.
+Max length 50.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billTime
+Bill time.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
+Required on updates.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billExpenses
+Bill expenses.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
+Required on updates.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billProducts
+Bill products.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
+Required on updates.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -markAsMilestoneFlag
+Mark as milestone flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -notes
+Notes.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -deadlineDate
+Deadline date.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billSeparatelyFlag
+Bill separately flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billingMethod
+Billing method.
+One of: ActualRates, FixedFee, NotToExceed, OverrideRate.
+BillingMethod is required if
+the phase billSeparatelyFlag is true.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 18
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -scheduledHours
+Scheduled hours.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -scheduledStart
+Scheduled start.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -scheduledEnd
+Scheduled end.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -actualHours
+Actual hours.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -actualStart
+Actual start.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -actualEnd
+Actual end.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -budgetHours
+Budget hours.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -locationId
+Location id.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 26
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -businessUnitId
+Business unit id.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 27
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hourlyRate
+Hourly rate.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 28
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billingStartDate
+Billing start date.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 29
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billPhaseClosedFlag
+Bill phase closed flag.
+$true or $false.
+This phase can only be billed after it has been closed.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 30
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billProjectClosedFlag
+Bill project closed flag.
+$true or $false.
+This phase can only be billed after the project has been
+closed.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 31
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -downpayment
+Downpayment.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 32
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -poNumber
+PO number.
+Max length 25.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 33
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -poAmount
+PO amount.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 34
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -estimatedTimeCost
+Estimated time cost.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 35
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -estimatedExpenseCost
+Estimated expense cost.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 36
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -estimatedProductCost
+Estimated product cost.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 37
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -estimatedTimeRevenue
+Estimated time revenue.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 38
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -estimatedExpenseRevenue
+Estimated expense revenue.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 39
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -estimatedProductRevenue
+Estimated product revenue.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 40
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -currency
+Currency reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 41
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billToCompany
+Bill to company reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 42
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billToContact
+Bill to contact reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 43
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billToSite
+Bill to site reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 44
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -shipToCompany
+Ship to company reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 45
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -shipToContact
+Ship to contact reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 46
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -shipToSite
+Ship to site reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 47
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 48
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFields
+Custom fields.
+An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
+
+```yaml
+Type: System.Collections.Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 49
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -75,740 +838,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -_info
-{{ Fill _info Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
-Position: 47
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -actualEnd
-{{ Fill actualEnd Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -actualHours
-{{ Fill actualHours Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -actualStart
-{{ Fill actualStart Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -agreement
-{{ Fill agreement Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billExpenses
-{{ Fill billExpenses Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Billable, DoNotBill, NoCharge, NoDefault
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billPhaseClosedFlag
-{{ Fill billPhaseClosedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 29
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billProducts
-{{ Fill billProducts Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Billable, DoNotBill, NoCharge, NoDefault
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billProjectClosedFlag
-{{ Fill billProjectClosedFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billSeparatelyFlag
-{{ Fill billSeparatelyFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billTime
-{{ Fill billTime Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Billable, DoNotBill, NoCharge, NoDefault
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billToCompany
-{{ Fill billToCompany Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 41
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billToContact
-{{ Fill billToContact Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 42
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billToSite
-{{ Fill billToSite Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 43
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billingMethod
-{{ Fill billingMethod Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: ActualRates, FixedFee, NotToExceed, OverrideRate
-
-Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billingStartDate
-{{ Fill billingStartDate Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 28
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -board
-{{ Fill board Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -budgetHours
-{{ Fill budgetHours Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 24
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -businessUnitId
-{{ Fill businessUnitId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 26
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -currency
-{{ Fill currency Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 40
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFields
-{{ Fill customFields Description }}
-
-```yaml
-Type: System.Collections.Hashtable[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 48
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -deadlineDate
-{{ Fill deadlineDate Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -description
-{{ Fill description Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -downpayment
-{{ Fill downpayment Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 31
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -estimatedExpenseCost
-{{ Fill estimatedExpenseCost Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 35
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -estimatedExpenseRevenue
-{{ Fill estimatedExpenseRevenue Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 38
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -estimatedProductCost
-{{ Fill estimatedProductCost Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 36
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -estimatedProductRevenue
-{{ Fill estimatedProductRevenue Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 39
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -estimatedTimeCost
-{{ Fill estimatedTimeCost Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 34
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -estimatedTimeRevenue
-{{ Fill estimatedTimeRevenue Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 37
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hourlyRate
-{{ Fill hourlyRate Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 27
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -locationId
-{{ Fill locationId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 25
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -markAsMilestoneFlag
-{{ Fill markAsMilestoneFlag Description }}
-
-```yaml
-Type: System.Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -notes
-{{ Fill notes Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -opportunity
-{{ Fill opportunity Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentPhase
-{{ Fill parentPhase Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -poAmount
-{{ Fill poAmount Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 33
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -poNumber
-{{ Fill poNumber Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 32
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -projectId
-{{ Fill projectId Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -scheduledEnd
-{{ Fill scheduledEnd Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -scheduledHours
-{{ Fill scheduledHours Description }}
-
-```yaml
-Type: System.Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -scheduledStart
-{{ Fill scheduledStart Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -shipToCompany
-{{ Fill shipToCompany Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 44
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -shipToContact
-{{ Fill shipToContact Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 45
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -shipToSite
-{{ Fill shipToSite Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 46
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -status
-{{ Fill status Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -wbsCode
-{{ Fill wbsCode Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -819,11 +858,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

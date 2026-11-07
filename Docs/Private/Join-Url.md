@@ -8,7 +8,7 @@ schema: 2.0.0
 # Join-Url
 
 ## SYNOPSIS
-Used to join URL segments.
+Joins two URL segments.
 
 ## SYNTAX
 
@@ -17,24 +17,26 @@ Join-Url [-Path] <String> [-ChildPath] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Joins two URL segments with exactly one slash between them: trailing slashes of -Path and leading
+slashes of -ChildPath are removed first.
+Internal helper; no API call is made.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> {{ Add example code here }}
+```
+Join-Url 'https://na.myconnectwise.net/' '/v4_6_release'
 ```
 
-{{ Add example description here }}
+Returns https://na.myconnectwise.net/v4_6_release.
 
 ## PARAMETERS
 
-### -ChildPath
-The item to append to the Path
+### -Path
+Root URL path to join to.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -45,16 +47,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-Root URL path to join to.
+### -ChildPath
+The segment to append to -Path.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -65,11 +67,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

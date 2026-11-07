@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Info&o=GET
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMOpportunityForecastItem
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets a forecast item of an opportunity.
 
 ## SYNTAX
 
@@ -20,21 +20,53 @@ Get-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [[-condition] <
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves one forecast item of an opportunity from ConnectWise Manage.
+Calls GET
+/sales/opportunities/{parentId}/forecast/{id}.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-CWMOpportunityForecastItem -parentId 75 -id 5
 ```
 
-{{ Add example description here }}
+Retrieves forecast item 5 of opportunity 75.
 
 ## PARAMETERS
 
-### -childConditions
-{{ Fill childConditions Description }}
+### -parentId
+The id of the opportunity.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the forecast item to retrieve.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "id\>100".
 
 ```yaml
 Type: System.String
@@ -48,23 +80,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -condition
-{{ Fill condition Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-{{ Fill customFieldConditions Description }}
+### -childConditions
+Filter on child (list) fields, in condition syntax.
 
 ```yaml
 Type: System.String
@@ -78,38 +95,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -fields
-{{ Fill fields Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-{{ Fill orderBy Description }}
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
 
 ```yaml
 Type: System.String
@@ -123,11 +110,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-{{ Fill page Description }}
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: System.Int32
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'forecastItems').
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -138,23 +140,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageID
-{{ Fill pageID Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-{{ Fill pageSize Description }}
+### -page
+The page number to return.
+Use with -pageSize.
 
 ```yaml
 Type: System.Int32
@@ -163,22 +151,38 @@ Aliases:
 
 Required: False
 Position: 8
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 0
-Default value: None
+Required: False
+Position: 9
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageID
+Starts forward-only pagination at the page identified by this value.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -188,10 +192,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

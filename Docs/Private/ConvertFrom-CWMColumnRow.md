@@ -8,7 +8,7 @@ schema: 2.0.0
 # ConvertFrom-CWMColumnRow
 
 ## SYNOPSIS
-Take Column Row output from Manage and converts it to an object
+Converts column/row report data from ConnectWise Manage to a table.
 
 ## SYNTAX
 
@@ -17,27 +17,32 @@ ConvertFrom-CWMColumnRow [[-Data] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Converts a report response with column_definitions and row_values (as returned by
+GET /system/reports/{reportName}) to a System.Data.DataTable, so each row becomes an object with one
+property per column.
+Internal helper used by Get-CWMReport; no API call is made.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-ConvertFrom-CWMColumnRow -Data $Data
 ```
+ConvertFrom-CWMColumnRow -Data $ReportResponse
+```
+
+Returns the rows of the report response as objects.
 
 ## PARAMETERS
 
 ### -Data
-Column row object to be converted
+The report response object, with column_definitions and row_values properties.
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -51,6 +56,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS

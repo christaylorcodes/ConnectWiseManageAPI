@@ -1,4 +1,60 @@
-﻿function Get-CWMMarketingGroupContact {
+﻿<#
+.SYNOPSIS
+    Gets the contacts in a marketing group.
+
+.DESCRIPTION
+    Retrieves the contacts of a marketing group from ConnectWise Manage, or a single contact by id. Calls
+    GET /marketing/groups/{parentId}/contacts; -id adds /{id} and -count adds /count.
+
+.PARAMETER parentId
+    The id of the marketing group.
+    Alias: groupId
+
+.PARAMETER id
+    The id of a single contact to retrieve.
+    Alias: contactId
+
+.PARAMETER count
+    Return only the number of matching contacts instead of the records.
+
+.PARAMETER condition
+    Filter in ConnectWise Manage condition syntax, for example "id>100".
+
+.PARAMETER orderBy
+    Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+.PARAMETER childConditions
+    Filter on child (list) fields, in condition syntax.
+
+.PARAMETER customFieldConditions
+    Filter on custom field values, in condition syntax.
+
+.PARAMETER page
+    The page number to return. Use with -pageSize.
+
+.PARAMETER pageSize
+    The number of records per page. Without it the API's default page size applies.
+
+.PARAMETER fields
+    Only return these fields, for example @('id', 'groupId').
+
+.PARAMETER all
+    Retrieve every matching record, handling pagination automatically.
+
+.EXAMPLE
+    Get-CWMMarketingGroupContact -parentId 12 -condition "id>100" -all
+
+    Retrieves the contacts of marketing group 12 that match the condition.
+
+.EXAMPLE
+    Get-CWMMarketingGroupContact -parentId 12 -id 5
+
+    Retrieves contact 5 of marketing group 12.
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+#>
+function Get-CWMMarketingGroupContact {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanyTypeAssociation
 
 ## SYNOPSIS
-Creates a new type association for a company
+Creates a company type association.
 
 ## SYNTAX
 
@@ -18,72 +18,41 @@ New-CWMCompanyTypeAssociation [[-id] <Int32>] [-type] <Hashtable> [-company] <Ha
 ```
 
 ## DESCRIPTION
-
-Assign a type to a company.
+Creates a company type association in ConnectWise Manage.
+Calls POST /company/companyTypeAssociations;
+only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-
-```powershell
-New-CWMCompanyTypeAssociation -company @{id = 4385} -Type @{id = 68}
+```
+New-CWMCompanyTypeAssociation -company @{ id = 250 } -type @{ id = 1 }
 ```
 
-Adds the type 68 to company 4385
+Assigns company type 1 to company 250.
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-Metadata
-
-```yaml
-Type: System.Collections.Hashtable
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: None
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -company
-
-Company object for the company you want to associate the type with
+### -type
+Type reference, for example @{ id = 1 }.
+Required by the API.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -97,25 +66,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-
-don't use?
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -type
-
-Company type reference object that you want to associate with the company
+### -company
+Company reference, for example @{ id = 250 }.
+Required by the API.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -123,7 +76,54 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -138,8 +138,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Author: Chris Taylor Date: 8/22/2018
-
 ## RELATED LINKS
 
-[https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post](https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTypeAssociations/paths/~1company~1companyTypeAssociations/post)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

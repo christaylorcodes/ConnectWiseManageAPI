@@ -1,4 +1,56 @@
-﻿function Get-CWMScheduleEntry {
+﻿<#
+.SYNOPSIS
+    Gets schedule entries.
+
+.DESCRIPTION
+    Retrieves the schedule entries from ConnectWise Manage, or a single schedule entry by id. Calls GET
+    /schedule/entries; -id adds /{id} and -count adds /count.
+
+.PARAMETER id
+    The id of a single schedule entry to retrieve.
+
+.PARAMETER count
+    Return only the number of matching schedule entries instead of the records.
+
+.PARAMETER condition
+    Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe' and
+    doneFlag=false".
+
+.PARAMETER orderBy
+    Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+.PARAMETER childConditions
+    Filter on child (list) fields, in condition syntax.
+
+.PARAMETER customFieldConditions
+    Filter on custom field values, in condition syntax.
+
+.PARAMETER page
+    The page number to return. Use with -pageSize.
+
+.PARAMETER pageSize
+    The number of records per page. Without it the API's default page size applies.
+
+.PARAMETER fields
+    Only return these fields, for example @('id', 'name').
+
+.PARAMETER all
+    Retrieve every matching record, handling pagination automatically.
+
+.EXAMPLE
+    Get-CWMScheduleEntry -condition "member/identifier='jdoe' and doneFlag=false" -all
+
+    Retrieves the schedule entries that match the condition.
+
+.EXAMPLE
+    Get-CWMScheduleEntry -id 5
+
+    Retrieves schedule entry 5.
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+#>
+function Get-CWMScheduleEntry {
     [CmdletBinding()]
     param(
         [int]$id,

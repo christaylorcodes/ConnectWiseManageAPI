@@ -1,46 +1,65 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMTicketConfiguration
 
 ## SYNOPSIS
-Assigns a configuration to a ticket.
+Attaches a configuration to a service ticket.
 
 ## SYNTAX
 
 ```
-New-CWMTicketConfiguration -parentId <Int32> [-id <String>] [-WhatIf]
+New-CWMTicketConfiguration [-parentId] <Int32> [[-id] <String>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Attaches the given configuration to the given ticket.
+Attaches an existing configuration to a service ticket in ConnectWise Manage.
+Calls POST
+/service/tickets/{parentId}/configurations with a ConfigurationReference body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> New-CWMTicketConfiguration -TicketID 123 -deviceIdentifier 333
+```
+New-CWMTicketConfiguration -parentId 1234 -id 77
 ```
 
-Attaches configuration 333 to ticket 123.
+Attaches configuration 77 to service ticket 1234.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the service ticket to add the configuration to.
+Alias: ticketId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: ticketId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of the configuration to attach.
+Alias: deviceIdentifier
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: deviceIdentifier
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,28 +81,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases: deviceIdentifier
+Aliases: cf
 
 Required: False
 Position: Named
@@ -97,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

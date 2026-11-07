@@ -1,144 +1,48 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Company&e=CompanyTeams&o=GET
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMCompanyTeam
 
 ## SYNOPSIS
-This function will list of teams of a company based on conditions.
+Gets the team members assigned to a company.
 
 ## SYNTAX
 
 ```
-Get-CWMCompanyTeam [-id <Int32>] [-count] -parentId <Int32> [[-condition] <String>] [[-orderBy] <String>]
+Get-CWMCompanyTeam [[-id] <Int32>] [-count] [-parentId] <Int32> [[-condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [<CommonParameters>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the team member assignments of a company from ConnectWise Manage, or a single team member
+assignment by id.
+Calls GET /company/companies/{parentId}/teams; -id adds /{id} and -count adds /count.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMCompanyTeam -CompanyID 1 -all
+Get-CWMCompanyTeam -parentId 12 -condition "member/identifier='jdoe'" -all
 ```
 
-Will return all team members for company 1
+Retrieves the team member assignments of company 12 that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMCompanyTeam -parentId 12 -id 5
+```
+
+Retrieves team member assignment 5 of company 12.
 
 ## PARAMETERS
 
-### -all
-Return all results
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -page
-Used in pagination to cycle through results
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-Number of results returned per page (Defaults to 25)
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -id
-{{ Fill id Description }}
+The id of a single team member assignment to retrieve.
 
 ```yaml
 Type: System.Int32
@@ -146,14 +50,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -count
-Will return the number of objects.
+Return only the number of matching team member assignments instead of the records.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -168,7 +72,8 @@ Accept wildcard characters: False
 ```
 
 ### -parentId
-{{ Fill parentId Description }}
+The id of the company.
+Alias: companyId
 
 ```yaml
 Type: System.Int32
@@ -176,14 +81,14 @@ Parameter Sets: (All)
 Aliases: companyId
 
 Required: True
-Position: Named
-Default value: None
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -condition
-The id of the company you want to get the teams of.
+Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
 
 ```yaml
 Type: System.String
@@ -191,8 +96,115 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 3
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+The page number to return.
+Use with -pageSize.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'company').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+Retrieve every matching record, handling pagination automatically.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -205,6 +217,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/25/2018
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

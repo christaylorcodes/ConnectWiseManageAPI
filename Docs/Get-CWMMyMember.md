@@ -1,39 +1,147 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Info&o=GET
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMMyMember
 
 ## SYNOPSIS
-This function will return information about the user used for the API connection.
+Gets the member record of the authenticated member.
 
 ## SYNTAX
 
 ```
-Get-CWMMyMember [-condition <String>] [-orderBy <String>] [-childConditions <String>]
- [-customFieldConditions <String>] [-page <Int32>] [-pageSize <Int32>] [-fields <String[]>] [-all]
+Get-CWMMyMember [[-condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the MyMember record of the member the API credentials belong to.
+Calls GET /system/myMembers.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMMyMembers
+Get-CWMMyMember -fields @('id', 'identifier', 'defaultEmail')
 ```
 
-Will return information about the used to authenticate.
+Returns the id, identifier and default email setting of the connected member.
 
 ## PARAMETERS
 
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "identifier='ACME'".
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+The page number to return.
+Use with -pageSize.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'identifier').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -all
-Return all results
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -47,112 +155,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-This is your search condition to return the results you desire.
-Example: \`(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"\`
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-Allows searching custom fields.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -page
-Used in pagination to cycle through results.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-Number of results returned per page (Defaults to 25)
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -161,6 +163,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 9/26/2019
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

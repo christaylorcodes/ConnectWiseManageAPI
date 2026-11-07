@@ -1,99 +1,72 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=System&e=AuditTrail&o=GET
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMAuditTrail
 
 ## SYNOPSIS
-This function will get the audit trail of an item in ConnectWise.
+Gets the audit trail of a record.
 
 ## SYNTAX
 
 ```
-Get-CWMAuditTrail [-type] <Object> [-id] <String> [-count] [[-deviceIdentifier] <String>] [-condition <String>]
- [-orderBy <String>] [[-childConditions] <String>] [-customFieldConditions <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [-fields <String[]>] [-all] [<CommonParameters>]
+Get-CWMAuditTrail [-type] <Object> [-id] <String> [-count] [[-deviceIdentifier] <String>]
+ [[-condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This function will get the audit trail of an item in ConnectWise.
+Retrieves the audit trail entries of one record, identified by its type and id.
+Calls GET
+/system/audittrail?type={type}&id={id} (GET /system/audittrail/count with -count).
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMAuditTrail -Type Ticket -id 1
+Get-CWMAuditTrail -type Ticket -id 1234 -all
 ```
 
-Will return the audit trail for ticket 1
+Retrieves the full audit trail of service ticket 1234.
 
 ## PARAMETERS
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -type
+The type of the record, for example Ticket, Company or Agreement.
 
 ```yaml
-Type: System.String
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 3
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -deviceIdentifier
-?
+### -id
+The id of the record whose audit trail is returned.
 
 ```yaml
 Type: System.String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-Used in pagination to cycle through results
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pageSize
-Number of results returned per page (Defaults to 25)
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -all
-Return all results
+### -count
+Return only the number of matching audit trails instead of the records.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -107,9 +80,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -condition
-This is your search condition to return the results you desire.
-Example: \`(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"\`
+### -deviceIdentifier
+Device identifier, sent as the deviceIdentifier query parameter.
 
 ```yaml
 Type: System.String
@@ -117,14 +89,59 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "text contains 'callback'".
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+Filter on custom field values, in condition syntax.
 
 ```yaml
 Type: System.String
@@ -132,14 +149,46 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -page
+The page number to return.
+Use with -pageSize.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -fields
-Allows you to return a partial response with just the fields listed.
+Only return these fields, for example @('id', 'text').
 
 ```yaml
 Type: System.String[]
@@ -147,60 +196,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 10
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-The id the the item you want the audit trail of.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -type
-Ticket, ProductCatalog, Configuration, PurchaseOrder, Expense
-
-```yaml
-Type: System.Object
-Parameter Sets: (All)
-Aliases:
-Accepted values: Ticket, ProductCatalog, Configuration, PurchaseOrder, Expense
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
+### -all
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -222,8 +225,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/29/2018
-
-No support for forward only pagination at this time.
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

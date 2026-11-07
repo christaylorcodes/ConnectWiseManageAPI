@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST#/TimeSheets
+online version:
 schema: 2.0.0
 ---
 
 # Update-CWMTimeSheet
 
 ## SYNOPSIS
-This will update a timesheet.
+Submits, approves, rejects or reverses a time sheet.
 
 ## SYNTAX
 
@@ -37,39 +37,48 @@ Update-CWMTimeSheet -id <Int32> [-Approve] [-approvalType <String>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Runs a time sheet action.
+Calls POST /time/sheets/{id}/submit (the default), /approve, /reject or
+/reverse.
+Approve and reject send a TimeSheetTierUpdate body with the id and, if given, the approval
+type.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Update-CWMTimeSheet -id 1 -Submit
+Update-CWMTimeSheet -id 88 -Approve -approvalType Tier1Update
 ```
+
+Approves time sheet 88 at tier 1.
 
 ### EXAMPLE 2
 ```
-Update-CWMTimeSheet -id 2 -Approve -ApprovalType 'Tier1Update'
+Update-CWMTimeSheet -id 88 -Reverse
 ```
+
+Reverses time sheet 88.
 
 ## PARAMETERS
 
-### -Approve
-Allows the 'ApprovalType' parameter to be used.
+### -id
+The id of the time sheet.
+Alias: sheetId
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Approve
-Aliases:
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: sheetId
 
-Required: False
+Required: True
 Position: Named
-Default value: False
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Reject
-Rejects a timesheet.
+Reject the time sheet (POST /time/sheets/{id}/reject).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -84,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -Reverse
-Reverses a timesheet.
+Reverse the time sheet (POST /time/sheets/{id}/reverse).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -99,7 +108,8 @@ Accept wildcard characters: False
 ```
 
 ### -Submit
-Submits a timesheet.
+Submit the time sheet (POST /time/sheets/{id}/submit).
+This is the default action.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -113,15 +123,48 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Approve
+Approve the time sheet (POST /time/sheets/{id}/approve).
 
 ```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases: sheetId
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Approve
+Aliases:
 
-Required: True
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -approvalType
+With -Approve or -Reject, the approval tier sent as approvalType in the request body.
+One of: DataEntry,
+Tier1Update, Tier2Update, Billing, Service, Project, MonthlySummary, SalesActivity, Schedule.
+
+```yaml
+Type: System.String
+Parameter Sets: Reject, Approve
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -138,38 +181,6 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -approvalType
-The type of value you want to assign.
-
-```yaml
-Type: System.String
-Parameter Sets: Reject, Approve
-Aliases:
-Accepted values: DataEntry, Tier1Update, Tier2Update, Billing, Service, Project, MonthlySummary, SalesActivity, Schedule
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -180,10 +191,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[Submit-CWMTimeSheet]()
+
+[Get-CWMTimeSheet]()
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

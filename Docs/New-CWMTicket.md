@@ -100,7 +100,9 @@ Creates a ticket with contact details.
 ## PARAMETERS
 
 ### -id
-{{ Fill id Description }}
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
 Type: System.Int32
@@ -131,7 +133,8 @@ Accept wildcard characters: False
 ```
 
 ### -recordType
-{{ Fill recordType Description }}
+Record type.
+One of: ProjectIssue, ProjectTicket, ServiceTicket.
 
 ```yaml
 Type: System.String
@@ -196,7 +199,7 @@ Accept wildcard characters: False
 ```
 
 ### -site
-{{ Fill site Description }}
+Site reference, for example @{ id = 5 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -211,7 +214,8 @@ Accept wildcard characters: False
 ```
 
 ### -siteName
-{{ Fill siteName Description }}
+Site name.
+Max length 156.
 
 ```yaml
 Type: System.String
@@ -226,7 +230,8 @@ Accept wildcard characters: False
 ```
 
 ### -addressLine1
-{{ Fill addressLine1 Description }}
+Address line 1.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -241,7 +246,8 @@ Accept wildcard characters: False
 ```
 
 ### -addressLine2
-{{ Fill addressLine2 Description }}
+Address line 2.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -256,7 +262,8 @@ Accept wildcard characters: False
 ```
 
 ### -city
-{{ Fill city Description }}
+City.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -271,7 +278,8 @@ Accept wildcard characters: False
 ```
 
 ### -stateIdentifier
-{{ Fill stateIdentifier Description }}
+State identifier.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -286,7 +294,8 @@ Accept wildcard characters: False
 ```
 
 ### -zip
-{{ Fill zip Description }}
+Zip.
+Max length 12.
 
 ```yaml
 Type: System.String
@@ -301,7 +310,7 @@ Accept wildcard characters: False
 ```
 
 ### -country
-{{ Fill country Description }}
+Country reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -332,7 +341,8 @@ Accept wildcard characters: False
 ```
 
 ### -contactName
-{{ Fill contactName Description }}
+Contact name.
+Max length 62.
 
 ```yaml
 Type: System.String
@@ -347,7 +357,8 @@ Accept wildcard characters: False
 ```
 
 ### -contactPhoneNumber
-{{ Fill contactPhoneNumber Description }}
+Contact phone number.
+Max length 20.
 
 ```yaml
 Type: System.String
@@ -362,7 +373,8 @@ Accept wildcard characters: False
 ```
 
 ### -contactPhoneExtension
-{{ Fill contactPhoneExtension Description }}
+Contact phone extension.
+Max length 15.
 
 ```yaml
 Type: System.String
@@ -377,7 +389,8 @@ Accept wildcard characters: False
 ```
 
 ### -contactEmailAddress
-{{ Fill contactEmailAddress Description }}
+Contact email address.
+Max length 250.
 
 ```yaml
 Type: System.String
@@ -440,7 +453,7 @@ Accept wildcard characters: False
 ```
 
 ### -team
-{{ Fill team Description }}
+Team reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -455,7 +468,7 @@ Accept wildcard characters: False
 ```
 
 ### -owner
-{{ Fill owner Description }}
+Owner reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -486,7 +499,7 @@ Accept wildcard characters: False
 ```
 
 ### -serviceLocation
-{{ Fill serviceLocation Description }}
+Service location reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -501,7 +514,7 @@ Accept wildcard characters: False
 ```
 
 ### -source
-{{ Fill source Description }}
+Source reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -516,7 +529,8 @@ Accept wildcard characters: False
 ```
 
 ### -requiredDate
-{{ Fill requiredDate Description }}
+Required date.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
 
 ```yaml
 Type: System.String
@@ -531,7 +545,8 @@ Accept wildcard characters: False
 ```
 
 ### -budgetHours
-{{ Fill budgetHours Description }}
+Budget hours.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -546,7 +561,7 @@ Accept wildcard characters: False
 ```
 
 ### -opportunity
-{{ Fill opportunity Description }}
+Opportunity reference, for example @{ id = 75 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -561,7 +576,7 @@ Accept wildcard characters: False
 ```
 
 ### -agreement
-{{ Fill agreement Description }}
+Agreement reference, for example @{ id = 30 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -576,7 +591,9 @@ Accept wildcard characters: False
 ```
 
 ### -severity
-{{ Fill severity Description }}
+Severity.
+One of: Low, Medium, High.
+Required on updates.
 
 ```yaml
 Type: System.String
@@ -591,7 +608,9 @@ Accept wildcard characters: False
 ```
 
 ### -impact
-{{ Fill impact Description }}
+Impact.
+One of: Low, Medium, High.
+Required on updates.
 
 ```yaml
 Type: System.String
@@ -606,7 +625,8 @@ Accept wildcard characters: False
 ```
 
 ### -externalXRef
-{{ Fill externalXRef Description }}
+External XRef.
+Max length 100.
 
 ```yaml
 Type: System.String
@@ -621,7 +641,8 @@ Accept wildcard characters: False
 ```
 
 ### -poNumber
-{{ Fill poNumber Description }}
+PO number.
+Max length 50.
 
 ```yaml
 Type: System.String
@@ -636,7 +657,8 @@ Accept wildcard characters: False
 ```
 
 ### -knowledgeBaseCategoryId
-{{ Fill knowledgeBaseCategoryId Description }}
+Knowledge base category id.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -651,7 +673,8 @@ Accept wildcard characters: False
 ```
 
 ### -knowledgeBaseSubCategoryId
-{{ Fill knowledgeBaseSubCategoryId Description }}
+Knowledge base sub category id.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -666,7 +689,8 @@ Accept wildcard characters: False
 ```
 
 ### -allowAllClientsPortalView
-{{ Fill allowAllClientsPortalView Description }}
+Allow all clients portal view.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -681,7 +705,8 @@ Accept wildcard characters: False
 ```
 
 ### -customerUpdatedFlag
-{{ Fill customerUpdatedFlag Description }}
+Customer updated flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -696,7 +721,8 @@ Accept wildcard characters: False
 ```
 
 ### -automaticEmailContactFlag
-{{ Fill automaticEmailContactFlag Description }}
+Automatic email contact flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -711,7 +737,8 @@ Accept wildcard characters: False
 ```
 
 ### -automaticEmailResourceFlag
-{{ Fill automaticEmailResourceFlag Description }}
+Automatic email resource flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -726,7 +753,8 @@ Accept wildcard characters: False
 ```
 
 ### -automaticEmailCcFlag
-{{ Fill automaticEmailCcFlag Description }}
+Automatic email CC flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -741,7 +769,8 @@ Accept wildcard characters: False
 ```
 
 ### -automaticEmailCc
-{{ Fill automaticEmailCc Description }}
+Automatic email CC.
+Max length 1000.
 
 ```yaml
 Type: System.String
@@ -802,7 +831,7 @@ Accept wildcard characters: False
 ```
 
 ### -contactEmailLookup
-{{ Fill contactEmailLookup Description }}
+Contact email lookup.
 
 ```yaml
 Type: System.String
@@ -817,7 +846,10 @@ Accept wildcard characters: False
 ```
 
 ### -processNotifications
-{{ Fill processNotifications Description }}
+Process notifications.
+$true or $false.
+Can be set to false to skip notification processing when adding
+or updating a ticket (Defaults to True).
 
 ```yaml
 Type: System.Boolean
@@ -832,7 +864,8 @@ Accept wildcard characters: False
 ```
 
 ### -skipCallback
-{{ Fill skipCallback Description }}
+Skip callback.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -847,7 +880,7 @@ Accept wildcard characters: False
 ```
 
 ### -closedDate
-{{ Fill closedDate Description }}
+Closed date.
 
 ```yaml
 Type: System.String
@@ -862,7 +895,7 @@ Accept wildcard characters: False
 ```
 
 ### -closedBy
-{{ Fill closedBy Description }}
+Closed by.
 
 ```yaml
 Type: System.String
@@ -877,7 +910,8 @@ Accept wildcard characters: False
 ```
 
 ### -closedFlag
-{{ Fill closedFlag Description }}
+Closed flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -892,7 +926,8 @@ Accept wildcard characters: False
 ```
 
 ### -actualHours
-{{ Fill actualHours Description }}
+Actual hours.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -907,7 +942,8 @@ Accept wildcard characters: False
 ```
 
 ### -approved
-{{ Fill approved Description }}
+Approved.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -922,7 +958,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedExpenseCost
-{{ Fill estimatedExpenseCost Description }}
+Estimated expense cost.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -937,7 +974,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedExpenseRevenue
-{{ Fill estimatedExpenseRevenue Description }}
+Estimated expense revenue.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -952,7 +990,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedProductCost
-{{ Fill estimatedProductCost Description }}
+Estimated product cost.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -967,7 +1006,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedProductRevenue
-{{ Fill estimatedProductRevenue Description }}
+Estimated product revenue.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -982,7 +1022,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedTimeCost
-{{ Fill estimatedTimeCost Description }}
+Estimated time cost.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -997,7 +1038,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedTimeRevenue
-{{ Fill estimatedTimeRevenue Description }}
+Estimated time revenue.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -1012,7 +1054,8 @@ Accept wildcard characters: False
 ```
 
 ### -billingMethod
-{{ Fill billingMethod Description }}
+Billing method.
+One of: ActualRates, FixedFee, NotToExceed, OverrideRate.
 
 ```yaml
 Type: System.String
@@ -1027,7 +1070,8 @@ Accept wildcard characters: False
 ```
 
 ### -billingAmount
-{{ Fill billingAmount Description }}
+Billing amount.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -1042,7 +1086,8 @@ Accept wildcard characters: False
 ```
 
 ### -hourlyRate
-{{ Fill hourlyRate Description }}
+Hourly rate.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -1057,7 +1102,8 @@ Accept wildcard characters: False
 ```
 
 ### -subBillingMethod
-{{ Fill subBillingMethod Description }}
+Sub billing method.
+One of: ActualRates, FixedFee, NotToExceed, OverrideRate.
 
 ```yaml
 Type: System.String
@@ -1072,7 +1118,8 @@ Accept wildcard characters: False
 ```
 
 ### -subBillingAmount
-{{ Fill subBillingAmount Description }}
+Sub billing amount.
+A number.
 
 ```yaml
 Type: System.Decimal
@@ -1087,7 +1134,7 @@ Accept wildcard characters: False
 ```
 
 ### -subDateAccepted
-{{ Fill subDateAccepted Description }}
+Sub date accepted.
 
 ```yaml
 Type: System.String
@@ -1102,7 +1149,7 @@ Accept wildcard characters: False
 ```
 
 ### -dateResolved
-{{ Fill dateResolved Description }}
+Date resolved.
 
 ```yaml
 Type: System.String
@@ -1117,7 +1164,7 @@ Accept wildcard characters: False
 ```
 
 ### -dateResplan
-{{ Fill dateResplan Description }}
+Date resplan.
 
 ```yaml
 Type: System.String
@@ -1132,7 +1179,7 @@ Accept wildcard characters: False
 ```
 
 ### -dateResponded
-{{ Fill dateResponded Description }}
+Date responded.
 
 ```yaml
 Type: System.String
@@ -1147,7 +1194,11 @@ Accept wildcard characters: False
 ```
 
 ### -resolveMinutes
-{{ Fill resolveMinutes Description }}
+Resolve minutes.
+An integer.
+To obtain the current SLA times for an active ticket, please use the
+/service/tickets/calculateSLA endpoint for multiple tickets or /service/tickets/{id} for individual
+tickets.
 
 ```yaml
 Type: System.Int32
@@ -1162,7 +1213,11 @@ Accept wildcard characters: False
 ```
 
 ### -resPlanMinutes
-{{ Fill resPlanMinutes Description }}
+Res plan minutes.
+An integer.
+To obtain the current SLA times for an active ticket, please use the
+/service/tickets/calculateSLA endpoint for multiple tickets or /service/tickets/{id} for individual
+tickets.
 
 ```yaml
 Type: System.Int32
@@ -1177,7 +1232,11 @@ Accept wildcard characters: False
 ```
 
 ### -respondMinutes
-{{ Fill respondMinutes Description }}
+Respond minutes.
+An integer.
+To obtain the current SLA times for an active ticket, please use the
+/service/tickets/calculateSLA endpoint for multiple tickets or /service/tickets/{id} for individual
+tickets.
 
 ```yaml
 Type: System.Int32
@@ -1192,7 +1251,8 @@ Accept wildcard characters: False
 ```
 
 ### -isInSla
-{{ Fill isInSla Description }}
+Is in SLA.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -1207,7 +1267,8 @@ Accept wildcard characters: False
 ```
 
 ### -knowledgeBaseLinkId
-{{ Fill knowledgeBaseLinkId Description }}
+Knowledge base link id.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -1222,7 +1283,7 @@ Accept wildcard characters: False
 ```
 
 ### -resources
-{{ Fill resources Description }}
+Resources.
 
 ```yaml
 Type: System.String
@@ -1237,7 +1298,8 @@ Accept wildcard characters: False
 ```
 
 ### -parentTicketId
-{{ Fill parentTicketId Description }}
+Parent ticket id.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -1252,7 +1314,8 @@ Accept wildcard characters: False
 ```
 
 ### -hasChildTicket
-{{ Fill hasChildTicket Description }}
+Has child ticket.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -1267,7 +1330,8 @@ Accept wildcard characters: False
 ```
 
 ### -hasMergedChildTicketFlag
-{{ Fill hasMergedChildTicketFlag Description }}
+Has merged child ticket flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -1282,7 +1346,9 @@ Accept wildcard characters: False
 ```
 
 ### -knowledgeBaseLinkType
-{{ Fill knowledgeBaseLinkType Description }}
+Knowledge base link type.
+One of: Activity, ProjectIssue, KnowledgeBaseArticle, ProjectTicket,
+ServiceTicket, Time.
 
 ```yaml
 Type: System.String
@@ -1297,7 +1363,8 @@ Accept wildcard characters: False
 ```
 
 ### -billTime
-{{ Fill billTime Description }}
+Bill time.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
 
 ```yaml
 Type: System.String
@@ -1312,7 +1379,8 @@ Accept wildcard characters: False
 ```
 
 ### -billExpenses
-{{ Fill billExpenses Description }}
+Bill expenses.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
 
 ```yaml
 Type: System.String
@@ -1327,7 +1395,8 @@ Accept wildcard characters: False
 ```
 
 ### -billProducts
-{{ Fill billProducts Description }}
+Bill products.
+One of: Billable, DoNotBill, NoCharge, NoDefault.
 
 ```yaml
 Type: System.String
@@ -1342,7 +1411,8 @@ Accept wildcard characters: False
 ```
 
 ### -predecessorType
-{{ Fill predecessorType Description }}
+Predecessor type.
+One of: Ticket, Phase.
 
 ```yaml
 Type: System.String
@@ -1357,7 +1427,8 @@ Accept wildcard characters: False
 ```
 
 ### -predecessorId
-{{ Fill predecessorId Description }}
+Predecessor id.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -1372,7 +1443,8 @@ Accept wildcard characters: False
 ```
 
 ### -predecessorClosedFlag
-{{ Fill predecessorClosedFlag Description }}
+Predecessor closed flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -1387,7 +1459,8 @@ Accept wildcard characters: False
 ```
 
 ### -lagDays
-{{ Fill lagDays Description }}
+Lag days.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -1402,7 +1475,8 @@ Accept wildcard characters: False
 ```
 
 ### -lagNonworkingDaysFlag
-{{ Fill lagNonworkingDaysFlag Description }}
+Lag nonworking days flag.
+$true or $false.
 
 ```yaml
 Type: System.Boolean
@@ -1417,7 +1491,8 @@ Accept wildcard characters: False
 ```
 
 ### -estimatedStartDate
-{{ Fill estimatedStartDate Description }}
+Estimated start date.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
 
 ```yaml
 Type: System.String
@@ -1432,7 +1507,8 @@ Accept wildcard characters: False
 ```
 
 ### -duration
-{{ Fill duration Description }}
+Duration.
+An integer.
 
 ```yaml
 Type: System.Int32
@@ -1447,7 +1523,7 @@ Accept wildcard characters: False
 ```
 
 ### -location
-{{ Fill location Description }}
+Location reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1462,7 +1538,7 @@ Accept wildcard characters: False
 ```
 
 ### -department
-{{ Fill department Description }}
+Department reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1477,7 +1553,7 @@ Accept wildcard characters: False
 ```
 
 ### -mobileGuid
-{{ Fill mobileGuid Description }}
+Mobile GUID.
 
 ```yaml
 Type: System.Guid
@@ -1492,7 +1568,7 @@ Accept wildcard characters: False
 ```
 
 ### -sla
-{{ Fill sla Description }}
+SLA reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1507,7 +1583,7 @@ Accept wildcard characters: False
 ```
 
 ### -currency
-{{ Fill currency Description }}
+Currency reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1522,7 +1598,7 @@ Accept wildcard characters: False
 ```
 
 ### -mergedParentTicket
-{{ Fill mergedParentTicket Description }}
+Merged parent ticket reference, for example @{ id = 1 }.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1537,7 +1613,8 @@ Accept wildcard characters: False
 ```
 
 ### -integratorTags
-{{ Fill integratorTags Description }}
+Integrator tags.
+An array of strings.
 
 ```yaml
 Type: System.String
@@ -1552,7 +1629,8 @@ Accept wildcard characters: False
 ```
 
 ### -_info
-{{ Fill _info Description }}
+The _info metadata of the record, as returned by the API.
+Usually left unset.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -1567,7 +1645,8 @@ Accept wildcard characters: False
 ```
 
 ### -customFields
-{{ Fill customFields Description }}
+Custom fields.
+An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
 Type: System.Collections.Hashtable[]

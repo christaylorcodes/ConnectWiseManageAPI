@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMChargeCode
 
 ## SYNOPSIS
-Gets a list of charge codes
+Gets the charge codes.
 
 ## SYNTAX
 
@@ -17,14 +17,18 @@ Get-CWMChargeCode [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the rows of the ChargeCode report.
+Calls Get-CWMReport, which calls GET
+/system/reports/ChargeCode.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-ChargeCode
 ```
+Get-CWMChargeCode
+```
+
+Returns every charge code as an object.
 
 ## PARAMETERS
 
@@ -36,6 +40,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+
