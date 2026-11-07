@@ -334,15 +334,16 @@ Describe 'Connect-CWM connection state (0.5.0 review)' {
         }
     }
 
-    It 'keeps the previous same-tenant connection, with nothing from the attempt, when <Case> fails with -Force' -ForEach @(
-        @{ Case = 'the server lookup' }
-        @{ Case = 'impersonation' }
-        @{ Case = 'cookie login' }
-        @{ Case = 'validation' }
+    It 'keeps the previous same-identity connection, with nothing from the attempt, when <Case> fails with -Force' -ForEach @(
+        @{ Case = 'the server lookup'; Method = 'Key' }
+        @{ Case = 'impersonation'; Method = 'Impersonation'; MemberID = 'jdoe' }
+        @{ Case = 'cookie login'; Method = 'Cookie' }
+        @{ Case = 'validation'; Method = 'Key' }
     ) {
-        InModuleScope ConnectWiseManageAPI -Parameters @{ Case = $Case } {
-            param($Case)
-            $Old = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{ Authorization = 'Basic old' } }
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Case = $Case; Method = $Method; MemberID = $MemberID } {
+            param($Case, $Method, $MemberID)
+            $Old = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = $Method; Headers = @{ Authorization = 'Basic old' } }
+            if ($MemberID) { $Old.MemberID = $MemberID }
             $OldSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
             $script:CWMServerConnection = $Old
             $script:CWMSession = $OldSession
@@ -368,8 +369,26 @@ Describe 'Connect-CWM connection state (0.5.0 review)' {
             [object]::ReferenceEquals($script:CWMServerConnection, $Old) | Should -BeTrue
             [object]::ReferenceEquals($script:CWMSession, $OldSession) | Should -BeTrue
             $script:CWMServerConnection.Headers.Authorization | Should -Be 'Basic old'
-            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Key'
-            $script:CWMServerConnection.ContainsKey('MemberID') | Should -BeFalse
+            $script:CWMServerConnection.ConnectionMethod | Should -Be $Method
+        }
+    }
+
+    It 'does not fall back to a different identity on the same tenant when <Case> fails' -ForEach @(
+        @{ Case = 'impersonating another member'; OldMethod = 'Impersonation'; OldMember = 'alice' }
+        @{ Case = 'switching from API key to impersonation'; OldMethod = 'Key' }
+        @{ Case = 'reconnecting an expired connection'; OldMethod = 'Impersonation'; OldMember = 'jdoe'; Expired = $true }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ OldMethod = $OldMethod; OldMember = $OldMember; Expired = $Expired } {
+            param($OldMethod, $OldMember, $Expired)
+            $Old = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = $OldMethod; Headers = @{ Authorization = 'Basic old' } }
+            if ($OldMember) { $Old.MemberID = $OldMember }
+            if ($Expired) { $Old.Expiration = (Get-Date).AddMinutes(-5) }
+            $script:CWMServerConnection = $Old
+            $script:CWMSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            Mock Invoke-CWMWebRequest { Write-Error 'token failure' }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe' -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+            $script:CWMServerConnection | Should -BeNullOrEmpty
+            $script:CWMSession | Should -BeNullOrEmpty
         }
     }
 

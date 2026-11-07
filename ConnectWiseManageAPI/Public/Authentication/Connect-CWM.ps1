@@ -263,11 +263,14 @@ function Connect-CWM {
 
     $EscapedCompany = [uri]::EscapeDataString($Company)
     $Connected = $false
-    # A failed reconnect to the same server and company (e.g. -Force hitting a transient error) keeps the
-    # previous connection. A failed connect to another tenant never falls back to the old one.
+    # A failed reconnect as the same identity (same server, company, sign-in method and member; e.g. -Force
+    # hitting a transient error) keeps the previous, unexpired connection. Any other failed connect clears it,
+    # so callers never silently continue under a different identity or tenant.
     $Previous = $null
     $PreviousSession = $null
-    if ($Cached -and $Cached.Server -eq $Server -and $Cached.Company -eq $Company) {
+    if ($Cached -and $Cached.Server -eq $Server -and $Cached.Company -eq $Company -and
+        $Cached.ConnectionMethod -eq $ConnectionMethod -and "$($Cached.MemberID)" -eq "$MemberID" -and
+        (!$Cached.Expiration -or $Cached.Expiration -gt $(Get-Date))) {
         $Previous = $Cached
         $PreviousSession = $script:CWMSession
     }
