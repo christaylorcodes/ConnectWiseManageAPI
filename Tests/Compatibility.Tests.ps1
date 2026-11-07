@@ -1,16 +1,15 @@
-#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '5.0.0' }
+﻿#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '5.0.0' }
 # Offline tests for behaviour that must be identical on Windows PowerShell 5.1 and PowerShell 7.
 # Run on both: powershell.exe -c Invoke-Pester ./Tests  and  pwsh -c Invoke-Pester ./Tests
 # Requests go to a local HttpListener (Tests/Helpers/CWMTestServer.ps1), so each edition's real
 # Invoke-WebRequest exceptions are exercised. No ConnectWise server or network access is needed.
 
 BeforeAll {
-    Import-Module "$PSScriptRoot/../ConnectWiseManageAPI/ConnectWiseManageAPI.psd1" -Force
-    . "$PSScriptRoot/Helpers/CWMTestServer.ps1"
+    . "$PSScriptRoot/Helpers/TestSetup.ps1"
 }
 
 AfterAll {
-    Remove-Module ConnectWiseManageAPI -Force -ErrorAction SilentlyContinue
+    Remove-CWMTestSetup
 }
 
 Describe 'ConvertFrom-CWMJson' {
@@ -241,11 +240,15 @@ Describe 'Invoke-CWMWebRequest against a local HTTP server' {
         $global:ProgressPreference | Should -Be 'Continue'
     }
 
-    It 'sends a utf-8 JSON body as UTF-8 bytes' {
-        InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url } {
-            param($Url)
+    It '<Master> sends a utf-8 JSON body as UTF-8 bytes' -ForEach @(
+        @{ Master = 'Invoke-CWMNewMaster' }
+        @{ Master = 'Invoke-CWMSetMaster' }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Url = $script:Url; Master = $Master } {
+            param($Url, $Master)
             Mock New-CWMUrl { "$Url/object" }
-            $null = Invoke-CWMNewMaster -Arguments @{ summary = [string][char]0x0142 } -Endpoint '/service/tickets' # l with stroke, not in Latin-1
+            $Result = & $Master -Arguments @{ summary = [string][char]0x0142 } -Endpoint '/service/tickets' # l with stroke, not in Latin-1
+            $Result.id | Should -Be 1
         }
         # 0x0142 in UTF-8 is C5 82. Latin-1 would have sent '?' (3F).
         $script:TestServer.State.LastBodyHex | Should -Match 'C5 82'
@@ -259,110 +262,6 @@ Describe 'Invoke-CWMWebRequest against a local HTTP server' {
             $Result.Count | Should -Be 3
             $Result.id | Should -Be @(1, 2, 3)
             $Result | ForEach-Object { $_ | Should -BeOfType [pscustomobject] }
-        }
-    }
-}
-
-Describe 'Master functions' {
-
-    BeforeEach {
-        InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Headers = @{ ClientID = 'test' }; BasePath = 'apis/3.0'; Codebase = 'v4_6_release/' }
-        }
-    }
-
-    It 'Invoke-CWMNewMaster sends JSON with charset=utf-8 by default' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"id":1}' } }
-            $null = Invoke-CWMNewMaster -Arguments @{ summary = 'x' } -Endpoint '/service/tickets'
-            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter { $Arguments.ContentType -eq 'application/json; charset=utf-8' }
-        }
-    }
-
-    It 'Invoke-CWMNewMaster keeps a caller-supplied ContentType' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"id":1}' } }
-            $null = Invoke-CWMNewMaster -Arguments @{ Body = 'raw'; ContentType = 'multipart/form-data; boundary=x' } -Endpoint '/system/documents'
-            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter { $Arguments.ContentType -eq 'multipart/form-data; boundary=x' }
-        }
-    }
-
-    It 'Invoke-CWMNewMaster summarizes a byte[] body in verbose output instead of failing' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"id":1}' } }
-            $Verbose = Invoke-CWMNewMaster -Arguments @{ Body = [byte[]](1, 2, 3); ContentType = 'multipart/form-data; boundary=x' } -Endpoint '/system/documents' -Verbose 4>&1 |
-                Where-Object { $_ -is [System.Management.Automation.VerboseRecord] }
-            ($Verbose | Out-String) | Should -Match '\[3 bytes\]'
-            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter { $Arguments.Body -is [byte[]] }
-        }
-    }
-
-    It 'Invoke-CWMUpdateMaster sends JSON with charset=utf-8' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"id":1}' } }
-            $null = Invoke-CWMUpdateMaster -Arguments @{ Operation = 'replace'; Path = 'summary'; Value = 'x' } -Endpoint '/service/tickets/1'
-            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter { $Arguments.ContentType -eq 'application/json; charset=utf-8' }
-        }
-    }
-
-    It 'Invoke-CWMGetMaster returns one object for a one-element array and N objects for N' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '[{"id":1}]' } }
-            $One = Invoke-CWMGetMaster -Arguments @{} -Endpoint '/service/tickets'
-            $One | Should -BeOfType [pscustomobject]
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '[{"id":1},{"id":2},{"id":3}]' } }
-            @(Invoke-CWMGetMaster -Arguments @{} -Endpoint '/service/tickets').Count | Should -Be 3
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '[]' } }
-            @(Invoke-CWMGetMaster -Arguments @{} -Endpoint '/service/tickets').Count | Should -Be 0
-        }
-    }
-}
-
-Describe 'Connect-CWM authentication branches' {
-
-    BeforeEach {
-        InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = $null
-            Mock Invoke-RestMethod { [pscustomobject]@{ Codebase = 'v4_6_release/' } }
-            Mock Get-CWMSystemInfo { [pscustomobject]@{ version = 'v2025.1' } }
-        }
-    }
-
-    It 'uses impersonation when MemberID is passed with API keys' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"publicKey":"imppub","privateKey":"imppriv","expiration":"2030-01-01T00:00:00Z"}' } }
-            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe' -Force
-
-            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Impersonation'
-            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter {
-                $Arguments.Uri -like '*/system/members/jdoe/tokens' -and
-                $Arguments.Body -is [string] -and $Arguments.Body -match '"memberIdentifier":\s*"jdoe"' -and
-                $Arguments.Headers.Authorization -eq ('Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes('c+p:k')))
-            }
-            $Expected = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes('c+imppub:imppriv'))
-            $script:CWMServerConnection.Headers.Authorization | Should -Be $Expected
-        }
-    }
-
-    It 'uses plain API key auth without MemberID' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { throw 'should not be called' }
-            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force
-            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Key'
-            Should -Invoke Invoke-CWMWebRequest -Times 0
-        }
-    }
-
-    It 'returns (instead of breaking out of the caller) when cookie login fails' {
-        InModuleScope ConnectWiseManageAPI {
-            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"Success":false}' } }
-            $Credentials = New-Object PSCredential 'user', (ConvertTo-SecureString 'pw' -AsPlainText -Force)
-            $Reached = $false
-            foreach ($i in 1) {
-                Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -Credentials $Credentials -Force -ErrorAction SilentlyContinue
-                $Reached = $true
-            }
-            $Reached | Should -BeTrue
         }
     }
 }

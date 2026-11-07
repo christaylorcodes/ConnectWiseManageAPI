@@ -1,12 +1,61 @@
-#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '5.0.0' }
-# Unit tests for the Connect-CWM -AllowInsecureRedirect workaround. No ConnectWise server or network needed.
+﻿#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '5.0.0' }
+# Offline tests for Connect-CWM (authentication branches, -AllowInsecureRedirect) and Disconnect-CWM.
+# No ConnectWise server or network is needed.
 
 BeforeAll {
-    Import-Module "$PSScriptRoot\..\ConnectWiseManageAPI\ConnectWiseManageAPI.psd1" -Force
+    . "$PSScriptRoot/Helpers/TestSetup.ps1"
 }
 
 AfterAll {
-    Remove-Module ConnectWiseManageAPI -Force -ErrorAction SilentlyContinue
+    Remove-CWMTestSetup
+}
+Describe 'Connect-CWM authentication branches' {
+
+    BeforeEach {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = $null
+            Mock Invoke-RestMethod { [pscustomobject]@{ Codebase = 'v4_6_release/' } }
+            Mock Get-CWMSystemInfo { [pscustomobject]@{ version = 'v2025.1' } }
+        }
+    }
+
+    It 'uses impersonation when MemberID is passed with API keys' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"publicKey":"imppub","privateKey":"imppriv","expiration":"2030-01-01T00:00:00Z"}' } }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe' -Force
+
+            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Impersonation'
+            Should -Invoke Invoke-CWMWebRequest -Times 1 -Exactly -ParameterFilter {
+                $Arguments.Uri -like '*/system/members/jdoe/tokens' -and
+                $Arguments.Body -is [string] -and $Arguments.Body -match '"memberIdentifier":\s*"jdoe"' -and
+                $Arguments.Headers.Authorization -eq ('Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes('c+p:k')))
+            }
+            $Expected = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes('c+imppub:imppriv'))
+            $script:CWMServerConnection.Headers.Authorization | Should -Be $Expected
+        }
+    }
+
+    It 'uses plain API key auth without MemberID' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { throw 'should not be called' }
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -Force
+            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Key'
+            Should -Invoke Invoke-CWMWebRequest -Times 0
+        }
+    }
+
+    It 'returns (instead of breaking out of the caller) when cookie login fails' {
+        InModuleScope ConnectWiseManageAPI {
+            Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"Success":false}' } }
+            $Credentials = New-Object PSCredential 'user', (ConvertTo-SecureString 'pw' -AsPlainText -Force)
+            $Reached = $false
+            foreach ($i in 1) {
+                Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -Credentials $Credentials -Force -ErrorAction SilentlyContinue
+                $Reached = $true
+            }
+            $Reached | Should -BeTrue
+        }
+    }
 }
 
 Describe 'Invoke-CWMWebRequest insecure redirect workaround' {
@@ -132,5 +181,53 @@ Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeTrue
         }
+    }
+}
+
+Describe 'Disconnect-CWM' {
+
+    It 'removes every connection variable' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Headers = @{ Authorization = 'Basic x' } }
+            $script:CWMSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            Disconnect-CWM
+            Get-Variable -Name CWMServerConnection -Scope Script -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+            Get-Variable -Name CWMSession -Scope Script -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+        }
+    }
+
+    It 'leaves the module feature flags in place' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = @{ Server = 'example.invalid' }
+            Disconnect-CWM
+            Get-Variable -Name CWMSupportsInsecureRedirect -Scope Script -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
+            Get-Variable -Name CWMJsonSupportsNoEnumerate -Scope Script -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
+        }
+    }
+
+    It 'is a quiet no-op when called twice' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection = @{ Server = 'example.invalid' }
+            $script:CWMSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            Disconnect-CWM -ErrorVariable First
+            Disconnect-CWM -ErrorVariable Second -Verbose 4>&1 | Out-String | Should -Match 'No ConnectWise Manage connection'
+            $First | Should -BeNullOrEmpty
+            $Second | Should -BeNullOrEmpty
+        }
+    }
+
+    It 'does not error when only the cookie session is left' {
+        InModuleScope ConnectWiseManageAPI {
+            Remove-Variable -Name CWMServerConnection -Scope Script -ErrorAction SilentlyContinue
+            $script:CWMSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            { Disconnect-CWM -ErrorAction Stop } | Should -Not -Throw
+            Get-Variable -Name CWMSession -Scope Script -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+        }
+    }
+
+    It 'causes other calls to fail after it runs' {
+        Set-CWMTestConnection
+        Disconnect-CWM
+        { Get-CWMSystemInfo -ErrorAction Stop } | Should -Throw
     }
 }

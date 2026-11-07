@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Removes the -ProgressAction common parameter that PlatyPS writes into markdown help on PowerShell 7.4+.
 
@@ -28,13 +28,9 @@ $Changed = 0
 
 foreach ($File in Get-ChildItem -Path $Path -Filter '*.md' -File) {
     $Text = [IO.File]::ReadAllText($File.FullName)
-    $New = $Text
-
-    # SYNTAX block: " [-ProgressAction <ActionPreference>]"
-    $New = [regex]::Replace($New, ' \[-ProgressAction <ActionPreference>\]', '')
-
-    # PARAMETERS section: "### -ProgressAction" up to the next "### " heading or "## " section
-    $New = [regex]::Replace($New, '(?ms)^### -ProgressAction\r?\n.*?(?=^#{2,3} )', '')
+    # SYNTAX block: " [-ProgressAction <ActionPreference>]"; PARAMETERS section: "### -ProgressAction"
+    # up to the next "### " heading or "## " section
+    $New = $Text -creplace ' \[-ProgressAction <ActionPreference>\]', '' -creplace '(?ms)^### -ProgressAction\r?\n.*?(?=^#{2,3} )', ''
 
     if ($New -ne $Text -and $PSCmdlet.ShouldProcess($File.Name, 'Remove -ProgressAction')) {
         [IO.File]::WriteAllText($File.FullName, $New, $Utf8NoBom)

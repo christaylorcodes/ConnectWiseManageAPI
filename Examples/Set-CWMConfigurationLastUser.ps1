@@ -1,4 +1,4 @@
-#Requires -Modules ConnectWiseManageAPI
+﻿#Requires -Modules ConnectWiseManageAPI
 <#
 .SYNOPSIS
     Sets the contact on each configuration to the contact matching the device's last logged-in user.
@@ -10,18 +10,10 @@
     The last login name is normalized first: a 'DOMAIN\' prefix and an '@upn.suffix' are removed.
     Excluded accounts (default 'codeblue' and 'administrator') and empty names are skipped.
 
-    Matching is exact (case-insensitive) and is done only against contacts of the configuration's company:
-      1. EmailLocalPart - the part before '@' of any of the contact's email addresses equals the user name.
-      2. Name rules, used only when no email matches:
-           first.last / 'first last'    - first name and last name both equal
-           firstlast                    - first name + last name concatenated
-           first initial + last name    - e.g. jsmith
-           first name + last initial    - e.g. johns
-           first name only              - e.g. john
-    If more than one contact matches at the same step the configuration is skipped as ambiguous.
-
-    Contacts are indexed by company id up front, so each configuration is only compared against the
-    contacts of its own company.
+    A contact of the configuration's company matches when the user name equals (case-insensitive) one of:
+      - the part before '@' of any of the contact's email addresses
+      - first.last, 'first last', firstlast or flast (first initial + last name), e.g. jsmith
+    If more than one contact matches, the configuration is skipped as ambiguous.
 
     One object is written to the pipeline per configuration describing what was decided
     (Updated, WouldUpdate, Unchanged or Skipped) and why.
@@ -80,40 +72,20 @@ function Get-NormalizedUserName {
     $Name.Trim()
 }
 
-function Get-ContactEmailLocalPart {
+function Get-ContactUserName {
+    # The user names a contact could log in with
     param($Contact)
     foreach ($Item in @($Contact.communicationItems)) {
-        if ($null -eq $Item) { continue }
         $Value = [string]$Item.value
         if ($Value -like '*@*') { $Value.Split('@')[0].Trim() }
     }
-}
-
-function Test-ContactNameMatch {
-    # Returns the name of the rule that matched, or $null.
-    param(
-        [string]$User,
-        $Contact
-    )
     $First = ([string]$Contact.firstName).Trim()
     $Last = ([string]$Contact.lastName).Trim()
-    if (-not $First) { return $null }
-
-    if ($User -match '^([^.\s]+)[.\s]+([^.\s]+)$') {
-        if ($Matches[1] -eq $First -and $Matches[2] -eq $Last) { return 'FirstLast' }
-        return $null
-    }
-    if ($Last) {
-        if ($User -eq "$First$Last") { return 'FirstLast' }
-        if ($User -eq "$($First.Substring(0, 1))$Last") { return 'FirstInitialLastName' }
-        if ($User -eq "$First$($Last.Substring(0, 1))") { return 'FirstNameLastInitial' }
-    }
-    if ($User -eq $First) { return 'FirstName' }
-    $null
+    if ($First -and $Last) { "$First.$Last"; "$First $Last"; "$First$Last"; "$($First[0])$Last" }
 }
 
 function ConvertTo-Decision {
-    param($Config, $User, $Action, $Reason, $Contact, $Rule)
+    param($Config, $User, $Action, $Reason, $Contact)
     [PSCustomObject]@{
         ConfigurationId   = $Config.id
         ConfigurationName = $Config.name
@@ -122,7 +94,6 @@ function ConvertTo-Decision {
         User              = $User
         Action            = $Action
         Reason            = $Reason
-        MatchRule         = $Rule
         ContactId         = if ($Contact) { $Contact.id } else { $null }
         ContactName       = if ($Contact) { "$($Contact.firstName) $($Contact.lastName)".Trim() } else { $null }
     }
@@ -148,13 +119,8 @@ Write-Verbose 'Retrieving contacts.'
 $ContactsByCompany = @{}
 foreach ($Contact in @(Get-CWMCompanyContact @ContactParams)) {
     if ($null -eq $Contact.company) { continue }
-    $Key = [string]$Contact.company.id
-    if (-not $ContactsByCompany.ContainsKey($Key)) {
-        $ContactsByCompany[$Key] = New-Object System.Collections.Generic.List[object]
-    }
-    $ContactsByCompany[$Key].Add($Contact)
+    $ContactsByCompany[[string]$Contact.company.id] += @($Contact)
 }
-Write-Verbose "Indexed contacts for $($ContactsByCompany.Count) compan(y/ies)."
 
 foreach ($Config in $Configs) {
     $User = Get-NormalizedUserName $Config.lastLoginName
@@ -170,24 +136,7 @@ foreach ($Config in $Configs) {
     }
 
     $CompanyContacts = $ContactsByCompany[[string]$Config.company.id]
-    if (-not $CompanyContacts) {
-        Write-Verbose "Skipping '$($Config.name)': company '$($Config.company.name)' has no contacts."
-        ConvertTo-Decision -Config $Config -User $User -Action 'Skipped' -Reason 'Company has no contacts'
-        continue
-    }
-
-    # Step 1: exact email local-part match.
-    $Rule = 'EmailLocalPart'
-    $Candidates = @($CompanyContacts | Where-Object { @(Get-ContactEmailLocalPart $_) -contains $User })
-
-    # Step 2: name rules, only if no email matched.
-    if ($Candidates.Count -eq 0) {
-        $Rule = $null
-        $Candidates = @(foreach ($Contact in $CompanyContacts) {
-                $NameRule = Test-ContactNameMatch -User $User -Contact $Contact
-                if ($NameRule) { $Rule = $NameRule; $Contact }
-            })
-    }
+    $Candidates = @($CompanyContacts | Where-Object { @(Get-ContactUserName $_) -contains $User })
 
     if ($Candidates.Count -eq 0) {
         Write-Verbose "Skipping '$($Config.name)': no contact matches '$User'."
@@ -197,30 +146,30 @@ foreach ($Config in $Configs) {
     if ($Candidates.Count -gt 1) {
         $Ids = ($Candidates | ForEach-Object { $_.id }) -join ', '
         Write-Warning "Skipping '$($Config.name)' ($($Config.company.name)): '$User' matches $($Candidates.Count) contacts ($Ids)."
-        ConvertTo-Decision -Config $Config -User $User -Action 'Skipped' -Reason "Ambiguous: $($Candidates.Count) contacts match ($Ids)" -Contact $null -Rule $Rule
+        ConvertTo-Decision -Config $Config -User $User -Action 'Skipped' -Reason "Ambiguous: $($Candidates.Count) contacts match ($Ids)"
         continue
     }
 
     $Match = $Candidates[0]
     if ($Config.contact -and $Config.contact.id -eq $Match.id) {
         Write-Verbose "'$($Config.name)' already assigned to contact $($Match.id)."
-        ConvertTo-Decision -Config $Config -User $User -Action 'Unchanged' -Reason 'Contact already set' -Contact $Match -Rule $Rule
+        ConvertTo-Decision -Config $Config -User $User -Action 'Unchanged' -Reason 'Contact already set' -Contact $Match
         continue
     }
 
     $Target = "Configuration '$($Config.name)' ($($Config.id)) for $($Config.company.name)"
-    $Change = "Set contact to $($Match.firstName) $($Match.lastName) ($($Match.id)) via $Rule"
+    $Change = "Set contact to $($Match.firstName) $($Match.lastName) ($($Match.id))"
     if ($PSCmdlet.ShouldProcess($Target, $Change)) {
         try {
             $null = Update-CWMCompanyConfiguration -id $Config.id -Operation replace -Path 'contact/id' -Value $Match.id -Confirm:$false -ErrorAction Stop
-            ConvertTo-Decision -Config $Config -User $User -Action 'Updated' -Reason 'Matched' -Contact $Match -Rule $Rule
+            ConvertTo-Decision -Config $Config -User $User -Action 'Updated' -Reason 'Matched' -Contact $Match
         }
         catch {
             Write-Warning "Failed to update $Target`: $_"
-            ConvertTo-Decision -Config $Config -User $User -Action 'Skipped' -Reason "Update failed: $_" -Contact $Match -Rule $Rule
+            ConvertTo-Decision -Config $Config -User $User -Action 'Skipped' -Reason "Update failed: $_" -Contact $Match
         }
     }
     else {
-        ConvertTo-Decision -Config $Config -User $User -Action 'WouldUpdate' -Reason 'WhatIf or declined' -Contact $Match -Rule $Rule
+        ConvertTo-Decision -Config $Config -User $User -Action 'WouldUpdate' -Reason 'WhatIf or declined' -Contact $Match
     }
 }

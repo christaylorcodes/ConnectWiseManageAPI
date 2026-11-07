@@ -1,5 +1,6 @@
 # See http://www.appveyor.com/docs/appveyor-yml for many more options
-# Kept for continuity; .github/workflows/ci.yml is the primary CI (5.1 + 7 on Windows, 7 on Linux).
+# Redundant: .github/workflows/ci.yml runs the same Windows 5.1 + 7 suite, plus Linux and PSScriptAnalyzer.
+# Kept only until the AppVeyor project is retired; then delete this file.
 
 # Skip on updates to the readme.
 # We can force this by adding [skip ci] or [ci skip] anywhere in commit message

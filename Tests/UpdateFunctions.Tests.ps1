@@ -4,13 +4,14 @@
 #   (b) positional calls bind in the same order as before the Single/Bulk conversion
 #   (c) -PatchOperations sends all operations in one request
 #   (d) 'remove' works without -Value; 'add'/'replace' without -Value is an error
-# Invoke-WebRequest is mocked, so no ConnectWise server or network is needed.
+# The exact URL of each wrapper is checked in Endpoints.Tests.ps1 only where it was in doubt.
+# Invoke-WebRequest is mocked.
 
 BeforeDiscovery {
     # Route ids in their positional order BEFORE the conversion (implicit positions, declaration order).
     # Operation, Path and Value followed the ids. This table is the contract for backward compatibility,
     # so it is written out by hand instead of being read from the current command metadata.
-    $script:Cases = @(
+    $Cases = @(
         @{ Name = 'Update-CWMAgreement'; Ids = @('id') }
         @{ Name = 'Update-CWMAgreementAddition'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMAgreementType'; Ids = @('id') }
@@ -33,7 +34,9 @@ BeforeDiscovery {
         @{ Name = 'Update-CWMOpportunityForecastItem'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMProductAdjustment'; Ids = @('id') }
         @{ Name = 'Update-CWMProductCatalog'; Ids = @('id') }
-        @{ Name = 'Update-CWMProductPickingShippingDetail'; Ids = @('id') }
+        # Deliberate exception: was @('id'), but the URL held a literal '{parentId}' so the function never
+        # worked. The bug fix added a mandatory parentId (alias productId) in front of id.
+        @{ Name = 'Update-CWMProductPickingShippingDetail'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMProject'; Ids = @('id') }
         @{ Name = 'Update-CWMProjectPhase'; Ids = @('parentId', 'id') }
         @{ Name = 'Update-CWMProjectTicket'; Ids = @('id') }
@@ -48,62 +51,40 @@ BeforeDiscovery {
 }
 
 BeforeAll {
-    Import-Module "$PSScriptRoot\..\ConnectWiseManageAPI\ConnectWiseManageAPI.psd1" -Force
+    . "$PSScriptRoot/Helpers/TestSetup.ps1"
 
-    # Not PATCH wrappers: Update-CWMTimeSheet posts approve/reject/reverse/submit actions
-    $script:NotPatch = @('Update-CWMTimeSheet')
-
-    function Get-SweepIdArgument {
-        param([string[]]$Ids)
-        $Named = [ordered]@{}
-        $Positional = New-Object System.Collections.Generic.List[object]
-        for ($i = 0; $i -lt $Ids.Count; $i++) {
-            $Named[$Ids[$i]] = 11 + $i
-            $Positional.Add(11 + $i)
-        }
-        @{ Named = $Named; Positional = $Positional.ToArray() }
-    }
-
-    function Get-SweepBody {
-        param($Call)
-        @(ConvertFrom-Json $Call.Body | ForEach-Object { $_ })
+    function Get-RequestBody {
+        param($Request)
+        @(ConvertFrom-Json $Request.Body | ForEach-Object { $_ })
     }
 }
 
 AfterAll {
-    Remove-Variable -Name CWMUpdateSweepCalls -Scope Global -ErrorAction SilentlyContinue
-    Remove-Module ConnectWiseManageAPI -Force -ErrorAction SilentlyContinue
+    Remove-CWMTestSetup
 }
 
-Describe 'Update-CWM* sweep coverage' {
-    It 'covers every exported Update-CWM* PATCH wrapper' -TestCases @{ Cases = $script:Cases } {
+Describe 'Update-CWM* coverage' {
+    It 'covers every exported Update-CWM* PATCH wrapper' -TestCases @{ Cases = $Cases } {
         param($Cases)
+        # Update-CWMTimeSheet is not a PATCH wrapper: it posts approve/reject/reverse/submit actions
         $Exported = @(Get-Command -Module ConnectWiseManageAPI -Name 'Update-CWM*' -CommandType Function |
-                Where-Object { $_.Name -notin $script:NotPatch } | ForEach-Object { $_.Name } | Sort-Object)
+                Where-Object Name -ne 'Update-CWMTimeSheet' | ForEach-Object { $_.Name } | Sort-Object)
         $Exported | Should -Be @($Cases | ForEach-Object { $_.Name } | Sort-Object)
     }
 }
 
-Describe '<Name> Single/Bulk pattern' -ForEach $script:Cases {
+Describe '<Name> Single/Bulk pattern' -ForEach $Cases {
 
     BeforeAll {
-        InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{
-                Server   = 'example.invalid'
-                Codebase = 'v4_6_release'
-                BasePath = 'apis/3.0'
-                Headers  = @{ ClientID = 'test' }
-            }
-        }
-        Mock Invoke-WebRequest -ModuleName ConnectWiseManageAPI {
-            $global:CWMUpdateSweepCalls.Add([pscustomobject]@{ Uri = $Uri; Method = $Method; Body = $Body })
-            [pscustomobject]@{ StatusCode = 200; Content = '{}'; Headers = @{} }
-        }
-        $script:IdArgs = Get-SweepIdArgument -Ids $Ids
+        Set-CWMTestConnection
+        # Ids 11, 12, 13... by position
+        $Named = [ordered]@{}
+        for ($i = 0; $i -lt $Ids.Count; $i++) { $Named[$Ids[$i]] = 11 + $i }
+        $Positional = @($Named.Values)
     }
 
     BeforeEach {
-        $global:CWMUpdateSweepCalls = New-Object System.Collections.Generic.List[object]
+        Set-CWMTestResponse
     }
 
     It 'has Single (default) and Bulk parameter sets with explicit positions' {
@@ -112,20 +93,20 @@ Describe '<Name> Single/Bulk pattern' -ForEach $script:Cases {
         @($Command.ParameterSets.Name | Sort-Object) | Should -Be @('Bulk', 'Single')
         $Single = $Command.ParameterSets | Where-Object Name -eq 'Single'
         $Expected = @($Ids) + @('Operation', 'Path', 'Value')
-        @($Single.Parameters | Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object { $_.Name }) | Should -Be $Expected
-        @($Single.Parameters | Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object { $_.Position }) | Should -Be @(0..($Expected.Count - 1))
+        $ByPosition = @($Single.Parameters | Where-Object Position -ge 0 | Sort-Object Position)
+        @($ByPosition | ForEach-Object { $_.Name }) | Should -Be $Expected
+        @($ByPosition | ForEach-Object { $_.Position }) | Should -Be @(0..($Expected.Count - 1))
         $Command.Parameters['PatchOperations'].ParameterSets.Keys | Should -Be @('Bulk')
     }
 
     It '(a) sends a named single operation as a one-element JSON array' {
-        $Named = $script:IdArgs.Named
         & $Name @Named -Operation replace -Path summary -Value 'x' | Out-Null
-        $global:CWMUpdateSweepCalls | Should -HaveCount 1
-        $Call = $global:CWMUpdateSweepCalls[0]
-        $Call.Method | Should -Be 'Patch'
-        $Call.Body.TrimStart().Substring(0, 1) | Should -Be '['
-        foreach ($IdValue in $Named.Values) { $Call.Uri | Should -Match "/$IdValue(/|$)" }
-        $B = Get-SweepBody $Call
+        $global:CWMTestRequests | Should -HaveCount 1
+        $Request = $global:CWMTestRequests[0]
+        $Request.Method | Should -Be 'Patch'
+        $Request.Body.TrimStart().Substring(0, 1) | Should -Be '['
+        foreach ($IdValue in $Named.Values) { $Request.Uri | Should -Match "/$IdValue(/|$)" }
+        $B = Get-RequestBody $Request
         $B | Should -HaveCount 1
         $B[0].op | Should -Be 'replace'
         $B[0].path | Should -Be 'summary'
@@ -133,27 +114,21 @@ Describe '<Name> Single/Bulk pattern' -ForEach $script:Cases {
     }
 
     It '(b) binds positional arguments in the original order' {
-        $Named = $script:IdArgs.Named
-        $Positional = @($script:IdArgs.Positional) + @('replace', 'summary', 'x')
+        $Arguments = $Positional + @('replace', 'summary', 'x')
         & $Name @Named -Operation replace -Path summary -Value 'x' | Out-Null
-        & $Name @Positional | Out-Null
-        $global:CWMUpdateSweepCalls | Should -HaveCount 2
-        $global:CWMUpdateSweepCalls[1].Uri | Should -Be $global:CWMUpdateSweepCalls[0].Uri
-        $B = Get-SweepBody $global:CWMUpdateSweepCalls[1]
-        $B | Should -HaveCount 1
-        $B[0].op | Should -Be 'replace'
-        $B[0].path | Should -Be 'summary'
-        $B[0].value | Should -Be 'x'
+        & $Name @Arguments | Out-Null
+        $global:CWMTestRequests | Should -HaveCount 2
+        $global:CWMTestRequests[1].Uri | Should -Be $global:CWMTestRequests[0].Uri
+        $global:CWMTestRequests[1].Body | Should -Be $global:CWMTestRequests[0].Body
     }
 
     It '(c) sends -PatchOperations as one request with every operation' {
-        $Named = $script:IdArgs.Named
         & $Name @Named -PatchOperations @(
             @{ op = 'replace'; path = 'summary'; value = 'A' }
             [pscustomobject]@{ op = 'replace'; path = 'status'; value = @{ id = 5 } }
         ) | Out-Null
-        $global:CWMUpdateSweepCalls | Should -HaveCount 1
-        $B = Get-SweepBody $global:CWMUpdateSweepCalls[0]
+        $global:CWMTestRequests | Should -HaveCount 1
+        $B = Get-RequestBody $global:CWMTestRequests[0]
         $B | Should -HaveCount 2
         $B[0].path | Should -Be 'summary'
         $B[0].value | Should -Be 'A'
@@ -162,13 +137,12 @@ Describe '<Name> Single/Bulk pattern' -ForEach $script:Cases {
     }
 
     It '(d) sends a remove without -Value, named and positional' {
-        $Named = $script:IdArgs.Named
-        $Positional = @($script:IdArgs.Positional) + @('remove', 'contact')
+        $Arguments = $Positional + @('remove', 'contact')
         & $Name @Named -Operation remove -Path contact | Out-Null
-        & $Name @Positional | Out-Null
-        $global:CWMUpdateSweepCalls | Should -HaveCount 2
-        foreach ($Call in $global:CWMUpdateSweepCalls) {
-            $B = Get-SweepBody $Call
+        & $Name @Arguments | Out-Null
+        $global:CWMTestRequests | Should -HaveCount 2
+        foreach ($Request in $global:CWMTestRequests) {
+            $B = Get-RequestBody $Request
             $B | Should -HaveCount 1
             $B[0].op | Should -Be 'remove'
             $B[0].path | Should -Be 'contact'
@@ -177,17 +151,15 @@ Describe '<Name> Single/Bulk pattern' -ForEach $script:Cases {
     }
 
     It 'rejects add/replace without -Value but accepts an explicit -Value $null' {
-        $Named = $script:IdArgs.Named
         { & $Name @Named -Operation replace -Path summary -ErrorAction Stop } | Should -Throw '*-Value is required*'
-        $global:CWMUpdateSweepCalls | Should -HaveCount 0
+        $global:CWMTestRequests | Should -HaveCount 0
         & $Name @Named -Operation replace -Path summary -Value $null | Out-Null
-        $global:CWMUpdateSweepCalls | Should -HaveCount 1
-        $global:CWMUpdateSweepCalls[0].Body | Should -Match '"value":\s*null'
+        $global:CWMTestRequests | Should -HaveCount 1
+        $global:CWMTestRequests[0].Body | Should -Match '"value":\s*null'
     }
 
     It 'rejects mixing -PatchOperations with -Operation' {
-        $Named = $script:IdArgs.Named
         { & $Name @Named -Operation replace -Path p -Value v -PatchOperations @(@{ op = 'replace'; path = 'p'; value = 1 }) } | Should -Throw
-        $global:CWMUpdateSweepCalls | Should -HaveCount 0
+        $global:CWMTestRequests | Should -HaveCount 0
     }
 }

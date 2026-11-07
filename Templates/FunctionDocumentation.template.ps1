@@ -167,65 +167,24 @@
 
 #>
 function Verb-CWMNoun {
-    # Get-CWM* stub. New-/Update-/Remove-CWM* functions add SupportsShouldProcess and
-    # call Invoke-CWMNewMaster / Invoke-CWMUpdateMaster / Invoke-CWMRemoveMaster instead.
+    # Get-CWM* shape. Copy the matching stub from Get-/New-/Update-/Remove-CWMTemplate.ps1;
+    # they show the parameter sets and master function each verb uses.
     [CmdletBinding()]
-    [OutputType([PSCustomObject])]
     param(
-        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [ValidateNotNullOrEmpty()]
+        [Alias('nounId')]
         [int]$id,
-
-        [Parameter()]
-        [ValidateNotNullOrEmpty()]
+        [switch]$count,
         [string]$condition,
-
-        [Parameter()]
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
-
-        [Parameter()]
         [string]$childConditions,
-
-        [Parameter()]
         [string]$customFieldConditions,
-
-        [Parameter()]
-        [ValidateRange(1, [int]::MaxValue)]
         [int]$page,
-
-        [Parameter()]
-        [ValidateRange(1, 1000)]
         [int]$pageSize,
-
-        [Parameter()]
         [string[]]$fields,
-
-        [Parameter()]
-        [switch]$all,
-
-        [Parameter()]
-        [switch]$count
+        [switch]$all
     )
 
-    begin {
-        # Initialize and validate
-        # Check connection state
-        # Set up any needed variables
-    }
-
-    process {
-        # Main function logic
-        # API endpoint construction
-        # Parameter handling
-
-        $Endpoint = '/api/endpoint/path'
-
-        # Call appropriate master function
-        Invoke-CWMGetMaster -Arguments $PSBoundParameters -Endpoint $Endpoint
-    }
-
-    end {
-        # Cleanup if needed
-    }
+    $Endpoint = '/api/endpoint/path'
+    Invoke-CWMGetMaster -Arguments $PSBoundParameters -Endpoint $Endpoint
 }
