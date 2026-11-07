@@ -21,6 +21,13 @@
     .PARAMETER AutoClose
     Close the GUI after you hit 'Submit'.
 
+    .PARAMETER LunchStart
+    Optional. The time your lunch break starts in 24hr format, e.g. '12:00'. Leave empty to disable.
+    No prompt is shown during lunch, and the lunch break itself does not count against TimeFrame.
+
+    .PARAMETER LunchEnd
+    Optional. The time your lunch break ends in 24hr format, e.g. '13:00'. Leave empty to disable.
+
     .PARAMETER TimeWrapChargeCode
     The charge code to use when using the 'TimeWrap' option.
 
@@ -59,8 +66,11 @@
     Creation Date:  9/14/2020
     Purpose/Change: Updated to work with ConnectWiseManageAPI module
 
+    Version:        0.3
+    Purpose/Change: Optional lunch break (LunchStart/LunchEnd), scheduled task duration keeps minutes
+
 #>
-$Version = 0.2
+$Version = 0.3
 
 $ScriptName = 'TimeSucks'
 $ScriptURL = 'https://raw.githubusercontent.com/christaylorcodes/ConnectWiseManageAPI/master/Examples/TimeSucks.ps1'
@@ -92,6 +102,28 @@ function Test-Time{
     catch{$false}
 }
 
+function Get-LunchAdjustedTime{
+    # Returns InLunch (skip the prompt) and the LastTimeEntry to use, max(LastTimeEntry, today's LunchEnd) after lunch.
+    # Lunch is disabled when LunchStart/LunchEnd are empty, missing (older configs) or invalid.
+    param(
+        [datetime]$LastTimeEntry,
+        $LunchStart,
+        $LunchEnd,
+        [datetime]$Now = (Get-Date)
+    )
+    $Result = [pscustomobject]@{ InLunch = $false; LastTimeEntry = $LastTimeEntry }
+    if(!$LunchStart -or !$LunchEnd){ return $Result }
+    $StartTime = Test-Time $LunchStart
+    $EndTime = Test-Time $LunchEnd
+    if(!$StartTime -or !$EndTime){ return $Result }
+    $Start = $Now.Date + $StartTime.TimeOfDay
+    $End = $Now.Date + $EndTime.TimeOfDay
+    if($End -le $Start){ return $Result }
+    if($Now -ge $Start -and $Now -lt $End){ $Result.InLunch = $true }
+    elseif($Now -ge $End -and $LastTimeEntry -lt $End){ $Result.LastTimeEntry = $End }
+    $Result
+}
+
 function Save-Config {
     param(
         $Template,
@@ -116,6 +148,8 @@ $ConfigTemplate = @{
     ScheduledEnd = '17:00'
     ManageUser = 'ctaylor'
     TimeFrame = 60
+    LunchStart = ''
+    LunchEnd = ''
     AutoClose = $true
     TimeWrapChargeCode = 'Undocumented'
     TaskName = 'ManageTimeReminder'
@@ -187,7 +221,8 @@ if($Config.TimeFrame){
             }
         }
         Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Creating scheduled task, $Config.TaskName."
-        $Duration = "$((New-TimeSpan $Config.ScheduledStart $Config.ScheduledEnd).Hours):00"
+        $Shift = New-TimeSpan $Config.ScheduledStart $Config.ScheduledEnd
+        $Duration = '{0:D2}:{1:D2}' -f [int][math]::Floor($Shift.TotalHours), $Shift.Minutes
         $ScheduledTask = schtasks /Create /RU $env:USERNAME /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST $Config.ScheduledStart /DU $Duration /TN $Config.TaskName /RL HIGHEST /RI 5 /F /TR "hostname" 2>&1
         $Action = New-ScheduledTaskAction -Execute 'WSCRIPT' -Argument "`"$ScriptDir\SilentLaunchPoSh.vbs`" `"$ScriptPath`""
         $null = Set-ScheduledTask -TaskName $Config.TaskName -Action $Action -User $env:USERNAME
@@ -208,6 +243,14 @@ $LatestTimeEntry = Get-CWMTimeEntry -Condition $condition -orderBy 'timeEnd desc
 if($LastTimeEntry -lt (Get-Date -Hour 0 -Minute 0 -Second 0)){
     [datetime]$LastTimeEntry = Get-Date $($Config.ScheduledStart)
 }
+
+#Lunch break, no prompt during lunch and don't count it against $Config.TimeFrame
+$LunchCheck = Get-LunchAdjustedTime -LastTimeEntry $LastTimeEntry -LunchStart $Config.LunchStart -LunchEnd $Config.LunchEnd
+if($LunchCheck.InLunch){
+    Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Lunch break, skipping time frame check."
+    Stop-Log -ToScreen -Status 'Success'
+}
+[datetime]$LastTimeEntry = $LunchCheck.LastTimeEntry
 
 #If last time entry was more than $Config.TimeFrame minutes old prompt for time input.
 if($LastTimeEntry -gt (Get-Date).AddMinutes((($Config.TimeFrame * -1) -2))){
