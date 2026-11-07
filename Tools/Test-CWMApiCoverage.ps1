@@ -75,13 +75,13 @@ $MasterMethod = @{
     Action = 'POST'
 }
 # Parameters the request body builder leaves out, or that are module-only
-$NonBodyParameter = @('parentId', 'grandparentId', 'Version', 'VersionAutomatic', 'Body', 'ContentType', 'Headers') +
+$NonBodyParameter = @('parentId', 'grandparentId', 'Body', 'ContentType', 'Headers') +
 @([System.Management.Automation.Cmdlet]::CommonParameters) + @([System.Management.Automation.Cmdlet]::OptionalCommonParameters)
 
 #region Spec helpers
 function Get-DictKey($Dictionary) {
     # .Keys / .Count can be shadowed by a key with that name, so use the methods
-    if ($null -eq $Dictionary -or $Dictionary -isnot [System.Collections.IDictionary]) { return @() }
+    if ($Dictionary -isnot [System.Collections.IDictionary]) { return @() }
     @($Dictionary.get_Keys())
 }
 
@@ -493,17 +493,17 @@ foreach ($Check in $Checks) {
 # Request-body fields for POST/PUT bodies
 $BodyIssues = New-Object System.Collections.Generic.List[object]
 foreach ($Check in ($Checks | Where-Object { ($_.Master -eq 'New' -or $_.Master -eq 'Set') -and $_.SpecPath -and $_.Status -ne 'NotInSpec' })) {
+    if ($null -eq $Check.BodyKeys) { continue }
     $Operation = $Spec['paths'][$Check.SpecPath][$Check.Method.ToLower()]
     $BodySchema = Get-SpecBodySchema $Spec $Operation
-    if (-not $BodySchema -or -not ($BodySchema.Schema -is [System.Collections.IDictionary])) { continue }
+    if (-not $BodySchema -or $BodySchema.Schema -isnot [System.Collections.IDictionary]) { continue }
     $Properties = @(Get-DictKey $BodySchema.Schema['properties'])
+    if ($Properties.Count -eq 0) { continue }
     $Required = @($BodySchema.Schema['required'] | Where-Object { $_ })
-    if ($null -eq $Check.BodyKeys) { continue }
     $Keys = @($Check.BodyKeys | Where-Object {
             $NonBodyParameter -notcontains $_ -and $Check.Skip -notcontains $_ -and
             ($Check.BodySource -ne 'PSBoundParameters' -or $Check.PathVars -notcontains $_)
         })
-    if ($Properties.Count -eq 0) { continue }
     $NotInSchema = @($Keys | Where-Object { $Properties -notcontains $_ })
     $CaseOnly = @($Keys | Where-Object { $Properties -contains $_ -and -not ($Properties -ccontains $_) } |
         ForEach-Object { $k = $_; "$k->$($Properties | Where-Object { $_ -eq $k } | Select-Object -First 1)" })
@@ -521,19 +521,19 @@ foreach ($Check in ($Checks | Where-Object { ($_.Master -eq 'New' -or $_.Master 
     }
 }
 
-# Spec operations no module function covers
-$Uncovered = foreach ($sp in $SpecPaths) {
+# Every spec operation by its first tag; the ones no module function covers are the backlog
+$Operations = foreach ($sp in $SpecPaths) {
     foreach ($m in $sp.Methods) {
-        if ($Covered["$($sp.Key)|$m"]) { continue }
         $Tags = @($sp.Item[$m.ToLower()]['tags'])
         $Tag = if ($Tags -and $Tags[0]) { $Tags[0] } else { '(untagged)' }
-        [pscustomobject]@{ Tag = $Tag; Method = $m; Path = $sp.Key; Area = ($sp.Path.Trim('/') -split '/')[0] }
+        [pscustomobject]@{ Tag = $Tag; Method = $m; Path = $sp.Key; Area = ($sp.Path.Trim('/') -split '/')[0]; Covered = [bool]$Covered["$($sp.Key)|$m"] }
     }
 }
+$TotalOps = @($Operations).Count
+$OperationsByTag = $Operations | Group-Object Tag -AsHashTable -AsString
+$Uncovered = @($Operations | Where-Object { -not $_.Covered } | Select-Object Tag, Method, Path, Area)
 $UncoveredByTag = $Uncovered | Group-Object Tag | ForEach-Object {
-    $Total = 0
-    foreach ($sp in $SpecPaths) { foreach ($m in $sp.Methods) { $t = @($sp.Item[$m.ToLower()]['tags']); if ($t -and $t[0] -eq $_.Name) { $Total++ } } }
-    [pscustomobject]@{ Tag = $_.Name; Area = ($_.Group | Group-Object Area | Sort-Object Count -Descending | Select-Object -First 1).Name; Uncovered = $_.Count; Total = $Total }
+    [pscustomobject]@{ Tag = $_.Name; Area = ($_.Group | Group-Object Area | Sort-Object Count -Descending | Select-Object -First 1).Name; Uncovered = $_.Count; Total = @($OperationsByTag[$_.Name]).Count }
 } | Sort-Object @{ e = { $_.Uncovered -eq $_.Total } }, @{ e = 'Uncovered'; Descending = $true }
 #endregion
 
@@ -541,7 +541,6 @@ $FunctionsChecked = @($Checks | Select-Object -ExpandProperty Function -Unique).
 $NotInSpec = @($Checks | Where-Object Status -eq 'NotInSpec')
 $Casing = @($Checks | Where-Object Status -eq 'Casing')
 $Loose = @($Checks | Where-Object Status -eq 'LooseMatch')
-$TotalOps = ($SpecPaths | ForEach-Object { $_.Methods.Count } | Measure-Object -Sum).Sum
 
 #region Report
 if ($OutputPath) {
@@ -604,17 +603,17 @@ if ($OutputPath) {
 
     Add-Line "## 4. Spec endpoints with no module function (backlog by tag)"
     Add-Line
-    $Full = @($UncoveredByTag | Where-Object { $_.Uncovered -lt $_.Total })
+    $Partial = @($UncoveredByTag | Where-Object { $_.Uncovered -lt $_.Total })
     $None = @($UncoveredByTag | Where-Object { $_.Uncovered -eq $_.Total })
     Add-Line "$(@($Uncovered).Count) of $TotalOps operations uncovered across $(@($UncoveredByTag).Count) tags. $($None.Count) tags have no module function at all."
     Add-Line
     Add-Line "Operation counts include the spec's /count, /info and /usages variants. Use -PassThru for the full list (Uncovered, UncoveredByTag)."
     Add-Line
-    Add-Line "Partly covered tags, top 15 by uncovered operations ($($Full.Count) in all):"
+    Add-Line "Partly covered tags, top 15 by uncovered operations ($($Partial.Count) in all):"
     Add-Line
     Add-Line "| Tag | Area | Uncovered | Total |"
     Add-Line "|---|---|---|---|"
-    foreach ($t in ($Full | Select-Object -First 15)) { Add-Line "| $($t.Tag) | $($t.Area) | $($t.Uncovered) | $($t.Total) |" }
+    foreach ($t in ($Partial | Select-Object -First 15)) { Add-Line "| $($t.Tag) | $($t.Area) | $($t.Uncovered) | $($t.Total) |" }
     Add-Line
     Add-Line "Tags with no module function, by area (largest tags first):"
     Add-Line
