@@ -1,4 +1,4 @@
-function Write-CWMWebRequestError {
+﻿function Write-CWMWebRequestError {
     # Builds the error message for a failed request. The wording is kept from earlier versions so scripts
     # matching on it keep working; the HTTP status is added as an extra line.
     # $script:ErrBody (parsed body) and $script:ErrDetails (raw ErrorDetails) are kept for scripts that read them.
@@ -18,24 +18,14 @@ function Write-CWMWebRequestError {
         if ($ErrBody.code) {
             $ErrorMessage += 'An exception code has been thrown.'
             $ErrorMessage += "--> $($ErrBody.code)"
+            $ErrorMessage += "-----> $($ErrBody.message)"
             if ($ErrBody.code -eq 'Unauthorized') {
-                $ErrorMessage += "-----> $($ErrBody.message)"
                 $ErrorMessage += "-----> Use 'Disconnect-CWM' or 'Connect-CWM -Force' to set new authentication."
             }
-            elseif ($ErrBody.code -eq 'ConnectWiseApi') {
-                switch ($ErrBody.message) {
-                    'UserNotAuthenticated' {
-                        $ErrorMessage += "-----> $($ErrBody.message)"
-                        $ErrorMessage += '-----> Check your connection parameters and/or user permissions.'
-                    }
-                    Default {
-                        $ErrorMessage += "-----> $($ErrBody.message)"
-                        $ErrorMessage += '-----> ^ Error has not been documented please report. ^'
-                    }
-                }
+            elseif ($ErrBody.code -eq 'ConnectWiseApi' -and $ErrBody.message -eq 'UserNotAuthenticated') {
+                $ErrorMessage += '-----> Check your connection parameters and/or user permissions.'
             }
             else {
-                $ErrorMessage += "-----> $($ErrBody.message)"
                 $ErrorMessage += '-----> ^ Error has not been documented please report. ^'
             }
             # Field-level validation errors, e.g. { code: 'InvalidObject', errors: [ { message: 'summary is required' } ] }

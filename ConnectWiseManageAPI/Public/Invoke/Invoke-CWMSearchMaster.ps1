@@ -85,7 +85,6 @@ function Invoke-CWMSearchMaster {
         Method      = 'Post'
         ContentType = 'application/json; charset=utf-8' #needed for accented chars
         Body        = $Body
-        Headers     = $script:CWMServerConnection.Headers
     }
 
     if ($Arguments.all) {

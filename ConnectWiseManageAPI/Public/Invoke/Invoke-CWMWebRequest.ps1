@@ -88,8 +88,8 @@ function Invoke-CWMWebRequest {
         return Write-Error ($ErrorMessage | Out-String)
     }
 
-    # Work on copies: callers reuse their hashtable (Invoke-CWMAllResult, per page) and some pass the
-    # connection's own Headers (Invoke-CWMSearchMaster), which must not pick up per-request changes.
+    # Work on copies: callers reuse their hashtable (Invoke-CWMAllResult, per page) and may pass a Headers
+    # hashtable they still own (e.g. the connection's), which must not pick up per-request changes.
     if ($Arguments -is [hashtable]) { $Arguments = $Arguments.Clone() }
     if ($Arguments.Headers -is [hashtable]) { $Arguments.Headers = $Arguments.Headers.Clone() }
     elseif (!$Arguments.Headers) { $Arguments.Headers = @{} }

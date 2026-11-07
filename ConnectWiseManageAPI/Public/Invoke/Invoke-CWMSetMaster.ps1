@@ -63,23 +63,9 @@ function Invoke-CWMSetMaster {
         [string]$Endpoint,
         [string[]]$Skip
     )
-    # Skip common parameters and the ids that are part of the route
-    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'VersionAutomatic', 'grandparentId', 'parentId', 'id'
 
-    if ($Arguments.Body) {
-        $Body = $Arguments.Body
-    }
-    else {
-        $Body = @{}
-
-        foreach ($i in $Arguments.GetEnumerator()) {
-            if ($Skip -notcontains $i.Key) {
-                $Body.Add($i.Key, $i.value)
-            }
-        }
-
-        $Body = ConvertTo-Json $Body -Depth 100
-    }
+    # The record id is part of the route, not the body
+    $Body = ConvertTo-CWMRequestBody -Arguments $Arguments -Skip ($Skip + 'id')
     $BodyText = [string]$Body
     Write-Verbose $BodyText
 

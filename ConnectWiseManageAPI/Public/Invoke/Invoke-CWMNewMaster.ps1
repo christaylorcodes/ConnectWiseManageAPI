@@ -61,23 +61,8 @@ function Invoke-CWMNewMaster {
         [string]$Endpoint,
         [string[]]$Skip
     )
-    # Skip common parameters
-    $Skip += 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm', 'Version', 'VersionAutomatic', 'grandparentId', 'parentId'
 
-    if ($Arguments.Body) {
-        $Body = $Arguments.Body
-    }
-    else {
-        $Body = @{}
-
-        foreach ($i in $Arguments.GetEnumerator()) {
-            if ($Skip -notcontains $i.Key) {
-                $Body.Add($i.Key, $i.value)
-            }
-        }
-
-        $Body = ConvertTo-Json $Body -Depth 100
-    }
+    $Body = ConvertTo-CWMRequestBody -Arguments $Arguments -Skip $Skip
     # A binary body (e.g. a multipart document upload as byte[]) is summarized instead of printed
     if ($Body -is [byte[]]) { $BodyText = "[$($Body.Length) bytes]" }
     else { $BodyText = [string]$Body }
