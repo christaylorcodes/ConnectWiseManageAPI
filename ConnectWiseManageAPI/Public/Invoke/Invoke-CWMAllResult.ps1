@@ -37,7 +37,7 @@
     - Uses forward-only pagination for performance
     - Uses page size 999
     - Follows Link headers for next page, but only to the connected server: the next-page URL must use
-      https (or the scheme of the first request, never a downgrade) and the connection's host. Any other
+      https (or the scheme of the first request, never a downgrade) and the connection's host and port. Any other
       URL stops paging with an error, so credentials are never sent to another host.
     - Returns results from all pages
 
@@ -64,7 +64,7 @@ function Invoke-CWMAllResult {
 
     # The next-page URL comes from the server's Link header and is requested with the connection's credentials,
     # so it may only point at the connected server, over https (never a downgrade from the first request).
-    try { $AllowedHost = ([uri]"https://$($script:CWMServerConnection.Server)").Host } catch { $AllowedHost = $null }
+    try { $AllowedUri = [uri]"https://$($script:CWMServerConnection.Server)"; $AllowedHost = $AllowedUri.Host } catch { $AllowedUri = $null; $AllowedHost = $null }
     try { $FirstScheme = ([uri][string]$Arguments.Uri).Scheme } catch { $FirstScheme = $null }
 
     # Update header for new pagination-type
@@ -93,7 +93,9 @@ function Invoke-CWMAllResult {
             $NextUri = $null
             if (![uri]::TryCreate($NextPage, [System.UriKind]::Absolute, [ref]$NextUri) -or
                 @('https', $FirstScheme) -notcontains $NextUri.Scheme -or
-                !$AllowedHost -or $NextUri.Host -ne $AllowedHost -or $NextUri.UserInfo) {
+                !$AllowedHost -or $NextUri.Host -ne $AllowedHost -or $NextUri.UserInfo -or
+                # Same port; an omitted port and the scheme's default (443 for https) count as equal
+                ($NextUri.Port -ne $AllowedUri.Port -and !($NextUri.IsDefaultPort -and $AllowedUri.IsDefaultPort))) {
                 return Write-Error "Stopped paging: the server's next-page link points to '$NextPage', which is not an https URL on the connected server ($AllowedHost). The results so far were returned. Please report this at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues"
             }
         }

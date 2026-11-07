@@ -3,7 +3,6 @@
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]
-        [Alias('somethingId')]
         [int]$id
     )
     # Invoke-CWMRemoveMaster does the ShouldProcess check (-WhatIf / -Confirm)

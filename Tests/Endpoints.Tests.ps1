@@ -296,6 +296,9 @@ Describe 'Endpoint functions' {
             Set-CWMTestResponse -Content '{"count":7}'
             Get-CWMAuditTrail -type Ticket -id 5 -count | Should -Be 7
             Get-CWMDocument -recordId 1 -recordType Ticket -count | Should -Be 7
+            $global:CWMTestRequests | Should -HaveCount 2
+            $global:CWMTestRequests[0].Uri | Should -BeLike '*/system/audittrail/count?type=Ticket&id=5'
+            $global:CWMTestRequests[1].Uri | Should -BeLike '*/system/documents/count?recordId=1&recordType=Ticket'
         }
 
         It 'Get-CWMAuditTrail does not change the caller''s bound parameters' {

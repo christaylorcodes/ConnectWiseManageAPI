@@ -32,11 +32,16 @@ Get-CWMCompany / New-CWMTicket / ...        (Public/<Area>/)
 Layout: `ConnectWiseManageAPI/` holds the psm1 (dot-sources everything, sets TLS on 5.1), the psd1, the
 format file, `Private/` (URL building, JSON conversion, request-body building, retry helpers; not exported)
 and `Public/<Area>/` (Authentication, Company, Finance, Helper, Invoke, Marketing, Procurement, Project,
-Sales, Schedule, Service, System, Time). `Docs/` and `en-US/` are generated; `Examples/`, `Templates/`,
-`Tests/` and `Tools/` are at the repo root.
+Sales, Schedule, Service, System, Time). `Docs/` and `ConnectWiseManageAPI/en-US/` are generated;
+`Examples/`, `Templates/`, `Tests/` and `Tools/` are at the repo root.
 
 `Connect-CWM` stores the connection in `$script:CWMServerConnection` (Server, Codebase, BasePath, Headers,
 ...); `Disconnect-CWM` clears it.
+
+- **Retries:** write requests (POST/PATCH/PUT/DELETE) are never retried on 5xx. Reads and searches
+  (`ReadOnly`) retry on 502/503/504; any method retries on 429. See `Test-CWMRetryable`.
+- **API version:** the module always targets the server's current CW API (read at connect); there is no
+  version pinning. Check endpoints against the spec with `./Tools/Test-CWMApiCoverage.ps1`.
 
 ## Conventions
 
@@ -65,6 +70,8 @@ Sales, Schedule, Service, System, Time). `Docs/` and `en-US/` are generated; `Ex
 Connect-CWM -Server 'na.myconnectwise.net' -Company 'MyCompany' -pubkey $pubkey -privatekey $privatekey -clientId $clientId
 
 Get-CWMCompany -condition "status/name='Active' and name contains 'Acme'" -orderBy 'id desc' -all
+# List fields (e.g. a company's types) are filtered with -childConditions, not -condition
+Get-CWMCompany -childConditions 'types/id=1' -all
 New-CWMTicket -summary 'From PowerShell' -board @{ id = 1 } -company @{ id = 123 }
 
 # One change
@@ -84,13 +91,14 @@ public function** (not every existing function has it yet). Use
 `.DESCRIPTION` (include the API endpoint), `.PARAMETER` for each parameter, at least one `.EXAMPLE`, and
 `.NOTES`/`.LINK` where useful. Don't invent API constraints or dates.
 
-`Docs/*.md` and `en-US/` are generated with PlatyPS; never hand-edit them. Regenerate after help changes and
-commit the source and generated files together:
+`Docs/*.md` and `ConnectWiseManageAPI/en-US/` are generated with PlatyPS; never hand-edit them. Regenerate
+after help changes and commit the source and generated files together:
 
 ```powershell
 Import-Module ./ConnectWiseManageAPI/ConnectWiseManageAPI.psd1 -Force
 Import-Module PlatyPS -Force
 Update-MarkdownHelp -Path ./Docs -UpdateInputOutput -UseFullTypeName -Force
+./Tools/Remove-PlatyPSProgressAction.ps1   # strips the -ProgressAction noise PlatyPS adds on PowerShell 7.4+
 ```
 
 ## Adding an endpoint

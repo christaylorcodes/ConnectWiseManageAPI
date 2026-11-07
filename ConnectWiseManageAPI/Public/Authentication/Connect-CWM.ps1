@@ -14,8 +14,10 @@
     the PowerShell session unless explicitly disconnected with Disconnect-CWM.
 
     The connection is only stored once it has been validated. If any step fails (server lookup,
-    impersonation token, cookie login or validation), no connection is left behind: the previous
-    connection is cleared too, and other commands fail until Connect-CWM succeeds.
+    impersonation token, cookie login or validation), nothing from the failed attempt is kept. A previous
+    connection to the same server and company stays in place (so a transient failure during -Force does
+    not disconnect you); a previous connection to a different server or company is cleared, and other
+    commands fail until Connect-CWM succeeds.
 
     The function validates the connection by retrieving system information. The server's current
     API version is read from that response and sent in the Accept header of every later request
@@ -26,8 +28,11 @@
     The ConnectWise Manage server hostname.
     Examples: 'na.myconnectwise.net', 'api-aus.myconnectwise.net', 'connectwise.company.com'
     Pass only the hostname, optionally with a port ('cw.company.com:8443'). A leading scheme (https://)
-    or trailing path is tolerated and stripped. Requests always use https.
-    Values with user info, a query, a fragment or a backslash (characters @ ? # \) are rejected.
+    and everything from the first '/' on are stripped, so a URL pasted from the browser
+    ('https://na.myconnectwise.net/v4_6_release/ConnectWise.aspx?locale=en_US#startscreen') works.
+    Requests always use https.
+    A host part with user info, a query, a fragment or a backslash (characters @ ? # \ before the
+    first '/') is rejected.
 
 .PARAMETER Company
     The ConnectWise Manage company identifier (company name/ID used during login).
@@ -225,12 +230,13 @@ function Connect-CWM {
         Write-Verbose 'AllowInsecureRedirect has no effect on this PowerShell version (requires 7.4+).'
     }
 
-    # Validate server: a host name with an optional port. A leading http(s):// and a trailing path are stripped.
-    # Anything that could change which host the credentials are sent to (user info, query, fragment, '\') is rejected.
+    # Validate server: a host name with an optional port. A leading http(s):// and everything from the first '/'
+    # on (path, query, fragment of a pasted URL) are stripped, as in 0.4.16. In the remaining authority, anything
+    # that could change which host the credentials are sent to (user info, query, fragment, '\') is rejected.
     $ServerInput = $Server
     $Server = (($Server.Trim() -replace '^https?://', '') -split '/')[0]
     $ServerUri = $null
-    if ($ServerInput.Trim() -match '[@#?\\\s]' -or $Server -notmatch '^[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(:\d{1,5})?$' -or
+    if ($Server -match '[@#?\\\s]' -or $Server -notmatch '^[A-Za-z0-9_]([A-Za-z0-9_.-]*[A-Za-z0-9_])?(:\d{1,5})?$' -or
         ![uri]::TryCreate("https://$Server", [System.UriKind]::Absolute, [ref]$ServerUri) -or
         $ServerUri.UserInfo -or $ServerUri.PathAndQuery -ne '/' -or $ServerUri.Fragment) {
         Write-Error "Invalid -Server '$ServerInput'. Pass the host name of the ConnectWise Manage server, e.g. 'na.myconnectwise.net' or 'cw.company.com:8443'." -ErrorAction Stop
@@ -257,9 +263,17 @@ function Connect-CWM {
 
     $EscapedCompany = [uri]::EscapeDataString($Company)
     $Connected = $false
+    # A failed reconnect to the same server and company (e.g. -Force hitting a transient error) keeps the
+    # previous connection. A failed connect to another tenant never falls back to the old one.
+    $Previous = $null
+    $PreviousSession = $null
+    if ($Cached -and $Cached.Server -eq $Server -and $Cached.Company -eq $Company) {
+        $Previous = $Cached
+        $PreviousSession = $script:CWMSession
+    }
     try {
-        # The previous connection is replaced. On any failure the finally block clears both connection
-        # variables, so a partly built connection is never left behind.
+        # The previous connection is replaced. On any failure the finally block puts back the previous
+        # same-tenant connection (or nothing), so a partly built connection is never left behind.
         $script:CWMServerConnection = $null
         $script:CWMSession = $null
 
@@ -375,7 +389,7 @@ function Connect-CWM {
         Write-Verbose 'Validating authentication'
         $Info = Get-CWMSystemInfo
         if (!$Info) {
-            Write-Warning 'Authentication failed. Clearing connection settings.'
+            Write-Warning 'Authentication failed. The new connection was not stored.'
             return
         }
 
@@ -389,8 +403,8 @@ function Connect-CWM {
     }
     finally {
         if (!$Connected) {
-            $script:CWMServerConnection = $null
-            $script:CWMSession = $null
+            $script:CWMServerConnection = $Previous
+            $script:CWMSession = $PreviousSession
         }
     }
 

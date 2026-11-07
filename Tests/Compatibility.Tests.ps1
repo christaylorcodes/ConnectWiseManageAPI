@@ -107,8 +107,10 @@ Describe 'Invoke-CWMWebRequest against a local HTTP server' {
     }
 
     BeforeEach {
-        InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'localhost'; Headers = @{ ClientID = 'test' } }
+        # Server includes the test server's port, as a real connection would (next-page links must match it)
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Authority = ([uri]$script:Url).Authority } {
+            param($Authority)
+            $script:CWMServerConnection = @{ Server = $Authority; Headers = @{ ClientID = 'test' } }
             $script:ErrBody = $null
             Mock Start-Sleep {}
         }

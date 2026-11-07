@@ -228,6 +228,21 @@ Describe 'Invoke-CWMWebRequest insecure redirect workaround' {
             $Text | Should -Not -Match 'MAY HAVE BEEN CREATED'
         }
     }
+
+    It 'treats a ReadOnly search POST like a read when it hits an insecure redirection' {
+        InModuleScope ConnectWiseManageAPI {
+            $script:CWMServerConnection.AllowInsecureRedirect = $false
+            Mock Invoke-WebRequest {
+                throw [System.Management.Automation.ErrorRecord]::new(
+                    [System.InvalidOperationException]::new(), 'InsecureRedirection', 'InvalidOperation', $null)
+            }
+            $Err = $null
+            Invoke-CWMWebRequest -Arguments @{ Uri = 'https://example.invalid/service/tickets/search'; Method = 'Post'; Body = '{}'; ReadOnly = $true; Headers = @{} } -ErrorVariable Err -ErrorAction SilentlyContinue
+            $Text = ($Err | ForEach-Object { $_.ToString() }) -join ' '
+            $Text | Should -Match 'Nothing was changed'
+            $Text | Should -Not -Match 'MAY HAVE BEEN CREATED'
+        }
+    }
 }
 
 Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
@@ -319,7 +334,46 @@ Describe 'Connect-CWM connection state (0.5.0 review)' {
         }
     }
 
-    It 'leaves no connection (not even the previous one) when <Case> fails' -ForEach @(
+    It 'keeps the previous same-tenant connection, with nothing from the attempt, when <Case> fails with -Force' -ForEach @(
+        @{ Case = 'the server lookup' }
+        @{ Case = 'impersonation' }
+        @{ Case = 'cookie login' }
+        @{ Case = 'validation' }
+    ) {
+        InModuleScope ConnectWiseManageAPI -Parameters @{ Case = $Case } {
+            param($Case)
+            $Old = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{ Authorization = 'Basic old' } }
+            $OldSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+            $script:CWMServerConnection = $Old
+            $script:CWMSession = $OldSession
+            $Base = @{ Server = 'example.invalid'; Company = 'c'; ClientID = 'id'; Force = $true; ErrorAction = 'SilentlyContinue'; WarningAction = 'SilentlyContinue' }
+            switch ($Case) {
+                'the server lookup' {
+                    Mock Invoke-RestMethod { throw 'transient failure' }
+                    try { Connect-CWM @Base -PubKey 'p' -PrivateKey 'k' } catch { $null = $_ }
+                }
+                'impersonation' {
+                    Mock Invoke-CWMWebRequest { Write-Error 'token failure' }
+                    Connect-CWM @Base -PubKey 'p' -PrivateKey 'k' -MemberID 'jdoe'
+                }
+                'cookie login' {
+                    Mock Invoke-CWMWebRequest { [pscustomobject]@{ Content = '{"Success":false}' } }
+                    Connect-CWM @Base -Credentials (New-Object PSCredential 'user', (ConvertTo-SecureString 'pw' -AsPlainText -Force))
+                }
+                'validation' {
+                    Mock Get-CWMSystemInfo { }
+                    Connect-CWM @Base -PubKey 'p' -PrivateKey 'k'
+                }
+            }
+            [object]::ReferenceEquals($script:CWMServerConnection, $Old) | Should -BeTrue
+            [object]::ReferenceEquals($script:CWMSession, $OldSession) | Should -BeTrue
+            $script:CWMServerConnection.Headers.Authorization | Should -Be 'Basic old'
+            $script:CWMServerConnection.ConnectionMethod | Should -Be 'Key'
+            $script:CWMServerConnection.ContainsKey('MemberID') | Should -BeFalse
+        }
+    }
+
+    It 'leaves no connection (not even the previous one) when a connect to another tenant fails: <Case>' -ForEach @(
         @{ Case = 'impersonation' }
         @{ Case = 'cookie login' }
         @{ Case = 'validation' }
@@ -431,6 +485,9 @@ Describe 'Connect-CWM connection state (0.5.0 review)' {
         @{ Server = 'https://na.myconnectwise.net/'; Expected = 'na.myconnectwise.net' }
         @{ Server = 'HTTPS://cw.company.com/v4_6_release/apis/3.0'; Expected = 'cw.company.com' }
         @{ Server = 'http://cw.company.com'; Expected = 'cw.company.com' }
+        @{ Server = 'https://na.myconnectwise.net/v4_6_release/ConnectWise.aspx?locale=en_US#startscreen'; Expected = 'na.myconnectwise.net' }
+        @{ Server = 'cw_internal.company.com'; Expected = 'cw_internal.company.com' }
+        @{ Server = 'https://cw_internal.company.com:8443/'; Expected = 'cw_internal.company.com:8443' }
     ) {
         InModuleScope ConnectWiseManageAPI -Parameters @{ Server = $Server; Expected = $Expected } {
             param($Server, $Expected)

@@ -165,8 +165,8 @@ function Invoke-CWMWebRequest {
             # Capture now: nested try/catch blocks below replace $_
             $WebError = $_
 
-            # Reads (GET/HEAD) change nothing, so the warnings below differ for them
-            $IsRead = !$Arguments.Method -or @('Get', 'Head') -contains $Arguments.Method
+            # Reads (GET/HEAD, and ReadOnly search POSTs) change nothing, so the warnings below differ for them
+            $IsRead = $ReadOnly -or !$Arguments.Method -or @('Get', 'Head') -contains $Arguments.Method
 
             # PowerShell 7.4+ insecure redirection check (any http:// Location header on an https request)
             if ($WebError.FullyQualifiedErrorId -like 'InsecureRedirection*') {

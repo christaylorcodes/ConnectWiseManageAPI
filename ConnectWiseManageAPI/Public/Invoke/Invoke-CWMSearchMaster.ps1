@@ -74,7 +74,8 @@ function Invoke-CWMSearchMaster {
         'orderBy' { $Body.orderBy = $Arguments.orderBy }
     }
     $Body = ConvertTo-Json $Body -Depth 100
-    Write-Verbose $Body
+    # Secrets in the body (password, token, ...) are masked, as in the other masters
+    Write-Verbose ([string](ConvertTo-CWMRedacted $Body))
 
     if ($Arguments.Fields) {
         $fields = [System.Web.HttpUtility]::UrlEncode($($Arguments.Fields -join ','))

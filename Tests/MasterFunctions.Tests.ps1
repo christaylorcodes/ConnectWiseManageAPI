@@ -425,6 +425,7 @@ Describe 'Master function regressions (0.5.0 review)' {
             @{ Case = 'an http downgrade'; Link = 'http://example.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
             @{ Case = 'carrying user info'; Link = 'https://user@example.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
             @{ Case = 'a relative URL'; Link = '/v4_6_release/apis/3.0/service/tickets?page=2' }
+            @{ Case = 'on another port'; Link = 'https://example.invalid:8443/v4_6_release/apis/3.0/service/tickets?page=2' }
         ) {
             InModuleScope ConnectWiseManageAPI -Parameters @{ Link = $Link } {
                 param($Link)
@@ -437,11 +438,16 @@ Describe 'Master function regressions (0.5.0 review)' {
                 Should -Invoke Invoke-WebRequest -Times 1 -Exactly
             }
         }
-        It 'follows an https next page on the connected host' {
-            InModuleScope ConnectWiseManageAPI {
+        It 'follows an https next page on the connected host (<Case>)' -ForEach @(
+            @{ Case = 'no port'; Link = 'https://EXAMPLE.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
+            @{ Case = 'default port 443'; Link = 'https://example.invalid:443/v4_6_release/apis/3.0/service/tickets?page=2' }
+        ) {
+            InModuleScope ConnectWiseManageAPI -Parameters @{ Link = $Link } {
+                param($Link)
+                $script:TestLink = $Link
                 Mock Invoke-WebRequest {
                     if ($Uri -like '*page=2*') { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":2}]'; Headers = @{ Link = '' } } }
-                    else { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = '<https://EXAMPLE.invalid/v4_6_release/apis/3.0/service/tickets?page=2>; rel="next"' } } }
+                    else { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = "<$($script:TestLink)>; rel=`"next`"" } } }
                 }
                 $Out = @(Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/service/tickets?'; Method = 'Get' })
                 $Out.id | Should -Be @(1, 2)
