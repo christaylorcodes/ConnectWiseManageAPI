@@ -226,3 +226,6 @@ __pycache__/
 *.py[cod]
 venv/
 .venv/
+
+# Personal blog drafts (kept locally, not part of the module repo)
+BLOG/
