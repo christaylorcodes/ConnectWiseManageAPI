@@ -44,18 +44,12 @@
 
     Renames agreement type 8 and marks it inactive in one request.
 
-.NOTES
-    Endpoint: PATCH /finance/agreements/types/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated agreement type.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMAgreementType {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

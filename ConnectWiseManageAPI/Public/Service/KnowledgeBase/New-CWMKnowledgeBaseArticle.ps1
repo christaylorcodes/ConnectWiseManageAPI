@@ -69,9 +69,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the created knowledge base article.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function New-CWMKnowledgeBaseArticle {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

@@ -44,18 +44,12 @@
 
     Changes the first name and title of member 150 in one request.
 
-.NOTES
-    Endpoint: PATCH /system/members/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated member.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMMember {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

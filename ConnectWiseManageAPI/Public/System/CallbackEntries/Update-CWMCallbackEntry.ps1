@@ -44,18 +44,12 @@
 
     Changes the URL and re-activates callback 15 in one request.
 
-.NOTES
-    Endpoint: PATCH /system/callbacks/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated callback.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMCallbackEntry {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

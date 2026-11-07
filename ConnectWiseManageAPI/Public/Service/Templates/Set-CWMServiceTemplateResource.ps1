@@ -83,9 +83,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the replaced service template resource.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Set-CWMServiceTemplateResource {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

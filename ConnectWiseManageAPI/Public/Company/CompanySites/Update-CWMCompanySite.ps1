@@ -48,18 +48,12 @@
 
     Changes the address and clears address line 2 of site 12 in one request.
 
-.NOTES
-    Endpoint: PATCH /company/companies/{parentId}/sites/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated company site.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMCompanySite {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

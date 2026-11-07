@@ -44,18 +44,12 @@
 
     Changes the name and status of opportunity 900 in one request.
 
-.NOTES
-    Endpoint: PATCH /sales/opportunities/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated opportunity.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMOpportunity {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

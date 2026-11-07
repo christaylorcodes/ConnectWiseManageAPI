@@ -44,18 +44,12 @@
 
     Changes the notes and billable option of time entry 5000 in one request.
 
-.NOTES
-    Endpoint: PATCH /time/entries/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated time entry.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMTimeEntry {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

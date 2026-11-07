@@ -48,18 +48,12 @@
 
     Changes the description and budget hours of phase 5 in one request.
 
-.NOTES
-    Endpoint: PATCH /project/projects/{parentId}/phases/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated project phase.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMProjectPhase {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

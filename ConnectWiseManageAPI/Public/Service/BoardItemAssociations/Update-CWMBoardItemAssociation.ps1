@@ -23,7 +23,7 @@
     The patch operation to perform: 'add', 'replace' or 'remove'.
 
 .PARAMETER Path
-    The property to change, for example 'addAllSubTypes'.
+    The property to change, for example 'addAllFlag'.
 
 .PARAMETER Value
     The new value for the property. Required for 'add' and 'replace'; not needed for 'remove'.
@@ -34,24 +34,21 @@
     op, path and (except for 'remove') value. 'value' is left out of 'remove' operations.
 
 .EXAMPLE
-    Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -Operation replace -Path 'addAllSubTypes' -Value $true
+    Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -Operation replace -Path 'addAllFlag' -Value $true
 
     Associates all sub types with item 20 and type 30 of board 1.
 
 .EXAMPLE
-    Update-CWMBoardItemAssociation 1 20 30 replace addAllSubTypes $true
+    Update-CWMBoardItemAssociation 1 20 30 replace addAllFlag $true
 
     The same change, using positional parameters.
 
 .EXAMPLE
     Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -PatchOperations @(
-        @{ op = 'replace'; path = 'addAllSubTypes'; value = $true }
+        @{ op = 'replace'; path = 'addAllFlag'; value = $true }
     )
 
     Sends the same change with -PatchOperations. Add more operations to the array to change several properties in one request.
-
-.NOTES
-    Endpoint: PATCH /service/boards/{parentId}/items/{itemId}/associations/{typeId}
 
 .LINK
     https://developer.connectwise.com/manage/rest
@@ -59,9 +56,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the updated service board item association.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMBoardItemAssociation {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

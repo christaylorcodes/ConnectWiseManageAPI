@@ -44,18 +44,12 @@
 
     Changes the summary and status of project ticket 123 in one request.
 
-.NOTES
-    Endpoint: PATCH /project/tickets/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated project ticket.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMProjectTicket {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

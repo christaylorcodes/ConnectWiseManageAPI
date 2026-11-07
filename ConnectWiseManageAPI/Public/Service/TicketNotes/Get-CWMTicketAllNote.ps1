@@ -17,6 +17,6 @@
         [switch]$all
     )
 
-    $Endpoint = "/service/tickets/$($parentId)/allnotes"
+    $Endpoint = "/service/tickets/$($parentId)/allNotes"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

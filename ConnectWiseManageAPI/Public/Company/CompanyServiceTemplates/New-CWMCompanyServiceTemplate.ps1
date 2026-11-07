@@ -245,9 +245,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the created company service template.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function New-CWMCompanyServiceTemplate {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

@@ -91,9 +91,6 @@
 .OUTPUTS
     PSCustomObject or PSCustomObject[]
     Returns company service template objects, or an integer if -count is specified.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Get-CWMCompanyServiceTemplate {
     [CmdletBinding()]

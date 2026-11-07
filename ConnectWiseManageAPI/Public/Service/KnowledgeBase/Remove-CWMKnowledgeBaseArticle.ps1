@@ -4,7 +4,8 @@
 
 .DESCRIPTION
     Permanently removes a knowledge base article by ID.
-    Prompts for confirmation by default (ConfirmImpact High). Use -Confirm:$false to skip the prompt.
+    Like the other Remove-CWM* functions, it does not prompt by default; use -Confirm to be prompted
+    or -WhatIf to see what would be deleted.
 
     This function calls the ConnectWise Manage API endpoint: DELETE /service/knowledgeBaseArticles/{id}
 
@@ -13,9 +14,9 @@
     Alias: articleId
 
 .EXAMPLE
-    Remove-CWMKnowledgeBaseArticle -id 42
+    Remove-CWMKnowledgeBaseArticle -id 42 -Confirm
 
-    Deletes article 42 after confirmation.
+    Prompts for confirmation, then deletes article 42.
 
 .EXAMPLE
     Remove-CWMKnowledgeBaseArticle -id 42 -WhatIf
@@ -38,12 +39,10 @@
 
 .LINK
     https://developer.connectwise.com/manage/rest#/KnowledgeBaseArticles
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Remove-CWMKnowledgeBaseArticle {
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]
         [Alias('articleId')]
@@ -51,8 +50,5 @@ function Remove-CWMKnowledgeBaseArticle {
     )
 
     $Endpoint = "/service/knowledgeBaseArticles/$($id)"
-    # Confirm here, at High impact. Invoke-CWMRemoveMaster defaults to Medium impact and would not prompt on its own.
-    if ($PSCmdlet.ShouldProcess("Knowledge base article $id", 'Remove')) {
-        Invoke-CWMRemoveMaster -Endpoint $Endpoint -Confirm:$false
-    }
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

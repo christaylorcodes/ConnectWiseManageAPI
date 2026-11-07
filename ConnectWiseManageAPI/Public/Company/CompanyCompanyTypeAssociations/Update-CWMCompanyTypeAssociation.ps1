@@ -41,24 +41,11 @@
     The same change, using positional parameters.
 
 .EXAMPLE
-    $
-
-    U
-
-.EXAMPLE
-    C
-
-    h
-
-.EXAMPLE
     Update-CWMCompanyTypeAssociation -parentId 250 -id 3 -PatchOperations @(
         @{ op = 'replace'; path = 'type'; value = @{ id = 5 } }
     )
 
     Sends the same change with -PatchOperations. Add more operations to the array to change several properties in one request.
-
-.NOTES
-    Endpoint: PATCH /company/companies/{parentId}/typeAssociations/{id}
 
 .LINK
     https://developer.connectwise.com/manage/rest
@@ -66,9 +53,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the updated company type association.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMCompanyTypeAssociation {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

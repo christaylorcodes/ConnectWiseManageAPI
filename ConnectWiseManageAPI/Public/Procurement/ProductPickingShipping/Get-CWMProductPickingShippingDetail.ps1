@@ -2,6 +2,7 @@
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
+        [Alias('productId')]
         [int]$parentId,
         [int]$id,
         [switch]$count,

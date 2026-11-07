@@ -48,18 +48,12 @@
 
     Changes the note text and name in one request.
 
-.NOTES
-    Endpoint: PATCH /company/companies/{parentId}/customStatusNotes/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated company custom status note.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMCompanyCustomNote {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

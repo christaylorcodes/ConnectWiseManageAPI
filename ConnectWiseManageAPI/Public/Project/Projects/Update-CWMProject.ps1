@@ -37,16 +37,6 @@
     The same change, using positional parameters.
 
 .EXAMPLE
-    $
-
-    U
-
-.EXAMPLE
-    C
-
-    h
-
-.EXAMPLE
     Update-CWMProject -id 100 -PatchOperations @(
         @{ op = 'replace'; path = 'name'; value = 'Server migration' }
         @{ op = 'replace'; path = 'status'; value = @{ id = 2 } }
@@ -54,18 +44,12 @@
 
     Changes the name and status of project 100 in one request.
 
-.NOTES
-    Endpoint: PATCH /project/projects/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated project.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMProject {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

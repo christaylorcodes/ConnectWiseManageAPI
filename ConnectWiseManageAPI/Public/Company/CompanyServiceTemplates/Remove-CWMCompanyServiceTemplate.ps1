@@ -38,9 +38,6 @@
 
 .LINK
     https://developer.connectwise.com/manage/rest
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Remove-CWMCompanyServiceTemplate {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

@@ -65,9 +65,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the updated catalog item.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMProductCatalog {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

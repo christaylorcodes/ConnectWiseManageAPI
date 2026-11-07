@@ -43,18 +43,12 @@
 
     Renames and re-activates SSO configuration 1 in one request.
 
-.NOTES
-    Endpoint: PATCH /system/ssoConfigurations/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated SSO configuration.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMSSOConfiguration {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

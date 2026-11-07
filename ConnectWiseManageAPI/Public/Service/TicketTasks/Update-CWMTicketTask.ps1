@@ -46,18 +46,12 @@
 
     Changes the notes and closes task 2 in one request.
 
-.NOTES
-    Endpoint: PATCH /service/tickets/{parentId}/tasks/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated ticket task.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMTicketTask {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

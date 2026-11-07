@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Uploads a document or links a URL to a ConnectWise Manage record.
 
@@ -59,6 +59,7 @@
     https://developer.connectwise.com/Products/ConnectWise_PSA/REST
 #>
 function New-CWMDocument {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
         [Parameter(Mandatory=$true)]
@@ -176,23 +177,9 @@ function New-CWMDocument {
         $Stream.Dispose()
     }
 
-    $Endpoint = '/system/documents'
-
-    # Calls Invoke-CWMWebRequest directly rather than Invoke-CWMNewMaster: the master function writes the
-    # body with Write-Verbose/ShouldProcess as a string, which fails (or is very slow) for a byte[] body.
-    $WebRequestArguments = @{
-        Uri         = New-CWMUrl -Endpoint $Endpoint
-        Method      = 'Post'
-        ContentType = "multipart/form-data; boundary=$boundary"
+    $Arguments = @{
         Body        = $BodyBytes
-        Headers     = @{}
+        ContentType = "multipart/form-data; boundary=$boundary"
     }
-
-    if ($PSCmdlet.ShouldProcess($WebRequestArguments.Uri, "New-CWMDocument, multipart body of $($BodyBytes.Length) bytes")) {
-        $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if ($Result.content) {
-            $Result = $Result.content | ConvertFrom-Json
-        }
-        $Result
-    }
+    Invoke-CWMNewMaster -Arguments $Arguments -Endpoint '/system/documents'
 }

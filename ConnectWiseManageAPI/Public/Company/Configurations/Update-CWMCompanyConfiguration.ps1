@@ -45,18 +45,12 @@
 
     Changes the name, serial number and status of configuration 5501 in one request.
 
-.NOTES
-    Endpoint: PATCH /company/configurations/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated company configuration.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMCompanyConfiguration {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

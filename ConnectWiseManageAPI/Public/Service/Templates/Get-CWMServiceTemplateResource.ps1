@@ -85,9 +85,6 @@
 .OUTPUTS
     PSCustomObject or PSCustomObject[]
     Returns service template resource objects, or an integer if -count is specified.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Get-CWMServiceTemplateResource {
     [CmdletBinding()]

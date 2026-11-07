@@ -89,9 +89,6 @@
 .OUTPUTS
     PSCustomObject or PSCustomObject[]
     Returns knowledge base article objects, or an integer if -count is specified.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Get-CWMKnowledgeBaseArticle {
     [CmdletBinding()]

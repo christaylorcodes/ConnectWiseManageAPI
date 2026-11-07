@@ -79,9 +79,6 @@
 .OUTPUTS
     PSCustomObject or PSCustomObject[]
     Returns note objects, or an integer if -count is specified.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Get-CWMProjectTicketAllNote {
     [CmdletBinding()]

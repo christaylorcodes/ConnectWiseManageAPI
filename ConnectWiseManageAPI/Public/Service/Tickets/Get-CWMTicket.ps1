@@ -151,10 +151,6 @@
     PSCustomObject or PSCustomObject[]
     Returns ticket objects with properties like id, summary, status, company, board, etc.
     Or returns an integer if -count is specified.
-
-.INPUTS
-    None. This function does not accept pipeline input.
-
 #>
 function Get-CWMTicket {
     [CmdletBinding()]

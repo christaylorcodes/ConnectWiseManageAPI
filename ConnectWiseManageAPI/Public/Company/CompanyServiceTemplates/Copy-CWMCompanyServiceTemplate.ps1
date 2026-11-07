@@ -37,9 +37,6 @@
 .OUTPUTS
     PSCustomObject
     Returns the API response, when there is one.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Copy-CWMCompanyServiceTemplate {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

@@ -48,18 +48,12 @@
 
     Changes the team role and account manager flag in one request.
 
-.NOTES
-    Endpoint: PATCH /company/companies/{parentId}/teams/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated company team member.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMCompanyTeam {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

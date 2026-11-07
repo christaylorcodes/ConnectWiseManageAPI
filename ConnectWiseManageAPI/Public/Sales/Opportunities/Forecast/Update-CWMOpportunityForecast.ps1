@@ -43,18 +43,12 @@
 
     Sends the same change with -PatchOperations. Add more operations to the array to change several properties in one request.
 
-.NOTES
-    Endpoint: PATCH /sales/opportunities/{parentId}/forecast
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated opportunity forecast.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMOpportunityForecast {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

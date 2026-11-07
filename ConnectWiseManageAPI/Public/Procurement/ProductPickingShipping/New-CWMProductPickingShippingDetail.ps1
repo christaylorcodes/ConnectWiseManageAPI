@@ -2,6 +2,7 @@
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
+        [Alias('productId')]
         [int]$parentId,
         [int]$pickedQuantity,
         [int]$shippedQuantity,

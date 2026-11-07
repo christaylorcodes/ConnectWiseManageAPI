@@ -44,18 +44,12 @@
 
     Sets the tracking number and status of purchase order 600 in one request.
 
-.NOTES
-    Endpoint: PATCH /procurement/purchaseorders/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated purchase order.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMPurchaseOrder {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

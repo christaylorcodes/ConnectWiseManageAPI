@@ -44,18 +44,12 @@
 
     Changes the reason and closes adjustment 40 in one request.
 
-.NOTES
-    Endpoint: PATCH /procurement/adjustments/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated inventory adjustment.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMProductAdjustment {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

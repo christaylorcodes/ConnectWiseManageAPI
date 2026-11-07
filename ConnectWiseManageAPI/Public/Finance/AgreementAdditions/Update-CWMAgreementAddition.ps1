@@ -41,16 +41,6 @@
     The same change, using positional parameters.
 
 .EXAMPLE
-    $
-
-    U
-
-.EXAMPLE
-    C
-
-    h
-
-.EXAMPLE
     Update-CWMAgreementAddition -parentId 300 -id 25 -PatchOperations @(
         @{ op = 'replace'; path = 'quantity'; value = 10 }
         @{ op = 'replace'; path = 'unitPrice'; value = 12.5 }
@@ -58,18 +48,12 @@
 
     Changes the quantity and unit price of addition 25 in one request.
 
-.NOTES
-    Endpoint: PATCH /finance/agreements/{parentId}/additions/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated agreement addition.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMAgreementAddition {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

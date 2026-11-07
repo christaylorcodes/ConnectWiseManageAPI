@@ -43,18 +43,12 @@
 
     Marks schedule entry 3000 as done and sets its hours in one request.
 
-.NOTES
-    Endpoint: PATCH /schedule/entries/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated schedule entry.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMScheduleEntry {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]

@@ -47,18 +47,12 @@
 
     Changes the revenue and cost of forecast item 2 in one request.
 
-.NOTES
-    Endpoint: PATCH /sales/opportunities/{parentId}/forecast/{id}
-
 .LINK
     https://developer.connectwise.com/manage/rest
 
 .OUTPUTS
     PSCustomObject
     Returns the updated opportunity forecast item.
-
-.INPUTS
-    None. This function does not accept pipeline input.
 #>
 function Update-CWMOpportunityForecastItem {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
