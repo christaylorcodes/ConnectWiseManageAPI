@@ -24,7 +24,7 @@ New-CWMOpportunity [[-id] <Int32>] [-name] <String> [[-expectedCloseDate] <DateT
  [[-billToContact] <Hashtable>] [[-billToSite] <Hashtable>] [[-billingTerms] <Hashtable>]
  [[-taxCode] <Hashtable>] [[-currency] <Hashtable>] [[-companyLocationId] <Int32>]
  [[-technicalContact] <Hashtable>] [[-_info] <Hashtable>] [[-customFields] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,7 +45,7 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -61,7 +61,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 {{ Fill billToCompany Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -106,7 +106,7 @@ Accept wildcard characters: False
 {{ Fill billToContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -121,7 +121,7 @@ Accept wildcard characters: False
 {{ Fill billToSite Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -136,7 +136,7 @@ Accept wildcard characters: False
 {{ Fill billingTerms Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -151,7 +151,7 @@ Accept wildcard characters: False
 {{ Fill businessUnitId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -166,7 +166,7 @@ Accept wildcard characters: False
 {{ Fill campaign Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -181,7 +181,7 @@ Accept wildcard characters: False
 {{ Fill closedBy Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -196,7 +196,7 @@ Accept wildcard characters: False
 {{ Fill closedDate Description }}
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -211,7 +211,7 @@ Accept wildcard characters: False
 {{ Fill company Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -226,7 +226,7 @@ Accept wildcard characters: False
 {{ Fill companyLocationId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -241,7 +241,7 @@ Accept wildcard characters: False
 {{ Fill contact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -256,7 +256,7 @@ Accept wildcard characters: False
 {{ Fill currency Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -271,7 +271,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -286,7 +286,7 @@ Accept wildcard characters: False
 {{ Fill customerPO Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -301,7 +301,7 @@ Accept wildcard characters: False
 {{ Fill dateBecameLead Description }}
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -316,7 +316,7 @@ Accept wildcard characters: False
 {{ Fill expectedCloseDate Description }}
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -331,7 +331,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -346,7 +346,7 @@ Accept wildcard characters: False
 {{ Fill locationId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -361,7 +361,7 @@ Accept wildcard characters: False
 {{ Fill name Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -376,7 +376,7 @@ Accept wildcard characters: False
 {{ Fill notes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -391,7 +391,7 @@ Accept wildcard characters: False
 {{ Fill pipelineChangeDate Description }}
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -406,7 +406,7 @@ Accept wildcard characters: False
 {{ Fill primarySalesRep Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -421,7 +421,7 @@ Accept wildcard characters: False
 {{ Fill priority Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -436,7 +436,7 @@ Accept wildcard characters: False
 {{ Fill probability Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -451,7 +451,7 @@ Accept wildcard characters: False
 {{ Fill rating Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -466,7 +466,7 @@ Accept wildcard characters: False
 {{ Fill secondarySalesRep Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -481,7 +481,7 @@ Accept wildcard characters: False
 {{ Fill shipToCompany Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -496,7 +496,7 @@ Accept wildcard characters: False
 {{ Fill shipToContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -511,7 +511,7 @@ Accept wildcard characters: False
 {{ Fill shipToSite Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -526,7 +526,7 @@ Accept wildcard characters: False
 {{ Fill site Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -541,7 +541,7 @@ Accept wildcard characters: False
 {{ Fill source Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -556,7 +556,7 @@ Accept wildcard characters: False
 {{ Fill stage Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -571,7 +571,7 @@ Accept wildcard characters: False
 {{ Fill status Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -586,7 +586,7 @@ Accept wildcard characters: False
 {{ Fill taxCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -601,7 +601,7 @@ Accept wildcard characters: False
 {{ Fill technicalContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -616,7 +616,7 @@ Accept wildcard characters: False
 {{ Fill totalSalesTax Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -631,27 +631,12 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

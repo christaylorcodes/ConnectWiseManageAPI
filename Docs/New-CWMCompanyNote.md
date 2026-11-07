@@ -5,19 +5,16 @@ online version:
 schema: 2.0.0
 ---
 
-# New-CWMTicketNote
+# New-CWMCompanyNote
 
 ## SYNOPSIS
-Add a note to a CW Manage company.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-detailDescriptionFlag] <Boolean>]
- [[-internalAnalysisFlag] <Boolean>] [[-resolutionFlag] <Boolean>] [[-member] <Hashtable>]
- [[-contact] <Hashtable>] [[-customerUpdatedFlag] <Boolean>] [[-processNotifications] <Boolean>]
- [[-dateCreated] <String>] [[-createdBy] <String>] [[-internalFlag] <Boolean>] [[-externalFlag] <Boolean>]
- [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMCompanyNote [-id] <Int32> [[-flagged] <Boolean>] [[-text] <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,230 +22,20 @@ New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-detail
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```powershell
-New-CWMCompanyNote -companyId $company.id -text 'New note'
+PS C:\> {{ Add example code here }}
 ```
 
-Create a new note.
+{{ Add example description here }}
 
 ## PARAMETERS
-
-### -_info
-{{ Fill _info Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -contact
-{{ Fill contact Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -createdBy
-{{ Fill createdBy Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customerUpdatedFlag
-{{ Fill customerUpdatedFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -dateCreated
-{{ Fill dateCreated Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -detailDescriptionFlag
-{{ Fill detailDescriptionFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -externalFlag
-{{ Fill externalFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -internalAnalysisFlag
-{{ Fill internalAnalysisFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -internalFlag
-{{ Fill internalFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -member
-{{ Fill member Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -processNotifications
-{{ Fill processNotifications Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -resolutionFlag
-{{ Fill resolutionFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -text
-{{ Fill text Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -260,10 +47,11 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -274,31 +62,46 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -flagged
+{{ Fill flagged Description }}
 
 ```yaml
-Type: Int32
+Type: System.Boolean
 Parameter Sets: (All)
-Aliases: ticketId
+Aliases:
 
-Required: True
-Position: Named
+Required: False
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -id
+{{ Fill id Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: proga
+Aliases: companyId
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -text
+{{ Fill text Description }}
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -309,12 +112,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-Author: Ben Craigs
-Date: 11/16/2023
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE](https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE)

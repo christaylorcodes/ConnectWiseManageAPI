@@ -20,7 +20,7 @@ New-CWMAgreementAddition -parentId <Int32> [[-id] <Int32>] [-product] <Object> [
  [[-description] <String>] [[-billedQuantity] <Single>] [[-uom] <String>] [[-extPrice] <Single>]
  [[-extCost] <Single>] [[-sequenceNumber] <Single>] [[-margin] <Single>] [[-prorateCost] <Single>]
  [[-proratePrice] <Single>] [[-extendedProrateCost] <Single>] [[-extendedProratePrice] <Single>]
- [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Hashtable>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -42,7 +42,7 @@ AgreementID = $Agreement.id     product = @{id = $Product.id}     billCustomer =
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -58,7 +58,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -73,7 +73,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 {{ Fill billCustomer Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge
@@ -104,7 +104,7 @@ Accept wildcard characters: False
 {{ Fill billedQuantity Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -119,7 +119,7 @@ Accept wildcard characters: False
 {{ Fill cancelledDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -134,7 +134,7 @@ Accept wildcard characters: False
 {{ Fill description Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -149,7 +149,7 @@ Accept wildcard characters: False
 {{ Fill effectiveDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -164,7 +164,7 @@ Accept wildcard characters: False
 {{ Fill extCost Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -179,7 +179,7 @@ Accept wildcard characters: False
 {{ Fill extPrice Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -194,7 +194,7 @@ Accept wildcard characters: False
 {{ Fill extendedProrateCost Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -209,7 +209,7 @@ Accept wildcard characters: False
 {{ Fill extendedProratePrice Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -224,7 +224,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -239,7 +239,7 @@ Accept wildcard characters: False
 {{ Fill invoiceDescription Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -254,7 +254,7 @@ Accept wildcard characters: False
 {{ Fill lessIncluded Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -269,7 +269,7 @@ Accept wildcard characters: False
 {{ Fill margin Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -284,7 +284,7 @@ Accept wildcard characters: False
 {{ Fill product Description }}
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
@@ -299,7 +299,7 @@ Accept wildcard characters: False
 {{ Fill prorateCost Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -314,7 +314,7 @@ Accept wildcard characters: False
 {{ Fill prorateCurrentPeriodFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -329,7 +329,7 @@ Accept wildcard characters: False
 {{ Fill proratePrice Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -344,7 +344,7 @@ Accept wildcard characters: False
 {{ Fill purchaseItemFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -359,7 +359,7 @@ Accept wildcard characters: False
 {{ Fill quantity Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -374,7 +374,7 @@ Accept wildcard characters: False
 {{ Fill sequenceNumber Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -389,7 +389,7 @@ Accept wildcard characters: False
 {{ Fill serialNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -404,7 +404,7 @@ Accept wildcard characters: False
 {{ Fill specialOrderFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -419,7 +419,7 @@ Accept wildcard characters: False
 {{ Fill taxableFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -434,7 +434,7 @@ Accept wildcard characters: False
 {{ Fill unitCost Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -449,7 +449,7 @@ Accept wildcard characters: False
 {{ Fill unitPrice Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -464,7 +464,7 @@ Accept wildcard characters: False
 {{ Fill uom Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -479,26 +479,11 @@ Accept wildcard characters: False
 {{ Fill parentId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: AgreementId
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

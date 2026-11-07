@@ -17,15 +17,14 @@ New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String
  [[-company] <Hashtable>] [[-site] <Hashtable>] [[-addressLine1] <String>] [[-addressLine2] <String>]
  [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <String>] [[-relationship] <Hashtable>]
  [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>] [[-defaultMergeContactId] <Int32>]
- [[-securityIdentifier] <String>] [[-managerContactId] <Int32>] [[-assistantContactId] <Int32>]
- [[-title] <String>] [[-school] <String>] [[-nickName] <String>] [[-marriedFlag] <Boolean>]
- [[-childrenFlag] <Boolean>] [[-significantOther] <String>] [[-portalPassword] <SecureString>]
- [[-portalSecurityLevel] <Int32>] [[-disablePortalLoginFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>]
- [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>] [[-presence] <String>]
- [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>] [[-linkedInUrl] <String>]
- [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>] [[-communicationItems] <Hashtable[]>]
- [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-ProgressAction <ActionPreference>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [[-securityIdentifier] <String>] [-managerContact <Object>] [-assistantContact <Object>] [[-title] <String>]
+ [[-school] <String>] [[-nickName] <String>] [[-marriedFlag] <Boolean>] [[-childrenFlag] <Boolean>]
+ [[-significantOther] <String>] [[-portalPassword] <SecureString>] [[-portalSecurityLevel] <Int32>]
+ [[-disablePortalLoginFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>] [[-gender] <String>]
+ [[-birthDay] <String>] [[-anniversary] <String>] [[-presence] <String>] [[-mobileGuid] <Guid>]
+ [[-facebookUrl] <String>] [[-twitterUrl] <String>] [[-linkedInUrl] <String>] [[-defaultBillingFlag] <Boolean>]
+ [[-defaultFlag] <Boolean>] [[-communicationItems] <Hashtable[]>] [[-_info] <Hashtable>]
+ [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,12 +33,11 @@ This function will create a new contact with the given values.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 PS C:\> New-CWMCompanyContact -firstName 'Chris' -lastName 'Taylor' -company @{id = $Company.id}
 ```
 
-Will create a new contact, Chris Taylor, under the given company
-.
+Will create a new contact, Chris Taylor, under the given company .
 
 ## PARAMETERS
 
@@ -47,13 +45,13 @@ Will create a new contact, Chris Taylor, under the given company
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -63,13 +61,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -78,7 +76,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -93,7 +91,7 @@ Accept wildcard characters: False
 {{ Fill addressLine1 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -108,7 +106,7 @@ Accept wildcard characters: False
 {{ Fill addressLine2 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -123,7 +121,7 @@ Accept wildcard characters: False
 {{ Fill anniversary Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -134,26 +132,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -assistantContactId
-{{ Fill assistantContactId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -birthDay
 {{ Fill birthDay Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -168,7 +151,7 @@ Accept wildcard characters: False
 {{ Fill childrenFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -183,7 +166,7 @@ Accept wildcard characters: False
 {{ Fill city Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -198,7 +181,7 @@ Accept wildcard characters: False
 {{ Fill communicationItems Description }}
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -213,7 +196,7 @@ Accept wildcard characters: False
 {{ Fill company Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -228,7 +211,7 @@ Accept wildcard characters: False
 {{ Fill country Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -243,7 +226,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -258,7 +241,7 @@ Accept wildcard characters: False
 {{ Fill defaultBillingFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -273,7 +256,7 @@ Accept wildcard characters: False
 {{ Fill defaultFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -288,7 +271,7 @@ Accept wildcard characters: False
 {{ Fill defaultMergeContactId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -303,7 +286,7 @@ Accept wildcard characters: False
 {{ Fill department Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -318,7 +301,7 @@ Accept wildcard characters: False
 {{ Fill disablePortalLoginFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -333,7 +316,7 @@ Accept wildcard characters: False
 {{ Fill facebookUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -348,7 +331,7 @@ Accept wildcard characters: False
 {{ Fill firstName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -363,7 +346,7 @@ Accept wildcard characters: False
 {{ Fill gender Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Male, Female
@@ -379,7 +362,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -394,7 +377,7 @@ Accept wildcard characters: False
 {{ Fill inactiveFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -409,7 +392,7 @@ Accept wildcard characters: False
 {{ Fill lastName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -424,7 +407,7 @@ Accept wildcard characters: False
 {{ Fill linkedInUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -435,26 +418,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -managerContactId
-{{ Fill managerContactId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -marriedFlag
 {{ Fill marriedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -469,7 +437,7 @@ Accept wildcard characters: False
 {{ Fill mobileGuid Description }}
 
 ```yaml
-Type: Guid
+Type: System.Guid
 Parameter Sets: (All)
 Aliases:
 
@@ -484,7 +452,7 @@ Accept wildcard characters: False
 {{ Fill nickName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -499,7 +467,7 @@ Accept wildcard characters: False
 {{ Fill portalPassword Description }}
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -514,7 +482,7 @@ Accept wildcard characters: False
 {{ Fill portalSecurityLevel Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -529,7 +497,7 @@ Accept wildcard characters: False
 {{ Fill presence Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Online, DoNotDisturb, Away, Offline, NoAgent
@@ -545,7 +513,7 @@ Accept wildcard characters: False
 {{ Fill relationship Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -560,7 +528,7 @@ Accept wildcard characters: False
 {{ Fill school Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -575,7 +543,7 @@ Accept wildcard characters: False
 {{ Fill securityIdentifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -590,7 +558,7 @@ Accept wildcard characters: False
 {{ Fill significantOther Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -605,7 +573,7 @@ Accept wildcard characters: False
 {{ Fill site Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -620,7 +588,7 @@ Accept wildcard characters: False
 {{ Fill state Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -635,7 +603,7 @@ Accept wildcard characters: False
 {{ Fill title Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -650,7 +618,7 @@ Accept wildcard characters: False
 {{ Fill twitterUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -665,7 +633,7 @@ Accept wildcard characters: False
 {{ Fill unsubscribeFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -680,7 +648,7 @@ Accept wildcard characters: False
 {{ Fill zip Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -695,7 +663,7 @@ Accept wildcard characters: False
 {{ Fill types Description }}
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -706,13 +674,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -assistantContact
+{{ Fill assistantContact Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Object
 Parameter Sets: (All)
-Aliases: proga
+Aliases: assistantContactId
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -managerContact
+{{ Fill managerContact Description }}
+
+```yaml
+Type: System.Object
+Parameter Sets: (All)
+Aliases: managerContactId
 
 Required: False
 Position: Named

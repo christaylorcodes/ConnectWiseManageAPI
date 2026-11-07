@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers
 schema: 2.0.0
 ---
 
@@ -17,10 +17,10 @@ New-CWMMember [[-id] <Int32>] [-identifier] <String> [[-password] <String>] [-fi
  [[-middleInitial] <String>] [-lastName] <String> [[-title] <String>] [[-reportCard] <Hashtable>]
  [-licenseClass] <String> [[-disableOnlineFlag] <Boolean>] [[-enableMobileFlag] <Boolean>]
  [[-type] <Hashtable>] [[-employeeIdentifer] <String>] [[-vendorNumber] <String>] [[-notes] <String>]
- [[-timeZone] <Hashtable>] [[-TimeZoneSetupReference] <Hashtable>] [[-country] <Hashtable>]
- [[-serviceBoardTeamIds] <Int32[]>] [[-enableMobileGpsFlag] <Boolean>] [[-inactiveDate] <String>]
- [[-inactiveFlag] <Boolean>] [[-lastLogin] <String>] [[-photo] <Hashtable>] [[-partnerPortalFlag] <Boolean>]
- [[-clientId] <String>] [[-stsUserAdminUrl] <String>] [[-token] <String>] [[-toastNotificationFlag] <Boolean>]
+ [[-timeZone] <Hashtable>] [[-country] <Hashtable>] [[-serviceBoardTeamIds] <Int32[]>]
+ [[-enableMobileGpsFlag] <Boolean>] [[-inactiveDate] <String>] [[-inactiveFlag] <Boolean>]
+ [[-lastLogin] <String>] [[-photo] <Hashtable>] [[-partnerPortalFlag] <Boolean>] [[-clientId] <String>]
+ [[-stsUserAdminUrl] <String>] [[-token] <String>] [[-toastNotificationFlag] <Boolean>]
  [[-memberPersonas] <Int32[]>] [[-office365] <Hashtable>] [[-officeEmail] <String>] [[-officePhone] <String>]
  [[-officeExtension] <String>] [[-mobileEmail] <String>] [[-mobilePhone] <String>]
  [[-mobileExtension] <String>] [[-homeEmail] <String>] [[-homePhone] <String>] [[-homeExtension] <String>]
@@ -49,15 +49,13 @@ New-CWMMember [[-id] <Int32>] [-identifier] <String> [[-password] <String>] [-fi
  [[-mapiName] <String>] [[-calendarSyncIntegrationFlag] <Boolean>] [[-enableLdapAuthenticationFlag] <Boolean>]
  [[-ldapConfiguration] <Hashtable>] [[-ldapUserName] <String>] [-companyActivityTabFormat] <String>
  [-invoiceTimeTabFormat] <String> [-invoiceScreenDefaultTabFormat] <String> [-invoicingDisplayOptions] <String>
- [-agreementInvoicingDisplayOptions] <String> [[-remotePackage] <String>] [[-remotePackagePlatform] <String>]
- [[-remotePackageUserName] <String>] [[-remotePackagePassword] <SecureString>]
- [[-remotePackageAccount] <String>] [[-authenticationServiceType] <String>]
+ [-agreementInvoicingDisplayOptions] <String> [[-authenticationServiceType] <String>]
  [[-timebasedOneTimePasswordActivated] <Boolean>] [[-ssoSettings] <Hashtable>]
  [[-autoStartStopwatch] <Boolean>] [[-autoPopupQuickNotesWithStopwatch] <Boolean>] [[-signature] <String>]
  [[-globalSearchDefaultTicketFilter] <String>] [[-globalSearchDefaultSort] <String>] [[-phoneSource] <String>]
  [[-phoneIntegrationType] <String>] [[-_info] <Hashtable>] [[-copyPodLayouts] <Boolean>]
  [[-copySharedDefaultViews] <Boolean>] [[-copyColumnLayoutsAndFilters] <Boolean>] [[-fromMemberRecId] <Int32>]
- [[-customFields] <Hashtable[]>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,7 +64,7 @@ This will create a new Manage user with the given properties.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 $NewMember = @{
     identifier = 'ctaylor'
     firstName = 'Chris'
@@ -106,28 +104,13 @@ Will create a new fully license user 'ctaylor'
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TimeZoneSetupReference
-{{ Fill TimeZoneSetupReference Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -137,13 +120,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -152,7 +135,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -167,7 +150,7 @@ Accept wildcard characters: False
 {{ Fill adminFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -182,7 +165,7 @@ Accept wildcard characters: False
 {{ Fill agreementInvoicingDisplayOptions Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: RemainOnInvoicingScreen, ShowRecentInvoices
@@ -198,7 +181,7 @@ Accept wildcard characters: False
 {{ Fill allowExpensesEnteredAgainstCompaniesFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -213,7 +196,7 @@ Accept wildcard characters: False
 {{ Fill allowInCellEntryOnTimeSheet Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -228,7 +211,7 @@ Accept wildcard characters: False
 {{ Fill authenticationServiceType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: AuthAnvil, GoogleAuthenticator
@@ -244,7 +227,7 @@ Accept wildcard characters: False
 {{ Fill autoPopupQuickNotesWithStopwatch Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -259,7 +242,7 @@ Accept wildcard characters: False
 {{ Fill autoStartStopwatch Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -274,7 +257,7 @@ Accept wildcard characters: False
 {{ Fill billableForecast Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -289,7 +272,7 @@ Accept wildcard characters: False
 {{ Fill calendar Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -304,7 +287,7 @@ Accept wildcard characters: False
 {{ Fill calendarSyncIntegrationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -319,7 +302,7 @@ Accept wildcard characters: False
 {{ Fill clientId Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -334,7 +317,7 @@ Accept wildcard characters: False
 {{ Fill companyActivityTabFormat Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: SummaryList, DetailList
@@ -350,7 +333,7 @@ Accept wildcard characters: False
 {{ Fill copyColumnLayoutsAndFilters Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -365,7 +348,7 @@ Accept wildcard characters: False
 {{ Fill copyPodLayouts Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -380,7 +363,7 @@ Accept wildcard characters: False
 {{ Fill copySharedDefaultViews Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -395,7 +378,7 @@ Accept wildcard characters: False
 {{ Fill country Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -410,7 +393,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -425,7 +408,7 @@ Accept wildcard characters: False
 {{ Fill dailyCapacity Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -440,7 +423,7 @@ Accept wildcard characters: False
 {{ Fill daysTolerance Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -455,7 +438,7 @@ Accept wildcard characters: False
 {{ Fill defaultDepartment Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -470,7 +453,7 @@ Accept wildcard characters: False
 {{ Fill defaultEmail Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Office, Mobile, Home
@@ -486,7 +469,7 @@ Accept wildcard characters: False
 {{ Fill defaultLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -501,7 +484,7 @@ Accept wildcard characters: False
 {{ Fill defaultPhone Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Office, Mobile, Home
@@ -517,7 +500,7 @@ Accept wildcard characters: False
 {{ Fill disableOnlineFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -532,7 +515,7 @@ Accept wildcard characters: False
 {{ Fill employeeIdentifer Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -547,7 +530,7 @@ Accept wildcard characters: False
 {{ Fill enableLdapAuthenticationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -562,7 +545,7 @@ Accept wildcard characters: False
 {{ Fill enableMobileFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -577,7 +560,7 @@ Accept wildcard characters: False
 {{ Fill enableMobileGpsFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -592,7 +575,7 @@ Accept wildcard characters: False
 {{ Fill enterTimeAgainstCompanyFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -607,7 +590,7 @@ Accept wildcard characters: False
 {{ Fill excludedProjectBoardIds Description }}
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -622,7 +605,7 @@ Accept wildcard characters: False
 {{ Fill excludedServiceBoardIds Description }}
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -637,7 +620,7 @@ Accept wildcard characters: False
 {{ Fill expenseApprover Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -652,7 +635,7 @@ Accept wildcard characters: False
 {{ Fill firstName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -667,7 +650,7 @@ Accept wildcard characters: False
 {{ Fill fromMemberRecId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -682,7 +665,7 @@ Accept wildcard characters: False
 {{ Fill globalSearchDefaultSort Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: None, LastUpdatedDesc, LastUpdatedAsc, CreatedDesc, CreatedAsc
@@ -698,7 +681,7 @@ Accept wildcard characters: False
 {{ Fill globalSearchDefaultTicketFilter Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: OpenRecords, ClosedRecords, AllRecords
@@ -714,7 +697,7 @@ Accept wildcard characters: False
 {{ Fill hideMemberInDispatchPortalFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -729,7 +712,7 @@ Accept wildcard characters: False
 {{ Fill hireDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -744,7 +727,7 @@ Accept wildcard characters: False
 {{ Fill homeEmail Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -759,7 +742,7 @@ Accept wildcard characters: False
 {{ Fill homeExtension Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -774,7 +757,7 @@ Accept wildcard characters: False
 {{ Fill homePhone Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -789,7 +772,7 @@ Accept wildcard characters: False
 {{ Fill hourlyCost Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -804,7 +787,7 @@ Accept wildcard characters: False
 {{ Fill hourlyRate Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -819,7 +802,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -834,7 +817,7 @@ Accept wildcard characters: False
 {{ Fill identifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -849,7 +832,7 @@ Accept wildcard characters: False
 {{ Fill inactiveDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -864,7 +847,7 @@ Accept wildcard characters: False
 {{ Fill inactiveFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -879,7 +862,7 @@ Accept wildcard characters: False
 {{ Fill includeInUtilizationReportingFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -894,7 +877,7 @@ Accept wildcard characters: False
 {{ Fill invoiceScreenDefaultTabFormat Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: ShowInvoicingTab, ShowAgreementInvoicingTab
@@ -910,7 +893,7 @@ Accept wildcard characters: False
 {{ Fill invoiceTimeTabFormat Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: SummaryList, DetailList
@@ -926,7 +909,7 @@ Accept wildcard characters: False
 {{ Fill invoicingDisplayOptions Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: RemainOnInvoicingScreen, ShowRecentInvoices
@@ -942,7 +925,7 @@ Accept wildcard characters: False
 {{ Fill lastLogin Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -957,7 +940,7 @@ Accept wildcard characters: False
 {{ Fill lastName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -972,7 +955,7 @@ Accept wildcard characters: False
 {{ Fill ldapConfiguration Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -987,7 +970,7 @@ Accept wildcard characters: False
 {{ Fill ldapUserName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1002,7 +985,7 @@ Accept wildcard characters: False
 F = Full Member, A = API Member, C = StreamlineIT Member, X = Subcontractor Member
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: F, A, C, X
@@ -1018,7 +1001,7 @@ Accept wildcard characters: False
 {{ Fill mapiName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1033,7 +1016,7 @@ Accept wildcard characters: False
 {{ Fill memberPersonas Description }}
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -1048,7 +1031,7 @@ Accept wildcard characters: False
 {{ Fill middleInitial Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1063,7 +1046,7 @@ Accept wildcard characters: False
 {{ Fill minimumHours Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1078,7 +1061,7 @@ Accept wildcard characters: False
 {{ Fill mobileEmail Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1093,7 +1076,7 @@ Accept wildcard characters: False
 {{ Fill mobileExtension Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1108,7 +1091,7 @@ Accept wildcard characters: False
 {{ Fill mobilePhone Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1123,7 +1106,7 @@ Accept wildcard characters: False
 {{ Fill notes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1138,7 +1121,7 @@ Accept wildcard characters: False
 {{ Fill office365 Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1153,7 +1136,7 @@ Accept wildcard characters: False
 {{ Fill officeEmail Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1168,7 +1151,7 @@ Accept wildcard characters: False
 {{ Fill officeExtension Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1183,7 +1166,7 @@ Accept wildcard characters: False
 {{ Fill officePhone Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1198,7 +1181,7 @@ Accept wildcard characters: False
 {{ Fill partnerPortalFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1213,7 +1196,7 @@ Accept wildcard characters: False
 {{ Fill password Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1228,7 +1211,7 @@ Accept wildcard characters: False
 {{ Fill phoneIntegrationType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: TAPI, SKYPE, NONE
@@ -1244,7 +1227,7 @@ Accept wildcard characters: False
 {{ Fill phoneSource Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1259,7 +1242,7 @@ Accept wildcard characters: False
 {{ Fill photo Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1274,7 +1257,7 @@ Accept wildcard characters: False
 {{ Fill primaryEmail Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1289,7 +1272,7 @@ Accept wildcard characters: False
 {{ Fill projectDefaultBoard Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1304,7 +1287,7 @@ Accept wildcard characters: False
 {{ Fill projectDefaultDepartment Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1319,7 +1302,7 @@ Accept wildcard characters: False
 {{ Fill projectDefaultLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1330,87 +1313,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -remotePackage
-{{ Fill remotePackage Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: LogMeIn, NTR
-
-Required: False
-Position: 107
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -remotePackageAccount
-{{ Fill remotePackageAccount Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 111
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -remotePackagePassword
-{{ Fill remotePackagePassword Description }}
-
-```yaml
-Type: SecureString
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 110
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -remotePackagePlatform
-{{ Fill remotePackagePlatform Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 108
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -remotePackageUserName
-{{ Fill remotePackageUserName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 109
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -reportCard
 {{ Fill reportCard Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1425,7 +1332,7 @@ Accept wildcard characters: False
 {{ Fill reportsTo Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1440,7 +1347,7 @@ Accept wildcard characters: False
 {{ Fill requireExpenseEntryFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1455,7 +1362,7 @@ Accept wildcard characters: False
 {{ Fill requireStartAndEndTimeOnTimeEntryFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1470,7 +1377,7 @@ Accept wildcard characters: False
 {{ Fill requireTimeSheetEntryFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1485,7 +1392,7 @@ Accept wildcard characters: False
 {{ Fill restrictDefaultSalesTerritoryFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1500,7 +1407,7 @@ Accept wildcard characters: False
 {{ Fill restrictDefaultWarehouseBinFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1515,7 +1422,7 @@ Accept wildcard characters: False
 {{ Fill restrictDefaultWarehouseFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1530,7 +1437,7 @@ Accept wildcard characters: False
 {{ Fill restrictDepartmentFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1545,7 +1452,7 @@ Accept wildcard characters: False
 {{ Fill restrictLocationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1560,7 +1467,7 @@ Accept wildcard characters: False
 {{ Fill restrictProjectDefaultDepartmentFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1575,7 +1482,7 @@ Accept wildcard characters: False
 {{ Fill restrictProjectDefaultLocationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1590,7 +1497,7 @@ Accept wildcard characters: False
 {{ Fill restrictScheduleFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1605,7 +1512,7 @@ Accept wildcard characters: False
 {{ Fill restrictServiceDefaultDepartmentFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1620,7 +1527,7 @@ Accept wildcard characters: False
 {{ Fill restrictServiceDefaultLocationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1635,7 +1542,7 @@ Accept wildcard characters: False
 {{ Fill salesDefaultLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1650,7 +1557,7 @@ Accept wildcard characters: False
 {{ Fill scheduleCapacity Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1665,7 +1572,7 @@ Accept wildcard characters: False
 {{ Fill scheduleDefaultDepartment Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1680,7 +1587,7 @@ Accept wildcard characters: False
 {{ Fill scheduleDefaultLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1695,7 +1602,7 @@ Accept wildcard characters: False
 {{ Fill securityLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1710,7 +1617,7 @@ Accept wildcard characters: False
 {{ Fill securityRole Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1725,7 +1632,7 @@ Accept wildcard characters: False
 {{ Fill serviceBoardTeamIds Description }}
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -1740,7 +1647,7 @@ Accept wildcard characters: False
 {{ Fill serviceDefaultBoard Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1755,7 +1662,7 @@ Accept wildcard characters: False
 {{ Fill serviceDefaultDepartment Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1770,7 +1677,7 @@ Accept wildcard characters: False
 {{ Fill serviceDefaultLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1785,7 +1692,7 @@ Accept wildcard characters: False
 {{ Fill serviceLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1800,7 +1707,7 @@ Accept wildcard characters: False
 {{ Fill signature Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1815,7 +1722,7 @@ Accept wildcard characters: False
 {{ Fill ssoSettings Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1830,7 +1737,7 @@ Accept wildcard characters: False
 {{ Fill structureLevel Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1845,7 +1752,7 @@ Accept wildcard characters: False
 {{ Fill stsUserAdminUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1860,7 +1767,7 @@ Accept wildcard characters: False
 {{ Fill timeApprover Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1875,7 +1782,7 @@ Accept wildcard characters: False
 {{ Fill timeReminderEmailFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1890,7 +1797,7 @@ Accept wildcard characters: False
 {{ Fill timeSheetStartDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1905,7 +1812,7 @@ Accept wildcard characters: False
 {{ Fill timeZone Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1920,7 +1827,7 @@ Accept wildcard characters: False
 {{ Fill timebasedOneTimePasswordActivated Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1935,7 +1842,7 @@ Accept wildcard characters: False
 {{ Fill title Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1950,7 +1857,7 @@ Accept wildcard characters: False
 {{ Fill toastNotificationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1965,7 +1872,7 @@ Accept wildcard characters: False
 {{ Fill token Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1980,7 +1887,7 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1995,7 +1902,7 @@ Accept wildcard characters: False
 {{ Fill vendorNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -2010,7 +1917,7 @@ Accept wildcard characters: False
 {{ Fill warehouse Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -2025,7 +1932,7 @@ Accept wildcard characters: False
 {{ Fill warehouseBin Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -2040,7 +1947,7 @@ Accept wildcard characters: False
 {{ Fill workRole Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -2055,27 +1962,12 @@ Accept wildcard characters: False
 {{ Fill workType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 53
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -2093,5 +1985,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers](https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers)

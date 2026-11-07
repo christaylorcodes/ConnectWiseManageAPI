@@ -13,7 +13,7 @@ This function is used to gather troubleshooting information.
 ## SYNTAX
 
 ```
-New-CWMDebugReport [[-Hash] <Object>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+New-CWMDebugReport [[-Hash] <Object>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -24,7 +24,7 @@ Please include this data with any incident report.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -36,7 +36,7 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -51,7 +51,7 @@ Accept wildcard characters: False
 Used to hash sensitive information so that it can be shared.
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
@@ -67,28 +67,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

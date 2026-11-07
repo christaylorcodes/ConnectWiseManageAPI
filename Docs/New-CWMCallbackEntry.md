@@ -16,7 +16,7 @@ This function will create a new callback entry.
 New-CWMCallbackEntry [[-id] <Int32>] [[-description] <String>] [-url] <String> [-objectId] <Int32>
  [-type] <String> [-level] <String> [[-memberId] <Int32>] [-payloadVersion <String>]
  [[-inactiveFlag] <Boolean>] [-isSoapCallbackFlag <Boolean>] [-isSelfSuppressedFlag <Boolean>]
- [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,7 +44,7 @@ Create a new callback for all tickets in status 72.
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -60,7 +60,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 Metadata
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 This is used to label the callback's usage.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -105,7 +105,7 @@ Accept wildcard characters: False
 Don't use. The database record id of the callback, this is automatically assigned.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -120,7 +120,7 @@ Accept wildcard characters: False
 Used to determine if the callback is active and sending requests.
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -135,7 +135,7 @@ Accept wildcard characters: False
 The type of object you want to trigger on ticket, contact, opportunity, etc. [See associated table for all values.](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -150,7 +150,7 @@ Accept wildcard characters: False
 This is a read only value that shows who initially created the Callback.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -165,7 +165,7 @@ Accept wildcard characters: False
 The ObjectId should be the Id of whatever record (level) you are subscribing to. This should be set to 1 when using a level of Owner.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -180,7 +180,7 @@ Accept wildcard characters: False
 This is the specific type of record such as Company, Ticket, Contact, etc... [See the associated table for all values.](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -195,7 +195,7 @@ Accept wildcard characters: False
 This is the URL ConnectWise Manage will send the GET payload to.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -210,7 +210,7 @@ Accept wildcard characters: False
 {{ Fill isSelfSuppressedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -225,7 +225,7 @@ Accept wildcard characters: False
 {{ Fill isSoapCallbackFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -240,24 +240,9 @@ Accept wildcard characters: False
 {{ Fill payloadVersion Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named

@@ -52,7 +52,7 @@
 .NOTES
     Endpoint: PATCH /service/templates/{parentId}/resources/{id}
 
-    Based on PR #82 by mdewart-Centre. #82 accepted only -PatchOperations; -Operation/-Path/-Value were
+    Based on PR #82 by mdewart-Centre, which accepted only -PatchOperations; -Operation/-Path/-Value were
     added to match the other Update-CWM* functions.
 
 .LINK

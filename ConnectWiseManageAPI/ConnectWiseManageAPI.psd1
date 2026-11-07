@@ -12,7 +12,7 @@
     RootModule        = 'ConnectWiseManageAPI.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.4.16'
+    ModuleVersion = '0.5.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop', 'Core')
@@ -107,7 +107,7 @@
             IconUri      = 'https://raw.githubusercontent.com/christaylorcodes/ConnectWiseManageAPI/master/Media/Manage-Icon.png'
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'https://github.com/christaylorcodes/ConnectWiseManageAPI/releases'
+            ReleaseNotes = 'Breaking changes: PowerShell 5.1 minimum; Connect-CWM -Version and several New-CWMTicket parameters removed (use New-CWMProjectTicket for project tickets). Full notes: https://github.com/christaylorcodes/ConnectWiseManageAPI/blob/master/CHANGELOG.md'
 
         } # End of PSData hashtable
 

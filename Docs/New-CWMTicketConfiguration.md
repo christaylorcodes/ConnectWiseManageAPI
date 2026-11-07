@@ -13,7 +13,7 @@ Assigns a configuration to a ticket.
 ## SYNTAX
 
 ```
-New-CWMTicketConfiguration -parentId <Int32> [-id <String>] [-ProgressAction <ActionPreference>] [-WhatIf]
+New-CWMTicketConfiguration -parentId <Int32> [-id <String>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -35,7 +35,7 @@ Attaches configuration 333 to ticket 123.
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -51,7 +51,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -66,7 +66,7 @@ Accept wildcard characters: False
 {{ Fill parentId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: ticketId
 
@@ -81,24 +81,9 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases: deviceIdentifier
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named

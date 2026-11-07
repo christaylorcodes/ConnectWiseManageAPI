@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/Products/Manage/REST#/TimeSheets
 schema: 2.0.0
 ---
 
@@ -12,27 +12,27 @@ This will update a timesheet.
 
 ## SYNTAX
 
+### Submit (Default)
+```
+Update-CWMTimeSheet -id <Int32> [-Submit] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
+```
+
 ### Reject
 ```
-Update-CWMTimeSheet -id <Int32> [-Reject] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Update-CWMTimeSheet -id <Int32> [-Reject] [-approvalType <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Reverse
 ```
-Update-CWMTimeSheet -id <Int32> [-Reverse] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
-```
-
-### Submit
-```
-Update-CWMTimeSheet -id <Int32> [-Submit] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+Update-CWMTimeSheet -id <Int32> [-Reverse] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ### Approve
 ```
-Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [-ProgressAction <ActionPreference>]
+Update-CWMTimeSheet -id <Int32> [-Approve] [-approvalType <String>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -42,44 +42,28 @@ Update-CWMTimeSheet -id <Int32> [-Approve] [-ApprovalType <String>] [-ProgressAc
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 Update-CWMTimeSheet -id 1 -Submit
 ```
 
 ### EXAMPLE 2
-```powershell
+```
 Update-CWMTimeSheet -id 2 -Approve -ApprovalType 'Tier1Update'
 ```
 
 ## PARAMETERS
 
-### -ApprovalType
-The type of value you want to assign.
-
-```yaml
-Type: String
-Parameter Sets: Approve
-Aliases:
-Accepted values: DataEntry, Tier1Update, Tier2Update, Billing, Service, Project, MonthlySummary, SalesActivity, Schedule
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Approve
 Allows the 'ApprovalType' parameter to be used.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Approve
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -88,13 +72,13 @@ Accept wildcard characters: False
 Rejects a timesheet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Reject
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -103,13 +87,13 @@ Accept wildcard characters: False
 Reverses a timesheet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Reverse
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -118,13 +102,13 @@ Accept wildcard characters: False
 Submits a timesheet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Submit
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -133,7 +117,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: sheetId
 
@@ -148,39 +132,41 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -approvalType
+The type of value you want to assign.
 
 ```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Type: System.String
+Parameter Sets: Reject, Approve
+Aliases:
+Accepted values: DataEntry, Tier1Update, Tier2Update, Billing, Service, Project, MonthlySummary, SalesActivity, Schedule
 
 Required: False
 Position: Named
@@ -201,5 +187,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/Products/Manage/REST#/TimeSheets](https://developer.connectwise.com/Products/Manage/REST#/TimeSheets)

@@ -1,73 +1,114 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest#/Companies
 schema: 2.0.0
 ---
 
 # Get-CWMCompany
 
 ## SYNOPSIS
-This function will list companies based on conditions.
+Retrieves company records from ConnectWise Manage.
 
 ## SYNTAX
 
 ```
 Get-CWMCompany [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Gets company information from ConnectWise Manage using either direct ID lookup
+or advanced filtering.
+Supports pagination, field selection, and custom field queries.
+
+Companies are the primary customer/vendor records in ConnectWise Manage and are
+used throughout the system for tickets, contacts, agreements, projects, and more.
+
+This function calls the ConnectWise Manage API endpoint: /company/companies
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-CWMCompany -Condition "status/id IN (1,42,43,57)" -all
+```
+Get-CWMCompany -id 250
 ```
 
-Will return all companies that match the condition
+Retrieves company with ID 250.
+
+### EXAMPLE 2
+```
+Get-CWMCompany -condition "name='Acme Corp'"
+```
+
+Finds companies with the name 'Acme Corp'.
+
+### EXAMPLE 3
+```
+Get-CWMCompany -condition "city='Seattle' and state='WA'" -all
+```
+
+Gets all companies in Seattle, WA.
+
+### EXAMPLE 4
+```
+Get-CWMCompany -condition "types contains 'Customer'" -orderBy "name asc" -all
+```
+
+Retrieves all customer companies sorted by name.
+
+### EXAMPLE 5
+```
+Get-CWMCompany -condition "status/name='Active'" -fields @('id', 'name', 'phoneNumber') -all
+```
+
+Gets active companies with only specific fields.
 
 ## PARAMETERS
 
 ### -id
-{{ Fill id Description }}
+The unique identifier for a specific company.
+When specified, returns only the company with this ID.
+Alias: companyId
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: companyId
 
 Required: False
 Position: 1
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -count
-Will return the number of objects.
+Returns only the count of matching companies instead of company data.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+Filter companies using ConnectWise Manage condition syntax.
+Examples:
+- "name='Acme Corp'"
+- "city='New York' and state='NY'"
+- "types contains 'Partner'"
+- "status/name='Active'"
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -79,10 +120,11 @@ Accept wildcard characters: False
 ```
 
 ### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+Sort results by specified field.
+Examples: "id desc", "name asc"
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -94,10 +136,10 @@ Accept wildcard characters: False
 ```
 
 ### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+Filter based on child record criteria.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -109,10 +151,10 @@ Accept wildcard characters: False
 ```
 
 ### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+Filter based on custom field values.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -124,10 +166,10 @@ Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+Page number for pagination (default: 1).
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -139,10 +181,11 @@ Accept wildcard characters: False
 ```
 
 ### -pageSize
-Number of results returned per page (Defaults to 25)
+Records per page.
+The module does not enforce a maximum; the API applies its own limit.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -154,10 +197,11 @@ Accept wildcard characters: False
 ```
 
 ### -fields
-Allows you to return a partial response with just the fields listed.
+Specify which fields to return.
+Example: @('id', 'name', 'identifier', 'status')
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -169,31 +213,16 @@ Accept wildcard characters: False
 ```
 
 ### -all
-Return all results
+Retrieve all matching companies automatically handling pagination.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -206,8 +235,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
+Author: Chris Taylor
+
+Common Filters:
+- By type: "types contains 'Customer'"
+- By status: "status/name='Active'"
+- By location: "city='CityName' and state='ST'"
+- By territory: "territory/id=5"
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/manage/rest?a=Company&e=Companies&o=GET](https://developer.connectwise.com/manage/rest?a=Company&e=Companies&o=GET)
+[https://developer.connectwise.com/manage/rest#/Companies](https://developer.connectwise.com/manage/rest#/Companies)
+
+[New-CWMCompany]()
+
+[Update-CWMCompany]()
+
+[Remove-CWMCompany]()
+

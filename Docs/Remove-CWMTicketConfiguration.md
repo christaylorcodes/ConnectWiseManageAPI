@@ -13,7 +13,7 @@ Remove a configuration from a ticket
 ## SYNTAX
 
 ```
-Remove-CWMTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+Remove-CWMTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -35,7 +35,7 @@ Removes the config 1 from the ticket 123
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -51,7 +51,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -66,7 +66,7 @@ Accept wildcard characters: False
 The id of the configuration to remove
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: configurationId
 
@@ -81,27 +81,12 @@ Accept wildcard characters: False
 The id of the ticket to remove the configuration from
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: ticketId
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

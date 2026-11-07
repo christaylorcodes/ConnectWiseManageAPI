@@ -14,7 +14,7 @@ This function will create a note on the given contact.
 
 ```
 New-CWMCompanyContactNote [-parentId] <Int32> [[-id] <Int32>] [-text] <String> [[-type] <Hashtable>]
- [[-flagged] <Boolean>] [[-enteredBy] <String>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>]
+ [[-flagged] <Boolean>] [[-enteredBy] <String>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -24,7 +24,7 @@ This function will create a note on the given contact.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 PS C:\> New-CWMCompanyContactNote -parentId $Contact.id -text 'This guy rocks!'
 ```
 
@@ -36,13 +36,13 @@ Will add a note to the given contact.
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -52,13 +52,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 Used to give a non-default value for the _info field.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 Used to give a non-default value for the enteredBy field.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 Used to flag the note.
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 Dont use.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -127,7 +127,7 @@ Accept wildcard characters: False
 The ID of the contact you want the note associated with.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: contactId
 
@@ -142,7 +142,7 @@ Accept wildcard characters: False
 The text you want in the note.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -157,27 +157,12 @@ Accept wildcard characters: False
 Set a type for the note.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

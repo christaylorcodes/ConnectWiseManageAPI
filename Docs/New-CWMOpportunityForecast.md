@@ -20,7 +20,7 @@ New-CWMOpportunityForecast [-parentId] <Int32> [[-id] <Int32>] [[-forecastItems]
  [[-lostRevenue] <Hashtable>] [[-openRevenue] <Hashtable>] [[-otherRevenue1] <Hashtable>]
  [[-otherRevenue2] <Hashtable>] [[-salesTaxRevenue] <Decimal>] [[-forecastTotalWithTaxes] <Decimal>]
  [[-expectedProbability] <Decimal>] [[-taxCode] <Hashtable>] [[-billingTerms] <Hashtable>]
- [[-currency] <Hashtable>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [[-currency] <Hashtable>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -42,7 +42,7 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -58,7 +58,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -73,7 +73,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 {{ Fill agreementRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 {{ Fill billingTerms Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -118,7 +118,7 @@ Accept wildcard characters: False
 {{ Fill currency Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -133,7 +133,7 @@ Accept wildcard characters: False
 {{ Fill expectedProbability Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -148,7 +148,7 @@ Accept wildcard characters: False
 {{ Fill expenseRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -163,7 +163,7 @@ Accept wildcard characters: False
 {{ Fill forecastItems Description }}
 
 ```yaml
-Type: Array
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -178,7 +178,7 @@ Accept wildcard characters: False
 {{ Fill forecastRevenueTotals Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -193,7 +193,7 @@ Accept wildcard characters: False
 {{ Fill forecastTotalWithTaxes Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -208,7 +208,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -223,7 +223,7 @@ Accept wildcard characters: False
 {{ Fill inclusiveRevenueTotals Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -238,7 +238,7 @@ Accept wildcard characters: False
 {{ Fill lostRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -253,7 +253,7 @@ Accept wildcard characters: False
 {{ Fill openRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -268,7 +268,7 @@ Accept wildcard characters: False
 {{ Fill otherRevenue1 Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -283,7 +283,7 @@ Accept wildcard characters: False
 {{ Fill otherRevenue2 Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -298,7 +298,7 @@ Accept wildcard characters: False
 {{ Fill parentId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -313,7 +313,7 @@ Accept wildcard characters: False
 {{ Fill productRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -328,7 +328,7 @@ Accept wildcard characters: False
 {{ Fill recurringTotal Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -343,7 +343,7 @@ Accept wildcard characters: False
 {{ Fill salesTaxRevenue Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -358,7 +358,7 @@ Accept wildcard characters: False
 {{ Fill serviceRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -373,7 +373,7 @@ Accept wildcard characters: False
 {{ Fill taxCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -388,7 +388,7 @@ Accept wildcard characters: False
 {{ Fill timeRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -403,27 +403,12 @@ Accept wildcard characters: False
 {{ Fill wonRevenue Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

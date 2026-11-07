@@ -31,8 +31,8 @@
     and everything from the first '/' on are stripped, so a URL pasted from the browser
     ('https://na.myconnectwise.net/v4_6_release/ConnectWise.aspx?locale=en_US#startscreen') works.
     Requests always use https.
-    A host part with user info, a query, a fragment or a backslash (characters @ ? # \ before the
-    first '/') is rejected.
+    A host part with user info, a query, a fragment or a backslash (the characters '@', '?', '#' or '\'
+    before the first '/') is rejected.
 
 .PARAMETER Company
     The ConnectWise Manage company identifier (company name/ID used during login).

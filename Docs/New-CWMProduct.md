@@ -35,7 +35,7 @@ New-CWMProduct [[-id] <Int32>] [-catalogItem] <Hashtable> [[-description] <Strin
  [[-calculatedPrice] <Decimal>] [[-calculatedCost] <Decimal>] [[-invoiceGrouping] <Hashtable>]
  [[-poApprovedFlag] <Boolean>] [[-uom] <String>] [[-addComponentsFlag] <Boolean>]
  [[-ignorePricingSchedulesFlag] <Boolean>] [[-asioSubscriptionsID] <String>] [[-_info] <Hashtable>]
- [[-bypassForecastUpdate] <Boolean>] [[-customFields] <Hashtable>] [-ProgressAction <ActionPreference>]
+ [[-bypassForecastUpdate] <Boolean>] [[-customFields] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -57,7 +57,7 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -73,7 +73,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 {{ Fill addComponentsFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -118,7 +118,7 @@ Accept wildcard characters: False
 {{ Fill agreement Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -133,7 +133,7 @@ Accept wildcard characters: False
 {{ Fill agreementAmount Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -148,7 +148,7 @@ Accept wildcard characters: False
 {{ Fill asioSubscriptionsID Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -163,7 +163,7 @@ Accept wildcard characters: False
 {{ Fill billableOption Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge
@@ -179,7 +179,7 @@ Accept wildcard characters: False
 {{ Fill businessUnit Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -194,7 +194,7 @@ Accept wildcard characters: False
 {{ Fill businessUnitId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -209,7 +209,7 @@ Accept wildcard characters: False
 {{ Fill bypassForecastUpdate Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -224,7 +224,7 @@ Accept wildcard characters: False
 {{ Fill calculatedCost Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -239,7 +239,7 @@ Accept wildcard characters: False
 {{ Fill calculatedCostFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -254,7 +254,7 @@ Accept wildcard characters: False
 {{ Fill calculatedPrice Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -269,7 +269,7 @@ Accept wildcard characters: False
 {{ Fill calculatedPriceFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -284,7 +284,7 @@ Accept wildcard characters: False
 {{ Fill cancelledBy Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -299,7 +299,7 @@ Accept wildcard characters: False
 {{ Fill cancelledDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -314,7 +314,7 @@ Accept wildcard characters: False
 {{ Fill cancelledFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -329,7 +329,7 @@ Accept wildcard characters: False
 {{ Fill cancelledReason Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -344,7 +344,7 @@ Accept wildcard characters: False
 {{ Fill catalogItem Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -359,7 +359,7 @@ Accept wildcard characters: False
 {{ Fill company Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -374,7 +374,7 @@ Accept wildcard characters: False
 {{ Fill cost Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -389,7 +389,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -404,7 +404,7 @@ Accept wildcard characters: False
 {{ Fill customerDescription Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -419,7 +419,7 @@ Accept wildcard characters: False
 {{ Fill description Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -434,7 +434,7 @@ Accept wildcard characters: False
 {{ Fill discount Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -449,7 +449,7 @@ Accept wildcard characters: False
 {{ Fill dropshipFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -464,7 +464,7 @@ Accept wildcard characters: False
 {{ Fill entityType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -479,7 +479,7 @@ Accept wildcard characters: False
 {{ Fill extCost Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -494,7 +494,7 @@ Accept wildcard characters: False
 {{ Fill extPrice Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -509,7 +509,7 @@ Accept wildcard characters: False
 {{ Fill forecastDetailId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -524,7 +524,7 @@ Accept wildcard characters: False
 {{ Fill forecastStatus Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -539,7 +539,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -554,7 +554,7 @@ Accept wildcard characters: False
 {{ Fill ignorePricingSchedulesFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -569,7 +569,7 @@ Accept wildcard characters: False
 {{ Fill integrationXRef Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -584,7 +584,7 @@ Accept wildcard characters: False
 {{ Fill internalNotes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -599,7 +599,7 @@ Accept wildcard characters: False
 {{ Fill invoice Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -614,7 +614,7 @@ Accept wildcard characters: False
 {{ Fill invoiceGrouping Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -629,7 +629,7 @@ Accept wildcard characters: False
 {{ Fill listPrice Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -644,7 +644,7 @@ Accept wildcard characters: False
 {{ Fill location Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -659,7 +659,7 @@ Accept wildcard characters: False
 {{ Fill locationId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -674,7 +674,7 @@ Accept wildcard characters: False
 {{ Fill margin Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -689,7 +689,7 @@ Accept wildcard characters: False
 {{ Fill minimumStockFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -704,7 +704,7 @@ Accept wildcard characters: False
 {{ Fill needToOrderQuantity Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -719,7 +719,7 @@ Accept wildcard characters: False
 {{ Fill needToPurchaseFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -734,7 +734,7 @@ Accept wildcard characters: False
 {{ Fill opportunity Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -749,7 +749,7 @@ Accept wildcard characters: False
 {{ Fill phase Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -764,7 +764,7 @@ Accept wildcard characters: False
 {{ Fill phaseProductFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -779,7 +779,7 @@ Accept wildcard characters: False
 {{ Fill poApprovedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -794,7 +794,7 @@ Accept wildcard characters: False
 {{ Fill price Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -809,7 +809,7 @@ Accept wildcard characters: False
 {{ Fill priceMethod Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: FlatRateForRange, PercentMarkupFromCost, PercentMarkdownFromPrice, PricePerUnit
@@ -825,7 +825,7 @@ Accept wildcard characters: False
 {{ Fill productClass Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Agreement, Bundle, Inventory, NonInventory, Service
@@ -841,7 +841,7 @@ Accept wildcard characters: False
 {{ Fill productSuppliedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -856,7 +856,7 @@ Accept wildcard characters: False
 {{ Fill project Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -871,7 +871,7 @@ Accept wildcard characters: False
 {{ Fill purchaseDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -886,7 +886,7 @@ Accept wildcard characters: False
 {{ Fill quantity Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -901,7 +901,7 @@ Accept wildcard characters: False
 {{ Fill quantityCancelled Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -916,7 +916,7 @@ Accept wildcard characters: False
 {{ Fill recurring Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -931,7 +931,7 @@ Accept wildcard characters: False
 {{ Fill salesOrder Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -946,7 +946,7 @@ Accept wildcard characters: False
 {{ Fill sequenceNumber Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -961,7 +961,7 @@ Accept wildcard characters: False
 {{ Fill serialNumberIds Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -976,7 +976,7 @@ Accept wildcard characters: False
 {{ Fill serialNumbers Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -991,7 +991,7 @@ Accept wildcard characters: False
 {{ Fill shipSet Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1006,7 +1006,7 @@ Accept wildcard characters: False
 {{ Fill sla Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1021,7 +1021,7 @@ Accept wildcard characters: False
 {{ Fill specialOrderFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1036,7 +1036,7 @@ Accept wildcard characters: False
 {{ Fill subContractorAmountLimit Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -1051,7 +1051,7 @@ Accept wildcard characters: False
 {{ Fill subContractorShipToId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1066,7 +1066,7 @@ Accept wildcard characters: False
 {{ Fill taxCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1081,7 +1081,7 @@ Accept wildcard characters: False
 {{ Fill taxableFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1096,7 +1096,7 @@ Accept wildcard characters: False
 {{ Fill ticket Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1111,7 +1111,7 @@ Accept wildcard characters: False
 {{ Fill unitOfMeasure Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1126,7 +1126,7 @@ Accept wildcard characters: False
 {{ Fill uom Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1141,7 +1141,7 @@ Accept wildcard characters: False
 {{ Fill vendor Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1156,7 +1156,7 @@ Accept wildcard characters: False
 {{ Fill vendorSku Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1171,7 +1171,7 @@ Accept wildcard characters: False
 {{ Fill warehouse Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1186,7 +1186,7 @@ Accept wildcard characters: False
 {{ Fill warehouseBin Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1201,7 +1201,7 @@ Accept wildcard characters: False
 {{ Fill warehouseBinId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1216,7 +1216,7 @@ Accept wildcard characters: False
 {{ Fill warehouseBinIdObject Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1231,7 +1231,7 @@ Accept wildcard characters: False
 {{ Fill warehouseId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1246,27 +1246,12 @@ Accept wildcard characters: False
 {{ Fill warehouseIdObject Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 44
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

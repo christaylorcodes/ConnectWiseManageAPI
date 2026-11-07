@@ -1,73 +1,100 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST#/Contacts/patchCompanyContactsById
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Update-CWMOpportunityForecastItem
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Updates a forecast item of an opportunity in ConnectWise Manage.
 
 ## SYNTAX
 
+### Single (Default)
 ```
 Update-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [-Operation] <String> [-Path] <String>
- [-Value] <Object> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-Value] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Bulk
+```
+Update-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> -PatchOperations <Object[]>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Applies JSON Patch operations to an existing opportunity forecast item.
+Use -Operation, -Path and -Value for one change, or -PatchOperations for several changes in one request.
+
+This function calls the ConnectWise Manage API endpoint: PATCH /sales/opportunities/{parentId}/forecast/{id}
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Update-CWMOpportunityForecastItem -parentId 900 -id 2 -Operation replace -Path 'revenue' -Value 1500
 ```
 
-{{ Add example description here }}
+Sets the revenue of forecast item 2 of opportunity 900.
+
+### EXAMPLE 2
+```
+Update-CWMOpportunityForecastItem 900 2 replace revenue 1500
+```
+
+The same change, using positional parameters.
+
+### EXAMPLE 3
+```
+Update-CWMOpportunityForecastItem -parentId 900 -id 2 -PatchOperations @(
+    @{ op = 'replace'; path = 'revenue'; value = 1500 }
+    @{ op = 'replace'; path = 'cost'; value = 900 }
+)
+```
+
+Changes the revenue and cost of forecast item 2 in one request.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The ID of the opportunity.
+Alias: opportunityID
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: opportunityID
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The ID of the forecast item to update.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Operation
-{{ Fill Operation Description }}
+The patch operation to perform: 'add', 'replace' or 'remove'.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: add, replace, remove
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-{{ Fill Path Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: Single
 Aliases:
 
 Required: True
@@ -77,16 +104,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Value
-{{ Fill Value Description }}
+### -Path
+The property to change, for example 'revenue'.
 
 ```yaml
-Type: Object
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: Single
 Aliases:
 
 Required: True
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+The new value for the property.
+Required for 'add' and 'replace'; not needed for 'remove'.
+Use -Value $null to set a property to null.
+
+```yaml
+Type: System.Object
+Parameter Sets: Single
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PatchOperations
+Several patch operations to apply in one request.
+Each is a hashtable or PSCustomObject with
+op, path and (except for 'remove') value.
+'value' is left out of 'remove' operations.
+
+```yaml
+Type: System.Object[]
+Parameter Sets: Bulk
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,7 +159,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -108,43 +170,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: opportunityID
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -158,10 +190,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### PSCustomObject
+### Returns the updated opportunity forecast item.
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

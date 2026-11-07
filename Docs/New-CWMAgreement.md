@@ -37,7 +37,7 @@ New-CWMAgreement [[-id] <Int32>] [-name] <String> [[-type] <Hashtable>] [[-compa
  [[-billableExpenseInvoice] <Boolean>] [[-billableProductInvoice] <Boolean>] [[-currency] <Hashtable>]
  [[-periodType] <String>] [[-autoInvoiceFlag] <Boolean>] [[-nextInvoiceDate] <String>]
  [[-companyLocation] <Hashtable>] [[-agreementStatus] <String>] [[-_info] <Hashtable>]
- [[-customFields] <Array>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Array>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,28 +58,29 @@ This will return all the open time sheets for ctaylor
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -88,7 +89,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -103,7 +104,7 @@ Accept wildcard characters: False
 {{ Fill agreementStatus Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Active, Cancelled, Expired, Inactive
@@ -119,7 +120,7 @@ Accept wildcard characters: False
 {{ Fill allowOverruns Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -134,7 +135,7 @@ Accept wildcard characters: False
 {{ Fill applicationCycle Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Contract2Weeks, Contract4Weeks, ContractYear, CalendarMonth, CalendarQuarter, CalendarWeek, ContractQuarter, CalendarYear
@@ -150,7 +151,7 @@ Accept wildcard characters: False
 {{ Fill applicationLimit Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -165,7 +166,7 @@ Accept wildcard characters: False
 {{ Fill applicationUnits Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Amount, Hours, Incidents
@@ -181,7 +182,7 @@ Accept wildcard characters: False
 {{ Fill applicationUnlimitedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -196,7 +197,7 @@ Accept wildcard characters: False
 {{ Fill autoInvoiceFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -211,7 +212,7 @@ Accept wildcard characters: False
 {{ Fill billAmount Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -226,7 +227,7 @@ Accept wildcard characters: False
 {{ Fill billExpenses Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -242,7 +243,7 @@ Accept wildcard characters: False
 {{ Fill billOneTimeFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -257,7 +258,7 @@ Accept wildcard characters: False
 {{ Fill billProducts Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -273,7 +274,7 @@ Accept wildcard characters: False
 {{ Fill billStartDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -288,7 +289,7 @@ Accept wildcard characters: False
 {{ Fill billTime Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -304,7 +305,7 @@ Accept wildcard characters: False
 {{ Fill billToCompany Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -319,7 +320,7 @@ Accept wildcard characters: False
 {{ Fill billToContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -334,7 +335,7 @@ Accept wildcard characters: False
 {{ Fill billToSite Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -349,7 +350,7 @@ Accept wildcard characters: False
 {{ Fill billableExpenseInvoice Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -364,7 +365,7 @@ Accept wildcard characters: False
 {{ Fill billableProductInvoice Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -379,7 +380,7 @@ Accept wildcard characters: False
 {{ Fill billableTimeInvoice Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -394,7 +395,7 @@ Accept wildcard characters: False
 {{ Fill billingCycle Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -409,7 +410,7 @@ Accept wildcard characters: False
 {{ Fill billingTerms Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -424,7 +425,7 @@ Accept wildcard characters: False
 {{ Fill bottomComment Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -439,7 +440,7 @@ Accept wildcard characters: False
 {{ Fill cancelledFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -454,7 +455,7 @@ Accept wildcard characters: False
 {{ Fill carryOverUnused Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -469,7 +470,7 @@ Accept wildcard characters: False
 {{ Fill chargeToFirm Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -484,7 +485,7 @@ Accept wildcard characters: False
 {{ Fill compHourlyRate Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -499,7 +500,7 @@ Accept wildcard characters: False
 {{ Fill compLimitAmount Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -514,7 +515,7 @@ Accept wildcard characters: False
 {{ Fill company Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -529,7 +530,7 @@ Accept wildcard characters: False
 {{ Fill companyLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -544,7 +545,7 @@ Accept wildcard characters: False
 {{ Fill contact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -559,7 +560,7 @@ Accept wildcard characters: False
 {{ Fill coverAgreementExpense Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -574,7 +575,7 @@ Accept wildcard characters: False
 {{ Fill coverAgreementProduct Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -589,7 +590,7 @@ Accept wildcard characters: False
 {{ Fill coverAgreementTime Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -604,7 +605,7 @@ Accept wildcard characters: False
 {{ Fill coverSalesTax Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -619,7 +620,7 @@ Accept wildcard characters: False
 {{ Fill currency Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -634,7 +635,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Array
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -649,7 +650,7 @@ Accept wildcard characters: False
 {{ Fill customerPO Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -664,7 +665,7 @@ Accept wildcard characters: False
 {{ Fill dateCancelled Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -679,7 +680,7 @@ Accept wildcard characters: False
 {{ Fill department Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -694,7 +695,7 @@ Accept wildcard characters: False
 {{ Fill employeeCompNotExceed Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billing, Amount, Percent
@@ -710,7 +711,7 @@ Accept wildcard characters: False
 {{ Fill employeeCompRate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Actual, Hourly
@@ -726,7 +727,7 @@ Accept wildcard characters: False
 {{ Fill endDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -741,7 +742,7 @@ Accept wildcard characters: False
 {{ Fill expireWhenZero Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -756,7 +757,7 @@ Accept wildcard characters: False
 {{ Fill expiredDays Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -771,7 +772,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -786,7 +787,7 @@ Accept wildcard characters: False
 {{ Fill internalNotes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -801,7 +802,7 @@ Accept wildcard characters: False
 {{ Fill invoiceDescription Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -816,7 +817,7 @@ Accept wildcard characters: False
 {{ Fill invoiceTemplate Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -831,7 +832,7 @@ Accept wildcard characters: False
 {{ Fill invoicingCycle Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: ContractYear, CalendarYear
@@ -847,7 +848,7 @@ Accept wildcard characters: False
 {{ Fill limit Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -862,7 +863,7 @@ Accept wildcard characters: False
 {{ Fill location Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -877,7 +878,7 @@ Accept wildcard characters: False
 {{ Fill name Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -892,7 +893,7 @@ Accept wildcard characters: False
 {{ Fill nextInvoiceDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -907,7 +908,7 @@ Accept wildcard characters: False
 {{ Fill noEndingDateFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -922,7 +923,7 @@ Accept wildcard characters: False
 {{ Fill oneTimeFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -937,7 +938,7 @@ Accept wildcard characters: False
 {{ Fill opportunity Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -952,7 +953,7 @@ Accept wildcard characters: False
 {{ Fill parentAgreement Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -967,7 +968,7 @@ Accept wildcard characters: False
 {{ Fill periodType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Current, Future, Both, Undefined
@@ -983,7 +984,7 @@ Accept wildcard characters: False
 {{ Fill projectType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -998,7 +999,7 @@ Accept wildcard characters: False
 {{ Fill prorateFirstBill Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1013,7 +1014,7 @@ Accept wildcard characters: False
 {{ Fill prorateFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1028,7 +1029,7 @@ Accept wildcard characters: False
 {{ Fill reasonCancelled Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1043,7 +1044,7 @@ Accept wildcard characters: False
 {{ Fill restrictDepartmentFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1058,7 +1059,7 @@ Accept wildcard characters: False
 {{ Fill restrictDownPayment Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1073,7 +1074,7 @@ Accept wildcard characters: False
 {{ Fill restrictLocationFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1088,7 +1089,7 @@ Accept wildcard characters: False
 {{ Fill site Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1103,7 +1104,7 @@ Accept wildcard characters: False
 {{ Fill sla Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1118,7 +1119,7 @@ Accept wildcard characters: False
 {{ Fill startDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1133,7 +1134,7 @@ Accept wildcard characters: False
 {{ Fill subContractCompany Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1148,7 +1149,7 @@ Accept wildcard characters: False
 {{ Fill subContractContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1163,7 +1164,7 @@ Accept wildcard characters: False
 {{ Fill taxCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1178,7 +1179,7 @@ Accept wildcard characters: False
 {{ Fill taxable Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1193,7 +1194,7 @@ Accept wildcard characters: False
 {{ Fill topComment Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1208,7 +1209,7 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1223,7 +1224,7 @@ Accept wildcard characters: False
 {{ Fill workOrder Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1238,7 +1239,7 @@ Accept wildcard characters: False
 {{ Fill workRole Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1253,27 +1254,12 @@ Accept wildcard characters: False
 {{ Fill workType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 61
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

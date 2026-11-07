@@ -13,7 +13,7 @@ Removes a note from a contact.
 ## SYNTAX
 
 ```
-Remove-CWMCompanyContactNote [-parentId] <Int32> [-id] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+Remove-CWMCompanyContactNote [-parentId] <Int32> [-id] <Int32> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -35,7 +35,7 @@ Removes the given note from the given contact.
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -51,7 +51,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -66,7 +66,7 @@ Accept wildcard characters: False
 The ID of the note you want removed.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: noteId
 
@@ -81,27 +81,12 @@ Accept wildcard characters: False
 The ID of the contact you want to remove the note from.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: contactId
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

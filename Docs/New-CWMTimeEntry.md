@@ -22,7 +22,7 @@ New-CWMTimeEntry [-id <Int32>] -company <Hashtable> [-member <Hashtable>] [-loca
  [-emailContactFlag <Boolean>] [-emailCcFlag <Boolean>] [-emailCc <String>] [-hoursBilled <Double>]
  [-enteredBy <String>] [-dateEntered <String>] [-invoice <Hashtable>] [-mobileGuid <Guid>]
  [-hourlyRate <Double>] [-timeSheet <Hashtable>] [-customFields <Hashtable[]>] [-_info <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ChargeTo
@@ -36,7 +36,7 @@ New-CWMTimeEntry [-id <Int32>] -chargeToId <Int32> -chargeToType <String> [-memb
  [-emailCcFlag <Boolean>] [-emailCc <String>] [-hoursBilled <Double>] [-enteredBy <String>]
  [-dateEntered <String>] [-invoice <Hashtable>] [-mobileGuid <Guid>] [-hourlyRate <Double>]
  [-timeSheet <Hashtable>] [-customFields <Hashtable[]>] [-_info <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -57,7 +57,7 @@ Create a new \<SOMETHING\>.
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -73,7 +73,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 {{ Fill actualHours Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -118,7 +118,7 @@ Accept wildcard characters: False
 {{ Fill addToDetailDescriptionFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -133,7 +133,7 @@ Accept wildcard characters: False
 {{ Fill addToInternalAnalysisFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -148,7 +148,7 @@ Accept wildcard characters: False
 {{ Fill addToResolutionFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -163,7 +163,7 @@ Accept wildcard characters: False
 {{ Fill agreement Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -178,7 +178,7 @@ Accept wildcard characters: False
 {{ Fill billableOption Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -194,7 +194,7 @@ Accept wildcard characters: False
 {{ Fill businessUnitId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -209,7 +209,7 @@ Accept wildcard characters: False
 {{ Fill chargeToId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: ChargeTo
 Aliases:
 
@@ -224,7 +224,7 @@ Accept wildcard characters: False
 {{ Fill chargeToType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ChargeTo
 Aliases:
 Accepted values: ServiceTicket, ProjectTicket, ChargeCode, Activity
@@ -240,7 +240,7 @@ Accept wildcard characters: False
 {{ Fill company Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: Company
 Aliases:
 
@@ -255,7 +255,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -270,7 +270,7 @@ Accept wildcard characters: False
 {{ Fill dateEntered Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -285,7 +285,7 @@ Accept wildcard characters: False
 {{ Fill emailCc Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -300,7 +300,7 @@ Accept wildcard characters: False
 {{ Fill emailCcFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -315,7 +315,7 @@ Accept wildcard characters: False
 {{ Fill emailContactFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -330,7 +330,7 @@ Accept wildcard characters: False
 {{ Fill emailResourceFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -345,7 +345,7 @@ Accept wildcard characters: False
 {{ Fill enteredBy Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -360,7 +360,7 @@ Accept wildcard characters: False
 {{ Fill hourlyRate Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -375,7 +375,7 @@ Accept wildcard characters: False
 {{ Fill hoursBilled Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -390,7 +390,7 @@ Accept wildcard characters: False
 {{ Fill hoursDeduct Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -405,7 +405,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -420,7 +420,7 @@ Accept wildcard characters: False
 {{ Fill internalNotes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -435,7 +435,7 @@ Accept wildcard characters: False
 {{ Fill invoice Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -450,7 +450,7 @@ Accept wildcard characters: False
 {{ Fill locationId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -465,7 +465,7 @@ Accept wildcard characters: False
 {{ Fill member Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -480,7 +480,7 @@ Accept wildcard characters: False
 {{ Fill mobileGuid Description }}
 
 ```yaml
-Type: Guid
+Type: System.Guid
 Parameter Sets: (All)
 Aliases:
 
@@ -495,7 +495,7 @@ Accept wildcard characters: False
 {{ Fill notes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -510,7 +510,7 @@ Accept wildcard characters: False
 {{ Fill timeEnd Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -525,7 +525,7 @@ Accept wildcard characters: False
 {{ Fill timeSheet Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -540,7 +540,7 @@ Accept wildcard characters: False
 {{ Fill timeStart Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -555,7 +555,7 @@ Accept wildcard characters: False
 {{ Fill workRole Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -570,24 +570,9 @@ Accept wildcard characters: False
 {{ Fill workType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named

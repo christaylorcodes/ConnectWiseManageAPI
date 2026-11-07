@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks/post
+online version: https://developer.connectwise.com/manage/rest#/Companies
 schema: 2.0.0
 ---
 
 # New-CWMCompany
 
 ## SYNOPSIS
-This function will create a new callback entry.
+Creates a new company record in ConnectWise Manage.
 
 ## SYNTAX
 
@@ -33,28 +33,61 @@ New-CWMCompany [[-id] <Int32>] [-identifier] <String> [-name] <String> [[-status
  [[-linkedInUrl] <String>] [[-currency] <Hashtable>] [[-territoryManager] <Hashtable>]
  [[-resellerIdentifier] <String>] [[-isVendorFlag] <Boolean>] [[-types] <Array>] [[-site] <Hashtable>]
  [[-integratorTags] <Array>] [[-_info] <Hashtable>] [[-customFields] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-ConnectWise Manage callbacks are payloads of information that are similar to webhooks. 
-When a record is saved within ConnectWise Manage, a summarized payload is sent to a specified location.
+Creates a new company with specified properties.
+Only identifier and name are required.
+All other fields are optional and will use system defaults if not specified.
+
+This function calls the ConnectWise Manage API endpoint: POST /company/companies
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-CWMCallbackEntry -level 'board' -objectid 63 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
+# Minimal company creation
+$company = @{
+    identifier = "ACME"
+    name = "Acme Corporation"
+}
+New-CWMCompany @company
 ```
 
-Create a new callback for all tickets on service board 63.
+Creates a basic company with required fields only.
 
 ### EXAMPLE 2
 ```
-New-CWMCallbackEntry -level 'Status' -objectid 72 -type 'ticket' -url 'http://christaylor.codes/webhook?id='
+# Company with address
+$companyParams = @{
+    identifier = "ACME"
+    name = "Acme Corporation"
+    addressLine1 = "123 Main St"
+    city = "Seattle"
+    state = "WA"
+    zip = "98101"
+    phoneNumber = "206-555-1234"
+    website = "https://acme.com"
+}
+New-CWMCompany @companyParams
 ```
 
-Create a new callback for all tickets in status 72.
+Creates a company with full address information.
+
+### EXAMPLE 3
+```
+# Company with type
+$companyParams = @{
+    identifier = "NEWCUST"
+    name = "New Customer LLC"
+    types = @( @{id=1} )  # Customer type
+    status = @{ id = 1 }  # Active status
+}
+New-CWMCompany @companyParams
+```
+
+Creates a company with specific type and status.
 
 ## PARAMETERS
 
@@ -62,22 +95,24 @@ Create a new callback for all tickets in status 72.
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 1
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -identifier
-{{ Fill identifier Description }}
+The company identifier/code (required).
+Maximum 25 characters.
+Must be unique across all companies.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -89,10 +124,11 @@ Accept wildcard characters: False
 ```
 
 ### -name
-{{ Fill name Description }}
+The company name (required).
+Maximum 50 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -104,10 +140,11 @@ Accept wildcard characters: False
 ```
 
 ### -status
-{{ Fill status Description }}
+Hashtable with status reference.
+Format: @{ id = 1 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -119,10 +156,11 @@ Accept wildcard characters: False
 ```
 
 ### -addressLine1
-{{ Fill addressLine1 Description }}
+First line of company address.
+Maximum 50 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -137,7 +175,7 @@ Accept wildcard characters: False
 {{ Fill addressLine2 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -149,10 +187,11 @@ Accept wildcard characters: False
 ```
 
 ### -city
-{{ Fill city Description }}
+City name.
+Maximum 50 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -164,10 +203,11 @@ Accept wildcard characters: False
 ```
 
 ### -state
-{{ Fill state Description }}
+State/province.
+Maximum 50 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -179,10 +219,11 @@ Accept wildcard characters: False
 ```
 
 ### -zip
-{{ Fill zip Description }}
+Postal/ZIP code.
+Maximum 12 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -197,7 +238,7 @@ Accept wildcard characters: False
 {{ Fill country Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -209,10 +250,11 @@ Accept wildcard characters: False
 ```
 
 ### -phoneNumber
-{{ Fill phoneNumber Description }}
+Primary phone number.
+Maximum 30 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -227,7 +269,7 @@ Accept wildcard characters: False
 {{ Fill faxNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -239,10 +281,11 @@ Accept wildcard characters: False
 ```
 
 ### -website
-{{ Fill website Description }}
+Company website URL.
+Maximum 255 characters.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -257,7 +300,7 @@ Accept wildcard characters: False
 {{ Fill territory Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -272,7 +315,7 @@ Accept wildcard characters: False
 {{ Fill market Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -287,7 +330,7 @@ Accept wildcard characters: False
 {{ Fill accountNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -302,7 +345,7 @@ Accept wildcard characters: False
 {{ Fill defaultContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -317,7 +360,7 @@ Accept wildcard characters: False
 {{ Fill dateAcquired Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -332,7 +375,7 @@ Accept wildcard characters: False
 {{ Fill sicCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -347,7 +390,7 @@ Accept wildcard characters: False
 {{ Fill parentCompany Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -362,13 +405,13 @@ Accept wildcard characters: False
 {{ Fill annualRevenue Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 21
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -377,13 +420,13 @@ Accept wildcard characters: False
 {{ Fill numberOfEmployees Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 22
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -392,13 +435,13 @@ Accept wildcard characters: False
 {{ Fill yearEstablished Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 23
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -407,13 +450,13 @@ Accept wildcard characters: False
 {{ Fill revenueYear Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 24
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -422,7 +465,7 @@ Accept wildcard characters: False
 {{ Fill ownershipType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -437,7 +480,7 @@ Accept wildcard characters: False
 {{ Fill timeZoneSetup Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -452,7 +495,7 @@ Accept wildcard characters: False
 {{ Fill leadSource Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -467,13 +510,13 @@ Accept wildcard characters: False
 {{ Fill leadFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 28
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -482,13 +525,13 @@ Accept wildcard characters: False
 {{ Fill unsubscribeFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 29
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -497,7 +540,7 @@ Accept wildcard characters: False
 {{ Fill calendar Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -512,7 +555,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField1 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -527,7 +570,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField2 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -542,7 +585,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField3 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -557,7 +600,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField4 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -572,7 +615,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField5 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -587,7 +630,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField6 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -602,7 +645,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField7 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -617,7 +660,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField8 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -632,7 +675,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField9 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -647,7 +690,7 @@ Accept wildcard characters: False
 {{ Fill userDefinedField10 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -662,7 +705,7 @@ Accept wildcard characters: False
 {{ Fill vendorIdentifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -677,7 +720,7 @@ Accept wildcard characters: False
 {{ Fill taxIdentifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -692,7 +735,7 @@ Accept wildcard characters: False
 {{ Fill taxCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -707,7 +750,7 @@ Accept wildcard characters: False
 {{ Fill billingTerms Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -722,7 +765,7 @@ Accept wildcard characters: False
 {{ Fill invoiceTemplate Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -737,7 +780,7 @@ Accept wildcard characters: False
 {{ Fill pricingSchedule Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -752,7 +795,7 @@ Accept wildcard characters: False
 {{ Fill companyEntityType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -767,7 +810,7 @@ Accept wildcard characters: False
 {{ Fill billToCompany Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -782,7 +825,7 @@ Accept wildcard characters: False
 {{ Fill billingSite Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -797,7 +840,7 @@ Accept wildcard characters: False
 {{ Fill billingContact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -812,7 +855,7 @@ Accept wildcard characters: False
 {{ Fill invoiceDeliveryMethod Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -827,7 +870,7 @@ Accept wildcard characters: False
 {{ Fill invoiceToEmailAddress Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -842,7 +885,7 @@ Accept wildcard characters: False
 {{ Fill invoiceCCEmailAddress Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -857,13 +900,13 @@ Accept wildcard characters: False
 {{ Fill deletedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 54
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -872,7 +915,7 @@ Accept wildcard characters: False
 {{ Fill dateDeleted Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -887,7 +930,7 @@ Accept wildcard characters: False
 {{ Fill deletedBy Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -902,7 +945,7 @@ Accept wildcard characters: False
 {{ Fill mobileGuid Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -917,7 +960,7 @@ Accept wildcard characters: False
 {{ Fill facebookUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -932,7 +975,7 @@ Accept wildcard characters: False
 {{ Fill twitterUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -947,7 +990,7 @@ Accept wildcard characters: False
 {{ Fill linkedInUrl Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -962,7 +1005,7 @@ Accept wildcard characters: False
 {{ Fill currency Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -977,7 +1020,7 @@ Accept wildcard characters: False
 {{ Fill territoryManager Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -992,7 +1035,7 @@ Accept wildcard characters: False
 {{ Fill resellerIdentifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1007,22 +1050,24 @@ Accept wildcard characters: False
 {{ Fill isVendorFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 64
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -types
-{{ Fill types Description }}
+Array of company type hashtables.
+Example: @( @{id=1}, @{id=2} )
+Common types: Customer, Vendor, Partner, Prospect
 
 ```yaml
-Type: Array
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -1037,7 +1082,7 @@ Accept wildcard characters: False
 {{ Fill site Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1052,7 +1097,7 @@ Accept wildcard characters: False
 {{ Fill integratorTags Description }}
 
 ```yaml
-Type: Array
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -1067,7 +1112,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1082,7 +1127,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1094,10 +1139,11 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -1112,24 +1158,9 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named
@@ -1146,8 +1177,25 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 6/27/2019
+Author: Chris Taylor
+
+Required Fields:
+- identifier (string, max 25 chars, must be unique)
+- name (string, max 50 chars)
+
+Common Optional Fields:
+- status, types, territory
+- address fields (addressLine1, city, state, zip)
+- phoneNumber, faxNumber, website
+- defaultContact, parentCompany
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks)](https://developer.connectwise.com/Products/Manage/Developer_Guide#Callbacks_(Webhooks))
+[https://developer.connectwise.com/manage/rest#/Companies](https://developer.connectwise.com/manage/rest#/Companies)
+
+[Get-CWMCompany]()
+
+[Update-CWMCompany]()
+
+[Remove-CWMCompany]()
+

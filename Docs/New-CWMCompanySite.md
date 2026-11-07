@@ -18,9 +18,9 @@ New-CWMCompanySite [-parentId] <Int32> [[-id] <Int32>] [-name] <String> [[-addre
  [[-country] <Hashtable>] [[-phoneNumber] <String>] [[-phoneNumberExt] <String>] [[-faxNumber] <String>]
  [[-taxCode] <Hashtable>] [[-entityType] <Hashtable>] [[-expenseReimbursement] <Double>]
  [[-primaryAddressFlag] <Boolean>] [[-defaultShippingFlag] <Boolean>] [[-defaultBillingFlag] <Boolean>]
- [[-defaultMailingFlag] <Boolean>] [[-inactiveFlag] <Boolean>] [[-billSeperateFlag] <Boolean>]
+ [[-defaultMailingFlag] <Boolean>] [[-inactiveFlag] <Boolean>] [-billSeparateFlag <Boolean>]
  [[-mobileGuid] <String>] [[-calendar] <Hashtable>] [[-timeZone] <Hashtable>] [[-customFields] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,7 +29,7 @@ New-CWMCompanySite [-parentId] <Int32> [[-id] <Int32>] [-name] <String> [[-addre
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -41,13 +41,13 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -57,13 +57,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -72,7 +72,7 @@ Accept wildcard characters: False
 {{ Fill addressLine1 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -87,7 +87,7 @@ Accept wildcard characters: False
 {{ Fill addressLine2 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -98,26 +98,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -billSeperateFlag
-{{ Fill billSeperateFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -calendar
 {{ Fill calendar Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -132,7 +117,7 @@ Accept wildcard characters: False
 {{ Fill city Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -147,7 +132,7 @@ Accept wildcard characters: False
 {{ Fill country Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -162,7 +147,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -177,7 +162,7 @@ Accept wildcard characters: False
 {{ Fill defaultBillingFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -192,7 +177,7 @@ Accept wildcard characters: False
 {{ Fill defaultMailingFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -207,7 +192,7 @@ Accept wildcard characters: False
 {{ Fill defaultShippingFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -222,7 +207,7 @@ Accept wildcard characters: False
 {{ Fill entityType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -237,7 +222,7 @@ Accept wildcard characters: False
 {{ Fill expenseReimbursement Description }}
 
 ```yaml
-Type: Double
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -252,7 +237,7 @@ Accept wildcard characters: False
 {{ Fill faxNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -267,7 +252,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -282,7 +267,7 @@ Accept wildcard characters: False
 {{ Fill inactiveFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -297,7 +282,7 @@ Accept wildcard characters: False
 {{ Fill mobileGuid Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -312,7 +297,7 @@ Accept wildcard characters: False
 {{ Fill name Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -327,7 +312,7 @@ Accept wildcard characters: False
 {{ Fill parentId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: companyId
 
@@ -342,7 +327,7 @@ Accept wildcard characters: False
 {{ Fill phoneNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -357,7 +342,7 @@ Accept wildcard characters: False
 {{ Fill phoneNumberExt Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -372,7 +357,7 @@ Accept wildcard characters: False
 {{ Fill primaryAddressFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -387,7 +372,7 @@ Accept wildcard characters: False
 {{ Fill stateReference Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -402,7 +387,7 @@ Accept wildcard characters: False
 {{ Fill taxCode Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -417,7 +402,7 @@ Accept wildcard characters: False
 {{ Fill timeZone Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -432,7 +417,7 @@ Accept wildcard characters: False
 {{ Fill zip Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -443,13 +428,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -billSeparateFlag
+{{ Fill billSeparateFlag Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Boolean
 Parameter Sets: (All)
-Aliases: proga
+Aliases: billSeperateFlag
 
 Required: False
 Position: Named

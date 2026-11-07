@@ -14,9 +14,9 @@ Will create a new configuration for the given company.
 
 ```
 New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Hashtable>] [-company] <Hashtable>
- [[-contact] <Hashtable>] [[-site] <Hashtable>] [[-locationID] <Int32>] [[-businessUnitID] <Int32>]
+ [[-contact] <Hashtable>] [[-site] <Hashtable>] [[-locationId] <Int32>] [[-businessUnitId] <Int32>]
  [[-deviceIdentifier] <String>] [[-serialNumber] <String>] [[-modelNumber] <String>] [[-tagNumber] <String>]
- [[-purchaseDate] <String>] [[-installationDate] <String>] [[-installedby] <Hashtable>]
+ [[-purchaseDate] <String>] [[-installationDate] <String>] [[-installedBy] <Hashtable>]
  [[-warrantyExpirationDate] <String>] [[-vendorNotes] <String>] [[-notes] <String>] [[-macAddress] <String>]
  [[-lastLoginName] <String>] [[-billFlag] <Boolean>] [[-backupSuccesses] <Int32>] [[-backupIncomplete] <Int32>]
  [[-backupFailed] <Int32>] [[-backupRestores] <Int32>] [[-lastBackupDate] <String>]
@@ -25,10 +25,10 @@ New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Has
  [[-osType] <String>] [[-osInfo] <String>] [[-cpuSpeed] <String>] [[-ram] <String>]
  [[-localHardDrives] <String>] [[-parentConfigurationId] <Int32>] [[-vendor] <Hashtable>]
  [[-manufacturer] <Hashtable>] [[-questions] <Array>] [[-activeFlag] <Boolean>] [[-managementLink] <String>]
- [[-remoteLink] <String>] [[-sla] <Hashtable>] [[-mobilezGuid] <String>] [[-_info] <Hashtable>]
+ [[-remoteLink] <String>] [[-sla] <Hashtable>] [-mobileGuid <String>] [[-_info] <Hashtable>]
  [[-displayVendorFlag] <Boolean>] [[-companyLocationId] <Int32>] [[-showRemoteFlag] <Boolean>]
  [[-showAutomateFlag] <Boolean>] [[-needsRenewalFlag] <Boolean>] [[-manufacturerPartNumber] <String>]
- [[-customFields] <Array>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-customFields] <Array>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,7 +37,7 @@ New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Has
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -49,13 +49,13 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -65,13 +65,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -80,7 +80,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -95,7 +95,7 @@ Accept wildcard characters: False
 {{ Fill activeFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -110,7 +110,7 @@ Accept wildcard characters: False
 {{ Fill backupBillableSpaceGb Description }}
 
 ```yaml
-Type: Int64
+Type: System.Int64
 Parameter Sets: (All)
 Aliases:
 
@@ -125,7 +125,7 @@ Accept wildcard characters: False
 {{ Fill backupFailed Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -140,7 +140,7 @@ Accept wildcard characters: False
 {{ Fill backupIncomplete Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -155,7 +155,7 @@ Accept wildcard characters: False
 {{ Fill backupMonth Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -170,7 +170,7 @@ Accept wildcard characters: False
 {{ Fill backupProtectedDeviceList Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -185,7 +185,7 @@ Accept wildcard characters: False
 {{ Fill backupRestores Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -200,7 +200,7 @@ Accept wildcard characters: False
 {{ Fill backupServerName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -215,7 +215,7 @@ Accept wildcard characters: False
 {{ Fill backupSuccesses Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -230,7 +230,7 @@ Accept wildcard characters: False
 {{ Fill backupYear Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -245,7 +245,7 @@ Accept wildcard characters: False
 {{ Fill billFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -256,26 +256,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -businessUnitID
-{{ Fill businessUnitID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -company
 {{ Fill company Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -290,7 +275,7 @@ Accept wildcard characters: False
 {{ Fill companyLocationId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -305,7 +290,7 @@ Accept wildcard characters: False
 {{ Fill contact Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -320,7 +305,7 @@ Accept wildcard characters: False
 {{ Fill cpuSpeed Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -335,7 +320,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Array
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -350,7 +335,7 @@ Accept wildcard characters: False
 {{ Fill defaultGateway Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -365,7 +350,7 @@ Accept wildcard characters: False
 {{ Fill deviceIdentifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -380,7 +365,7 @@ Accept wildcard characters: False
 {{ Fill displayVendorFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -395,7 +380,7 @@ Accept wildcard characters: False
 {{ Fill installationDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -406,26 +391,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -installedby
-{{ Fill installedby Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ipAddress
 {{ Fill ipAddress Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -440,7 +410,7 @@ Accept wildcard characters: False
 {{ Fill lastBackupDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -455,7 +425,7 @@ Accept wildcard characters: False
 {{ Fill lastLoginName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -470,7 +440,7 @@ Accept wildcard characters: False
 {{ Fill localHardDrives Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -481,26 +451,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -locationID
-{{ Fill locationID Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -macAddress
 {{ Fill macAddress Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -515,7 +470,7 @@ Accept wildcard characters: False
 {{ Fill managementLink Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -530,7 +485,7 @@ Accept wildcard characters: False
 {{ Fill manufacturer Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -545,7 +500,7 @@ Accept wildcard characters: False
 {{ Fill manufacturerPartNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -556,26 +511,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -mobilezGuid
-{{ Fill mobilezGuid Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 46
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -modelNumber
 {{ Fill modelNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -590,7 +530,7 @@ Accept wildcard characters: False
 {{ Fill name Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -605,7 +545,7 @@ Accept wildcard characters: False
 {{ Fill needsRenewalFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -620,7 +560,7 @@ Accept wildcard characters: False
 {{ Fill notes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -635,7 +575,7 @@ Accept wildcard characters: False
 {{ Fill osInfo Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -650,7 +590,7 @@ Accept wildcard characters: False
 {{ Fill osType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -665,7 +605,7 @@ Accept wildcard characters: False
 {{ Fill parentConfigurationId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -680,7 +620,7 @@ Accept wildcard characters: False
 {{ Fill purchaseDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -695,7 +635,7 @@ Accept wildcard characters: False
 {{ Fill questions Description }}
 
 ```yaml
-Type: Array
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -710,7 +650,7 @@ Accept wildcard characters: False
 {{ Fill ram Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -725,7 +665,7 @@ Accept wildcard characters: False
 {{ Fill remoteLink Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -740,7 +680,7 @@ Accept wildcard characters: False
 {{ Fill serialNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -755,7 +695,7 @@ Accept wildcard characters: False
 {{ Fill showAutomateFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -770,7 +710,7 @@ Accept wildcard characters: False
 {{ Fill showRemoteFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -785,7 +725,7 @@ Accept wildcard characters: False
 {{ Fill site Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -800,7 +740,7 @@ Accept wildcard characters: False
 {{ Fill sla Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -815,7 +755,7 @@ Accept wildcard characters: False
 {{ Fill status Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -830,7 +770,7 @@ Accept wildcard characters: False
 {{ Fill tagNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -845,7 +785,7 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -860,7 +800,7 @@ Accept wildcard characters: False
 {{ Fill vendor Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -875,7 +815,7 @@ Accept wildcard characters: False
 {{ Fill vendorNotes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -890,7 +830,7 @@ Accept wildcard characters: False
 {{ Fill warrantyExpirationDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -901,13 +841,58 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -businessUnitId
+{{ Fill businessUnitID Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -installedBy
+{{ Fill installedby Description }}
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -locationId
+{{ Fill locationID Description }}
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -mobileGuid
+{{ Fill mobileGuid Description }}
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: mobilezGuid
 
 Required: False
 Position: Named

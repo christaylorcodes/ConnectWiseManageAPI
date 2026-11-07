@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest?a=Procurement&e=CatalogsItem&o=CREATE
 schema: 2.0.0
 ---
 
@@ -19,8 +19,8 @@ New-CWMProductCatalog [-identifier] <String> [-description] <String> [[-inactive
  [[-minStockLevel] <Int32>] [[-price] <Single>] [[-cost] <Single>] [[-priceAttribute] <Int32>]
  [[-taxableFlag] <Boolean>] [-customerDescription] <String> [[-manufacturer] <Hashtable>]
  [[-manufacturerPartNumber] <String>] [[-vendor] <Hashtable>] [[-vendorSku] <String>] [[-notes] <String>]
- [[-integrationXRef] <String>] [[-dateEntered] <String>] [[-category] <Hashtable>] [[-_info] <Hashtable>]
- [[-customFields] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-integrationXRef] <String>] [[-category] <Hashtable>] [[-_info] <Hashtable>] [[-customFields] <Hashtable>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,7 +29,7 @@ New-CWMProductCatalog [-identifier] <String> [-description] <String> [[-inactive
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 $Catalog = @{
 ```
 
@@ -41,7 +41,7 @@ $Catalog = @{
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -57,7 +57,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -72,7 +72,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -87,7 +87,7 @@ Accept wildcard characters: False
 {{ Fill category Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -102,7 +102,7 @@ Accept wildcard characters: False
 {{ Fill cost Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -117,7 +117,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -132,7 +132,7 @@ Accept wildcard characters: False
 {{ Fill customerDescription Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -143,26 +143,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -dateEntered
-{{ Fill dateEntered Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -description
 {{ Fill description Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -177,7 +162,7 @@ Accept wildcard characters: False
 {{ Fill identifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -192,7 +177,7 @@ Accept wildcard characters: False
 {{ Fill inactiveFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -207,7 +192,7 @@ Accept wildcard characters: False
 {{ Fill integrationXRef Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -222,7 +207,7 @@ Accept wildcard characters: False
 {{ Fill manufacturer Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -237,7 +222,7 @@ Accept wildcard characters: False
 {{ Fill manufacturerPartNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -252,7 +237,7 @@ Accept wildcard characters: False
 {{ Fill minStockLevel Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -267,7 +252,7 @@ Accept wildcard characters: False
 {{ Fill notes Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -282,7 +267,7 @@ Accept wildcard characters: False
 {{ Fill phaseProductFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -297,7 +282,7 @@ Accept wildcard characters: False
 {{ Fill price Description }}
 
 ```yaml
-Type: Single
+Type: System.Single
 Parameter Sets: (All)
 Aliases:
 
@@ -312,7 +297,7 @@ Accept wildcard characters: False
 {{ Fill priceAttribute Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -327,7 +312,7 @@ Accept wildcard characters: False
 {{ Fill productClass Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Agreement, Bundle, Inventory, NonInventory, Service
@@ -343,7 +328,7 @@ Accept wildcard characters: False
 {{ Fill serializedCostFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -358,7 +343,7 @@ Accept wildcard characters: False
 {{ Fill serializedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -373,7 +358,7 @@ Accept wildcard characters: False
 {{ Fill subcategory Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -388,7 +373,7 @@ Accept wildcard characters: False
 {{ Fill taxableFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -403,7 +388,7 @@ Accept wildcard characters: False
 {{ Fill type Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -418,7 +403,7 @@ Accept wildcard characters: False
 {{ Fill unitOfMeasure Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -433,7 +418,7 @@ Accept wildcard characters: False
 {{ Fill vendor Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -448,27 +433,12 @@ Accept wildcard characters: False
 {{ Fill vendorSku Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -485,5 +455,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/manage/rest?a=Procurement&e=CatalogsItem&o=CREATE](https://developer.connectwise.com/manage/rest?a=Procurement&e=CatalogsItem&o=CREATE)

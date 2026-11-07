@@ -35,7 +35,7 @@ New-CWMServiceBoard [[-id] <Int32>] [-name] <String> [[-location] <Hashtable>] [
  [[-emailConnectorNeverReopenByDaysClosedFlag] <Boolean>] [[-emailConnectorReopenDaysClosedLimit] <Int32>]
  [[-useMemberDisplayNameFlag] <Boolean>] [[-sendToCCFlag] <Boolean>] [[-autoAssignTicketOwnerFlag] <Boolean>]
  [[-closedLoopAllFlag] <Boolean>] [[-percentageCalculation] <String>] [[-allSort] <String>]
- [[-markFirstNoteIssueFlag] <Boolean>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf]
+ [[-markFirstNoteIssueFlag] <Boolean>] [[-_info] <Hashtable>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -57,7 +57,7 @@ this will create a new 'test' service board.
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -72,7 +72,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -87,7 +87,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -102,7 +102,7 @@ Accept wildcard characters: False
 {{ Fill allSort Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Ascending, Descending
@@ -118,7 +118,7 @@ Accept wildcard characters: False
 {{ Fill autoAssignNewECTicketsFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -133,7 +133,7 @@ Accept wildcard characters: False
 {{ Fill autoAssignNewPortalTicketsFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -148,7 +148,7 @@ Accept wildcard characters: False
 {{ Fill autoAssignNewTicketsFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -163,7 +163,7 @@ Accept wildcard characters: False
 {{ Fill autoAssignTicketOwnerFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -178,7 +178,7 @@ Accept wildcard characters: False
 {{ Fill autoCloseStatus Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -193,7 +193,7 @@ Accept wildcard characters: False
 {{ Fill billExpense Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -209,7 +209,7 @@ Accept wildcard characters: False
 {{ Fill billProduct Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -225,7 +225,7 @@ Accept wildcard characters: False
 {{ Fill billTicketSeparatelyFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -240,7 +240,7 @@ Accept wildcard characters: False
 {{ Fill billTicketsAfterClosedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -255,7 +255,7 @@ Accept wildcard characters: False
 {{ Fill billTime Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Billable, DoNotBill, NoCharge, NoDefault
@@ -271,7 +271,7 @@ Accept wildcard characters: False
 {{ Fill billUnapprovedTimeExpenseFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -286,7 +286,7 @@ Accept wildcard characters: False
 {{ Fill boardIcon Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -301,7 +301,7 @@ Accept wildcard characters: False
 {{ Fill closedLoopAllFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -316,7 +316,7 @@ Accept wildcard characters: False
 {{ Fill closedLoopDiscussionsFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -331,7 +331,7 @@ Accept wildcard characters: False
 {{ Fill closedLoopInternalAnalysisFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -346,7 +346,7 @@ Accept wildcard characters: False
 {{ Fill closedLoopResolutionFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -361,7 +361,7 @@ Accept wildcard characters: False
 {{ Fill contactTemplate Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -376,7 +376,7 @@ Accept wildcard characters: False
 {{ Fill department Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -391,7 +391,7 @@ Accept wildcard characters: False
 {{ Fill discussionsLockedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -406,7 +406,7 @@ Accept wildcard characters: False
 {{ Fill dispatchMember Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -421,7 +421,7 @@ Accept wildcard characters: False
 {{ Fill dutyManagerMember Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -436,7 +436,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorAllowReopenClosedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -451,7 +451,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorNeverReopenByDaysClosedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -466,7 +466,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorNeverReopenByDaysFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -481,7 +481,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorNewTicketNoMatchFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -496,7 +496,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorReopenDaysClosedLimit Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -511,7 +511,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorReopenDaysLimit Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -526,7 +526,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorReopenResourcesFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -541,7 +541,7 @@ Accept wildcard characters: False
 {{ Fill emailConnectorReopenStatus Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -556,7 +556,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -571,7 +571,7 @@ Accept wildcard characters: False
 {{ Fill inactiveFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -586,7 +586,7 @@ Accept wildcard characters: False
 {{ Fill internalAnalysisSort Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Ascending, Descending
@@ -602,7 +602,7 @@ Accept wildcard characters: False
 {{ Fill location Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -617,7 +617,7 @@ Accept wildcard characters: False
 {{ Fill markFirstNoteIssueFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -632,7 +632,7 @@ Accept wildcard characters: False
 {{ Fill name Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -647,7 +647,7 @@ Accept wildcard characters: False
 {{ Fill notifyEmailFrom Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -662,7 +662,7 @@ Accept wildcard characters: False
 {{ Fill notifyEmailFromName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -677,7 +677,7 @@ Accept wildcard characters: False
 {{ Fill oncallMember Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -692,7 +692,7 @@ Accept wildcard characters: False
 {{ Fill overrideBillingSetupFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -707,7 +707,7 @@ Accept wildcard characters: False
 {{ Fill percentageCalculation Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: ActualHours, Manual, ClosedPhases, ClosedTickets
@@ -723,7 +723,7 @@ Accept wildcard characters: False
 {{ Fill problemSort Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Ascending, Descending
@@ -739,7 +739,7 @@ Accept wildcard characters: False
 {{ Fill projectFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -754,7 +754,7 @@ Accept wildcard characters: False
 {{ Fill resolutionSort Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Ascending, Descending
@@ -770,7 +770,7 @@ Accept wildcard characters: False
 {{ Fill resourceTemplate Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -785,7 +785,7 @@ Accept wildcard characters: False
 {{ Fill sendToCCFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -800,7 +800,7 @@ Accept wildcard characters: False
 {{ Fill sendToContactFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -815,7 +815,7 @@ Accept wildcard characters: False
 {{ Fill sendToResourceFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -830,7 +830,7 @@ Accept wildcard characters: False
 {{ Fill serviceManagerMember Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -845,7 +845,7 @@ Accept wildcard characters: False
 {{ Fill showDependenciesFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -860,7 +860,7 @@ Accept wildcard characters: False
 {{ Fill showEstimatesFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -875,7 +875,7 @@ Accept wildcard characters: False
 {{ Fill signOffTemplate Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -890,7 +890,7 @@ Accept wildcard characters: False
 {{ Fill timeEntryDiscussionFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -905,7 +905,7 @@ Accept wildcard characters: False
 {{ Fill timeEntryInternalAnalysisFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -920,7 +920,7 @@ Accept wildcard characters: False
 {{ Fill timeEntryLockedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -935,7 +935,7 @@ Accept wildcard characters: False
 {{ Fill timeEntryResolutionFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -950,7 +950,7 @@ Accept wildcard characters: False
 {{ Fill useMemberDisplayNameFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -965,7 +965,7 @@ Accept wildcard characters: False
 {{ Fill workRole Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -980,27 +980,12 @@ Accept wildcard characters: False
 {{ Fill workType Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -13,7 +13,7 @@ Converts date time returned by manage to a \[datetime\] object.
 ## SYNTAX
 
 ```
-ConvertFrom-CWMTime [[-Date] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ConvertFrom-CWMTime [[-Date] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,27 +34,12 @@ PS C:\> {{ Add example code here }}
 {{ Fill Date Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

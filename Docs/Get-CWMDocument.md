@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest?a=System&e=Documents&o=GET
 schema: 2.0.0
 ---
 
@@ -16,14 +16,14 @@ This function will list documents associated with a record.
 ```
 Get-CWMDocument [-id <Int32>] [-download] [-count] [-condition <String>] [-orderBy <String>]
  [-childConditions <String>] [-customFieldConditions <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ### Record
 ```
 Get-CWMDocument -recordId <Int32> -recordType <String> [-count] [-condition <String>] [-orderBy <String>]
  [-childConditions <String>] [-customFieldConditions <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-fields <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,7 +32,7 @@ Gets a document associated with a record.
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 Get-CWMDocuments -recordType Ticket -recordId 1836414
 ```
 
@@ -44,7 +44,7 @@ Will return documents associated with a the ticket 1936414
 Used in pagination to cycle through results
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -59,7 +59,7 @@ Accept wildcard characters: False
 Number of results returned per page (Defaults to 25)
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -74,13 +74,13 @@ Accept wildcard characters: False
 Return all results
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -89,7 +89,7 @@ Accept wildcard characters: False
 Allows searching arrays on endpoints that list childConditions under parameters
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -102,10 +102,10 @@ Accept wildcard characters: False
 
 ### -condition
 This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+Example: \`(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"\`
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -120,7 +120,7 @@ Accept wildcard characters: False
 Allows searching custom fields when customFieldConditions is listed in the parameters
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -135,7 +135,7 @@ Accept wildcard characters: False
 Allows you to return a partial response with just the fields listed.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -150,7 +150,7 @@ Accept wildcard characters: False
 The ID of the document you want to retrieve.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: ID
 Aliases: documentId
 
@@ -165,7 +165,7 @@ Accept wildcard characters: False
 Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -180,7 +180,7 @@ Accept wildcard characters: False
 The ID of the record that holds the document you are looking for.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: Record
 Aliases:
 
@@ -195,7 +195,7 @@ Accept wildcard characters: False
 The type of record you are looking to retrieve.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: Record
 Aliases:
 
@@ -210,13 +210,13 @@ Accept wildcard characters: False
 Will return the number of objects.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -225,28 +225,13 @@ Accept wildcard characters: False
 {{ Fill download Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ID
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -262,5 +247,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor Date: 8/22/2018
 
 ## RELATED LINKS
-
-[https://developer.connectwise.com/manage/rest?a=System&e=Documents&o=GET](https://developer.connectwise.com/manage/rest?a=System&e=Documents&o=GET)

@@ -13,7 +13,7 @@ Converts \[datetime\] to the time format used in condition queries.
 ## SYNTAX
 
 ```
-ConvertTo-CWMTime [[-Date] <DateTime[]>] [-Raw] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ConvertTo-CWMTime [[-Date] <DateTime[]>] [-Raw] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +34,7 @@ Will output tomorrows date.
 Date used in conversion.
 
 ```yaml
-Type: DateTime[]
+Type: System.DateTime[]
 Parameter Sets: (All)
 Aliases:
 
@@ -49,28 +49,13 @@ Accept wildcard characters: False
 {{ Fill Raw Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

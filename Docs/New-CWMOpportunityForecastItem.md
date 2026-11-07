@@ -21,7 +21,7 @@ New-CWMOpportunityForecastItem [-parentID] <Int32> [[-id] <Int32>] [[-forecastDe
  [[-linkFlag] <Boolean>] [[-recurringRevenue] <Decimal>] [[-recurringCost] <Decimal>]
  [[-recurringDateStart] <String>] [[-recurringDateEnd] <String>] [[-billCycle] <Hashtable>]
  [[-cycleBasis] <String>] [[-cycles] <Int32>] [[-recurringFlag] <Boolean>] [[-sequenceNumber] <Int32>]
- [[-subNumber] <Int32>] [[-taxableFlag] <Boolean>] [[-info] <Hashtable>] [-ProgressAction <ActionPreference>]
+ [[-subNumber] <Int32>] [[-taxableFlag] <Boolean>] [-_info <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -31,7 +31,7 @@ New-CWMOpportunityForecastItem [-parentID] <Int32> [[-id] <Int32>] [[-forecastDe
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -43,13 +43,13 @@ PS C:\> {{ Add example code here }}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -59,13 +59,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -74,7 +74,7 @@ Accept wildcard characters: False
 {{ Fill billCycle Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -89,7 +89,7 @@ Accept wildcard characters: False
 {{ Fill catalogItem Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -104,7 +104,7 @@ Accept wildcard characters: False
 {{ Fill cost Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -119,7 +119,7 @@ Accept wildcard characters: False
 {{ Fill cycleBasis Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -134,7 +134,7 @@ Accept wildcard characters: False
 {{ Fill cycles Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -149,7 +149,7 @@ Accept wildcard characters: False
 {{ Fill forecastDescription Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -164,7 +164,7 @@ Accept wildcard characters: False
 {{ Fill forecastType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -179,7 +179,7 @@ Accept wildcard characters: False
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -194,7 +194,7 @@ Accept wildcard characters: False
 {{ Fill includeFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -205,26 +205,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -info
-{{ Fill info Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -linkFlag
 {{ Fill linkFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -239,7 +224,7 @@ Accept wildcard characters: False
 {{ Fill margin Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -254,7 +239,7 @@ Accept wildcard characters: False
 {{ Fill opportunity Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -269,7 +254,7 @@ Accept wildcard characters: False
 {{ Fill parentID Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -284,7 +269,7 @@ Accept wildcard characters: False
 {{ Fill percentage Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -299,7 +284,7 @@ Accept wildcard characters: False
 {{ Fill productClass Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -314,7 +299,7 @@ Accept wildcard characters: False
 {{ Fill productDescription Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -329,7 +314,7 @@ Accept wildcard characters: False
 {{ Fill quantity Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -344,7 +329,7 @@ Accept wildcard characters: False
 {{ Fill quoteWerksDocName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -359,7 +344,7 @@ Accept wildcard characters: False
 {{ Fill quoteWerksDocNo Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -374,7 +359,7 @@ Accept wildcard characters: False
 {{ Fill quoteWerksQuantity Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -389,7 +374,7 @@ Accept wildcard characters: False
 {{ Fill recurringCost Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -404,7 +389,7 @@ Accept wildcard characters: False
 {{ Fill recurringDateEnd Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -419,7 +404,7 @@ Accept wildcard characters: False
 {{ Fill recurringDateStart Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -434,7 +419,7 @@ Accept wildcard characters: False
 {{ Fill recurringFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -449,7 +434,7 @@ Accept wildcard characters: False
 {{ Fill recurringRevenue Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -464,7 +449,7 @@ Accept wildcard characters: False
 {{ Fill revenue Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -479,7 +464,7 @@ Accept wildcard characters: False
 {{ Fill sequenceNumber Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -494,7 +479,7 @@ Accept wildcard characters: False
 {{ Fill status Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -509,7 +494,7 @@ Accept wildcard characters: False
 {{ Fill subNumber Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -524,7 +509,7 @@ Accept wildcard characters: False
 {{ Fill taxableFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -535,13 +520,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -_info
+{{ Fill _info Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
-Aliases: proga
+Aliases: info
 
 Required: False
 Position: Named

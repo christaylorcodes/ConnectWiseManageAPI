@@ -1,7 +1,7 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post
 schema: 2.0.0
 ---
 
@@ -14,9 +14,9 @@ This function will create a new company team.
 
 ```
 New-CWMCompanyTeam -parentId <Int32> [[-id] <Int32>] [[-company] <Hashtable>] [-teamRole] <Hashtable>
- [[-locationId] <Int32>] [[-businessUnitId] <Int32>] [[-contact] <Hashtable>] [[-member] <Hashtable>]
+ [-location <Object>] [-department <Object>] [[-contact] <Hashtable>] [[-member] <Hashtable>]
  [[-accountManagerFlag] <Boolean>] [[-techFlag] <Boolean>] [[-salesFlag] <Boolean>] [[-_info] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,7 +25,7 @@ New-CWMCompanyTeam -parentId <Int32> [[-id] <Int32>] [[-company] <Hashtable>] [-
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
+```
 New-CWMCompanyTeam -id $CompanyID -TeamRole @{id = $Role.id}
 ```
 
@@ -35,7 +35,7 @@ New-CWMCompanyTeam -id $CompanyID -TeamRole @{id = $Role.id}
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -51,7 +51,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -66,7 +66,7 @@ Accept wildcard characters: False
 Metadata
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -81,7 +81,7 @@ Accept wildcard characters: False
 {{ Fill accountManagerFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -92,26 +92,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -businessUnitId
-The ID of the business unit you want to associate the team with.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -company
 Company object of the company you want to add the team to.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -126,7 +111,7 @@ Accept wildcard characters: False
 Contact object
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -141,7 +126,7 @@ Accept wildcard characters: False
 The ID of the company you want to add the team to.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -152,26 +137,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -locationId
-The ID of the location you want to associate the team with.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -member
 Member object
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -186,7 +156,7 @@ Accept wildcard characters: False
 {{ Fill salesFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -202,7 +172,7 @@ The team role reference of the role you want to add.
 Get-CWMCompanyTeamRole
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -217,7 +187,7 @@ Accept wildcard characters: False
 {{ Fill techFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -232,7 +202,7 @@ Accept wildcard characters: False
 {{ Fill parentId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: companyId
 
@@ -243,13 +213,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -department
+{{ Fill department Description }}
 
 ```yaml
-Type: ActionPreference
+Type: System.Object
 Parameter Sets: (All)
-Aliases: proga
+Aliases: businessUnitId
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -location
+{{ Fill location Description }}
+
+```yaml
+Type: System.Object
+Parameter Sets: (All)
+Aliases: locationId
 
 Required: False
 Position: Named
@@ -269,5 +254,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Author: Chris Taylor Date: 8/22/2018
 
 ## RELATED LINKS
-
-[https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post](https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post)

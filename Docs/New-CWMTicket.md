@@ -1,54 +1,19 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/Tickets/postServiceTickets
+online version: https://developer.connectwise.com/manage/rest#/Tickets
 schema: 2.0.0
 ---
 
 # New-CWMTicket
 
 ## SYNOPSIS
-This function will create a new service ticket
+Creates a new service ticket in ConnectWise Manage.
 
 ## SYNTAX
 
-### 2020.1 (Default)
 ```
-New-CWMTicket [-Version <String>] [-VersionAutomatic] [-id <Int32>] -summary <String> [-recordType <String>]
- [-board <Hashtable>] [-status <Hashtable>] -company <Hashtable> [-site <Hashtable>] [-siteName <String>]
- [-addressLine1 <String>] [-addressLine2 <String>] [-city <String>] [-stateIdentifier <String>] [-zip <String>]
- [-country <Hashtable>] [-contact <Hashtable>] [-contactName <String>] [-contactPhoneNumber <String>]
- [-contactPhoneExtension <String>] [-contactEmailAddress <String>] [-type <Hashtable>] [-subType <Hashtable>]
- [-item <Hashtable>] [-team <Hashtable>] [-owner <Hashtable>] [-priority <Hashtable>]
- [-serviceLocation <Hashtable>] [-source <Hashtable>] [-requiredDate <String>] [-budgetHours <Decimal>]
- [-opportunity <Hashtable>] [-agreement <Hashtable>] [-severity <String>] [-impact <String>]
- [-externalXRef <String>] [-poNumber <String>] [-knowledgeBaseCategoryId <Int32>]
- [-knowledgeBaseSubCategoryId <Int32>] [-allowAllClientsPortalView <Boolean>] [-customerUpdatedFlag <Boolean>]
- [-automaticEmailContactFlag <Boolean>] [-automaticEmailResourceFlag <Boolean>]
- [-automaticEmailCcFlag <Boolean>] [-automaticEmailCc <String>] [-initialDescription <String>]
- [-initialInternalAnalysis <String>] [-initialResolution <String>] [-contactEmailLookup <String>]
- [-processNotifications <Boolean>] [-skipCallback <Boolean>] [-closedDate <String>] [-closedBy <String>]
- [-closedFlag <Boolean>] [-dateEntered <String>] [-enteredBy <String>] [-actualHours <Decimal>]
- [-approved <Boolean>] [-estimatedExpenseCost <Decimal>] [-estimatedExpenseRevenue <Decimal>]
- [-estimatedProductCost <Decimal>] [-estimatedProductRevenue <Decimal>] [-estimatedTimeCost <Decimal>]
- [-estimatedTimeRevenue <Decimal>] [-billingMethod <String>] [-billingAmount <Decimal>] [-hourlyRate <Decimal>]
- [-subBillingMethod <String>] [-subBillingAmount <Decimal>] [-subDateAccepted <String>]
- [-dateResolved <String>] [-dateResplan <String>] [-dateResponded <String>] [-resolveMinutes <Int32>]
- [-resPlanMinutes <Int32>] [-respondMinutes <Int32>] [-isInSla <Boolean>] [-knowledgeBaseLinkId <Int32>]
- [-resources <String>] [-parentTicketId <Int32>] [-hasChildTicket <Boolean>]
- [-hasMergedChildTicketFlag <Boolean>] [-knowledgeBaseLinkType <String>] [-billTime <String>]
- [-billExpenses <String>] [-billProducts <String>] [-predecessorType <String>] [-predecessorId <Int32>]
- [-predecessorClosedFlag <Boolean>] [-lagDays <Int32>] [-lagNonworkingDaysFlag <Boolean>]
- [-estimatedStartDate <String>] [-duration <Int32>] [-location <Hashtable>] [-department <Hashtable>]
- [-mobileGuid <Guid>] [-sla <Hashtable>] [-currency <Hashtable>] [-mergedParentTicket <Hashtable>]
- [-integratorTags <String>] [-_info <Hashtable>] [-customFields <Hashtable[]>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
-### 2019.1
-```
-New-CWMTicket [-Version <String>] [-VersionAutomatic] [-id <Int32>] -summary <String> [-recordType <String>]
- [-board <Hashtable>] [-status <Hashtable>] [-project <Hashtable>] [-phase <Hashtable>] [-wbsCode <String>]
+New-CWMTicket [-id <Int32>] -summary <String> [-recordType <String>] [-board <Hashtable>] [-status <Hashtable>]
  -company <Hashtable> [-site <Hashtable>] [-siteName <String>] [-addressLine1 <String>]
  [-addressLine2 <String>] [-city <String>] [-stateIdentifier <String>] [-zip <String>] [-country <Hashtable>]
  [-contact <Hashtable>] [-contactName <String>] [-contactPhoneNumber <String>]
@@ -62,78 +27,99 @@ New-CWMTicket [-Version <String>] [-VersionAutomatic] [-id <Int32>] -summary <St
  [-automaticEmailCcFlag <Boolean>] [-automaticEmailCc <String>] [-initialDescription <String>]
  [-initialInternalAnalysis <String>] [-initialResolution <String>] [-contactEmailLookup <String>]
  [-processNotifications <Boolean>] [-skipCallback <Boolean>] [-closedDate <String>] [-closedBy <String>]
- [-closedFlag <Boolean>] [-dateEntered <String>] [-enteredBy <String>] [-actualHours <Decimal>]
- [-approved <Boolean>] [-subBillingMethod <String>] [-subBillingAmount <Decimal>] [-subDateAccepted <String>]
- [-dateResolved <String>] [-dateResplan <String>] [-dateResponded <String>] [-resolveMinutes <Int32>]
- [-resPlanMinutes <Int32>] [-respondMinutes <Int32>] [-isInSla <Boolean>] [-knowledgeBaseLinkId <Int32>]
- [-resources <String>] [-parentTicketId <Int32>] [-hasChildTicket <Boolean>] [-knowledgeBaseLinkType <String>]
- [-billTime <String>] [-billExpenses <String>] [-billProducts <String>] [-predecessorType <String>]
- [-predecessorId <Int32>] [-predecessorClosedFlag <Boolean>] [-lagDays <Int32>]
- [-lagNonworkingDaysFlag <Boolean>] [-estimatedStartDate <String>] [-duration <Int32>] [-location <Hashtable>]
- [-department <Hashtable>] [-locationId <Int32>] [-businessUnitId <Int32>] [-mobileGuid <Guid>]
- [-sla <Hashtable>] [-currency <Hashtable>] [-_info <Hashtable>] [-customFields <Hashtable[]>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-closedFlag <Boolean>] [-actualHours <Decimal>] [-approved <Boolean>] [-estimatedExpenseCost <Decimal>]
+ [-estimatedExpenseRevenue <Decimal>] [-estimatedProductCost <Decimal>] [-estimatedProductRevenue <Decimal>]
+ [-estimatedTimeCost <Decimal>] [-estimatedTimeRevenue <Decimal>] [-billingMethod <String>]
+ [-billingAmount <Decimal>] [-hourlyRate <Decimal>] [-subBillingMethod <String>] [-subBillingAmount <Decimal>]
+ [-subDateAccepted <String>] [-dateResolved <String>] [-dateResplan <String>] [-dateResponded <String>]
+ [-resolveMinutes <Int32>] [-resPlanMinutes <Int32>] [-respondMinutes <Int32>] [-isInSla <Boolean>]
+ [-knowledgeBaseLinkId <Int32>] [-resources <String>] [-parentTicketId <Int32>] [-hasChildTicket <Boolean>]
+ [-hasMergedChildTicketFlag <Boolean>] [-knowledgeBaseLinkType <String>] [-billTime <String>]
+ [-billExpenses <String>] [-billProducts <String>] [-predecessorType <String>] [-predecessorId <Int32>]
+ [-predecessorClosedFlag <Boolean>] [-lagDays <Int32>] [-lagNonworkingDaysFlag <Boolean>]
+ [-estimatedStartDate <String>] [-duration <Int32>] [-location <Hashtable>] [-department <Hashtable>]
+ [-mobileGuid <Guid>] [-sla <Hashtable>] [-currency <Hashtable>] [-mergedParentTicket <Hashtable>]
+ [-integratorTags <String>] [-_info <Hashtable>] [-customFields <Hashtable[]>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a new service ticket with the specified properties.
+The module only requires
+summary and company; any field you leave out is not sent, and ConnectWise Manage applies
+its own defaults or validation.
+
+This function calls the ConnectWise Manage API endpoint: POST /service/tickets
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+```
+# Minimal ticket creation
+$ticket = @{
+    summary = "Password reset request"
+    company = @{ id = 250 }
+}
+New-CWMTicket @ticket
+```
+
+Creates a basic ticket with just summary and company.
+
+### EXAMPLE 2
+```
+# Full ticket with board, status, and description
+$ticket = @{
+    summary = "Server offline - urgent"
+    company = @{ id = 250 }
+    board = @{ id = 1 }
+    status = @{ id = 10 }
+    priority = @{ id = 3 }
+    initialDescription = "Production server is not responding. Multiple users affected."
+}
+New-CWMTicket @ticket
+```
+
+Creates a detailed ticket with multiple properties.
+
+### EXAMPLE 3
+```
+# Ticket with contact information
+$ticketParams = @{
+    summary = "Email not working"
+    company = @{ id = 250 }
+    contact = @{ id = 500 }
+    contactPhoneNumber = "555-1234"
+    contactEmailAddress = "user@company.com"
+    initialDescription = "User reports unable to send/receive email."
+}
+New-CWMTicket @ticketParams
+```
+
+Creates a ticket with contact details.
 
 ## PARAMETERS
-
-### -Version
-{{ Fill Version Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -VersionAutomatic
-{{ Fill VersionAutomatic Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -id
 {{ Fill id Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -summary
-{{ Fill summary Description }}
+The ticket summary/title (required).
+1-100 characters (enforced by the parameter's ValidateLength).
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -148,7 +134,7 @@ Accept wildcard characters: False
 {{ Fill recordType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -160,10 +146,12 @@ Accept wildcard characters: False
 ```
 
 ### -board
-{{ Fill board Description }}
+Hashtable with service board reference.
+Format: @{ id = 1 }
+If not specified, no board is sent and ConnectWise Manage decides the board.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -175,10 +163,12 @@ Accept wildcard characters: False
 ```
 
 ### -status
-{{ Fill status Description }}
+Hashtable with status reference.
+Format: @{ id = 456 }
+If not specified, no status is sent and ConnectWise Manage decides the status.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -189,56 +179,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -project
-{{ Fill project Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: 2019.1
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -phase
-{{ Fill phase Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: 2019.1
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -wbsCode
-{{ Fill wbsCode Description }}
-
-```yaml
-Type: String
-Parameter Sets: 2019.1
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -company
-{{ Fill company Description }}
+Hashtable with company reference (required).
+Format: @{ id = 123 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -253,7 +199,7 @@ Accept wildcard characters: False
 {{ Fill site Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -268,7 +214,7 @@ Accept wildcard characters: False
 {{ Fill siteName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -283,7 +229,7 @@ Accept wildcard characters: False
 {{ Fill addressLine1 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -298,7 +244,7 @@ Accept wildcard characters: False
 {{ Fill addressLine2 Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -313,7 +259,7 @@ Accept wildcard characters: False
 {{ Fill city Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -328,7 +274,7 @@ Accept wildcard characters: False
 {{ Fill stateIdentifier Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -343,7 +289,7 @@ Accept wildcard characters: False
 {{ Fill zip Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -358,7 +304,7 @@ Accept wildcard characters: False
 {{ Fill country Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -370,10 +316,11 @@ Accept wildcard characters: False
 ```
 
 ### -contact
-{{ Fill contact Description }}
+Hashtable with contact reference.
+Format: @{ id = 789 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -388,7 +335,7 @@ Accept wildcard characters: False
 {{ Fill contactName Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -403,7 +350,7 @@ Accept wildcard characters: False
 {{ Fill contactPhoneNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -418,7 +365,7 @@ Accept wildcard characters: False
 {{ Fill contactPhoneExtension Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -433,7 +380,7 @@ Accept wildcard characters: False
 {{ Fill contactEmailAddress Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -445,10 +392,11 @@ Accept wildcard characters: False
 ```
 
 ### -type
-{{ Fill type Description }}
+Hashtable with type reference.
+Format: @{ id = 100 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -460,10 +408,11 @@ Accept wildcard characters: False
 ```
 
 ### -subType
-{{ Fill subType Description }}
+Hashtable with subtype reference.
+Format: @{ id = 200 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -475,10 +424,11 @@ Accept wildcard characters: False
 ```
 
 ### -item
-{{ Fill item Description }}
+Hashtable with item reference.
+Format: @{ id = 50 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -493,7 +443,7 @@ Accept wildcard characters: False
 {{ Fill team Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -508,7 +458,7 @@ Accept wildcard characters: False
 {{ Fill owner Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -520,10 +470,11 @@ Accept wildcard characters: False
 ```
 
 ### -priority
-{{ Fill priority Description }}
+Hashtable with priority reference.
+Format: @{ id = 3 }
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -538,7 +489,7 @@ Accept wildcard characters: False
 {{ Fill serviceLocation Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -553,7 +504,7 @@ Accept wildcard characters: False
 {{ Fill source Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -568,7 +519,7 @@ Accept wildcard characters: False
 {{ Fill requiredDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -583,13 +534,13 @@ Accept wildcard characters: False
 {{ Fill budgetHours Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -598,7 +549,7 @@ Accept wildcard characters: False
 {{ Fill opportunity Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -613,7 +564,7 @@ Accept wildcard characters: False
 {{ Fill agreement Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -628,13 +579,13 @@ Accept wildcard characters: False
 {{ Fill severity Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -643,13 +594,13 @@ Accept wildcard characters: False
 {{ Fill impact Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -658,7 +609,7 @@ Accept wildcard characters: False
 {{ Fill externalXRef Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -673,7 +624,7 @@ Accept wildcard characters: False
 {{ Fill poNumber Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -688,7 +639,7 @@ Accept wildcard characters: False
 {{ Fill knowledgeBaseCategoryId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -703,7 +654,7 @@ Accept wildcard characters: False
 {{ Fill knowledgeBaseSubCategoryId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -718,7 +669,7 @@ Accept wildcard characters: False
 {{ Fill allowAllClientsPortalView Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -733,7 +684,7 @@ Accept wildcard characters: False
 {{ Fill customerUpdatedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -748,7 +699,7 @@ Accept wildcard characters: False
 {{ Fill automaticEmailContactFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -763,7 +714,7 @@ Accept wildcard characters: False
 {{ Fill automaticEmailResourceFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -778,7 +729,7 @@ Accept wildcard characters: False
 {{ Fill automaticEmailCcFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -793,7 +744,7 @@ Accept wildcard characters: False
 {{ Fill automaticEmailCc Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -805,10 +756,11 @@ Accept wildcard characters: False
 ```
 
 ### -initialDescription
-{{ Fill initialDescription Description }}
+The initial description/details for the ticket.
+Supports HTML.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -820,10 +772,10 @@ Accept wildcard characters: False
 ```
 
 ### -initialInternalAnalysis
-{{ Fill initialInternalAnalysis Description }}
+Internal analysis notes (not visible to contacts).
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -835,10 +787,10 @@ Accept wildcard characters: False
 ```
 
 ### -initialResolution
-{{ Fill initialResolution Description }}
+Initial resolution notes.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -853,7 +805,7 @@ Accept wildcard characters: False
 {{ Fill contactEmailLookup Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -868,7 +820,7 @@ Accept wildcard characters: False
 {{ Fill processNotifications Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -883,7 +835,7 @@ Accept wildcard characters: False
 {{ Fill skipCallback Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -898,7 +850,7 @@ Accept wildcard characters: False
 {{ Fill closedDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -913,7 +865,7 @@ Accept wildcard characters: False
 {{ Fill closedBy Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -928,7 +880,7 @@ Accept wildcard characters: False
 {{ Fill closedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -939,47 +891,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -dateEntered
-{{ Fill dateEntered Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -enteredBy
-{{ Fill enteredBy Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -actualHours
 {{ Fill actualHours Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -988,7 +910,7 @@ Accept wildcard characters: False
 {{ Fill approved Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1003,13 +925,13 @@ Accept wildcard characters: False
 {{ Fill estimatedExpenseCost Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1018,13 +940,13 @@ Accept wildcard characters: False
 {{ Fill estimatedExpenseRevenue Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1033,13 +955,13 @@ Accept wildcard characters: False
 {{ Fill estimatedProductCost Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1048,13 +970,13 @@ Accept wildcard characters: False
 {{ Fill estimatedProductRevenue Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1063,13 +985,13 @@ Accept wildcard characters: False
 {{ Fill estimatedTimeCost Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1078,13 +1000,13 @@ Accept wildcard characters: False
 {{ Fill estimatedTimeRevenue Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1093,8 +1015,8 @@ Accept wildcard characters: False
 {{ Fill billingMethod Description }}
 
 ```yaml
-Type: String
-Parameter Sets: 2020.1
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -1108,13 +1030,13 @@ Accept wildcard characters: False
 {{ Fill billingAmount Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1123,13 +1045,13 @@ Accept wildcard characters: False
 {{ Fill hourlyRate Description }}
 
 ```yaml
-Type: Decimal
-Parameter Sets: 2020.1
+Type: System.Decimal
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1138,7 +1060,7 @@ Accept wildcard characters: False
 {{ Fill subBillingMethod Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1153,7 +1075,7 @@ Accept wildcard characters: False
 {{ Fill subBillingAmount Description }}
 
 ```yaml
-Type: Decimal
+Type: System.Decimal
 Parameter Sets: (All)
 Aliases:
 
@@ -1168,7 +1090,7 @@ Accept wildcard characters: False
 {{ Fill subDateAccepted Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1183,7 +1105,7 @@ Accept wildcard characters: False
 {{ Fill dateResolved Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1198,7 +1120,7 @@ Accept wildcard characters: False
 {{ Fill dateResplan Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1213,7 +1135,7 @@ Accept wildcard characters: False
 {{ Fill dateResponded Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1228,7 +1150,7 @@ Accept wildcard characters: False
 {{ Fill resolveMinutes Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1243,7 +1165,7 @@ Accept wildcard characters: False
 {{ Fill resPlanMinutes Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1258,7 +1180,7 @@ Accept wildcard characters: False
 {{ Fill respondMinutes Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1273,7 +1195,7 @@ Accept wildcard characters: False
 {{ Fill isInSla Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1288,7 +1210,7 @@ Accept wildcard characters: False
 {{ Fill knowledgeBaseLinkId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1303,7 +1225,7 @@ Accept wildcard characters: False
 {{ Fill resources Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1318,7 +1240,7 @@ Accept wildcard characters: False
 {{ Fill parentTicketId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1333,7 +1255,7 @@ Accept wildcard characters: False
 {{ Fill hasChildTicket Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1348,13 +1270,13 @@ Accept wildcard characters: False
 {{ Fill hasMergedChildTicketFlag Description }}
 
 ```yaml
-Type: Boolean
-Parameter Sets: 2020.1
+Type: System.Boolean
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1363,7 +1285,7 @@ Accept wildcard characters: False
 {{ Fill knowledgeBaseLinkType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1378,7 +1300,7 @@ Accept wildcard characters: False
 {{ Fill billTime Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1393,7 +1315,7 @@ Accept wildcard characters: False
 {{ Fill billExpenses Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1408,7 +1330,7 @@ Accept wildcard characters: False
 {{ Fill billProducts Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1423,7 +1345,7 @@ Accept wildcard characters: False
 {{ Fill predecessorType Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1438,7 +1360,7 @@ Accept wildcard characters: False
 {{ Fill predecessorId Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1453,7 +1375,7 @@ Accept wildcard characters: False
 {{ Fill predecessorClosedFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1468,7 +1390,7 @@ Accept wildcard characters: False
 {{ Fill lagDays Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1483,7 +1405,7 @@ Accept wildcard characters: False
 {{ Fill lagNonworkingDaysFlag Description }}
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -1498,7 +1420,7 @@ Accept wildcard characters: False
 {{ Fill estimatedStartDate Description }}
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -1513,7 +1435,7 @@ Accept wildcard characters: False
 {{ Fill duration Description }}
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -1528,7 +1450,7 @@ Accept wildcard characters: False
 {{ Fill location Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1543,38 +1465,8 @@ Accept wildcard characters: False
 {{ Fill department Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -locationId
-{{ Fill locationId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: 2019.1
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -businessUnitId
-{{ Fill businessUnitId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: 2019.1
 Aliases:
 
 Required: False
@@ -1588,7 +1480,7 @@ Accept wildcard characters: False
 {{ Fill mobileGuid Description }}
 
 ```yaml
-Type: Guid
+Type: System.Guid
 Parameter Sets: (All)
 Aliases:
 
@@ -1603,7 +1495,7 @@ Accept wildcard characters: False
 {{ Fill sla Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1618,7 +1510,7 @@ Accept wildcard characters: False
 {{ Fill currency Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1633,8 +1525,8 @@ Accept wildcard characters: False
 {{ Fill mergedParentTicket Description }}
 
 ```yaml
-Type: Hashtable
-Parameter Sets: 2020.1
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -1648,8 +1540,8 @@ Accept wildcard characters: False
 {{ Fill integratorTags Description }}
 
 ```yaml
-Type: String
-Parameter Sets: 2020.1
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -1663,7 +1555,7 @@ Accept wildcard characters: False
 {{ Fill _info Description }}
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -1678,7 +1570,7 @@ Accept wildcard characters: False
 {{ Fill customFields Description }}
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -1694,13 +1586,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1709,24 +1601,9 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named
@@ -1745,6 +1622,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 Author: Chris Taylor
 
+Required Fields:
+- summary (string, max 100 chars)
+- company (hashtable with id)
+
+Common Optional Fields:
+- board, status, priority, type, subType, item
+- contact, contactName, contactPhoneNumber, contactEmailAddress
+- initialDescription, initialInternalAnalysis, initialResolution
+- owner, team, serviceLocation, source
+
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/Tickets/postServiceTickets](https://developer.connectwise.com/Products/ConnectWise_PSA/REST#/Tickets/postServiceTickets)
+[https://developer.connectwise.com/manage/rest#/Tickets](https://developer.connectwise.com/manage/rest#/Tickets)
+
+[Get-CWMTicket]()
+
+[Update-CWMTicket]()
+
+[Remove-CWMTicket]()
+

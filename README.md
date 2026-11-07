@@ -41,6 +41,8 @@ A comprehensive PowerShell wrapper for the [ConnectWise Manage REST API](https:/
 - [Installation](#-installation)
 - [Quick Start](#-quick-start)
 - [Usage Examples](#-usage-examples)
+- [Upgrading to 0.5.0](#-upgrading-to-050)
+- [Troubleshooting](#-troubleshooting)
 - [Available Functions](#-available-functions)
 - [Requirements](#-requirements)
 - [Contributing](#-contributing)
@@ -51,13 +53,13 @@ A comprehensive PowerShell wrapper for the [ConnectWise Manage REST API](https:/
 
 This module makes it easy to leverage PowerShell to automate tasks in ConnectWise Manage:
 
-- **180+ Cmdlets** covering all major API endpoints
+- **220+ Cmdlets** covering all major API endpoints
 - **Automated Pagination** for large result sets
 - **Advanced Filtering** using ConnectWise condition syntax
-- **Retry Logic** for handling transient errors
+- **Retry Logic** for transient errors (reads only, so a retry never creates a duplicate)
 - **Object Output** that works with the PowerShell pipeline (Where-Object, Select-Object, Export-Csv)
 - **Built-in Help** for every function (Get-Help <function> -Full), with examples for the most-used ones
-- **Cross-Platform** compatible with Windows PowerShell and PowerShell Core
+- **Cross-Platform**: PowerShell 7 on Windows, Linux and macOS, and Windows PowerShell 5.1
 
 ## 📦 Installation
 
@@ -159,17 +161,44 @@ New-CWMTimeEntry @timeParams
 
 More examples available in the [Examples](https://github.com/christaylorcodes/ConnectWiseManageAPI/tree/master/Examples) directory.
 
+## 🔄 Upgrading to 0.5.0
+
+0.5.0 has breaking changes. The main ones:
+
+- **PowerShell 5.1 or later is required** (was 3.0).
+- **The module always uses the server's current API version.** `Connect-CWM -Version` is removed; remove it from your scripts.
+- **New-CWMTicket** no longer takes `-Version`, `-VersionAutomatic`, `-project`, `-phase`, `-wbsCode`, `-locationId`, `-businessUnitId`, `-dateEntered` or `-enteredBy`. Create project tickets with `New-CWMProjectTicket`.
+- **`Connect-CWM -MemberID` now really impersonates** the member (0.4.16 silently used the API key).
+- A few parameters and aliases the API did not accept were removed, some route ids are now mandatory, and positional binding shifted on four functions. Use named parameters.
+
+See the [CHANGELOG](CHANGELOG.md) for the full list and migration hints.
+
+## 🔧 Troubleshooting
+
+### PowerShell 7.4+ and "Cannot follow an insecure redirection"
+
+On PowerShell 7.4 and later, create and update calls (`New-CWM*`, `Update-CWM*`) against some ConnectWise-hosted servers can fail with *"Cannot follow an insecure redirection by default"*. The server's response carries an `http://` Location header, usually on a request it has **already processed**, so the record may exist even though you saw an error.
+
+Connect with the opt-in `-AllowInsecureRedirect` switch:
+
+```powershell
+Connect-CWM -Server 'na.myconnectwise.net' -Company 'YourCompany' `
+            -pubkey $publicKey -privatekey $privateKey -clientId $clientId `
+            -AllowInsecureRedirect
+```
+
+With the switch, PowerShell accepts that response, but the module never follows a redirect on a create or update (nothing is sent over http). If the server sends a real redirect, you get an error saying it was not followed and that the record may already exist. The switch has no effect on Windows PowerShell 5.1 or PowerShell 7.0-7.3, which do not raise this error. Whenever you see either error, check whether the record was created before you retry.
 ## 📚 Available Functions
 
-The module includes 180+ cmdlets organized by functional area:
+The module includes 220+ cmdlets organized by functional area:
 
 | Category | Functions |
 |----------|-----------|
-| **Service** | Tickets, Service Boards, Ticket Notes, Configurations |
+| **Service** | Tickets, Service Boards, Ticket Notes, Configurations, Knowledge Base, Service Templates |
 | **Company** | Companies, Contacts, Sites, Teams |
 | **Time** | Time Entries, Time Sheets |
-| **Project** | Projects, Phases, Team Members |
-| **Finance** | Agreements, Billing |
+| **Project** | Projects, Phases, Team Members, Project Tickets |
+| **Finance** | Agreements, Billing, Invoices |
 | **System** | Members, Audit Trail, Documents |
 | **Sales** | Opportunities, Activities |
 | **Marketing** | Marketing Groups |
@@ -180,7 +209,7 @@ For a complete list of available functions, see [ConnectWiseManageAPI_Functions.
 
 ## 📋 Requirements
 
-- **PowerShell Version:** PowerShell 7.4 or later is recommended (Windows, Linux and macOS). Windows PowerShell 5.1 is still supported. Both are tested on every change.
+- **PowerShell Version:** PowerShell 5.1 or later. PowerShell 7.4+ is recommended (Windows, Linux and macOS); Windows PowerShell 5.1 is still supported. Both are tested on every change.
 - **ConnectWise Manage:** Active instance with API access
 - **API Credentials:** Public/Private API keys and Client ID
 - **Dependencies:** None (self-contained module)
