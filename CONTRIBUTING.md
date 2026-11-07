@@ -23,14 +23,9 @@ The following is a set of guidelines for contributing. These are mostly guidelin
 
 ## I don't want to read this whole thing I just have a question
 
-> **Note:** *Please don't file an issue to ask a question.* You'll get faster results by using the resources below.
-
-Join the MSPGeek Slack team:
-
--   [Join the MSPGeek Slack Team](https://join.mspgeek.com/)
-    -   Even though Slack is a chat service, sometimes it takes several hours for community members to respond — please be patient!
-    -   Use the `#cw-manage` channel for general questions or discussion
-    -   There are many other channels available, check the channel list
+-   Check each command's help (`Get-Help <Command> -Full`) or the [Docs](https://github.com/christaylorcodes/ConnectWiseManageAPI/tree/master/Docs) folder.
+-   Search [existing issues](https://github.com/christaylorcodes/ConnectWiseManageAPI/issues?q=is%3Aissue), including closed ones.
+-   Still stuck? Open an issue with the **Question** template.
 
 ## How Can I Contribute
 
@@ -44,8 +39,7 @@ Before creating bug reports, please check existing issues as you might find out 
 
 #### Before Submitting A Bug Report
 
--   **Check the Wiki.** You might be able to find the cause of the problem and fix things yourself.
--   **Check the [MSPGeek Slack Team](https://join.mspgeek.com/)** for help from the community.
+-   **Check the command's help and the [Wiki](https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki).** You might be able to find the cause yourself.
 
 #### How Do I Submit A (Good) Bug Report
 
@@ -66,7 +60,7 @@ Provide more context by answering these questions:
 
 Include details about your configuration and environment:
 
--   **Include the debug output from [New-CWMDebugReport](<>)!**
+-   **Include the output of `New-CWMDebugReport`** (it leaves out credentials).
 -   **What's the name and version of the OS you're using**?
 
 ### Suggesting Enhancements
@@ -77,8 +71,7 @@ Before creating enhancement suggestions, please check existing suggestions as yo
 
 #### Before Submitting An Enhancement Suggestion
 
--   **Check the [Wiki](<>)** for tips — you might discover that the enhancement is already available.
--   **Check if there's already [a package](<>) which provides that enhancement.**
+-   **Check the [Wiki](https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki) and `Get-Command -Module ConnectWiseManageAPI`**. The enhancement might already be available.
 
 #### How Do I Submit A (Good) Enhancement Suggestion
 
@@ -88,7 +81,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 -   **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 -   **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 -   **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
--   **Explain why this enhancement would be useful** to most users and isn't something that can or should be implemented as a [community package](<>).
+-   **Explain why this enhancement would be useful** to most users.
 -   **List some other text examples where this enhancement exists.**
 -   **Specify which version of manage you're using.**
 -   **Specify the name and version of the OS you're using.**
@@ -146,8 +139,8 @@ PowerShell 7.4+ is the primary target. Windows PowerShell 5.1 is still supported
     Invoke-ScriptAnalyzer -Path ./ConnectWiseManageAPI -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
 
     # Offline tests on both editions (needs Pester 5)
-    pwsh -NoProfile -File ./Tests/appveyor.pester.ps1 -Test
-    powershell -NoProfile -File ./Tests/appveyor.pester.ps1 -Test
+    pwsh -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
+    powershell -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
     ```
 
     CI runs the same checks on Windows PowerShell 5.1, PowerShell 7 on Windows, and PowerShell 7 on Linux.

@@ -115,12 +115,12 @@ Update-MarkdownHelp -Path ./Docs -UpdateInputOutput -UseFullTypeName -Force
 Pester 5, fully offline (`Invoke-WebRequest` is mocked; see `Tests/Helpers/TestSetup.ps1`). Run on both shells:
 
 ```powershell
-pwsh -NoProfile -File ./Tests/appveyor.pester.ps1 -Test
-powershell -NoProfile -File ./Tests/appveyor.pester.ps1 -Test
+pwsh -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
+powershell -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
 Invoke-ScriptAnalyzer -Path ./ConnectWiseManageAPI -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
 ```
 
-CI: GitHub Actions (`.github/workflows/ci.yml`, pwsh and Windows PowerShell) and AppVeyor (`appveyor.yml`).
+CI: GitHub Actions (`.github/workflows/ci.yml`): Windows PowerShell 5.1 and pwsh on Windows, pwsh on Ubuntu.
 
 ## Resources
 

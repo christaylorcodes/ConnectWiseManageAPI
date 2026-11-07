@@ -57,8 +57,8 @@ jobs:
 
       - name: Tests
         run: |
-          ./Tests/appveyor.pester.ps1 -Test
-          ./Tests/appveyor.pester.ps1 -Finalize
+          ./Tests/Invoke-Tests.ps1 -Test
+          ./Tests/Invoke-Tests.ps1 -Finalize
 
       - name: Upload test results
         if: always()

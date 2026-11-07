@@ -1,12 +1,11 @@
-﻿# Runs the Pester 5 tests and (on AppVeyor) uploads the results.
-# Works on Windows PowerShell 5.1 and PowerShell 7, locally and in CI.
+﻿# Runs the Pester 5 tests. Works on Windows PowerShell 5.1 and PowerShell 7, locally and in CI.
 #   -Test      run the tests for the current PowerShell version and save the results
 #   -Finalize  read all saved results and fail if any test failed
 
 param(
     [switch]$Finalize,
     [switch]$Test,
-    [string]$ProjectRoot = $(if ($ENV:APPVEYOR_BUILD_FOLDER) { $ENV:APPVEYOR_BUILD_FOLDER } else { Split-Path $PSScriptRoot -Parent })
+    [string]$ProjectRoot = (Split-Path $PSScriptRoot -Parent)
 )
 
 $Timestamp = Get-Date -UFormat '%Y%m%d-%H%M%S'
@@ -32,11 +31,6 @@ if ($Test) {
     Invoke-Pester -Configuration $Config |
         Select-Object PassedCount, FailedCount, SkippedCount, @{ n = 'Failed'; e = { $_.Failed | ForEach-Object { $_.ExpandedPath } } } |
         Export-Clixml -Path (Join-Path $ProjectRoot "PesterResults_PS$PSVersion`_$Timestamp.xml")
-
-    if ($env:APPVEYOR_JOB_ID) {
-        $Address = "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)"
-        (New-Object 'System.Net.WebClient').UploadFile($Address, $TestFile)
-    }
 }
 
 if ($Finalize) {

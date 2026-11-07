@@ -14,7 +14,7 @@ A comprehensive PowerShell wrapper for the [ConnectWise Manage REST API](https:/
 
 <div align="center">
 
-[![Build status](https://ci.appveyor.com/api/projects/status/gkmh0h0234s1x7rt?svg=true)](https://ci.appveyor.com/project/christaylorcodes/connectwisemanageapi)
+[![CI](https://github.com/christaylorcodes/ConnectWiseManageAPI/actions/workflows/ci.yml/badge.svg)](https://github.com/christaylorcodes/ConnectWiseManageAPI/actions/workflows/ci.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8aa3633cda3d41d5baa5e9f595b8124f)](https://www.codacy.com/gh/christaylorcodes/ConnectWiseManageAPI/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=christaylorcodes/ConnectWiseManageAPI&amp;utm_campaign=Badge_Grade)
 [![Gallery](https://img.shields.io/powershellgallery/v/ConnectWiseManageAPI?label=PS%20Gallery&logo=powershell&logoColor=white)](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
 [![Downloads](https://img.shields.io/powershellgallery/dt/ConnectWiseManageAPI?label=Downloads&logo=powershell)](https://www.powershellgallery.com/packages/ConnectWiseManageAPI)
@@ -250,7 +250,6 @@ In-depth tutorials on [christaylor.codes](https://christaylor.codes):
 ### Getting Help
 
 - 📖 Check the [Wiki](https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki) for detailed documentation
-- 💬 Join the [MSPGeek Slack](https://join.mspgeek.com/) (`#cw-manage` channel)
 - 🐛 [Report bugs](https://github.com/christaylorcodes/ConnectWiseManageAPI/issues/new?template=bug_report.md)
 - 💡 [Request features](https://github.com/christaylorcodes/ConnectWiseManageAPI/issues/new?template=feature_request.md)
 - 📧 [Browse existing issues](https://github.com/christaylorcodes/ConnectWiseManageAPI/issues)
