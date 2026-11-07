@@ -1,4 +1,4 @@
-<#
+﻿<#
     .SYNOPSIS
     If a time entry has not been created within time frame this will prompt for time.
 
@@ -6,54 +6,45 @@
     This script will create a scheduled task that checks for latest time entry every 5 minutes.
     If a time entry has not been created in the specified time frame a prompt will display where they can enter time.
 
-    .PARAMETER ScheduledStart
-    The time your shift starts in 24hr format.
+    On first run the script copies itself to %APPDATA%\TimeSucks\TimeSucks.ps1, opens the config template in
+    Notepad, asks for your Manage API keys and creates the scheduled task. The task runs that local copy hidden
+    (conhost --headless) as the current user, with normal (not elevated) rights, only while you are logged on.
 
-    .PARAMETER ScheduledEnd
-    The time your shift ends in 24hr format.
+    The script does not update itself. To update, download the example again and run it once; it copies itself
+    over the installed copy. Run Update-Module ConnectWiseManageAPI to update the module.
 
-    .PARAMETER ManageUser
-    Your Manage Username.
+    Data, config and log live in %APPDATA%\TimeSucks:
+    - TimeSucks.xml   config, with the API keys stored as a PSCredential (Export-Clixml, current user and machine only)
+    - TimeSucks.log   log of the most recent run
 
-    .PARAMETER TimeFrame
-    How long you can go without entering a time entry in minutes.
+    Config settings (edited in Notepad on first run):
+    - ScheduledStart      The time your shift starts in 24hr format.
+    - ScheduledEnd        The time your shift ends in 24hr format.
+    - ManageUser          Your Manage username.
+    - TimeFrame           How long you can go without entering a time entry in minutes. 0 removes the scheduled task.
+    - LunchStart          Optional. The time your lunch break starts in 24hr format, e.g. '12:00'. Leave empty to disable.
+                          No prompt is shown during lunch, and the lunch break itself does not count against TimeFrame.
+    - LunchEnd            Optional. The time your lunch break ends in 24hr format, e.g. '13:00'. Leave empty to disable.
+    - AutoClose           Close the GUI after you hit 'Submit'.
+    - TimeWrapChargeCode  The charge code to use when using the 'TimeWrap' option.
+    - TaskName            The name of the scheduled task that will get created.
+    - CWMConnectionInfo   Server (the URL for your CW Manage server), Company (the company used when logging in
+                          to Manage) and ClientID (https://developer.connectwise.com/ClientID).
 
-    .PARAMETER AutoClose
-    Close the GUI after you hit 'Submit'.
-
-    .PARAMETER LunchStart
-    Optional. The time your lunch break starts in 24hr format, e.g. '12:00'. Leave empty to disable.
-    No prompt is shown during lunch, and the lunch break itself does not count against TimeFrame.
-
-    .PARAMETER LunchEnd
-    Optional. The time your lunch break ends in 24hr format, e.g. '13:00'. Leave empty to disable.
-
-    .PARAMETER TimeWrapChargeCode
-    The charge code to use when using the 'TimeWrap' option.
-
-    .PARAMETER TaskName
-    The name of the scheduled task that will get created.
-
-    .PARAMETER AutoUpdate
-    If true the script and required modules will update on close.
-
-    .PARAMETER Server
-    The URL for your CW Manage server.
-
-    .PARAMETER Company
-    The company used when logging in to Manage.
-
-    .PARAMETER ClientID
-    Your client ID for using the Manage API.
-    https://developer.connectwise.com/ClientID
-
-    .PARAMETER User
-    Your public API key
+    The public and private API keys are asked for separately:
     https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki/Getting-Started---Authentication#api-keys
 
-    .PARAMETER Password
-    Your private API key
-    https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki/Getting-Started---Authentication#api-keys
+    To start over, delete %APPDATA%\TimeSucks\TimeSucks.xml.
+
+    .EXAMPLE
+    .\TimeSucks.ps1
+
+    First run: installs the script, asks for the config and creates the scheduled task.
+
+    .EXAMPLE
+    .\TimeSucks.ps1 -Verbose
+
+    Shows the log lines on screen as well as writing them to the log file.
 
     .NOTES
     Version:        0.1
@@ -69,31 +60,51 @@
     Version:        0.3
     Purpose/Change: Optional lunch break (LunchStart/LunchEnd), scheduled task duration keeps minutes
 
+    Version:        0.4
+    Purpose/Change: Removed the remote logging helper, the downloads and the auto-update; built-in log file;
+                    the scheduled task runs the local copy hidden via conhost --headless, without elevation.
+                    The AutoUpdate config setting is no longer used. Updates come from re-downloading this example.
+
 #>
-$Version = 0.3
+[CmdletBinding()]
+param()
+
+$Version = '0.4'
 
 $ScriptName = 'TimeSucks'
-$ScriptURL = 'https://raw.githubusercontent.com/christaylorcodes/ConnectWiseManageAPI/master/Examples/TimeSucks.ps1'
 $Quotes = 'All your time are belong to us!','Time keeps on slipping slipping, into the future.','Time is money.','Time waits for no one.','Lost time is never found again.'
 
+$ScriptDir = Join-Path $env:APPDATA $ScriptName
+$ScriptPath = Join-Path $ScriptDir "$ScriptName.ps1"
+$LogPath = Join-Path $ScriptDir "$ScriptName.log"
+$ConfigPath = Join-Path $ScriptDir "$ScriptName.xml"
+$null = New-Item -Path $ScriptDir -ItemType Directory -Force
+
+function Write-TSLog {
+    param(
+        [Parameter(Mandatory)][string]$Message,
+        [ValidateSet('Info', 'Error')][string]$Level = 'Info'
+    )
+    $Line = '{0:yyyy-MM-dd HH:mm:ss} [{1}] {2}' -f (Get-Date), $Level.ToUpper(), $Message
+    Write-Verbose $Line
+    Add-Content -Path $LogPath -Value $Line -ErrorAction SilentlyContinue
+}
+
 #Exit if already open
-$AlreadyRunning = Get-CimInstance -Class Win32_Process -Filter "name='powershell.exe'" | Where-Object {$_.CommandLine -eq $((Get-CimInstance -Class Win32_Process -Filter "ProcessId='$PID'").CommandLine) -and $_.ProcessId -ne $pid}
-if($null -ne $AlreadyRunning){
-    Get-Date | Out-File "$(Split-Path -Parent $MyInvocation.MyCommand.Path)\AlreadyRunning.log"
+$ThisProcess = Get-CimInstance -ClassName Win32_Process -Filter "ProcessId=$PID"
+$AlreadyRunning = Get-CimInstance -ClassName Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -eq $ThisProcess.CommandLine -and $_.ProcessId -ne $PID }
+if ($AlreadyRunning) {
+    Write-TSLog 'Already running, exiting.'
     exit
 }
 
-$ScriptDir = Join-Path $env:APPDATA $ScriptName
-$ScriptPath = Join-Path $ScriptDir "$($ScriptName).ps1"
-$sLogPath = $ScriptPath -replace '.ps1','.log'
-$ConfigPath = $ScriptPath -replace '.ps1','.xml'
-
-# logging module
-Invoke-RestMethod "https://raw.githubusercontent.com/ChrisTaylorRocks/Powershell-Logging/master/Powershell-Logging.ps1" | Invoke-Expression
+#Start a fresh log for this run
+Set-Content -Path $LogPath -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [INFO] $ScriptName $Version started." -ErrorAction SilentlyContinue
 
 $MinimumVersion = '0.3.5.0'
-if (Get-Module ConnectWiseManageAPI -ListAvailable | Where-Object { $_.version -ge $MinimumVersion}) {}
-else { Install-Module ConnectWiseManageAPI -Force }
+if (-not (Get-Module ConnectWiseManageAPI -ListAvailable | Where-Object { $_.Version -ge $MinimumVersion })) {
+    Install-Module ConnectWiseManageAPI -Force
+}
 Import-Module ConnectWiseManageAPI -MinimumVersion $MinimumVersion
 
 function Test-Time{
@@ -129,12 +140,13 @@ function Save-Config {
         $Template,
         $Path
     )
-    $Template | ConvertTo-Json | Out-File $env:TEMP\TempConfig.json -Force
-    Start-Process notepad -ArgumentList $env:TEMP\TempConfig.json -Wait
-    $Config = Get-Content $env:TEMP\TempConfig.json | ConvertFrom-Json
-    Remove-Item $env:TEMP\TempConfig.json -Force -Confirm:$false
+    $TempConfig = Join-Path $env:TEMP 'TempConfig.json'
+    $Template | ConvertTo-Json | Out-File $TempConfig -Force
+    Start-Process notepad -ArgumentList $TempConfig -Wait
+    $Config = Get-Content $TempConfig | ConvertFrom-Json
+    Remove-Item $TempConfig -Force -Confirm:$false
     $APIKeys = Get-Credential -Message 'Enter your Manage public and private API keys'
-    $Config.CWMConnectionInfo | Add-Member  -NotePropertyName credential -NotePropertyValue $APIKeys
+    $Config.CWMConnectionInfo | Add-Member -NotePropertyName credential -NotePropertyValue $APIKeys
     $Config | Export-Clixml -Path $Path
 }
 
@@ -153,28 +165,26 @@ $ConfigTemplate = @{
     AutoClose = $true
     TimeWrapChargeCode = 'Undocumented'
     TaskName = 'ManageTimeReminder'
-    AutoUpdate = $true
 }
-
-Start-Log -LogPath $sLogPath -ToScreen -ScriptVersion $Version
 
 #Check for config
 if (!(Test-Path $ConfigPath)){
-    Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Config not found."
+    Write-TSLog 'Config not found.'
     Save-Config -Template $ConfigTemplate -Path $ConfigPath
 }
 #Load config
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Loading config."
+Write-TSLog 'Loading config.'
 try {
     $Config = Import-Clixml -Path $ConfigPath
 } catch {
-    Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "There was an error loading the config. Was this config created on a different machine or for a different user?"
-    Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "Please remove the config file and try again. $ConfigPath" -ExitGracefully
+    Write-TSLog -Level Error 'There was an error loading the config. Was this config created on a different machine or for a different user?'
+    Write-TSLog -Level Error "Please remove the config file and try again. $ConfigPath"
+    exit 1
 }
 
 #Validate config
 if (!$Config.CWMConnectionInfo) {
-    Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Requesting Manage connection information."
+    Write-TSLog 'Requesting Manage connection information.'
     $Config | Add-Member -NotePropertyName CWMConnectionInfo -NotePropertyValue $ConfigTemplate.CWMConnectionInfo
     Save-Config -Template $Config -Path $ConfigPath
     $Config = Import-Clixml -Path $ConfigPath
@@ -193,78 +203,74 @@ try {
     Disconnect-CWM
     $Config.PSObject.Properties.Remove('CWMConnectionInfo')
     $Config | Export-Clixml -Path $ConfigPath -Force
-    Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "Manage Connection information is incorrect."
-    Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "Clearing connection info, run again to re-enter." -ExitGracefully
+    Write-TSLog -Level Error 'Manage Connection information is incorrect.'
+    Write-TSLog -Level Error 'Clearing connection info, run again to re-enter.'
+    exit 1
 }
 
 #if $Config.TimeFrame set make sure there is a scheduled task.
 if($Config.TimeFrame){
-    #Setup scheduled task
+    #Install: the scheduled task runs the local copy. Running a newly downloaded copy replaces it.
+    if($PSCommandPath -and $PSCommandPath -ne $ScriptPath){
+        Write-TSLog "Copying $PSCommandPath to $ScriptPath."
+        Copy-Item -LiteralPath $PSCommandPath -Destination $ScriptPath -Force
+    }
+    if(-not (Test-Path $ScriptPath)){
+        Write-TSLog -Level Error "$ScriptPath is missing. The scheduled task will not be created."
+        exit 1
+    }
+
+    #Setup scheduled task, or replace one from an older version (launched through SilentLaunchPoSh.vbs, elevated)
     $TaskQuery = Get-ScheduledTask -TaskName $Config.TaskName -ErrorAction SilentlyContinue
-    if(!$TaskQuery){
-        if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
-            Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading SilentLaunchPoSh.vbs"
-            $url = "https://gitlab.com/ChrisTaylorRocks/ConnectWise-TimeEntryReminder/raw/master/SilentLaunchPoSh.vbs"
-            $output = "$ScriptDir\SilentLaunchPoSh.vbs"
-            Invoke-RestMethod $url -OutFile $output
-            if(-not $(Test-Path "$ScriptDir\SilentLaunchPoSh.vbs")){
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "$ScriptDir\SilentLaunchPoSh.vbs, is missing."
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
-            }
-        }
-        if(-not $(Test-Path $ScriptPath)){
-            Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Downloading $(Split-Path $ScriptPath -Leaf)"
-            Invoke-RestMethod $ScriptURL -OutFile $ScriptPath
-            if(-not $(Test-Path $ScriptPath)){
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "$ScriptPath, is missing."
-                Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "The scheduled task will not be created." -ExitGracefully
-            }
-        }
-        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Creating scheduled task, $Config.TaskName."
+    if(!$TaskQuery -or $TaskQuery.Actions[0].Execute -ne 'conhost.exe'){
+        Write-TSLog "Creating scheduled task, $($Config.TaskName)."
         $Shift = New-TimeSpan $Config.ScheduledStart $Config.ScheduledEnd
         $Duration = '{0:D2}:{1:D2}' -f [int][math]::Floor($Shift.TotalHours), $Shift.Minutes
-        $ScheduledTask = schtasks /Create /RU $env:USERNAME /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST $Config.ScheduledStart /DU $Duration /TN $Config.TaskName /RL HIGHEST /RI 5 /F /TR "hostname" 2>&1
-        $Action = New-ScheduledTaskAction -Execute 'WSCRIPT' -Argument "`"$ScriptDir\SilentLaunchPoSh.vbs`" `"$ScriptPath`""
+        $ScheduledTask = schtasks /Create /RU $env:USERNAME /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST $Config.ScheduledStart /DU $Duration /TN $Config.TaskName /RL LIMITED /RI 5 /F /TR "hostname" 2>&1
+        #conhost --headless keeps the console hidden; only the time entry window is shown.
+        $Action = New-ScheduledTaskAction -Execute 'conhost.exe' -Argument "--headless powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPath`""
         $null = Set-ScheduledTask -TaskName $Config.TaskName -Action $Action -User $env:USERNAME
-        Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message $ScheduledTask
+        Write-TSLog ($ScheduledTask -join ' ')
+        Remove-Item (Join-Path $ScriptDir 'SilentLaunchPoSh.vbs') -Force -ErrorAction SilentlyContinue
     }
 }
 else{
     $null = SCHTASKS /Delete /TN $Config.TaskName /F 2>&1
 }
 
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Starting time frame check."
+Write-TSLog 'Starting time frame check.'
 #Get latest time entries
 $condition = "enteredBy='$($Config.ManageUser)'"
 $LatestTimeEntry = Get-CWMTimeEntry -Condition $condition -orderBy 'timeEnd desc' -pageSize 1 -fields 'timeEnd'
 [datetime]$LastTimeEntry = $LatestTimeEntry.timeEnd
 
 #If no time entry today set to $($Config.ScheduledStart)
-if($LastTimeEntry -lt (Get-Date -Hour 0 -Minute 0 -Second 0)){
+if($LastTimeEntry -lt (Get-Date).Date){
     [datetime]$LastTimeEntry = Get-Date $($Config.ScheduledStart)
 }
 
 #Lunch break, no prompt during lunch and don't count it against $Config.TimeFrame
 $LunchCheck = Get-LunchAdjustedTime -LastTimeEntry $LastTimeEntry -LunchStart $Config.LunchStart -LunchEnd $Config.LunchEnd
 if($LunchCheck.InLunch){
-    Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Lunch break, skipping time frame check."
-    Stop-Log -ToScreen -Status 'Success'
+    Write-TSLog 'Lunch break, skipping time frame check.'
+    exit
 }
 [datetime]$LastTimeEntry = $LunchCheck.LastTimeEntry
 
 #If last time entry was more than $Config.TimeFrame minutes old prompt for time input.
 if($LastTimeEntry -gt (Get-Date).AddMinutes((($Config.TimeFrame * -1) -2))){
     #Last time entry was within $Config.TimeFrame
-    Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Last time entry was $LastTimeEntry."
-    Stop-Log -ToScreen -Status 'Success'
+    Write-TSLog "Last time entry was $LastTimeEntry."
+    exit
 }
 
 #Get CW icon if on machine
-if(Get-ChildItem "C:\Program Files*\ConnectWise\PSA.net\ConnectWise.ico"){
-    $CWIcon = " Icon='$((Get-ChildItem "C:\Program Files*\ConnectWise\PSA.net\ConnectWise.ico").FullName)'"
+$CWIconFile = Get-ChildItem "C:\Program Files*\ConnectWise\PSA.net\ConnectWise.ico" -ErrorAction SilentlyContinue | Select-Object -First 1
+if($CWIconFile){
+    $CWIcon = " Icon='$($CWIconFile.FullName)'"
 }
 
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Loading XAML"
+Write-TSLog 'Loading XAML'
 $inputXAML = @"
 <Window x:Class="WpfApplication6.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -302,7 +308,7 @@ $inputXAML = @"
 #region -[Don't mess with this region]-
 
 $inputXAML = $inputXAML -replace 'mc:Ignorable="d"','' -replace "x:N",'N' -replace '^<Win.*', '<Window'
-[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
+Add-Type -AssemblyName PresentationFramework
 [xml]$XML = $inputXAML
 
 #Read converted XAML
@@ -333,23 +339,22 @@ $WPFStartTime.Text = $LastTimeEntry.ToString("t")
 $WPFEndTime.Text = (Get-Date).ToString("t")
 
 #Populate Charge Codes
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Loading Charge Codes"
+Write-TSLog 'Loading Charge Codes'
 $ChargeCodes = Get-CWMChargeCode
 $ChargeCodes.Description | ForEach-Object { $null = $WPFcomboBox.Items.add($_) }
 
 #Populate service tickets
 #TODO limit to open tickets with time entry in last two days
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Loading Recent tickets"
+Write-TSLog 'Loading Recent tickets'
 $TimeEntryCondition = "enteredBy = '$($Config.ManageUser)' and chargeToType = 'ServiceTicket' and dateEntered > $((Get-Date).AddDays(-2) | ConvertTo-CWMTime)"
 $LatestTimeEntries = Get-CWMTimeEntry -Condition $TimeEntryCondition -orderBy 'timeEnd desc' -fields @('chargeToId','timeStart') -all
 $RecentTimeEntryTicketIDs = $LatestTimeEntries.chargeToId | Sort-Object -Unique
-if (($RecentTimeEntryTicketIDs | Measure-Object).Count -gt 0) {
+if ($RecentTimeEntryTicketIDs) {
     $RecentTicketCondition = "id in ($($RecentTimeEntryTicketIDs -join ',')) and closedFlag = false"
     $RecentTickets = Get-CWMTicket -condition $RecentTicketCondition -fields @('id','company','summary')
     foreach($Ticket in $RecentTickets){
-            $CompanyTrimed = $($Ticket.company.identifier.subString(0, [System.Math]::Min(15, ($Ticket.company.identifier).Length)))
-            $LastTimeSummary = "$($Ticket.id):$($CompanyTrimed)\$($Ticket.summary)"
-            $null = $WPFcomboBoxTicket.Items.add($LastTimeSummary)
+        $CompanyTrimmed = $Ticket.company.identifier.Substring(0, [System.Math]::Min(15, $Ticket.company.identifier.Length))
+        $null = $WPFcomboBoxTicket.Items.add("$($Ticket.id):$CompanyTrimmed\$($Ticket.summary)")
     }
 }
 
@@ -359,7 +364,7 @@ $TodaysTimeEntries = Get-CWMTimeEntry -Condition $TimeEntryCondition -orderBy 't
 $TodaysTotal = (($TodaysTimeEntries.actualHours) | Measure-Object -Sum).Sum
 $WPFtodaysHours.text = "$TodaysTotal hours today"
 
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Loading form elements"
+Write-TSLog 'Loading form elements'
 
 $WPFStatus.Text = $Quotes | Get-Random
 
@@ -422,61 +427,37 @@ $WPFSubmit.add_click({
     }
 
     if($Valid){
-
-        #Charge Code
-        if($WPFcomboBox.Text){
-            $chargeToId = ($ChargeCodes | Where-Object{ $_.Description -eq $WPFcomboBox.Text }).'TE_Charge_Code_RecID'
-
-            $TimeEntryParams = @{
-                chargeToId = $chargeToId
-                chargeToType = 'ChargeCode'
-                notes = $($WPFtextBox.Text)
-                timeStart = $(Get-Date $WPFStartTime.Text | ConvertTo-CWMTime -Raw)
-                timeEnd = $(Get-Date $WPFEndTime.Text | ConvertTo-CWMTime -Raw)
-                billableOption = 'NoCharge'
-            }
+        $TimeEntryParams = @{
+            notes = $WPFtextBox.Text
+            timeStart = Get-Date $WPFStartTime.Text | ConvertTo-CWMTime -Raw
+            timeEnd = Get-Date $WPFEndTime.Text | ConvertTo-CWMTime -Raw
         }
-
-        #Time Wrap
-        if($WPFTimeWrap.IsChecked){
-            $chargeToId = ($ChargeCodes | Where-Object{ $_.Description -eq $Config.TimeWrapChargeCode }).'TE_Charge_Code_RecID'
-
-            $TimeEntryParams = @{
-                chargeToId = $chargeToId
-                chargeToType = 'ChargeCode'
-                notes = $($WPFtextBox.Text)
-                timeStart = $(Get-Date $WPFStartTime.Text | ConvertTo-CWMTime -Raw)
-                timeEnd = $(Get-Date $WPFEndTime.Text | ConvertTo-CWMTime -Raw)
-                billableOption = 'NoCharge'
-                hoursDeduct = $TodaysTotal
-            }
-        }
-
-        #Recent Ticket
         if($WPFcomboBoxTicket.Text){
-            $TicketID = $WPFcomboBoxTicket.Text.Split(':')[0]
-
-            $TimeEntryParams = @{
-                chargeToId = $TicketID
-                chargeToType = "ServiceTicket"
-                notes = $($WPFtextBox.Text)
-                timeStart = $(Get-Date $WPFStartTime.Text | ConvertTo-CWMTime -Raw)
-                timeEnd = $(Get-Date $WPFEndTime.Text | ConvertTo-CWMTime -Raw)
-            }
+            #Recent Ticket
+            $TimeEntryParams.chargeToId = $WPFcomboBoxTicket.Text.Split(':')[0]
+            $TimeEntryParams.chargeToType = 'ServiceTicket'
+        }
+        else{
+            #Time Wrap or Charge Code
+            $ChargeCodeName = if($WPFTimeWrap.IsChecked){ $Config.TimeWrapChargeCode } else{ $WPFcomboBox.Text }
+            $TimeEntryParams.chargeToId = ($ChargeCodes | Where-Object{ $_.Description -eq $ChargeCodeName }).'TE_Charge_Code_RecID'
+            $TimeEntryParams.chargeToType = 'ChargeCode'
+            $TimeEntryParams.billableOption = 'NoCharge'
+            if($WPFTimeWrap.IsChecked){ $TimeEntryParams.hoursDeduct = $TodaysTotal }
         }
         try {
             $null = New-CWMTimeEntry @TimeEntryParams -ErrorAction Stop
             if($Config.AutoClose){ $Form.Close() }
             $WPFStatus.Text = 'Time entry successfully created.'
-            $WPFStartTime.Text = Get-Date -f t
+            $WPFStartTime.Text = Get-Date -Format t
             $WPFEndTime.Text = ''
             $WPFtextBox.Text = ''
             $WPFcomboBox.Text = ''
         } catch {
             $WPFStatus.Text = 'There was an error creating the time entry.'
-            $_
+            Write-TSLog -Level Error "There was an error creating the time entry. $_"
             $wshell = New-Object -ComObject Wscript.Shell
-            $wshell.Popup($_,0,"Error creating Time Entry",0x1010)
+            $null = $wshell.Popup($_,0,"Error creating Time Entry",0x1010)
         }
     }
 })
@@ -484,21 +465,7 @@ $WPFSubmit.add_click({
 #endregion
 
 #Shows the form
-Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Launching form."
+Write-TSLog 'Launching form.'
 $null = $Form.ShowDialog()
 
-if($Config.AutoUpdate) {
-    Write-LogInfo -LogPath $sLogPath -ToScreen -TimeStamp -Message "Updating module."
-    try { Update-Module ConnectWiseManageAPI -ErrorAction Stop }
-    catch {
-        Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "There was an error updating the ConnectWiseManageAPI."
-        Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message $_
-    }
-    try { Invoke-RestMethod $ScriptURL -OutFile $ScriptPath }
-    catch {
-        Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message "There was an error updating the script."
-        Write-LogError -LogPath $sLogPath -ToScreen -TimeStamp -Message $_
-    }
-}
-
-Stop-Log -ToScreen -Status 'Success'
+Write-TSLog 'Done.'
