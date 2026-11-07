@@ -41,6 +41,9 @@
     - Supports -WhatIf and -Confirm
     - Automatically filters PowerShell common parameters
     - Converts parameters to JSON body
+    - Writes a warning when the response is a single record with id 0. PR #82 reported that
+      POST /company/companies/{id}/serviceTemplates without a company returns a record with id 0
+      and creates nothing. The warning is based on PR #82 by mdewart-Centre.
 
 .LINK
     Invoke-CWMWebRequest
@@ -102,6 +105,11 @@ function Invoke-CWMNewMaster {
 
         if ($Result.content) {
             $Result = ConvertFrom-CWMJson $Result.Content
+        }
+
+        # A record with id 0 means nothing was created (seen when a required field is missing, see PR #82)
+        if ($Result -and $Result -isnot [array] -and $Result.PSObject.Properties['id'] -and $Result.id -eq 0) {
+            Write-Warning "The API returned id 0 for $($WebRequestArguments.URI); nothing was likely created. Check that the request includes all required fields."
         }
     }
 

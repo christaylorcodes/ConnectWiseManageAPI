@@ -19,22 +19,35 @@
     - childConditions: Filter on child records
     - customFieldConditions: Filter on custom fields
     - page, pageSize: Pagination
+    - pageId: Record id to start forward-only pagination from (sent as &pageId=)
     - fields: Field selection array
     - all: Switch to retrieve all pages
     - count: Switch to return count only
+
+    The id is read from $Arguments.id only; variables in the caller's scope are never used.
 
 .PARAMETER Endpoint
     The API endpoint path (e.g., '/service/tickets', '/company/companies')
 
 .EXAMPLE
-    $args = @{
+    $QueryArguments = @{
         condition = "status/name='Open'"
         orderBy = "id desc"
         all = $true
     }
-    Invoke-CWMGetMaster -Arguments $args -Endpoint '/service/tickets'
+    Invoke-CWMGetMaster -Arguments $QueryArguments -Endpoint '/service/tickets'
 
     Retrieves all open tickets sorted by ID descending.
+
+.EXAMPLE
+    Invoke-CWMGetMaster -Arguments @{ id = 12345 } -Endpoint '/service/tickets'
+
+    Retrieves ticket 12345 (GET /service/tickets/12345).
+
+.EXAMPLE
+    Invoke-CWMGetMaster -Arguments @{ pageId = 500; pageSize = 100 } -Endpoint '/service/tickets'
+
+    Retrieves up to 100 tickets, starting from the page identified by pageId 500.
 
 .NOTES
     Author: Chris Taylor
@@ -45,6 +58,8 @@
     - Handles pagination automatically with -all
     - Routes to Invoke-CWMAllResult for -all requests
     - Supports both direct lookups and filtered queries
+
+    pageId support and the $Arguments.id fix are based on PR #82 by mdewart-Centre.
 
 .LINK
     Invoke-CWMWebRequest
@@ -63,7 +78,9 @@ function Invoke-CWMGetMaster {
         [string]$Endpoint
     )
 
-    if ($Arguments.id) { $Endpoint = Join-Url $Endpoint $id }
+    $URLParameters = ''
+
+    if ($Arguments.id) { $Endpoint = Join-Url $Endpoint $Arguments.id }
 
     if ($Arguments.count.IsPresent) { $Endpoint = Join-Url $Endpoint '/count' }
 
@@ -90,6 +107,11 @@ function Invoke-CWMGetMaster {
     if ($Arguments.orderBy) {
         $orderBy = [System.Web.HttpUtility]::UrlEncode($Arguments.orderBy)
         $URLParameters += "&orderBy=$orderBy"
+    }
+
+    if ($null -ne $Arguments.pageId) {
+        $pageId = [System.Web.HttpUtility]::UrlEncode([string]$Arguments.pageId)
+        $URLParameters += "&pageId=$pageId"
     }
 
     $URI = New-CWMUrl -Endpoint $Endpoint -URLParameters $URLParameters
