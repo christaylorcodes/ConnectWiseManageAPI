@@ -1,0 +1,36 @@
+name: API spec check
+
+# Compares every endpoint function with the ConnectWise Manage OpenAPI spec (Tools/Test-CWMApiCoverage.ps1).
+# Weekly and on demand; not a PR gate. The spec is a third-party copy, so it is pinned to a reviewed commit:
+# move SPEC_COMMIT only in a pull request, after looking at what changed upstream.
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  SPEC_COMMIT: 236cb981aa930711d6f7b8426ef6a0d8d1f62ab0
+
+jobs:
+  api-spec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Check endpoints against the spec
+        shell: pwsh
+        run: |
+          $SpecUrl = "https://raw.githubusercontent.com/covenanttechnologysolutions/connectwise-rest/$env:SPEC_COMMIT/generator/manage-json/manage.json"
+          $Summary = ./Tools/Test-CWMApiCoverage.ps1 -SpecUrl $SpecUrl -OutputPath ./api-coverage.md
+          $Summary | Format-List | Out-String
+          Get-Content ./api-coverage.md -Raw | Add-Content -Path $env:GITHUB_STEP_SUMMARY
+          $Issues = $Summary.NotInSpec + $Summary.Casing + $Summary.BodyIssues + $Summary.Unresolved
+          if ($Issues -gt 0) { throw "$Issues endpoint issue(s) against the spec; see the job summary." }
