@@ -1,6 +1,6 @@
 ﻿<h1 align="center">
   <br>
-  <img src=".\Media\Manage-RGB-Horiz-Master.png" alt="logo"></a>
+  <img src=".\Media\Manage-RGB-Horiz-Master.png" alt="logo">
   <br>
   ConnectWise Manage REST API
   <br>
@@ -45,7 +45,9 @@ A comprehensive PowerShell wrapper for the [ConnectWise Manage REST API](https:/
 - [Troubleshooting](#-troubleshooting)
 - [Available Functions](#-available-functions)
 - [Requirements](#-requirements)
+- [Security](#-security)
 - [Contributing](#-contributing)
+- [Tutorials & Blog Posts](#-tutorials--blog-posts)
 - [Support](#-support)
 - [License](#-license)
 
@@ -53,12 +55,12 @@ A comprehensive PowerShell wrapper for the [ConnectWise Manage REST API](https:/
 
 This module makes it easy to leverage PowerShell to automate tasks in ConnectWise Manage:
 
-- **220+ Cmdlets** covering all major API endpoints
+- **250+ Cmdlets** covering all major API endpoints
 - **Automated Pagination** for large result sets
 - **Advanced Filtering** using ConnectWise condition syntax
-- **Retry Logic** for transient errors (reads only, so a retry never creates a duplicate)
+- **Retry Logic** for throttling and transient errors (writes are retried only on 429, so a retry never creates a duplicate)
 - **Object Output** that works with the PowerShell pipeline (Where-Object, Select-Object, Export-Csv)
-- **Built-in Help** for every function (Get-Help <function> -Full), with examples for the most-used ones
+- **Built-in Help** with examples for every function (`Get-Help <function> -Full`)
 - **Cross-Platform**: PowerShell 7 on Windows, Linux and macOS, and Windows PowerShell 5.1
 
 ## 📦 Installation
@@ -188,9 +190,10 @@ Connect-CWM -Server 'na.myconnectwise.net' -Company 'YourCompany' `
 ```
 
 With the switch, PowerShell accepts that response, but the module never follows a redirect on a create or update (nothing is sent over http). If the server sends a real redirect, you get an error saying it was not followed and that the record may already exist. The switch has no effect on Windows PowerShell 5.1 or PowerShell 7.0-7.3, which do not raise this error. Whenever you see either error, check whether the record was created before you retry.
+
 ## 📚 Available Functions
 
-The module includes 220+ cmdlets organized by functional area:
+The module includes 250+ cmdlets organized by functional area:
 
 | Category | Functions |
 |----------|-----------|
@@ -231,8 +234,6 @@ Contributions are what make the open-source community such an amazing place to l
 5. **Share your work** - Show us what you've built!
 
 **Want to share something you created using the module?** Submit it to be featured as a Community Package.
-
-Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## 📖 Tutorials & Blog Posts
 

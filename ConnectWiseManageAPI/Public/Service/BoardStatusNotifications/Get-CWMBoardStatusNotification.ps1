@@ -80,6 +80,6 @@ function Get-CWMBoardStatusNotification {
         [switch]$all
     )
 
-    $Endpoint = "/service/boards/$($grandparentId )/statuses/$($parentId)/notifications"
+    $Endpoint = "/service/boards/$($grandparentId)/statuses/$($parentId)/notifications"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

@@ -17,7 +17,8 @@
     New-CWMUrl -Endpoint '/service/tickets' -URLParameters '&pageSize=10'
 
     Returns the full URL of the tickets endpoint for the current connection, with &pageSize=10 appended.
-#>function New-CWMUrl {
+#>
+function New-CWMUrl {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Justification = 'No creation impact.')]
     param(
         [string]$Endpoint,

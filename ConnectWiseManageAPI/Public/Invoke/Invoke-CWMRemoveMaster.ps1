@@ -48,12 +48,12 @@ function Invoke-CWMRemoveMaster {
     $Result = $null
     $URI = New-CWMUrl -Endpoint $Endpoint
     $WebRequestArguments = @{
-        Uri = $URI
+        Uri    = $URI
         Method = 'Delete'
     }
-    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, "Invoke-CWMRemoveMaster")) {
-        $Result =  Invoke-CWMWebRequest -Arguments $WebRequestArguments
-        if($Result.content){ $Result = ConvertFrom-CWMJson $Result.Content }
+    if ($PSCmdlet.ShouldProcess($WebRequestArguments.URI, 'Invoke-CWMRemoveMaster')) {
+        $Result = Invoke-CWMWebRequest -Arguments $WebRequestArguments
+        if ($Result.content) { $Result = ConvertFrom-CWMJson $Result.Content }
     }
     if ($Result.StatusCode -eq 204) { Write-Verbose 'Success' }
     $Result

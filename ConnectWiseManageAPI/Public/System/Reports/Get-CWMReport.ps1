@@ -63,9 +63,17 @@ function Get-CWMReport {
         [switch]$all
     )
 
+    # The report name is a string path segment, so it is escaped here instead of being joined by
+    # Invoke-CWMGetMaster. Work on a copy so $PSBoundParameters is never modified.
+    $Arguments = @{}
+    foreach ($Key in $PSBoundParameters.Keys) { $Arguments[$Key] = $PSBoundParameters[$Key] }
+    $null = $Arguments.Remove('id')
+
     $Endpoint = '/system/reports'
-    $Result = Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
-    if(!$Result){ return }
-    if($id){ ConvertFrom-CWMColumnRow -Data $Result }
-    else{ $Result }
+    if ($id) { $Endpoint += "/$([uri]::EscapeDataString($id))" }
+
+    $Result = Invoke-CWMGetMaster -Arguments $Arguments -Endpoint $Endpoint
+    if (!$Result) { return }
+    if ($id) { ConvertFrom-CWMColumnRow -Data $Result }
+    else { $Result }
 }

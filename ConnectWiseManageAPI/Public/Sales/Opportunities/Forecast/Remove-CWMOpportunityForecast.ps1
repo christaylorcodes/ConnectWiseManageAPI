@@ -8,6 +8,7 @@
 
 .PARAMETER parentId
     The id of the opportunity.
+    Alias: opportunityId
 
 .EXAMPLE
     Remove-CWMOpportunityForecast -parentId 12
@@ -20,12 +21,12 @@
 function Remove-CWMOpportunityForecast {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
-    param (
-        [Parameter(Mandatory=$true)]
+    param(
+        [Parameter(Mandatory = $true)]
+        [Alias('opportunityId')]
         [int]$parentId
     )
 
-    $endpoint = "/sales/opportunities/$parentId/forecast"
-
-    Invoke-CWMRemoveMaster -Endpoint $endpoint
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast"
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

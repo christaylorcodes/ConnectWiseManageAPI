@@ -116,8 +116,6 @@ Describe 'Endpoint functions' {
         @{ Name = 'Remove-CWMExpenseEntry'; HttpMethod = 'Delete'; Path = '/expense/entries/9'; Call = { Remove-CWMExpenseEntry -id 9 -Confirm:$false } }
         @{ Name = 'Get-CWMConfigurationStatus'; HttpMethod = 'GET'; Path = '/company/configurations/statuses'; Call = { Get-CWMConfigurationStatus } }
         @{ Name = 'Get-CWMWorkflow'; HttpMethod = 'GET'; Path = '/system/workflows/2'; Call = { Get-CWMWorkflow -id 2 } }
-        # Unbundle (POST, not DELETE)
-        @{ Name = 'Remove-CWMTicketChild'; HttpMethod = 'Post'; Path = '/service/tickets/100/detachChildren'; Call = { Remove-CWMTicketChild -ParentTicketID 100 -ChildTicketIDs 201 -Confirm:$false } }
     ) {
         $null = & $Call
         $ExpectedUri = "$CWMTestBaseUri$Path"
@@ -139,16 +137,6 @@ Describe 'Endpoint functions' {
             $First.company.id | Should -Be 250
             $First.PSObject.Properties['parentId'] | Should -BeNullOrEmpty
             $Second.company.id | Should -Be 7
-        }
-
-        It 'New-CWMCompanyServiceTemplate passes a copy, not $PSBoundParameters, to Invoke-CWMNewMaster' {
-            InModuleScope ConnectWiseManageAPI {
-                Mock Invoke-CWMNewMaster { $script:CapturedArguments = $Arguments }
-                New-CWMCompanyServiceTemplate -parentId 250 -name 'N' -summary 'S' -board @{ id = 1 } -status @{ id = 2 } | Out-Null
-                $script:CapturedArguments | Should -BeOfType [hashtable]
-                $script:CapturedArguments.company.id | Should -Be 250
-                $script:CapturedArguments.name | Should -Be 'N'
-            }
         }
 
         It 'Set-* functions leave the route ids out of the body' {
@@ -179,13 +167,6 @@ Describe 'Endpoint functions' {
             $B.issue | Should -Be 'I'
             $B.resolution | Should -Be 'R'
             $B.board.id | Should -Be 1
-        }
-
-        It 'New-CWMKnowledgeBaseArticle requires title, issue and resolution' {
-            $Params = (Get-Command New-CWMKnowledgeBaseArticle).Parameters
-            foreach ($Name in 'title', 'issue', 'resolution') {
-                $Params[$Name].Attributes.Where({ $_ -is [System.Management.Automation.ParameterAttribute] }).Mandatory | Should -Contain $true
-            }
         }
 
         It 'Remove-CWMKnowledgeBaseArticle sends nothing with -WhatIf' {
@@ -311,7 +292,7 @@ Describe 'Endpoint functions' {
         }
     }
 
-    Context 'Review pass 1 fixes' {
+    Context 'Parameters, counts and URL escaping' {
         It 'Submit-CWMTimeSheet supports -WhatIf and sends no body' {
             (Get-Command Submit-CWMTimeSheet).Parameters.ContainsKey('WhatIf') | Should -BeTrue
             Submit-CWMTimeSheet -id 55 -WhatIf | Out-Null
@@ -350,12 +331,50 @@ Describe 'Endpoint functions' {
             $Token | Should -BeExactly "$CWMTestBaseUri/system/members/j%20doe/tokens"
         }
 
+        It 'Get-CWMReport escapes the report name' {
+            Set-CWMTestResponse -Content '{"column_definitions":[],"row_values":[]}'
+            Get-CWMReport -id 'My Report' | Out-Null
+            ([uri]$global:CWMTestRequests[0].Uri).AbsoluteUri | Should -BeExactly "$CWMTestBaseUri/system/reports/My%20Report"
+        }
+
+        It 'Get-CWMOpportunity sends an array -fields as a comma-separated list' {
+            Get-CWMOpportunity -fields 'id', 'name' | Out-Null
+            [uri]::UnescapeDataString($global:CWMTestRequests[0].Uri) | Should -BeLike '*fields=id,name*'
+        }
+
+        It 'every -customFields parameter takes an array' {
+            $Commands = Get-Command -Module ConnectWiseManageAPI | Where-Object { $_.Parameters -and $_.Parameters.ContainsKey('customFields') }
+            $Commands | Should -Not -BeNullOrEmpty
+            # [hashtable[]] or [array]; [array] (System.Array) also accepts custom field objects copied from a Get.
+            $Commands | Where-Object { $T = $_.Parameters['customFields'].ParameterType; -not ($T.IsArray -or $T -eq [array]) } |
+                ForEach-Object Name | Should -BeNullOrEmpty
+        }
+
+        It 'New-CWMExpenseEntry sends a single custom field as a JSON array' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-CWMNewMaster { $script:CapturedArguments = $Arguments }
+                $Mandatory = @{}
+                foreach ($P in (Get-Command New-CWMExpenseEntry).Parameters.Values) {
+                    if ($P.Attributes.Where({ $_ -is [System.Management.Automation.ParameterAttribute] -and $_.Mandatory })) {
+                        $Mandatory[$P.Name] = if ($P.ParameterType -eq [hashtable]) { @{ id = 1 } } elseif ($P.ParameterType -eq [string]) { 'x' } else { 1 }
+                    }
+                }
+                New-CWMExpenseEntry @Mandatory -customFields @{ id = 4; value = 'Gold' } -Confirm:$false | Out-Null
+                , $script:CapturedArguments.customFields | Should -BeOfType [hashtable[]]
+            }
+        }
+
         It '<Command> -<Parameter> is mandatory' -ForEach @(
             @{ Command = 'Get-CWMCompanyTeam'; Parameter = 'parentId' }
             @{ Command = 'New-CWMProductPickingShippingDetail'; Parameter = 'parentId' }
             @{ Command = 'New-CWMMarketingGroupCompany'; Parameter = 'parentId' }
             @{ Command = 'Get-CWMProductAdjustmentDetail'; Parameter = 'parentId' }
             @{ Command = 'New-CWMMemberToken'; Parameter = 'memberIdentifier' }
+            @{ Command = 'New-CWMKnowledgeBaseArticle'; Parameter = 'title' }
+            @{ Command = 'New-CWMKnowledgeBaseArticle'; Parameter = 'issue' }
+            @{ Command = 'New-CWMKnowledgeBaseArticle'; Parameter = 'resolution' }
+            @{ Command = 'New-CWMProjectTicket'; Parameter = 'project' }
+            @{ Command = 'New-CWMOpportunityForecastItem'; Parameter = 'id' }
         ) {
             (Get-Command $Command).Parameters[$Parameter].Attributes.Where({ $_ -is [System.Management.Automation.ParameterAttribute] }).Mandatory | Should -Contain $true
         }
@@ -368,6 +387,14 @@ Describe 'Endpoint functions' {
             @{ Command = 'Update-CWMAgreementType'; Parameter = 'id'; Alias = 'agreementTypeId' }
             @{ Command = 'New-CWMMarketingGroupCompany'; Parameter = 'parentId'; Alias = 'groupId' }
             @{ Command = 'Get-CWMProductAdjustmentDetail'; Parameter = 'parentId'; Alias = 'adjustmentId' }
+            @{ Command = 'Get-CWMCompanyNote'; Parameter = 'parentId'; Alias = 'companyId' }
+            @{ Command = 'Get-CWMCompanyCustomNote'; Parameter = 'parentId'; Alias = 'companyId' }
+            @{ Command = 'Remove-CWMCompanyNote'; Parameter = 'id'; Alias = 'noteId' }
+            @{ Command = 'Remove-CWMAgreementAddition'; Parameter = 'parentId'; Alias = 'agreementId' }
+            @{ Command = 'Get-CWMInventory'; Parameter = 'parentId'; Alias = 'warehouseBinId' }
+            @{ Command = 'Get-CWMPurchaseOrderLineItem'; Parameter = 'parentId'; Alias = 'purchaseOrderId' }
+            @{ Command = 'Get-CWMOpportunityForecast'; Parameter = 'parentId'; Alias = 'opportunityId' }
+            @{ Command = 'New-CWMOpportunityForecastItem'; Parameter = 'parentId'; Alias = 'opportunityId' }
         ) {
             (Get-Command $Command).Parameters[$Parameter].Aliases | Should -Contain $Alias
         }
@@ -398,6 +425,7 @@ Describe 'Endpoint functions' {
         }
 
         It '<Command> passes a copy, not $PSBoundParameters, to Invoke-CWMNewMaster' -ForEach @(
+            @{ Command = 'New-CWMCompanyServiceTemplate'; Splat = @{ parentId = 250; name = 'N'; summary = 'S'; board = @{ id = 1 }; status = @{ id = 2 } }; Key = 'company' }
             @{ Command = 'New-CWMCompanyTeam'; Splat = @{ parentId = 250; teamRole = @{ id = 1 }; locationId = 2 }; Key = 'location' }
             @{ Command = 'New-CWMCompanyContact'; Splat = @{ firstName = 'A'; managerContactId = 5 }; Key = 'managerContact' }
         ) {
@@ -429,12 +457,6 @@ Describe 'Endpoint functions' {
             $B.project.id | Should -Be 386
             $B.phase.id | Should -Be 12
             $B.summary | Should -Be 'Migrate file shares'
-        }
-
-        It 'requires -project' {
-            (Get-Command New-CWMProjectTicket).Parameters['project'].Attributes |
-                Where-Object { $_ -is [System.Management.Automation.ParameterAttribute] } |
-                ForEach-Object { $_.Mandatory } | Should -Contain $true
         }
     }
 

@@ -78,6 +78,14 @@ Describe 'Master functions' {
                 @(Invoke-CWMGetMaster -Arguments @{} -Endpoint '/service/tickets').Count | Should -Be 0
             }
         }
+        It 'writes no output object when the response is not JSON' {
+            Set-CWMTestResponse -Content 'not json'
+            InModuleScope ConnectWiseManageAPI {
+                $Out = @(Invoke-CWMGetMaster -Arguments @{} -Endpoint '/x' -ErrorVariable Err -ErrorAction SilentlyContinue)
+                $Out | Should -HaveCount 0
+                "$Err" | Should -Match 'converting the results from JSON'
+            }
+        }
     }
 
     Context 'Invoke-CWMActionMaster' {
@@ -523,9 +531,6 @@ Describe 'API best-practice review (0.5.0)' {
                 $Arguments.expectedCloseDate | Should -BeOfType [datetime]
             }
         }
-    }
-
-    Context 'Dates without a kind and dates in patch values' {
         It 'sends a date without a kind unchanged as UTC, so a calendar date keeps its day' {
             InModuleScope ConnectWiseManageAPI {
                 Invoke-CWMNewMaster -Arguments @{ expectedCloseDate = [datetime]::new(2026, 1, 2) } -Endpoint '/x' | Out-Null
@@ -548,16 +553,6 @@ Describe 'API best-practice review (0.5.0)' {
                 $global:CWMTestRequests[0].Body | Should -Match '"value":\s*"2026-01-02T03:04:05Z"'
                 $global:CWMTestRequests[1].Body | Should -Match '"value":\s*\[\s*"2026-01-02T03:04:05Z"\s*\]'
                 $global:CWMTestRequests[1].Body | Should -Not -Match '"Count"'
-            }
-        }
-    }
-    Context 'Invoke-CWMGetMaster' {
-        It 'writes no output object when the response is not JSON' {
-            Set-CWMTestResponse -Content 'not json'
-            InModuleScope ConnectWiseManageAPI {
-                $Out = @(Invoke-CWMGetMaster -Arguments @{} -Endpoint '/x' -ErrorVariable Err -ErrorAction SilentlyContinue)
-                $Out | Should -HaveCount 0
-                "$Err" | Should -Match 'converting the results from JSON'
             }
         }
     }

@@ -262,6 +262,6 @@ function New-CWMCompanyConfiguration {
         [string]$manufacturerPartNumber,
         [array]$customFields
     )
-    $Endpoint = 'company/configurations'
+    $Endpoint = '/company/configurations'
     Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

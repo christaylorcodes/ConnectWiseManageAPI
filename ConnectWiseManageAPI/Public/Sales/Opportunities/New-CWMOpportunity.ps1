@@ -175,10 +175,9 @@ function New-CWMOpportunity {
         [int]$companyLocationId,
         [hashtable]$technicalContact,
         [hashtable]$_info,
-        [hashtable]$customFields
+        [hashtable[]]$customFields
     )
 
-    $endpoint = "/sales/opportunities"
-
-    Invoke-CWMNewMaster -Endpoint $endpoint -Arguments $PSBoundParameters
+    $Endpoint = '/sales/opportunities'
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

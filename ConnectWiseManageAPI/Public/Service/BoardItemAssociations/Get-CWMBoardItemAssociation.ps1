@@ -6,7 +6,7 @@
     Retrieves the subtype associations of a board item from ConnectWise Manage. Calls GET
     /service/boards/{grandparentId}/items/{parentId}/associations; -count adds /count.
 
-.PARAMETER grandParentId
+.PARAMETER grandparentId
     The id of the service board.
     Alias: boardId
 
@@ -42,7 +42,7 @@
     Retrieve every matching record, handling pagination automatically.
 
 .EXAMPLE
-    Get-CWMBoardItemAssociation -grandParentId 3 -parentId 12 -condition "id>100" -all
+    Get-CWMBoardItemAssociation -grandparentId 3 -parentId 12 -condition "id>100" -all
 
     Retrieves the subtype associations of board item 12 that match the condition.
 
@@ -53,10 +53,10 @@ function Get-CWMBoardItemAssociation {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [Alias ('boardId')]
-        [int]$grandParentId,
+        [Alias('boardId')]
+        [int]$grandparentId,
         [Parameter(Mandatory = $true)]
-        [Alias ('itemId')]
+        [Alias('itemId')]
         [int]$parentId,
         [switch]$count,
         [string]$condition,
@@ -70,6 +70,6 @@ function Get-CWMBoardItemAssociation {
         [switch]$all
     )
 
-    $Endpoint = "/service/boards/$grandParentId/items/$parentId/associations"
+    $Endpoint = "/service/boards/$grandparentId/items/$parentId/associations"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

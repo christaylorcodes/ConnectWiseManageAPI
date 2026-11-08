@@ -124,7 +124,7 @@ function New-CWMCompanySite {
         [string]$mobileGuid,
         [hashtable]$calendar,
         [hashtable]$timeZone,
-        [hashtable]$customFields
+        [hashtable[]]$customFields
     )
 
     $Endpoint = "/company/companies/$($parentId)/sites"

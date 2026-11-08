@@ -75,6 +75,6 @@ function Update-CWMOpportunityForecastItem {
         [object[]]$PatchOperations
     )
 
-    $Endpoint = "/sales/opportunities/$parentId/forecast/$id"
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast/$($id)"
     Invoke-CWMUpdateMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

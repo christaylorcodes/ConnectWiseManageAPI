@@ -8,13 +8,14 @@
 
 .PARAMETER parentId
     The id of the company.
-    Alias: CompanyID
+    Alias: companyId
 
-.PARAMETER NoteId
+.PARAMETER id
     The id of the note to delete.
+    Alias: noteId
 
 .EXAMPLE
-    Remove-CWMCompanyNote -parentId 12 -NoteId 5
+    Remove-CWMCompanyNote -parentId 12 -id 5
 
     Deletes note 5 of company 12.
 
@@ -26,12 +27,13 @@ function Remove-CWMCompanyNote {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]
-        [Alias('CompanyID')]
+        [Alias('companyId')]
         [int]$parentId,
         [Parameter(Mandatory = $true)]
-        [int]$NoteId
+        [Alias('noteId')]
+        [int]$id
     )
 
-    $Endpoint = "/company/companies/$ParentID/notes/$NoteId"
+    $Endpoint = "/company/companies/$($parentId)/notes/$($id)"
     Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

@@ -221,6 +221,7 @@
     https://developer.connectwise.com/manage/rest
 #>
 function New-CWMAgreementType {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [int]$id,
@@ -301,9 +302,6 @@ function New-CWMAgreementType {
         [hashtable]$_info
     )
 
-    if ($PSCmdlet.ShouldProcess($name, "Creating New Agreement Type")) {
-        $Endpoint = '/finance/agreements/types'
-        Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
-    }
-
+    $Endpoint = '/finance/agreements/types'
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

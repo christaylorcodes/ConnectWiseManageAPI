@@ -14,7 +14,8 @@
     ConvertFrom-CWMColumnRow -Data $ReportResponse
 
     Returns the rows of the report response as objects.
-#>function ConvertFrom-CWMColumnRow {
+#>
+function ConvertFrom-CWMColumnRow {
     [CmdletBinding()]
     param(
         $Data
@@ -22,8 +23,9 @@
     $dataTable = New-Object System.Data.DataTable
 
     $null = $Data.column_definitions | ForEach-Object {
-        if (!$dataTable.Columns.Contains($($_ | Get-Member | Where-Object { $_.memberType -eq 'noteproperty' }).Name)) {
-            $dataTable.Columns.Add(($_ | Get-Member | Where-Object { $_.memberType -eq 'noteproperty' }).Name)
+        $ColumnName = ($_ | Get-Member -MemberType NoteProperty).Name
+        if (!$dataTable.Columns.Contains($ColumnName)) {
+            $dataTable.Columns.Add($ColumnName)
         }
     }
     $null = $Data.row_values | ForEach-Object {

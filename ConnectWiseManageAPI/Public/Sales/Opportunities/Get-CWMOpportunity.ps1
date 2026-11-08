@@ -26,7 +26,7 @@
 .PARAMETER pageSize
     The number of records per page. Without it the API's default page size applies.
 
-.PARAMETER pageID
+.PARAMETER pageId
     Starts forward-only pagination at the page identified by this value.
 
 .PARAMETER all
@@ -41,19 +41,19 @@
     https://developer.connectwise.com/manage/rest
 #>
 function Get-CWMOpportunity {
-    param (
+    [CmdletBinding()]
+    param(
         [string]$condition,
         [string]$childConditions,
         [string]$customFieldConditions,
         [string]$orderBy,
-        [string]$fields,
-        [Int32]$page,
-        [Int32]$pageSize,
-        [Int32]$pageID,
+        [string[]]$fields,
+        [int]$page,
+        [int]$pageSize,
+        [int]$pageId,
         [switch]$all
     )
 
-    $endpoint = "/sales/opportunities"
-
-    Invoke-CWMGetMaster -Arguments $PSBoundParameters -Endpoint $endpoint
+    $Endpoint = '/sales/opportunities'
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

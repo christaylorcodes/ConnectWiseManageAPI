@@ -59,7 +59,7 @@ Describe 'Get-CWM* smoke test' {
         $global:CWMTestRequests.Count | Should -Be 1
         $Request = $global:CWMTestRequests[0]
         # Get-CWMTicket without an id runs a POST .../search
-        "$($Request.Method)" | Should -BeIn 'GET', 'Get', 'POST', 'Post'
+        "$($Request.Method)" | Should -BeIn 'GET', 'POST'
         $Uri = "$($Request.Uri)"
         $Uri | Should -BeLike "$CWMTestBaseUri/*"
         $Path = ($Uri -split '\?')[0].Substring($CWMTestBaseUri.Length)

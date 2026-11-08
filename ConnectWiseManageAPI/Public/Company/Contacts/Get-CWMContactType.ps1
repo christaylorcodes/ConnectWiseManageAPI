@@ -67,7 +67,6 @@ function Get-CWMContactType {
         [switch]$all
     )
 
-    $Endpoint = "/company/contacts/types"
-
-    return Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+    $Endpoint = '/company/contacts/types'
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

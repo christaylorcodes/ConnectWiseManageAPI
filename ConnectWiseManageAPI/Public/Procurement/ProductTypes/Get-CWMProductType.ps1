@@ -64,6 +64,7 @@ function Get-CWMProductType {
         [string[]]$fields,
         [switch]$all
     )
+
     $Endpoint = '/procurement/types'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

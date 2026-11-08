@@ -341,8 +341,7 @@ function New-CWMProduct {
         [string]$asioSubscriptionsID,
         [hashtable]$_info,
         [bool]$bypassForecastUpdate,
-        [hashtable]$customFields
-
+        [hashtable[]]$customFields
     )
 
     $Endpoint = '/procurement/products'

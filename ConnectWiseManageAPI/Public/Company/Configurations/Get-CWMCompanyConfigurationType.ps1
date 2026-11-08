@@ -65,6 +65,6 @@ function Get-CWMCompanyConfigurationType {
         [switch]$all
     )
 
-    $Endpoint = 'company/configurations/types'
+    $Endpoint = '/company/configurations/types'
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

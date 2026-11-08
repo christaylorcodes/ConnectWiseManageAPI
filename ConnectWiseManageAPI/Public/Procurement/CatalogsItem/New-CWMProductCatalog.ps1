@@ -138,7 +138,7 @@ function New-CWMProductCatalog {
         [string]$integrationXRef,
         [hashtable]$category,
         [hashtable]$_info,
-        [hashtable]$customFields
+        [hashtable[]]$customFields
     )
 
     $Endpoint = '/procurement/catalog'

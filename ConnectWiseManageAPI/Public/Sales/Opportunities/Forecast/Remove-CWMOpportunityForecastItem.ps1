@@ -8,6 +8,7 @@
 
 .PARAMETER parentId
     The id of the opportunity.
+    Alias: opportunityId
 
 .PARAMETER id
     The id of the forecast item to delete.
@@ -23,14 +24,14 @@
 function Remove-CWMOpportunityForecastItem {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
-    param (
-        [Parameter(Mandatory=$true)]
+    param(
+        [Parameter(Mandatory = $true)]
+        [Alias('opportunityId')]
         [int]$parentId,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [int]$id
     )
 
-    $endpoint = "/sales/opportunities/$parentId/forecast/$id"
-
-    Invoke-CWMRemoveMaster -Endpoint $endpoint
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast/$($id)"
+    Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

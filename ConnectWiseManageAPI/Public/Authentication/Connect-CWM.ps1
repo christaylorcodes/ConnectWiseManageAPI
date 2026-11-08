@@ -249,9 +249,11 @@ function Connect-CWM {
     # Reuse the cached connection only for the same server, company and sign-in method (and impersonated member).
     # Anything else connects again, as if -Force was passed.
     $Cached = $script:CWMServerConnection
-    if ($Cached -and !$Force -and (!$Cached.Expiration -or $Cached.Expiration -gt $(Get-Date))) {
-        if ($Cached.Server -eq $Server -and $Cached.Company -eq $Company -and
-            $Cached.ConnectionMethod -eq $ConnectionMethod -and "$($Cached.MemberID)" -eq "$MemberID") {
+    $CachedIsValid = $Cached -and (!$Cached.Expiration -or $Cached.Expiration -gt $(Get-Date))
+    $CachedIsSameIdentity = $Cached -and $Cached.Server -eq $Server -and $Cached.Company -eq $Company -and
+        $Cached.ConnectionMethod -eq $ConnectionMethod -and "$($Cached.MemberID)" -eq "$MemberID"
+    if ($CachedIsValid -and !$Force) {
+        if ($CachedIsSameIdentity) {
             Write-Verbose 'Using cached Authentication information.'
             if ($PSBoundParameters.ContainsKey('AllowInsecureRedirect')) {
                 $Cached.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
@@ -268,9 +270,7 @@ function Connect-CWM {
     # so callers never silently continue under a different identity or tenant.
     $Previous = $null
     $PreviousSession = $null
-    if ($Cached -and $Cached.Server -eq $Server -and $Cached.Company -eq $Company -and
-        $Cached.ConnectionMethod -eq $ConnectionMethod -and "$($Cached.MemberID)" -eq "$MemberID" -and
-        (!$Cached.Expiration -or $Cached.Expiration -gt $(Get-Date))) {
+    if ($CachedIsValid -and $CachedIsSameIdentity) {
         $Previous = $Cached
         $PreviousSession = $script:CWMSession
     }
@@ -318,10 +318,8 @@ function Connect-CWM {
             $Connection.MemberID = $MemberID
 
             # The token request is authenticated with the API member's own keys
-            $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
-            $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
             $TokenHeaders = $Headers.Clone()
-            $TokenHeaders.Authorization = "Basic $EncodedAuth"
+            $TokenHeaders.Authorization = ConvertTo-CWMBasicAuth -Company $Company -PublicKey $PubKey -PrivateKey $PrivateKey
             $TokenHeaders.'x-cw-usertype' = 'member'
             $WebRequestArguments = @{
                 Method      = 'Post'
@@ -340,17 +338,13 @@ function Connect-CWM {
 
             # Create auth header for Impersonated user
             if ($Result.expiration) { $Connection.Expiration = [datetime]$Result.expiration }
-            $AuthString = $Company + '+' + $Result.publicKey + ':' + $Result.privateKey
-            $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(($AuthString)))
-            $Headers.Authorization = "Basic $EncodedAuth"
+            $Headers.Authorization = ConvertTo-CWMBasicAuth -Company $Company -PublicKey $Result.publicKey -PrivateKey $Result.privateKey
         }
 
         # API key
         elseif ($ConnectionMethod -eq 'Key') {
             Write-Verbose 'Using API Key authentication'
-            $AuthString = "$($Company)+$($PubKey):$($PrivateKey)"
-            $EncodedAuth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($AuthString))
-            $Headers.Authorization = "Basic $EncodedAuth"
+            $Headers.Authorization = ConvertTo-CWMBasicAuth -Company $Company -PublicKey $PubKey -PrivateKey $PrivateKey
         }
 
         # Cookies, yummy

@@ -103,7 +103,6 @@ This release has **breaking changes**. Read them before upgrading.
   without a kind with no offset. Local dates (for example `Get-Date`) are converted to UTC. Dates without a kind (for
   example `[datetime]'2026-01-02'`) are sent unchanged as UTC, as PowerShell 7 sent them, so a calendar date keeps its
   day. String parameters are sent as given.
-
 - **Retry policy.** Reads (GET/HEAD) and searches retry on 502, 503 and 504; every method retries on 429. Writes
   (POST/PATCH/PUT/DELETE) are never retried on a 5xx, so a retry can't create a duplicate. The wait honours
   `Retry-After`, otherwise it backs off 2, 4, 8, 16 and 32 seconds (about 62 seconds in total over 5 retries).
@@ -149,7 +148,6 @@ This release has **breaking changes**. Read them before upgrading.
   header to `/login/companyinfo`.
 - **A response that is not JSON no longer comes back as a result object** from `Get-*` functions; only the error is
   written.
-
 - **Nine functions that were never exported** (their files had plural names) can now be called:
   `Get-`, `New-` and `Update-CWMAgreementType`, `Get-`, `New-`, `Update-` and `Remove-CWMProductPickingShippingDetail`,
   `Get-CWMOpportunityStage` and `Get-CWMOpportunityStatus`.

@@ -114,7 +114,7 @@ function New-CWMExpenseEntry {
         [hashtable]$ticket,
         [hashtable]$project,
         [hashtable]$phase,
-        [hashtable]$customFields
+        [hashtable[]]$customFields
     )
 
     $Endpoint = '/expense/entries'

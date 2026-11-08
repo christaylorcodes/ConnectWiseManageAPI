@@ -10,12 +10,12 @@
     The id of the agreement addition to delete.
     Alias: additionId
 
-.PARAMETER agreementid
+.PARAMETER parentId
     The id of the agreement.
-    Alias: parentId
+    Alias: agreementId
 
 .EXAMPLE
-    Remove-CWMAgreementAddition -agreementid 12 -id 5
+    Remove-CWMAgreementAddition -parentId 12 -id 5
 
     Deletes agreement addition 5 of agreement 12.
 
@@ -24,16 +24,17 @@
 #>
 function Remove-CWMAgreementAddition {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
-    [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
-        [Parameter(Mandatory=$true)]
+        # Position order kept from the old signature (id first) so positional calls still bind the same way
+        [Parameter(Mandatory = $true)]
         [Alias('additionId')]
         [int]$id,
-		[Parameter(Mandatory=$true)]
-		[Alias('parentId')]
-		[int]$agreementid
+        [Parameter(Mandatory = $true)]
+        [Alias('agreementId')]
+        [int]$parentId
     )
 
-    $Endpoint = "/finance/agreements/$($agreementid)/additions/$($id)"
+    $Endpoint = "/finance/agreements/$($parentId)/additions/$($id)"
     Invoke-CWMRemoveMaster -Endpoint $Endpoint
 }

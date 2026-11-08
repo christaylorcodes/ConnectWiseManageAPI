@@ -12,8 +12,9 @@
 .PARAMETER count
     Return only the number of matching custom status notes instead of the records.
 
-.PARAMETER CompanyID
+.PARAMETER parentId
     The id of the company.
+    Alias: companyId
 
 .PARAMETER condition
     Filter in ConnectWise Manage condition syntax, for example "id>100".
@@ -40,12 +41,12 @@
     Retrieve every matching record, handling pagination automatically.
 
 .EXAMPLE
-    Get-CWMCompanyCustomNote -CompanyID 12 -condition "id>100" -all
+    Get-CWMCompanyCustomNote -parentId 12 -condition "id>100" -all
 
     Retrieves the custom status notes of company 12 that match the condition.
 
 .EXAMPLE
-    Get-CWMCompanyCustomNote -CompanyID 12 -id 5
+    Get-CWMCompanyCustomNote -parentId 12 -id 5
 
     Retrieves custom status note 5 of company 12.
 
@@ -58,7 +59,8 @@ function Get-CWMCompanyCustomNote {
         [int]$id,
         [switch]$count,
         [Parameter(Mandatory = $true)]
-        [int]$CompanyID,
+        [Alias('companyId')]
+        [int]$parentId,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -70,6 +72,6 @@ function Get-CWMCompanyCustomNote {
         [switch]$all
     )
 
-    $Endpoint = "/company/companies/$($CompanyID)/customStatusNotes"
+    $Endpoint = "/company/companies/$($parentId)/customStatusNotes"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

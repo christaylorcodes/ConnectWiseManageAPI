@@ -9,7 +9,7 @@
 
 .PARAMETER parentId
     The id of the purchase order.
-    Alias: ProductID
+    Aliases: purchaseOrderId, ProductID
 
 .PARAMETER id
     The id of a single purchase order line item to retrieve.
@@ -58,7 +58,7 @@ function Get-CWMPurchaseOrderLineItem {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [Alias('ProductID')]
+        [Alias('purchaseOrderId', 'ProductID')]
         [int]$parentId,
         [int]$id,
         [switch]$count,

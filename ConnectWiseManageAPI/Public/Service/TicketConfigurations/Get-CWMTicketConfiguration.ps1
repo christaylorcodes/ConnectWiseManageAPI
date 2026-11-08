@@ -54,8 +54,8 @@
     https://developer.connectwise.com/manage/rest
 #>
 function Get-CWMTicketConfiguration {
-     [CmdletBinding()]
-     param(
+    [CmdletBinding()]
+    param(
         [Parameter(Mandatory=$true)]
         [Alias('ticketId')]
         [int]$parentId,
@@ -70,8 +70,8 @@ function Get-CWMTicketConfiguration {
         [int]$pageSize,
         [string[]]$fields,
         [switch]$all
-      )
+    )
 
-     $Endpoint = "/service/tickets/$($parentId)/configurations"
-     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
-  }
+    $Endpoint = "/service/tickets/$($parentId)/configurations"
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+}

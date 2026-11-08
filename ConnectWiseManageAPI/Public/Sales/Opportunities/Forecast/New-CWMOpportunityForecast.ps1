@@ -8,6 +8,7 @@
 
 .PARAMETER parentId
     The id of the opportunity to add the forecast to.
+    Alias: opportunityId
 
 .PARAMETER id
     The id property of the request body. Usually left unset; ConnectWise Manage assigns the id of a new
@@ -87,10 +88,11 @@
 function New-CWMOpportunityForecast {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
-    param (
-        [Parameter(Mandatory=$true)]
+    param(
+        [Parameter(Mandatory = $true)]
+        [Alias('opportunityId')]
         [int]$parentId,
-        [int]$id = 0,
+        [int]$id,
         [array]$forecastItems,
         [hashtable]$productRevenue,
         [hashtable]$serviceRevenue,
@@ -99,22 +101,21 @@ function New-CWMOpportunityForecast {
         [hashtable]$expenseRevenue,
         [hashtable]$forecastRevenueTotals,
         [hashtable]$inclusiveRevenueTotals,
-        [decimal]$recurringTotal = 0,
+        [decimal]$recurringTotal,
         [hashtable]$wonRevenue,
         [hashtable]$lostRevenue,
         [hashtable]$openRevenue,
         [hashtable]$otherRevenue1,
         [hashtable]$otherRevenue2,
-        [decimal]$salesTaxRevenue = 0,
-        [decimal]$forecastTotalWithTaxes = 0,
-        [decimal]$expectedProbability = 0,
+        [decimal]$salesTaxRevenue,
+        [decimal]$forecastTotalWithTaxes,
+        [decimal]$expectedProbability,
         [hashtable]$taxCode,
         [hashtable]$billingTerms,
         [hashtable]$currency,
         [hashtable]$_info
     )
 
-    $endpoint = "/sales/opportunities/$parentId/forecast"
-
-    Invoke-CWMNewMaster -Arguments $PSBoundParameters -Endpoint $endpoint
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast"
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

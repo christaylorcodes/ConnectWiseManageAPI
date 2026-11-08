@@ -8,6 +8,7 @@
 
 .PARAMETER parentId
     The id of the opportunity.
+    Alias: opportunityId
 
 .PARAMETER id
     The id of the forecast item to retrieve.
@@ -33,7 +34,7 @@
 .PARAMETER pageSize
     The number of records per page. Without it the API's default page size applies.
 
-.PARAMETER pageID
+.PARAMETER pageId
     Starts forward-only pagination at the page identified by this value.
 
 .EXAMPLE
@@ -45,22 +46,24 @@
     https://developer.connectwise.com/manage/rest
 #>
 function Get-CWMOpportunityForecastItem {
-    param (
-        [Parameter(Mandatory=$true)]
-        [int32]$parentId,
-        [Parameter(Mandatory=$true)]
-        [int32]$id,
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [Alias('opportunityId')]
+        [int]$parentId,
+        [Parameter(Mandatory = $true)]
+        [int]$id,
         [string]$condition,
         [string]$childConditions,
         [string]$customFieldConditions,
         [string]$orderBy,
-        [string]$fields,
-        [Int32]$page,
-        [Int32]$pageSize,
-        [Int32]$pageID
+        [string[]]$fields,
+        [int]$page,
+        [int]$pageSize,
+        [int]$pageId
     )
 
-    $endpoint = "/sales/opportunities/$parentId/forecast"
-
-    Invoke-CWMGetMaster -Arguments $PSBoundParameters -Endpoint $endpoint
+    # Invoke-CWMGetMaster adds /{id}
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast"
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

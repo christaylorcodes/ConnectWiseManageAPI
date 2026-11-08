@@ -12,8 +12,9 @@
 .PARAMETER count
     Return only the number of matching notes instead of the records.
 
-.PARAMETER CompanyID
+.PARAMETER parentId
     The id of the company.
+    Alias: companyId
 
 .PARAMETER condition
     Filter in ConnectWise Manage condition syntax, for example "text contains 'callback'".
@@ -40,12 +41,12 @@
     Retrieve every matching record, handling pagination automatically.
 
 .EXAMPLE
-    Get-CWMCompanyNote -CompanyID 12 -condition "text contains 'callback'" -all
+    Get-CWMCompanyNote -parentId 12 -condition "text contains 'callback'" -all
 
     Retrieves the notes of company 12 that match the condition.
 
 .EXAMPLE
-    Get-CWMCompanyNote -CompanyID 12 -id 5
+    Get-CWMCompanyNote -parentId 12 -id 5
 
     Retrieves note 5 of company 12.
 
@@ -58,7 +59,8 @@ function Get-CWMCompanyNote {
         [int]$id,
         [switch]$count,
         [Parameter(Mandatory = $true)]
-        [int]$CompanyID,
+        [Alias('companyId')]
+        [int]$parentId,
         [string]$condition,
         [ValidatePattern('\S* (desc|asc)')]
         [string]$orderBy,
@@ -70,6 +72,6 @@ function Get-CWMCompanyNote {
         [switch]$all
     )
 
-    $Endpoint = "/company/companies/$($CompanyID)/notes"
+    $Endpoint = "/company/companies/$($parentId)/notes"
     Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

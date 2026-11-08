@@ -9,7 +9,7 @@
 
 .PARAMETER parentId
     The id of the warehouse bin.
-    Alias: ProductID
+    Aliases: warehouseBinId, ProductID
 
 .PARAMETER id
     The id of a single on-hand inventory record to retrieve.
@@ -58,7 +58,7 @@ function Get-CWMInventory {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [Alias('ProductID')]
+        [Alias('warehouseBinId', 'ProductID')]
         [int]$parentId,
         [int]$id,
         [switch]$count,

@@ -16,7 +16,8 @@
     Join-Url 'https://na.myconnectwise.net/' '/v4_6_release'
 
     Returns https://na.myconnectwise.net/v4_6_release.
-#>function Join-Url {
+#>
+function Join-Url {
     param (
         [parameter(Mandatory = $True)]
         [string] $Path,

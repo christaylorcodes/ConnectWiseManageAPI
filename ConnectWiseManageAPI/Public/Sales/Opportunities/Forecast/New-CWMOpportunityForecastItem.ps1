@@ -7,8 +7,9 @@
     /sales/opportunities/{parentId}/forecast/{id}; only the parameters you pass are sent in the request
     body.
 
-.PARAMETER parentID
+.PARAMETER parentId
     The id of the opportunity to add the forecast item to.
+    Alias: opportunityId
 
 .PARAMETER id
     The {id} of the path POST /sales/opportunities/{parentId}/forecast/{id} (forecastId in the spec). It is
@@ -103,7 +104,7 @@
     Alias: info
 
 .EXAMPLE
-    New-CWMOpportunityForecastItem -parentID 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200
+    New-CWMOpportunityForecastItem -parentId 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200
 
     Creates a service forecast item with 1200 revenue on opportunity 75.
 
@@ -113,10 +114,12 @@
 function New-CWMOpportunityForecastItem {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
-    param (
-        [Parameter(Mandatory=$true)]
-        [int]$parentID,
-        [int]$id = 0,
+    param(
+        [Parameter(Mandatory = $true)]
+        [Alias('opportunityId')]
+        [int]$parentId,
+        [Parameter(Mandatory = $true)]
+        [int]$id,
         [string]$forecastDescription,
         [Parameter(Mandatory=$true)]
         [hashtable]$opportunity,
@@ -152,7 +155,6 @@ function New-CWMOpportunityForecastItem {
         [hashtable]$_info
     )
 
-    $endpoint = "/sales/opportunities/$parentId/forecast/$id"
-
-    Invoke-CWMNewMaster -Endpoint $endpoint -Arguments $PSBoundParameters
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast/$($id)"
+    Invoke-CWMNewMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }

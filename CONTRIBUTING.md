@@ -6,20 +6,20 @@ The following is a set of guidelines for contributing. These are mostly guidelin
 
 ## Table Of Contents
 
-[I don't want to read this whole thing, I just have a question!!!](#i-don't-want-to-read-this-whole-thing-i-just-have-a-question)
+[I don't want to read this whole thing, I just have a question!!!](#i-dont-want-to-read-this-whole-thing-i-just-have-a-question)
 
 [How Can I Contribute?](#how-can-i-contribute)
 
 -   [Reporting Bugs](#reporting-bugs)
 -   [Suggesting Enhancements](#suggesting-enhancements)
--   [Your First Code Contribution](#your-first-code-contribution)
--   [Pull Requests](#pull-requests)
 
 [Style Guides](#style-guides)
 
 -   [Git Commit Messages](#git-commit-messages)
--   [Powershell Style Guide](#powershell-style-guide)
+-   [PowerShell Style Guide](#powershell-style-guide)
+-   [Supported PowerShell versions](#supported-powershell-versions)
 -   [Documentation Style Guide](#documentation-style-guide)
+-   [Checking against the ConnectWise API spec](#checking-against-the-connectwise-api-spec)
 
 ## I don't want to read this whole thing I just have a question
 
@@ -162,7 +162,7 @@ PowerShell 7.4+ is the primary target. Windows PowerShell 5.1 is still supported
 ### Documentation Style Guide
 
 -   Use [Markdown](https://daringfireball.net/projects/markdown).
--   Documentation is built with platyPS from the markdown.
+-   Comment-based help in each function's `.ps1` file is the source of truth (start from `Templates/FunctionDocumentation.template.ps1`). `Docs/` is generated from it with platyPS; don't edit it by hand.
 -   Regenerate the docs on PowerShell 7, then run `./Tools/Remove-PlatyPSProgressAction.ps1` to strip the `-ProgressAction` parameter that platyPS adds on PowerShell 7.4+.
 
 ### Checking against the ConnectWise API spec

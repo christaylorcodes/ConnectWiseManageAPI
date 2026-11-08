@@ -1,6 +1,6 @@
 ﻿#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '5.0.0' }
 # Offline tests for behaviour that must be identical on Windows PowerShell 5.1 and PowerShell 7.
-# Run on both: powershell.exe -c Invoke-Pester ./Tests  and  pwsh -c Invoke-Pester ./Tests
+# Run on both editions with ./Tests/Invoke-Tests.ps1 -Test (see CLAUDE.md "Testing and checks").
 # Requests go to a local HttpListener (Tests/Helpers/CWMTestServer.ps1), so each edition's real
 # Invoke-WebRequest exceptions are exercised. No ConnectWise server or network access is needed.
 

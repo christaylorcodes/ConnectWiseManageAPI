@@ -8,6 +8,7 @@
 
 .PARAMETER parentId
     The id of the opportunity.
+    Alias: opportunityId
 
 .PARAMETER condition
     Filter in ConnectWise Manage condition syntax, for example "id>100".
@@ -30,7 +31,7 @@
 .PARAMETER pageSize
     The number of records per page. Without it the API's default page size applies.
 
-.PARAMETER pageID
+.PARAMETER pageId
     Starts forward-only pagination at the page identified by this value.
 
 .PARAMETER all
@@ -45,21 +46,22 @@
     https://developer.connectwise.com/manage/rest
 #>
 function Get-CWMOpportunityForecast {
-        param (
-            [Parameter(Mandatory=$true)]
-            [int32]$parentId,
-            [string]$condition,
-            [string]$childConditions,
-            [string]$customFieldConditions,
-            [string]$orderBy,
-            [string]$fields,
-            [Int32]$page,
-            [Int32]$pageSize,
-            [Int32]$pageID,
-            [switch]$all
-        )
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [Alias('opportunityId')]
+        [int]$parentId,
+        [string]$condition,
+        [string]$childConditions,
+        [string]$customFieldConditions,
+        [string]$orderBy,
+        [string[]]$fields,
+        [int]$page,
+        [int]$pageSize,
+        [int]$pageId,
+        [switch]$all
+    )
 
-        $endpoint = "/sales/opportunities/$parentId/forecast"
-
-        Invoke-CWMGetMaster -Arguments $PSBoundParameters -Endpoint $endpoint
+    $Endpoint = "/sales/opportunities/$($parentId)/forecast"
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
 }
