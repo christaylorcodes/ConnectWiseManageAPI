@@ -145,6 +145,8 @@ function New-CWMDocument {
     $fileBytes = $null
     switch ($PSCmdlet.ParameterSetName){
         'File' {
+            # ValidateScript checks each element of an array, so several files are rejected here
+            if (@($FilePath).Count -gt 1) { throw 'Pass one file. To upload several, call New-CWMDocument once per file.' }
             # Resolved against the current PowerShell location, not the process working directory
             if ($FilePath -is [System.IO.FileInfo]) { $ResolvedPath = $FilePath.FullName }
             else { $ResolvedPath = $PSCmdlet.GetUnresolvedProviderPathFromPSPath("$FilePath") }

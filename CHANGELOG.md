@@ -52,7 +52,8 @@ This release has **breaking changes**. Read them before upgrading.
     (it was an `[int]`, which the API rejects);
   - `New-CWMTicketConfiguration` and `New-CWMProjectTicketConfiguration`: `-id` is an `[int]`, and
     `-deviceIdentifier` is its own parameter, sent as `deviceIdentifier` (it was an alias of `-id`);
-  - `Get-CWMSSOConfiguration -id` is an `[int]`, as in the API.
+  - `Get-CWMSSOConfiguration -id` is an `[int]`, as in the API;
+  - `New-CWMCompanyContact -country` is a reference such as `@{ id = 1 }`; a country name string no longer binds.
 - **`Connect-CWM -MemberID` now really impersonates the member.** 0.4.16 silently connected with the API key
   instead. Check what the impersonated member is allowed to do before relying on it.
 - **An `add` or `replace` update without a value now errors** instead of silently sending `null`. Pass
@@ -183,8 +184,8 @@ This release has **breaking changes**. Read them before upgrading.
 - Parameters the API takes as arrays accept arrays: `-customFields`, `New-CWMProductAdjustment -adjustmentDetails`,
   `-serialNumberIds`, `-serialNumbers` and `New-CWMTicket -integratorTags`. `New-CWMMember` accepts `Email`, `TEL` and
   `CALLTO`; `New-CWMTimeEntry -chargeToType` accepts `Company`.
-- `New-CWMCompanyContact -country` is a reference (`@{ id = 1 }`); as a string it sent `System.Collections.Hashtable`.
-  `New-CWMCompanyConfiguration -backupBillableSpaceGb` keeps its decimals.
+- `New-CWMCompanyConfiguration -backupBillableSpaceGb` keeps its decimals. `Get-CWMOpportunity`,
+  `Get-CWMOpportunityStatus` and `Get-CWMOpportunityStage` take `-id` and `-count`.
 - `New-CWMCompanyNote` no longer sends the company id in the request body. Its route id is `-parentId`;
   `-companyId` and `-id` still work.
 - `Get-CWMReport` escapes the report name; `Get-CWMOpportunity*` send an array `-fields` correctly.

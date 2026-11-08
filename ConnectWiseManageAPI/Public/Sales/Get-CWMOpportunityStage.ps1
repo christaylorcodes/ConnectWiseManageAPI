@@ -3,7 +3,13 @@
     Gets sales stages.
 
 .DESCRIPTION
-    Retrieves the sales stages from ConnectWise Manage. Calls GET /sales/stages.
+    Retrieves the sales stages from ConnectWise Manage. Calls GET /sales/stages; -id adds /{id} and -count adds /count.
+
+.PARAMETER id
+    The id of a single sales stage to return.
+
+.PARAMETER count
+    Returns the number of matching sales stages instead of the records.
 
 .PARAMETER condition
     Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".
@@ -43,6 +49,8 @@
 function Get-CWMOpportunityStage {
     [CmdletBinding()]
     param(
+        [int]$id,
+        [switch]$count,
         [string]$condition,
         [string]$childConditions,
         [string]$customFieldConditions,

@@ -3,7 +3,13 @@
     Gets opportunities.
 
 .DESCRIPTION
-    Retrieves the opportunities from ConnectWise Manage. Calls GET /sales/opportunities.
+    Retrieves the opportunities from ConnectWise Manage. Calls GET /sales/opportunities; -id adds /{id} and -count adds /count.
+
+.PARAMETER id
+    The id of a single opportunity to return.
+
+.PARAMETER count
+    Returns the number of matching opportunities instead of the records.
 
 .PARAMETER condition
     Filter in ConnectWise Manage condition syntax, for example "status/name='Open' and company/id=250".
@@ -43,6 +49,8 @@
 function Get-CWMOpportunity {
     [CmdletBinding()]
     param(
+        [int]$id,
+        [switch]$count,
         [string]$condition,
         [string]$childConditions,
         [string]$customFieldConditions,

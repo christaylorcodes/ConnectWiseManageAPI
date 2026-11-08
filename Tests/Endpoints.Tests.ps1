@@ -337,6 +337,15 @@ Describe 'Endpoint functions' {
             ([uri]$global:CWMTestRequests[0].Uri).AbsoluteUri | Should -BeExactly "$CWMTestBaseUri/system/reports/My%20Report"
         }
 
+        It '<Command> supports -id and -count' -ForEach @(
+            @{ Command = 'Get-CWMOpportunity'; Path = '/sales/opportunities' }
+            @{ Command = 'Get-CWMOpportunityStatus'; Path = '/sales/opportunities/statuses' }
+            @{ Command = 'Get-CWMOpportunityStage'; Path = '/sales/stages' }
+        ) {
+            & $Command -id 5 | Out-Null
+            ([uri]$global:CWMTestRequests[0].Uri).AbsolutePath | Should -BeLike "*$Path/5"
+        }
+
         It 'Get-CWMOpportunity sends an array -fields as a comma-separated list' {
             Get-CWMOpportunity -fields 'id', 'name' | Out-Null
             [uri]::UnescapeDataString($global:CWMTestRequests[0].Uri) | Should -BeLike '*fields=id,name*'
@@ -473,16 +482,16 @@ Describe 'Endpoint functions' {
         }
 
         It '<Command> passes a copy, not $PSBoundParameters, to Invoke-CWMNewMaster' -ForEach @(
-            @{ Command = 'New-CWMCompanyServiceTemplate'; Splat = @{ parentId = 250; name = 'N'; summary = 'S'; board = @{ id = 1 }; status = @{ id = 2 } }; Key = 'company' }
-            @{ Command = 'New-CWMCompanyTeam'; Splat = @{ parentId = 250; teamRole = @{ id = 1 }; locationId = 2 }; Key = 'location' }
-            @{ Command = 'New-CWMCompanyContact'; Splat = @{ firstName = 'A'; managerContactId = 5 }; Key = 'managerContact' }
+            @{ Command = 'New-CWMCompanyServiceTemplate'; Splat = @{ parentId = 250; name = 'N'; summary = 'S'; board = @{ id = 1 }; status = @{ id = 2 } }; Key = 'company'; Expected = 250 }
+            @{ Command = 'New-CWMCompanyTeam'; Splat = @{ parentId = 250; teamRole = @{ id = 1 }; locationId = 2 }; Key = 'location'; Expected = 2 }
+            @{ Command = 'New-CWMCompanyContact'; Splat = @{ firstName = 'A'; managerContactId = 5 }; Key = 'managerContact'; Expected = 5 }
         ) {
-            InModuleScope ConnectWiseManageAPI -Parameters @{ Command = $Command; Splat = $Splat; Key = $Key } {
-                param($Command, $Splat, $Key)
+            InModuleScope ConnectWiseManageAPI -Parameters @{ Command = $Command; Splat = $Splat; Key = $Key; Expected = $Expected } {
+                param($Command, $Splat, $Key, $Expected)
                 Mock Invoke-CWMNewMaster { $script:CapturedArguments = $Arguments }
                 & $Command @Splat | Out-Null
                 $script:CapturedArguments | Should -BeOfType [hashtable]
-                $script:CapturedArguments[$Key].id | Should -BeGreaterThan 0
+                $script:CapturedArguments[$Key].id | Should -Be $Expected
             }
         }
 
@@ -549,6 +558,10 @@ Describe 'Endpoint functions' {
 
         BeforeEach {
             Set-CWMTestResponse -StatusCode 201 -Content '{"id":7}'
+        }
+
+        It 'rejects several files in one call with a clear message' {
+            { New-CWMDocument -recordType Ticket -recordId 1 -title 'T' -FilePath @($TestFile, $TestFile) -Confirm:$false } | Should -Throw '*Pass one file*'
         }
 
         It 'resolves a relative -FilePath against the current PowerShell location' {
