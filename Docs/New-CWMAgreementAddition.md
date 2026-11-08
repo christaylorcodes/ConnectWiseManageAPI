@@ -13,13 +13,13 @@ Creates an agreement addition for an agreement.
 ## SYNTAX
 
 ```
-New-CWMAgreementAddition [-parentId] <Int32> [[-id] <Int32>] [-product] <Object> [[-quantity] <Single>]
- [[-lessIncluded] <Single>] [[-unitPrice] <Single>] [[-unitCost] <Single>] [-billCustomer] <String>
+New-CWMAgreementAddition [-parentId] <Int32> [[-id] <Int32>] [-product] <Object> [[-quantity] <Double>]
+ [[-lessIncluded] <Double>] [[-unitPrice] <Double>] [[-unitCost] <Double>] [-billCustomer] <String>
  [[-effectiveDate] <String>] [[-cancelledDate] <String>] [[-taxableFlag] <Boolean>] [[-serialNumber] <String>]
  [[-invoiceDescription] <String>] [[-purchaseItemFlag] <Boolean>] [[-specialOrderFlag] <Boolean>]
- [[-description] <String>] [[-billedQuantity] <Single>] [[-uom] <String>] [[-extPrice] <Single>]
- [[-extCost] <Single>] [[-sequenceNumber] <Single>] [[-margin] <Single>] [[-prorateCost] <Single>]
- [[-proratePrice] <Single>] [[-extendedProrateCost] <Single>] [[-extendedProratePrice] <Single>]
+ [[-description] <String>] [[-billedQuantity] <Double>] [[-uom] <String>] [[-extPrice] <Double>]
+ [[-extCost] <Double>] [[-sequenceNumber] <Double>] [[-margin] <Double>] [[-prorateCost] <Double>]
+ [[-proratePrice] <Double>] [[-extendedProrateCost] <Double>] [[-extendedProratePrice] <Double>]
  [[-prorateCurrentPeriodFlag] <Boolean>] [[-_info] <Hashtable>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
@@ -94,7 +94,7 @@ Quantity.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -110,7 +110,7 @@ Less included.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -126,7 +126,7 @@ Unit price.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -142,7 +142,7 @@ Unit cost.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -302,7 +302,7 @@ Billed quantity.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -333,7 +333,7 @@ Ext price.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -349,7 +349,7 @@ Ext cost.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -365,7 +365,7 @@ Sequence number.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -381,7 +381,7 @@ Margin.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -397,7 +397,7 @@ Prorate cost.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -413,7 +413,7 @@ Prorate price.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -429,7 +429,7 @@ Extended prorate cost.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -445,7 +445,7 @@ Extended prorate price.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

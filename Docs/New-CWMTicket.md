@@ -39,7 +39,7 @@ New-CWMTicket [-id <Int32>] -summary <String> [-recordType <String>] [-board <Ha
  [-predecessorClosedFlag <Boolean>] [-lagDays <Int32>] [-lagNonworkingDaysFlag <Boolean>]
  [-estimatedStartDate <String>] [-duration <Int32>] [-location <Hashtable>] [-department <Hashtable>]
  [-mobileGuid <Guid>] [-sla <Hashtable>] [-currency <Hashtable>] [-mergedParentTicket <Hashtable>]
- [-integratorTags <String>] [-_info <Hashtable>] [-customFields <Hashtable[]>]
+ [-integratorTags <String[]>] [-_info <Hashtable>] [-customFields <Hashtable[]>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -1617,7 +1617,7 @@ Integrator tags.
 An array of strings.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 

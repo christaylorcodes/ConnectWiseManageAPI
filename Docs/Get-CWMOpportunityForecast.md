@@ -14,8 +14,8 @@ Gets the forecast of an opportunity.
 
 ```
 Get-CWMOpportunityForecast [-parentId] <Int32> [[-condition] <String>] [[-childConditions] <String>]
- [[-customFieldConditions] <String>] [[-orderBy] <String>] [[-fields] <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [[-pageID] <Int32>] [-all] [<CommonParameters>]
+ [[-customFieldConditions] <String>] [[-orderBy] <String>] [[-fields] <String[]>] [[-page] <Int32>]
+ [[-pageSize] <Int32>] [[-pageId] <Int32>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,11 +36,12 @@ Retrieves the forecasts of opportunity 12 that match the condition.
 
 ### -parentId
 The id of the opportunity.
+Alias: opportunityId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: opportunityId
 
 Required: True
 Position: 1
@@ -113,7 +114,7 @@ Accept wildcard characters: False
 Only return these fields, for example @('id', 'forecastItems').
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -156,7 +157,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageID
+### -pageId
 Starts forward-only pagination at the page identified by this value.
 
 ```yaml

@@ -36,7 +36,7 @@ Creates the report, with the server name hashed, and copies it to the clipboard.
 ## PARAMETERS
 
 ### -Hash
-Replace the server name with its MD5 hash so the report can be shared.
+Replace the server name with its SHA-256 hash so the report can be shared.
 Defaults to $true; use -Hash
 $false to show the server name.
 

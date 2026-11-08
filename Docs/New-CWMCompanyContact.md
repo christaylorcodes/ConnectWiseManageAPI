@@ -15,17 +15,17 @@ Creates a contact.
 ```
 New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [[-types] <Hashtable[]>]
  [[-company] <Hashtable>] [[-site] <Hashtable>] [[-addressLine1] <String>] [[-addressLine2] <String>]
- [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <String>] [[-relationship] <Hashtable>]
- [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>] [[-defaultMergeContactId] <Int32>]
- [[-securityIdentifier] <String>] [[-managerContact] <Object>] [[-assistantContact] <Object>]
- [[-title] <String>] [[-school] <String>] [[-nickName] <String>] [[-marriedFlag] <Boolean>]
- [[-childrenFlag] <Boolean>] [[-significantOther] <String>] [[-portalPassword] <SecureString>]
- [[-portalSecurityLevel] <Int32>] [[-disablePortalLoginFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>]
- [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>] [[-presence] <String>]
- [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>] [[-linkedInUrl] <String>]
- [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>] [[-communicationItems] <Hashtable[]>]
- [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <Hashtable>]
+ [[-relationship] <Hashtable>] [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>]
+ [[-defaultMergeContactId] <Int32>] [[-securityIdentifier] <String>] [[-managerContact] <Object>]
+ [[-assistantContact] <Object>] [[-title] <String>] [[-school] <String>] [[-nickName] <String>]
+ [[-marriedFlag] <Boolean>] [[-childrenFlag] <Boolean>] [[-significantOther] <String>]
+ [[-portalPassword] <SecureString>] [[-portalSecurityLevel] <Int32>] [[-disablePortalLoginFlag] <Boolean>]
+ [[-unsubscribeFlag] <Boolean>] [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>]
+ [[-presence] <String>] [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>]
+ [[-linkedInUrl] <String>] [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>]
+ [[-communicationItems] <Hashtable[]>] [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -216,7 +216,7 @@ Accept wildcard characters: False
 Country reference, for example @{ id = 1 }.
 
 ```yaml
-Type: System.String
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 

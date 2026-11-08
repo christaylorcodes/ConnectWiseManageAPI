@@ -13,8 +13,8 @@ Gets the types of a service board.
 ## SYNTAX
 
 ```
-Get-CWMBoardType [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <Object>]
- [[-childconditions] <String>] [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+Get-CWMBoardType [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
@@ -106,7 +106,7 @@ Accept wildcard characters: False
 Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: System.Object
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -117,7 +117,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childconditions
+### -childConditions
 Filter on child (list) fields, in condition syntax.
 
 ```yaml
@@ -132,7 +132,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customfieldconditions
+### -customFieldConditions
 Filter on custom field values, in condition syntax.
 
 ```yaml

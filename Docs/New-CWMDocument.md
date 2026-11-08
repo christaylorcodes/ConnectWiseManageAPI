@@ -21,8 +21,8 @@ New-CWMDocument -recordType <String> -recordId <Int32> -title <String> -URL <Str
 
 ### File
 ```
-New-CWMDocument -recordType <String> -recordId <Int32> -title <String> -FilePath <FileInfo>
- [-FileName <String>] [-Private <Boolean>] [-ReadOnly <Boolean>] [-isAvatar <Boolean>]
+New-CWMDocument -recordType <String> -recordId <Int32> -title <String> -FilePath <Object> [-FileName <String>]
+ [-Private <Boolean>] [-ReadOnly <Boolean>] [-isAvatar <Boolean>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -119,11 +119,13 @@ Accept wildcard characters: False
 ```
 
 ### -FilePath
-Path to the local file to upload.
-Must be a file, not a folder.
+Path to the local file to upload, or a file object from Get-Item or Get-ChildItem.
+Must be a file, not a
+folder.
+A relative path is resolved against the current PowerShell location.
 
 ```yaml
-Type: System.IO.FileInfo
+Type: System.Object
 Parameter Sets: File
 Aliases:
 

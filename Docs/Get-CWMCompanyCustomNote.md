@@ -13,7 +13,7 @@ Gets the custom status notes of a company.
 ## SYNTAX
 
 ```
-Get-CWMCompanyCustomNote [[-id] <Int32>] [-count] [-CompanyID] <Int32> [[-condition] <String>]
+Get-CWMCompanyCustomNote [[-id] <Int32>] [-count] [-parentId] <Int32> [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
  [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
@@ -34,7 +34,7 @@ Retrieves the custom status notes of company 12 that match the condition.
 
 ### EXAMPLE 2
 ```
-Get-CWMCompanyCustomNote -CompanyID 12 -id 5
+Get-CWMCompanyCustomNote -parentId 12 -id 5
 ```
 
 Retrieves custom status note 5 of company 12.
@@ -71,13 +71,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CompanyID
+### -parentId
 The id of the company.
+Alias: companyId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
 Required: True
 Position: 2

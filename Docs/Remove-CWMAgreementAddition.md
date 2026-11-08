@@ -13,7 +13,7 @@ Deletes an agreement addition of an agreement.
 ## SYNTAX
 
 ```
-Remove-CWMAgreementAddition [-id] <Int32> [-agreementid] <Int32> [-WhatIf]
+Remove-CWMAgreementAddition [-id] <Int32> [-parentId] <Int32> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -26,7 +26,7 @@ Calls DELETE
 
 ### EXAMPLE 1
 ```
-Remove-CWMAgreementAddition -agreementid 12 -id 5
+Remove-CWMAgreementAddition -parentId 12 -id 5
 ```
 
 Deletes agreement addition 5 of agreement 12.
@@ -49,14 +49,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -agreementid
+### -parentId
 The id of the agreement.
-Alias: parentId
+Alias: agreementId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases: parentId
+Aliases: agreementId
 
 Required: True
 Position: 2

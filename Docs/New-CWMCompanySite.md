@@ -19,7 +19,7 @@ New-CWMCompanySite [-parentId] <Int32> [[-id] <Int32>] [-name] <String> [[-addre
  [[-taxCode] <Hashtable>] [[-entityType] <Hashtable>] [[-expenseReimbursement] <Double>]
  [[-primaryAddressFlag] <Boolean>] [[-defaultShippingFlag] <Boolean>] [[-defaultBillingFlag] <Boolean>]
  [[-defaultMailingFlag] <Boolean>] [[-inactiveFlag] <Boolean>] [[-billSeparateFlag] <Boolean>]
- [[-mobileGuid] <String>] [[-calendar] <Hashtable>] [[-timeZone] <Hashtable>] [[-customFields] <Hashtable>]
+ [[-mobileGuid] <String>] [[-calendar] <Hashtable>] [[-timeZone] <Hashtable>] [[-customFields] <Hashtable[]>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -424,7 +424,7 @@ Custom fields.
 An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 

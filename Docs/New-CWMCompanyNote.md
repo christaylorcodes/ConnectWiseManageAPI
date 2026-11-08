@@ -13,7 +13,7 @@ Creates a note for a company.
 ## SYNTAX
 
 ```
-New-CWMCompanyNote [-id] <Int32> [[-flagged] <Boolean>] [[-text] <String>]
+New-CWMCompanyNote [-parentId] <Int32> [[-flagged] <Boolean>] [[-text] <String>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -26,21 +26,21 @@ the parameters you pass are sent in the request body.
 
 ### EXAMPLE 1
 ```
-New-CWMCompanyNote -id 250 -text 'Discussed the contract renewal with the owner.' -flagged $true
+New-CWMCompanyNote -parentId 250 -text 'Discussed the contract renewal with the owner.' -flagged $true
 ```
 
 Adds a flagged note to company 250.
 
 ## PARAMETERS
 
-### -id
+### -parentId
 The id of the company to add the note to.
-Alias: companyId
+Aliases: companyId, id (the name used before 0.5.0)
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases: companyId
+Aliases: companyId, id
 
 Required: True
 Position: 1

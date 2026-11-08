@@ -13,7 +13,7 @@ Gets SSO configurations.
 ## SYNTAX
 
 ```
-Get-CWMSSOConfiguration [[-id] <String>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+Get-CWMSSOConfiguration [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
@@ -45,13 +45,13 @@ Retrieves SSO configuration 5.
 The id of a single SSO configuration to retrieve.
 
 ```yaml
-Type: System.String
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 1
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

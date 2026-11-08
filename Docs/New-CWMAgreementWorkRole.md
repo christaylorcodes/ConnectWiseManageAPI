@@ -14,7 +14,7 @@ Creates an agreement work role rate for an agreement.
 
 ```
 New-CWMAgreementWorkRole [-parentId] <Int32> [[-id] <Int32>] [[-workRole] <Object>] [[-locationId] <Int32>]
- [[-location] <Object>] [-rateType] <String> [[-rate] <Single>] [[-limitTo] <Single>]
+ [[-location] <Object>] [-rateType] <String> [[-rate] <Double>] [[-limitTo] <Double>]
  [[-effectiveDate] <String>] [[-endingDate] <String>] [[-agreement] <Object>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -135,7 +135,7 @@ Rate.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -151,7 +151,7 @@ Limit to.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

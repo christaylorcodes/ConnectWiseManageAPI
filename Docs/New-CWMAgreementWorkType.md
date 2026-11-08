@@ -14,9 +14,9 @@ Creates an agreement work type rate for an agreement.
 
 ```
 New-CWMAgreementWorkType [-parentId] <Int32> [[-id] <Int32>] [[-workType] <Object>] [[-location] <Object>]
- [[-locationId] <Int32>] [-rateType] <String> [-billTime] <String> [[-rate] <Single>] [[-hoursMax] <Single>]
- [[-hoursMin] <Single>] [[-roundBillHours] <Single>] [[-overageRate] <Single>] [[-overageRateType] <String>]
- [[-agreementLimit] <Single>] [[-site] <Object>] [[-effectiveDate] <String>] [[-endingDate] <String>]
+ [[-locationId] <Int32>] [-rateType] <String> [-billTime] <String> [[-rate] <Double>] [[-hoursMax] <Double>]
+ [[-hoursMin] <Double>] [[-roundBillHours] <Double>] [[-overageRate] <Double>] [[-overageRateType] <String>]
+ [[-agreementLimit] <Double>] [[-site] <Object>] [[-effectiveDate] <String>] [[-endingDate] <String>]
  [[-agreement] <Object>] [[-company] <Object>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -154,7 +154,7 @@ Rate.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -170,7 +170,7 @@ Hours max.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -186,7 +186,7 @@ Hours min.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -202,7 +202,7 @@ Round bill hours.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -218,7 +218,7 @@ Overage rate.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -250,7 +250,7 @@ Agreement limit.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

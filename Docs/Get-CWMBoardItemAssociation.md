@@ -13,7 +13,7 @@ Gets the subtype associations of a service board item.
 ## SYNTAX
 
 ```
-Get-CWMBoardItemAssociation [-grandParentId] <Int32> [-parentId] <Int32> [-count] [[-condition] <String>]
+Get-CWMBoardItemAssociation [-grandparentId] <Int32> [-parentId] <Int32> [-count] [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
  [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
@@ -34,7 +34,7 @@ Retrieves the subtype associations of board item 12 that match the condition.
 
 ## PARAMETERS
 
-### -grandParentId
+### -grandparentId
 The id of the service board.
 Alias: boardId
 

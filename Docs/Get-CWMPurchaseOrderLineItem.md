@@ -44,12 +44,12 @@ Retrieves purchase order line item 5 of purchase order 12.
 
 ### -parentId
 The id of the purchase order.
-Alias: ProductID
+Aliases: purchaseOrderId, ProductID
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases: ProductID
+Aliases: purchaseOrderId, ProductID
 
 Required: True
 Position: 1

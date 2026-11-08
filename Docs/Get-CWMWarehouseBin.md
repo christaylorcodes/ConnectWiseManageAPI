@@ -14,7 +14,7 @@ Gets warehouse bins.
 
 ```
 Get-CWMWarehouseBin [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
- [[-childconditions] <String>] [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
  [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
@@ -101,7 +101,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childconditions
+### -childConditions
 Filter on child (list) fields, in condition syntax.
 
 ```yaml
@@ -116,7 +116,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customfieldconditions
+### -customFieldConditions
 Filter on custom field values, in condition syntax.
 
 ```yaml

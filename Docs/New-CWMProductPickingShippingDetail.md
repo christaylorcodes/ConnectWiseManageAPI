@@ -15,7 +15,7 @@ Creates a picking and shipping detail for a product.
 ```
 New-CWMProductPickingShippingDetail [-parentId] <Int32> [[-pickedQuantity] <Int32>]
  [[-shippedQuantity] <Int32>] [-warehouse] <Hashtable> [-warehouseBin] <Hashtable>
- [[-shipmentMethod] <Hashtable>] [[-serialNumber] <String>] [[-serialNumberIds] <Int32>]
+ [[-shipmentMethod] <Hashtable>] [[-serialNumber] <String>] [[-serialNumberIds] <Int32[]>]
  [[-trackingNumber] <String>] [[-productItem] <Hashtable>] [[-lineNumber] <Int32>] [[-quantity] <Int32>]
  [[-expectedArrivalDate] <String>] [[-shipmentDate] <String>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
@@ -153,13 +153,13 @@ Serial number ids.
 An array of integers.
 
 ```yaml
-Type: System.Int32
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 8
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -44,12 +44,12 @@ Retrieves on-hand inventory record 5 of warehouse bin 12.
 
 ### -parentId
 The id of the warehouse bin.
-Alias: ProductID
+Aliases: warehouseBinId, ProductID
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases: ProductID
+Aliases: warehouseBinId, ProductID
 
 Required: True
 Position: 1

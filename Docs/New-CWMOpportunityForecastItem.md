@@ -13,8 +13,8 @@ Creates a forecast item for an opportunity.
 ## SYNTAX
 
 ```
-New-CWMOpportunityForecastItem [-parentID] <Int32> [[-id] <Int32>] [[-forecastDescription] <String>]
- [-opportunity] <Hashtable> [[-quantity] <Int32>] [-status] <Hashtable> [[-catalogItem] <Hashtable>]
+New-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [[-forecastDescription] <String>]
+ [-opportunity] <Hashtable> [[-quantity] <Double>] [-status] <Hashtable> [[-catalogItem] <Hashtable>]
  [[-productDescription] <String>] [[-productClass] <String>] [[-revenue] <Decimal>] [[-cost] <Decimal>]
  [[-margin] <Decimal>] [[-percentage] <Decimal>] [[-includeFlag] <Boolean>] [[-quoteWerksDocNo] <String>]
  [[-quoteWerksDocName] <String>] [[-quoteWerksQuantity] <Int32>] [-forecastType] <String>
@@ -35,20 +35,21 @@ body.
 
 ### EXAMPLE 1
 ```
-New-CWMOpportunityForecastItem -parentID 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200
+New-CWMOpportunityForecastItem -parentId 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200
 ```
 
 Creates a service forecast item with 1200 revenue on opportunity 75.
 
 ## PARAMETERS
 
-### -parentID
+### -parentId
 The id of the opportunity to add the forecast item to.
+Alias: opportunityId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: opportunityId
 
 Required: True
 Position: 1
@@ -67,7 +68,7 @@ Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 2
 Default value: 0
 Accept pipeline input: False
@@ -111,7 +112,7 @@ Quantity.
 A number.
 
 ```yaml
-Type: System.Int32
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

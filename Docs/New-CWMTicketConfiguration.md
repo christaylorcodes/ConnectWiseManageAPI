@@ -13,8 +13,8 @@ Attaches a configuration to a service ticket.
 ## SYNTAX
 
 ```
-New-CWMTicketConfiguration [-parentId] <Int32> [[-id] <String>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+New-CWMTicketConfiguration [-parentId] <Int32> [[-id] <Int32>] [[-deviceIdentifier] <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,15 +51,30 @@ Accept wildcard characters: False
 
 ### -id
 The id of the configuration to attach.
-Alias: deviceIdentifier
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -deviceIdentifier
+The device identifier of the configuration to attach.
+Use instead of -id.
 
 ```yaml
 Type: System.String
 Parameter Sets: (All)
-Aliases: deviceIdentifier
+Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

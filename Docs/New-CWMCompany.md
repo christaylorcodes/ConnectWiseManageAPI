@@ -32,7 +32,7 @@ New-CWMCompany [[-id] <Int32>] [-identifier] <String> [-name] <String> [[-status
  [[-deletedBy] <String>] [[-mobileGuid] <String>] [[-facebookUrl] <String>] [[-twitterUrl] <String>]
  [[-linkedInUrl] <String>] [[-currency] <Hashtable>] [[-territoryManager] <Hashtable>]
  [[-resellerIdentifier] <String>] [[-isVendorFlag] <Boolean>] [[-types] <Array>] [[-site] <Hashtable>]
- [[-integratorTags] <Array>] [[-_info] <Hashtable>] [[-customFields] <Hashtable>]
+ [[-integratorTags] <Array>] [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -1157,7 +1157,7 @@ Custom fields.
 An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 

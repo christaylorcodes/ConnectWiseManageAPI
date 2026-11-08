@@ -13,14 +13,14 @@ Gets opportunities.
 ## SYNTAX
 
 ```
-Get-CWMOpportunity [[-condition] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>]
- [[-orderBy] <String>] [[-fields] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-pageID] <Int32>] [-all]
- [<CommonParameters>]
+Get-CWMOpportunity [[-id] <Int32>] [-count] [[-condition] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-orderBy] <String>] [[-fields] <String[]>] [[-page] <Int32>]
+ [[-pageSize] <Int32>] [[-pageId] <Int32>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Retrieves the opportunities from ConnectWise Manage.
-Calls GET /sales/opportunities.
+Calls GET /sales/opportunities; -id adds /{id} and -count adds /count.
 
 ## EXAMPLES
 
@@ -33,6 +33,36 @@ Retrieves the opportunities that match the condition.
 
 ## PARAMETERS
 
+### -id
+The id of a single opportunity to return.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Returns the number of matching opportunities instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -condition
 Filter in ConnectWise Manage condition syntax, for example "status/name='Open' and company/id=250".
 
@@ -42,7 +72,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -57,7 +87,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -72,7 +102,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -87,7 +117,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,12 +127,12 @@ Accept wildcard characters: False
 Only return these fields, for example @('id', 'name').
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -118,7 +148,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 7
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -134,13 +164,13 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 8
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageID
+### -pageId
 Starts forward-only pagination at the page identified by this value.
 
 ```yaml
@@ -149,7 +179,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 8
+Position: 9
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False

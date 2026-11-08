@@ -29,13 +29,13 @@ New-CWMProduct [[-id] <Int32>] [-catalogItem] <Hashtable> [[-description] <Strin
  [[-warehouseBinIdObject] <Hashtable>] [[-calculatedPriceFlag] <Boolean>] [[-calculatedCostFlag] <Boolean>]
  [[-forecastDetailId] <Int32>] [[-cancelledBy] <Int32>] [[-cancelledDate] <String>] [[-warehouse] <String>]
  [[-warehouseBin] <String>] [[-purchaseDate] <String>] [[-taxCode] <Hashtable>] [[-integrationXRef] <String>]
- [[-listPrice] <Decimal>] [[-serialNumberIds] <Int32>] [[-serialNumbers] <String>] [[-company] <Hashtable>]
+ [[-listPrice] <Decimal>] [[-serialNumberIds] <Int32[]>] [[-serialNumbers] <String[]>] [[-company] <Hashtable>]
  [[-forecastStatus] <Hashtable>] [[-productClass] <String>] [[-needToPurchaseFlag] <Boolean>]
  [[-needToOrderQuantity] <Int32>] [[-minimumStockFlag] <Boolean>] [[-shipSet] <String>]
  [[-calculatedPrice] <Decimal>] [[-calculatedCost] <Decimal>] [[-invoiceGrouping] <Hashtable>]
  [[-poApprovedFlag] <Boolean>] [[-uom] <String>] [[-addComponentsFlag] <Boolean>]
  [[-ignorePricingSchedulesFlag] <Boolean>] [[-asioSubscriptionsID] <String>] [[-_info] <Hashtable>]
- [[-bypassForecastUpdate] <Boolean>] [[-customFields] <Hashtable>]
+ [[-bypassForecastUpdate] <Boolean>] [[-customFields] <Hashtable[]>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -973,13 +973,13 @@ Serial number ids.
 An array of integers.
 
 ```yaml
-Type: System.Int32
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 59
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -989,7 +989,7 @@ Serial numbers.
 An array of strings.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -1272,7 +1272,7 @@ Custom fields.
 An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 

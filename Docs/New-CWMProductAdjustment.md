@@ -14,7 +14,7 @@ Creates a product adjustment.
 
 ```
 New-CWMProductAdjustment [-identifier] <String> [-type] <Hashtable> [[-reason] <String>] [[-notes] <String>]
- [[-adjustmentDetails] <Hashtable>] [[-_info] <Hashtable>] [-WhatIf]
+ [[-adjustmentDetails] <Hashtable[]>] [[-_info] <Hashtable>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -103,7 +103,7 @@ Adjustment details.
 An array of hashtables with the properties of the API's AdjustmentDetail object.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 

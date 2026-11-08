@@ -356,8 +356,8 @@ Connection Lifecycle:
 - Connections persist for the PowerShell session duration
 - Only impersonation connections expire (when the impersonation token expires); API key and
   cookie connections are reused until Disconnect-CWM or -Force
-- A cached connection is reused only for the same server, company, sign-in method and impersonated
-  member; connecting to another tenant replaces it
+- A cached connection is reused only for the same server, company, sign-in method, impersonated member,
+  ClientID and BasePath; connecting to another tenant replaces it
 - Cookie-session cookies are marked Secure, so they are only sent over https
 - Use Disconnect-CWM to explicitly clear connection
 - Use -Force to refresh an existing connection

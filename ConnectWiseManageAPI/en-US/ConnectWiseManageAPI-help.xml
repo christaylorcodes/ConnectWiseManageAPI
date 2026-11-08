@@ -639,7 +639,7 @@
         <maml:para>Author: Chris Taylor</maml:para>
         <maml:para>Connection Lifecycle: - Connections persist for the PowerShell session duration</maml:para>
         <maml:para>- Only impersonation connections expire (when the impersonation token expires); API key and</maml:para>
-        <maml:para>  cookie connections are reused until Disconnect-CWM or -Force - A cached connection is reused only for the same server, company, sign-in method and impersonated   member; connecting to another tenant replaces it - Cookie-session cookies are marked Secure, so they are only sent over https</maml:para>
+        <maml:para>  cookie connections are reused until Disconnect-CWM or -Force - A cached connection is reused only for the same server, company, sign-in method, impersonated member,   ClientID and BasePath; connecting to another tenant replaces it - Cookie-session cookies are marked Secure, so they are only sent over https</maml:para>
         <maml:para>- Use Disconnect-CWM to explicitly clear connection</maml:para>
         <maml:para>- Use -Force to refresh an existing connection</maml:para>
         <maml:para></maml:para>
@@ -3973,7 +3973,7 @@ finally {
       <command:syntaxItem>
         <maml:name>Get-CWMBoardItemAssociation</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="boardId">
-          <maml:name>grandParentId</maml:name>
+          <maml:name>grandparentId</maml:name>
           <maml:description>
             <maml:para>The id of the service board. Alias: boardId</maml:para>
           </maml:description>
@@ -4106,7 +4106,7 @@ finally {
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="boardId">
-        <maml:name>grandParentId</maml:name>
+        <maml:name>grandparentId</maml:name>
         <maml:description>
           <maml:para>The id of the service board. Alias: boardId</maml:para>
         </maml:description>
@@ -4963,15 +4963,15 @@ finally {
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -4983,7 +4983,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -5108,15 +5108,15 @@ finally {
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -5128,7 +5128,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -5274,15 +5274,15 @@ finally {
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -5294,7 +5294,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -5419,15 +5419,15 @@ finally {
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -5439,7 +5439,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -5585,15 +5585,15 @@ finally {
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -5605,7 +5605,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -5730,15 +5730,15 @@ finally {
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -5750,7 +5750,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -5896,15 +5896,15 @@ finally {
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -5916,7 +5916,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -6041,15 +6041,15 @@ finally {
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -6061,7 +6061,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -6800,7 +6800,6 @@ finally {
           <maml:description>
             <maml:para>Filter companies using ConnectWise Manage condition syntax. Examples: - "name='Acme Corp'"</maml:para>
             <maml:para>- "city='New York' and state='NY'"</maml:para>
-            <maml:para>- "types contains 'Partner'"</maml:para>
             <maml:para>- "status/name='Active'"</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
@@ -6936,7 +6935,6 @@ finally {
         <maml:description>
           <maml:para>Filter companies using ConnectWise Manage condition syntax. Examples: - "name='Acme Corp'"</maml:para>
           <maml:para>- "city='New York' and state='NY'"</maml:para>
-          <maml:para>- "types contains 'Partner'"</maml:para>
           <maml:para>- "status/name='Active'"</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
@@ -7036,7 +7034,7 @@ finally {
     <maml:alertSet>
       <maml:alert>
         <maml:para>Author: Chris Taylor</maml:para>
-        <maml:para>Common Filters: - By type: "types contains 'Customer'"</maml:para>
+        <maml:para>Common Filters: - By type (a list field, so use -childConditions): 'types/id=1'</maml:para>
         <maml:para>- By status: "status/name='Active'"</maml:para>
         <maml:para>- By location: "city='CityName' and state='ST'"</maml:para>
         <maml:para>- By territory: "territory/id=5"</maml:para>
@@ -7066,9 +7064,9 @@ finally {
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Get-CWMCompany -condition "types contains 'Customer'" -orderBy "name asc" -all</dev:code>
+        <dev:code>Get-CWMCompany -childConditions 'types/id=1' -orderBy 'name asc' -all</dev:code>
         <dev:remarks>
-          <maml:para>Retrieves all customer companies sorted by name.</maml:para>
+          <maml:para>Retrieves all companies of company type 1 (for example Customer) sorted by name. A company's types is a list, so it is filtered with -childConditions, not -condition.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -8584,10 +8582,10 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>CompanyID</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="companyId">
+          <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the company.</maml:para>
+            <maml:para>The id of the company. Alias: companyId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -8729,10 +8727,10 @@ finally {
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>CompanyID</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="companyId">
+        <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the company.</maml:para>
+          <maml:para>The id of the company. Alias: companyId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -8855,7 +8853,7 @@ finally {
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CWMCompanyCustomNote -CompanyID 12 -id 5</dev:code>
+        <dev:code>Get-CWMCompanyCustomNote -parentId 12 -id 5</dev:code>
         <dev:remarks>
           <maml:para>Retrieves custom status note 5 of company 12.</maml:para>
         </dev:remarks>
@@ -8895,10 +8893,10 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>CompanyID</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="companyId">
+          <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the company.</maml:para>
+            <maml:para>The id of the company. Alias: companyId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -9040,10 +9038,10 @@ finally {
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>CompanyID</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="companyId">
+        <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the company.</maml:para>
+          <maml:para>The id of the company. Alias: companyId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -9159,14 +9157,14 @@ finally {
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CWMCompanyNote -CompanyID 12 -condition "text contains 'callback'" -all</dev:code>
+        <dev:code>Get-CWMCompanyNote -parentId 12 -condition "text contains 'callback'" -all</dev:code>
         <dev:remarks>
           <maml:para>Retrieves the notes of company 12 that match the condition.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CWMCompanyNote -CompanyID 12 -id 5</dev:code>
+        <dev:code>Get-CWMCompanyNote -parentId 12 -id 5</dev:code>
         <dev:remarks>
           <maml:para>Retrieves note 5 of company 12.</maml:para>
         </dev:remarks>
@@ -14185,10 +14183,10 @@ finally {
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMInventory</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ProductID">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="warehouseBinId, ProductID">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the warehouse bin. Alias: ProductID</maml:para>
+            <maml:para>The id of the warehouse bin. Aliases: warehouseBinId, ProductID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -14318,10 +14316,10 @@ finally {
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ProductID">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="warehouseBinId, ProductID">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the warehouse bin. Alias: ProductID</maml:para>
+          <maml:para>The id of the warehouse bin. Aliases: warehouseBinId, ProductID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -17139,12 +17137,24 @@ finally {
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves the opportunities from ConnectWise Manage. Calls GET /sales/opportunities.</maml:para>
+      <maml:para>Retrieves the opportunities from ConnectWise Manage. Calls GET /sales/opportunities; -id adds /{id} and -count adds /count.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMOpportunity</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>id</maml:name>
+          <maml:description>
+            <maml:para>The id of a single opportunity to return.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
             <maml:para>Filter in ConnectWise Manage condition syntax, for example "status/name='Open' and company/id=250".</maml:para>
@@ -17156,7 +17166,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
@@ -17168,7 +17178,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
@@ -17180,7 +17190,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
@@ -17192,19 +17202,19 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
             <maml:para>Only return these fields, for example @('id', 'name').</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>page</maml:name>
           <maml:description>
             <maml:para>The page number to return. Use with -pageSize.</maml:para>
@@ -17216,7 +17226,7 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
           <maml:name>pageSize</maml:name>
           <maml:description>
             <maml:para>The number of records per page. Without it the API's default page size applies.</maml:para>
@@ -17228,8 +17238,8 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-          <maml:name>pageID</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+          <maml:name>pageId</maml:name>
           <maml:description>
             <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
           </maml:description>
@@ -17239,6 +17249,17 @@ finally {
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>count</maml:name>
+          <maml:description>
+            <maml:para>Returns the number of matching opportunities instead of the records.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>all</maml:name>
@@ -17255,6 +17276,30 @@ finally {
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>id</maml:name>
+        <maml:description>
+          <maml:para>The id of a single opportunity to return.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>count</maml:name>
+        <maml:description>
+          <maml:para>Returns the number of matching opportunities instead of the records.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
           <maml:para>Filter in ConnectWise Manage condition syntax, for example "status/name='Open' and company/id=250".</maml:para>
@@ -17266,7 +17311,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
@@ -17278,7 +17323,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
@@ -17290,7 +17335,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
@@ -17302,19 +17347,19 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
           <maml:para>Only return these fields, for example @('id', 'name').</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>page</maml:name>
         <maml:description>
           <maml:para>The page number to return. Use with -pageSize.</maml:para>
@@ -17326,7 +17371,7 @@ finally {
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
         <maml:name>pageSize</maml:name>
         <maml:description>
           <maml:para>The number of records per page. Without it the API's default page size applies.</maml:para>
@@ -17338,8 +17383,8 @@ finally {
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-        <maml:name>pageID</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+        <maml:name>pageId</maml:name>
         <maml:description>
           <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
         </maml:description>
@@ -17401,10 +17446,10 @@ finally {
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMOpportunityForecast</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the opportunity.</maml:para>
+            <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -17466,9 +17511,9 @@ finally {
           <maml:description>
             <maml:para>Only return these fields, for example @('id', 'forecastItems').</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -17498,7 +17543,7 @@ finally {
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
-          <maml:name>pageID</maml:name>
+          <maml:name>pageId</maml:name>
           <maml:description>
             <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
           </maml:description>
@@ -17523,10 +17568,10 @@ finally {
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the opportunity.</maml:para>
+          <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -17588,9 +17633,9 @@ finally {
         <maml:description>
           <maml:para>Only return these fields, for example @('id', 'forecastItems').</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -17620,7 +17665,7 @@ finally {
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
-        <maml:name>pageID</maml:name>
+        <maml:name>pageId</maml:name>
         <maml:description>
           <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
         </maml:description>
@@ -17682,10 +17727,10 @@ finally {
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMOpportunityForecastItem</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the opportunity.</maml:para>
+            <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -17695,7 +17740,7 @@ finally {
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
-          <maml:name>pageID</maml:name>
+          <maml:name>pageId</maml:name>
           <maml:description>
             <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
           </maml:description>
@@ -17771,9 +17816,9 @@ finally {
           <maml:description>
             <maml:para>Only return these fields, for example @('id', 'forecastItems').</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -17805,10 +17850,10 @@ finally {
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the opportunity.</maml:para>
+          <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -17882,9 +17927,9 @@ finally {
         <maml:description>
           <maml:para>Only return these fields, for example @('id', 'forecastItems').</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -17914,7 +17959,7 @@ finally {
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
-        <maml:name>pageID</maml:name>
+        <maml:name>pageId</maml:name>
         <maml:description>
           <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
         </maml:description>
@@ -18303,12 +18348,24 @@ finally {
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves the sales stages from ConnectWise Manage. Calls GET /sales/stages.</maml:para>
+      <maml:para>Retrieves the sales stages from ConnectWise Manage. Calls GET /sales/stages; -id adds /{id} and -count adds /count.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMOpportunityStage</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>id</maml:name>
+          <maml:description>
+            <maml:para>The id of a single sales stage to return.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
             <maml:para>Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".</maml:para>
@@ -18320,7 +18377,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
@@ -18332,7 +18389,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
@@ -18344,7 +18401,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
@@ -18356,19 +18413,19 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
             <maml:para>Only return these fields, for example @('id', 'name').</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>page</maml:name>
           <maml:description>
             <maml:para>The page number to return. Use with -pageSize.</maml:para>
@@ -18380,7 +18437,7 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
           <maml:name>pageSize</maml:name>
           <maml:description>
             <maml:para>The number of records per page. Without it the API's default page size applies.</maml:para>
@@ -18392,8 +18449,8 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-          <maml:name>pageID</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+          <maml:name>pageId</maml:name>
           <maml:description>
             <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
           </maml:description>
@@ -18403,6 +18460,17 @@ finally {
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>count</maml:name>
+          <maml:description>
+            <maml:para>Returns the number of matching sales stages instead of the records.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>all</maml:name>
@@ -18419,6 +18487,30 @@ finally {
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>id</maml:name>
+        <maml:description>
+          <maml:para>The id of a single sales stage to return.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>count</maml:name>
+        <maml:description>
+          <maml:para>Returns the number of matching sales stages instead of the records.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
           <maml:para>Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".</maml:para>
@@ -18430,7 +18522,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
@@ -18442,7 +18534,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
@@ -18454,7 +18546,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
@@ -18466,19 +18558,19 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
           <maml:para>Only return these fields, for example @('id', 'name').</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>page</maml:name>
         <maml:description>
           <maml:para>The page number to return. Use with -pageSize.</maml:para>
@@ -18490,7 +18582,7 @@ finally {
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
         <maml:name>pageSize</maml:name>
         <maml:description>
           <maml:para>The number of records per page. Without it the API's default page size applies.</maml:para>
@@ -18502,8 +18594,8 @@ finally {
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-        <maml:name>pageID</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+        <maml:name>pageId</maml:name>
         <maml:description>
           <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
         </maml:description>
@@ -18560,12 +18652,24 @@ finally {
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves the opportunity statuses from ConnectWise Manage. Calls GET /sales/opportunities/statuses.</maml:para>
+      <maml:para>Retrieves the opportunity statuses from ConnectWise Manage. Calls GET /sales/opportunities/statuses; -id adds /{id} and -count adds /count.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMOpportunityStatus</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>id</maml:name>
+          <maml:description>
+            <maml:para>The id of a single opportunity status to return.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
             <maml:para>Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".</maml:para>
@@ -18577,7 +18681,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
@@ -18589,7 +18693,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
@@ -18601,7 +18705,7 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
@@ -18613,19 +18717,19 @@ finally {
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>fields</maml:name>
           <maml:description>
             <maml:para>Only return these fields, for example @('id', 'name').</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>page</maml:name>
           <maml:description>
             <maml:para>The page number to return. Use with -pageSize.</maml:para>
@@ -18637,7 +18741,7 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
           <maml:name>pageSize</maml:name>
           <maml:description>
             <maml:para>The number of records per page. Without it the API's default page size applies.</maml:para>
@@ -18649,8 +18753,8 @@ finally {
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-          <maml:name>pageID</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+          <maml:name>pageId</maml:name>
           <maml:description>
             <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
           </maml:description>
@@ -18660,6 +18764,17 @@ finally {
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>count</maml:name>
+          <maml:description>
+            <maml:para>Returns the number of matching opportunity statuses instead of the records.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>all</maml:name>
@@ -18676,6 +18791,30 @@ finally {
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>id</maml:name>
+        <maml:description>
+          <maml:para>The id of a single opportunity status to return.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>count</maml:name>
+        <maml:description>
+          <maml:para>Returns the number of matching opportunity statuses instead of the records.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
           <maml:para>Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".</maml:para>
@@ -18687,7 +18826,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
@@ -18699,7 +18838,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
@@ -18711,7 +18850,7 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
@@ -18723,19 +18862,19 @@ finally {
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>fields</maml:name>
         <maml:description>
           <maml:para>Only return these fields, for example @('id', 'name').</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>page</maml:name>
         <maml:description>
           <maml:para>The page number to return. Use with -pageSize.</maml:para>
@@ -18747,7 +18886,7 @@ finally {
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
         <maml:name>pageSize</maml:name>
         <maml:description>
           <maml:para>The number of records per page. Without it the API's default page size applies.</maml:para>
@@ -18759,8 +18898,8 @@ finally {
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-        <maml:name>pageID</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+        <maml:name>pageId</maml:name>
         <maml:description>
           <maml:para>Starts forward-only pagination at the page identified by this value.</maml:para>
         </maml:description>
@@ -18851,15 +18990,15 @@ finally {
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -18871,7 +19010,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -18984,15 +19123,15 @@ finally {
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -19004,7 +19143,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -19146,7 +19285,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -19158,7 +19297,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -19279,7 +19418,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -19291,7 +19430,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -23623,7 +23762,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -23635,7 +23774,7 @@ finally {
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -23756,7 +23895,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -23768,7 +23907,7 @@ finally {
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -23873,10 +24012,10 @@ finally {
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CWMPurchaseOrderLineItem</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ProductID">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="purchaseOrderId, ProductID">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the purchase order. Alias: ProductID</maml:para>
+            <maml:para>The id of the purchase order. Aliases: purchaseOrderId, ProductID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -24006,10 +24145,10 @@ finally {
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ProductID">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="purchaseOrderId, ProductID">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the purchase order. Alias: ProductID</maml:para>
+          <maml:para>The id of the purchase order. Aliases: purchaseOrderId, ProductID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -27001,15 +27140,15 @@ $Columns.Keys</dev:code>
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -27021,7 +27160,7 @@ $Columns.Keys</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -27134,15 +27273,15 @@ $Columns.Keys</dev:code>
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -27154,7 +27293,7 @@ $Columns.Keys</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -27288,15 +27427,15 @@ $Columns.Keys</dev:code>
           <maml:description>
             <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Object</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -27308,7 +27447,7 @@ $Columns.Keys</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -27421,15 +27560,15 @@ $Columns.Keys</dev:code>
         <maml:description>
           <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -27441,7 +27580,7 @@ $Columns.Keys</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -27551,12 +27690,12 @@ $Columns.Keys</dev:code>
           <maml:description>
             <maml:para>The id of a single SSO configuration to retrieve.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
@@ -27672,12 +27811,12 @@ $Columns.Keys</dev:code>
         <maml:description>
           <maml:para>The id of a single SSO configuration to retrieve.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>count</maml:name>
@@ -31537,7 +31676,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -31549,7 +31688,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -31670,7 +31809,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -31682,7 +31821,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -31824,7 +31963,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>childconditions</maml:name>
+          <maml:name>childConditions</maml:name>
           <maml:description>
             <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
           </maml:description>
@@ -31836,7 +31975,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>customfieldconditions</maml:name>
+          <maml:name>customFieldConditions</maml:name>
           <maml:description>
             <maml:para>Filter on custom field values, in condition syntax.</maml:para>
           </maml:description>
@@ -31957,7 +32096,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>childconditions</maml:name>
+        <maml:name>childConditions</maml:name>
         <maml:description>
           <maml:para>Filter on child (list) fields, in condition syntax.</maml:para>
         </maml:description>
@@ -31969,7 +32108,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>customfieldconditions</maml:name>
+        <maml:name>customFieldConditions</maml:name>
         <maml:description>
           <maml:para>Filter on custom field values, in condition syntax.</maml:para>
         </maml:description>
@@ -36505,9 +36644,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Billed quantity. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36529,9 +36668,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Ext price. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36553,9 +36692,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Ext cost. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36565,9 +36704,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Sequence number. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36577,9 +36716,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Margin. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36589,9 +36728,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Prorate cost. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36601,9 +36740,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Prorate price. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36613,9 +36752,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Extended prorate cost. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36625,9 +36764,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Extended prorate price. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36673,9 +36812,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Quantity. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36685,9 +36824,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Less included. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36697,9 +36836,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Unit price. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36709,9 +36848,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Unit cost. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -36806,9 +36945,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Quantity. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -36818,9 +36957,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Less included. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -36830,9 +36969,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Unit price. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -36842,9 +36981,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Unit cost. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -36962,9 +37101,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Billed quantity. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -36986,9 +37125,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Ext price. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -36998,9 +37137,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Ext cost. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37010,9 +37149,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Sequence number. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37022,9 +37161,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Margin. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37034,9 +37173,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Prorate cost. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37046,9 +37185,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Prorate price. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37058,9 +37197,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Extended prorate cost. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37070,9 +37209,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Extended prorate price. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -37193,9 +37332,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
           <maml:description>
             <maml:para>Amount. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -37302,9 +37441,9 @@ Invoke-CWMWebRequest -Arguments $RequestArguments</dev:code>
         <maml:description>
           <maml:para>Amount. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39190,9 +39329,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Rate. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39202,9 +39341,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Limit to. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39323,9 +39462,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Rate. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39335,9 +39474,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Limit to. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39470,9 +39609,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Hours min. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39482,9 +39621,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Round bill hours. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39494,9 +39633,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Overage rate. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39518,9 +39657,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Agreement limit. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39674,9 +39813,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Rate. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39686,9 +39825,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Hours max. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -39807,9 +39946,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Rate. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39819,9 +39958,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Hours max. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39831,9 +39970,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Hours min. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39843,9 +39982,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Round bill hours. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39855,9 +39994,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Overage rate. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -39879,9 +40018,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Agreement limit. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -41343,9 +41482,9 @@ New-CWMAgreementType @AgreementType</dev:code>
           <maml:description>
             <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -42232,9 +42371,9 @@ New-CWMAgreementType @AgreementType</dev:code>
         <maml:description>
           <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -42603,9 +42742,9 @@ New-CWMCompany @companyParams</dev:code>
           <maml:description>
             <maml:para>Backup billable space GB. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Int64</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Int64</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -43372,9 +43511,9 @@ New-CWMCompany @companyParams</dev:code>
         <maml:description>
           <maml:para>Backup billable space GB. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Int64</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Int64</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -44129,9 +44268,9 @@ New-CWMCompany @companyParams</dev:code>
           <maml:description>
             <maml:para>Country reference, for example @{ id = 1 }.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.Collections.Hashtable</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -44754,9 +44893,9 @@ New-CWMCompany @companyParams</dev:code>
         <maml:description>
           <maml:para>Country reference, for example @{ id = 1 }.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.Collections.Hashtable</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -45600,10 +45739,10 @@ New-CWMCompany @companyParams</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-CWMCompanyNote</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="companyId">
-          <maml:name>id</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="companyId, id">
+          <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the company to add the note to. Alias: companyId</maml:para>
+            <maml:para>The id of the company to add the note to. Aliases: companyId, id (the name used before 0.5.0)</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -45661,10 +45800,10 @@ New-CWMCompany @companyParams</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="companyId">
-        <maml:name>id</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="companyId, id">
+        <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the company to add the note to. Alias: companyId</maml:para>
+          <maml:para>The id of the company to add the note to. Aliases: companyId, id (the name used before 0.5.0)</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -45732,7 +45871,7 @@ New-CWMCompany @companyParams</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-CWMCompanyNote -id 250 -text 'Discussed the contract renewal with the owner.' -flagged $true</dev:code>
+        <dev:code>New-CWMCompanyNote -parentId 250 -text 'Discussed the contract renewal with the owner.' -flagged $true</dev:code>
         <dev:remarks>
           <maml:para>Adds a flagged note to company 250.</maml:para>
         </dev:remarks>
@@ -47643,9 +47782,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -48052,9 +48191,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -48965,7 +49104,7 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Hash</maml:name>
           <maml:description>
-            <maml:para>Replace the server name with its MD5 hash so the report can be shared. Defaults to $true; use -Hash $false to show the server name.</maml:para>
+            <maml:para>Replace the server name with its SHA-256 hash so the report can be shared. Defaults to $true; use -Hash $false to show the server name.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
           <dev:type>
@@ -49002,7 +49141,7 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Hash</maml:name>
         <maml:description>
-          <maml:para>Replace the server name with its MD5 hash so the report can be shared. Defaults to $true; use -Hash $false to show the server name.</maml:para>
+          <maml:para>Replace the server name with its SHA-256 hash so the report can be shared. Defaults to $true; use -Hash $false to show the server name.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
         <dev:type>
@@ -49224,11 +49363,11 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FilePath</maml:name>
           <maml:description>
-            <maml:para>Path to the local file to upload. Must be a file, not a folder.</maml:para>
+            <maml:para>Path to the local file to upload, or a file object from Get-Item or Get-ChildItem. Must be a file, not a folder. A relative path is resolved against the current PowerShell location.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.IO.FileInfo</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
           <dev:type>
-            <maml:name>System.IO.FileInfo</maml:name>
+            <maml:name>System.Object</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -49357,11 +49496,11 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>FilePath</maml:name>
         <maml:description>
-          <maml:para>Path to the local file to upload. Must be a file, not a folder.</maml:para>
+          <maml:para>Path to the local file to upload, or a file object from Get-Item or Get-ChildItem. Must be a file, not a folder. A relative path is resolved against the current PowerShell location.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.IO.FileInfo</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Object</command:parameterValue>
         <dev:type>
-          <maml:name>System.IO.FileInfo</maml:name>
+          <maml:name>System.Object</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -49665,9 +49804,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -50038,9 +50177,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -50617,9 +50756,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Service total. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50677,9 +50816,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Expense total. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50689,9 +50828,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Product total. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50701,9 +50840,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Previous progress applied. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50713,9 +50852,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Service adjustment amount. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50725,9 +50864,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Agreement amount. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50737,9 +50876,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Downpayment applied. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50749,9 +50888,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Subtotal. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50761,9 +50900,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Total. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50785,9 +50924,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Remaining downpayment. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50797,9 +50936,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Sales tax. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50845,9 +50984,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Payments. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50857,9 +50996,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Credits. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -50869,9 +51008,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
           <maml:description>
             <maml:para>Balance. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -51638,9 +51777,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Service total. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51686,9 +51825,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Expense total. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51698,9 +51837,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Product total. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51710,9 +51849,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Previous progress applied. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51722,9 +51861,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Service adjustment amount. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51734,9 +51873,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Agreement amount. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51746,9 +51885,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Downpayment applied. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51758,9 +51897,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Subtotal. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51770,9 +51909,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Total. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51782,9 +51921,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Remaining downpayment. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51794,9 +51933,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Sales tax. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51842,9 +51981,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Payments. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51854,9 +51993,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Credits. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -51866,9 +52005,9 @@ New-CWMCompanyServiceTemplate @Template</dev:code>
         <maml:description>
           <maml:para>Balance. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -55948,9 +56087,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Total sales tax. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Int32</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -56116,9 +56255,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -56513,9 +56652,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Total sales tax. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Int32</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -56669,9 +56808,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -56739,10 +56878,10 @@ New-CWMMember @Member</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-CWMOpportunityForecast</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the opportunity to add the forecast to.</maml:para>
+            <maml:para>The id of the opportunity to add the forecast to. Alias: opportunityId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -57040,10 +57179,10 @@ New-CWMMember @Member</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the opportunity to add the forecast to.</maml:para>
+          <maml:para>The id of the opportunity to add the forecast to. Alias: opportunityId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -57379,10 +57518,10 @@ New-CWMMember @Member</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-CWMOpportunityForecastItem</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>parentID</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
+          <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the opportunity to add the forecast item to.</maml:para>
+            <maml:para>The id of the opportunity to add the forecast item to. Alias: opportunityId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -57511,7 +57650,7 @@ New-CWMMember @Member</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>id</maml:name>
           <maml:description>
             <maml:para>The {id} of the path POST /sales/opportunities/{parentId}/forecast/{id} (forecastId in the spec). It is also sent as id in the request body.</maml:para>
@@ -57696,9 +57835,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Quantity. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Int32</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -57776,10 +57915,10 @@ New-CWMMember @Member</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>parentID</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
+        <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the opportunity to add the forecast item to.</maml:para>
+          <maml:para>The id of the opportunity to add the forecast item to. Alias: opportunityId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -57788,7 +57927,7 @@ New-CWMMember @Member</dev:code>
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>id</maml:name>
         <maml:description>
           <maml:para>The {id} of the path POST /sales/opportunities/{parentId}/forecast/{id} (forecastId in the spec). It is also sent as id in the request body.</maml:para>
@@ -57829,9 +57968,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Quantity. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Int32</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -58183,7 +58322,7 @@ New-CWMMember @Member</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-CWMOpportunityForecastItem -parentID 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200</dev:code>
+        <dev:code>New-CWMOpportunityForecastItem -parentId 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200</dev:code>
         <dev:remarks>
           <maml:para>Creates a service forecast item with 1200 revenue on opportunity 75.</maml:para>
         </dev:remarks>
@@ -58864,12 +59003,12 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Serial number ids. An array of integers.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Int32[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Int32</maml:name>
+            <maml:name>System.Int32[]</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>unitOfMeasure</maml:name>
@@ -58888,9 +59027,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Serial numbers. An array of strings.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -59116,9 +59255,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -59873,21 +60012,21 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Serial number ids. An array of integers.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Int32[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Int32</maml:name>
+          <maml:name>System.Int32[]</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="60" aliases="none">
         <maml:name>serialNumbers</maml:name>
         <maml:description>
           <maml:para>Serial numbers. An array of strings.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -60101,9 +60240,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -60224,9 +60363,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Adjustment details. An array of hashtables with the properties of the API's AdjustmentDetail object.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -60321,9 +60460,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Adjustment details. An array of hashtables with the properties of the API's AdjustmentDetail object.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -60796,9 +60935,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Price. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -60808,9 +60947,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Cost. A number.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
           <dev:type>
-            <maml:name>System.Single</maml:name>
+            <maml:name>System.Double</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
@@ -60820,12 +60959,12 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Price attribute. One of: FixedFee, NotToExceed, OverrideRate, TimeAndMaterials.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
-            <maml:name>System.Int32</maml:name>
+            <maml:name>System.String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="15" aliases="none">
           <maml:name>taxableFlag</maml:name>
@@ -60964,9 +61103,9 @@ New-CWMMember @Member</dev:code>
           <maml:description>
             <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:name>System.Collections.Hashtable[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -61217,9 +61356,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Price. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -61229,9 +61368,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Cost. A number.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Single</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Double</command:parameterValue>
         <dev:type>
-          <maml:name>System.Single</maml:name>
+          <maml:name>System.Double</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
@@ -61241,12 +61380,12 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Price attribute. One of: FixedFee, NotToExceed, OverrideRate, TimeAndMaterials.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
-          <maml:name>System.Int32</maml:name>
+          <maml:name>System.String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="15" aliases="none">
         <maml:name>taxableFlag</maml:name>
@@ -61373,9 +61512,9 @@ New-CWMMember @Member</dev:code>
         <maml:description>
           <maml:para>Custom fields. An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Collections.Hashtable[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -61613,12 +61752,12 @@ New-CWMProductCatalog @CatalogItem</dev:code>
           <maml:description>
             <maml:para>Serial number ids. An array of integers.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.Int32[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.Int32</maml:name>
+            <maml:name>System.Int32[]</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
           <maml:name>trackingNumber</maml:name>
@@ -61746,12 +61885,12 @@ New-CWMProductCatalog @CatalogItem</dev:code>
         <maml:description>
           <maml:para>Serial number ids. An array of integers.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.Int32[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.Int32</maml:name>
+          <maml:name>System.Int32[]</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
         <maml:name>trackingNumber</maml:name>
@@ -64412,10 +64551,22 @@ New-CWMProjectTicket @Ticket</dev:code>
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="deviceIdentifier">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>id</maml:name>
           <maml:description>
-            <maml:para>The id of the configuration to attach. Alias: deviceIdentifier</maml:para>
+            <maml:para>The id of the configuration to attach.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>deviceIdentifier</maml:name>
+          <maml:description>
+            <maml:para>The device identifier of the configuration to attach. Use instead of -id.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -64424,7 +64575,7 @@ New-CWMProjectTicket @Ticket</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>_info</maml:name>
           <maml:description>
             <maml:para>The _info metadata of the record, as returned by the API. Usually left unset.</maml:para>
@@ -64473,10 +64624,22 @@ New-CWMProjectTicket @Ticket</dev:code>
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="deviceIdentifier">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>id</maml:name>
         <maml:description>
-          <maml:para>The id of the configuration to attach. Alias: deviceIdentifier</maml:para>
+          <maml:para>The id of the configuration to attach.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>deviceIdentifier</maml:name>
+        <maml:description>
+          <maml:para>The device identifier of the configuration to attach. Use instead of -id.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -64485,7 +64648,7 @@ New-CWMProjectTicket @Ticket</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>_info</maml:name>
         <maml:description>
           <maml:para>The _info metadata of the record, as returned by the API. Usually left unset.</maml:para>
@@ -68336,9 +68499,9 @@ New-CWMProjectTicket @Ticket</dev:code>
           <maml:description>
             <maml:para>Integrator tags. An array of strings.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
           <dev:type>
-            <maml:name>System.String</maml:name>
+            <maml:name>System.String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -69537,9 +69700,9 @@ New-CWMProjectTicket @Ticket</dev:code>
         <maml:description>
           <maml:para>Integrator tags. An array of strings.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">System.String[]</command:parameterValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -70006,10 +70169,22 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="deviceIdentifier">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>id</maml:name>
           <maml:description>
-            <maml:para>The id of the configuration to attach. Alias: deviceIdentifier</maml:para>
+            <maml:para>The id of the configuration to attach.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>deviceIdentifier</maml:name>
+          <maml:description>
+            <maml:para>The device identifier of the configuration to attach. Use instead of -id.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -70055,10 +70230,22 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="deviceIdentifier">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>id</maml:name>
         <maml:description>
-          <maml:para>The id of the configuration to attach. Alias: deviceIdentifier</maml:para>
+          <maml:para>The id of the configuration to attach.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>deviceIdentifier</maml:name>
+        <maml:description>
+          <maml:para>The device identifier of the configuration to attach. Use instead of -id.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -72943,10 +73130,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="parentId">
-          <maml:name>agreementid</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="agreementId">
+          <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the agreement. Alias: parentId</maml:para>
+            <maml:para>The id of the agreement. Alias: agreementId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -72992,10 +73179,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="parentId">
-        <maml:name>agreementid</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="agreementId">
+        <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the agreement. Alias: parentId</maml:para>
+          <maml:para>The id of the agreement. Alias: agreementId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -73039,7 +73226,7 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Remove-CWMAgreementAddition -agreementid 12 -id 5</dev:code>
+        <dev:code>Remove-CWMAgreementAddition -parentId 12 -id 5</dev:code>
         <dev:remarks>
           <maml:para>Deletes agreement addition 5 of agreement 12.</maml:para>
         </dev:remarks>
@@ -74366,10 +74553,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-CWMCompanyNote</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="CompanyID">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="companyId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the company. Alias: CompanyID</maml:para>
+            <maml:para>The id of the company. Alias: companyId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -74378,10 +74565,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>NoteId</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="noteId">
+          <maml:name>id</maml:name>
           <maml:description>
-            <maml:para>The id of the note to delete.</maml:para>
+            <maml:para>The id of the note to delete. Alias: noteId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -74415,10 +74602,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="CompanyID">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="companyId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the company. Alias: CompanyID</maml:para>
+          <maml:para>The id of the company. Alias: companyId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -74427,10 +74614,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>NoteId</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="noteId">
+        <maml:name>id</maml:name>
         <maml:description>
-          <maml:para>The id of the note to delete.</maml:para>
+          <maml:para>The id of the note to delete. Alias: noteId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -74474,7 +74661,7 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Remove-CWMCompanyNote -parentId 12 -NoteId 5</dev:code>
+        <dev:code>Remove-CWMCompanyNote -parentId 12 -id 5</dev:code>
         <dev:remarks>
           <maml:para>Deletes note 5 of company 12.</maml:para>
         </dev:remarks>
@@ -76083,10 +76270,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-CWMOpportunityForecast</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the opportunity.</maml:para>
+            <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -76120,10 +76307,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the opportunity.</maml:para>
+          <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -76195,10 +76382,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-CWMOpportunityForecastItem</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the opportunity.</maml:para>
+            <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -76244,10 +76431,10 @@ New-CWMTicketChild -ParentTicketID 141378 -ChildTicketIDs 143061, 143062 -Operat
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="opportunityId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the opportunity.</maml:para>
+          <maml:para>The id of the opportunity. Alias: opportunityId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>

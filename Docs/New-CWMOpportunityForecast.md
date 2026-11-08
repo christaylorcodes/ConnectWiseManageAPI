@@ -42,11 +42,12 @@ Adds a product forecast item with 2500 revenue to opportunity 75.
 
 ### -parentId
 The id of the opportunity to add the forecast to.
+Alias: opportunityId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: opportunityId
 
 Required: True
 Position: 1

@@ -16,10 +16,10 @@ Creates a catalog item.
 New-CWMProductCatalog [-identifier] <String> [-description] <String> [[-inactiveFlag] <Boolean>]
  [-subcategory] <Hashtable> [-type] <Hashtable> [[-productClass] <String>] [[-serializedFlag] <Boolean>]
  [[-serializedCostFlag] <Boolean>] [[-phaseProductFlag] <Boolean>] [[-unitOfMeasure] <Hashtable>]
- [[-minStockLevel] <Int32>] [[-price] <Single>] [[-cost] <Single>] [[-priceAttribute] <Int32>]
+ [[-minStockLevel] <Int32>] [[-price] <Double>] [[-cost] <Double>] [[-priceAttribute] <String>]
  [[-taxableFlag] <Boolean>] [-customerDescription] <String> [[-manufacturer] <Hashtable>]
  [[-manufacturerPartNumber] <String>] [[-vendor] <Hashtable>] [[-vendorSku] <String>] [[-notes] <String>]
- [[-integrationXRef] <String>] [[-category] <Hashtable>] [[-_info] <Hashtable>] [[-customFields] <Hashtable>]
+ [[-integrationXRef] <String>] [[-category] <Hashtable>] [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -231,7 +231,7 @@ Price.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -247,7 +247,7 @@ Cost.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -263,13 +263,13 @@ Price attribute.
 One of: FixedFee, NotToExceed, OverrideRate, TimeAndMaterials.
 
 ```yaml
-Type: System.Int32
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 14
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -436,7 +436,7 @@ Custom fields.
 An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 

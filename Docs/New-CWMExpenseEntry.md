@@ -18,8 +18,8 @@ New-CWMExpenseEntry [[-id] <Int32>] [[-company] <Hashtable>] [[-chargeToId] <Int
  [-amount] <Double> [[-billableOption] <String>] [-date] <String> [[-locationId] <Int32>]
  [[-businessUnitId] <Int32>] [[-notes] <String>] [[-agreement] <Hashtable>] [[-agreementAmount] <Double>]
  [[-odometerStart] <Double>] [[-odometerEnd] <Double>] [[-ticket] <Hashtable>] [[-project] <Hashtable>]
- [[-phase] <Hashtable>] [[-customFields] <Hashtable>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [[-phase] <Hashtable>] [[-customFields] <Hashtable[]>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -376,7 +376,7 @@ Custom fields.
 An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 

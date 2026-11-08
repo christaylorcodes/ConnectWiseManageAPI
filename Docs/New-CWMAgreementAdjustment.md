@@ -13,7 +13,7 @@ Creates an agreement adjustment for an agreement.
 ## SYNTAX
 
 ```
-New-CWMAgreementAdjustment [-parentId] <Int32> [[-id] <Int32>] [[-amount] <Single>] [[-description] <String>]
+New-CWMAgreementAdjustment [-parentId] <Int32> [[-id] <Int32>] [[-amount] <Double>] [[-description] <String>]
  [[-effectiveDate] <String>] [[-_info] <Hashtable>] [[-customFields] <Array>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -71,7 +71,7 @@ Amount.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

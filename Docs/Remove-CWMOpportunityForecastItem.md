@@ -35,11 +35,12 @@ Deletes forecast item 5 of opportunity 12.
 
 ### -parentId
 The id of the opportunity.
+Alias: opportunityId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: opportunityId
 
 Required: True
 Position: 1

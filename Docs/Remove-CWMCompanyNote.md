@@ -13,7 +13,7 @@ Deletes a note of a company.
 ## SYNTAX
 
 ```
-Remove-CWMCompanyNote [-parentId] <Int32> [-NoteId] <Int32> [-WhatIf]
+Remove-CWMCompanyNote [-parentId] <Int32> [-id] <Int32> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -26,7 +26,7 @@ Calls DELETE
 
 ### EXAMPLE 1
 ```
-Remove-CWMCompanyNote -parentId 12 -NoteId 5
+Remove-CWMCompanyNote -parentId 12 -id 5
 ```
 
 Deletes note 5 of company 12.
@@ -35,12 +35,12 @@ Deletes note 5 of company 12.
 
 ### -parentId
 The id of the company.
-Alias: CompanyID
+Alias: companyId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases: CompanyID
+Aliases: companyId
 
 Required: True
 Position: 1
@@ -49,13 +49,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -NoteId
+### -id
 The id of the note to delete.
+Alias: noteId
 
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: noteId
 
 Required: True
 Position: 2

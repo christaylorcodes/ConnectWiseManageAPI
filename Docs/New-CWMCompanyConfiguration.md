@@ -20,7 +20,7 @@ New-CWMCompanyConfiguration [-name] <String> [-type] <Hashtable> [[-status] <Has
  [[-warrantyExpirationDate] <String>] [[-vendorNotes] <String>] [[-notes] <String>] [[-macAddress] <String>]
  [[-lastLoginName] <String>] [[-billFlag] <Boolean>] [[-backupSuccesses] <Int32>] [[-backupIncomplete] <Int32>]
  [[-backupFailed] <Int32>] [[-backupRestores] <Int32>] [[-lastBackupDate] <String>]
- [[-backupServerName] <String>] [[-backupBillableSpaceGb] <Int64>] [[-backupProtectedDeviceList] <String>]
+ [[-backupServerName] <String>] [[-backupBillableSpaceGb] <Double>] [[-backupProtectedDeviceList] <String>]
  [[-backupYear] <Int32>] [[-backupMonth] <Int32>] [[-ipAddress] <String>] [[-defaultGateway] <String>]
  [[-osType] <String>] [[-osInfo] <String>] [[-cpuSpeed] <String>] [[-ram] <String>]
  [[-localHardDrives] <String>] [[-parentConfigurationId] <Int32>] [[-vendor] <Hashtable>]
@@ -480,7 +480,7 @@ Backup billable space GB.
 A number.
 
 ```yaml
-Type: System.Int64
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

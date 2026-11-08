@@ -26,13 +26,13 @@ New-CWMInvoice [[-id] <Int32>] [[-invoiceNumber] <String>] [-type] <String> [[-s
  [[-restrictDownpaymentFlag] <Boolean>] [[-locationId] <Int32>] [[-location] <Object>]
  [[-departmentId] <Int32>] [[-department] <Object>] [[-territoryId] <Int32>] [[-territory] <Object>]
  [[-topComment] <String>] [[-bottomComment] <String>] [[-taxableFlag] <Boolean>] [[-taxCode] <Object>]
- [[-internalNotes] <String>] [[-downpaymentPreviouslyTaxedFlag] <Boolean>] [[-serviceTotal] <Single>]
+ [[-internalNotes] <String>] [[-downpaymentPreviouslyTaxedFlag] <Boolean>] [[-serviceTotal] <Double>]
  [[-overrideDownPaymentAmountFlag] <Boolean>] [[-currency] <Object>] [[-dueDate] <String>]
- [[-expenseTotal] <Single>] [[-productTotal] <Single>] [[-previousProgressApplied] <Single>]
- [[-serviceAdjustmentAmount] <Single>] [[-agreementAmount] <Single>] [[-downpaymentApplied] <Single>]
- [[-subtotal] <Single>] [[-total] <Single>] [[-remainingDownpayment] <Single>] [[-salesTax] <Single>]
- [[-adjustmentReason] <String>] [[-adjustedBy] <String>] [[-closedBy] <String>] [[-payments] <Single>]
- [[-credits] <Single>] [[-balance] <Single>] [[-specialInvoiceFlag] <Boolean>]
+ [[-expenseTotal] <Double>] [[-productTotal] <Double>] [[-previousProgressApplied] <Double>]
+ [[-serviceAdjustmentAmount] <Double>] [[-agreementAmount] <Double>] [[-downpaymentApplied] <Double>]
+ [[-subtotal] <Double>] [[-total] <Double>] [[-remainingDownpayment] <Double>] [[-salesTax] <Double>]
+ [[-adjustmentReason] <String>] [[-adjustedBy] <String>] [[-closedBy] <String>] [[-payments] <Double>]
+ [[-credits] <Double>] [[-balance] <Double>] [[-specialInvoiceFlag] <Boolean>]
  [[-billingSetupReference] <Object>] [[-ticket] <Object>] [[-project] <Object>] [[-phase] <Object>]
  [[-salesOrder] <Object>] [[-agreement] <Object>] [[-glBatch] <Object>] [[-unbatchedBatch] <Object>]
  [[-_info] <Hashtable>] [[-customFields] <Array>] [-WhatIf] [-Confirm]
@@ -781,7 +781,7 @@ Service total.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -844,7 +844,7 @@ Expense total.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -860,7 +860,7 @@ Product total.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -876,7 +876,7 @@ Previous progress applied.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -892,7 +892,7 @@ Service adjustment amount.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -908,7 +908,7 @@ Agreement amount.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -924,7 +924,7 @@ Downpayment applied.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -940,7 +940,7 @@ Subtotal.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -956,7 +956,7 @@ Total.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -972,7 +972,7 @@ Remaining downpayment.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -988,7 +988,7 @@ Sales tax.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1049,7 +1049,7 @@ Payments.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1065,7 +1065,7 @@ Credits.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -1081,7 +1081,7 @@ Balance.
 A number.
 
 ```yaml
-Type: System.Single
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 

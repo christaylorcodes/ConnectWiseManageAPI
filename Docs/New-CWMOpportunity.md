@@ -19,12 +19,12 @@ New-CWMOpportunity [[-id] <Int32>] [-name] <String> [[-expectedCloseDate] <DateT
  [-primarySalesRep] <Hashtable> [[-secondarySalesRep] <Hashtable>] [[-locationId] <Int32>]
  [[-businessUnitId] <Int32>] [-company] <Hashtable> [-contact] <Hashtable> [[-site] <Hashtable>]
  [[-customerPO] <String>] [[-pipelineChangeDate] <DateTime>] [[-dateBecameLead] <DateTime>]
- [[-closedDate] <DateTime>] [[-closedBy] <Hashtable>] [[-totalSalesTax] <Int32>] [[-shipToCompany] <Hashtable>]
- [[-shipToContact] <Hashtable>] [[-shipToSite] <Hashtable>] [[-billToCompany] <Hashtable>]
- [[-billToContact] <Hashtable>] [[-billToSite] <Hashtable>] [[-billingTerms] <Hashtable>]
- [[-taxCode] <Hashtable>] [[-currency] <Hashtable>] [[-companyLocationId] <Int32>]
- [[-technicalContact] <Hashtable>] [[-_info] <Hashtable>] [[-customFields] <Hashtable>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-closedDate] <DateTime>] [[-closedBy] <Hashtable>] [[-totalSalesTax] <Double>]
+ [[-shipToCompany] <Hashtable>] [[-shipToContact] <Hashtable>] [[-shipToSite] <Hashtable>]
+ [[-billToCompany] <Hashtable>] [[-billToContact] <Hashtable>] [[-billToSite] <Hashtable>]
+ [[-billingTerms] <Hashtable>] [[-taxCode] <Hashtable>] [[-currency] <Hashtable>]
+ [[-companyLocationId] <Int32>] [[-technicalContact] <Hashtable>] [[-_info] <Hashtable>]
+ [[-customFields] <Hashtable[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -426,7 +426,7 @@ Total sales tax.
 A number.
 
 ```yaml
-Type: System.Int32
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
@@ -624,7 +624,7 @@ Custom fields.
 An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
