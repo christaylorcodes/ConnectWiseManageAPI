@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.5.0] - YYYY-MM-DD
+## [0.5.0] - 2026-11-07
 
 PowerShell 7 is now the primary edition; Windows PowerShell 5.1 is still supported and tested.
 This release has **breaking changes**. Read them before upgrading.
