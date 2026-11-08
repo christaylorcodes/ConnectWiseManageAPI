@@ -178,3 +178,35 @@ The module targets the latest ConnectWise Manage API only. `./Tools/Test-CWMApiC
 ```
 
 Run it after adding or changing an endpoint function. Don't commit the spec or the report.
+
+## Releasing
+
+Releases are published by GitHub Actions ([.github/workflows/release.yml](.github/workflows/release.yml)) when a
+version tag is pushed. The workflow runs the full CI test matrix, checks that the tag is on `master` and matches the
+manifest, publishes `./ConnectWiseManageAPI` to the PowerShell Gallery with `Publish-PSResource`, and creates a GitHub
+Release from the version's CHANGELOG section.
+
+One-time setup (maintainer):
+
+1. On the PowerShell Gallery, create an API key scoped to push `ConnectWiseManageAPI` only.
+2. In GitHub, **Settings → Environments → New environment** named `production`. Add yourself as a required reviewer
+   so each publish waits for your approval, and limit deployment tags to `v*`.
+3. In that environment, add the secret `PSGALLERY_API_KEY` with the Gallery key.
+
+Each release:
+
+1. Set `ModuleVersion` (and `Prerelease`, for a prerelease) in the manifest, and add the dated `## [x.y.z]` section to
+   `CHANGELOG.md`. Merge to `master`.
+2. Tag the merge commit on `master` and push the tag:
+
+   ```powershell
+   git checkout master; git pull
+   git tag v0.5.1
+   git push origin v0.5.1
+   ```
+
+3. Approve the `production` deployment in the workflow run. If a step fails after the Gallery publish, re-run the
+   workflow: it skips a version that is already published and only creates the missing GitHub Release.
+
+Don't publish with `Publish-Module`: PowerShellGet adds a tag per exported command, and the tag list is over NuGet's
+4000-character limit, so the package fails to build.
