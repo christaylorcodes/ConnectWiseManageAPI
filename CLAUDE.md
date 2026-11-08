@@ -120,6 +120,10 @@ powershell -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
 Invoke-ScriptAnalyzer -Path ./ConnectWiseManageAPI -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
 ```
 
+Live tests (`Tests/Live.*.Tests.ps1`, tag `Integration`) run only with `-Live`, against the server in the
+gitignored `Tests/live.local.ps1`; the write tests also need `$env:CWMAllowWrite = 'yes'` (sandbox only).
+Never in CI. See CONTRIBUTING.md.
+
 CI: GitHub Actions (`.github/workflows/ci.yml`): Windows PowerShell 5.1 and pwsh on Windows, pwsh on Ubuntu.
 
 ## Resources

@@ -232,3 +232,6 @@ BLOG/
 # Internal planning notes (kept locally)
 MAP.md
 TODO.md
+
+# Live test connection settings (copy Tests/live.example.ps1)
+Tests/live.local.ps1

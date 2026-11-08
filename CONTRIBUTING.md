@@ -145,6 +145,20 @@ PowerShell 7.4+ is the primary target. Windows PowerShell 5.1 is still supported
 
     CI runs the same checks on Windows PowerShell 5.1, PowerShell 7 on Windows, and PowerShell 7 on Linux.
 
+-   **Live tests (optional, local only):** with access to a ConnectWise Manage server, copy
+    `Tests/live.example.ps1` to `Tests/live.local.ps1` (gitignored), fill in the connection settings, and run:
+
+    ```powershell
+    pwsh -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test -Live
+    powershell -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test -Live
+    ```
+
+    `Tests/Live.Read.Tests.ps1` only reads, so it is safe on production: it calls every `Get-*` function and
+    checks conditions, ordering, fields, counts and paging. `Tests/Live.Write.Tests.ps1` creates, changes and
+    deletes `PSTEST` records and runs only when `$env:CWMAllowWrite = 'yes'`. Use a sandbox server for it.
+    `./Tools/Remove-CWMTestData.ps1` lists (and with `-Remove`, deletes) records left behind by an interrupted run.
+    Live tests never run in CI.
+
 ### Documentation Style Guide
 
 -   Use [Markdown](https://daringfireball.net/projects/markdown).

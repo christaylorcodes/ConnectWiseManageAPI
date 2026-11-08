@@ -1,11 +1,15 @@
 ﻿# Runs the Pester 5 tests. Works on Windows PowerShell 5.1 and PowerShell 7, locally and in CI.
 #   -Test      run the tests for the current PowerShell version and save the results
+#   -Live      also run the live tests (tag 'Integration') against a real ConnectWise server, using the
+#              settings in Tests/live.local.ps1 (copy Tests/live.example.ps1). The write tests (tag 'Write')
+#              also need $env:CWMAllowWrite = 'yes': sandbox servers only.
 #   -Finalize  read all saved results and fail if any test failed
 # Results go to ./TestResults (gitignored), one pair of files per PowerShell version, overwritten each run.
 
 param(
     [switch]$Finalize,
     [switch]$Test,
+    [switch]$Live,
     [string]$ProjectRoot = (Split-Path $PSScriptRoot -Parent)
 )
 
@@ -27,11 +31,28 @@ if ($Test) {
     $Config.TestResult.Enabled = $true
     $Config.TestResult.OutputFormat = 'NUnitXml'
     $Config.TestResult.OutputPath = $TestFile
-    # Live tests need a ConnectWise server; they also skip themselves when CWMServer is not set
-    if (!$env:CWMServer) { $Config.Filter.ExcludeTag = 'Integration' }
+    # Live tests need a ConnectWise server and run only with -Live; they also skip themselves when CWMServer is not set
+    if ($Live) {
+        $LiveSettings = Join-Path $PSScriptRoot 'live.local.ps1'
+        if (Test-Path $LiveSettings) { . $LiveSettings }
+        if (!$env:CWMServer) { throw "-Live needs a ConnectWise server: copy Tests/live.example.ps1 to $LiveSettings and fill it in." }
+        "`tLive tests against $env:CWMServer$(if ($env:CWMAllowWrite -eq 'yes') { ', INCLUDING WRITE TESTS' })`n"
+    }
+    $ExcludeTag = @()
+    if (!$Live) { $ExcludeTag += 'Integration' }
+    if ($env:CWMAllowWrite -ne 'yes') { $ExcludeTag += 'Write' }
+    $Config.Filter.ExcludeTag = $ExcludeTag
 
+    # A file that errors during discovery, or a failing BeforeAll/AfterAll, fails no single test: count those too
     Invoke-Pester -Configuration $Config |
-        Select-Object PassedCount, FailedCount, SkippedCount, @{ n = 'Failed'; e = { $_.Failed | ForEach-Object { $_.ExpandedPath } } } |
+        Select-Object PassedCount, SkippedCount,
+        @{ n = 'FailedCount'; e = { $_.FailedCount + $_.FailedBlocksCount + $_.FailedContainersCount } },
+        @{ n = 'Failed'; e = {
+                $_.Failed | ForEach-Object { $_.ExpandedPath }
+                $_.FailedBlocks | ForEach-Object { "Block: $($_.ExpandedPath)" }
+                $_.FailedContainers | ForEach-Object { "File: $($_.Item)" }
+            }
+        } |
         Export-Clixml -Path (Join-Path $ResultsDir "PesterResults_PS$PSVersion.xml")
 }
 

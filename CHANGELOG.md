@@ -127,6 +127,19 @@ This release has **breaking changes**. Read them before upgrading.
 - `Submit-CWMTimeSheet` calls `Update-CWMTimeSheet -Submit` and supports `-WhatIf`.
 - `Tests/Invoke-Tests.ps1` writes its results to `TestResults/` (one file pair per PowerShell version, overwritten
   each run) instead of timestamped files in the repo root.
+- **Live tests** (opt-in, never in CI): `Tests/Live.Read.Tests.ps1` is read-only and safe on production; it calls
+  every `Get-*` function and checks conditions, ordering, fields, counts and paging. `Tests/Live.Write.Tests.ps1`
+  creates, changes and deletes `PSTEST` records on a sandbox server and also needs `$env:CWMAllowWrite = 'yes'`.
+  Run them with `./Tests/Invoke-Tests.ps1 -Test -Live`, using settings in the gitignored `Tests/live.local.ps1`
+  (copy `Tests/live.example.ps1`). `Tools/Remove-CWMTestData.ps1` finds and removes records left by an interrupted
+  run. These replace `Tests/ConnectWiseManageAPI.Tests.ps1`.
+- New offline tests: `Tests/Conventions.Tests.ps1` (approved verbs, complete help, ShouldProcess on writes, Get
+  parameters the masters read, manifest aliases) and `Tests/GetSmoke.Tests.ps1` (every `Get-*` sends one
+  well-formed request). `Invoke-Tests.ps1` also counts failed blocks and files as failures.
+- `Tools/Update-CWMManifestExport.ps1` also keeps `AliasesToExport` in sync with the `[Alias()]` attributes.
+- CI runs on `integration/**` branches, cancels superseded runs, has a job timeout and uses actions v7.
+  Dependabot keeps the actions current, and a weekly workflow checks every endpoint against a pinned, reviewed
+  copy of the ConnectWise OpenAPI spec.
 
 ### Fixed
 
