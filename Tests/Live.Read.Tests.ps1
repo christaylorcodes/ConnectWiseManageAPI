@@ -70,7 +70,7 @@ BeforeAll {
     # no parent record to use
     $script:Resolvers = @{}
     $Parents = @{
-        'Get-CWMAgreement'          = 'Get-CWMAgreementAddition', 'Get-CWMAgreementSite'
+        'Get-CWMAgreement'          = 'Get-CWMAgreementAddition', 'Get-CWMAgreementAdjustment', 'Get-CWMAgreementSite', 'Get-CWMAgreementWorkRole', 'Get-CWMAgreementWorkType'
         'Get-CWMCompany'            = 'Get-CWMCompanyServiceTemplate', 'Get-CWMCompanySite', 'Get-CWMCompanyTeam', 'Get-CWMCompanyTypeAssociation'
         'Get-CWMCompanyContact'     = 'Get-CWMCompanyContactNote'
         'Get-CWMDepartment'         = 'Get-CWMDepartmentLocation'
@@ -84,7 +84,7 @@ BeforeAll {
         'Get-CWMScheduleHolidayList' = 'Get-CWMScheduleHoliday'
         'Get-CWMServiceBoard'       = 'Get-CWMBoardItem', 'Get-CWMBoardStatus', 'Get-CWMBoardSubtype', 'Get-CWMBoardTeam', 'Get-CWMBoardType', 'Get-CWMBoardTypeSubTypeItemAssociation'
         'Get-CWMServiceTemplate'    = 'Get-CWMServiceTemplateResource'
-        'Get-CWMTicket'             = 'Get-CWMTicketAllNote', 'Get-CWMTicketConfiguration', 'Get-CWMTicketNote', 'Get-CWMTicketTask'
+        'Get-CWMTicket'             = 'Get-CWMTicketAllNote', 'Get-CWMTicketConfiguration', 'Get-CWMTicketDocument', 'Get-CWMTicketNote', 'Get-CWMTicketProduct', 'Get-CWMTicketScheduleEntry', 'Get-CWMTicketTask', 'Get-CWMTicketTimeEntry'
         'Get-CWMWarehouseBin'       = 'Get-CWMInventory'
     }
     # Child -> parent list function. (No GetNewClosure: a closure cannot see the helper functions above.)
@@ -95,12 +95,12 @@ BeforeAll {
             $script:Resolvers[$Child] = { $Id = Get-LiveFirstId $ParentOf[$Name]; if ($Id) { @{ parentId = $Id } } }
         }
     }
-    $script:Resolvers['Get-CWMCompanyNote'] = { $Id = Get-LiveFirstId 'Get-CWMCompany'; if ($Id) { @{ CompanyID = $Id } } }
+    $script:Resolvers['Get-CWMCompanyNote'] = { $Id = Get-LiveFirstId 'Get-CWMCompany'; if ($Id) { @{ parentId = $Id } } }
     $script:Resolvers['Get-CWMCompanyCustomNote'] = $script:Resolvers['Get-CWMCompanyNote']
     $script:Resolvers['Get-CWMBoardItemAssociation'] = {
         $Board = Get-LiveFirstId 'Get-CWMServiceBoard'
         if ($Board) { $Item = Get-LiveFirstId 'Get-CWMBoardItem' @{ parentId = $Board } }
-        if ($Item) { @{ grandParentId = $Board; parentId = $Item } }
+        if ($Item) { @{ grandparentId = $Board; parentId = $Item } }
     }
     $script:Resolvers['Get-CWMBoardStatusNotification'] = {
         $Board = Get-LiveFirstId 'Get-CWMServiceBoard'
