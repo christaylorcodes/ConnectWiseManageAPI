@@ -1,169 +1,157 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMMySecurity
 
 ## SYNOPSIS
-This function will return information about the users permissions.
+Gets the security settings of the authenticated member.
 
 ## SYNTAX
 
 ```
-Get-CWMMySecurity [-condition <String>] [-orderBy <String>] [-childConditions <String>]
- [-customFieldConditions <String>] [-page <Int32>] [-pageSize <Int32>] [-fields <String[]>] [-all]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CWMMySecurity [[-condition] <String>] [[-orderBy] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>] [[-fields] <String[]>] [-all]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the module security levels (add, edit, delete, inquire) of the member the API credentials
+belong to.
+Calls GET /system/mySecurity.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-CWMSystemInfo
+```
+Get-CWMMySecurity -condition "inquireLevel='All'" -all
 ```
 
-Will return information about the users permissions.
+Returns the module functions the connected member can view at the All level.
 
 ## PARAMETERS
 
-### -all
-Return all results
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+Filter in ConnectWise Manage condition syntax, for example "inquireLevel='All'".
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-Allows searching custom fields.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results.
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
+Position: 5
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -pageSize
-Number of results returned per page (Defaults to 25)
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 6
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'addLevel').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -all
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -176,8 +164,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 9/26/2019
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=System&e=Info&o=GET](https://developer.connectwise.com/products/manage/rest?a=System&e=Info&o=GET)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,0 +1,215 @@
+---
+external help file: ConnectWiseManageAPI-help.xml
+Module Name: ConnectWiseManageAPI
+online version: https://developer.connectwise.com/manage/rest
+schema: 2.0.0
+---
+
+# Get-CWMOpportunityStage
+
+## SYNOPSIS
+Gets sales stages.
+
+## SYNTAX
+
+```
+Get-CWMOpportunityStage [[-id] <Int32>] [-count] [[-condition] <String>] [[-childConditions] <String>]
+ [[-customFieldConditions] <String>] [[-orderBy] <String>] [[-fields] <String[]>] [[-page] <Int32>]
+ [[-pageSize] <Int32>] [[-pageId] <Int32>] [-all] [<CommonParameters>]
+```
+
+## DESCRIPTION
+Retrieves the sales stages from ConnectWise Manage.
+Calls GET /sales/stages; -id adds /{id} and -count adds /count.
+
+## EXAMPLES
+
+### EXAMPLE 1
+```
+Get-CWMOpportunityStage -condition "name contains 'Support'" -all
+```
+
+Retrieves the sales stages that match the condition.
+
+## PARAMETERS
+
+### -id
+The id of a single sales stage to return.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Returns the number of matching sales stages instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'name').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+The page number to return.
+Use with -pageSize.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageId
+Starts forward-only pagination at the page identified by this value.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+Retrieve every matching record, handling pagination automatically.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+## OUTPUTS
+
+## NOTES
+
+## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

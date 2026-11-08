@@ -1,0 +1,71 @@
+﻿<#
+.SYNOPSIS
+    Gets user defined (custom) fields.
+
+.DESCRIPTION
+    Retrieves user defined (custom) fields from ConnectWise Manage, or a single user defined field by id. Calls GET
+    /system/userDefinedFields; -id adds /{id} and -count adds /count.
+
+.PARAMETER id
+    The id of a single user defined field to retrieve.
+
+.PARAMETER count
+    Return only the number of matching user defined (custom) fields instead of the records.
+
+.PARAMETER condition
+    Filter in ConnectWise Manage condition syntax, for example "screenId='Company'".
+
+.PARAMETER orderBy
+    Sort order as 'field asc' or 'field desc', for example 'id desc'.
+
+.PARAMETER childConditions
+    Filter on child (list) fields, in condition syntax.
+
+.PARAMETER customFieldConditions
+    Filter on custom field values, in condition syntax.
+
+.PARAMETER page
+    The page number to return. Use with -pageSize.
+
+.PARAMETER pageSize
+    The number of records per page. Without it the API's default page size applies.
+
+.PARAMETER fields
+    Only return these fields, for example @('id', 'caption').
+
+.PARAMETER all
+    Retrieve every matching record, handling pagination automatically.
+
+.EXAMPLE
+    Get-CWMUserDefinedField -all
+
+    Retrieves every user defined field.
+
+.EXAMPLE
+    Get-CWMUserDefinedField -id 5
+
+    Retrieves user defined field 5.
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+#>
+function Get-CWMUserDefinedField {
+    [CmdletBinding()]
+    param(
+        [Alias('userDefinedFieldId')]
+        [int]$id,
+        [switch]$count,
+        [string]$condition,
+        [ValidatePattern('\S* (desc|asc)')]
+        [string]$orderBy,
+        [string]$childConditions,
+        [string]$customFieldConditions,
+        [int]$page,
+        [int]$pageSize,
+        [string[]]$fields,
+        [switch]$all
+    )
+
+    $Endpoint = '/system/userDefinedFields'
+    Invoke-CWMGetMaster -Arguments $PsBoundParameters -Endpoint $Endpoint
+}

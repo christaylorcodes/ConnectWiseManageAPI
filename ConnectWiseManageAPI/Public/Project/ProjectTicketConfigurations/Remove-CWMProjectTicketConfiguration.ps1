@@ -1,3 +1,27 @@
+﻿<#
+.SYNOPSIS
+    Detaches a configuration from a project ticket.
+
+.DESCRIPTION
+    Detaches a configuration from a project ticket in ConnectWise Manage. Calls DELETE
+    /project/tickets/{parentId}/configurations/{id}.
+
+.PARAMETER id
+    The id of the configuration to detach.
+    Alias: configurationId
+
+.PARAMETER parentId
+    The id of the project ticket.
+    Alias: ticketId
+
+.EXAMPLE
+    Remove-CWMProjectTicketConfiguration -parentId 12 -id 5
+
+    Deletes configuration 5 of project ticket 12.
+
+.LINK
+    https://developer.connectwise.com/manage/rest
+#>
 function Remove-CWMProjectTicketConfiguration {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '', Justification = 'Used by sub-function')]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]

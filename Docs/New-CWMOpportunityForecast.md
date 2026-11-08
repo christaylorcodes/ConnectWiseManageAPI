@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMOpportunityForecast
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates the forecast of an opportunity.
 
 ## SYNTAX
 
@@ -20,300 +20,65 @@ New-CWMOpportunityForecast [-parentId] <Int32> [[-id] <Int32>] [[-forecastItems]
  [[-lostRevenue] <Hashtable>] [[-openRevenue] <Hashtable>] [[-otherRevenue1] <Hashtable>]
  [[-otherRevenue2] <Hashtable>] [[-salesTaxRevenue] <Decimal>] [[-forecastTotalWithTaxes] <Decimal>]
  [[-expectedProbability] <Decimal>] [[-taxCode] <Hashtable>] [[-billingTerms] <Hashtable>]
- [[-currency] <Hashtable>] [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [[-currency] <Hashtable>] [[-_info] <Hashtable>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a forecast on an opportunity in ConnectWise Manage.
+Calls POST
+/sales/opportunities/{parentId}/forecast; only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMOpportunityForecast -parentId 75 -forecastItems @(@{ forecastDescription = 'Firewall'; opportunity = @{ id = 75 }; status = @{ id = 1 }; forecastType = 'Product'; revenue = 2500 })
 ```
 
-{{ Add example description here }}
+Adds a product forecast item with 2500 revenue to opportunity 75.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the opportunity to add the forecast to.
+Alias: opportunityId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: opportunityId
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-{{ Fill _info Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -agreementRevenue
-{{ Fill agreementRevenue Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billingTerms
-{{ Fill billingTerms Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -currency
-{{ Fill currency Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -expectedProbability
-{{ Fill expectedProbability Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -expenseRevenue
-{{ Fill expenseRevenue Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -forecastItems
-{{ Fill forecastItems Description }}
-
-```yaml
-Type: Array
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -forecastRevenueTotals
-{{ Fill forecastRevenueTotals Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -forecastTotalWithTaxes
-{{ Fill forecastTotalWithTaxes Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 17
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -id
-{{ Fill id Description }}
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -inclusiveRevenueTotals
-{{ Fill inclusiveRevenueTotals Description }}
+### -forecastItems
+Forecast items.
+An array of hashtables with the properties of the API's ForecastItem object.
 
 ```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -lostRevenue
-{{ Fill lostRevenue Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -openRevenue
-{{ Fill openRevenue Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -otherRevenue1
-{{ Fill otherRevenue1 Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -otherRevenue2
-{{ Fill otherRevenue2 Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -productRevenue
-{{ Fill productRevenue Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Array
 Parameter Sets: (All)
 Aliases:
 
@@ -324,41 +89,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -recurringTotal
-{{ Fill recurringTotal Description }}
+### -productRevenue
+Product revenue reference, for example @{ id = 1 }.
 
 ```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -salesTaxRevenue
-{{ Fill salesTaxRevenue Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -serviceRevenue
-{{ Fill serviceRevenue Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -369,26 +104,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -taxCode
-{{ Fill taxCode Description }}
+### -serviceRevenue
+Service revenue reference, for example @{ id = 1 }.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 19
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -timeRevenue
-{{ Fill timeRevenue Description }}
+### -agreementRevenue
+Agreement revenue reference, for example @{ id = 1 }.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -399,28 +134,289 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -wonRevenue
-{{ Fill wonRevenue Description }}
+### -timeRevenue
+Time revenue reference, for example @{ id = 1 }.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 11
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -expenseRevenue
+Expense revenue reference, for example @{ id = 1 }.
 
 ```yaml
-Type: ActionPreference
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -forecastRevenueTotals
+Forecast revenue totals reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -inclusiveRevenueTotals
+Inclusive revenue totals reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -recurringTotal
+Recurring total.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -wonRevenue
+Won revenue reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -lostRevenue
+Lost revenue reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -openRevenue
+Open revenue reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -otherRevenue1
+Other revenue 1 reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -otherRevenue2
+Other revenue 2 reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -salesTaxRevenue
+Sales tax revenue.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -forecastTotalWithTaxes
+Forecast total with taxes.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 18
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -expectedProbability
+Expected probability.
+An integer.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -taxCode
+Tax code reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billingTerms
+Billing terms reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -currency
+Currency reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -434,10 +430,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

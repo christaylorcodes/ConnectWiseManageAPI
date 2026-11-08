@@ -1,72 +1,76 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMTicketAllNote
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets all notes of a service ticket.
 
 ## SYNTAX
 
 ```
-Get-CWMTicketAllNote [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+Get-CWMTicketAllNote [-parentId] <Int32> [-count] [[-condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves all notes of a service ticket from ConnectWise Manage, including time entry and meeting notes
+(noteType TicketNote, TimeEntryNote or MeetingNote).
+Calls GET /service/tickets/{parentId}/allNotes (GET
+/service/tickets/{parentId}/allNotes/count with -count).
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-CWMTicketAllNote -parentId 12 -condition "member/identifier='jdoe'" -all
 ```
 
-{{ Add example description here }}
+Retrieves the notes of service ticket 12 that match the condition.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -parentId
+The id of the service ticket.
+Alias: ticketId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Return only the number of matching notes instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -condition
-{{ Fill condition Description }}
+Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -77,71 +81,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-Allows searching custom fields.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -152,62 +96,94 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-Used in pagination to cycle through results.
+### -childConditions
+Filter on child (list) fields, in condition syntax.
 
 ```yaml
-Type: Int32
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -page
+The page number to return.
+Use with -pageSize.
+
+```yaml
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 6
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -pageSize
-Number of results returned per page (Defaults to 25)
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'text').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -all
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -217,10 +193,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

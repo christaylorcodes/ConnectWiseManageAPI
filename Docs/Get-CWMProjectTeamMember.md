@@ -1,42 +1,82 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMProjectTeamMember
 
 ## SYNOPSIS
-This function will list team members of a project.
+Gets the team members of a project.
 
 ## SYNTAX
 
 ```
-Get-CWMProjectTeamMember -parentId <Int32> [-id <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
- [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CWMProjectTeamMember [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>]
+ [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the team members of a project from ConnectWise Manage, or a single team member by id.
+Calls
+GET /project/projects/{parentId}/teamMembers; -id adds /{id} and -count adds /count.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-CWMProjectTeamMember -ProjectID 1 -all
+```
+Get-CWMProjectTeamMember -parentId 12 -condition "member/identifier='jdoe'" -all
 ```
 
-Will list all project team members for project 1.
+Retrieves the team members of project 12 that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMProjectTeamMember -parentId 12 -id 5
+```
+
+Retrieves team member 5 of project 12.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -parentId
+The id of the project.
+Alias: ProjectID
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: ProjectID
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of a single team member to retrieve.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Return only the number of matching team members instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -47,11 +87,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -62,11 +102,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -77,138 +117,94 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+### -childConditions
+Filter on child (list) fields, in condition syntax.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 7
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -pageSize
-Number of results returned per page (Defaults to 25)
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 8
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -fields
-Allows you to return a partial response with just the fields listed.
+Only return these fields, for example @('id', 'projectId').
 
 ```yaml
-Type: String[]
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+Retrieve every matching record, handling pagination automatically.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: ProjectID
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -221,8 +217,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=Project&e=ProjectBoardTeamMembers&o=GET](https://developer.connectwise.com/products/manage/rest?a=Project&e=ProjectBoardTeamMembers&o=GET)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

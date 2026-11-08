@@ -1,162 +1,97 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMCompanyCustomNote
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets the custom status notes of a company.
 
 ## SYNTAX
 
 ```
-Get-CWMCompanyCustomNote [[-id] <Int32>] [-count] [-CompanyID] <Int32> [[-condition] <String>]
+Get-CWMCompanyCustomNote [[-id] <Int32>] [-count] [-parentId] <Int32> [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the custom status notes of a company from ConnectWise Manage, or a single custom status note
+by id.
+Calls GET /company/companies/{parentId}/customStatusNotes; -id adds /{id} and -count adds /count.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+100" -all
 ```
 
-{{ Add example description here }}
+Retrieves the custom status notes of company 12 that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMCompanyCustomNote -parentId 12 -id 5
+```
+
+Retrieves custom status note 5 of company 12.
 
 ## PARAMETERS
 
-### -CompanyID
-{{ Fill CompanyID Description }}
+### -id
+The id of a single custom status note to retrieve.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -all
-{{ Fill all Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -childConditions
-{{ Fill childConditions Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-{{ Fill condition Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -count
-{{ Fill count Description }}
+Return only the number of matching custom status notes instead of the records.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customFieldConditions
-{{ Fill customFieldConditions Description }}
+### -parentId
+The id of the company.
+Alias: companyId
 
 ```yaml
-Type: String
+Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: companyId
 
-Required: False
-Position: 5
-Default value: None
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -fields
-{{ Fill fields Description }}
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "id\>100".
 
 ```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-{{ Fill orderBy Description }}
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -167,11 +102,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-{{ Fill page Description }}
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: Int32
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -182,32 +147,64 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageSize
-{{ Fill pageSize Description }}
+### -page
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'customNote').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -all
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -217,10 +214,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,130 +1,71 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ContactCommunications/paths/~1company~1contacts~1{id}~1communications/post
+online version:
 schema: 2.0.0
 ---
 
 # New-CWMDocument
 
 ## SYNOPSIS
-Will allow you to upload a document and attach it to an item.
+Uploads a document or links a URL to a ConnectWise Manage record.
 
 ## SYNTAX
 
 ### URL
 ```
-New-CWMDocument [-recordType] <String> [-recordId] <Int32> [-title] <String> -URL <String>
- [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>] [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMDocument -recordType <String> -recordId <Int32> -title <String> -URL <String> [-Private <Boolean>]
+ [-ReadOnly <Boolean>] [-isAvatar <Boolean>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### File
 ```
-New-CWMDocument [-recordType] <String> [-recordId] <Int32> [-title] <String> [-FilePath] <FileInfo>
- [[-FileName] <String>] [[-Private] <Boolean>] [[-ReadOnly] <Boolean>] [-isAvatar <Boolean>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CWMDocument -recordType <String> -recordId <Int32> -title <String> -FilePath <Object> [-FileName <String>]
+ [-Private <Boolean>] [-ReadOnly <Boolean>] [-isAvatar <Boolean>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Will allow you to upload a document and attach it to an item. You can also set some permissions for the document.
+Creates a document attached to a record (ticket, company, project, ...).
+Either uploads a
+local file (-FilePath) or links a URL (-URL).
+
+The request is sent as multipart/form-data.
+The body is built as a byte array: the form
+fields and part headers are UTF-8 text and the file content is copied byte for byte, so
+binary files upload unchanged on both Windows PowerShell 5.1 and PowerShell 7.
+
+This function calls the ConnectWise Manage API endpoint: POST /system/documents
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> New-CWMDocument -recordType 'Ticket' -recordId 123 -title 'NewDoc' -FilePath 'C:\temp\test.txt'
+```
+New-CWMDocument -recordType Ticket -recordId 12345 -title 'Screenshot' -FilePath 'C:\Temp\error.png'
 ```
 
-Will upload test.txt to the ticket 123 with a title of NewDoc.
+Uploads error.png to ticket 12345.
+
+### EXAMPLE 2
+```
+New-CWMDocument -recordType Company -recordId 250 -title 'Runbook' -URL 'https://wiki.example.com/runbook'
+```
+
+Links a URL to company 250.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -recordType
+The type of record to attach the document to, e.g.
+'Ticket', 'Company' or 'Project'.
 
 ```yaml
-Type: SwitchParameter
+Type: System.String
 Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FileName
-Name of the file when uploaded. Will default to the original file name.
-
-```yaml
-Type: String
-Parameter Sets: File
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilePath
-Full path to the file to be uploaded.
-
-```yaml
-Type: FileInfo
-Parameter Sets: File
 Aliases:
 
 Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Private
-If true the document will not be shown in the customer portal.
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReadOnly
-If true only the owner can update the file.
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -132,60 +73,30 @@ Accept wildcard characters: False
 ```
 
 ### -recordId
-The ID of the item you are attaching the document to.
+The ID of the record to attach the document to.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recordType
-The type of record are you trying to attach the document to.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Ticket, Agreement, Company, Configuration, Contact, Expense, Opportunity, PurchaseOrder, Project, SalesOrder, ServiceTemplate, Rma
-
-Required: True
-Position: 0
-Default value: None
+Position: Named
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -title
-Title of the uploaded document.
+The title of the document.
+Line breaks are replaced with a space.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -isAvatar
-{{ Fill isAvatar Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -193,10 +104,10 @@ Accept wildcard characters: False
 ```
 
 ### -URL
-{{ Fill URL Description }}
+A URL to link instead of uploading a file.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: URL
 Aliases:
 
@@ -207,13 +118,112 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -FilePath
+Path to the local file to upload, or a file object from Get-Item or Get-ChildItem.
+Must be a file, not a
+folder.
+A relative path is resolved against the current PowerShell location.
 
 ```yaml
-Type: ActionPreference
+Type: System.Object
+Parameter Sets: File
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FileName
+The file name to send to ConnectWise Manage.
+Defaults to the name of -FilePath.
+Double quotes, carriage returns and line feeds are replaced with '_'.
+
+```yaml
+Type: System.String
+Parameter Sets: File
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Private
+Whether the document is private.
+Default: $true
+
+```yaml
+Type: System.Boolean
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: Named
+Default value: True
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReadOnly
+Whether the document is read-only.
+Default: $false
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -isAvatar
+Whether the document is an avatar image.
+Default: $false
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -227,13 +237,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
-Author: Chris Taylor Date: 7/2/2020
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/Products/Manage/REST#/Documents/getSystemDocumentsUploadsample](https://developer.connectwise.com/Products/Manage/REST#/Documents/getSystemDocumentsUploadsample)
+[Get-CWMDocument]()
+
+[Remove-CWMDocument]()
+
+[https://developer.connectwise.com/Products/ConnectWise_PSA/REST](https://developer.connectwise.com/Products/ConnectWise_PSA/REST)
+

@@ -1,47 +1,66 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMAgreementAddition
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Deletes an agreement addition of an agreement.
 
 ## SYNTAX
 
 ```
-Remove-CWMAgreementAddition [-id] <Int32> [-agreementid] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+Remove-CWMAgreementAddition [-id] <Int32> [-parentId] <Int32> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes an agreement addition of an agreement from ConnectWise Manage.
+Calls DELETE
+/finance/agreements/{parentId}/additions/{id}.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Remove-CWMAgreementAddition -parentId 12 -id 5
 ```
 
-{{ Add example description here }}
+Deletes agreement addition 5 of agreement 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the agreement addition to delete.
+Alias: additionId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: additionId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+The id of the agreement.
+Alias: agreementId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: agreementId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -51,7 +70,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -62,43 +81,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -agreementid
-{{ Fill agreementid Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: parentId
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: additionId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -112,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

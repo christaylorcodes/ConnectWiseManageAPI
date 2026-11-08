@@ -1,61 +1,53 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET
+online version:
 schema: 2.0.0
 ---
 
 # Invoke-CWMRemoveMaster
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Generic DELETE request handler for removing ConnectWise Manage records.
 
 ## SYNTAX
 
 ```
-Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+Invoke-CWMRemoveMaster [[-Endpoint] <String>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Master function for all delete (DELETE) operations in the module.
+Permanently removes records from the ConnectWise Manage system.
+
+Used by all Remove-CWM* functions (Remove-CWMTicket, Remove-CWMCompany, etc.).
+Supports -WhatIf and -Confirm for safety.
+
+This function calls the ConnectWise Manage API endpoint: DELETE {Endpoint}
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Invoke-CWMRemoveMaster -Endpoint '/service/tickets/12345'
 ```
 
-{{ Add example description here }}
+Deletes ticket with ID 12345.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Endpoint
-{{ Fill Endpoint Description }}
+The API endpoint path including the ID to delete.
+Format: '/service/tickets/12345', '/company/companies/250'
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,7 +58,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -77,13 +69,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -97,10 +89,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Author: Chris Taylor
+
+Internal Function:
+- Called by all Remove-CWM* functions
+- Supports -WhatIf and -Confirm for safety
+- Returns 204 (No Content) on success
+- Deletion is permanent and cannot be undone
 
 ## RELATED LINKS
+
+[Invoke-CWMWebRequest]()
+
+[Remove-CWMTicket]()
+
+[Remove-CWMCompany]()
+

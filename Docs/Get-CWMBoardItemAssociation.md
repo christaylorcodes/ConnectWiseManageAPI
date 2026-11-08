@@ -1,147 +1,91 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMBoardItemAssociation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets the subtype associations of a service board item.
 
 ## SYNTAX
 
 ```
-Get-CWMBoardItemAssociation [-grandParentId] <Int32> [-parentId] <Int32> [-count] [[-condition] <String>]
+Get-CWMBoardItemAssociation [-grandparentId] <Int32> [-parentId] <Int32> [-count] [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the subtype associations of a board item from ConnectWise Manage.
+Calls GET
+/service/boards/{grandparentId}/items/{parentId}/associations; -count adds /count.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+100" -all
 ```
 
-{{ Add example description here }}
+Retrieves the subtype associations of board item 12 that match the condition.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -grandparentId
+The id of the service board.
+Alias: boardId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: boardId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -parentId
+The id of the board item.
+Alias: itemId
 
 ```yaml
-Type: String
+Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: itemId
 
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-{{ Fill condition Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
+Required: True
 Position: 2
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -count
-Will return the number of objects.
+Return only the number of matching subtype associations instead of the records.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customFieldConditions
-Allows searching custom fields.
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "id\>100".
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -grandParentId
-{{ Fill grandParentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: boardId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -152,11 +96,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-Used in pagination to cycle through results.
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: Int32
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -167,47 +141,64 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageSize
-Number of results returned per page (Defaults to 25)
+### -page
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'subTypeAssociationIds').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -all
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: itemId
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -217,10 +208,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

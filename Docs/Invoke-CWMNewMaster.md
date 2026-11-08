@@ -1,71 +1,53 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET
+online version:
 schema: 2.0.0
 ---
 
 # Invoke-CWMNewMaster
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Generic POST request handler for creating new ConnectWise Manage records.
 
 ## SYNTAX
 
 ```
 Invoke-CWMNewMaster [[-Arguments] <Object>] [[-Endpoint] <String>] [[-Skip] <String[]>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Master function for all create (POST) operations in the module.
+Converts function parameters to JSON body and submits to the API.
+
+Used by all New-CWM* functions (New-CWMTicket, New-CWMCompany, etc.).
+Automatically filters out PowerShell common parameters and skipped parameters.
+
+This function calls the ConnectWise Manage API endpoint: POST {Endpoint}
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+$NewArguments = @{
+    summary = "New ticket"
+    company = @{ id = 250 }
+    board = @{ id = 1 }
+}
+Invoke-CWMNewMaster -Arguments $NewArguments -Endpoint '/service/tickets'
 ```
 
-{{ Add example description here }}
+Creates a new ticket.
 
 ## PARAMETERS
 
 ### -Arguments
-{{ Fill Arguments Description }}
+Hashtable containing the properties for the new record.
+Common parameters and those in $Skip are automatically filtered out.
 
 ```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Endpoint
-{{ Fill Endpoint Description }}
-
-```yaml
-Type: String
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
@@ -76,12 +58,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Skip
-Ignores the specified number of objects and then gets the remaining objects.
-Enter the number of objects to skip.
+### -Endpoint
+The API endpoint path (e.g., '/service/tickets', '/company/companies')
 
 ```yaml
-Type: String[]
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -92,12 +73,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Skip
+Array of parameter names to exclude from the request body.
+Common parameters are automatically skipped.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -108,13 +105,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -128,10 +125,28 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Author: Chris Taylor
+
+Internal Function:
+- Called by all New-CWM* functions
+- Supports -WhatIf and -Confirm
+- Automatically filters PowerShell common parameters
+- Verbose and -WhatIf output masks secrets (password, token, privateKey, secret, memberHash)
+- Converts parameters to JSON body
+- Writes a warning when the response is a single record with id 0.
+PR #82 reported that
+  POST /company/companies/{id}/serviceTemplates without a company returns a record with id 0
+  and creates nothing.
+The warning is based on PR #82 by mdewart-Centre.
 
 ## RELATED LINKS
+
+[Invoke-CWMWebRequest]()
+
+[New-CWMTicket]()
+
+[New-CWMCompany]()
+

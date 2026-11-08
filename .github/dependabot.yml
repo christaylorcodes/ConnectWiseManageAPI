@@ -1,0 +1,11 @@
+# Keeps the GitHub Actions used by the workflows current. PowerShell modules (Pester, PSScriptAnalyzer)
+# are pinned in .github/workflows/ci.yml and are not covered by Dependabot: bump them by hand.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']

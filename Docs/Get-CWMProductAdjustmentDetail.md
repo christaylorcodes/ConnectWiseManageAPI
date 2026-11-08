@@ -1,57 +1,98 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/manage/rest?a=Procurement&e=ProductsItem&o=GET
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMProductAdjustmentDetail
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets the product adjustment details of a product adjustment.
 
 ## SYNTAX
 
 ```
-Get-CWMProductAdjustmentDetail [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
- [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CWMProductAdjustmentDetail [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>]
+ [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the product adjustment details of a product adjustment from ConnectWise Manage, or a single
+product adjustment detail by id.
+Calls GET /procurement/adjustments/{parentId}/details; -id adds /{id}
+and -count adds /count.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-CWMProductAdjustmentDetail -parentId 12 -condition "description contains 'laptop'" -all
 ```
 
-{{ Add example description here }}
+Retrieves the product adjustment details of product adjustment 12 that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMProductAdjustmentDetail -parentId 12 -id 5
+```
+
+Retrieves product adjustment detail 5 of product adjustment 12.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -parentId
+The id of the product adjustment.
+Alias: adjustmentId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: adjustmentId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of a single product adjustment detail to retrieve.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Return only the number of matching product adjustment details instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "description contains 'laptop'".
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -62,41 +103,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -condition
-{{ Fill condition Description }}
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFieldConditions
-Allows searching custom fields.
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -107,56 +118,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -fields
-Allows you to return a partial response with just the fields listed.
+### -childConditions
+Filter on child (list) fields, in condition syntax.
 
 ```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -page
-Used in pagination to cycle through results.
-
-```yaml
-Type: Int32
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -167,11 +133,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageSize
-Number of results returned per page (Defaults to 25)
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
 
 ```yaml
-Type: Int32
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -182,17 +148,64 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -page
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: ActionPreference
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'description').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+Retrieve every matching record, handling pagination automatically.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -202,10 +215,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

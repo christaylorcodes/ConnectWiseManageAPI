@@ -1,219 +1,102 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/ConfigurationTypeQuestionValues/paths/~1company~1configurations~1types~1{configurationTypeId:int}~1questions~1{questionId:int}~1values/post
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanyContact
 
 ## SYNOPSIS
-This function will create a new contact.
+Creates a contact.
 
 ## SYNTAX
 
 ```
-New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [-types <Hashtable[]>]
+New-CWMCompanyContact [[-id] <Int32>] [-firstName] <String> [[-lastName] <String>] [[-types] <Hashtable[]>]
  [[-company] <Hashtable>] [[-site] <Hashtable>] [[-addressLine1] <String>] [[-addressLine2] <String>]
- [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <String>] [[-relationship] <Hashtable>]
- [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>] [[-defaultMergeContactId] <Int32>]
- [[-securityIdentifier] <String>] [[-managerContactId] <Int32>] [[-assistantContactId] <Int32>]
- [[-title] <String>] [[-school] <String>] [[-nickName] <String>] [[-marriedFlag] <Boolean>]
- [[-childrenFlag] <Boolean>] [[-significantOther] <String>] [[-portalPassword] <SecureString>]
- [[-portalSecurityLevel] <Int32>] [[-disablePortalLoginFlag] <Boolean>] [[-unsubscribeFlag] <Boolean>]
- [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>] [[-presence] <String>]
- [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>] [[-linkedInUrl] <String>]
- [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>] [[-communicationItems] <Hashtable[]>]
- [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>] [-ProgressAction <ActionPreference>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [[-city] <String>] [[-state] <String>] [[-zip] <String>] [[-country] <Hashtable>]
+ [[-relationship] <Hashtable>] [[-department] <Hashtable>] [[-inactiveFlag] <Boolean>]
+ [[-defaultMergeContactId] <Int32>] [[-securityIdentifier] <String>] [[-managerContact] <Object>]
+ [[-assistantContact] <Object>] [[-title] <String>] [[-school] <String>] [[-nickName] <String>]
+ [[-marriedFlag] <Boolean>] [[-childrenFlag] <Boolean>] [[-significantOther] <String>]
+ [[-portalPassword] <SecureString>] [[-portalSecurityLevel] <Int32>] [[-disablePortalLoginFlag] <Boolean>]
+ [[-unsubscribeFlag] <Boolean>] [[-gender] <String>] [[-birthDay] <String>] [[-anniversary] <String>]
+ [[-presence] <String>] [[-mobileGuid] <Guid>] [[-facebookUrl] <String>] [[-twitterUrl] <String>]
+ [[-linkedInUrl] <String>] [[-defaultBillingFlag] <Boolean>] [[-defaultFlag] <Boolean>]
+ [[-communicationItems] <Hashtable[]>] [[-_info] <Hashtable>] [[-customFields] <Hashtable[]>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This function will create a new contact with the given values.
+Creates a contact in ConnectWise Manage.
+Calls POST /company/contacts; only the parameters you pass are
+sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> New-CWMCompanyContact -firstName 'Chris' -lastName 'Taylor' -company @{id = $Company.id}
+```
+New-CWMCompanyContact -firstName 'Ann' -lastName 'Smith' -company @{ id = 250 } -title 'Office Manager'
 ```
 
-Will create a new contact, Chris Taylor, under the given company
-.
+Creates contact Ann Smith at company 250.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-{{ Fill _info Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 40
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -firstName
+First name.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -addressLine1
-{{ Fill addressLine1 Description }}
+### -lastName
+Last name.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -addressLine2
-{{ Fill addressLine2 Description }}
+### -types
+Types.
+An array of references, for example @(@{ id = 1 }).
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -anniversary
-{{ Fill anniversary Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 31
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -assistantContactId
-{{ Fill assistantContactId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -birthDay
-{{ Fill birthDay Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -childrenFlag
-{{ Fill childrenFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -city
-{{ Fill city Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -communicationItems
-{{ Fill communicationItems Description }}
-
-```yaml
-Type: Hashtable[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 39
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -company
-{{ Fill company Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable[]
 Parameter Sets: (All)
 Aliases:
 
@@ -224,388 +107,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -country
-{{ Fill country Description }}
+### -company
+Company reference, for example @{ id = 250 }.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFields
-{{ Fill customFields Description }}
-
-```yaml
-Type: Hashtable[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 41
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultBillingFlag
-{{ Fill defaultBillingFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 37
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultFlag
-{{ Fill defaultFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 38
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultMergeContactId
-{{ Fill defaultMergeContactId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -department
-{{ Fill department Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -disablePortalLoginFlag
-{{ Fill disablePortalLoginFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 27
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -facebookUrl
-{{ Fill facebookUrl Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 34
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -firstName
-{{ Fill firstName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -gender
-{{ Fill gender Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Male, Female
-
-Required: False
-Position: 29
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -inactiveFlag
-{{ Fill inactiveFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -lastName
-{{ Fill lastName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -linkedInUrl
-{{ Fill linkedInUrl Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 36
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -managerContactId
-{{ Fill managerContactId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -marriedFlag
-{{ Fill marriedFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -mobileGuid
-{{ Fill mobileGuid Description }}
-
-```yaml
-Type: Guid
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 33
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -nickName
-{{ Fill nickName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -portalPassword
-{{ Fill portalPassword Description }}
-
-```yaml
-Type: SecureString
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 25
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -portalSecurityLevel
-{{ Fill portalSecurityLevel Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 26
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -presence
-{{ Fill presence Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Online, DoNotDisturb, Away, Offline, NoAgent
-
-Required: False
-Position: 32
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -relationship
-{{ Fill relationship Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -school
-{{ Fill school Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -securityIdentifier
-{{ Fill securityIdentifier Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -significantOther
-{{ Fill significantOther Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 24
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -site
-{{ Fill site Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -616,11 +122,56 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -state
-{{ Fill state Description }}
+### -site
+Site reference, for example @{ id = 5 }.
 
 ```yaml
-Type: String
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -addressLine1
+Address line 1.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -addressLine2
+Address line 2.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -city
+City.
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -631,56 +182,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -title
-{{ Fill title Description }}
+### -state
+State.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -twitterUrl
-{{ Fill twitterUrl Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 35
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -unsubscribeFlag
-{{ Fill unsubscribeFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 28
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -zip
-{{ Fill zip Description }}
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -691,13 +197,511 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -types
-{{ Fill types Description }}
+### -zip
+Zip.
 
 ```yaml
-Type: Hashtable[]
+Type: System.String
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -country
+Country reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -relationship
+Relationship reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -department
+Department reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -inactiveFlag
+Inactive flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultMergeContactId
+Default merge contact id.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -securityIdentifier
+Security identifier.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -managerContact
+Manager contact reference, for example @{ id = 1 }.
+Alias: managerContactId
+
+```yaml
+Type: System.Object
+Parameter Sets: (All)
+Aliases: managerContactId
+
+Required: False
+Position: 18
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -assistantContact
+Assistant contact reference, for example @{ id = 1 }.
+Alias: assistantContactId
+
+```yaml
+Type: System.Object
+Parameter Sets: (All)
+Aliases: assistantContactId
+
+Required: False
+Position: 19
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -title
+Title.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -school
+School.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -nickName
+Nick name.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -marriedFlag
+Married flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childrenFlag
+Children flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -significantOther
+Significant other.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -portalPassword
+Portal password.
+
+```yaml
+Type: System.Security.SecureString
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 26
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -portalSecurityLevel
+Portal security level.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 27
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -disablePortalLoginFlag
+Disable portal login flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 28
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -unsubscribeFlag
+Unsubscribe flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 29
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -gender
+Gender.
+One of: Female, Male.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 30
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -birthDay
+Birth day.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 31
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -anniversary
+Anniversary.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 32
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -presence
+Presence.
+One of: NoAgent, Online, DoNotDisturb, Away, Offline.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 33
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -mobileGuid
+Mobile GUID.
+
+```yaml
+Type: System.Guid
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 34
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -facebookUrl
+Facebook URL.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 35
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -twitterUrl
+Twitter URL.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 36
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -linkedInUrl
+LinkedIn URL.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 37
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultBillingFlag
+Default billing flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 38
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultFlag
+Default flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 39
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -communicationItems
+Communication items.
+An array of hashtables with the properties of the API's ContactCommunicationItem
+object.
+
+```yaml
+Type: System.Collections.Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 40
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 41
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFields
+Custom fields.
+An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
+
+```yaml
+Type: System.Collections.Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 42
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
 
 Required: False
 Position: Named
@@ -706,13 +710,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -726,10 +730,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -6,31 +6,26 @@ The following is a set of guidelines for contributing. These are mostly guidelin
 
 ## Table Of Contents
 
-[I don't want to read this whole thing, I just have a question!!!](#i-don't-want-to-read-this-whole-thing-i-just-have-a-question)
+[I don't want to read this whole thing, I just have a question!!!](#i-dont-want-to-read-this-whole-thing-i-just-have-a-question)
 
 [How Can I Contribute?](#how-can-i-contribute)
 
 -   [Reporting Bugs](#reporting-bugs)
 -   [Suggesting Enhancements](#suggesting-enhancements)
--   [Your First Code Contribution](#your-first-code-contribution)
--   [Pull Requests](#pull-requests)
 
 [Style Guides](#style-guides)
 
 -   [Git Commit Messages](#git-commit-messages)
--   [Powershell Style Guide](#powershell-style-guide)
+-   [PowerShell Style Guide](#powershell-style-guide)
+-   [Supported PowerShell versions](#supported-powershell-versions)
 -   [Documentation Style Guide](#documentation-style-guide)
+-   [Checking against the ConnectWise API spec](#checking-against-the-connectwise-api-spec)
 
 ## I don't want to read this whole thing I just have a question
 
-> **Note:** *Please don't file an issue to ask a question.* You'll get faster results by using the resources below.
-
-Join the MSPGeek Slack team:
-
--   [Join the MSPGeek Slack Team](https://join.mspgeek.com/)
-    -   Even though Slack is a chat service, sometimes it takes several hours for community members to respond — please be patient!
-    -   Use the `#cw-manage` channel for general questions or discussion
-    -   There are many other channels available, check the channel list
+-   Check each command's help (`Get-Help <Command> -Full`) or the [Docs](https://github.com/christaylorcodes/ConnectWiseManageAPI/tree/master/Docs) folder.
+-   Search [existing issues](https://github.com/christaylorcodes/ConnectWiseManageAPI/issues?q=is%3Aissue), including closed ones.
+-   Still stuck? Open an issue with the **Question** template.
 
 ## How Can I Contribute
 
@@ -44,8 +39,7 @@ Before creating bug reports, please check existing issues as you might find out 
 
 #### Before Submitting A Bug Report
 
--   **Check the Wiki.** You might be able to find the cause of the problem and fix things yourself.
--   **Check the [MSPGeek Slack Team](https://join.mspgeek.com/)** for help from the community.
+-   **Check the command's help and the [Wiki](https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki).** You might be able to find the cause yourself.
 
 #### How Do I Submit A (Good) Bug Report
 
@@ -66,7 +60,7 @@ Provide more context by answering these questions:
 
 Include details about your configuration and environment:
 
--   **Include the debug output from [New-CWMDebugReport](<>)!**
+-   **Include the output of `New-CWMDebugReport`** (it leaves out credentials).
 -   **What's the name and version of the OS you're using**?
 
 ### Suggesting Enhancements
@@ -77,8 +71,7 @@ Before creating enhancement suggestions, please check existing suggestions as yo
 
 #### Before Submitting An Enhancement Suggestion
 
--   **Check the [Wiki](<>)** for tips — you might discover that the enhancement is already available.
--   **Check if there's already [a package](<>) which provides that enhancement.**
+-   **Check the [Wiki](https://github.com/christaylorcodes/ConnectWiseManageAPI/wiki) and `Get-Command -Module ConnectWiseManageAPI`**. The enhancement might already be available.
 
 #### How Do I Submit A (Good) Enhancement Suggestion
 
@@ -88,7 +81,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 -   **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 -   **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 -   **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
--   **Explain why this enhancement would be useful** to most users and isn't something that can or should be implemented as a [community package](<>).
+-   **Explain why this enhancement would be useful** to most users.
 -   **List some other text examples where this enhancement exists.**
 -   **Specify which version of manage you're using.**
 -   **Specify the name and version of the OS you're using.**
@@ -128,7 +121,60 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 
 -   Refer to the [unofficial guide](https://github.com/PoshCode/PowerShellPracticeAndStyle).
 
+### Supported PowerShell versions
+
+PowerShell 7.4+ is the primary target. Windows PowerShell 5.1 is still supported, so every change must work on both.
+
+-   **Syntax and cmdlets must work on 5.1.** No `??`, `?.`, ternary, `&&`/`||`, `ForEach-Object -Parallel`, or 7-only parameters such as `-SkipHttpErrorCheck`, `-NoEnumerate` or `-AllowInsecureRedirect`, including inside splatted hashtables.
+-   **7-only features must be feature-detected** once in `ConnectWiseManageAPI.psm1` (see `$script:CWMSupportsInsecureRedirect`), used only behind that check, and added to the allow-list in `Tests/Compatibility.Lint.Tests.ps1`.
+-   **Use the module's helpers instead of the raw cmdlets** where the editions differ:
+    -   `ConvertFrom-CWMJson` instead of `ConvertFrom-Json` for response bodies (arrays come back the same on both).
+    -   `Get-CWMResponseHeader` instead of `$Response.Headers.<Name>` (string on 5.1, string[] on 7).
+    -   `Invoke-CWMWebRequest` (via the `Invoke-CWM*Master` functions) instead of calling `Invoke-WebRequest` directly.
+    -   JSON request bodies use `ContentType = 'application/json; charset=utf-8'`; without the charset, 5.1 sends Latin-1.
+-   **Check before opening a pull request:**
+
+    ```powershell
+    # Compatibility analysis (5.1 + 7)
+    Invoke-ScriptAnalyzer -Path ./ConnectWiseManageAPI -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
+
+    # Offline tests on both editions (needs Pester 5)
+    pwsh -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
+    powershell -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test
+    ```
+
+    CI runs the same checks on Windows PowerShell 5.1, PowerShell 7 on Windows, and PowerShell 7 on Linux.
+
+-   **Live tests (optional, local only):** with access to a ConnectWise Manage server, copy
+    `Tests/live.example.ps1` to `Tests/live.local.ps1` (gitignored), fill in the connection settings, and run:
+
+    ```powershell
+    pwsh -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test -Live
+    powershell -NoProfile -File ./Tests/Invoke-Tests.ps1 -Test -Live
+    ```
+
+    `Tests/Live.Read.Tests.ps1` only reads, so it is safe on production: it calls every `Get-*` function and
+    checks conditions, ordering, fields, counts and paging. `Tests/Live.Write.Tests.ps1` creates, changes and
+    deletes `PSTEST` records and runs only when `$env:CWMAllowWrite = 'yes'`. Use a sandbox server for it.
+    `./Tools/Remove-CWMTestData.ps1` lists (and with `-Remove`, deletes) records left behind by an interrupted run.
+    Live tests never run in CI.
+
 ### Documentation Style Guide
 
 -   Use [Markdown](https://daringfireball.net/projects/markdown).
--   Documentation is built with platyPS from the markdown.
+-   Comment-based help in each function's `.ps1` file is the source of truth (start from `Templates/FunctionDocumentation.template.ps1`). `Docs/` is generated from it with platyPS; don't edit it by hand.
+-   Regenerate the docs on PowerShell 7, then run `./Tools/Remove-PlatyPSProgressAction.ps1` to strip the `-ProgressAction` parameter that platyPS adds on PowerShell 7.4+.
+
+### Checking against the ConnectWise API spec
+
+The module targets the latest ConnectWise Manage API only. `./Tools/Test-CWMApiCoverage.ps1` checks every `Invoke-CWM*Master` call (method + path, and POST/PUT body fields) against the OpenAPI spec, without importing the module or calling a ConnectWise server:
+
+```powershell
+# Downloads the maintained copy of manage.json to a temp file and writes a markdown report
+./Tools/Test-CWMApiCoverage.ps1 -OutputPath ./api-coverage.md
+
+# Or check against a manage.json exported from the ConnectWise developer portal
+./Tools/Test-CWMApiCoverage.ps1 -SpecPath C:\Temp\manage.json -PassThru
+```
+
+Run it after adding or changing an endpoint function. Don't commit the spec or the report.

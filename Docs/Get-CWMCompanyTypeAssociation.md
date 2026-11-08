@@ -1,42 +1,83 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMCompanyTypeAssociation
 
 ## SYNOPSIS
-This function will list all types associated with a company.
+Gets the company type associations of a company.
 
 ## SYNTAX
 
 ```
-Get-CWMCompanyTypeAssociation -parentId <Int32> [-id <Int32>] [-count] [[-condition] <String>]
+Get-CWMCompanyTypeAssociation [-parentId] <Int32> [[-id] <Int32>] [-count] [[-condition] <String>]
  [[-orderBy] <String>] [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>]
- [[-pageSize] <Int32>] [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-pageSize] <Int32>] [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the company type associations of a company from ConnectWise Manage, or a single company type
+association by id.
+Calls GET /company/companies/{parentId}/typeAssociations; -id adds /{id} and -count
+adds /count.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-CWMCompanyTypeAssociation -CompanyID 1 -all
+```
+Get-CWMCompanyTypeAssociation -parentId 12 -condition "type/id=1" -all
 ```
 
-Will list all types associated with company 1.
+Retrieves the company type associations of company 12 that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMCompanyTypeAssociation -parentId 12 -id 5
+```
+
+Retrieves company type association 5 of company 12.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -parentId
+The id of the company.
+Alias: companyId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: companyId
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -id
+The id of a single company type association to retrieve.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Return only the number of matching company type associations instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -47,11 +88,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "type/id=1".
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -62,11 +103,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -77,138 +118,94 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+### -childConditions
+Filter on child (list) fields, in condition syntax.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 7
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -pageSize
-Number of results returned per page (Defaults to 25)
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 8
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -fields
-Allows you to return a partial response with just the fields listed.
+Only return these fields, for example @('id', 'type').
 
 ```yaml
-Type: String[]
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+Retrieve every matching record, handling pagination automatically.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-The id of the company to retrieve types.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: companyId
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -221,8 +218,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=Company&e=CompanyCompanyTypeAssociations&o=GET](https://developer.connectwise.com/products/manage/rest?a=Company&e=CompanyCompanyTypeAssociations&o=GET)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

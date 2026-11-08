@@ -1,6 +1,237 @@
+# =============================================================================
+# ConnectWiseManageAPI - .gitignore
+# =============================================================================
+# Comprehensive ignore patterns optimized for PowerShell modules
+# Based on best practices for PowerShell development
 
+# =============================================================================
+# Project-Specific
+# =============================================================================
 Scratch\.ps1
+BACKUP_*/
+*.bak
 
-\.vscode/
+# =============================================================================
+# Operating Systems
+# =============================================================================
 
-\.vs/
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# IDEs and Editors
+# =============================================================================
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+*.vsix
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.pidb
+*.svclog
+*.scc
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+Session.vim
+.netrwhist
+tags
+
+# =============================================================================
+# PowerShell Specific
+# =============================================================================
+
+# Modules
+[Pp]owershell[Mm]odules/
+
+# Build artifacts
+*.ps1xml.bak
+*.psd1.bak
+*.psm1.bak
+PublishedModules/
+publish/
+
+# Test results
+TestResults/
+*.Coverage.xml
+coverage.xml
+
+# Pester test results
+Pester.Tests.ps1.xml
+*.Tests.ps1.xml
+TestResults_PS*.xml
+PesterResults_PS*.xml
+
+# Debug and profiling
+*.psprofile
+
+# PowerShell Gallery package
+*.nupkg
+*.snupkg
+
+# =============================================================================
+# Logs and Temporary Files
+# =============================================================================
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# =============================================================================
+# Environment and Configuration
+# =============================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+*.env
+secrets.yml
+credentials.json
+config/local.json
+.envrc
+
+# =============================================================================
+# Build Artifacts
+# =============================================================================
+dist/
+build/
+out/
+target/
+
+# =============================================================================
+# Documentation Build
+# =============================================================================
+/docs/_build/
+/docs/.doctrees/
+site/
+
+# =============================================================================
+# Archives
+# =============================================================================
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+*.bz2
+*.xz
+
+# =============================================================================
+# Security and Secrets
+# =============================================================================
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.crt
+id_rsa
+id_rsa.pub
+.ssh/
+
+# API keys and secrets (PowerShell specific patterns)
+*apikey*.ps1
+*secret*.ps1
+*credential*.ps1
+
+# =============================================================================
+# CI/CD
+# =============================================================================
+.travis.yml.bak
+.circleci/local.yml
+
+# =============================================================================
+# Other Development Tools
+# =============================================================================
+
+# Node.js (if using for tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (if using for tooling)
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Personal blog drafts (kept locally, not part of the module repo)
+BLOG/
+# Internal planning notes (kept locally)
+MAP.md
+TODO.md
+
+# Live test connection settings (copy Tests/live.example.ps1)
+Tests/live.local.ps1

@@ -1,320 +1,149 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/Products/Manage/REST?a=Company&e=CompanyCompanyTypeAssociations&o=UPDATE#/Members/postSystemMembers
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMOpportunityForecastItem
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a forecast item for an opportunity.
 
 ## SYNTAX
 
 ```
-New-CWMOpportunityForecastItem [-parentID] <Int32> [[-id] <Int32>] [[-forecastDescription] <String>]
- [-opportunity] <Hashtable> [[-quantity] <Int32>] [-status] <Hashtable> [[-catalogItem] <Hashtable>]
+New-CWMOpportunityForecastItem [-parentId] <Int32> [-id] <Int32> [[-forecastDescription] <String>]
+ [-opportunity] <Hashtable> [[-quantity] <Double>] [-status] <Hashtable> [[-catalogItem] <Hashtable>]
  [[-productDescription] <String>] [[-productClass] <String>] [[-revenue] <Decimal>] [[-cost] <Decimal>]
  [[-margin] <Decimal>] [[-percentage] <Decimal>] [[-includeFlag] <Boolean>] [[-quoteWerksDocNo] <String>]
  [[-quoteWerksDocName] <String>] [[-quoteWerksQuantity] <Int32>] [-forecastType] <String>
  [[-linkFlag] <Boolean>] [[-recurringRevenue] <Decimal>] [[-recurringCost] <Decimal>]
  [[-recurringDateStart] <String>] [[-recurringDateEnd] <String>] [[-billCycle] <Hashtable>]
  [[-cycleBasis] <String>] [[-cycles] <Int32>] [[-recurringFlag] <Boolean>] [[-sequenceNumber] <Int32>]
- [[-subNumber] <Int32>] [[-taxableFlag] <Boolean>] [[-info] <Hashtable>] [-ProgressAction <ActionPreference>]
+ [[-subNumber] <Int32>] [[-taxableFlag] <Boolean>] [[-_info] <Hashtable>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a forecast item on an opportunity in ConnectWise Manage.
+Calls POST
+/sales/opportunities/{parentId}/forecast/{id}; only the parameters you pass are sent in the request
+body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMOpportunityForecastItem -parentId 75 -id 1 -opportunity @{ id = 75 } -status @{ id = 1 } -forecastType 'Service' -revenue 1200
 ```
 
-{{ Add example description here }}
+Creates a service forecast item with 1200 revenue on opportunity 75.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the opportunity to add the forecast item to.
+Alias: opportunityId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -billCycle
-{{ Fill billCycle Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -catalogItem
-{{ Fill catalogItem Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -cost
-{{ Fill cost Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -cycleBasis
-{{ Fill cycleBasis Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 24
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -cycles
-{{ Fill cycles Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 25
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -forecastDescription
-{{ Fill forecastDescription Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -forecastType
-{{ Fill forecastType Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
+Aliases: opportunityId
 
 Required: True
-Position: 17
-Default value: None
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -id
-{{ Fill id Description }}
+The {id} of the path POST /sales/opportunities/{parentId}/forecast/{id} (forecastId in the spec).
+It is
+also sent as id in the request body.
 
 ```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -includeFlag
-{{ Fill includeFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -info
-{{ Fill info Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 30
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -linkFlag
-{{ Fill linkFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -margin
-{{ Fill margin Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -opportunity
-{{ Fill opportunity Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: True
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -forecastDescription
+Forecast description.
+Max length 50.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentID
-{{ Fill parentID Description }}
+### -opportunity
+Opportunity reference, for example @{ id = 75 }.
+Required by the API.
 
 ```yaml
-Type: Int32
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -percentage
-{{ Fill percentage Description }}
+### -quantity
+Quantity.
+A number.
 
 ```yaml
-Type: Decimal
+Type: System.Double
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 12
-Default value: None
+Position: 5
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -productClass
-{{ Fill productClass Description }}
+### -status
+Status reference, for example @{ id = 1 }.
+Required by the API.
 
 ```yaml
-Type: String
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 8
+Required: True
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -productDescription
-{{ Fill productDescription Description }}
+### -catalogItem
+Catalog item reference, for example @{ id = 1 }.
 
 ```yaml
-Type: String
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -325,146 +154,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -quantity
-{{ Fill quantity Description }}
+### -productDescription
+Product description.
 
 ```yaml
-Type: Int32
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -quoteWerksDocName
-{{ Fill quoteWerksDocName Description }}
+### -productClass
+Product class.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -quoteWerksDocNo
-{{ Fill quoteWerksDocNo Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -quoteWerksQuantity
-{{ Fill quoteWerksQuantity Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringCost
-{{ Fill recurringCost Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringDateEnd
-{{ Fill recurringDateEnd Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringDateStart
-{{ Fill recurringDateStart Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringFlag
-{{ Fill recurringFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 26
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -recurringRevenue
-{{ Fill recurringRevenue Description }}
-
-```yaml
-Type: Decimal
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -revenue
-{{ Fill revenue Description }}
-
-```yaml
-Type: Decimal
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -475,73 +184,381 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -sequenceNumber
-{{ Fill sequenceNumber Description }}
+### -revenue
+Revenue.
+A number.
 
 ```yaml
-Type: Int32
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -cost
+Cost.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -margin
+Margin.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -percentage
+Percentage.
+An integer.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -includeFlag
+Include flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -quoteWerksDocNo
+Quote werks doc no.
+Max length 20.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -quoteWerksDocName
+Quote werks doc name.
+Max length 255.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -quoteWerksQuantity
+Quote werks quantity.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -forecastType
+Forecast type.
+One of: Other1, Other2, Agreement, Product, Service.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 18
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -linkFlag
+Link flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -recurringRevenue
+Recurring revenue.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -recurringCost
+Recurring cost.
+A number.
+
+```yaml
+Type: System.Decimal
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 21
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -recurringDateStart
+Recurring date start.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -recurringDateEnd
+Recurring date end.
+Date and time as an ISO 8601 UTC string, as returned by ConvertTo-CWMTime -Raw.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billCycle
+Bill cycle reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -cycleBasis
+Cycle basis.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -cycles
+Cycles.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 26
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -recurringFlag
+Recurring flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 27
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -status
-{{ Fill status Description }}
+### -sequenceNumber
+Sequence number.
+A number.
 
 ```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -subNumber
-{{ Fill subNumber Description }}
-
-```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 28
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -taxableFlag
-{{ Fill taxableFlag Description }}
+### -subNumber
+Sub number.
+An integer.
 
 ```yaml
-Type: Boolean
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 29
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -taxableFlag
+Taxable flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 30
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+Alias: info
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases: info
+
+Required: False
+Position: 31
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -555,10 +572,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,164 +1,95 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMTicketNote
 
 ## SYNOPSIS
-Add a note to a CW Manage ticket.
+Creates a note for a service ticket.
 
 ## SYNTAX
 
 ```
-New-CWMTicketNote -parentId <Int32> [[-id] <Int32>] [[-text] <String>] [[-detailDescriptionFlag] <Boolean>]
+New-CWMTicketNote [-parentId] <Int32> [[-id] <Int32>] [[-text] <String>] [[-detailDescriptionFlag] <Boolean>]
  [[-internalAnalysisFlag] <Boolean>] [[-resolutionFlag] <Boolean>] [[-member] <Hashtable>]
  [[-contact] <Hashtable>] [[-customerUpdatedFlag] <Boolean>] [[-processNotifications] <Boolean>]
  [[-dateCreated] <String>] [[-createdBy] <String>] [[-internalFlag] <Boolean>] [[-externalFlag] <Boolean>]
- [[-_info] <Hashtable>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-_info] <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Add a note to a ticket.
+Creates a note for a service ticket in ConnectWise Manage.
+Calls POST /service/tickets/{parentId}/notes;
+only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-New-CWMTicketNote -ticketId $Ticket.id -text 'New note' -detailDescriptionFlag $true -internalFlag $false -resolutionFlag $false
+```
+New-CWMTicketNote -parentId 1234 -text 'Rebooted the server; the issue is resolved.' -resolutionFlag $true
 ```
 
-Create a new note.
+Adds a resolution note to service ticket 1234.
 
 ## PARAMETERS
 
-### -_info
-{{ Fill _info Description }}
+### -parentId
+The id of the service ticket to add the note to.
+Alias: ticketId
 
 ```yaml
-Type: Hashtable
+Type: System.Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: ticketId
 
-Required: False
-Position: 14
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -contact
-{{ Fill contact Description }}
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: Hashtable
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
-Default value: None
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -createdBy
-{{ Fill createdBy Description }}
+### -text
+Text.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customerUpdatedFlag
-{{ Fill customerUpdatedFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -dateCreated
-{{ Fill dateCreated Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -detailDescriptionFlag
-A boolean value that determines if the note should appear in the discussion tab.
+Detail description flag.
+$true or $false.
 
 ```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -externalFlag
-{{ Fill externalFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -internalAnalysisFlag
-{{ Fill internalAnalysisFlag Description }}
-
-```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -169,57 +100,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -internalFlag
-A boolean value that determines if the note should appear in the internal tab.
-
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -member
-{{ Fill member Description }}
+### -internalAnalysisFlag
+Internal analysis flag.
+$true or $false.
 
 ```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -processNotifications
-{{ Fill processNotifications Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -resolutionFlag
-A boolean value that determines if the note should appear in the Resolution tab.
-
-```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -230,41 +116,168 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -text
-{{ Fill text Description }}
+### -resolutionFlag
+Resolution flag.
+$true or $false.
 
 ```yaml
-Type: String
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 6
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -member
+Member reference, for example @{ id = 10 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -contact
+Contact reference, for example @{ id = 500 }.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
 Required: False
-Position: Named
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customerUpdatedFlag
+Customer updated flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -processNotifications
+Process notifications.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -dateCreated
+Date created.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -createdBy
+Created by.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -internalFlag
+Internal flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -externalFlag
+External flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -275,28 +288,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-The ticket id to attach the internal note to.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -313,9 +311,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor
-Date: 1/21/2019
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE](https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,75 +1,117 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Update-CWMBoardItemAssociation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Updates the association between a service board item and a type in ConnectWise Manage.
 
 ## SYNTAX
 
+### Single (Default)
 ```
 Update-CWMBoardItemAssociation [-parentId] <Int32> [-itemId] <Int32> [-typeId] <Int32> [-Operation] <String>
- [-Path] <String> [-Value] <Object> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [-Path] <String> [[-Value] <Object>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
+### Bulk
+```
+Update-CWMBoardItemAssociation [-parentId] <Int32> [-itemId] <Int32> [-typeId] <Int32>
+ -PatchOperations <Object[]> [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
 ## DESCRIPTION
-{{ Fill in the Description }}
+Applies JSON Patch operations to an existing service board item association.
+Use -Operation, -Path and -Value for one change, or -PatchOperations for several changes in one request.
+
+This function calls the ConnectWise Manage API endpoint: PATCH /service/boards/{parentId}/items/{itemId}/associations/{typeId}
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -Operation replace -Path 'addAllSubTypesFlag' -Value $true
 ```
 
-{{ Add example description here }}
+Associates all sub types with item 20 and type 30 of board 1.
+
+### EXAMPLE 2
+```
+Update-CWMBoardItemAssociation 1 20 30 replace addAllSubTypesFlag $true
+```
+
+The same change, using positional parameters.
+
+### EXAMPLE 3
+```
+Update-CWMBoardItemAssociation -parentId 1 -itemId 20 -typeId 30 -PatchOperations @(
+    @{ op = 'replace'; path = 'addAllSubTypesFlag'; value = $true }
+)
+```
+
+Sends the same change with -PatchOperations.
+Add more operations to the array to change several properties in one request.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The ID of the service board.
+Alias: boardId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: boardId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -itemId
+The ID of the board item.
+Alias: id
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: id
+
+Required: True
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -typeId
+The ID of the service type of the association to update.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Operation
-What you are doing with the value.
-replace, add, remove
+The patch operation to perform: 'add', 'replace' or 'remove'.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: add, replace, remove
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-The path to the property that you want to perform the operation on.
-
-```yaml
-Type: String
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: Single
 Aliases:
 
 Required: True
@@ -79,16 +121,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Value
-The value you want to set the property to.
+### -Path
+The property to change, for example 'addAllSubTypesFlag'.
 
 ```yaml
-Type: Object
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: Single
 Aliases:
 
 Required: True
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+The new value for the property.
+Required for 'add' and 'replace'; not needed for 'remove'.
+Use -Value $null to set a property to null.
+
+```yaml
+Type: System.Object
+Parameter Sets: Single
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PatchOperations
+Several patch operations to apply in one request.
+Each is a hashtable or PSCustomObject with
+op, path and (except for 'remove') value.
+'value' is left out of 'remove' operations.
+
+```yaml
+Type: System.Object[]
+Parameter Sets: Bulk
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -99,7 +176,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -110,58 +187,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -itemId
-{{ Fill itemId Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: id
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: boardId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -typeId
-{{ Fill typeId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -175,10 +207,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### PSCustomObject
+### Returns the updated service board item association.
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

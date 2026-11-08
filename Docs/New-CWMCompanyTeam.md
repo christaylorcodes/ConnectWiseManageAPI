@@ -1,134 +1,112 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanyTeam
 
 ## SYNOPSIS
-This function will create a new company team.
+Assigns a team member to a company.
 
 ## SYNTAX
 
 ```
-New-CWMCompanyTeam -parentId <Int32> [[-id] <Int32>] [[-company] <Hashtable>] [-teamRole] <Hashtable>
- [[-locationId] <Int32>] [[-businessUnitId] <Int32>] [[-contact] <Hashtable>] [[-member] <Hashtable>]
+New-CWMCompanyTeam [-parentId] <Int32> [[-id] <Int32>] [[-company] <Hashtable>] [-teamRole] <Hashtable>
+ [[-location] <Object>] [[-department] <Object>] [[-contact] <Hashtable>] [[-member] <Hashtable>]
  [[-accountManagerFlag] <Boolean>] [[-techFlag] <Boolean>] [[-salesFlag] <Boolean>] [[-_info] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a team member assignment for a company in ConnectWise Manage.
+Calls POST
+/company/companies/{parentId}/teams; only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-New-CWMCompanyTeam -id $CompanyID -TeamRole @{id = $Role.id}
 ```
+New-CWMCompanyTeam -parentId 250 -teamRole @{ id = 1 } -member @{ id = 10 } -accountManagerFlag $true
+```
+
+Adds member 10 to the team of company 250 with team role 1, as account manager.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the company to add the team member assignment to.
+Alias: companyId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-Metadata
-
-```yaml
-Type: Hashtable
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -accountManagerFlag
-{{ Fill accountManagerFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -businessUnitId
-The ID of the business unit you want to associate the team with.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
+Position: 2
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -company
-Company object of the company you want to add the team to.
+Company reference, for example @{ id = 250 }.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -contact
-Contact object
+### -teamRole
+Team role reference, for example @{ id = 1 }.
+Required by the API.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
+
+Required: True
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -location
+Location reference, for example @{ id = 1 }.
+Alias: locationId
+
+```yaml
+Type: System.Object
+Parameter Sets: (All)
+Aliases: locationId
 
 Required: False
 Position: 5
@@ -137,43 +115,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The ID of the company you want to add the team to.
+### -department
+Department reference, for example @{ id = 1 }.
+Alias: businessUnitId
 
 ```yaml
-Type: Int32
+Type: System.Object
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -locationId
-The ID of the location you want to associate the team with.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -member
-Member object
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
+Aliases: businessUnitId
 
 Required: False
 Position: 6
@@ -182,11 +131,42 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -salesFlag
-{{ Fill salesFlag Description }}
+### -contact
+Contact reference, for example @{ id = 500 }.
 
 ```yaml
-Type: Boolean
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -member
+Member reference, for example @{ id = 10 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -accountManagerFlag
+Account manager flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -197,59 +177,77 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -teamRole
-The team role reference of the role you want to add.
-Get-CWMCompanyTeamRole
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -techFlag
-{{ Fill techFlag Description }}
+Tech flag.
+$true or $false.
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 8
+Position: 10
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -parentId
-{{ Fill parentId Description }}
+### -salesFlag
+Sales flag.
+$true or $false.
 
 ```yaml
-Type: Int32
+Type: System.Boolean
 Parameter Sets: (All)
-Aliases: companyId
+Aliases:
 
-Required: True
+Required: False
+Position: 11
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: ActionPreference
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -266,8 +264,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 8/22/2018
 
 ## RELATED LINKS
 
-[https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post](https://marketplace.connectwise.com/docs/redoc/manage/company.html#tag/CompanyTeams/paths/~1company~1companies~1{id}~1teams/post)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=TicketNotes&o=CREATE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMTicketTask
 
 ## SYNOPSIS
-Add a note to a CW Manage ticket.
+Creates a task for a service ticket.
 
 ## SYNTAX
 
@@ -16,104 +16,63 @@ Add a note to a CW Manage ticket.
 New-CWMTicketTask [-parentId] <Int32> [[-id] <Int32>] [[-notes] <String>] [[-closedFlag] <Boolean>]
  [[-priority] <Int32>] [[-schedule] <Hashtable>] [[-code] <Hashtable>] [[-resolution] <String>]
  [[-childScheduleAction] <Object>] [[-childTicketId] <Int32>] [[-_info] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a task for a service ticket in ConnectWise Manage.
+Calls POST /service/tickets/{parentId}/tasks;
+only the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-CWMTicketNote -ticketId $Ticket.id -text 'New note'
+New-CWMTicketTask -parentId 1234 -notes 'Replace the toner cartridge.'
 ```
 
-Create a new note.
+Adds a task to service ticket 1234.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the service ticket to add the task to.
+Alias: ticketId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: ticketId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -_info
-{{ Fill _info Description }}
-
-```yaml
-Type: Hashtable
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 10
-Default value: None
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childScheduleAction
-{{ Fill childScheduleAction Description }}
+### -notes
+Notes.
 
 ```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-Accepted values: Transfer, Delete, Done
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -childTicketId
-{{ Fill childTicketId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -closedFlag
-{{ Fill closedFlag Description }}
-
-```yaml
-Type: Boolean
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -124,11 +83,43 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -code
-{{ Fill code Description }}
+### -closedFlag
+Closed flag.
+$true or $false.
 
 ```yaml
-Type: Hashtable
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -priority
+Priority.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -schedule
+Schedule reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -139,71 +130,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -code
+Code reference, for example @{ id = 1 }.
 
 ```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -notes
-{{ Fill notes Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -priority
-{{ Fill priority Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -resolution
-{{ Fill resolution Description }}
-
-```yaml
-Type: String
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -214,28 +145,92 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -schedule
-{{ Fill schedule Description }}
+### -resolution
+Resolution.
 
 ```yaml
-Type: Hashtable
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -childScheduleAction
+Child schedule action.
+One of: Transfer, Delete, Done.
 
 ```yaml
-Type: ActionPreference
+Type: System.Object
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childTicketId
+Child ticket id.
+An integer.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -_info
+The _info metadata of the record, as returned by the API.
+Usually left unset.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -249,11 +244,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
-Author: Chris Taylor Date: 1/21/2019
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

@@ -1,42 +1,66 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMWarehouse
 
 ## SYNOPSIS
-This function will list warehouses.
+Gets warehouses.
 
 ## SYNTAX
 
 ```
 Get-CWMWarehouse [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
- [[-childconditions] <String>] [[-customfieldconditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [[-fields] <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the warehouses from ConnectWise Manage, or a single warehouse by id.
+Calls GET
+/procurement/warehouses; -id adds /{id} and -count adds /count.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-CWMWarehouse -Condition "name = 'Office'" -all
+```
+Get-CWMWarehouse -condition "name contains 'Support'" -all
 ```
 
-Will return all warehouses with the name 'Office'
+Retrieves the warehouses that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMWarehouse -id 5
+```
+
+Retrieves warehouse 5.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -id
+The id of a single warehouse to retrieve.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Return only the number of matching warehouses instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -47,102 +71,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childconditions
-Allows searching arrays on endpoints that list childConditions under parameters
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
+Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customfieldconditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -fields
-Allows you to return a partial response with just the fields listed.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -153,26 +86,57 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -page
-Used in pagination to cycle through results
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: Int32
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -childConditions
+Filter on child (list) fields, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 5
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -pageSize
-Number of results returned per page (Defaults to 25)
+### -page
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -183,17 +147,48 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -pageSize
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
-Type: ActionPreference
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -fields
+Only return these fields, for example @('id', 'name').
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -all
+Retrieve every matching record, handling pagination automatically.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -203,13 +198,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
-Author: Chris Taylor Date: 11/8/2018
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET](https://developer.connectwise.com/products/manage/rest?a=System&e=Members&o=GET)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

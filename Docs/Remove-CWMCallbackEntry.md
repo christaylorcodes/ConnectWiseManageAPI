@@ -1,45 +1,49 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMCallbackEntry
 
 ## SYNOPSIS
-This function will remove a Callback entry from Manage.
+Deletes a callback entry.
 
 ## SYNTAX
 
 ```
-Remove-CWMCallbackEntry [-id] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+Remove-CWMCallbackEntry [-id] <Int32> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Deletes a callback entry from ConnectWise Manage.
+Calls DELETE /system/callbacks/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Remove-CWMCallbackEntry -ID 123
 ```
+Remove-CWMCallbackEntry -id 5
+```
+
+Deletes callback entry 5.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the callback entry to delete.
+Alias: callbackId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: callbackId
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -49,39 +53,24 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The ID of the Callback you want to delete.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: callbackId
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -98,8 +87,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 6/27/2019
 
 ## RELATED LINKS
 
-[https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/delete](https://marketplace.connectwise.com/docs/redoc/manage/system.html#tag/CallbackEntries/paths/~1system~1callbacks~1{id}/delete)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

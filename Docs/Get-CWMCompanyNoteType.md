@@ -1,42 +1,66 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMCompanyNoteType
 
 ## SYNOPSIS
-This function will list company note types based on conditions.
+Gets company note types.
 
 ## SYNTAX
 
 ```
-Get-CWMCompanyNoteType [-id <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
+Get-CWMCompanyNoteType [[-id] <Int32>] [-count] [[-condition] <String>] [[-orderBy] <String>]
  [[-childConditions] <String>] [[-customFieldConditions] <String>] [[-page] <Int32>] [[-pageSize] <Int32>]
- [-fields <String[]>] [-all] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-fields] <String[]>] [-all] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the company note types from ConnectWise Manage, or a single company note type by id.
+Calls GET
+/company/noteTypes; -id adds /{id} and -count adds /count.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-CWMCompanyNoteTypes -Condition "status/id IN (1,42,43,57)" -all
+```
+Get-CWMCompanyNoteType -condition "name contains 'Support'" -all
 ```
 
-Will return all company notes that match the condition
+Retrieves the company note types that match the condition.
+
+### EXAMPLE 2
+```
+Get-CWMCompanyNoteType -id 5
+```
+
+Retrieves company note type 5.
 
 ## PARAMETERS
 
-### -all
-Return all results
+### -id
+The id of a single company note type to retrieve.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -count
+Return only the number of matching company note types instead of the records.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -47,11 +71,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -childConditions
-Allows searching arrays on endpoints that list childConditions under parameters
+### -condition
+Filter in ConnectWise Manage condition syntax, for example "name contains 'Support'".
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -62,11 +86,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -customFieldConditions
-Allows searching custom fields when customFieldConditions is listed in the parameters
+### -orderBy
+Sort order as 'field asc' or 'field desc', for example 'id desc'.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -77,123 +101,94 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -orderBy
-Choose which field to sort the results by, 'field/sub desc' or 'field/sub asc'
+### -childConditions
+Filter on child (list) fields, in condition syntax.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFieldConditions
+Filter on custom field values, in condition syntax.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -page
-Used in pagination to cycle through results
+The page number to return.
+Use with -pageSize.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 6
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -pageSize
-Number of results returned per page (Defaults to 25)
+The number of records per page.
+Without it the API's default page size applies.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 7
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -fields
-Allows you to return a partial response with just the fields listed.
+Only return these fields, for example @('id', 'name').
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-{{ Fill id Description }}
+### -all
+Retrieve every matching record, handling pagination automatically.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -count
-Will return the number of objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -condition
-This is your search condition to return the results you desire.
-Example: `(contact/name like "Fred%" and closedFlag = false) and dateEntered \> \[2015-12-23T05:53:27Z\] or summary contains "test" AND  summary != "Some Summary"`
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -206,8 +201,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: \<GET-DATE\>
 
 ## RELATED LINKS
 
-[https://developer.connectwise.com/products/manage/rest?a=Company&e=CompanyNoteTypes&o=GET](https://developer.connectwise.com/products/manage/rest?a=Company&e=CompanyNoteTypes&o=GET)
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

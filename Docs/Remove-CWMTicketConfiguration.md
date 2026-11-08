@@ -1,47 +1,66 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://developer.connectwise.com/products/manage/rest?a=Service&e=Tickets&o=DELETE
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Remove-CWMTicketConfiguration
 
 ## SYNOPSIS
-Remove a configuration from a ticket
+Detaches a configuration from a service ticket.
 
 ## SYNTAX
 
 ```
-Remove-CWMTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-ProgressAction <ActionPreference>] [-WhatIf]
+Remove-CWMTicketConfiguration [-id] <Int32> [-parentId] <Int32> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Remove a configuration from a ticket
+Detaches a configuration from a service ticket in ConnectWise Manage.
+Calls DELETE
+/service/tickets/{parentId}/configurations/{id}.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-PS C:\> Remove-CWMTicketConfiguration -partentId 123 -id 1
+```
+Remove-CWMTicketConfiguration -parentId 12 -id 5
 ```
 
-Removes the config 1 from the ticket 123
+Deletes configuration 5 of service ticket 12.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -id
+The id of the configuration to detach.
+Alias: configurationId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: configurationId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -parentId
+The id of the service ticket.
+Alias: ticketId
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases: ticketId
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -51,7 +70,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -62,43 +81,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
-The id of the configuration to remove
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: configurationId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-The id of the ticket to remove the configuration from
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: ticketId
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
+Aliases: cf
 
 Required: False
 Position: Named
@@ -112,10 +101,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

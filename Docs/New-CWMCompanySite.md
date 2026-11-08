@@ -1,14 +1,14 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version: https://christaylor.codes
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # New-CWMCompanySite
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a site for a company.
 
 ## SYNTAX
 
@@ -18,76 +18,83 @@ New-CWMCompanySite [-parentId] <Int32> [[-id] <Int32>] [-name] <String> [[-addre
  [[-country] <Hashtable>] [[-phoneNumber] <String>] [[-phoneNumberExt] <String>] [[-faxNumber] <String>]
  [[-taxCode] <Hashtable>] [[-entityType] <Hashtable>] [[-expenseReimbursement] <Double>]
  [[-primaryAddressFlag] <Boolean>] [[-defaultShippingFlag] <Boolean>] [[-defaultBillingFlag] <Boolean>]
- [[-defaultMailingFlag] <Boolean>] [[-inactiveFlag] <Boolean>] [[-billSeperateFlag] <Boolean>]
- [[-mobileGuid] <String>] [[-calendar] <Hashtable>] [[-timeZone] <Hashtable>] [[-customFields] <Hashtable>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-defaultMailingFlag] <Boolean>] [[-inactiveFlag] <Boolean>] [[-billSeparateFlag] <Boolean>]
+ [[-mobileGuid] <String>] [[-calendar] <Hashtable>] [[-timeZone] <Hashtable>] [[-customFields] <Hashtable[]>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a site for a company in ConnectWise Manage.
+Calls POST /company/companies/{parentId}/sites; only
+the parameters you pass are sent in the request body.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-CWMCompanySite -parentId 250 -name 'Branch Office' -addressLine1 '100 Main St' -city 'Tampa' -zip '33602'
 ```
 
-{{ Add example description here }}
+Adds a site named Branch Office to company 250.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -parentId
+The id of the company to add the site to.
+Alias: companyId
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
 Parameter Sets: (All)
-Aliases: cf
+Aliases: companyId
 
-Required: False
-Position: Named
-Default value: None
+Required: True
+Position: 1
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -id
+The id property of the request body.
+Usually left unset; ConnectWise Manage assigns the id of a new
+record.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -addressLine1
-{{ Fill addressLine1 Description }}
-
-```yaml
-Type: String
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -name
+Name.
+Max length 156.
+Required by the API.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -addressLine2
-{{ Fill addressLine2 Description }}
+### -addressLine1
+Address line 1.
+Max length 50.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -98,41 +105,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -billSeperateFlag
-{{ Fill billSeperateFlag Description }}
+### -addressLine2
+Address line 2.
+Max length 50.
 
 ```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 20
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -calendar
-{{ Fill calendar Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 22
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -city
-{{ Fill city Description }}
-
-```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -143,251 +121,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -country
-{{ Fill country Description }}
+### -city
+City.
+Max length 50.
 
 ```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -customFields
-{{ Fill customFields Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 24
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultBillingFlag
-{{ Fill defaultBillingFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultMailingFlag
-{{ Fill defaultMailingFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 18
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -defaultShippingFlag
-{{ Fill defaultShippingFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -entityType
-{{ Fill entityType Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 13
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -expenseReimbursement
-{{ Fill expenseReimbursement Description }}
-
-```yaml
-Type: Double
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 14
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -faxNumber
-{{ Fill faxNumber Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -id
-{{ Fill id Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -inactiveFlag
-{{ Fill inactiveFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 19
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -mobileGuid
-{{ Fill mobileGuid Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 21
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -name
-{{ Fill name Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -parentId
-{{ Fill parentId Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: companyId
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -phoneNumber
-{{ Fill phoneNumber Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -phoneNumberExt
-{{ Fill phoneNumberExt Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -primaryAddressFlag
-{{ Fill primaryAddressFlag Description }}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 15
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -stateReference
-{{ Fill stateReference Description }}
-
-```yaml
-Type: Hashtable
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -398,41 +137,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -taxCode
-{{ Fill taxCode Description }}
+### -stateReference
+State reference reference, for example @{ id = 1 }.
 
 ```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -timeZone
-{{ Fill timeZone Description }}
-
-```yaml
-Type: Hashtable
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 23
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -zip
-{{ Fill zip Description }}
-
-```yaml
-Type: String
+Type: System.Collections.Hashtable
 Parameter Sets: (All)
 Aliases:
 
@@ -443,13 +152,312 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
+### -zip
+Zip.
+Max length 12.
 
 ```yaml
-Type: ActionPreference
+Type: System.String
 Parameter Sets: (All)
-Aliases: proga
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -country
+Country reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -phoneNumber
+Phone number.
+Max length 30.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -phoneNumberExt
+Phone number ext.
+Max length 30.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -faxNumber
+Fax number.
+Max length 30.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -taxCode
+Tax code reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 13
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -entityType
+Entity type reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 14
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -expenseReimbursement
+Expense reimbursement.
+A number.
+
+```yaml
+Type: System.Double
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 15
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -primaryAddressFlag
+Primary address flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 16
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultShippingFlag
+Default shipping flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 17
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultBillingFlag
+Default billing flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 18
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -defaultMailingFlag
+Default mailing flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 19
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -inactiveFlag
+Inactive flag.
+$true or $false.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 20
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -billSeparateFlag
+Bill separate flag.
+$true or $false.
+Alias: billSeperateFlag
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases: billSeperateFlag
+
+Required: False
+Position: 21
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -mobileGuid
+Mobile GUID.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -calendar
+Calendar reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 23
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -timeZone
+Time zone reference, for example @{ id = 1 }.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -customFields
+Custom fields.
+An array of custom field values, for example @(@{ id = 4; value = 'Gold' }).
+
+```yaml
+Type: System.Collections.Hashtable[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 25
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -463,10 +471,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+

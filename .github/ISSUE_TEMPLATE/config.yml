@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 Function documentation
+    url: https://github.com/christaylorcodes/ConnectWiseManageAPI/tree/master/Docs
+    about: Every command's help, parameters and examples
+  - name: 🔍 Existing issues
+    url: https://github.com/christaylorcodes/ConnectWiseManageAPI/issues?q=is%3Aissue
+    about: Search open and closed issues before creating a new one

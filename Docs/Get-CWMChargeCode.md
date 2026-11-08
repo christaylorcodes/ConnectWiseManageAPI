@@ -1,47 +1,36 @@
 ---
 external help file: ConnectWiseManageAPI-help.xml
 Module Name: ConnectWiseManageAPI
-online version:
+online version: https://developer.connectwise.com/manage/rest
 schema: 2.0.0
 ---
 
 # Get-CWMChargeCode
 
 ## SYNOPSIS
-Gets a list of charge codes
+Gets the charge codes.
 
 ## SYNTAX
 
 ```
-Get-CWMChargeCode [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CWMChargeCode [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the rows of the ChargeCode report.
+Calls Get-CWMReport, which calls GET
+/system/reports/ChargeCode.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```powershell
-Get-ChargeCode
 ```
+Get-CWMChargeCode
+```
+
+Returns every charge code as an object.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -51,6 +40,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Chris Taylor Date: 10/10/2018
 
 ## RELATED LINKS
+
+[https://developer.connectwise.com/manage/rest](https://developer.connectwise.com/manage/rest)
+
