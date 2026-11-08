@@ -33277,7 +33277,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <maml:para>- Uses forward-only pagination for performance</maml:para>
         <maml:para>- Uses page size 1000 (the API maximum) unless -PageSize is smaller</maml:para>
         <maml:para>- Follows Link headers for next page, but only to the connected server: the next-page URL must use</maml:para>
-        <maml:para>  https (or the scheme of the first request, never a downgrade) and the connection's host and port. Any other   URL stops paging with an error, so credentials are never sent to another host. - Returns results from all pages</maml:para>
+        <maml:para>  https (or the scheme of the first request, never a downgrade) and the connection's host and port. Any other   URL stops paging with a terminating error, so credentials are never sent to another host and the   caller never gets a silently partial result. - Returns results from all pages</maml:para>
         <maml:para>Performance: - More efficient than manual pagination</maml:para>
         <maml:para>- Reduces number of API calls</maml:para>
         <maml:para>- Recommended for retrieving large datasets</maml:para>

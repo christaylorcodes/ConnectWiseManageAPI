@@ -41,7 +41,8 @@
     - Uses page size 1000 (the API maximum) unless -PageSize is smaller
     - Follows Link headers for next page, but only to the connected server: the next-page URL must use
       https (or the scheme of the first request, never a downgrade) and the connection's host and port. Any other
-      URL stops paging with an error, so credentials are never sent to another host.
+      URL stops paging with a terminating error, so credentials are never sent to another host and the
+      caller never gets a silently partial result.
     - Returns results from all pages
 
     Performance:
@@ -83,7 +84,7 @@ function Invoke-CWMAllResult {
         $PageResult = Invoke-CWMWebRequest -Arguments $Arguments
         if (!$PageResult) { return }
         if (!$PageResult.Headers.ContainsKey('Link')) {
-            return Write-Error "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
+            throw "The $((Get-PSCallStack)[2].Command) Endpoint doesn't support 'forward-only' pagination. Please report to ConnectWise."
         }
 
         $Link = Get-CWMResponseHeader -Response $PageResult -Name 'Link'
@@ -107,7 +108,8 @@ function Invoke-CWMAllResult {
                 !$AllowedHost -or $NextUri.Host -ne $AllowedHost -or $NextUri.UserInfo -or
                 # Same port; an omitted port and the scheme's default (443 for https) count as equal
                 ($NextUri.Port -ne $AllowedUri.Port -and !($NextUri.IsDefaultPort -and $AllowedUri.IsDefaultPort))) {
-                return Write-Error "Stopped paging: the server's next-page link points to '$NextPage', which is not an https URL on the connected server ($AllowedHost). The results so far were returned. Please report this at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues"
+                # Terminating: a caller that asked for -all must not carry on with a silently partial result
+                throw "Stopped paging: the server's next-page link points to '$NextPage', which is not an https URL on the connected server ($AllowedHost). The result is incomplete. Please report this at https://github.com/christaylorcodes/ConnectWiseManageAPI/issues"
             }
         }
     }

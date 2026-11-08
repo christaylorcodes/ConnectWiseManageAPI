@@ -197,7 +197,8 @@ This release has **breaking changes**. Read them before upgrading.
 ### Security
 
 - `-all` paging only follows next-page links on the connected host and port, with no https-to-http downgrade, so
-  credentials are never sent to another host.
+  credentials are never sent to another host. A link that fails the check stops the call with a terminating
+  error rather than returning a partial result.
 - `Connect-CWM` validates `-Server` and escapes `-Company` and `-MemberID`; cookie sessions use Secure cookies and a
   stale cookie session is reset.
 - Secrets are masked in debug, verbose and `-WhatIf` output, and kept out of `New-CWMDebugReport`.

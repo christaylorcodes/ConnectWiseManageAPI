@@ -96,7 +96,8 @@ Internal Function:
 - Follows Link headers for next page, but only to the connected server: the next-page URL must use
   https (or the scheme of the first request, never a downgrade) and the connection's host and port.
 Any other
-  URL stops paging with an error, so credentials are never sent to another host.
+  URL stops paging with a terminating error, so credentials are never sent to another host and the
+  caller never gets a silently partial result.
 - Returns results from all pages
 
 Performance:

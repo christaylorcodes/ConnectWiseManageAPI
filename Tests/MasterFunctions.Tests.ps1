@@ -428,7 +428,7 @@ Describe 'Master function regressions (0.5.0 review)' {
     }
 
     Context 'Invoke-CWMAllResult next-page links' {
-        It 'stops paging, with an error, when the next page is <Case>' -ForEach @(
+        It 'stops paging with a terminating error when the next page is <Case>' -ForEach @(
             @{ Case = 'on another host'; Link = 'https://evil.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
             @{ Case = 'an http downgrade'; Link = 'http://example.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
             @{ Case = 'carrying user info'; Link = 'https://user@example.invalid/v4_6_release/apis/3.0/service/tickets?page=2' }
@@ -439,11 +439,19 @@ Describe 'Master function regressions (0.5.0 review)' {
                 param($Link)
                 $script:TestLink = $Link
                 Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = "<$($script:TestLink)>; rel=`"next`"" } } }
-                $Err = $null
-                $Out = Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/service/tickets?'; Method = 'Get' } -ErrorVariable Err -ErrorAction SilentlyContinue
-                @($Out).Count | Should -Be 1
-                ($Err | Out-String) | Should -Match 'Stopped paging'
+                $Out = 'unset'
+                { $Out = Invoke-CWMAllResult -Arguments @{ Uri = 'https://example.invalid/v4_6_release/apis/3.0/service/tickets?'; Method = 'Get' } } |
+                    Should -Throw '*Stopped paging*'
+                $Out | Should -Be 'unset' -Because 'an assignment never receives the partial result'
                 Should -Invoke Invoke-WebRequest -Times 1 -Exactly
+            }
+        }
+        It 'stops a public -all call even under the default error preference' {
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-WebRequest { [pscustomobject]@{ StatusCode = 200; Content = '[{"id":1}]'; Headers = @{ Link = '<https://evil.invalid/x?page=2>; rel="next"' } } }
+                $Reached = $false
+                try { $null = Get-CWMServiceBoard -all; $Reached = $true } catch { $_.Exception.Message | Should -Match 'Stopped paging' }
+                $Reached | Should -BeFalse
             }
         }
         It 'follows an https next page on the connected host (<Case>)' -ForEach @(
