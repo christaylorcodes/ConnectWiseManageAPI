@@ -36,16 +36,23 @@ This release has **breaking changes**. Read them before upgrading.
     `-agreementInvoicingDisplayOptions` moved up six.
   - `New-CWMProductCatalog`: the parameters after `-integrationXRef` moved up one.
   - `Get-CWMProductAdjustmentDetail`: the new mandatory `-parentId` is position 0, so `-id` is now position 1.
+  - `New-CWMProjectTicketConfiguration`: `-_info` moved from position 2 to 3 (new `-deviceIdentifier`).
 - **Wrong aliases removed or replaced:**
   - `Remove-CWMDocument`: `-somethingId` is now `-documentId`;
-  - `Update-CWMAgreementType`: `-agreementId` is now `-agreementTypeId`;
   - `Update-CWMProductAdjustment`: `-catalogId` is now `-adjustmentId`;
   - `Update-CWMPurchaseOrder`: `-catalogId` is now `-purchaseOrderId`;
-  - `Get-CWMCompanyState` and `Get-CWMCompanyCountry`: the misleading `-companyId` alias is removed.
+  - `Get-CWMCompanyCountry`: the misleading `-companyId` alias is removed.
 - **Route ids are now mandatory** where a missing id built a broken URL: `Get-CWMCompanyTeam -parentId`,
   `Get-CWMProductAdjustmentDetail -parentId`, `New-/Update-/Remove-CWMProductPickingShippingDetail -parentId`,
-  `New-CWMMarketingGroupCompany -parentId` (alias `-groupId`), `New-CWMMemberToken -memberIdentifier`, and the
-  ticket ids of `New-CWMTicketChild`.
+  `New-CWMMarketingGroupCompany -parentId` (alias `-groupId`), `New-CWMMemberToken -memberIdentifier`,
+  `New-CWMOpportunityForecastItem -id` (it defaulted to 0, which posted to `/forecast/0`), and the ticket ids of
+  `New-CWMTicketChild`.
+- **Parameter types now match the API:**
+  - `New-CWMProductCatalog -priceAttribute` takes `FixedFee`, `NotToExceed`, `OverrideRate` or `TimeAndMaterials`
+    (it was an `[int]`, which the API rejects);
+  - `New-CWMTicketConfiguration` and `New-CWMProjectTicketConfiguration`: `-id` is an `[int]`, and
+    `-deviceIdentifier` is its own parameter, sent as `deviceIdentifier` (it was an alias of `-id`);
+  - `Get-CWMSSOConfiguration -id` is an `[int]`, as in the API.
 - **`Connect-CWM -MemberID` now really impersonates the member.** 0.4.16 silently connected with the API key
   instead. Check what the impersonated member is allowed to do before relying on it.
 - **An `add` or `replace` update without a value now errors** instead of silently sending `null`. Pass
@@ -138,7 +145,8 @@ This release has **breaking changes**. Read them before upgrading.
 - `Tools/Update-CWMManifestExport.ps1` also keeps `AliasesToExport` in sync with the `[Alias()]` attributes.
 - CI runs on `integration/**` branches, cancels superseded runs, has a job timeout and uses actions v7.
   Dependabot keeps the actions current, and a weekly workflow checks every endpoint against a pinned, reviewed
-  copy of the ConnectWise OpenAPI spec.
+  copy of a community-maintained ConnectWise OpenAPI spec
+  (covenanttechnologysolutions/connectwise-rest).
 
 ### Fixed
 
@@ -170,6 +178,17 @@ This release has **breaking changes**. Read them before upgrading.
 - Clearer help for `New-`/`Update-CWMCompanyConfigurationTypeQuestionValue`: they edit a question's allowed values,
   not a configuration's answer (#45).
 - `TimeSucks.ps1` example: the scheduled task duration no longer drops minutes (#23).
+- **Money and quantity values keep their precision.** Decimal parameters were single-precision `[float]` (and
+  `New-CWMOpportunity -totalSalesTax` an `[int]`), so 1234567.89 was sent as 1234567.9. They are `[double]` now.
+- Parameters the API takes as arrays accept arrays: `-customFields`, `New-CWMProductAdjustment -adjustmentDetails`,
+  `-serialNumberIds` and `-serialNumbers`. `New-CWMMember` accepts `Email`, `TEL` and `CALLTO`.
+- `New-CWMCompanyNote` no longer sends the company id in the request body. Its route id is `-parentId`;
+  `-companyId` and `-id` still work.
+- `Get-CWMReport` escapes the report name; `Get-CWMOpportunity*` send an array `-fields` correctly.
+- `ConvertTo-CWMTime` uses the invariant culture (other cultures could produce dates the API rejects).
+- `Connect-CWM` connects again when `-ClientID` or `-BasePath` changes, instead of keeping the old values.
+- `New-CWMDocument -FilePath` resolves relative paths against the current PowerShell location.
+- `New-CWMAgreementType -Confirm` prompts once. `New-CWMDebugReport` hashes with SHA-256 (MD5 fails under FIPS).
 
 ### Security
 

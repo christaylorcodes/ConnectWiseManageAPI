@@ -25,7 +25,8 @@
     A URL to link instead of uploading a file.
 
 .PARAMETER FilePath
-    Path to the local file to upload. Must be a file, not a folder.
+    Path to the local file to upload, or a file object from Get-Item or Get-ChildItem. Must be a file, not a
+    folder. A relative path is resolved against the current PowerShell location.
 
 .PARAMETER FileName
     The file name to send to ConnectWise Manage. Defaults to the name of -FilePath.
@@ -86,14 +87,17 @@ function New-CWMDocument {
         [Parameter(Mandatory=$true, ParameterSetName = 'URL')]
         [string]$URL,
         [Parameter(Mandatory=$true, ParameterSetName = 'File')]
+        # [object], not [string]: on 5.1 a FileInfo from Get-ChildItem converts to its bare name, so FileInfo
+        # input is read by its FullName. A string is resolved against the current PowerShell location.
         [ValidateScript({
-            if(-Not ($_ | Test-Path)){ throw 'File or folder does not exist' }
-            if(-Not ($_ | Test-Path -PathType Leaf)){
+            $Path = if ($_ -is [System.IO.FileInfo]) { $_.FullName } else { "$_" }
+            if(-Not (Test-Path -LiteralPath $Path)){ throw 'File or folder does not exist' }
+            if(-Not (Test-Path -LiteralPath $Path -PathType Leaf)){
                 throw 'The Path argument must be a file. Folder paths are not allowed.'
             }
             $true
         })]
-        [string]$FilePath,
+        [object]$FilePath,
         [Parameter(ParameterSetName = 'File')]
         [string]$FileName,
         [boolean]$Private = $true,
@@ -141,11 +145,13 @@ function New-CWMDocument {
     $fileBytes = $null
     switch ($PSCmdlet.ParameterSetName){
         'File' {
-            if(!$FileName){ $FileName = Split-Path $FilePath -Leaf }
+            # Resolved against the current PowerShell location, not the process working directory
+            if ($FilePath -is [System.IO.FileInfo]) { $ResolvedPath = $FilePath.FullName }
+            else { $ResolvedPath = $PSCmdlet.GetUnresolvedProviderPathFromPSPath("$FilePath") }
+            if(!$FileName){ $FileName = Split-Path $ResolvedPath -Leaf }
             $FileName = $FileName -replace '["\r\n]', '_'
 
-            # Resolved against the current PowerShell location, not the process working directory
-            $fileBytes = [System.IO.File]::ReadAllBytes($PSCmdlet.GetUnresolvedProviderPathFromPSPath($FilePath))
+            $fileBytes = [System.IO.File]::ReadAllBytes($ResolvedPath)
 
             $Head += (
                 "Content-Disposition: form-data; name=`"file`"; filename=`"$FileName`"",

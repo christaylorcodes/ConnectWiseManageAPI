@@ -171,7 +171,7 @@ More examples available in the [Examples](https://github.com/christaylorcodes/Co
 - **The module always uses the server's current API version.** `Connect-CWM -Version` is removed; remove it from your scripts.
 - **New-CWMTicket** no longer takes `-Version`, `-VersionAutomatic`, `-project`, `-phase`, `-wbsCode`, `-locationId`, `-businessUnitId`, `-dateEntered` or `-enteredBy`. Create project tickets with `New-CWMProjectTicket`.
 - **`Connect-CWM -MemberID` now really impersonates** the member (0.4.16 silently used the API key).
-- A few parameters and aliases the API did not accept were removed, some route ids are now mandatory, and positional binding shifted on four functions. Use named parameters.
+- A few parameters and aliases the API did not accept were removed, some route ids are now mandatory, and positional binding shifted on five functions. Use named parameters.
 
 See the [CHANGELOG](CHANGELOG.md) for the full list and migration hints.
 

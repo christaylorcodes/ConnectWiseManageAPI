@@ -549,6 +549,18 @@ Describe 'Endpoint functions' {
             $global:CWMTestRequests | Should -HaveCount 1
         }
 
+        It 'reads a file object from Get-ChildItem by its full path, from any location' {
+            $Item = Get-ChildItem (Split-Path $TestFile) -Filter (Split-Path $TestFile -Leaf)
+            Push-Location $HOME
+            try {
+                New-CWMDocument -recordType Ticket -recordId 123 -title 'T' -FilePath $Item -Confirm:$false | Out-Null
+            }
+            finally { Pop-Location }
+            $global:CWMTestRequests | Should -HaveCount 1
+            $Text = [System.Text.Encoding]::UTF8.GetString($global:CWMTestRequests[0].Body)
+            $Text | Should -Match ([regex]::Escape("filename=`"$($Item.Name)`""))
+        }
+
         It 'sends the exact file bytes between the part headers and the closing boundary' {
             $Result = New-CWMDocument -recordType Ticket -recordId 123 -title 'T' -FilePath $TestFile -FileName 'a.bin' -Confirm:$false
             $Result.id | Should -Be 7
