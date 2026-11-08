@@ -1,0 +1,96 @@
+name: Release
+
+# Pushing a version tag (v0.5.1, or v0.6.0-beta1 for a prerelease) runs the full CI test matrix, then publishes
+# ./ConnectWiseManageAPI to the PowerShell Gallery and creates a GitHub Release with the CHANGELOG section.
+# Setup: CONTRIBUTING.md, "Releasing".
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  test:
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    name: Publish to the PowerShell Gallery
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Add required reviewers to this environment to approve each publish by hand
+    environment:
+      name: production
+      url: https://www.powershellgallery.com/packages/ConnectWiseManageAPI
+    permissions:
+      contents: write   # create the GitHub Release
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check the tag against master and the manifest
+        id: version
+        run: |
+          $Tag = '${{ github.ref_name }}'
+          if ($Tag -notmatch '^v(\d+\.\d+\.\d+)(?:-([0-9A-Za-z]+))?$') { throw "Tag '$Tag' is not vX.Y.Z or vX.Y.Z-label." }
+          $Version = $Matches[1]; $Label = "$($Matches[2])"
+
+          git merge-base --is-ancestor HEAD origin/master
+          if ($LASTEXITCODE -ne 0) { throw "Tag '$Tag' is not on master. Merge the release to master, then tag the merge." }
+
+          $Manifest = Import-PowerShellDataFile ./ConnectWiseManageAPI/ConnectWiseManageAPI.psd1
+          $ManifestLabel = "$($Manifest.PrivateData.PSData.Prerelease)"
+          if ($Manifest.ModuleVersion -ne $Version -or $ManifestLabel -ne $Label) {
+            throw "Tag '$Tag' does not match the manifest: ModuleVersion '$($Manifest.ModuleVersion)', Prerelease '$ManifestLabel'."
+          }
+
+          # Release notes: the CHANGELOG section for this version, up to the next version heading
+          $Lines = Get-Content ./CHANGELOG.md
+          $Start = ($Lines | Select-String -Pattern "^## \[$([regex]::Escape($Version))\]" | Select-Object -First 1).LineNumber
+          if (!$Start) { throw "CHANGELOG.md has no '## [$Version]' section." }
+          if ($Lines[$Start - 1] -match 'YYYY-MM-DD') { throw "CHANGELOG.md still has a placeholder date for $Version." }
+          $End = ($Lines[$Start..($Lines.Count - 1)] | Select-String -Pattern '^## \[' | Select-Object -First 1).LineNumber
+          $Section = if ($End) { $Lines[$Start..($Start + $End - 2)] } else { $Lines[$Start..($Lines.Count - 1)] }
+          $Section | Set-Content ./release-notes.md
+
+          "prerelease=$([bool]$Label)".ToLower() >> $env:GITHUB_OUTPUT
+
+      - name: Publish
+        env:
+          PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+        run: |
+          if (!$env:PSGALLERY_API_KEY) { throw 'The PSGALLERY_API_KEY secret is not set (CONTRIBUTING.md, "Releasing").' }
+          $Manifest = Import-PowerShellDataFile ./ConnectWiseManageAPI/ConnectWiseManageAPI.psd1
+          $Full = $Manifest.ModuleVersion + $(if ($Manifest.PrivateData.PSData.Prerelease) { "-$($Manifest.PrivateData.PSData.Prerelease)" })
+
+          # A re-run after a successful publish skips the Gallery and goes on to the GitHub Release
+          $Existing = Find-PSResource -Name ConnectWiseManageAPI -Version $Full -Prerelease -Repository PSGallery -ErrorAction SilentlyContinue
+          if ($Existing) { "ConnectWiseManageAPI $Full is already on the Gallery; skipping."; return }
+
+          # Publish-PSResource, not Publish-Module: PowerShellGet adds a tag per exported command and the
+          # resulting tag list is over NuGet's 4000-character limit, so its pack fails
+          Publish-PSResource -Path ./ConnectWiseManageAPI -Repository PSGallery -ApiKey $env:PSGALLERY_API_KEY -ErrorAction Stop
+          "Published ConnectWiseManageAPI $Full"
+
+      - name: GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $Tag = '${{ github.ref_name }}'
+          gh release view $Tag *> $null
+          if ($LASTEXITCODE -eq 0) { "Release $Tag already exists."; exit 0 }
+          $GhArgs = @($Tag, '--title', "ConnectWiseManageAPI $Tag", '--notes-file', './release-notes.md', '--verify-tag')
+          if ('${{ steps.version.outputs.prerelease }}' -eq 'true') { $GhArgs += '--prerelease' }
+          gh release create @GhArgs
+          if ($LASTEXITCODE -ne 0) { throw 'gh release create failed.' }

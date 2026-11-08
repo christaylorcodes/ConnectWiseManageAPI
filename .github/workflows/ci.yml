@@ -5,6 +5,8 @@ on:
     branches: [master, 'integration/**']
   pull_request:
   workflow_dispatch:
+  # release.yml runs this test matrix before it publishes
+  workflow_call:
 
 permissions:
   contents: read

@@ -125,6 +125,9 @@ gitignored `Tests/live.local.ps1`; the write tests also need `$env:CWMAllowWrite
 Never in CI. See CONTRIBUTING.md.
 
 CI: GitHub Actions (`.github/workflows/ci.yml`): Windows PowerShell 5.1 and pwsh on Windows, pwsh on Ubuntu.
+Releases: pushing a `vX.Y.Z` tag on master runs `.github/workflows/release.yml` (CI matrix, then
+`Publish-PSResource` to the Gallery behind the `production` environment, then a GitHub Release). Never
+`Publish-Module`: its pack fails on this module's tag count. See CONTRIBUTING.md, "Releasing".
 
 ## Resources
 
