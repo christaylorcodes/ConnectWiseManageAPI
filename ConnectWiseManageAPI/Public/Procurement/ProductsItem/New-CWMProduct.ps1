@@ -320,8 +320,8 @@ function New-CWMProduct {
         [hashtable]$taxCode,
         [string]$integrationXRef,
         [decimal]$listPrice,
-        [int]$serialNumberIds,
-        [string]$serialNumbers,
+        [int[]]$serialNumberIds,
+        [string[]]$serialNumbers,
         [hashtable]$company,
         [hashtable]$forecastStatus,
         [ValidateSet('Agreement', 'Bundle', 'Inventory', 'NonInventory', 'Service')]

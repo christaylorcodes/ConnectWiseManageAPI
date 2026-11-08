@@ -123,7 +123,7 @@ function New-CWMOpportunityForecastItem {
         [string]$forecastDescription,
         [Parameter(Mandatory=$true)]
         [hashtable]$opportunity,
-        [int]$quantity,
+        [double]$quantity,
         [Parameter(Mandatory=$true)]
         [hashtable]$status,
         [hashtable]$catalogItem,

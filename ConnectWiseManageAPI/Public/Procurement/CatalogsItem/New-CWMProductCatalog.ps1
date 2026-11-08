@@ -120,9 +120,10 @@ function New-CWMProductCatalog {
         [bool]$phaseProductFlag,
         [hashtable]$unitOfMeasure,
         [int]$minStockLevel,
-        [float]$price,
-        [float]$cost,
-        [int]$priceAttribute,
+        [double]$price,
+        [double]$cost,
+        [ValidateSet('FixedFee', 'NotToExceed', 'OverrideRate', 'TimeAndMaterials')]
+        [string]$priceAttribute,
         [bool]$taxableFlag,
         [Parameter(Mandatory=$true)]
         [ValidateLength(1,6000)]

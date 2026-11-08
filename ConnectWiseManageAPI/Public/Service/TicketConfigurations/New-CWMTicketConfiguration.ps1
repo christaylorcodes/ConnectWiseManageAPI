@@ -12,7 +12,9 @@
 
 .PARAMETER id
     The id of the configuration to attach.
-    Alias: deviceIdentifier
+
+.PARAMETER deviceIdentifier
+    The device identifier of the configuration to attach. Use instead of -id.
 
 .EXAMPLE
     New-CWMTicketConfiguration -parentId 1234 -id 77
@@ -29,8 +31,8 @@ function New-CWMTicketConfiguration {
         [Parameter(Mandatory = $true)]
         [Alias('ticketId')]
         [int]$parentId,
-        [Alias('deviceIdentifier')]
-        [string]$id
+        [int]$id,
+        [string]$deviceIdentifier
     )
 
     $Endpoint = "/service/tickets/$($parentId)/configurations"

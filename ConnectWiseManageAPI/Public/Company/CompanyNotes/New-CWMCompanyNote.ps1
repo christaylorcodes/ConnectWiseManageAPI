@@ -6,9 +6,9 @@
     Creates a note for a company in ConnectWise Manage. Calls POST /company/companies/{parentId}/notes; only
     the parameters you pass are sent in the request body.
 
-.PARAMETER id
+.PARAMETER parentId
     The id of the company to add the note to.
-    Alias: companyId
+    Aliases: companyId, id (the name used before 0.5.0)
 
 .PARAMETER flagged
     Flagged. $true or $false.
@@ -17,7 +17,7 @@
     Text. Required by the API.
 
 .EXAMPLE
-    New-CWMCompanyNote -id 250 -text 'Discussed the contract renewal with the owner.' -flagged $true
+    New-CWMCompanyNote -parentId 250 -text 'Discussed the contract renewal with the owner.' -flagged $true
 
     Adds a flagged note to company 250.
 
@@ -29,14 +29,14 @@ function New-CWMCompanyNote {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]
-        [Alias('companyId')]
-        [int]$id,
+        [Alias('companyId', 'id')]
+        [int]$parentId,
         [Parameter(Mandatory = $false)]
         [bool]$flagged,
         [Parameter(Mandatory = $false)]
         [string]$text
     )
 
-    $Endpoint = "/company/companies/$id/notes"
+    $Endpoint = "/company/companies/$($parentId)/notes"
     Invoke-CWMNewMaster -Arguments $PSBoundParameters -Endpoint $Endpoint
 }

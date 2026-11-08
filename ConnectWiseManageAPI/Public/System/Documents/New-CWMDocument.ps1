@@ -93,7 +93,7 @@ function New-CWMDocument {
             }
             $true
         })]
-        [System.IO.FileInfo]$FilePath,
+        [string]$FilePath,
         [Parameter(ParameterSetName = 'File')]
         [string]$FileName,
         [boolean]$Private = $true,
@@ -144,7 +144,8 @@ function New-CWMDocument {
             if(!$FileName){ $FileName = Split-Path $FilePath -Leaf }
             $FileName = $FileName -replace '["\r\n]', '_'
 
-            $fileBytes = [System.IO.File]::ReadAllBytes($FilePath.FullName)
+            # Resolved against the current PowerShell location, not the process working directory
+            $fileBytes = [System.IO.File]::ReadAllBytes($PSCmdlet.GetUnresolvedProviderPathFromPSPath($FilePath))
 
             $Head += (
                 "Content-Disposition: form-data; name=`"file`"; filename=`"$FileName`"",

@@ -44,7 +44,7 @@ function New-CWMAgreementAdjustment {
         [Alias('agreementId')]
         [int]$parentId,
         [int]$id,
-        [float]$amount,
+        [double]$amount,
         [string]$description,
         [string]$effectiveDate,
         [hashtable]$_info,

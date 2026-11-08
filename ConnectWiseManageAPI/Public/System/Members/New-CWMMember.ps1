@@ -544,7 +544,7 @@ function New-CWMMember {
         [Parameter(Mandatory=$true)]
         [ValidateSet('RemainOnInvoicingScreen','ShowRecentInvoices')]
         [string]$agreementInvoicingDisplayOptions,
-        [ValidateSet('AuthAnvil','GoogleAuthenticator')]
+        [ValidateSet('AuthAnvil','GoogleAuthenticator','Email')]
         [string]$authenticationServiceType,
         [boolean]$timebasedOneTimePasswordActivated,
         [hashtable]$ssoSettings,
@@ -556,7 +556,7 @@ function New-CWMMember {
         [ValidateSet('None','LastUpdatedDesc','LastUpdatedAsc','CreatedDesc','CreatedAsc')]
         [string]$globalSearchDefaultSort,
         [string]$phoneSource,
-        [ValidateSet('TAPI','SKYPE','NONE')]
+        [ValidateSet('TAPI','SKYPE','TEL','CALLTO','NONE')]
         [string]$phoneIntegrationType,
         [hashtable]$_info,
         [boolean]$copyPodLayouts,

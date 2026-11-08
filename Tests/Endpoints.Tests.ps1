@@ -350,6 +350,43 @@ Describe 'Endpoint functions' {
                 ForEach-Object Name | Should -BeNullOrEmpty
         }
 
+        It 'no parameter is single-precision [float], which rounds money values' {
+            Get-Command -Module ConnectWiseManageAPI | ForEach-Object {
+                $C = $_; $C.Parameters.Values | Where-Object { $_.ParameterType -in [single], [single[]] } | ForEach-Object { "$($C.Name) -$($_.Name)" }
+            } | Should -BeNullOrEmpty
+            New-CWMOpportunity -name 'N' -type @{ id = 1 } -primarySalesRep @{ id = 1 } -company @{ id = 1 } -contact @{ id = 1 } -totalSalesTax 1234567.89 -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+            ($global:CWMTestRequests[-1].Body | ConvertFrom-Json).totalSalesTax | Should -Be 1234567.89
+        }
+
+        It 'New-CWMCompanyNote keeps the company id out of the body, by -parentId or the old -id' {
+            New-CWMCompanyNote -parentId 250 -text 'a' -Confirm:$false | Out-Null
+            New-CWMCompanyNote -id 251 -text 'b' -Confirm:$false | Out-Null
+            $global:CWMTestRequests[0].Uri | Should -BeLike '*/company/companies/250/notes'
+            $global:CWMTestRequests[1].Uri | Should -BeLike '*/company/companies/251/notes'
+            foreach ($R in $global:CWMTestRequests) { ($R.Body | ConvertFrom-Json).PSObject.Properties['id'] | Should -BeNullOrEmpty }
+        }
+
+        It '<Command> sends -deviceIdentifier as its own body property' -ForEach @(
+            @{ Command = 'New-CWMTicketConfiguration' }
+            @{ Command = 'New-CWMProjectTicketConfiguration' }
+        ) {
+            & $Command -parentId 9 -deviceIdentifier 'ABC' -Confirm:$false | Out-Null
+            $B = $global:CWMTestRequests[0].Body | ConvertFrom-Json
+            $B.deviceIdentifier | Should -BeExactly 'ABC'
+            $B.PSObject.Properties['id'] | Should -BeNullOrEmpty
+        }
+
+        It 'ConvertTo-CWMTime uses the invariant culture' {
+            $Saved = [System.Threading.Thread]::CurrentThread.CurrentCulture
+            try {
+                [System.Threading.Thread]::CurrentThread.CurrentCulture = [cultureinfo]'fi-FI'
+                ConvertTo-CWMTime ([datetime]::new(2026, 11, 7, 15, 4, 5, [DateTimeKind]::Utc)) -Raw | Should -BeExactly '2026-11-07T15:04:05Z'
+                [System.Threading.Thread]::CurrentThread.CurrentCulture = [cultureinfo]'th-TH'
+                ConvertTo-CWMTime ([datetime]::new(2026, 11, 7, 15, 4, 5, [DateTimeKind]::Utc)) -Raw | Should -BeExactly '2026-11-07T15:04:05Z'
+            }
+            finally { [System.Threading.Thread]::CurrentThread.CurrentCulture = $Saved }
+        }
+
         It 'New-CWMExpenseEntry sends a single custom field as a JSON array' {
             InModuleScope ConnectWiseManageAPI {
                 Mock Invoke-CWMNewMaster { $script:CapturedArguments = $Arguments }
@@ -501,6 +538,15 @@ Describe 'Endpoint functions' {
 
         BeforeEach {
             Set-CWMTestResponse -StatusCode 201 -Content '{"id":7}'
+        }
+
+        It 'resolves a relative -FilePath against the current PowerShell location' {
+            Push-Location (Split-Path $TestFile)
+            try {
+                New-CWMDocument -recordType Ticket -recordId 123 -title 'T' -FilePath (Split-Path $TestFile -Leaf) -Confirm:$false | Out-Null
+            }
+            finally { Pop-Location }
+            $global:CWMTestRequests | Should -HaveCount 1
         }
 
         It 'sends the exact file bytes between the part headers and the closing boundary' {

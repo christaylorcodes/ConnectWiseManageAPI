@@ -24,7 +24,6 @@
     Examples:
     - "name='Acme Corp'"
     - "city='New York' and state='NY'"
-    - "types contains 'Partner'"
     - "status/name='Active'"
 
 .PARAMETER orderBy
@@ -64,9 +63,9 @@
     Gets all companies in Seattle, WA.
 
 .EXAMPLE
-    Get-CWMCompany -condition "types contains 'Customer'" -orderBy "name asc" -all
+    Get-CWMCompany -childConditions 'types/id=1' -orderBy 'name asc' -all
 
-    Retrieves all customer companies sorted by name.
+    Retrieves all companies of company type 1 (for example Customer) sorted by name. A company's types is a list, so it is filtered with -childConditions, not -condition.
 
 .EXAMPLE
     Get-CWMCompany -condition "status/name='Active'" -fields @('id', 'name', 'phoneNumber') -all
@@ -77,7 +76,7 @@
     Author: Chris Taylor
 
     Common Filters:
-    - By type: "types contains 'Customer'"
+    - By type (a list field, so use -childConditions): 'types/id=1'
     - By status: "status/name='Active'"
     - By location: "city='CityName' and state='ST'"
     - By territory: "territory/id=5"

@@ -167,8 +167,8 @@
     - Connections persist for the PowerShell session duration
     - Only impersonation connections expire (when the impersonation token expires); API key and
       cookie connections are reused until Disconnect-CWM or -Force
-    - A cached connection is reused only for the same server, company, sign-in method and impersonated
-      member; connecting to another tenant replaces it
+    - A cached connection is reused only for the same server, company, sign-in method, impersonated member,
+      ClientID and BasePath; connecting to another tenant replaces it
     - Cookie-session cookies are marked Secure, so they are only sent over https
     - Use Disconnect-CWM to explicitly clear connection
     - Use -Force to refresh an existing connection
@@ -253,14 +253,15 @@ function Connect-CWM {
     $CachedIsSameIdentity = $Cached -and $Cached.Server -eq $Server -and $Cached.Company -eq $Company -and
         $Cached.ConnectionMethod -eq $ConnectionMethod -and "$($Cached.MemberID)" -eq "$MemberID"
     if ($CachedIsValid -and !$Force) {
-        if ($CachedIsSameIdentity) {
+        # A changed -ClientID or -BasePath also connects again, so the new values are used.
+        if ($CachedIsSameIdentity -and $Cached.Headers.ClientID -eq $ClientID -and $Cached.BasePath -eq $BasePath) {
             Write-Verbose 'Using cached Authentication information.'
             if ($PSBoundParameters.ContainsKey('AllowInsecureRedirect')) {
                 $Cached.AllowInsecureRedirect = [bool]$AllowInsecureRedirect
             }
             return
         }
-        Write-Verbose 'The cached connection is for a different server, company or sign-in method. Connecting again.'
+        Write-Verbose 'The cached connection is for a different server, company, sign-in method, ClientID or BasePath. Connecting again.'
     }
 
     $EscapedCompany = [uri]::EscapeDataString($Company)

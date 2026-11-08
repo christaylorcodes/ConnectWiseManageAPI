@@ -76,7 +76,7 @@ function New-CWMProductPickingShippingDetail {
         [hashtable]$warehouseBin,
         [hashtable]$shipmentMethod,
         [string]$serialNumber,
-        [int]$serialNumberIds,
+        [int[]]$serialNumberIds,
         [string]$trackingNumber,
         [hashtable]$productItem,
         [int]$lineNumber,

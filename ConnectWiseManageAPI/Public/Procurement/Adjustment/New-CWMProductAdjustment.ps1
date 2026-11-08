@@ -44,7 +44,7 @@ function New-CWMProductAdjustment {
         [ValidateLength(1,100)]
         [string]$reason,
         [string]$notes,
-        [hashtable]$adjustmentDetails,
+        [hashtable[]]$adjustmentDetails,
         [hashtable]$_info
     )
 

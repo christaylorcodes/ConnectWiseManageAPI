@@ -162,7 +162,7 @@ function New-CWMOpportunity {
         [datetime]$dateBecameLead,
         [datetime]$closedDate,
         [hashtable]$closedBy,
-        [int]$totalSalesTax,
+        [double]$totalSalesTax,
         [hashtable]$shipToCompany,
         [hashtable]$shipToContact,
         [hashtable]$shipToSite,

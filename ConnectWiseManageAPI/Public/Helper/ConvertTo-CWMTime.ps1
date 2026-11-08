@@ -37,7 +37,7 @@ function ConvertTo-CWMTime {
     begin {}
     process {
         foreach ($D in $Date) {
-            $Converted = "[$(Get-Date $D.ToUniversalTime() -format yyyy-MM-ddTHH:mm:ssZ)]"
+            $Converted = "[$($D.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ', [cultureinfo]::InvariantCulture))]"
             if($Raw){ $Converted.Trim('[]') }
             else { $Converted }
         }

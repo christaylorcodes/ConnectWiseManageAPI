@@ -92,14 +92,14 @@ function New-CWMAgreementWorkType {
         [Parameter(Mandatory = $true)]
         [ValidateSet('Billable', 'DoNotBill', 'NoCharge', 'NoDefault')]
         [string]$billTime,
-        [float]$rate,
-        [float]$hoursMax,
-        [float]$hoursMin,
-        [float]$roundBillHours,
-        [float]$overageRate,
+        [double]$rate,
+        [double]$hoursMax,
+        [double]$hoursMin,
+        [double]$roundBillHours,
+        [double]$overageRate,
         [ValidateSet('AdjAmount', 'Custom', 'Multiplier')]
         [string]$overageRateType,
-        [float]$agreementLimit,
+        [double]$agreementLimit,
         $site,
         [string]$effectiveDate,
         [string]$endingDate,

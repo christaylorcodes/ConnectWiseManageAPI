@@ -65,8 +65,8 @@ function New-CWMAgreementWorkRole {
         [Parameter(Mandatory = $true)]
         [ValidateSet('AdjAmount', 'Custom', 'Multiplier')]
         [string]$rateType,
-        [float]$rate,
-        [float]$limitTo,
+        [double]$rate,
+        [double]$limitTo,
         [string]$effectiveDate,
         [string]$endingDate,
         $agreement,

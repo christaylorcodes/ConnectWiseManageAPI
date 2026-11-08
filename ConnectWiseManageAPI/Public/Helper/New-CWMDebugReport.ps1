@@ -8,7 +8,7 @@
     Connect-CWM first.
 
 .PARAMETER Hash
-    Replace the server name with its MD5 hash so the report can be shared. Defaults to $true; use -Hash
+    Replace the server name with its SHA-256 hash so the report can be shared. Defaults to $true; use -Hash
     $false to show the server name.
 
 .EXAMPLE
@@ -61,7 +61,7 @@ function New-CWMDebugReport {
 
     # Hash sensitive information so that it can be shared
     if ($Hash) {
-        Function Get-StringHash([String]$String, $HashName = 'MD5') {
+        Function Get-StringHash([String]$String, $HashName = 'SHA256') {
             $StringBuilder = New-Object System.Text.StringBuilder
             [System.Security.Cryptography.HashAlgorithm]::Create($HashName).ComputeHash([System.Text.Encoding]::UTF8.GetBytes($String)) | `
                     ForEach-Object {

@@ -249,7 +249,7 @@ Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
 
     It 'applies the switch without -Force and without contacting the server' {
         InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{} }
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{ ClientID = 'id' }; BasePath = 'apis/3.0' }
             Mock Invoke-RestMethod { throw 'should not be called' }
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -AllowInsecureRedirect
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeTrue
@@ -259,7 +259,7 @@ Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
 
     It 'can be turned off again with -AllowInsecureRedirect:$false' {
         InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{}; AllowInsecureRedirect = $true }
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{ ClientID = 'id' }; BasePath = 'apis/3.0'; AllowInsecureRedirect = $true }
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k' -AllowInsecureRedirect:$false
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeFalse
         }
@@ -267,7 +267,7 @@ Describe 'Connect-CWM -AllowInsecureRedirect on a cached connection' {
 
     It 'leaves the setting unchanged when the switch is not passed' {
         InModuleScope ConnectWiseManageAPI {
-            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{}; AllowInsecureRedirect = $true }
+            $script:CWMServerConnection = @{ Server = 'example.invalid'; Company = 'c'; ConnectionMethod = 'Key'; Headers = @{ ClientID = 'id' }; BasePath = 'apis/3.0'; AllowInsecureRedirect = $true }
             Mock Invoke-RestMethod { throw 'should not be called' }
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
             $script:CWMServerConnection.AllowInsecureRedirect | Should -BeTrue
@@ -435,6 +435,7 @@ Describe 'Connect-CWM connection state (0.5.0 review)' {
         @{ Change = 'server'; Second = @{ Server = 'other.invalid'; Company = 'c'; PubKey = 'p'; PrivateKey = 'k' } }
         @{ Change = 'company'; Second = @{ Server = 'example.invalid'; Company = 'other'; PubKey = 'p'; PrivateKey = 'k' } }
         @{ Change = 'sign-in method'; Second = @{ Server = 'example.invalid'; Company = 'c'; PubKey = 'p'; PrivateKey = 'k'; MemberID = 'jdoe' } }
+        @{ Change = 'base path'; Second = @{ Server = 'example.invalid'; Company = 'c'; PubKey = 'p'; PrivateKey = 'k'; BasePath = 'apis/3.1' } }
     ) {
         InModuleScope ConnectWiseManageAPI -Parameters @{ Second = $Second } {
             param($Second)
@@ -452,6 +453,15 @@ Describe 'Connect-CWM connection state (0.5.0 review)' {
             Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
             Connect-CWM -Server 'https://EXAMPLE.invalid/' -Company 'C' -ClientID 'id' -PubKey 'p2' -PrivateKey 'k2'
             Should -Invoke Invoke-RestMethod -Times 1 -Exactly
+        }
+    }
+
+    It 'connects again without -Force when the ClientID changes, and sends the new one' {
+        InModuleScope ConnectWiseManageAPI {
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id' -PubKey 'p' -PrivateKey 'k'
+            Connect-CWM -Server 'example.invalid' -Company 'c' -ClientID 'id2' -PubKey 'p' -PrivateKey 'k'
+            Should -Invoke Invoke-RestMethod -Times 2 -Exactly
+            $script:CWMServerConnection.Headers.ClientID | Should -Be 'id2'
         }
     }
 
