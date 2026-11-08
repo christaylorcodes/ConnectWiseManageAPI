@@ -358,6 +358,17 @@ Describe 'Endpoint functions' {
             ($global:CWMTestRequests[-1].Body | ConvertFrom-Json).totalSalesTax | Should -Be 1234567.89
         }
 
+        It 'reference and array parameters keep their JSON shape' {
+            New-CWMCompanyContact -firstName 'A' -country @{ id = 1 } -Confirm:$false | Out-Null
+            ($global:CWMTestRequests[0].Body | ConvertFrom-Json).country.id | Should -Be 1
+            InModuleScope ConnectWiseManageAPI {
+                Mock Invoke-CWMNewMaster { $script:CapturedArguments = $Arguments }
+                New-CWMTicket -summary 'S' -company @{ id = 1 } -integratorTags 'a', 'b' -Confirm:$false | Out-Null
+                , $script:CapturedArguments.integratorTags | Should -BeOfType [string[]]
+                $script:CapturedArguments.integratorTags | Should -HaveCount 2
+            }
+        }
+
         It 'New-CWMCompanyNote keeps the company id out of the body, by -parentId or the old -id' {
             New-CWMCompanyNote -parentId 250 -text 'a' -Confirm:$false | Out-Null
             New-CWMCompanyNote -id 251 -text 'b' -Confirm:$false | Out-Null

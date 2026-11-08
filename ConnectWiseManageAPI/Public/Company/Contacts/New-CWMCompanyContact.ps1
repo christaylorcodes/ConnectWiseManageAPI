@@ -168,8 +168,7 @@ function New-CWMCompanyContact {
         [string]$state,
         [ValidateLength(1, 12)]
         [string]$zip,
-        [ValidateLength(1, 50)]
-        [string]$country,
+        [hashtable]$country,
         [hashtable]$relationship,
         [hashtable]$department,
         [bool]$inactiveFlag,

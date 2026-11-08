@@ -181,7 +181,10 @@ This release has **breaking changes**. Read them before upgrading.
 - **Money and quantity values keep their precision.** Decimal parameters were single-precision `[float]` (and
   `New-CWMOpportunity -totalSalesTax` an `[int]`), so 1234567.89 was sent as 1234567.9. They are `[double]` now.
 - Parameters the API takes as arrays accept arrays: `-customFields`, `New-CWMProductAdjustment -adjustmentDetails`,
-  `-serialNumberIds` and `-serialNumbers`. `New-CWMMember` accepts `Email`, `TEL` and `CALLTO`.
+  `-serialNumberIds`, `-serialNumbers` and `New-CWMTicket -integratorTags`. `New-CWMMember` accepts `Email`, `TEL` and
+  `CALLTO`; `New-CWMTimeEntry -chargeToType` accepts `Company`.
+- `New-CWMCompanyContact -country` is a reference (`@{ id = 1 }`); as a string it sent `System.Collections.Hashtable`.
+  `New-CWMCompanyConfiguration -backupBillableSpaceGb` keeps its decimals.
 - `New-CWMCompanyNote` no longer sends the company id in the request body. Its route id is `-parentId`;
   `-companyId` and `-id` still work.
 - `Get-CWMReport` escapes the report name; `Get-CWMOpportunity*` send an array `-fields` correctly.

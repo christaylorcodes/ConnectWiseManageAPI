@@ -495,7 +495,7 @@ function New-CWMTicket {
         [hashtable]$sla,
         [hashtable]$currency,
         [hashtable]$mergedParentTicket,
-        [string]$integratorTags,
+        [string[]]$integratorTags,
         [hashtable]$_info,
         [hashtable[]]$customFields
     )

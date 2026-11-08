@@ -130,7 +130,7 @@ function New-CWMTimeEntry {
         [Parameter(Mandatory = $true, ParameterSetName = 'ChargeTo')]
         [int]$chargeToId,
         [Parameter(Mandatory = $true, ParameterSetName = 'ChargeTo')]
-        [ValidateSet('ServiceTicket', 'ProjectTicket', 'ChargeCode', 'Activity')]
+        [ValidateSet('Company', 'ServiceTicket', 'ProjectTicket', 'ChargeCode', 'Activity')]
         [string]$chargeToType,
         [hashtable]$member,
         [int]$locationId,
