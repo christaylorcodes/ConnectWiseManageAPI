@@ -46,7 +46,14 @@ Lists the documents attached to service ticket 1234.
 Get-CWMDocument -id 55 -download
 ```
 
-Downloads the content of document 55.
+Returns the content of document 55 as a byte array.
+
+### EXAMPLE 3
+```
+Get-CWMDocument -id 55 -download -OutFile 'C:\Temp\contract.pdf'
+```
+
+Saves the content of document 55 to C:\Temp\contract.pdf.
 
 ## PARAMETERS
 
@@ -69,6 +76,7 @@ Accept wildcard characters: False
 ### -download
 With -id, download the file content of the document (GET /system/documents/{id}/download) instead of its
 metadata.
+Returns the file content as a byte array, or writes it to -OutFile.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

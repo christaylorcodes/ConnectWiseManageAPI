@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMTicketScheduleEntry
 
 ## SYNOPSIS
-Gets schedule entries of a service ticket.
+Gets the schedule entries of a service ticket.
 
 ## SYNTAX
 
@@ -19,30 +19,34 @@ Get-CWMTicketScheduleEntry [-parentId] <Int32> [-count] [[-condition] <String>] 
 ```
 
 ## DESCRIPTION
-Retrieves schedule entries of a service ticket from ConnectWise Manage.
-Calls GET
-/service/tickets/{parentId}/scheduleentries; -count adds /count.
+Retrieves the full schedule entries of a service ticket.
+Calls GET /schedule/entries with the condition
+type/id=4 and objectId={parentId}, combined with -condition when given; -count calls
+/schedule/entries/count.
+
+GET /service/tickets/{id}/scheduleentries is not used: it returns only id references, and the ConnectWise
+API documentation points to this /schedule/entries query instead.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMTicketScheduleEntry -parentId 1234 -all
+Get-CWMTicketScheduleEntry -ticketId 1234 -all
 ```
 
 Retrieves every schedule entry of ticket 1234.
 
 ### EXAMPLE 2
 ```
-Get-CWMTicketScheduleEntry -parentId 1234 -count
+Get-CWMTicketScheduleEntry -ticketId 1234 -count
 ```
 
-Returns the number of schedule entries of a service ticket of ticket 1234.
+Returns the number of schedule entries of ticket 1234.
 
 ## PARAMETERS
 
 ### -parentId
-The id of the ticket.
+The id of the service ticket.
 Alias: ticketId
 
 ```yaml
@@ -58,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -count
-Return only the number of matching schedule entries of a service ticket instead of the records.
+Return only the number of matching schedule entries instead of the records.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -73,7 +77,9 @@ Accept wildcard characters: False
 ```
 
 ### -condition
-Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
+An extra filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
+It is
+combined with the ticket filter using 'and'.
 
 ```yaml
 Type: System.String
@@ -88,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -orderBy
-Sort order as 'field asc' or 'field desc', for example 'id desc'.
+Sort order as 'field asc' or 'field desc', for example 'dateStart desc'.
 
 ```yaml
 Type: System.String

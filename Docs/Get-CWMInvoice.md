@@ -47,6 +47,13 @@ Get-CWMInvoice -condition "company/id=250" -count
 
 Returns the number of invoices for company 250.
 
+### EXAMPLE 4
+```
+Get-CWMInvoice -id 1001 -pdf -OutFile 'C:\Temp\Invoice-1001.pdf'
+```
+
+Saves invoice 1001 as a PDF.
+
 ## PARAMETERS
 
 ### -id
@@ -67,7 +74,8 @@ Accept wildcard characters: False
 ```
 
 ### -pdf
-With -id, download the invoice as a PDF (GET /finance/invoices/{id}/pdf). Returns the PDF as a byte
+With -id, download the invoice as a PDF (GET /finance/invoices/{id}/pdf).
+Returns the PDF as a byte
 array, or writes it to -OutFile.
 
 ```yaml
@@ -257,6 +265,7 @@ Endpoints:
 - GET /finance/invoices
 - GET /finance/invoices/{id}
 - GET /finance/invoices/count
+- GET /finance/invoices/{id}/pdf
 
 Originally proposed by jadamwilson in PR #77
 

@@ -19,6 +19,9 @@
     - Body: Request body (for POST requests)
     - Headers: Request headers
 
+.PARAMETER PageSize
+    Records per request. Defaults to 1000, the API's maximum; values below 1 or above 1000 use 1000.
+
 .EXAMPLE
     $Condition = [System.Web.HttpUtility]::UrlEncode("status/name='Open'")
     $RequestArguments = @{
@@ -60,7 +63,6 @@ function Invoke-CWMAllResult {
     [CmdletBinding()]
     param(
         $Arguments,
-        # Records per request. 1000 is the API's maximum; larger values are capped.
         [int]$PageSize = 1000
     )
     if ($PageSize -lt 1 -or $PageSize -gt 1000) { $PageSize = 1000 }

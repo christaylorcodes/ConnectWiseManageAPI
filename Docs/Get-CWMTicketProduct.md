@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMTicketProduct
 
 ## SYNOPSIS
-Gets products on a service ticket.
+Gets the products of a service ticket.
 
 ## SYNTAX
 
@@ -19,30 +19,35 @@ Get-CWMTicketProduct [-parentId] <Int32> [-count] [[-condition] <String>] [[-ord
 ```
 
 ## DESCRIPTION
-Retrieves products on a service ticket from ConnectWise Manage.
-Calls GET
-/service/tickets/{parentId}/products; -count adds /count.
+Retrieves the full products of a service ticket.
+Calls GET /procurement/products with the condition
+ticket/id={parentId}, combined with -condition when given; -count calls /procurement/products/count.
+
+GET /service/tickets/{id}/products is not used: it returns only id references, and the ConnectWise API
+documentation points to /procurement/products instead.
+Its suggested chargeToType/chargeToId condition
+names fields the product model does not have, so the product's ticket reference is used.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMTicketProduct -parentId 1234 -all
+Get-CWMTicketProduct -ticketId 1234 -all
 ```
 
 Retrieves every product of ticket 1234.
 
 ### EXAMPLE 2
 ```
-Get-CWMTicketProduct -parentId 1234 -count
+Get-CWMTicketProduct -ticketId 1234 -condition "catalogItem/identifier='LAPTOP'"
 ```
 
-Returns the number of products on a service ticket of ticket 1234.
+Retrieves the LAPTOP products on ticket 1234.
 
 ## PARAMETERS
 
 ### -parentId
-The id of the ticket.
+The id of the service ticket.
 Alias: ticketId
 
 ```yaml
@@ -58,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -count
-Return only the number of matching products on a service ticket instead of the records.
+Return only the number of matching products instead of the records.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -73,7 +78,9 @@ Accept wildcard characters: False
 ```
 
 ### -condition
-Filter in ConnectWise Manage condition syntax, for example "catalogItem/identifier='LAPTOP'".
+An extra filter in ConnectWise Manage condition syntax, for example "catalogItem/identifier='LAPTOP'".
+It
+is combined with the ticket filter using 'and'.
 
 ```yaml
 Type: System.String

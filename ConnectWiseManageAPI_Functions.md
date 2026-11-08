@@ -150,7 +150,7 @@ Returns available departments.
 Return locations for a given department.
 
 ### [Get-CWMDocument](Docs/Get-CWMDocument.md)
-This function will list documents associated with a record.
+Gets documents, or downloads a document.
 
 ### [Get-CWMExpenseEntry](Docs/Get-CWMExpenseEntry.md)
 {{ Fill in the Synopsis }}
@@ -312,22 +312,22 @@ Retrieves service tickets from ConnectWise Manage.
 This function will list configs attached to a ticket.
 
 ### [Get-CWMTicketDocument](Docs/Get-CWMTicketDocument.md)
-Gets documents attached to a service ticket.
+Gets the documents attached to a service ticket.
 
 ### [Get-CWMTicketNote](Docs/Get-CWMTicketNote.md)
 This function will list notes of a ticket based on conditions.
 
 ### [Get-CWMTicketProduct](Docs/Get-CWMTicketProduct.md)
-Gets products on a service ticket.
+Gets the products of a service ticket.
 
 ### [Get-CWMTicketScheduleEntry](Docs/Get-CWMTicketScheduleEntry.md)
-Gets schedule entries of a service ticket.
+Gets the schedule entries of a service ticket.
 
 ### [Get-CWMTicketTask](Docs/Get-CWMTicketTask.md)
 Will list the tasks associated with a ticket.
 
 ### [Get-CWMTicketTimeEntry](Docs/Get-CWMTicketTimeEntry.md)
-Gets time entries of a service ticket.
+Gets the time entries of a service or project ticket.
 
 ### [Get-CWMTimeEntry](Docs/Get-CWMTimeEntry.md)
 This function will allow you to search for Manage time entries.

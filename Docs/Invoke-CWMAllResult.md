@@ -23,7 +23,7 @@ Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster when -all switch is use
 
 Automatically follows pagination links in response headers to retrieve all pages
 of results.
-Uses page size 999 and forward-only pagination
+Uses page size 1000 (the API maximum, or -PageSize) and forward-only pagination
 for better performance.
 
 This function iterates through all pages until no more results are available.
@@ -64,7 +64,8 @@ Accept wildcard characters: False
 ```
 
 ### -PageSize
-Records per request. 1000 is the API's maximum; larger values are capped.
+Records per request.
+Defaults to 1000, the API's maximum; values below 1 or above 1000 use 1000.
 
 ```yaml
 Type: System.Int32
@@ -91,7 +92,7 @@ Author: Chris Taylor
 Internal Function:
 - Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster
 - Uses forward-only pagination for performance
-- Uses page size 999
+- Uses page size 1000 (the API maximum) unless -PageSize is smaller
 - Follows Link headers for next page, but only to the connected server: the next-page URL must use
   https (or the scheme of the first request, never a downgrade) and the connection's host and port.
 Any other

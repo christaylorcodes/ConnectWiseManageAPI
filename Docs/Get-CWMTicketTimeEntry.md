@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMTicketTimeEntry
 
 ## SYNOPSIS
-Gets time entries of a service ticket.
+Gets the time entries of a service or project ticket.
 
 ## SYNTAX
 
@@ -19,25 +19,29 @@ Get-CWMTicketTimeEntry [-parentId] <Int32> [-count] [[-condition] <String>] [[-o
 ```
 
 ## DESCRIPTION
-Retrieves time entries of a service ticket from ConnectWise Manage.
-Calls GET
-/service/tickets/{parentId}/timeentries; -count adds /count.
+Retrieves the full time entries charged to a ticket.
+Calls GET /time/entries with the condition
+(chargeToType='ServiceTicket' or chargeToType='ProjectTicket') and chargeToId={parentId}, combined with
+-condition when given; -count calls /time/entries/count.
+
+GET /service/tickets/{id}/timeentries is not used: it returns only id references, and the ConnectWise API
+documentation points to this /time/entries query instead.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMTicketTimeEntry -parentId 1234 -all
+Get-CWMTicketTimeEntry -ticketId 1234 -all
 ```
 
-Retrieves every time entry of ticket 1234.
+Retrieves every time entry charged to ticket 1234.
 
 ### EXAMPLE 2
 ```
-Get-CWMTicketTimeEntry -parentId 1234 -count
+Get-CWMTicketTimeEntry -ticketId 1234 -condition "member/identifier='jdoe'" -fields @('id', 'actualHours')
 ```
 
-Returns the number of time entries of a service ticket of ticket 1234.
+Retrieves the id and hours of the time entries jdoe charged to ticket 1234.
 
 ## PARAMETERS
 
@@ -58,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -count
-Return only the number of matching time entries of a service ticket instead of the records.
+Return only the number of matching time entries instead of the records.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -73,7 +77,9 @@ Accept wildcard characters: False
 ```
 
 ### -condition
-Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
+An extra filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".
+It is
+combined with the ticket filter using 'and'.
 
 ```yaml
 Type: System.String
@@ -88,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -orderBy
-Sort order as 'field asc' or 'field desc', for example 'id desc'.
+Sort order as 'field asc' or 'field desc', for example 'timeStart desc'.
 
 ```yaml
 Type: System.String

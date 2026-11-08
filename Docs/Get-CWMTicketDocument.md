@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CWMTicketDocument
 
 ## SYNOPSIS
-Gets documents attached to a service ticket.
+Gets the documents attached to a service ticket.
 
 ## SYNTAX
 
@@ -19,30 +19,36 @@ Get-CWMTicketDocument [-parentId] <Int32> [-count] [[-condition] <String>] [[-or
 ```
 
 ## DESCRIPTION
-Retrieves documents attached to a service ticket from ConnectWise Manage.
-Calls GET
-/service/tickets/{parentId}/documents; -count adds /count.
+Retrieves the full documents attached to a service ticket.
+Calls
+GET /system/documents?recordType=Ticket&recordId={parentId} through Get-CWMDocument; -count calls
+/system/documents/count.
+
+GET /service/tickets/{id}/documents is not used: it returns only id references, and the ConnectWise API
+documentation points to this /system/documents query instead.
+Download a document's content with
+Get-CWMDocument -id \<id\> -download.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CWMTicketDocument -parentId 1234 -all
+Get-CWMTicketDocument -ticketId 1234 -all
 ```
 
-Retrieves every document of ticket 1234.
+Retrieves every document attached to ticket 1234.
 
 ### EXAMPLE 2
 ```
-Get-CWMTicketDocument -parentId 1234 -count
+Get-CWMTicketDocument -ticketId 1234 | ForEach-Object { Get-CWMDocument -id $_.id -download -OutFile "C:\Temp\$($_.fileName)" }
 ```
 
-Returns the number of documents attached to a service ticket of ticket 1234.
+Saves every document of ticket 1234 to C:\Temp.
 
 ## PARAMETERS
 
 ### -parentId
-The id of the ticket.
+The id of the service ticket.
 Alias: ticketId
 
 ```yaml
@@ -58,7 +64,7 @@ Accept wildcard characters: False
 ```
 
 ### -count
-Return only the number of matching documents attached to a service ticket instead of the records.
+Return only the number of matching documents instead of the records.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

@@ -13128,7 +13128,7 @@ finally {
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>download</maml:name>
           <maml:description>
-            <maml:para>With -id, download the file content of the document (GET /system/documents/{id}/download) instead of its metadata.</maml:para>
+            <maml:para>With -id, download the file content of the document (GET /system/documents/{id}/download) instead of its metadata. Returns the file content as a byte array, or writes it to -OutFile.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>System.Management.Automation.SwitchParameter</maml:name>
@@ -13405,7 +13405,7 @@ finally {
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>download</maml:name>
         <maml:description>
-          <maml:para>With -id, download the file content of the document (GET /system/documents/{id}/download) instead of its metadata.</maml:para>
+          <maml:para>With -id, download the file content of the document (GET /system/documents/{id}/download) instead of its metadata. Returns the file content as a byte array, or writes it to -OutFile.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13578,7 +13578,14 @@ finally {
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>Get-CWMDocument -id 55 -download</dev:code>
         <dev:remarks>
-          <maml:para>Downloads the content of document 55.</maml:para>
+          <maml:para>Returns the content of document 55 as a byte array.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>Get-CWMDocument -id 55 -download -OutFile 'C:\Temp\contract.pdf'</dev:code>
+        <dev:remarks>
+          <maml:para>Saves the content of document 55 to C:\Temp\contract.pdf.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -14803,6 +14810,7 @@ finally {
         <maml:para>Endpoints: - GET /finance/invoices</maml:para>
         <maml:para>- GET /finance/invoices/{id}</maml:para>
         <maml:para>- GET /finance/invoices/count</maml:para>
+        <maml:para>- GET /finance/invoices/{id}/pdf</maml:para>
         <maml:para></maml:para>
         <maml:para>Originally proposed by jadamwilson in PR #77</maml:para>
       </maml:alert>
@@ -14827,6 +14835,13 @@ finally {
         <dev:code>Get-CWMInvoice -condition "company/id=250" -count</dev:code>
         <dev:remarks>
           <maml:para>Returns the number of invoices for company 250.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>Get-CWMInvoice -id 1001 -pdf -OutFile 'C:\Temp\Invoice-1001.pdf'</dev:code>
+        <dev:remarks>
+          <maml:para>Saves invoice 1001 as a PDF.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -28841,11 +28856,12 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:verb>Get</command:verb>
       <command:noun>CWMTicketDocument</command:noun>
       <maml:description>
-        <maml:para>Gets documents attached to a service ticket.</maml:para>
+        <maml:para>Gets the documents attached to a service ticket.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves documents attached to a service ticket from ConnectWise Manage. Calls GET /service/tickets/{parentId}/documents; -count adds /count.</maml:para>
+      <maml:para>Retrieves the full documents attached to a service ticket. Calls GET /system/documents?recordType=Ticket&amp;recordId={parentId} through Get-CWMDocument; -count calls /system/documents/count.</maml:para>
+      <maml:para>GET /service/tickets/{id}/documents is not used: it returns only id references, and the ConnectWise API documentation points to this /system/documents query instead. Download a document's content with Get-CWMDocument -id &lt;id&gt; -download.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -28853,7 +28869,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ticketId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the ticket. Alias: ticketId</maml:para>
+            <maml:para>The id of the service ticket. Alias: ticketId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -28949,7 +28965,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>count</maml:name>
           <maml:description>
-            <maml:para>Return only the number of matching documents attached to a service ticket instead of the records.</maml:para>
+            <maml:para>Return only the number of matching documents instead of the records.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>System.Management.Automation.SwitchParameter</maml:name>
@@ -28974,7 +28990,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ticketId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the ticket. Alias: ticketId</maml:para>
+          <maml:para>The id of the service ticket. Alias: ticketId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -28986,7 +29002,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>count</maml:name>
         <maml:description>
-          <maml:para>Return only the number of matching documents attached to a service ticket instead of the records.</maml:para>
+          <maml:para>Return only the number of matching documents instead of the records.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
         <dev:type>
@@ -29102,16 +29118,16 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketDocument -parentId 1234 -all</dev:code>
+        <dev:code>Get-CWMTicketDocument -ticketId 1234 -all</dev:code>
         <dev:remarks>
-          <maml:para>Retrieves every document of ticket 1234.</maml:para>
+          <maml:para>Retrieves every document attached to ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketDocument -parentId 1234 -count</dev:code>
+        <dev:code>Get-CWMTicketDocument -ticketId 1234 | ForEach-Object { Get-CWMDocument -id $_.id -download -OutFile "C:\Temp\$($_.fileName)" }</dev:code>
         <dev:remarks>
-          <maml:para>Returns the number of documents attached to a service ticket of ticket 1234.</maml:para>
+          <maml:para>Saves every document of ticket 1234 to C:\Temp.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -29439,11 +29455,12 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:verb>Get</command:verb>
       <command:noun>CWMTicketProduct</command:noun>
       <maml:description>
-        <maml:para>Gets products on a service ticket.</maml:para>
+        <maml:para>Gets the products of a service ticket.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves products on a service ticket from ConnectWise Manage. Calls GET /service/tickets/{parentId}/products; -count adds /count.</maml:para>
+      <maml:para>Retrieves the full products of a service ticket. Calls GET /procurement/products with the condition ticket/id={parentId}, combined with -condition when given; -count calls /procurement/products/count.</maml:para>
+      <maml:para>GET /service/tickets/{id}/products is not used: it returns only id references, and the ConnectWise API documentation points to /procurement/products instead. Its suggested chargeToType/chargeToId condition names fields the product model does not have, so the product's ticket reference is used.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -29451,7 +29468,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ticketId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the ticket. Alias: ticketId</maml:para>
+            <maml:para>The id of the service ticket. Alias: ticketId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -29463,7 +29480,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
-            <maml:para>Filter in ConnectWise Manage condition syntax, for example "catalogItem/identifier='LAPTOP'".</maml:para>
+            <maml:para>An extra filter in ConnectWise Manage condition syntax, for example "catalogItem/identifier='LAPTOP'". It is combined with the ticket filter using 'and'.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -29547,7 +29564,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>count</maml:name>
           <maml:description>
-            <maml:para>Return only the number of matching products on a service ticket instead of the records.</maml:para>
+            <maml:para>Return only the number of matching products instead of the records.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>System.Management.Automation.SwitchParameter</maml:name>
@@ -29572,7 +29589,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ticketId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the ticket. Alias: ticketId</maml:para>
+          <maml:para>The id of the service ticket. Alias: ticketId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -29584,7 +29601,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>count</maml:name>
         <maml:description>
-          <maml:para>Return only the number of matching products on a service ticket instead of the records.</maml:para>
+          <maml:para>Return only the number of matching products instead of the records.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
         <dev:type>
@@ -29596,7 +29613,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
-          <maml:para>Filter in ConnectWise Manage condition syntax, for example "catalogItem/identifier='LAPTOP'".</maml:para>
+          <maml:para>An extra filter in ConnectWise Manage condition syntax, for example "catalogItem/identifier='LAPTOP'". It is combined with the ticket filter using 'and'.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -29700,16 +29717,16 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketProduct -parentId 1234 -all</dev:code>
+        <dev:code>Get-CWMTicketProduct -ticketId 1234 -all</dev:code>
         <dev:remarks>
           <maml:para>Retrieves every product of ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketProduct -parentId 1234 -count</dev:code>
+        <dev:code>Get-CWMTicketProduct -ticketId 1234 -condition "catalogItem/identifier='LAPTOP'"</dev:code>
         <dev:remarks>
-          <maml:para>Returns the number of products on a service ticket of ticket 1234.</maml:para>
+          <maml:para>Retrieves the LAPTOP products on ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -29726,11 +29743,12 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:verb>Get</command:verb>
       <command:noun>CWMTicketScheduleEntry</command:noun>
       <maml:description>
-        <maml:para>Gets schedule entries of a service ticket.</maml:para>
+        <maml:para>Gets the schedule entries of a service ticket.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves schedule entries of a service ticket from ConnectWise Manage. Calls GET /service/tickets/{parentId}/scheduleentries; -count adds /count.</maml:para>
+      <maml:para>Retrieves the full schedule entries of a service ticket. Calls GET /schedule/entries with the condition type/id=4 and objectId={parentId}, combined with -condition when given; -count calls /schedule/entries/count.</maml:para>
+      <maml:para>GET /service/tickets/{id}/scheduleentries is not used: it returns only id references, and the ConnectWise API documentation points to this /schedule/entries query instead.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -29738,7 +29756,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ticketId">
           <maml:name>parentId</maml:name>
           <maml:description>
-            <maml:para>The id of the ticket. Alias: ticketId</maml:para>
+            <maml:para>The id of the service ticket. Alias: ticketId</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -29750,7 +29768,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
-            <maml:para>Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".</maml:para>
+            <maml:para>An extra filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'". It is combined with the ticket filter using 'and'.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -29762,7 +29780,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
+            <maml:para>Sort order as 'field asc' or 'field desc', for example 'dateStart desc'.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -29834,7 +29852,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>count</maml:name>
           <maml:description>
-            <maml:para>Return only the number of matching schedule entries of a service ticket instead of the records.</maml:para>
+            <maml:para>Return only the number of matching schedule entries instead of the records.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>System.Management.Automation.SwitchParameter</maml:name>
@@ -29859,7 +29877,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ticketId">
         <maml:name>parentId</maml:name>
         <maml:description>
-          <maml:para>The id of the ticket. Alias: ticketId</maml:para>
+          <maml:para>The id of the service ticket. Alias: ticketId</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -29871,7 +29889,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>count</maml:name>
         <maml:description>
-          <maml:para>Return only the number of matching schedule entries of a service ticket instead of the records.</maml:para>
+          <maml:para>Return only the number of matching schedule entries instead of the records.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
         <dev:type>
@@ -29883,7 +29901,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
-          <maml:para>Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".</maml:para>
+          <maml:para>An extra filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'". It is combined with the ticket filter using 'and'.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -29895,7 +29913,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
+          <maml:para>Sort order as 'field asc' or 'field desc', for example 'dateStart desc'.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -29987,16 +30005,16 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketScheduleEntry -parentId 1234 -all</dev:code>
+        <dev:code>Get-CWMTicketScheduleEntry -ticketId 1234 -all</dev:code>
         <dev:remarks>
           <maml:para>Retrieves every schedule entry of ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketScheduleEntry -parentId 1234 -count</dev:code>
+        <dev:code>Get-CWMTicketScheduleEntry -ticketId 1234 -count</dev:code>
         <dev:remarks>
-          <maml:para>Returns the number of schedule entries of a service ticket of ticket 1234.</maml:para>
+          <maml:para>Returns the number of schedule entries of ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -30324,11 +30342,12 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:verb>Get</command:verb>
       <command:noun>CWMTicketTimeEntry</command:noun>
       <maml:description>
-        <maml:para>Gets time entries of a service ticket.</maml:para>
+        <maml:para>Gets the time entries of a service or project ticket.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Retrieves time entries of a service ticket from ConnectWise Manage. Calls GET /service/tickets/{parentId}/timeentries; -count adds /count.</maml:para>
+      <maml:para>Retrieves the full time entries charged to a ticket. Calls GET /time/entries with the condition (chargeToType='ServiceTicket' or chargeToType='ProjectTicket') and chargeToId={parentId}, combined with -condition when given; -count calls /time/entries/count.</maml:para>
+      <maml:para>GET /service/tickets/{id}/timeentries is not used: it returns only id references, and the ConnectWise API documentation points to this /time/entries query instead.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -30348,7 +30367,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>condition</maml:name>
           <maml:description>
-            <maml:para>Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".</maml:para>
+            <maml:para>An extra filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'". It is combined with the ticket filter using 'and'.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -30360,7 +30379,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>orderBy</maml:name>
           <maml:description>
-            <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
+            <maml:para>Sort order as 'field asc' or 'field desc', for example 'timeStart desc'.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
           <dev:type>
@@ -30432,7 +30451,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>count</maml:name>
           <maml:description>
-            <maml:para>Return only the number of matching time entries of a service ticket instead of the records.</maml:para>
+            <maml:para>Return only the number of matching time entries instead of the records.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>System.Management.Automation.SwitchParameter</maml:name>
@@ -30469,7 +30488,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>count</maml:name>
         <maml:description>
-          <maml:para>Return only the number of matching time entries of a service ticket instead of the records.</maml:para>
+          <maml:para>Return only the number of matching time entries instead of the records.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
         <dev:type>
@@ -30481,7 +30500,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>condition</maml:name>
         <maml:description>
-          <maml:para>Filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'".</maml:para>
+          <maml:para>An extra filter in ConnectWise Manage condition syntax, for example "member/identifier='jdoe'". It is combined with the ticket filter using 'and'.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -30493,7 +30512,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>orderBy</maml:name>
         <maml:description>
-          <maml:para>Sort order as 'field asc' or 'field desc', for example 'id desc'.</maml:para>
+          <maml:para>Sort order as 'field asc' or 'field desc', for example 'timeStart desc'.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
         <dev:type>
@@ -30585,16 +30604,16 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketTimeEntry -parentId 1234 -all</dev:code>
+        <dev:code>Get-CWMTicketTimeEntry -ticketId 1234 -all</dev:code>
         <dev:remarks>
-          <maml:para>Retrieves every time entry of ticket 1234.</maml:para>
+          <maml:para>Retrieves every time entry charged to ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CWMTicketTimeEntry -parentId 1234 -count</dev:code>
+        <dev:code>Get-CWMTicketTimeEntry -ticketId 1234 -condition "member/identifier='jdoe'" -fields @('id', 'actualHours')</dev:code>
         <dev:remarks>
-          <maml:para>Returns the number of time entries of a service ticket of ticket 1234.</maml:para>
+          <maml:para>Retrieves the id and hours of the time entries jdoe charged to ticket 1234.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -33046,7 +33065,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
     </command:details>
     <maml:description>
       <maml:para>Handles automatic pagination for API requests using forward-only pagination. Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster when -all switch is used.</maml:para>
-      <maml:para>Automatically follows pagination links in response headers to retrieve all pages of results. Uses page size 999 and forward-only pagination for better performance.</maml:para>
+      <maml:para>Automatically follows pagination links in response headers to retrieve all pages of results. Uses page size 1000 (the API maximum, or -PageSize) and forward-only pagination for better performance.</maml:para>
       <maml:para>This function iterates through all pages until no more results are available.</maml:para>
     </maml:description>
     <command:syntax>
@@ -33070,7 +33089,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>PageSize</maml:name>
           <maml:description>
-            <maml:para>Records per request. 1000 is the API's maximum; larger values are capped.</maml:para>
+            <maml:para>Records per request. Defaults to 1000, the API's maximum; values below 1 or above 1000 use 1000.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
           <dev:type>
@@ -33100,7 +33119,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>PageSize</maml:name>
         <maml:description>
-          <maml:para>Records per request. 1000 is the API's maximum; larger values are capped.</maml:para>
+          <maml:para>Records per request. Defaults to 1000, the API's maximum; values below 1 or above 1000 use 1000.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
         <dev:type>
@@ -33117,7 +33136,7 @@ Get-CWMTicket -condition "status/name in ('Open','In Progress','Waiting')" -all<
         <maml:para>Author: Chris Taylor</maml:para>
         <maml:para>Internal Function: - Called by Invoke-CWMGetMaster and Invoke-CWMSearchMaster</maml:para>
         <maml:para>- Uses forward-only pagination for performance</maml:para>
-        <maml:para>- Uses page size 999</maml:para>
+        <maml:para>- Uses page size 1000 (the API maximum) unless -PageSize is smaller</maml:para>
         <maml:para>- Follows Link headers for next page, but only to the connected server: the next-page URL must use</maml:para>
         <maml:para>  https (or the scheme of the first request, never a downgrade) and the connection's host and port. Any other   URL stops paging with an error, so credentials are never sent to another host. - Returns results from all pages</maml:para>
         <maml:para>Performance: - More efficient than manual pagination</maml:para>
